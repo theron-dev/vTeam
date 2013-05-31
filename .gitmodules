@@ -1,3 +1,3 @@
-[submodule "c"]
-	path = c
+[submodule "vendor/c"]
+	path = vendor/c
 	url = https://github.com/hailongz/c.git
