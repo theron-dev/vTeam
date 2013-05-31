@@ -127,6 +127,18 @@
 			<key>Path</key>
 			<string>___VARIABLE_classPrefix___ViewController.m</string>
 		</dict>
+		<key>Theme</key>
+		<dict>
+			<key>Path</key>
+			<string>Theme</string>
+		</dict>
+		<key>Theme/___VARIABLE_classPrefix___ThemeDefault.xib</key>
+		<dict>
+			<key>Group</key>
+			<string>Theme</string>
+			<key>Path</key>
+			<string>___VARIABLE_classPrefix___ThemeDefault.xib</string>
+		</dict>
 		<key>Resource</key>
 		<dict>
 			<key>Path</key>
@@ -149,6 +161,8 @@
 		<string>ViewController</string>
 		<string>ViewController/___VARIABLE_classPrefix___ViewController.h</string>
 		<string>ViewController/___VARIABLE_classPrefix___ViewController.m</string>
+		<string>Theme</string>
+		<string>Theme/___VARIABLE_classPrefix___ThemeDefault.xib</string>
 		<string>Resource</string>
 		<string>___VARIABLE_classPrefix___Context.h</string>
 		<string>___VARIABLE_classPrefix___Shell.h</string>
