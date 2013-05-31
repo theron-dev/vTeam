@@ -10,7 +10,7 @@ git submodule update <br />
 
 # Installing xcode project templates
 
-unzip xcode <br />
+unzip xcode.zip <br />
 cd xcode <br />
 cp vTeam Templetes <br />
 
