@@ -19,6 +19,10 @@
 @synthesize bottom = _bottom;
 @synthesize widthToFit = _widthToFit;
 @synthesize heightToFit = _heightToFit;
+@synthesize minWidth = _minWidth;
+@synthesize maxWidth = _maxWidth;
+@synthesize minHeight = _minHeight;
+@synthesize maxHeight = _maxHeight;
 
 -(void) dealloc{
     [_left release];
@@ -26,6 +30,10 @@
     [_top release];
     [_bottom release];
     [_view release];
+    [_minWidth release];
+    [_maxWidth release];
+    [_minHeight release];
+    [_maxHeight release];
     [super dealloc];
 }
 
@@ -41,16 +49,32 @@
 -(CGRect) frameOfSize:(CGSize) size{
     CGRect r = CGRectZero;
     CGRect frame = _view.frame;
-    
+
     if(_widthToFit || _heightToFit){
+        
         if(_widthToFit){
-            frame.size.width = 0.0f;
+            frame.size.width = [self value:_minWidth ofBase:size.width];
         }
-        if(_widthToFit){
-            frame.size.height = 0.0f;
+        if(_heightToFit){
+            frame.size.height = [self value:_minHeight ofBase:size.height];
         }
         [_view setFrame:frame];
         [_view sizeToFit];
+        frame = _view.frame;
+        
+        if(_maxWidth){
+            CGFloat maxWidth = [self value:_maxWidth ofBase:size.width];;
+            if(frame.size.width > maxWidth){
+                frame.size.width = maxWidth;
+            }
+        }
+        
+        if(_maxHeight){
+            CGFloat maxHeight = [self value:_maxHeight ofBase:size.height];
+            if(frame.size.height > maxHeight){
+                frame.size.height = maxHeight;
+            }
+        }
     }
     
     if(_width == nil){

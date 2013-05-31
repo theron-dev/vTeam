@@ -11,9 +11,11 @@
 @implementation VTLayoutContainer
 
 @synthesize layouts = _layouts;
+@synthesize rootLayout = _rootLayout;
 
 -(void) dealloc{
     [_layouts release];
+    [_rootLayout release];
     [super dealloc];
 }
 

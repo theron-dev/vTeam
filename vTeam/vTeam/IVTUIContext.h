@@ -14,7 +14,8 @@
 
 @protocol IVTUIContext <IVTServiceContext>
 
-@property(nonatomic,retain) IBOutlet VTStyleSheet * styleSheet;
+@property(nonatomic,readonly) VTStyleSheet * styleSheet;
+@property(nonatomic,retain) IBOutlet VTStyleController * styleController;
 
 -(id) getViewController:(NSURL *) url basePath:(NSString *) basePath;
 

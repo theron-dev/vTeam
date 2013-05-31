@@ -10,9 +10,11 @@
 
 @implementation VTLayout
 
+@synthesize contentSize = _contentSize;
 
 -(void) layout{
     
 }
+
 
 @end

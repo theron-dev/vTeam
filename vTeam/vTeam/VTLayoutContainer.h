@@ -12,6 +12,7 @@
 
 @interface VTLayoutContainer : NSObject
 
+@property(nonatomic,retain) VTLayout * rootLayout;
 @property(nonatomic,retain) IBOutletCollection(VTLayout) NSArray * layouts;
 
 -(void) layout;

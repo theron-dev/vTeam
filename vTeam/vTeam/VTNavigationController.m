@@ -103,10 +103,8 @@
         
         id viewController = [self.context getViewController:_url basePath:basePath];
         
-        if(viewController){
-            [viewController setParentController:self];
-            [newViewControllers addObject:viewController];
-        }
+        [viewController setParentController:self];
+        [newViewControllers addObject:viewController];
         
         basePath = [basePath stringByAppendingPathComponent:alias];
         

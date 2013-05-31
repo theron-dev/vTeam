@@ -16,9 +16,8 @@
 
 @implementation VTStyleSheet
 
-@synthesize bundle = _bundle;
 @synthesize version = _version;
-@synthesize styles = _styles;
+@synthesize styleController = _styleController;
 
 -(id) init{
     if((self = [super init])){
@@ -29,19 +28,21 @@
 
 
 -(void) dealloc{
-    [_bundle release];
+    [_styleController release];
     [_images release];
     [super dealloc];
 }
 
 -(NSDictionary *) selectorStyle:(NSString *) styleName{
     
+    [_styleController view];
+    
     NSArray * names=  [styleName componentsSeparatedByString:@" "];
     
     NSMutableDictionary * styles = [NSMutableDictionary dictionaryWithCapacity:4];
     
     for(NSString * name in names){
-        for(VTStyle * style in _styles){
+        for(VTStyle * style in [_styleController styles]){
             if([style.name isEqualToString:name]){
                 [styles setValue:style forKey:style.key];
             }
@@ -97,7 +98,7 @@
         return img;
     }
     
-    NSBundle * bundle = [self bundle];
+    NSBundle * bundle = [_styleController nibBundle];
     
     if(bundle == nil){
         bundle = [NSBundle mainBundle];
@@ -141,6 +142,13 @@
     _images = nil;
 }
 
-
+-(void) setStyleController:(VTStyleController *) styleController{
+    if(_styleController != styleController){
+        [styleController retain];
+        [_styleController release];
+        _styleController = styleController;
+        self.version = self.version + 1;
+    }
+}
 
 @end

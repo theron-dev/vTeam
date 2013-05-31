@@ -50,14 +50,28 @@
 
 -(void) doLayout{
     
+    CGSize contentSize = CGSizeZero;
+    
     CGSize innerSize = CGSizeMake(_size.width - _padding.left - _padding.right, _size.height - _padding.top - _padding.bottom);
     
     for(id layoutData in _layoutDatas){
+        
         CGRect r = [layoutData frameOfSize:innerSize];
         r.origin.x += _padding.left;
         r.origin.y += _padding.top;
         [[layoutData view] setFrame:r];
+        
+        if(contentSize.width < r.origin.x + r.size.width + _padding.right){
+            contentSize.width = r.origin.x + r.size.width + _padding.right;
+        }
+        
+        if(contentSize.height < r.origin.y + r.size.height + _padding.bottom){
+            contentSize.height = r.origin.y + r.size.height + _padding.bottom;
+        }
+        
     }
+    
+    self.contentSize = contentSize;
 }
 
 @end

@@ -10,7 +10,11 @@
 
 #import <vTeam/VTLayoutData.h>
 
-@interface VTLayout : NSObject
+@interface VTLayout : NSObject{
+    
+}
+
+@property(nonatomic,assign) CGSize contentSize;
 
 -(void) layout;
 

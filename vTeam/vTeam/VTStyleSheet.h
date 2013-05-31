@@ -9,12 +9,12 @@
 #import <UIKit/UIKit.h>
 
 #import <vTeam/VTStyle.h>
+#import <vTeam/VTStyleController.h>
 
 @interface VTStyleSheet : NSObject
 
-@property(nonatomic,readonly) NSBundle * bundle;
 @property(nonatomic,assign) NSInteger version;
-@property(nonatomic,retain) IBOutletCollection(VTStyle) NSArray * styles;
+@property(nonatomic,retain) VTStyleController * styleController;
 
 -(NSDictionary *) selectorStyle:(NSString *) styleName;
 

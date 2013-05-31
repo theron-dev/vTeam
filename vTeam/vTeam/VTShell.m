@@ -211,9 +211,6 @@ extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
                         [_viewControllers addObject:viewController];
                     }
                 }
-                else{
-                    NSLog(@"Not Found IVTUIViewController %@",className);
-                }
                 
                 return viewController;
             }
@@ -298,4 +295,20 @@ extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
     }
     return _rootViewController;
 }
+
+-(VTStyleController *) styleController{
+    return [self.styleSheet styleController];
+}
+
+-(void) setStyleController:(VTStyleController *)styleController{
+    [self.styleSheet setStyleController:styleController];
+}
+
+-(VTStyleSheet *) styleSheet{
+    if(_styleSheet == nil){
+        _styleSheet = [[VTStyleSheet alloc] init];
+    }
+    return _styleSheet;
+}
+
 @end

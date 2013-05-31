@@ -17,6 +17,10 @@
 @property(nonatomic,retain) id right;
 @property(nonatomic,retain) id top;
 @property(nonatomic,retain) id bottom;
+@property(nonatomic,retain) id minWidth;
+@property(nonatomic,retain) id maxWidth;
+@property(nonatomic,retain) id minHeight;
+@property(nonatomic,retain) id maxHeight;
 @property(nonatomic,assign) BOOL widthToFit;
 @property(nonatomic,assign) BOOL heightToFit;
 

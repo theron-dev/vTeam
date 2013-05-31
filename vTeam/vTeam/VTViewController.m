@@ -10,6 +10,9 @@
 
 #import "IVTAction.h"
 
+#import "VTPopWindow.h"
+#import "NSURL+QueryValue.h"
+
 @interface VTViewController ()
 
 @end
@@ -70,6 +73,29 @@
 }
 
 -(BOOL) openUrl:(NSURL *) url animated:(BOOL) animated{
+    
+    NSString * schema = [url scheme];
+    
+    if([schema isEqualToString:@"pop"]){
+
+        NSLog(@"%@",[url absoluteString]);
+        
+        id viewController = [self.context getViewController:url basePath:@"/"];
+        
+        if(viewController){
+            
+            VTPopWindow * win = [VTPopWindow popWindow];
+            
+            win.backgroundColor = [UIColor clearColor];
+        
+            [win showAnimated:animated];
+            
+            win.rootViewController = viewController;
+            
+            return YES;
+        }
+    }
+    
     return [_parentController openUrl:url animated:animated];
 }
 
@@ -141,6 +167,12 @@
             if(userInfo){
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:userInfo]];
             }
+        }
+        else if([actionName isEqualToString:@"popclose"]){
+            [[VTPopWindow topPopWindow] closeAnimated:YES];
+        }
+        else if([actionName isEqualToString:@"popclosed"]){
+            [[VTPopWindow topPopWindow] closeAnimated:NO];
         }
     }
 }
