@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Ancestors</key>
+	<array>
+		<string>com.apple.dt.unit.objectiveCApplication</string>
+		<string>com.apple.dt.unit.iPhoneBase</string>
+		<string>com.apple.dt.unit.prefixable</string>
+	</array>
+	<key>Concrete</key>
+	<true/>
+	<key>Definitions</key>
+	<dict>
+		<key>___PACKAGENAME___-Info.plist:iPhone</key>
+		<string>&lt;key&gt;CFBundleDisplayName&lt;/key&gt;
+&lt;string&gt;${PRODUCT_NAME}&lt;/string&gt;
+&lt;key&gt;CFBundleVersion&lt;/key&gt;
+&lt;string&gt;1.0.0&lt;/string&gt;
+&lt;key&gt;CFBundleShortVersionString&lt;/key&gt;
+&lt;string&gt;1.0.0&lt;/string&gt;
+&lt;key&gt;LSRequiresIPhoneOS&lt;/key&gt;
+&lt;true/&gt;
+&lt;key&gt;NSMainNibFile&lt;/key&gt;
+&lt;string&gt;___VARIABLE_classPrefix___Main&lt;/string&gt;
+&lt;key&gt;CFBundleDevelopmentRegion&lt;/key&gt;
+&lt;string&gt;zh_CN&lt;/string&gt;</string>
+		<key>___PACKAGENAME___-Info.plist:iPad</key>
+		<string>&lt;key&gt;CFBundleDisplayName&lt;/key&gt;
+&lt;string&gt;${PRODUCT_NAME}&lt;/string&gt;
+&lt;key&gt;CFBundleVersion&lt;/key&gt;
+&lt;string&gt;1.0.0&lt;/string&gt;
+&lt;key&gt;CFBundleShortVersionString&lt;/key&gt;
+&lt;string&gt;1.0.0&lt;/string&gt;
+&lt;key&gt;LSRequiresIPhoneOS&lt;/key&gt;
+&lt;true/&gt;
+&lt;key&gt;NSMainNibFile&lt;/key&gt;
+&lt;string&gt;___VARIABLE_classPrefix___Main&lt;/string&gt;
+&lt;key&gt;CFBundleDevelopmentRegion&lt;/key&gt;
+&lt;string&gt;zh_CN&lt;/string&gt;</string>
+		<key>___PACKAGENAME___-Info.plist:Universal</key>
+		<string>&lt;key&gt;CFBundleDisplayName&lt;/key&gt;
+&lt;string&gt;${PRODUCT_NAME}&lt;/string&gt;
+&lt;key&gt;CFBundleVersion&lt;/key&gt;
+&lt;string&gt;1.0.0&lt;/string&gt;
+&lt;key&gt;CFBundleShortVersionString&lt;/key&gt;
+&lt;string&gt;1.0.0&lt;/string&gt;
+&lt;key&gt;LSRequiresIPhoneOS&lt;/key&gt;
+&lt;true/&gt;
+&lt;key&gt;NSMainNibFile&lt;/key&gt;
+&lt;string&gt;___VARIABLE_classPrefix___Main&lt;/string&gt;
+&lt;key&gt;CFBundleDevelopmentRegion&lt;/key&gt;
+&lt;string&gt;zh_CN&lt;/string&gt;
+&lt;key&gt;NSMainNibFile~ipad&lt;/key&gt;
+&lt;string&gt;___VARIABLE_classPrefix___Main~iPad&lt;/string&gt;</string>
+		<key>main.m:main:UIApplicationMain</key>
+		<string>@autoreleasepool {
+    return UIApplicationMain(argc, argv, nil, nil);
+}
+</string>
+		<key>cfg.plist</key>
+		<dict>
+			<key>Path</key>
+			<string>cfg.plist</string>
+		</dict>
+		<key>___VARIABLE_classPrefix___Shell.h</key>
+		<dict>
+			<key>Path</key>
+			<string>___VARIABLE_classPrefix___Shell.h</string>
+		</dict>
+		<key>___VARIABLE_classPrefix___Shell.m</key>
+		<dict>
+			<key>Path</key>
+			<string>___VARIABLE_classPrefix___Shell.m</string>
+		</dict>
+		<key>___VARIABLE_classPrefix___Main.xib</key>
+		<dict>
+			<key>Path</key>
+			<string>___VARIABLE_classPrefix___Main.xib</string>
+		</dict>
+		<key>___VARIABLE_classPrefix___Main~iPad.xib</key>
+		<dict>
+			<key>Path</key>
+			<string>___VARIABLE_classPrefix___Main~iPad.xib</string>
+		</dict>
+		<key>___VARIABLE_classPrefix___Context.h</key>
+		<dict>
+			<key>Path</key>
+			<string>___VARIABLE_classPrefix___Context.h</string>
+		</dict>
+		<key>Tasks</key>
+		<dict>
+			<key>Path</key>
+			<string>Tasks</string>
+		</dict>
+		<key>Services</key>
+		<dict>
+			<key>Path</key>
+			<string>Services</string>
+		</dict>
+		<key>DataSource</key>
+		<dict>
+			<key>Path</key>
+			<string>DataSource</string>
+		</dict>
+		<key>Controller</key>
+		<dict>
+			<key>Path</key>
+			<string>Controller</string>
+		</dict>
+		<key>ViewController</key>
+		<dict>
+			<key>Path</key>
+			<string>ViewController</string>
+		</dict>
+		<key>ViewController/___VARIABLE_classPrefix___ViewController.h</key>
+		<dict>
+			<key>Group</key>
+			<string>ViewController</string>
+			<key>Path</key>
+			<string>___VARIABLE_classPrefix___ViewController.h</string>
+		</dict>
+		<key>ViewController/___VARIABLE_classPrefix___ViewController.m</key>
+		<dict>
+			<key>Group</key>
+			<string>ViewController</string>
+			<key>Path</key>
+			<string>___VARIABLE_classPrefix___ViewController.m</string>
+		</dict>
+		<key>Resource</key>
+		<dict>
+			<key>Path</key>
+			<string>Resource</string>
+		</dict>
+	</dict>
+	<key>Description</key>
+	<string>vTeam Project Templete</string>
+	<key>Identifier</key>
+	<string>org.hailong.vTeamProject</string>
+	<key>Kind</key>
+	<string>Xcode.Xcode3.ProjectTemplateUnitKind</string>
+	<key>Nodes</key>
+	<array>
+		<string>main.m:main:UIApplicationMain</string>
+		<string>Tasks</string>
+		<string>Services</string>
+		<string>DataSource</string>
+		<string>Controller</string>
+		<string>ViewController</string>
+		<string>ViewController/___VARIABLE_classPrefix___ViewController.h</string>
+		<string>ViewController/___VARIABLE_classPrefix___ViewController.m</string>
+		<string>Resource</string>
+		<string>___VARIABLE_classPrefix___Context.h</string>
+		<string>___VARIABLE_classPrefix___Shell.h</string>
+		<string>___VARIABLE_classPrefix___Shell.m</string>
+		<string>cfg.plist</string>
+	</array>
+	<key>Options</key>
+	<array>
+		<dict>
+			<key>Identifier</key>
+			<string>universalDeviceFamily</string>
+			<key>Type</key>
+			<string>popup</string>
+			<key>Default</key>
+			<string>Universal</string>
+			<key>Description</key>
+			<string>Which device family to create a project for</string>
+			<key>SortOrder</key>
+			<integer>1</integer>
+			<key>Name</key>
+			<string>Devices</string>
+			<key>Units</key>
+			<dict>
+				<key>Universal</key>
+				<dict>
+					<key>Nodes</key>
+					<array>
+						<string>___VARIABLE_classPrefix___Main.xib</string>
+						<string>___VARIABLE_classPrefix___Main~iPad.xib</string>
+						<string>___PACKAGENAME___-Info.plist:Universal</string>
+					</array>
+					<key>Project</key>
+					<dict>
+						<key>SharedSettings</key>
+						<dict>
+							<key>TARGETED_DEVICE_FAMILY</key>
+							<string>1,2</string>
+						</dict>
+					</dict>
+				</dict>
+				<key>iPad</key>
+				<dict>
+					<key>Nodes</key>
+					<array>
+						<string>___VARIABLE_classPrefix___Main~iPad.xib</string>
+						<string>___PACKAGENAME___-Info.plist:iPad</string>
+					</array>
+					<key>Project</key>
+					<dict>
+						<key>SharedSettings</key>
+						<dict>
+							<key>TARGETED_DEVICE_FAMILY</key>
+							<string>2</string>
+						</dict>
+					</dict>
+				</dict>
+				<key>iPhone</key>
+				<dict>
+					<key>Nodes</key>
+					<array>
+						<string>___VARIABLE_classPrefix___Main.xib</string>
+						<string>___PACKAGENAME___-Info.plist:iPhone</string>
+					</array>
+				</dict>
+			</dict>
+		</dict>
+	</array>
+	<key>Targets</key>
+	<array>
+		<dict>
+			<key>Frameworks</key>
+			<array>
+				<string>UIKit</string>
+				<string>Foundation</string>
+				<string>CoreGraphics</string>
+				<string>ImageIO</string>
+				<string>vTeam</string>
+			</array>
+		</dict>
+	</array>
+	<key>SortOrder</key>
+	<integer>1</integer>
+</dict>
+</plist>

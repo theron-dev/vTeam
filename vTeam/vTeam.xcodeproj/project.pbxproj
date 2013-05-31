@@ -1,0 +1,1361 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		113B5BDD174F78F8003211AD /* UIView+VTDataOutlet.h in Headers */ = {isa = PBXBuildFile; fileRef = 113B5BDB174F78F8003211AD /* UIView+VTDataOutlet.h */; };
+		113B5BDE174F78F8003211AD /* UIView+VTDataOutlet.m in Sources */ = {isa = PBXBuildFile; fileRef = 113B5BDC174F78F8003211AD /* UIView+VTDataOutlet.m */; };
+		114772FC1727DE5200196FB2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 114772FA1727DE5200196FB2 /* InfoPlist.strings */; };
+		114773031727DF0D00196FB2 /* vTeam.m in Sources */ = {isa = PBXBuildFile; fileRef = 114773021727DF0D00196FB2 /* vTeam.m */; };
+		114773051727DFE000196FB2 /* vTeam.h in Headers */ = {isa = PBXBuildFile; fileRef = 114773011727DF0D00196FB2 /* vTeam.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1147730C1727E29600196FB2 /* VTShell.h in Headers */ = {isa = PBXBuildFile; fileRef = 1147730A1727E29600196FB2 /* VTShell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1147730D1727E29600196FB2 /* VTShell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1147730B1727E29600196FB2 /* VTShell.m */; };
+		1147734B1727E7C800196FB2 /* IVTTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 114773081727E0EF00196FB2 /* IVTTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1147734C1727E7C800196FB2 /* IVTService.h in Headers */ = {isa = PBXBuildFile; fileRef = 114773091727E13900196FB2 /* IVTService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1147734D1727E7C800196FB2 /* IVTContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 114773061727E04F00196FB2 /* IVTContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1147734E1727E7C800196FB2 /* IVTServiceContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 114773071727E09700196FB2 /* IVTServiceContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1147734F1727E7C800196FB2 /* IVTUIViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 1147730F1727E33A00196FB2 /* IVTUIViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		114773501727E7C800196FB2 /* IVTUIContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 1147730E1727E2E100196FB2 /* IVTUIContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		114D796817291F3B0041468E /* VTStyleOutlet.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D796617291F3B0041468E /* VTStyleOutlet.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		114D796917291F3B0041468E /* VTStyleOutlet.m in Sources */ = {isa = PBXBuildFile; fileRef = 114D796717291F3B0041468E /* VTStyleOutlet.m */; };
+		114D797A172929430041468E /* VTTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D7978172929430041468E /* VTTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		114D797B172929430041468E /* VTTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 114D7979172929430041468E /* VTTask.m */; };
+		114D797E172929A40041468E /* VTHttpTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D797C172929A40041468E /* VTHttpTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		114D797F172929A40041468E /* VTHttpTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 114D797D172929A40041468E /* VTHttpTask.m */; };
+		114D79E8172A10F00041468E /* hactree.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D7988172A10EF0041468E /* hactree.h */; };
+		114D79E9172A10F00041468E /* hbase64.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D7989172A10EF0041468E /* hbase64.c */; };
+		114D79EA172A10F00041468E /* hbase64.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D798A172A10EF0041468E /* hbase64.h */; };
+		114D79EB172A10F00041468E /* hbtree.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D798B172A10EF0041468E /* hbtree.c */; };
+		114D79EC172A10F00041468E /* hbtree.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D798C172A10EF0041468E /* hbtree.h */; };
+		114D79ED172A10F00041468E /* hbuffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D798D172A10EF0041468E /* hbuffer.c */; };
+		114D79EE172A10F00041468E /* hbuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D798E172A10EF0041468E /* hbuffer.h */; };
+		114D79EF172A10F00041468E /* hbytes.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D798F172A10EF0041468E /* hbytes.c */; };
+		114D79F0172A10F00041468E /* hbytes.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D7990172A10EF0041468E /* hbytes.h */; };
+		114D79F1172A10F00041468E /* hcgi.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D7991172A10EF0041468E /* hcgi.h */; };
+		114D79F2172A10F00041468E /* hclass.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D7992172A10EF0041468E /* hclass.c */; };
+		114D79F3172A10F00041468E /* hclass.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D7993172A10EF0041468E /* hclass.h */; };
+		114D79F4172A10F00041468E /* hconfig.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D7994172A10EF0041468E /* hconfig.c */; };
+		114D79F5172A10F00041468E /* hconfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D7995172A10EF0041468E /* hconfig.h */; };
+		114D79F6172A10F00041468E /* hdata.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D7996172A10EF0041468E /* hdata.c */; };
+		114D79F7172A10F00041468E /* hdata.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D7997172A10EF0041468E /* hdata.h */; };
+		114D79F8172A10F00041468E /* hdata_alloc.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D7998172A10EF0041468E /* hdata_alloc.c */; };
+		114D79F9172A10F00041468E /* hdata_alloc.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D7999172A10EF0041468E /* hdata_alloc.h */; };
+		114D79FA172A10F00041468E /* hdata_binary.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D799A172A10EF0041468E /* hdata_binary.c */; };
+		114D79FB172A10F00041468E /* hdata_binary.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D799B172A10EF0041468E /* hdata_binary.h */; };
+		114D79FC172A10F00041468E /* hdata_json.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D799C172A10EF0041468E /* hdata_json.c */; };
+		114D79FD172A10F00041468E /* hdata_json.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D799D172A10EF0041468E /* hdata_json.h */; };
+		114D79FE172A10F00041468E /* hdata_set.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D799E172A10EF0041468E /* hdata_set.c */; };
+		114D79FF172A10F00041468E /* hdata_set.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D799F172A10EF0041468E /* hdata_set.h */; };
+		114D7A00172A10F00041468E /* hdata_storage.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D79A0172A10EF0041468E /* hdata_storage.c */; };
+		114D7A01172A10F00041468E /* hdata_storage.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D79A1172A10EF0041468E /* hdata_storage.h */; };
+		114D7A02172A10F00041468E /* hdata_xml.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D79A2172A10EF0041468E /* hdata_xml.c */; };
+		114D7A03172A10F00041468E /* hdata_xml.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D79A3172A10EF0041468E /* hdata_xml.h */; };
+		114D7A04172A10F00041468E /* hdebug.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D79A4172A10EF0041468E /* hdebug.c */; };
+		114D7A05172A10F00041468E /* hdebug.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D79A5172A10EF0041468E /* hdebug.h */; };
+		114D7A06172A10F00041468E /* hdevice.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D79A6172A10EF0041468E /* hdevice.c */; };
+		114D7A07172A10F00041468E /* hdevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D79A7172A10EF0041468E /* hdevice.h */; };
+		114D7A08172A10F00041468E /* hext_obj.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D79A8172A10EF0041468E /* hext_obj.c */; };
+		114D7A09172A10F00041468E /* hext_obj.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D79A9172A10EF0041468E /* hext_obj.h */; };
+		114D7A0A172A10F00041468E /* hfile.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D79AA172A10EF0041468E /* hfile.c */; };
+		114D7A0B172A10F00041468E /* hfile.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D79AB172A10EF0041468E /* hfile.h */; };
+		114D7A0C172A10F00041468E /* hinifile.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D79AC172A10EF0041468E /* hinifile.c */; };
+		114D7A0D172A10F00041468E /* hinifile.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D79AD172A10EF0041468E /* hinifile.h */; };
+		114D7A0E172A10F00041468E /* hjson.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D79AE172A10EF0041468E /* hjson.c */; };
+		114D7A0F172A10F00041468E /* hjson.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D79AF172A10EF0041468E /* hjson.h */; };
+		114D7A10172A10F00041468E /* hlibrary.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D79B0172A10EF0041468E /* hlibrary.c */; };
+		114D7A11172A10F00041468E /* hlibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D79B1172A10EF0041468E /* hlibrary.h */; };
+		114D7A12172A10F00041468E /* hlist.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D79B2172A10EF0041468E /* hlist.c */; };
+		114D7A13172A10F00041468E /* hlist.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D79B3172A10EF0041468E /* hlist.h */; };
+		114D7A14172A10F00041468E /* hlog.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D79B4172A10EF0041468E /* hlog.c */; };
+		114D7A15172A10F00041468E /* hlog.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D79B5172A10EF0041468E /* hlog.h */; };
+		114D7A17172A10F00041468E /* hmap.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D79B7172A10EF0041468E /* hmap.h */; };
+		114D7A18172A10F00041468E /* hmap2.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D79B8172A10EF0041468E /* hmap2.c */; };
+		114D7A19172A10F00041468E /* hmem.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D79B9172A10EF0041468E /* hmem.c */; };
+		114D7A1A172A10F00041468E /* hmem.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D79BA172A10EF0041468E /* hmem.h */; };
+		114D7A1B172A10F00041468E /* hmutex.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D79BB172A10EF0041468E /* hmutex.c */; };
+		114D7A1C172A10F00041468E /* hmutex.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D79BC172A10EF0041468E /* hmutex.h */; };
+		114D7A1D172A10F00041468E /* hnetbios.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D79BD172A10EF0041468E /* hnetbios.c */; };
+		114D7A1E172A10F00041468E /* hnetbios.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D79BE172A10EF0041468E /* hnetbios.h */; };
+		114D7A1F172A10F00041468E /* hprocess.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D79BF172A10EF0041468E /* hprocess.c */; };
+		114D7A20172A10F00041468E /* hprocess.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D79C0172A10EF0041468E /* hprocess.h */; };
+		114D7A21172A10F00041468E /* hqueue.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D79C1172A10EF0041468E /* hqueue.c */; };
+		114D7A22172A10F00041468E /* hqueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D79C2172A10EF0041468E /* hqueue.h */; };
+		114D7A23172A10F00041468E /* hrecursive.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D79C3172A10EF0041468E /* hrecursive.c */; };
+		114D7A24172A10F00041468E /* hrecursive.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D79C4172A10EF0041468E /* hrecursive.h */; };
+		114D7A25172A10F00041468E /* hrwlock.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D79C5172A10EF0041468E /* hrwlock.c */; };
+		114D7A26172A10F00041468E /* hrwlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D79C6172A10EF0041468E /* hrwlock.h */; };
+		114D7A27172A10F00041468E /* hserial_list.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D79C7172A10EF0041468E /* hserial_list.c */; };
+		114D7A28172A10F00041468E /* hserial_list.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D79C8172A10EF0041468E /* hserial_list.h */; };
+		114D7A29172A10F00041468E /* hserial_map.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D79C9172A10EF0041468E /* hserial_map.c */; };
+		114D7A2A172A10F00041468E /* hserial_map.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D79CA172A10EF0041468E /* hserial_map.h */; };
+		114D7A2B172A10F00041468E /* hstack.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D79CB172A10EF0041468E /* hstack.c */; };
+		114D7A2C172A10F00041468E /* hstack.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D79CC172A10EF0041468E /* hstack.h */; };
+		114D7A2D172A10F00041468E /* hstr.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D79CD172A10EF0041468E /* hstr.c */; };
+		114D7A2E172A10F00041468E /* hstr.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D79CE172A10EF0041468E /* hstr.h */; };
+		114D7A2F172A10F00041468E /* hstruct_list.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D79CF172A10EF0041468E /* hstruct_list.c */; };
+		114D7A30172A10F00041468E /* hstruct_list.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D79D0172A10EF0041468E /* hstruct_list.h */; };
+		114D7A31172A10F00041468E /* hthread.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D79D1172A10EF0041468E /* hthread.c */; };
+		114D7A32172A10F00041468E /* hthread.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D79D2172A10EF0041468E /* hthread.h */; };
+		114D7A33172A10F00041468E /* htime.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D79D3172A10EF0041468E /* htime.c */; };
+		114D7A34172A10F00041468E /* htime.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D79D4172A10EF0041468E /* htime.h */; };
+		114D7A35172A10F00041468E /* htypes.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D79D5172A10EF0041468E /* htypes.c */; };
+		114D7A36172A10F00041468E /* htypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D79D6172A10EF0041468E /* htypes.h */; };
+		114D7A37172A10F00041468E /* huniquekey.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D79D7172A10EF0041468E /* huniquekey.c */; };
+		114D7A38172A10F00041468E /* huniquekey.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D79D8172A10EF0041468E /* huniquekey.h */; };
+		114D7A39172A10F00041468E /* hurl.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D79D9172A10EF0041468E /* hurl.c */; };
+		114D7A3A172A10F00041468E /* hurl.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D79DA172A10EF0041468E /* hurl.h */; };
+		114D7A3B172A10F00041468E /* hwaiter.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D79DB172A10EF0041468E /* hwaiter.c */; };
+		114D7A3C172A10F00041468E /* hwaiter.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D79DC172A10EF0041468E /* hwaiter.h */; };
+		114D7A3D172A10F00041468E /* hxml_scanf.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D79DD172A10EF0041468E /* hxml_scanf.c */; };
+		114D7A3E172A10F00041468E /* hxml_scanf.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D79DE172A10EF0041468E /* hxml_scanf.h */; };
+		114D7A40172A10F00041468E /* hxpath.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D79E0172A10F00041468E /* hxpath.h */; };
+		114D7A41172A10F00041468E /* md5.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D79E1172A10F00041468E /* md5.c */; };
+		114D7A42172A10F00041468E /* md5.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D79E2172A10F00041468E /* md5.h */; };
+		114D7A44172A10F00041468E /* sha1.c in Sources */ = {isa = PBXBuildFile; fileRef = 114D79E4172A10F00041468E /* sha1.c */; };
+		114D7A45172A10F00041468E /* sha1.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D79E5172A10F00041468E /* sha1.h */; };
+		114D7A49172A130F0041468E /* VTJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D7A47172A130E0041468E /* VTJSON.h */; };
+		114D7A4A172A130F0041468E /* VTJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 114D7A48172A130E0041468E /* VTJSON.m */; };
+		114D7A4D172A20280041468E /* VTHttpFormBody.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D7A4B172A20280041468E /* VTHttpFormBody.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		114D7A4E172A20280041468E /* VTHttpFormBody.m in Sources */ = {isa = PBXBuildFile; fileRef = 114D7A4C172A20280041468E /* VTHttpFormBody.m */; };
+		114D7A51172A29EB0041468E /* VTHttpService.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D7A4F172A29EB0041468E /* VTHttpService.h */; };
+		114D7A52172A29EB0041468E /* VTHttpService.m in Sources */ = {isa = PBXBuildFile; fileRef = 114D7A50172A29EB0041468E /* VTHttpService.m */; };
+		114D7A55172A2A3F0041468E /* VTService.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D7A53172A2A3D0041468E /* VTService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		114D7A56172A2A3F0041468E /* VTService.m in Sources */ = {isa = PBXBuildFile; fileRef = 114D7A54172A2A3E0041468E /* VTService.m */; };
+		114D7A66172A32210041468E /* VTImageService.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D7A64172A32210041468E /* VTImageService.h */; };
+		114D7A67172A32210041468E /* VTImageService.m in Sources */ = {isa = PBXBuildFile; fileRef = 114D7A65172A32210041468E /* VTImageService.m */; };
+		114D7A6A172A38DA0041468E /* VTImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D7A68172A38DA0041468E /* VTImageView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		114D7A6B172A38DA0041468E /* VTImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 114D7A69172A38DA0041468E /* VTImageView.m */; };
+		114D7A6C172A38EF0041468E /* IVTImageTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D7A63172A30F30041468E /* IVTImageTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		114D7A6F172A3A910041468E /* VTContentViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D7A6D172A3A900041468E /* VTContentViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		114D7A70172A3A910041468E /* VTContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 114D7A6E172A3A910041468E /* VTContentViewController.m */; };
+		114D7A73172A3E8E0041468E /* VTFoldViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D7A71172A3E8E0041468E /* VTFoldViewController.h */; };
+		114D7A75172A5B4B0041468E /* VTFoldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 114D7A72172A3E8E0041468E /* VTFoldViewController.m */; };
+		114D7AC3172A6D7A0041468E /* VTToolbar.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D7AC1172A6D7A0041468E /* VTToolbar.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		114D7AC4172A6D7A0041468E /* VTToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 114D7AC2172A6D7A0041468E /* VTToolbar.m */; };
+		114D7ACB172A75A90041468E /* VTNavigationBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D7AC9172A75A90041468E /* VTNavigationBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		114D7ACC172A75A90041468E /* VTNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 114D7ACA172A75A90041468E /* VTNavigationBar.m */; };
+		114D7ADE172A88FD0041468E /* GIFView.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D7ADC172A88FC0041468E /* GIFView.h */; };
+		114D7ADF172A88FD0041468E /* GIFView.m in Sources */ = {isa = PBXBuildFile; fileRef = 114D7ADD172A88FD0041468E /* GIFView.m */; };
+		114D7AE2172A89710041468E /* VTContainerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D7AE0172A89700041468E /* VTContainerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		114D7AE3172A89710041468E /* VTContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 114D7AE1172A89700041468E /* VTContainerView.m */; };
+		11619C4B17320E1F00BD3561 /* VTContainerLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 11619C4917320E1F00BD3561 /* VTContainerLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11619C4C17320E1F00BD3561 /* VTContainerLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 11619C4A17320E1F00BD3561 /* VTContainerLayout.m */; };
+		11619C4F17320FCE00BD3561 /* VTFlowContainerLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 11619C4D17320FCD00BD3561 /* VTFlowContainerLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11619C5017320FCE00BD3561 /* VTFlowContainerLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 11619C4E17320FCD00BD3561 /* VTFlowContainerLayout.m */; };
+		11619C53173213CD00BD3561 /* VTFallsContainerLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 11619C51173213CD00BD3561 /* VTFallsContainerLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11619C54173213CD00BD3561 /* VTFallsContainerLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 11619C52173213CD00BD3561 /* VTFallsContainerLayout.m */; };
+		11619C5717322FD400BD3561 /* UIView+Search.h in Headers */ = {isa = PBXBuildFile; fileRef = 11619C5517322FD300BD3561 /* UIView+Search.h */; };
+		11619C5817322FD400BD3561 /* UIView+Search.m in Sources */ = {isa = PBXBuildFile; fileRef = 11619C5617322FD400BD3561 /* UIView+Search.m */; };
+		11619C5F173231F000BD3561 /* IVTDownlinkTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 11619C591732315D00BD3561 /* IVTDownlinkTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11619C60173231F300BD3561 /* IVTDownlinkPageTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 11619C5E173231E700BD3561 /* IVTDownlinkPageTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11619C64173232B500BD3561 /* VTUplinkTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 11619C62173232B500BD3561 /* VTUplinkTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11619C65173232B500BD3561 /* VTUplinkTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 11619C63173232B500BD3561 /* VTUplinkTask.m */; };
+		11619C66173232E300BD3561 /* IVTUplinkTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 11619C611732324500BD3561 /* IVTUplinkTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11619C6A1732338C00BD3561 /* VTDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 11619C681732338C00BD3561 /* VTDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11619C6B1732338C00BD3561 /* VTDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 11619C691732338C00BD3561 /* VTDataSource.m */; };
+		11619C6E1732383800BD3561 /* VTPageDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 11619C6C1732383800BD3561 /* VTPageDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11619C6F1732383800BD3561 /* VTPageDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 11619C6D1732383800BD3561 /* VTPageDataSource.m */; };
+		11619C73173239B000BD3561 /* VTDataController.h in Headers */ = {isa = PBXBuildFile; fileRef = 11619C71173239B000BD3561 /* VTDataController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11619C74173239B000BD3561 /* VTDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11619C72173239B000BD3561 /* VTDataController.m */; };
+		11619C7717323BF500BD3561 /* VTContainerDataController.h in Headers */ = {isa = PBXBuildFile; fileRef = 11619C7517323BF500BD3561 /* VTContainerDataController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11619C7817323BF500BD3561 /* VTContainerDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11619C7617323BF500BD3561 /* VTContainerDataController.m */; };
+		11619C7B17324C0A00BD3561 /* VTDownlinkService.h in Headers */ = {isa = PBXBuildFile; fileRef = 11619C7917324C0A00BD3561 /* VTDownlinkService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11619C7C17324C0A00BD3561 /* VTDownlinkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 11619C7A17324C0A00BD3561 /* VTDownlinkService.m */; };
+		11619C831732559900BD3561 /* VTUplinkService.h in Headers */ = {isa = PBXBuildFile; fileRef = 11619C811732559900BD3561 /* VTUplinkService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11619C841732559900BD3561 /* VTUplinkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 11619C821732559900BD3561 /* VTUplinkService.m */; };
+		11619C8F17325B5900BD3561 /* VTItemViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 11619C8D17325B5700BD3561 /* VTItemViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11619C9017325B5900BD3561 /* VTItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11619C8E17325B5800BD3561 /* VTItemViewController.m */; };
+		11619CAA1732658C00BD3561 /* IVTAPITask.h in Headers */ = {isa = PBXBuildFile; fileRef = 11619CA81732646C00BD3561 /* IVTAPITask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11619CAB1732658F00BD3561 /* IVTAPICancelTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 11619CA91732657B00BD3561 /* IVTAPICancelTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11619CAE173265B800BD3561 /* VTAPIRequestTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 11619CAC173265B700BD3561 /* VTAPIRequestTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11619CAF173265B800BD3561 /* VTAPIRequestTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 11619CAD173265B800BD3561 /* VTAPIRequestTask.m */; };
+		11619CB2173266D100BD3561 /* VTAPITask.h in Headers */ = {isa = PBXBuildFile; fileRef = 11619CB0173266D100BD3561 /* VTAPITask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11619CB3173266D100BD3561 /* VTAPITask.m in Sources */ = {isa = PBXBuildFile; fileRef = 11619CB1173266D100BD3561 /* VTAPITask.m */; };
+		11619CB61732674C00BD3561 /* VTAPIResponseTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 11619CB41732674A00BD3561 /* VTAPIResponseTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11619CB71732674C00BD3561 /* VTAPIResponseTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 11619CB51732674A00BD3561 /* VTAPIResponseTask.m */; };
+		11619CBA173267D400BD3561 /* VTAPIService.h in Headers */ = {isa = PBXBuildFile; fileRef = 11619CB8173267D400BD3561 /* VTAPIService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11619CBB173267D400BD3561 /* VTAPIService.m in Sources */ = {isa = PBXBuildFile; fileRef = 11619CB9173267D400BD3561 /* VTAPIService.m */; };
+		11619CC31733585200BD3561 /* VTDragLoadingView.h in Headers */ = {isa = PBXBuildFile; fileRef = 11619CC11733584F00BD3561 /* VTDragLoadingView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11619CC41733585200BD3561 /* VTDragLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11619CC21733585100BD3561 /* VTDragLoadingView.m */; };
+		11619CCB17339A3300BD3561 /* VTZoomView.h in Headers */ = {isa = PBXBuildFile; fileRef = 11619CC917339A2E00BD3561 /* VTZoomView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11619CCC17339A3300BD3561 /* VTZoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11619CCA17339A3000BD3561 /* VTZoomView.m */; };
+		11619CD81733B1C700BD3561 /* IVTAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 11619CD71733B1A400BD3561 /* IVTAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11E59F5F1728C197002DD63C /* IVTServiceContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 11E59F5E1728C03B002DD63C /* IVTServiceContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11E59F641728C785002DD63C /* VTStyleSheet.h in Headers */ = {isa = PBXBuildFile; fileRef = 11E59F621728C785002DD63C /* VTStyleSheet.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11E59F651728C785002DD63C /* VTStyleSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E59F631728C785002DD63C /* VTStyleSheet.m */; };
+		11E59F681728C798002DD63C /* VTStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 11E59F661728C798002DD63C /* VTStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11E59F691728C798002DD63C /* VTStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E59F671728C798002DD63C /* VTStyle.m */; };
+		11E59F6C1728CCAC002DD63C /* VTStyleOutletContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 11E59F6A1728CCAB002DD63C /* VTStyleOutletContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11E59F6D1728CCAC002DD63C /* VTStyleOutletContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E59F6B1728CCAB002DD63C /* VTStyleOutletContainer.m */; };
+		11E59F701728CD6C002DD63C /* VTDataOutlet.h in Headers */ = {isa = PBXBuildFile; fileRef = 11E59F6E1728CD6C002DD63C /* VTDataOutlet.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11E59F711728CD6C002DD63C /* VTDataOutlet.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E59F6F1728CD6C002DD63C /* VTDataOutlet.m */; };
+		11E59F741728CE81002DD63C /* VTDataOutletContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 11E59F721728CE81002DD63C /* VTDataOutletContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11E59F751728CE81002DD63C /* VTDataOutletContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E59F731728CE81002DD63C /* VTDataOutletContainer.m */; };
+		11E59F791728CFA8002DD63C /* VTViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 11E59F771728CFA8002DD63C /* VTViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11E59F7A1728CFA8002DD63C /* VTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E59F781728CFA8002DD63C /* VTViewController.m */; };
+		11E59F7D1728DBCD002DD63C /* NSURL+QueryValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 11E59F7B1728DBCC002DD63C /* NSURL+QueryValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11E59F7E1728DBCD002DD63C /* NSURL+QueryValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E59F7C1728DBCD002DD63C /* NSURL+QueryValue.m */; };
+		11E59F811728DF6E002DD63C /* VTNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 11E59F7F1728DF6E002DD63C /* VTNavigationController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11E59F821728DF6E002DD63C /* VTNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E59F801728DF6E002DD63C /* VTNavigationController.m */; };
+		AC324F6C173DD8FA0094A7A6 /* UIView+VTStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = AC324F6A173DD8FA0094A7A6 /* UIView+VTStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC324F6D173DD8FA0094A7A6 /* UIView+VTStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = AC324F6B173DD8FA0094A7A6 /* UIView+VTStyle.m */; };
+		AC324F87173DE23B0094A7A6 /* UIButton+VTStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = AC324F85173DE23B0094A7A6 /* UIButton+VTStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC324F88173DE23B0094A7A6 /* UIButton+VTStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = AC324F86173DE23B0094A7A6 /* UIButton+VTStyle.m */; };
+		AC325010173E1AE30094A7A6 /* VTHeapViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = AC32500E173E1AE10094A7A6 /* VTHeapViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC325011173E1AE30094A7A6 /* VTHeapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC32500F173E1AE20094A7A6 /* VTHeapViewController.m */; };
+		AC325014173E23980094A7A6 /* VTLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = AC325012173E23980094A7A6 /* VTLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC325015173E23980094A7A6 /* VTLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AC325013173E23980094A7A6 /* VTLayout.m */; };
+		AC325018173E23A60094A7A6 /* VTLayoutData.h in Headers */ = {isa = PBXBuildFile; fileRef = AC325016173E23A60094A7A6 /* VTLayoutData.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC325019173E23A60094A7A6 /* VTLayoutData.m in Sources */ = {isa = PBXBuildFile; fileRef = AC325017173E23A60094A7A6 /* VTLayoutData.m */; };
+		AC325020173E257D0094A7A6 /* VTViewLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = AC32501E173E257D0094A7A6 /* VTViewLayout.h */; };
+		AC325021173E257D0094A7A6 /* VTViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AC32501F173E257D0094A7A6 /* VTViewLayout.m */; };
+		AC325028173E2DF10094A7A6 /* VTFormController.h in Headers */ = {isa = PBXBuildFile; fileRef = AC325026173E2DF10094A7A6 /* VTFormController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC325029173E2DF10094A7A6 /* VTFormController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC325027173E2DF10094A7A6 /* VTFormController.m */; };
+		AC32502D173E2EF60094A7A6 /* VTFormItem.h in Headers */ = {isa = PBXBuildFile; fileRef = AC32502B173E2EF50094A7A6 /* VTFormItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC32502E173E2EF60094A7A6 /* VTFormItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AC32502C173E2EF60094A7A6 /* VTFormItem.m */; };
+		AC325030173E31440094A7A6 /* IVTFormItemView.h in Headers */ = {isa = PBXBuildFile; fileRef = AC32502F173E31220094A7A6 /* IVTFormItemView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC325032173E35950094A7A6 /* IVTFormEditor.h in Headers */ = {isa = PBXBuildFile; fileRef = AC325031173E35760094A7A6 /* IVTFormEditor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC325035173E36C50094A7A6 /* VTFormKeyboardEditor.h in Headers */ = {isa = PBXBuildFile; fileRef = AC325033173E36C40094A7A6 /* VTFormKeyboardEditor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC325036173E36C50094A7A6 /* VTFormKeyboardEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = AC325034173E36C50094A7A6 /* VTFormKeyboardEditor.m */; };
+		AC325039173E39BD0094A7A6 /* VTKeyboardController.h in Headers */ = {isa = PBXBuildFile; fileRef = AC325037173E39BC0094A7A6 /* VTKeyboardController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC32503A173E39BD0094A7A6 /* VTKeyboardController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC325038173E39BC0094A7A6 /* VTKeyboardController.m */; };
+		AC32504D173E7B1E0094A7A6 /* VTLayoutContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = AC32504B173E7B1E0094A7A6 /* VTLayoutContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC32504E173E7B1E0094A7A6 /* VTLayoutContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = AC32504C173E7B1E0094A7A6 /* VTLayoutContainer.m */; };
+		AC325054173E7EE30094A7A6 /* VTFormDateEditor.h in Headers */ = {isa = PBXBuildFile; fileRef = AC325052173E7EE30094A7A6 /* VTFormDateEditor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC325055173E7EE30094A7A6 /* VTFormDateEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = AC325053173E7EE30094A7A6 /* VTFormDateEditor.m */; };
+		AC325058173E83DF0094A7A6 /* VTFormButton.h in Headers */ = {isa = PBXBuildFile; fileRef = AC325056173E83DE0094A7A6 /* VTFormButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC325059173E83DF0094A7A6 /* VTFormButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AC325057173E83DF0094A7A6 /* VTFormButton.m */; };
+		AC32505C173E87D10094A7A6 /* VTFormPickerEditor.h in Headers */ = {isa = PBXBuildFile; fileRef = AC32505A173E87D00094A7A6 /* VTFormPickerEditor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC32505D173E87D10094A7A6 /* VTFormPickerEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = AC32505B173E87D10094A7A6 /* VTFormPickerEditor.m */; };
+		AC325060173E884D0094A7A6 /* VTFormPickerEditorItem.h in Headers */ = {isa = PBXBuildFile; fileRef = AC32505E173E884B0094A7A6 /* VTFormPickerEditorItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC325061173E884D0094A7A6 /* VTFormPickerEditorItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AC32505F173E884B0094A7A6 /* VTFormPickerEditorItem.m */; };
+		ACDE3A501733EC410046ED56 /* UIView+Image.h in Headers */ = {isa = PBXBuildFile; fileRef = ACDE3A4E1733EC410046ED56 /* UIView+Image.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ACDE3A511733EC410046ED56 /* UIView+Image.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDE3A4F1733EC410046ED56 /* UIView+Image.m */; };
+		ACDE3A5717349D380046ED56 /* VTPageContainerLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = ACDE3A5517349D380046ED56 /* VTPageContainerLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ACDE3A5817349D380046ED56 /* VTPageContainerLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDE3A5617349D380046ED56 /* VTPageContainerLayout.m */; };
+		ACDE3A5B17349F940046ED56 /* VTPageDataController.h in Headers */ = {isa = PBXBuildFile; fileRef = ACDE3A5917349F930046ED56 /* VTPageDataController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ACDE3A5C17349F940046ED56 /* VTPageDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDE3A5A17349F930046ED56 /* VTPageDataController.m */; };
+		ACDE3A651734BD0D0046ED56 /* UIView+Hidden.h in Headers */ = {isa = PBXBuildFile; fileRef = ACDE3A631734BD0B0046ED56 /* UIView+Hidden.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ACDE3A661734BD0D0046ED56 /* UIView+Hidden.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDE3A641734BD0C0046ED56 /* UIView+Hidden.m */; };
+		ACDE3A7E1735087D0046ED56 /* VTTableSection.h in Headers */ = {isa = PBXBuildFile; fileRef = ACDE3A7C1735087B0046ED56 /* VTTableSection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ACDE3A7F1735087D0046ED56 /* VTTableSection.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDE3A7D1735087C0046ED56 /* VTTableSection.m */; };
+		ACDE3A82173508FC0046ED56 /* VTTableSource.h in Headers */ = {isa = PBXBuildFile; fileRef = ACDE3A80173508F90046ED56 /* VTTableSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ACDE3A83173508FC0046ED56 /* VTTableSource.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDE3A81173508FA0046ED56 /* VTTableSource.m */; };
+		ACDE3A8617350AE50046ED56 /* VTButton.h in Headers */ = {isa = PBXBuildFile; fileRef = ACDE3A8417350AE30046ED56 /* VTButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ACDE3A8717350AE50046ED56 /* VTButton.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDE3A8517350AE40046ED56 /* VTButton.m */; };
+		ACDE3AB1173647950046ED56 /* VTAppStatusView.h in Headers */ = {isa = PBXBuildFile; fileRef = ACDE3AAF173647910046ED56 /* VTAppStatusView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ACDE3AB2173647950046ED56 /* VTAppStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDE3AB0173647930046ED56 /* VTAppStatusView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		113B5BDB174F78F8003211AD /* UIView+VTDataOutlet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+VTDataOutlet.h"; sourceTree = "<group>"; };
+		113B5BDC174F78F8003211AD /* UIView+VTDataOutlet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+VTDataOutlet.m"; sourceTree = "<group>"; };
+		114772E21727DE0800196FB2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		114772F41727DE5200196FB2 /* vTeam.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = vTeam.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		114772F91727DE5200196FB2 /* vTeam-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "vTeam-Info.plist"; sourceTree = "<group>"; };
+		114772FB1727DE5200196FB2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		114772FD1727DE5200196FB2 /* vTeam-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "vTeam-Prefix.pch"; sourceTree = "<group>"; };
+		114773011727DF0D00196FB2 /* vTeam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vTeam.h; sourceTree = "<group>"; };
+		114773021727DF0D00196FB2 /* vTeam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = vTeam.m; sourceTree = "<group>"; };
+		114773061727E04F00196FB2 /* IVTContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVTContext.h; sourceTree = "<group>"; };
+		114773071727E09700196FB2 /* IVTServiceContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVTServiceContext.h; sourceTree = "<group>"; };
+		114773081727E0EF00196FB2 /* IVTTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVTTask.h; sourceTree = "<group>"; };
+		114773091727E13900196FB2 /* IVTService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVTService.h; sourceTree = "<group>"; };
+		1147730A1727E29600196FB2 /* VTShell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTShell.h; sourceTree = "<group>"; };
+		1147730B1727E29600196FB2 /* VTShell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTShell.m; sourceTree = "<group>"; };
+		1147730E1727E2E100196FB2 /* IVTUIContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVTUIContext.h; sourceTree = "<group>"; };
+		1147730F1727E33A00196FB2 /* IVTUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVTUIViewController.h; sourceTree = "<group>"; };
+		114D796617291F3B0041468E /* VTStyleOutlet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTStyleOutlet.h; sourceTree = "<group>"; };
+		114D796717291F3B0041468E /* VTStyleOutlet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTStyleOutlet.m; sourceTree = "<group>"; };
+		114D7978172929430041468E /* VTTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTTask.h; sourceTree = "<group>"; };
+		114D7979172929430041468E /* VTTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTTask.m; sourceTree = "<group>"; };
+		114D797C172929A40041468E /* VTHttpTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTHttpTask.h; sourceTree = "<group>"; };
+		114D797D172929A40041468E /* VTHttpTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTHttpTask.m; sourceTree = "<group>"; };
+		114D7987172A10EF0041468E /* hactree.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hactree.c; sourceTree = "<group>"; };
+		114D7988172A10EF0041468E /* hactree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hactree.h; sourceTree = "<group>"; };
+		114D7989172A10EF0041468E /* hbase64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hbase64.c; sourceTree = "<group>"; };
+		114D798A172A10EF0041468E /* hbase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hbase64.h; sourceTree = "<group>"; };
+		114D798B172A10EF0041468E /* hbtree.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hbtree.c; sourceTree = "<group>"; };
+		114D798C172A10EF0041468E /* hbtree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hbtree.h; sourceTree = "<group>"; };
+		114D798D172A10EF0041468E /* hbuffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hbuffer.c; sourceTree = "<group>"; };
+		114D798E172A10EF0041468E /* hbuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hbuffer.h; sourceTree = "<group>"; };
+		114D798F172A10EF0041468E /* hbytes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hbytes.c; sourceTree = "<group>"; };
+		114D7990172A10EF0041468E /* hbytes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hbytes.h; sourceTree = "<group>"; };
+		114D7991172A10EF0041468E /* hcgi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hcgi.h; sourceTree = "<group>"; };
+		114D7992172A10EF0041468E /* hclass.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hclass.c; sourceTree = "<group>"; };
+		114D7993172A10EF0041468E /* hclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hclass.h; sourceTree = "<group>"; };
+		114D7994172A10EF0041468E /* hconfig.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hconfig.c; sourceTree = "<group>"; };
+		114D7995172A10EF0041468E /* hconfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hconfig.h; sourceTree = "<group>"; };
+		114D7996172A10EF0041468E /* hdata.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hdata.c; sourceTree = "<group>"; };
+		114D7997172A10EF0041468E /* hdata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hdata.h; sourceTree = "<group>"; };
+		114D7998172A10EF0041468E /* hdata_alloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hdata_alloc.c; sourceTree = "<group>"; };
+		114D7999172A10EF0041468E /* hdata_alloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hdata_alloc.h; sourceTree = "<group>"; };
+		114D799A172A10EF0041468E /* hdata_binary.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hdata_binary.c; sourceTree = "<group>"; };
+		114D799B172A10EF0041468E /* hdata_binary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hdata_binary.h; sourceTree = "<group>"; };
+		114D799C172A10EF0041468E /* hdata_json.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hdata_json.c; sourceTree = "<group>"; };
+		114D799D172A10EF0041468E /* hdata_json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hdata_json.h; sourceTree = "<group>"; };
+		114D799E172A10EF0041468E /* hdata_set.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hdata_set.c; sourceTree = "<group>"; };
+		114D799F172A10EF0041468E /* hdata_set.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hdata_set.h; sourceTree = "<group>"; };
+		114D79A0172A10EF0041468E /* hdata_storage.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hdata_storage.c; sourceTree = "<group>"; };
+		114D79A1172A10EF0041468E /* hdata_storage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hdata_storage.h; sourceTree = "<group>"; };
+		114D79A2172A10EF0041468E /* hdata_xml.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hdata_xml.c; sourceTree = "<group>"; };
+		114D79A3172A10EF0041468E /* hdata_xml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hdata_xml.h; sourceTree = "<group>"; };
+		114D79A4172A10EF0041468E /* hdebug.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hdebug.c; sourceTree = "<group>"; };
+		114D79A5172A10EF0041468E /* hdebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hdebug.h; sourceTree = "<group>"; };
+		114D79A6172A10EF0041468E /* hdevice.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hdevice.c; sourceTree = "<group>"; };
+		114D79A7172A10EF0041468E /* hdevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hdevice.h; sourceTree = "<group>"; };
+		114D79A8172A10EF0041468E /* hext_obj.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hext_obj.c; sourceTree = "<group>"; };
+		114D79A9172A10EF0041468E /* hext_obj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hext_obj.h; sourceTree = "<group>"; };
+		114D79AA172A10EF0041468E /* hfile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hfile.c; sourceTree = "<group>"; };
+		114D79AB172A10EF0041468E /* hfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hfile.h; sourceTree = "<group>"; };
+		114D79AC172A10EF0041468E /* hinifile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hinifile.c; sourceTree = "<group>"; };
+		114D79AD172A10EF0041468E /* hinifile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hinifile.h; sourceTree = "<group>"; };
+		114D79AE172A10EF0041468E /* hjson.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hjson.c; sourceTree = "<group>"; };
+		114D79AF172A10EF0041468E /* hjson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hjson.h; sourceTree = "<group>"; };
+		114D79B0172A10EF0041468E /* hlibrary.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hlibrary.c; sourceTree = "<group>"; };
+		114D79B1172A10EF0041468E /* hlibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hlibrary.h; sourceTree = "<group>"; };
+		114D79B2172A10EF0041468E /* hlist.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hlist.c; sourceTree = "<group>"; };
+		114D79B3172A10EF0041468E /* hlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hlist.h; sourceTree = "<group>"; };
+		114D79B4172A10EF0041468E /* hlog.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hlog.c; sourceTree = "<group>"; };
+		114D79B5172A10EF0041468E /* hlog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hlog.h; sourceTree = "<group>"; };
+		114D79B6172A10EF0041468E /* hmap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hmap.c; sourceTree = "<group>"; };
+		114D79B7172A10EF0041468E /* hmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hmap.h; sourceTree = "<group>"; };
+		114D79B8172A10EF0041468E /* hmap2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hmap2.c; sourceTree = "<group>"; };
+		114D79B9172A10EF0041468E /* hmem.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hmem.c; sourceTree = "<group>"; };
+		114D79BA172A10EF0041468E /* hmem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hmem.h; sourceTree = "<group>"; };
+		114D79BB172A10EF0041468E /* hmutex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hmutex.c; sourceTree = "<group>"; };
+		114D79BC172A10EF0041468E /* hmutex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hmutex.h; sourceTree = "<group>"; };
+		114D79BD172A10EF0041468E /* hnetbios.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hnetbios.c; sourceTree = "<group>"; };
+		114D79BE172A10EF0041468E /* hnetbios.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hnetbios.h; sourceTree = "<group>"; };
+		114D79BF172A10EF0041468E /* hprocess.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hprocess.c; sourceTree = "<group>"; };
+		114D79C0172A10EF0041468E /* hprocess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hprocess.h; sourceTree = "<group>"; };
+		114D79C1172A10EF0041468E /* hqueue.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hqueue.c; sourceTree = "<group>"; };
+		114D79C2172A10EF0041468E /* hqueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hqueue.h; sourceTree = "<group>"; };
+		114D79C3172A10EF0041468E /* hrecursive.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hrecursive.c; sourceTree = "<group>"; };
+		114D79C4172A10EF0041468E /* hrecursive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hrecursive.h; sourceTree = "<group>"; };
+		114D79C5172A10EF0041468E /* hrwlock.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hrwlock.c; sourceTree = "<group>"; };
+		114D79C6172A10EF0041468E /* hrwlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hrwlock.h; sourceTree = "<group>"; };
+		114D79C7172A10EF0041468E /* hserial_list.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hserial_list.c; sourceTree = "<group>"; };
+		114D79C8172A10EF0041468E /* hserial_list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hserial_list.h; sourceTree = "<group>"; };
+		114D79C9172A10EF0041468E /* hserial_map.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hserial_map.c; sourceTree = "<group>"; };
+		114D79CA172A10EF0041468E /* hserial_map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hserial_map.h; sourceTree = "<group>"; };
+		114D79CB172A10EF0041468E /* hstack.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hstack.c; sourceTree = "<group>"; };
+		114D79CC172A10EF0041468E /* hstack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hstack.h; sourceTree = "<group>"; };
+		114D79CD172A10EF0041468E /* hstr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hstr.c; sourceTree = "<group>"; };
+		114D79CE172A10EF0041468E /* hstr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hstr.h; sourceTree = "<group>"; };
+		114D79CF172A10EF0041468E /* hstruct_list.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hstruct_list.c; sourceTree = "<group>"; };
+		114D79D0172A10EF0041468E /* hstruct_list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hstruct_list.h; sourceTree = "<group>"; };
+		114D79D1172A10EF0041468E /* hthread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hthread.c; sourceTree = "<group>"; };
+		114D79D2172A10EF0041468E /* hthread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hthread.h; sourceTree = "<group>"; };
+		114D79D3172A10EF0041468E /* htime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = htime.c; sourceTree = "<group>"; };
+		114D79D4172A10EF0041468E /* htime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = htime.h; sourceTree = "<group>"; };
+		114D79D5172A10EF0041468E /* htypes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = htypes.c; sourceTree = "<group>"; };
+		114D79D6172A10EF0041468E /* htypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = htypes.h; sourceTree = "<group>"; };
+		114D79D7172A10EF0041468E /* huniquekey.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = huniquekey.c; sourceTree = "<group>"; };
+		114D79D8172A10EF0041468E /* huniquekey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = huniquekey.h; sourceTree = "<group>"; };
+		114D79D9172A10EF0041468E /* hurl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hurl.c; sourceTree = "<group>"; };
+		114D79DA172A10EF0041468E /* hurl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hurl.h; sourceTree = "<group>"; };
+		114D79DB172A10EF0041468E /* hwaiter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hwaiter.c; sourceTree = "<group>"; };
+		114D79DC172A10EF0041468E /* hwaiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hwaiter.h; sourceTree = "<group>"; };
+		114D79DD172A10EF0041468E /* hxml_scanf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hxml_scanf.c; sourceTree = "<group>"; };
+		114D79DE172A10EF0041468E /* hxml_scanf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hxml_scanf.h; sourceTree = "<group>"; };
+		114D79DF172A10EF0041468E /* hxpath.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hxpath.c; sourceTree = "<group>"; };
+		114D79E0172A10F00041468E /* hxpath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hxpath.h; sourceTree = "<group>"; };
+		114D79E1172A10F00041468E /* md5.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = md5.c; sourceTree = "<group>"; };
+		114D79E2172A10F00041468E /* md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = md5.h; sourceTree = "<group>"; };
+		114D79E3172A10F00041468E /* sha.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sha.c; sourceTree = "<group>"; };
+		114D79E4172A10F00041468E /* sha1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sha1.c; sourceTree = "<group>"; };
+		114D79E5172A10F00041468E /* sha1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sha1.h; sourceTree = "<group>"; };
+		114D79E6172A10F00041468E /* shatest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = shatest.c; sourceTree = "<group>"; };
+		114D7A47172A130E0041468E /* VTJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTJSON.h; sourceTree = "<group>"; };
+		114D7A48172A130E0041468E /* VTJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTJSON.m; sourceTree = "<group>"; };
+		114D7A4B172A20280041468E /* VTHttpFormBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTHttpFormBody.h; sourceTree = "<group>"; };
+		114D7A4C172A20280041468E /* VTHttpFormBody.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTHttpFormBody.m; sourceTree = "<group>"; };
+		114D7A4F172A29EB0041468E /* VTHttpService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTHttpService.h; sourceTree = "<group>"; };
+		114D7A50172A29EB0041468E /* VTHttpService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTHttpService.m; sourceTree = "<group>"; };
+		114D7A53172A2A3D0041468E /* VTService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTService.h; sourceTree = "<group>"; };
+		114D7A54172A2A3E0041468E /* VTService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTService.m; sourceTree = "<group>"; };
+		114D7A63172A30F30041468E /* IVTImageTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVTImageTask.h; sourceTree = "<group>"; };
+		114D7A64172A32210041468E /* VTImageService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTImageService.h; sourceTree = "<group>"; };
+		114D7A65172A32210041468E /* VTImageService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTImageService.m; sourceTree = "<group>"; };
+		114D7A68172A38DA0041468E /* VTImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTImageView.h; sourceTree = "<group>"; };
+		114D7A69172A38DA0041468E /* VTImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTImageView.m; sourceTree = "<group>"; };
+		114D7A6D172A3A900041468E /* VTContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTContentViewController.h; sourceTree = "<group>"; };
+		114D7A6E172A3A910041468E /* VTContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTContentViewController.m; sourceTree = "<group>"; };
+		114D7A71172A3E8E0041468E /* VTFoldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTFoldViewController.h; sourceTree = "<group>"; };
+		114D7A72172A3E8E0041468E /* VTFoldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTFoldViewController.m; sourceTree = "<group>"; };
+		114D7AC1172A6D7A0041468E /* VTToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTToolbar.h; sourceTree = "<group>"; };
+		114D7AC2172A6D7A0041468E /* VTToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTToolbar.m; sourceTree = "<group>"; };
+		114D7AC9172A75A90041468E /* VTNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTNavigationBar.h; sourceTree = "<group>"; };
+		114D7ACA172A75A90041468E /* VTNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTNavigationBar.m; sourceTree = "<group>"; };
+		114D7ADC172A88FC0041468E /* GIFView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GIFView.h; sourceTree = "<group>"; };
+		114D7ADD172A88FD0041468E /* GIFView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GIFView.m; sourceTree = "<group>"; };
+		114D7AE0172A89700041468E /* VTContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTContainerView.h; sourceTree = "<group>"; };
+		114D7AE1172A89700041468E /* VTContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTContainerView.m; sourceTree = "<group>"; };
+		11619C4917320E1F00BD3561 /* VTContainerLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTContainerLayout.h; sourceTree = "<group>"; };
+		11619C4A17320E1F00BD3561 /* VTContainerLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTContainerLayout.m; sourceTree = "<group>"; };
+		11619C4D17320FCD00BD3561 /* VTFlowContainerLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTFlowContainerLayout.h; sourceTree = "<group>"; };
+		11619C4E17320FCD00BD3561 /* VTFlowContainerLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTFlowContainerLayout.m; sourceTree = "<group>"; };
+		11619C51173213CD00BD3561 /* VTFallsContainerLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTFallsContainerLayout.h; sourceTree = "<group>"; };
+		11619C52173213CD00BD3561 /* VTFallsContainerLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTFallsContainerLayout.m; sourceTree = "<group>"; };
+		11619C5517322FD300BD3561 /* UIView+Search.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Search.h"; sourceTree = "<group>"; };
+		11619C5617322FD400BD3561 /* UIView+Search.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Search.m"; sourceTree = "<group>"; };
+		11619C591732315D00BD3561 /* IVTDownlinkTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVTDownlinkTask.h; sourceTree = "<group>"; };
+		11619C5E173231E700BD3561 /* IVTDownlinkPageTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVTDownlinkPageTask.h; sourceTree = "<group>"; };
+		11619C611732324500BD3561 /* IVTUplinkTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVTUplinkTask.h; sourceTree = "<group>"; };
+		11619C62173232B500BD3561 /* VTUplinkTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTUplinkTask.h; sourceTree = "<group>"; };
+		11619C63173232B500BD3561 /* VTUplinkTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTUplinkTask.m; sourceTree = "<group>"; };
+		11619C681732338C00BD3561 /* VTDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDataSource.h; sourceTree = "<group>"; };
+		11619C691732338C00BD3561 /* VTDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDataSource.m; sourceTree = "<group>"; };
+		11619C6C1732383800BD3561 /* VTPageDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTPageDataSource.h; sourceTree = "<group>"; };
+		11619C6D1732383800BD3561 /* VTPageDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTPageDataSource.m; sourceTree = "<group>"; };
+		11619C71173239B000BD3561 /* VTDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDataController.h; sourceTree = "<group>"; };
+		11619C72173239B000BD3561 /* VTDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDataController.m; sourceTree = "<group>"; };
+		11619C7517323BF500BD3561 /* VTContainerDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTContainerDataController.h; sourceTree = "<group>"; };
+		11619C7617323BF500BD3561 /* VTContainerDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTContainerDataController.m; sourceTree = "<group>"; };
+		11619C7917324C0A00BD3561 /* VTDownlinkService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDownlinkService.h; sourceTree = "<group>"; };
+		11619C7A17324C0A00BD3561 /* VTDownlinkService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDownlinkService.m; sourceTree = "<group>"; };
+		11619C811732559900BD3561 /* VTUplinkService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTUplinkService.h; sourceTree = "<group>"; };
+		11619C821732559900BD3561 /* VTUplinkService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTUplinkService.m; sourceTree = "<group>"; };
+		11619C8D17325B5700BD3561 /* VTItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTItemViewController.h; sourceTree = "<group>"; };
+		11619C8E17325B5800BD3561 /* VTItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTItemViewController.m; sourceTree = "<group>"; };
+		11619CA81732646C00BD3561 /* IVTAPITask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVTAPITask.h; sourceTree = "<group>"; };
+		11619CA91732657B00BD3561 /* IVTAPICancelTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVTAPICancelTask.h; sourceTree = "<group>"; };
+		11619CAC173265B700BD3561 /* VTAPIRequestTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTAPIRequestTask.h; sourceTree = "<group>"; };
+		11619CAD173265B800BD3561 /* VTAPIRequestTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTAPIRequestTask.m; sourceTree = "<group>"; };
+		11619CB0173266D100BD3561 /* VTAPITask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTAPITask.h; sourceTree = "<group>"; };
+		11619CB1173266D100BD3561 /* VTAPITask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTAPITask.m; sourceTree = "<group>"; };
+		11619CB41732674A00BD3561 /* VTAPIResponseTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTAPIResponseTask.h; sourceTree = "<group>"; };
+		11619CB51732674A00BD3561 /* VTAPIResponseTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTAPIResponseTask.m; sourceTree = "<group>"; };
+		11619CB8173267D400BD3561 /* VTAPIService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTAPIService.h; sourceTree = "<group>"; };
+		11619CB9173267D400BD3561 /* VTAPIService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTAPIService.m; sourceTree = "<group>"; };
+		11619CC11733584F00BD3561 /* VTDragLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDragLoadingView.h; sourceTree = "<group>"; };
+		11619CC21733585100BD3561 /* VTDragLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDragLoadingView.m; sourceTree = "<group>"; };
+		11619CC917339A2E00BD3561 /* VTZoomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTZoomView.h; sourceTree = "<group>"; };
+		11619CCA17339A3000BD3561 /* VTZoomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTZoomView.m; sourceTree = "<group>"; };
+		11619CD71733B1A400BD3561 /* IVTAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVTAction.h; sourceTree = "<group>"; };
+		11E59F5E1728C03B002DD63C /* IVTServiceContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVTServiceContainer.h; sourceTree = "<group>"; };
+		11E59F621728C785002DD63C /* VTStyleSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTStyleSheet.h; sourceTree = "<group>"; };
+		11E59F631728C785002DD63C /* VTStyleSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTStyleSheet.m; sourceTree = "<group>"; };
+		11E59F661728C798002DD63C /* VTStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTStyle.h; sourceTree = "<group>"; };
+		11E59F671728C798002DD63C /* VTStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTStyle.m; sourceTree = "<group>"; };
+		11E59F6A1728CCAB002DD63C /* VTStyleOutletContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTStyleOutletContainer.h; sourceTree = "<group>"; };
+		11E59F6B1728CCAB002DD63C /* VTStyleOutletContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTStyleOutletContainer.m; sourceTree = "<group>"; };
+		11E59F6E1728CD6C002DD63C /* VTDataOutlet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDataOutlet.h; sourceTree = "<group>"; };
+		11E59F6F1728CD6C002DD63C /* VTDataOutlet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDataOutlet.m; sourceTree = "<group>"; };
+		11E59F721728CE81002DD63C /* VTDataOutletContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDataOutletContainer.h; sourceTree = "<group>"; };
+		11E59F731728CE81002DD63C /* VTDataOutletContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDataOutletContainer.m; sourceTree = "<group>"; };
+		11E59F771728CFA8002DD63C /* VTViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTViewController.h; sourceTree = "<group>"; };
+		11E59F781728CFA8002DD63C /* VTViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTViewController.m; sourceTree = "<group>"; };
+		11E59F7B1728DBCC002DD63C /* NSURL+QueryValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+QueryValue.h"; sourceTree = "<group>"; };
+		11E59F7C1728DBCD002DD63C /* NSURL+QueryValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+QueryValue.m"; sourceTree = "<group>"; };
+		11E59F7F1728DF6E002DD63C /* VTNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTNavigationController.h; sourceTree = "<group>"; };
+		11E59F801728DF6E002DD63C /* VTNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTNavigationController.m; sourceTree = "<group>"; };
+		AC324F6A173DD8FA0094A7A6 /* UIView+VTStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+VTStyle.h"; sourceTree = "<group>"; };
+		AC324F6B173DD8FA0094A7A6 /* UIView+VTStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+VTStyle.m"; sourceTree = "<group>"; };
+		AC324F85173DE23B0094A7A6 /* UIButton+VTStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+VTStyle.h"; sourceTree = "<group>"; };
+		AC324F86173DE23B0094A7A6 /* UIButton+VTStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+VTStyle.m"; sourceTree = "<group>"; };
+		AC32500E173E1AE10094A7A6 /* VTHeapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTHeapViewController.h; sourceTree = "<group>"; };
+		AC32500F173E1AE20094A7A6 /* VTHeapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTHeapViewController.m; sourceTree = "<group>"; };
+		AC325012173E23980094A7A6 /* VTLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTLayout.h; sourceTree = "<group>"; };
+		AC325013173E23980094A7A6 /* VTLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTLayout.m; sourceTree = "<group>"; };
+		AC325016173E23A60094A7A6 /* VTLayoutData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTLayoutData.h; sourceTree = "<group>"; };
+		AC325017173E23A60094A7A6 /* VTLayoutData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTLayoutData.m; sourceTree = "<group>"; };
+		AC32501E173E257D0094A7A6 /* VTViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTViewLayout.h; sourceTree = "<group>"; };
+		AC32501F173E257D0094A7A6 /* VTViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTViewLayout.m; sourceTree = "<group>"; };
+		AC325026173E2DF10094A7A6 /* VTFormController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTFormController.h; sourceTree = "<group>"; };
+		AC325027173E2DF10094A7A6 /* VTFormController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTFormController.m; sourceTree = "<group>"; };
+		AC32502B173E2EF50094A7A6 /* VTFormItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTFormItem.h; sourceTree = "<group>"; };
+		AC32502C173E2EF60094A7A6 /* VTFormItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTFormItem.m; sourceTree = "<group>"; };
+		AC32502F173E31220094A7A6 /* IVTFormItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVTFormItemView.h; sourceTree = "<group>"; };
+		AC325031173E35760094A7A6 /* IVTFormEditor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVTFormEditor.h; sourceTree = "<group>"; };
+		AC325033173E36C40094A7A6 /* VTFormKeyboardEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTFormKeyboardEditor.h; sourceTree = "<group>"; };
+		AC325034173E36C50094A7A6 /* VTFormKeyboardEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTFormKeyboardEditor.m; sourceTree = "<group>"; };
+		AC325037173E39BC0094A7A6 /* VTKeyboardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTKeyboardController.h; sourceTree = "<group>"; };
+		AC325038173E39BC0094A7A6 /* VTKeyboardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTKeyboardController.m; sourceTree = "<group>"; };
+		AC32504B173E7B1E0094A7A6 /* VTLayoutContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTLayoutContainer.h; sourceTree = "<group>"; };
+		AC32504C173E7B1E0094A7A6 /* VTLayoutContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTLayoutContainer.m; sourceTree = "<group>"; };
+		AC325052173E7EE30094A7A6 /* VTFormDateEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTFormDateEditor.h; sourceTree = "<group>"; };
+		AC325053173E7EE30094A7A6 /* VTFormDateEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTFormDateEditor.m; sourceTree = "<group>"; };
+		AC325056173E83DE0094A7A6 /* VTFormButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTFormButton.h; sourceTree = "<group>"; };
+		AC325057173E83DF0094A7A6 /* VTFormButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTFormButton.m; sourceTree = "<group>"; };
+		AC32505A173E87D00094A7A6 /* VTFormPickerEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTFormPickerEditor.h; sourceTree = "<group>"; };
+		AC32505B173E87D10094A7A6 /* VTFormPickerEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTFormPickerEditor.m; sourceTree = "<group>"; };
+		AC32505E173E884B0094A7A6 /* VTFormPickerEditorItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTFormPickerEditorItem.h; sourceTree = "<group>"; };
+		AC32505F173E884B0094A7A6 /* VTFormPickerEditorItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTFormPickerEditorItem.m; sourceTree = "<group>"; };
+		ACDE3A4E1733EC410046ED56 /* UIView+Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Image.h"; sourceTree = "<group>"; };
+		ACDE3A4F1733EC410046ED56 /* UIView+Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Image.m"; sourceTree = "<group>"; };
+		ACDE3A5517349D380046ED56 /* VTPageContainerLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTPageContainerLayout.h; sourceTree = "<group>"; };
+		ACDE3A5617349D380046ED56 /* VTPageContainerLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTPageContainerLayout.m; sourceTree = "<group>"; };
+		ACDE3A5917349F930046ED56 /* VTPageDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTPageDataController.h; sourceTree = "<group>"; };
+		ACDE3A5A17349F930046ED56 /* VTPageDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTPageDataController.m; sourceTree = "<group>"; };
+		ACDE3A631734BD0B0046ED56 /* UIView+Hidden.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Hidden.h"; sourceTree = "<group>"; };
+		ACDE3A641734BD0C0046ED56 /* UIView+Hidden.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Hidden.m"; sourceTree = "<group>"; };
+		ACDE3A7C1735087B0046ED56 /* VTTableSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTTableSection.h; sourceTree = "<group>"; };
+		ACDE3A7D1735087C0046ED56 /* VTTableSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTTableSection.m; sourceTree = "<group>"; };
+		ACDE3A80173508F90046ED56 /* VTTableSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTTableSource.h; sourceTree = "<group>"; };
+		ACDE3A81173508FA0046ED56 /* VTTableSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTTableSource.m; sourceTree = "<group>"; };
+		ACDE3A8417350AE30046ED56 /* VTButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTButton.h; sourceTree = "<group>"; };
+		ACDE3A8517350AE40046ED56 /* VTButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTButton.m; sourceTree = "<group>"; };
+		ACDE3AAF173647910046ED56 /* VTAppStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTAppStatusView.h; sourceTree = "<group>"; };
+		ACDE3AB0173647930046ED56 /* VTAppStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTAppStatusView.m; sourceTree = "<group>"; };
+		ACDE3AB317364EA10046ED56 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		114772F11727DE5200196FB2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		114772D61727DE0700196FB2 = {
+			isa = PBXGroup;
+			children = (
+				114772F71727DE5200196FB2 /* vTeam */,
+				114772E11727DE0800196FB2 /* Frameworks */,
+				114772E01727DE0800196FB2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		114772E01727DE0800196FB2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				114772F41727DE5200196FB2 /* vTeam.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		114772E11727DE0800196FB2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				114772E21727DE0800196FB2 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		114772F71727DE5200196FB2 /* vTeam */ = {
+			isa = PBXGroup;
+			children = (
+				AC32502A173E2E1B0094A7A6 /* Form */,
+				AC324FB1173DFB630094A7A6 /* Layout */,
+				11619C701732399A00BD3561 /* Controller */,
+				11619C671732337B00BD3561 /* DataSource */,
+				114D7985172A10BC0041468E /* C */,
+				114D796C172928A80041468E /* Tasks */,
+				114D796D172928AD0041468E /* Services */,
+				11E59F761728CF91002DD63C /* UIKit */,
+				11E59F611728C75B002DD63C /* DataOutlet */,
+				11E59F601728C756002DD63C /* Style */,
+				114772F81727DE5200196FB2 /* Supporting Files */,
+				114773011727DF0D00196FB2 /* vTeam.h */,
+				114773021727DF0D00196FB2 /* vTeam.m */,
+				114773081727E0EF00196FB2 /* IVTTask.h */,
+				114D7978172929430041468E /* VTTask.h */,
+				114D7979172929430041468E /* VTTask.m */,
+				114773091727E13900196FB2 /* IVTService.h */,
+				114D7A53172A2A3D0041468E /* VTService.h */,
+				114D7A54172A2A3E0041468E /* VTService.m */,
+				11E59F5E1728C03B002DD63C /* IVTServiceContainer.h */,
+				114773061727E04F00196FB2 /* IVTContext.h */,
+				114773071727E09700196FB2 /* IVTServiceContext.h */,
+				1147730F1727E33A00196FB2 /* IVTUIViewController.h */,
+				1147730E1727E2E100196FB2 /* IVTUIContext.h */,
+				1147730A1727E29600196FB2 /* VTShell.h */,
+				1147730B1727E29600196FB2 /* VTShell.m */,
+				11E59F7B1728DBCC002DD63C /* NSURL+QueryValue.h */,
+				11E59F7C1728DBCD002DD63C /* NSURL+QueryValue.m */,
+				114D7A47172A130E0041468E /* VTJSON.h */,
+				114D7A48172A130E0041468E /* VTJSON.m */,
+			);
+			path = vTeam;
+			sourceTree = "<group>";
+		};
+		114772F81727DE5200196FB2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				114772F91727DE5200196FB2 /* vTeam-Info.plist */,
+				114772FA1727DE5200196FB2 /* InfoPlist.strings */,
+				114772FD1727DE5200196FB2 /* vTeam-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		114D796C172928A80041468E /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				114D797C172929A40041468E /* VTHttpTask.h */,
+				114D797D172929A40041468E /* VTHttpTask.m */,
+				114D7A4B172A20280041468E /* VTHttpFormBody.h */,
+				114D7A4C172A20280041468E /* VTHttpFormBody.m */,
+				114D7A63172A30F30041468E /* IVTImageTask.h */,
+				11619C591732315D00BD3561 /* IVTDownlinkTask.h */,
+				11619C5E173231E700BD3561 /* IVTDownlinkPageTask.h */,
+				11619C611732324500BD3561 /* IVTUplinkTask.h */,
+				11619C62173232B500BD3561 /* VTUplinkTask.h */,
+				11619C63173232B500BD3561 /* VTUplinkTask.m */,
+				11619CA81732646C00BD3561 /* IVTAPITask.h */,
+				11619CA91732657B00BD3561 /* IVTAPICancelTask.h */,
+				11619CB0173266D100BD3561 /* VTAPITask.h */,
+				11619CB1173266D100BD3561 /* VTAPITask.m */,
+				11619CAC173265B700BD3561 /* VTAPIRequestTask.h */,
+				11619CAD173265B800BD3561 /* VTAPIRequestTask.m */,
+				11619CB41732674A00BD3561 /* VTAPIResponseTask.h */,
+				11619CB51732674A00BD3561 /* VTAPIResponseTask.m */,
+			);
+			name = Tasks;
+			sourceTree = "<group>";
+		};
+		114D796D172928AD0041468E /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				114D7A4F172A29EB0041468E /* VTHttpService.h */,
+				114D7A50172A29EB0041468E /* VTHttpService.m */,
+				114D7A64172A32210041468E /* VTImageService.h */,
+				114D7A65172A32210041468E /* VTImageService.m */,
+				11619C7917324C0A00BD3561 /* VTDownlinkService.h */,
+				11619C7A17324C0A00BD3561 /* VTDownlinkService.m */,
+				11619C811732559900BD3561 /* VTUplinkService.h */,
+				11619C821732559900BD3561 /* VTUplinkService.m */,
+				11619CB8173267D400BD3561 /* VTAPIService.h */,
+				11619CB9173267D400BD3561 /* VTAPIService.m */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		114D7985172A10BC0041468E /* C */ = {
+			isa = PBXGroup;
+			children = (
+				114D7986172A10EF0041468E /* core */,
+			);
+			name = C;
+			sourceTree = "<group>";
+		};
+		114D7986172A10EF0041468E /* core */ = {
+			isa = PBXGroup;
+			children = (
+				114D7987172A10EF0041468E /* hactree.c */,
+				114D7988172A10EF0041468E /* hactree.h */,
+				114D7989172A10EF0041468E /* hbase64.c */,
+				114D798A172A10EF0041468E /* hbase64.h */,
+				114D798B172A10EF0041468E /* hbtree.c */,
+				114D798C172A10EF0041468E /* hbtree.h */,
+				114D798D172A10EF0041468E /* hbuffer.c */,
+				114D798E172A10EF0041468E /* hbuffer.h */,
+				114D798F172A10EF0041468E /* hbytes.c */,
+				114D7990172A10EF0041468E /* hbytes.h */,
+				114D7991172A10EF0041468E /* hcgi.h */,
+				114D7992172A10EF0041468E /* hclass.c */,
+				114D7993172A10EF0041468E /* hclass.h */,
+				114D7994172A10EF0041468E /* hconfig.c */,
+				114D7995172A10EF0041468E /* hconfig.h */,
+				114D7996172A10EF0041468E /* hdata.c */,
+				114D7997172A10EF0041468E /* hdata.h */,
+				114D7998172A10EF0041468E /* hdata_alloc.c */,
+				114D7999172A10EF0041468E /* hdata_alloc.h */,
+				114D799A172A10EF0041468E /* hdata_binary.c */,
+				114D799B172A10EF0041468E /* hdata_binary.h */,
+				114D799C172A10EF0041468E /* hdata_json.c */,
+				114D799D172A10EF0041468E /* hdata_json.h */,
+				114D799E172A10EF0041468E /* hdata_set.c */,
+				114D799F172A10EF0041468E /* hdata_set.h */,
+				114D79A0172A10EF0041468E /* hdata_storage.c */,
+				114D79A1172A10EF0041468E /* hdata_storage.h */,
+				114D79A2172A10EF0041468E /* hdata_xml.c */,
+				114D79A3172A10EF0041468E /* hdata_xml.h */,
+				114D79A4172A10EF0041468E /* hdebug.c */,
+				114D79A5172A10EF0041468E /* hdebug.h */,
+				114D79A6172A10EF0041468E /* hdevice.c */,
+				114D79A7172A10EF0041468E /* hdevice.h */,
+				114D79A8172A10EF0041468E /* hext_obj.c */,
+				114D79A9172A10EF0041468E /* hext_obj.h */,
+				114D79AA172A10EF0041468E /* hfile.c */,
+				114D79AB172A10EF0041468E /* hfile.h */,
+				114D79AC172A10EF0041468E /* hinifile.c */,
+				114D79AD172A10EF0041468E /* hinifile.h */,
+				114D79AE172A10EF0041468E /* hjson.c */,
+				114D79AF172A10EF0041468E /* hjson.h */,
+				114D79B0172A10EF0041468E /* hlibrary.c */,
+				114D79B1172A10EF0041468E /* hlibrary.h */,
+				114D79B2172A10EF0041468E /* hlist.c */,
+				114D79B3172A10EF0041468E /* hlist.h */,
+				114D79B4172A10EF0041468E /* hlog.c */,
+				114D79B5172A10EF0041468E /* hlog.h */,
+				114D79B6172A10EF0041468E /* hmap.c */,
+				114D79B7172A10EF0041468E /* hmap.h */,
+				114D79B8172A10EF0041468E /* hmap2.c */,
+				114D79B9172A10EF0041468E /* hmem.c */,
+				114D79BA172A10EF0041468E /* hmem.h */,
+				114D79BB172A10EF0041468E /* hmutex.c */,
+				114D79BC172A10EF0041468E /* hmutex.h */,
+				114D79BD172A10EF0041468E /* hnetbios.c */,
+				114D79BE172A10EF0041468E /* hnetbios.h */,
+				114D79BF172A10EF0041468E /* hprocess.c */,
+				114D79C0172A10EF0041468E /* hprocess.h */,
+				114D79C1172A10EF0041468E /* hqueue.c */,
+				114D79C2172A10EF0041468E /* hqueue.h */,
+				114D79C3172A10EF0041468E /* hrecursive.c */,
+				114D79C4172A10EF0041468E /* hrecursive.h */,
+				114D79C5172A10EF0041468E /* hrwlock.c */,
+				114D79C6172A10EF0041468E /* hrwlock.h */,
+				114D79C7172A10EF0041468E /* hserial_list.c */,
+				114D79C8172A10EF0041468E /* hserial_list.h */,
+				114D79C9172A10EF0041468E /* hserial_map.c */,
+				114D79CA172A10EF0041468E /* hserial_map.h */,
+				114D79CB172A10EF0041468E /* hstack.c */,
+				114D79CC172A10EF0041468E /* hstack.h */,
+				114D79CD172A10EF0041468E /* hstr.c */,
+				114D79CE172A10EF0041468E /* hstr.h */,
+				114D79CF172A10EF0041468E /* hstruct_list.c */,
+				114D79D0172A10EF0041468E /* hstruct_list.h */,
+				114D79D1172A10EF0041468E /* hthread.c */,
+				114D79D2172A10EF0041468E /* hthread.h */,
+				114D79D3172A10EF0041468E /* htime.c */,
+				114D79D4172A10EF0041468E /* htime.h */,
+				114D79D5172A10EF0041468E /* htypes.c */,
+				114D79D6172A10EF0041468E /* htypes.h */,
+				114D79D7172A10EF0041468E /* huniquekey.c */,
+				114D79D8172A10EF0041468E /* huniquekey.h */,
+				114D79D9172A10EF0041468E /* hurl.c */,
+				114D79DA172A10EF0041468E /* hurl.h */,
+				114D79DB172A10EF0041468E /* hwaiter.c */,
+				114D79DC172A10EF0041468E /* hwaiter.h */,
+				114D79DD172A10EF0041468E /* hxml_scanf.c */,
+				114D79DE172A10EF0041468E /* hxml_scanf.h */,
+				114D79DF172A10EF0041468E /* hxpath.c */,
+				114D79E0172A10F00041468E /* hxpath.h */,
+				114D79E1172A10F00041468E /* md5.c */,
+				114D79E2172A10F00041468E /* md5.h */,
+				114D79E3172A10F00041468E /* sha.c */,
+				114D79E4172A10F00041468E /* sha1.c */,
+				114D79E5172A10F00041468E /* sha1.h */,
+				114D79E6172A10F00041468E /* shatest.c */,
+			);
+			name = core;
+			path = ../../../../c/trunk/core;
+			sourceTree = "<group>";
+		};
+		11619C671732337B00BD3561 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				11619C681732338C00BD3561 /* VTDataSource.h */,
+				11619C691732338C00BD3561 /* VTDataSource.m */,
+				11619C6C1732383800BD3561 /* VTPageDataSource.h */,
+				11619C6D1732383800BD3561 /* VTPageDataSource.m */,
+			);
+			name = DataSource;
+			sourceTree = "<group>";
+		};
+		11619C701732399A00BD3561 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				11619C71173239B000BD3561 /* VTDataController.h */,
+				11619C72173239B000BD3561 /* VTDataController.m */,
+				11619C7517323BF500BD3561 /* VTContainerDataController.h */,
+				11619C7617323BF500BD3561 /* VTContainerDataController.m */,
+				ACDE3A5917349F930046ED56 /* VTPageDataController.h */,
+				ACDE3A5A17349F930046ED56 /* VTPageDataController.m */,
+				AC325026173E2DF10094A7A6 /* VTFormController.h */,
+				AC325027173E2DF10094A7A6 /* VTFormController.m */,
+				AC325037173E39BC0094A7A6 /* VTKeyboardController.h */,
+				AC325038173E39BC0094A7A6 /* VTKeyboardController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		11E59F601728C756002DD63C /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				11E59F621728C785002DD63C /* VTStyleSheet.h */,
+				11E59F631728C785002DD63C /* VTStyleSheet.m */,
+				11E59F661728C798002DD63C /* VTStyle.h */,
+				11E59F671728C798002DD63C /* VTStyle.m */,
+				114D796617291F3B0041468E /* VTStyleOutlet.h */,
+				114D796717291F3B0041468E /* VTStyleOutlet.m */,
+				11E59F6A1728CCAB002DD63C /* VTStyleOutletContainer.h */,
+				11E59F6B1728CCAB002DD63C /* VTStyleOutletContainer.m */,
+				AC324F6A173DD8FA0094A7A6 /* UIView+VTStyle.h */,
+				AC324F6B173DD8FA0094A7A6 /* UIView+VTStyle.m */,
+				AC324F85173DE23B0094A7A6 /* UIButton+VTStyle.h */,
+				AC324F86173DE23B0094A7A6 /* UIButton+VTStyle.m */,
+			);
+			name = Style;
+			sourceTree = "<group>";
+		};
+		11E59F611728C75B002DD63C /* DataOutlet */ = {
+			isa = PBXGroup;
+			children = (
+				11E59F6E1728CD6C002DD63C /* VTDataOutlet.h */,
+				11E59F6F1728CD6C002DD63C /* VTDataOutlet.m */,
+				11E59F721728CE81002DD63C /* VTDataOutletContainer.h */,
+				11E59F731728CE81002DD63C /* VTDataOutletContainer.m */,
+				113B5BDB174F78F8003211AD /* UIView+VTDataOutlet.h */,
+				113B5BDC174F78F8003211AD /* UIView+VTDataOutlet.m */,
+			);
+			name = DataOutlet;
+			sourceTree = "<group>";
+		};
+		11E59F761728CF91002DD63C /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				11E59F771728CFA8002DD63C /* VTViewController.h */,
+				11E59F781728CFA8002DD63C /* VTViewController.m */,
+				11E59F7F1728DF6E002DD63C /* VTNavigationController.h */,
+				11E59F801728DF6E002DD63C /* VTNavigationController.m */,
+				114D7A6D172A3A900041468E /* VTContentViewController.h */,
+				114D7A6E172A3A910041468E /* VTContentViewController.m */,
+				114D7A71172A3E8E0041468E /* VTFoldViewController.h */,
+				114D7A72172A3E8E0041468E /* VTFoldViewController.m */,
+				AC32500E173E1AE10094A7A6 /* VTHeapViewController.h */,
+				AC32500F173E1AE20094A7A6 /* VTHeapViewController.m */,
+				114D7A68172A38DA0041468E /* VTImageView.h */,
+				114D7A69172A38DA0041468E /* VTImageView.m */,
+				114D7AC1172A6D7A0041468E /* VTToolbar.h */,
+				114D7AC2172A6D7A0041468E /* VTToolbar.m */,
+				114D7AC9172A75A90041468E /* VTNavigationBar.h */,
+				114D7ACA172A75A90041468E /* VTNavigationBar.m */,
+				114D7ADC172A88FC0041468E /* GIFView.h */,
+				114D7ADD172A88FD0041468E /* GIFView.m */,
+				11619C4917320E1F00BD3561 /* VTContainerLayout.h */,
+				11619C4A17320E1F00BD3561 /* VTContainerLayout.m */,
+				11619C4D17320FCD00BD3561 /* VTFlowContainerLayout.h */,
+				11619C4E17320FCD00BD3561 /* VTFlowContainerLayout.m */,
+				11619C51173213CD00BD3561 /* VTFallsContainerLayout.h */,
+				11619C52173213CD00BD3561 /* VTFallsContainerLayout.m */,
+				ACDE3A5517349D380046ED56 /* VTPageContainerLayout.h */,
+				ACDE3A5617349D380046ED56 /* VTPageContainerLayout.m */,
+				114D7AE0172A89700041468E /* VTContainerView.h */,
+				114D7AE1172A89700041468E /* VTContainerView.m */,
+				11619C8D17325B5700BD3561 /* VTItemViewController.h */,
+				11619C8E17325B5800BD3561 /* VTItemViewController.m */,
+				11619C5517322FD300BD3561 /* UIView+Search.h */,
+				11619C5617322FD400BD3561 /* UIView+Search.m */,
+				11619CC11733584F00BD3561 /* VTDragLoadingView.h */,
+				11619CC21733585100BD3561 /* VTDragLoadingView.m */,
+				11619CC917339A2E00BD3561 /* VTZoomView.h */,
+				11619CCA17339A3000BD3561 /* VTZoomView.m */,
+				11619CD71733B1A400BD3561 /* IVTAction.h */,
+				ACDE3A4E1733EC410046ED56 /* UIView+Image.h */,
+				ACDE3A4F1733EC410046ED56 /* UIView+Image.m */,
+				ACDE3A631734BD0B0046ED56 /* UIView+Hidden.h */,
+				ACDE3A641734BD0C0046ED56 /* UIView+Hidden.m */,
+				ACDE3A7C1735087B0046ED56 /* VTTableSection.h */,
+				ACDE3A7D1735087C0046ED56 /* VTTableSection.m */,
+				ACDE3A80173508F90046ED56 /* VTTableSource.h */,
+				ACDE3A81173508FA0046ED56 /* VTTableSource.m */,
+				ACDE3A8417350AE30046ED56 /* VTButton.h */,
+				ACDE3A8517350AE40046ED56 /* VTButton.m */,
+				ACDE3AAF173647910046ED56 /* VTAppStatusView.h */,
+				ACDE3AB0173647930046ED56 /* VTAppStatusView.m */,
+			);
+			name = UIKit;
+			sourceTree = "<group>";
+		};
+		AC324FB1173DFB630094A7A6 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				AC325012173E23980094A7A6 /* VTLayout.h */,
+				AC325013173E23980094A7A6 /* VTLayout.m */,
+				AC325016173E23A60094A7A6 /* VTLayoutData.h */,
+				AC325017173E23A60094A7A6 /* VTLayoutData.m */,
+				AC32501E173E257D0094A7A6 /* VTViewLayout.h */,
+				AC32501F173E257D0094A7A6 /* VTViewLayout.m */,
+				AC32504B173E7B1E0094A7A6 /* VTLayoutContainer.h */,
+				AC32504C173E7B1E0094A7A6 /* VTLayoutContainer.m */,
+			);
+			name = Layout;
+			sourceTree = "<group>";
+		};
+		AC32502A173E2E1B0094A7A6 /* Form */ = {
+			isa = PBXGroup;
+			children = (
+				AC32502B173E2EF50094A7A6 /* VTFormItem.h */,
+				AC32502C173E2EF60094A7A6 /* VTFormItem.m */,
+				AC32502F173E31220094A7A6 /* IVTFormItemView.h */,
+				AC325031173E35760094A7A6 /* IVTFormEditor.h */,
+				AC325033173E36C40094A7A6 /* VTFormKeyboardEditor.h */,
+				AC325034173E36C50094A7A6 /* VTFormKeyboardEditor.m */,
+				AC325052173E7EE30094A7A6 /* VTFormDateEditor.h */,
+				AC325053173E7EE30094A7A6 /* VTFormDateEditor.m */,
+				AC325056173E83DE0094A7A6 /* VTFormButton.h */,
+				AC325057173E83DF0094A7A6 /* VTFormButton.m */,
+				AC32505A173E87D00094A7A6 /* VTFormPickerEditor.h */,
+				AC32505B173E87D10094A7A6 /* VTFormPickerEditor.m */,
+				AC32505E173E884B0094A7A6 /* VTFormPickerEditorItem.h */,
+				AC32505F173E884B0094A7A6 /* VTFormPickerEditorItem.m */,
+			);
+			name = Form;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		114773041727DFD700196FB2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1147734B1727E7C800196FB2 /* IVTTask.h in Headers */,
+				1147734C1727E7C800196FB2 /* IVTService.h in Headers */,
+				1147734D1727E7C800196FB2 /* IVTContext.h in Headers */,
+				1147734E1727E7C800196FB2 /* IVTServiceContext.h in Headers */,
+				1147734F1727E7C800196FB2 /* IVTUIViewController.h in Headers */,
+				114773501727E7C800196FB2 /* IVTUIContext.h in Headers */,
+				114773051727DFE000196FB2 /* vTeam.h in Headers */,
+				1147730C1727E29600196FB2 /* VTShell.h in Headers */,
+				11E59F5F1728C197002DD63C /* IVTServiceContainer.h in Headers */,
+				11E59F641728C785002DD63C /* VTStyleSheet.h in Headers */,
+				11E59F681728C798002DD63C /* VTStyle.h in Headers */,
+				11E59F6C1728CCAC002DD63C /* VTStyleOutletContainer.h in Headers */,
+				11E59F701728CD6C002DD63C /* VTDataOutlet.h in Headers */,
+				11E59F741728CE81002DD63C /* VTDataOutletContainer.h in Headers */,
+				11E59F791728CFA8002DD63C /* VTViewController.h in Headers */,
+				11E59F7D1728DBCD002DD63C /* NSURL+QueryValue.h in Headers */,
+				11E59F811728DF6E002DD63C /* VTNavigationController.h in Headers */,
+				114D796817291F3B0041468E /* VTStyleOutlet.h in Headers */,
+				114D797A172929430041468E /* VTTask.h in Headers */,
+				114D797E172929A40041468E /* VTHttpTask.h in Headers */,
+				114D79E8172A10F00041468E /* hactree.h in Headers */,
+				114D79EA172A10F00041468E /* hbase64.h in Headers */,
+				114D79EC172A10F00041468E /* hbtree.h in Headers */,
+				114D79EE172A10F00041468E /* hbuffer.h in Headers */,
+				114D79F0172A10F00041468E /* hbytes.h in Headers */,
+				114D79F1172A10F00041468E /* hcgi.h in Headers */,
+				114D79F3172A10F00041468E /* hclass.h in Headers */,
+				114D79F5172A10F00041468E /* hconfig.h in Headers */,
+				114D79F7172A10F00041468E /* hdata.h in Headers */,
+				114D79F9172A10F00041468E /* hdata_alloc.h in Headers */,
+				114D79FB172A10F00041468E /* hdata_binary.h in Headers */,
+				114D79FD172A10F00041468E /* hdata_json.h in Headers */,
+				114D79FF172A10F00041468E /* hdata_set.h in Headers */,
+				114D7A01172A10F00041468E /* hdata_storage.h in Headers */,
+				114D7A03172A10F00041468E /* hdata_xml.h in Headers */,
+				114D7A05172A10F00041468E /* hdebug.h in Headers */,
+				114D7A07172A10F00041468E /* hdevice.h in Headers */,
+				114D7A09172A10F00041468E /* hext_obj.h in Headers */,
+				114D7A0B172A10F00041468E /* hfile.h in Headers */,
+				114D7A0D172A10F00041468E /* hinifile.h in Headers */,
+				114D7A0F172A10F00041468E /* hjson.h in Headers */,
+				114D7A11172A10F00041468E /* hlibrary.h in Headers */,
+				114D7A13172A10F00041468E /* hlist.h in Headers */,
+				114D7A15172A10F00041468E /* hlog.h in Headers */,
+				114D7A17172A10F00041468E /* hmap.h in Headers */,
+				114D7A1A172A10F00041468E /* hmem.h in Headers */,
+				114D7A1C172A10F00041468E /* hmutex.h in Headers */,
+				114D7A1E172A10F00041468E /* hnetbios.h in Headers */,
+				114D7A20172A10F00041468E /* hprocess.h in Headers */,
+				114D7A22172A10F00041468E /* hqueue.h in Headers */,
+				114D7A24172A10F00041468E /* hrecursive.h in Headers */,
+				114D7A26172A10F00041468E /* hrwlock.h in Headers */,
+				114D7A28172A10F00041468E /* hserial_list.h in Headers */,
+				114D7A2A172A10F00041468E /* hserial_map.h in Headers */,
+				114D7A2C172A10F00041468E /* hstack.h in Headers */,
+				114D7A2E172A10F00041468E /* hstr.h in Headers */,
+				114D7A30172A10F00041468E /* hstruct_list.h in Headers */,
+				114D7A32172A10F00041468E /* hthread.h in Headers */,
+				114D7A34172A10F00041468E /* htime.h in Headers */,
+				114D7A36172A10F00041468E /* htypes.h in Headers */,
+				114D7A38172A10F00041468E /* huniquekey.h in Headers */,
+				114D7A3A172A10F00041468E /* hurl.h in Headers */,
+				114D7A3C172A10F00041468E /* hwaiter.h in Headers */,
+				114D7A3E172A10F00041468E /* hxml_scanf.h in Headers */,
+				114D7A40172A10F00041468E /* hxpath.h in Headers */,
+				114D7A42172A10F00041468E /* md5.h in Headers */,
+				114D7A45172A10F00041468E /* sha1.h in Headers */,
+				114D7A49172A130F0041468E /* VTJSON.h in Headers */,
+				114D7A4D172A20280041468E /* VTHttpFormBody.h in Headers */,
+				114D7A51172A29EB0041468E /* VTHttpService.h in Headers */,
+				114D7A55172A2A3F0041468E /* VTService.h in Headers */,
+				114D7A66172A32210041468E /* VTImageService.h in Headers */,
+				114D7A6A172A38DA0041468E /* VTImageView.h in Headers */,
+				114D7A6C172A38EF0041468E /* IVTImageTask.h in Headers */,
+				114D7A6F172A3A910041468E /* VTContentViewController.h in Headers */,
+				114D7A73172A3E8E0041468E /* VTFoldViewController.h in Headers */,
+				114D7AC3172A6D7A0041468E /* VTToolbar.h in Headers */,
+				114D7ACB172A75A90041468E /* VTNavigationBar.h in Headers */,
+				114D7ADE172A88FD0041468E /* GIFView.h in Headers */,
+				114D7AE2172A89710041468E /* VTContainerView.h in Headers */,
+				11619C4B17320E1F00BD3561 /* VTContainerLayout.h in Headers */,
+				11619C4F17320FCE00BD3561 /* VTFlowContainerLayout.h in Headers */,
+				11619C53173213CD00BD3561 /* VTFallsContainerLayout.h in Headers */,
+				11619C5717322FD400BD3561 /* UIView+Search.h in Headers */,
+				11619C5F173231F000BD3561 /* IVTDownlinkTask.h in Headers */,
+				11619C60173231F300BD3561 /* IVTDownlinkPageTask.h in Headers */,
+				11619C64173232B500BD3561 /* VTUplinkTask.h in Headers */,
+				11619C66173232E300BD3561 /* IVTUplinkTask.h in Headers */,
+				11619C6A1732338C00BD3561 /* VTDataSource.h in Headers */,
+				11619C6E1732383800BD3561 /* VTPageDataSource.h in Headers */,
+				11619C73173239B000BD3561 /* VTDataController.h in Headers */,
+				11619C7717323BF500BD3561 /* VTContainerDataController.h in Headers */,
+				11619C7B17324C0A00BD3561 /* VTDownlinkService.h in Headers */,
+				11619C831732559900BD3561 /* VTUplinkService.h in Headers */,
+				11619C8F17325B5900BD3561 /* VTItemViewController.h in Headers */,
+				11619CAA1732658C00BD3561 /* IVTAPITask.h in Headers */,
+				11619CAB1732658F00BD3561 /* IVTAPICancelTask.h in Headers */,
+				11619CAE173265B800BD3561 /* VTAPIRequestTask.h in Headers */,
+				11619CB2173266D100BD3561 /* VTAPITask.h in Headers */,
+				11619CB61732674C00BD3561 /* VTAPIResponseTask.h in Headers */,
+				11619CBA173267D400BD3561 /* VTAPIService.h in Headers */,
+				11619CC31733585200BD3561 /* VTDragLoadingView.h in Headers */,
+				11619CCB17339A3300BD3561 /* VTZoomView.h in Headers */,
+				11619CD81733B1C700BD3561 /* IVTAction.h in Headers */,
+				ACDE3A501733EC410046ED56 /* UIView+Image.h in Headers */,
+				ACDE3A5717349D380046ED56 /* VTPageContainerLayout.h in Headers */,
+				ACDE3A5B17349F940046ED56 /* VTPageDataController.h in Headers */,
+				ACDE3A651734BD0D0046ED56 /* UIView+Hidden.h in Headers */,
+				ACDE3A7E1735087D0046ED56 /* VTTableSection.h in Headers */,
+				ACDE3A82173508FC0046ED56 /* VTTableSource.h in Headers */,
+				ACDE3A8617350AE50046ED56 /* VTButton.h in Headers */,
+				ACDE3AB1173647950046ED56 /* VTAppStatusView.h in Headers */,
+				AC324F6C173DD8FA0094A7A6 /* UIView+VTStyle.h in Headers */,
+				AC324F87173DE23B0094A7A6 /* UIButton+VTStyle.h in Headers */,
+				AC325010173E1AE30094A7A6 /* VTHeapViewController.h in Headers */,
+				AC325014173E23980094A7A6 /* VTLayout.h in Headers */,
+				AC325018173E23A60094A7A6 /* VTLayoutData.h in Headers */,
+				AC325020173E257D0094A7A6 /* VTViewLayout.h in Headers */,
+				AC325028173E2DF10094A7A6 /* VTFormController.h in Headers */,
+				AC32502D173E2EF60094A7A6 /* VTFormItem.h in Headers */,
+				AC325030173E31440094A7A6 /* IVTFormItemView.h in Headers */,
+				AC325032173E35950094A7A6 /* IVTFormEditor.h in Headers */,
+				AC325035173E36C50094A7A6 /* VTFormKeyboardEditor.h in Headers */,
+				AC325039173E39BD0094A7A6 /* VTKeyboardController.h in Headers */,
+				AC32504D173E7B1E0094A7A6 /* VTLayoutContainer.h in Headers */,
+				AC325054173E7EE30094A7A6 /* VTFormDateEditor.h in Headers */,
+				AC325058173E83DF0094A7A6 /* VTFormButton.h in Headers */,
+				AC32505C173E87D10094A7A6 /* VTFormPickerEditor.h in Headers */,
+				AC325060173E884D0094A7A6 /* VTFormPickerEditorItem.h in Headers */,
+				113B5BDD174F78F8003211AD /* UIView+VTDataOutlet.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		114772F31727DE5200196FB2 /* vTeam */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 114772FE1727DE5200196FB2 /* Build configuration list for PBXNativeTarget "vTeam" */;
+			buildPhases = (
+				114772F01727DE5200196FB2 /* Sources */,
+				114772F11727DE5200196FB2 /* Frameworks */,
+				114772F21727DE5200196FB2 /* Resources */,
+				114773041727DFD700196FB2 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = vTeam;
+			productName = vTeam;
+			productReference = 114772F41727DE5200196FB2 /* vTeam.framework */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		114772D71727DE0700196FB2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = VT;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = hailong.org;
+			};
+			buildConfigurationList = 114772DA1727DE0700196FB2 /* Build configuration list for PBXProject "vTeam" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				"zh-Hans",
+			);
+			mainGroup = 114772D61727DE0700196FB2;
+			productRefGroup = 114772E01727DE0800196FB2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				114772F31727DE5200196FB2 /* vTeam */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		114772F21727DE5200196FB2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				114772FC1727DE5200196FB2 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		114772F01727DE5200196FB2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				114773031727DF0D00196FB2 /* vTeam.m in Sources */,
+				1147730D1727E29600196FB2 /* VTShell.m in Sources */,
+				11E59F651728C785002DD63C /* VTStyleSheet.m in Sources */,
+				11E59F691728C798002DD63C /* VTStyle.m in Sources */,
+				11E59F6D1728CCAC002DD63C /* VTStyleOutletContainer.m in Sources */,
+				11E59F711728CD6C002DD63C /* VTDataOutlet.m in Sources */,
+				11E59F751728CE81002DD63C /* VTDataOutletContainer.m in Sources */,
+				11E59F7A1728CFA8002DD63C /* VTViewController.m in Sources */,
+				11E59F7E1728DBCD002DD63C /* NSURL+QueryValue.m in Sources */,
+				11E59F821728DF6E002DD63C /* VTNavigationController.m in Sources */,
+				114D796917291F3B0041468E /* VTStyleOutlet.m in Sources */,
+				114D797B172929430041468E /* VTTask.m in Sources */,
+				114D797F172929A40041468E /* VTHttpTask.m in Sources */,
+				114D79E9172A10F00041468E /* hbase64.c in Sources */,
+				114D79EB172A10F00041468E /* hbtree.c in Sources */,
+				114D79ED172A10F00041468E /* hbuffer.c in Sources */,
+				114D79EF172A10F00041468E /* hbytes.c in Sources */,
+				114D79F2172A10F00041468E /* hclass.c in Sources */,
+				114D79F4172A10F00041468E /* hconfig.c in Sources */,
+				114D79F6172A10F00041468E /* hdata.c in Sources */,
+				114D79F8172A10F00041468E /* hdata_alloc.c in Sources */,
+				114D79FA172A10F00041468E /* hdata_binary.c in Sources */,
+				114D79FC172A10F00041468E /* hdata_json.c in Sources */,
+				114D79FE172A10F00041468E /* hdata_set.c in Sources */,
+				114D7A00172A10F00041468E /* hdata_storage.c in Sources */,
+				114D7A02172A10F00041468E /* hdata_xml.c in Sources */,
+				114D7A04172A10F00041468E /* hdebug.c in Sources */,
+				114D7A06172A10F00041468E /* hdevice.c in Sources */,
+				114D7A08172A10F00041468E /* hext_obj.c in Sources */,
+				114D7A0A172A10F00041468E /* hfile.c in Sources */,
+				114D7A0C172A10F00041468E /* hinifile.c in Sources */,
+				114D7A0E172A10F00041468E /* hjson.c in Sources */,
+				114D7A10172A10F00041468E /* hlibrary.c in Sources */,
+				114D7A12172A10F00041468E /* hlist.c in Sources */,
+				114D7A14172A10F00041468E /* hlog.c in Sources */,
+				114D7A18172A10F00041468E /* hmap2.c in Sources */,
+				114D7A19172A10F00041468E /* hmem.c in Sources */,
+				114D7A1B172A10F00041468E /* hmutex.c in Sources */,
+				114D7A1D172A10F00041468E /* hnetbios.c in Sources */,
+				114D7A1F172A10F00041468E /* hprocess.c in Sources */,
+				114D7A21172A10F00041468E /* hqueue.c in Sources */,
+				114D7A23172A10F00041468E /* hrecursive.c in Sources */,
+				114D7A25172A10F00041468E /* hrwlock.c in Sources */,
+				114D7A27172A10F00041468E /* hserial_list.c in Sources */,
+				114D7A29172A10F00041468E /* hserial_map.c in Sources */,
+				114D7A2B172A10F00041468E /* hstack.c in Sources */,
+				114D7A2D172A10F00041468E /* hstr.c in Sources */,
+				114D7A2F172A10F00041468E /* hstruct_list.c in Sources */,
+				114D7A31172A10F00041468E /* hthread.c in Sources */,
+				114D7A33172A10F00041468E /* htime.c in Sources */,
+				114D7A35172A10F00041468E /* htypes.c in Sources */,
+				114D7A37172A10F00041468E /* huniquekey.c in Sources */,
+				114D7A39172A10F00041468E /* hurl.c in Sources */,
+				114D7A3B172A10F00041468E /* hwaiter.c in Sources */,
+				114D7A3D172A10F00041468E /* hxml_scanf.c in Sources */,
+				114D7A41172A10F00041468E /* md5.c in Sources */,
+				114D7A44172A10F00041468E /* sha1.c in Sources */,
+				114D7A4A172A130F0041468E /* VTJSON.m in Sources */,
+				114D7A4E172A20280041468E /* VTHttpFormBody.m in Sources */,
+				114D7A52172A29EB0041468E /* VTHttpService.m in Sources */,
+				114D7A56172A2A3F0041468E /* VTService.m in Sources */,
+				114D7A67172A32210041468E /* VTImageService.m in Sources */,
+				114D7A6B172A38DA0041468E /* VTImageView.m in Sources */,
+				114D7A70172A3A910041468E /* VTContentViewController.m in Sources */,
+				114D7A75172A5B4B0041468E /* VTFoldViewController.m in Sources */,
+				114D7AC4172A6D7A0041468E /* VTToolbar.m in Sources */,
+				114D7ACC172A75A90041468E /* VTNavigationBar.m in Sources */,
+				114D7ADF172A88FD0041468E /* GIFView.m in Sources */,
+				114D7AE3172A89710041468E /* VTContainerView.m in Sources */,
+				11619C4C17320E1F00BD3561 /* VTContainerLayout.m in Sources */,
+				11619C5017320FCE00BD3561 /* VTFlowContainerLayout.m in Sources */,
+				11619C54173213CD00BD3561 /* VTFallsContainerLayout.m in Sources */,
+				11619C5817322FD400BD3561 /* UIView+Search.m in Sources */,
+				11619C65173232B500BD3561 /* VTUplinkTask.m in Sources */,
+				11619C6B1732338C00BD3561 /* VTDataSource.m in Sources */,
+				11619C6F1732383800BD3561 /* VTPageDataSource.m in Sources */,
+				11619C74173239B000BD3561 /* VTDataController.m in Sources */,
+				11619C7817323BF500BD3561 /* VTContainerDataController.m in Sources */,
+				11619C7C17324C0A00BD3561 /* VTDownlinkService.m in Sources */,
+				11619C841732559900BD3561 /* VTUplinkService.m in Sources */,
+				11619C9017325B5900BD3561 /* VTItemViewController.m in Sources */,
+				11619CAF173265B800BD3561 /* VTAPIRequestTask.m in Sources */,
+				11619CB3173266D100BD3561 /* VTAPITask.m in Sources */,
+				11619CB71732674C00BD3561 /* VTAPIResponseTask.m in Sources */,
+				11619CBB173267D400BD3561 /* VTAPIService.m in Sources */,
+				11619CC41733585200BD3561 /* VTDragLoadingView.m in Sources */,
+				11619CCC17339A3300BD3561 /* VTZoomView.m in Sources */,
+				ACDE3A511733EC410046ED56 /* UIView+Image.m in Sources */,
+				ACDE3A5817349D380046ED56 /* VTPageContainerLayout.m in Sources */,
+				ACDE3A5C17349F940046ED56 /* VTPageDataController.m in Sources */,
+				ACDE3A661734BD0D0046ED56 /* UIView+Hidden.m in Sources */,
+				ACDE3A7F1735087D0046ED56 /* VTTableSection.m in Sources */,
+				ACDE3A83173508FC0046ED56 /* VTTableSource.m in Sources */,
+				ACDE3A8717350AE50046ED56 /* VTButton.m in Sources */,
+				ACDE3AB2173647950046ED56 /* VTAppStatusView.m in Sources */,
+				AC324F6D173DD8FA0094A7A6 /* UIView+VTStyle.m in Sources */,
+				AC324F88173DE23B0094A7A6 /* UIButton+VTStyle.m in Sources */,
+				AC325011173E1AE30094A7A6 /* VTHeapViewController.m in Sources */,
+				AC325015173E23980094A7A6 /* VTLayout.m in Sources */,
+				AC325019173E23A60094A7A6 /* VTLayoutData.m in Sources */,
+				AC325021173E257D0094A7A6 /* VTViewLayout.m in Sources */,
+				AC325029173E2DF10094A7A6 /* VTFormController.m in Sources */,
+				AC32502E173E2EF60094A7A6 /* VTFormItem.m in Sources */,
+				AC325036173E36C50094A7A6 /* VTFormKeyboardEditor.m in Sources */,
+				AC32503A173E39BD0094A7A6 /* VTKeyboardController.m in Sources */,
+				AC32504E173E7B1E0094A7A6 /* VTLayoutContainer.m in Sources */,
+				AC325055173E7EE30094A7A6 /* VTFormDateEditor.m in Sources */,
+				AC325059173E83DF0094A7A6 /* VTFormButton.m in Sources */,
+				AC32505D173E87D10094A7A6 /* VTFormPickerEditor.m in Sources */,
+				AC325061173E884D0094A7A6 /* VTFormPickerEditorItem.m in Sources */,
+				113B5BDE174F78F8003211AD /* UIView+VTDataOutlet.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		114772FA1727DE5200196FB2 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				114772FB1727DE5200196FB2 /* en */,
+				ACDE3AB317364EA10046ED56 /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		114772EB1727DE0800196FB2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		114772EC1727DE0800196FB2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		114772FF1727DE5200196FB2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "vTeam/vTeam-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					__MACOS__,
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				INFOPLIST_FILE = "vTeam/vTeam-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LINK_WITH_STANDARD_LIBRARIES = NO;
+				MACH_O_TYPE = mh_object;
+				MACOSX_DEPLOYMENT_TARGET = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-Objc";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		114773001727DE5200196FB2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "vTeam/vTeam-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = __MACOS__;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				INFOPLIST_FILE = "vTeam/vTeam-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LINK_WITH_STANDARD_LIBRARIES = NO;
+				MACH_O_TYPE = mh_object;
+				MACOSX_DEPLOYMENT_TARGET = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-Objc";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		114772DA1727DE0700196FB2 /* Build configuration list for PBXProject "vTeam" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				114772EB1727DE0800196FB2 /* Debug */,
+				114772EC1727DE0800196FB2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		114772FE1727DE5200196FB2 /* Build configuration list for PBXNativeTarget "vTeam" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				114772FF1727DE5200196FB2 /* Debug */,
+				114773001727DE5200196FB2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 114772D71727DE0700196FB2 /* Project object */;
+}
