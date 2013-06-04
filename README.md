@@ -1,11 +1,11 @@
 #vTeam.framework
-Checkout
-git clone https://github.com/hailongz/vTeam.git 
-cd vTeam 
-git submodule init 
-git submodule update 
+Checkout <br/>
+git clone https://github.com/hailongz/vTeam.git <br/>
+cd vTeam <br/>
+git submodule init <br/>
+git submodule update <br/>
 
 #Installing xcode project templates
-unzip xcode.zip 
-cd xcode 
-cp -rf vTeam Templetes 
+unzip xcode.zip <br/>
+cd xcode <br/>
+cp -rf vTeam Templetes <br/>
