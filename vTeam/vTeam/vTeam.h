@@ -37,3 +37,5 @@
 #import <vTeam/VTFormController.h>
 #import <vTeam/VTKeyboardController.h>
 #import <vTeam/VTPopWindow.h>
+#import <vTeam/VTBarButtonItem.h>
+#import <vTeam/VTDBContext.h>

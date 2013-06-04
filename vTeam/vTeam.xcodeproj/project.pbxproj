@@ -188,6 +188,12 @@
 		11619CCB17339A3300BD3561 /* VTZoomView.h in Headers */ = {isa = PBXBuildFile; fileRef = 11619CC917339A2E00BD3561 /* VTZoomView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11619CCC17339A3300BD3561 /* VTZoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11619CCA17339A3000BD3561 /* VTZoomView.m */; };
 		11619CD81733B1C700BD3561 /* IVTAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 11619CD71733B1A400BD3561 /* IVTAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		118AFC2D175D9A9F00A6A2FF /* VTBarButtonItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 118AFC2B175D9A9F00A6A2FF /* VTBarButtonItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		118AFC2E175D9A9F00A6A2FF /* VTBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 118AFC2C175D9A9F00A6A2FF /* VTBarButtonItem.m */; };
+		118AFC43175DA15100A6A2FF /* VTDBObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 118AFC41175DA15100A6A2FF /* VTDBObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		118AFC44175DA15100A6A2FF /* VTDBObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 118AFC42175DA15100A6A2FF /* VTDBObject.m */; };
+		118AFC47175DA1E800A6A2FF /* VTDBContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 118AFC45175DA1E800A6A2FF /* VTDBContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		118AFC48175DA1E800A6A2FF /* VTDBContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 118AFC46175DA1E800A6A2FF /* VTDBContext.m */; };
 		11E59F5F1728C197002DD63C /* IVTServiceContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 11E59F5E1728C03B002DD63C /* IVTServiceContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11E59F641728C785002DD63C /* VTStyleSheet.h in Headers */ = {isa = PBXBuildFile; fileRef = 11E59F621728C785002DD63C /* VTStyleSheet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11E59F651728C785002DD63C /* VTStyleSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E59F631728C785002DD63C /* VTStyleSheet.m */; };
@@ -446,6 +452,12 @@
 		11619CC917339A2E00BD3561 /* VTZoomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTZoomView.h; sourceTree = "<group>"; };
 		11619CCA17339A3000BD3561 /* VTZoomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTZoomView.m; sourceTree = "<group>"; };
 		11619CD71733B1A400BD3561 /* IVTAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVTAction.h; sourceTree = "<group>"; };
+		118AFC2B175D9A9F00A6A2FF /* VTBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTBarButtonItem.h; sourceTree = "<group>"; };
+		118AFC2C175D9A9F00A6A2FF /* VTBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTBarButtonItem.m; sourceTree = "<group>"; };
+		118AFC41175DA15100A6A2FF /* VTDBObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDBObject.h; sourceTree = "<group>"; };
+		118AFC42175DA15100A6A2FF /* VTDBObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDBObject.m; sourceTree = "<group>"; };
+		118AFC45175DA1E800A6A2FF /* VTDBContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDBContext.h; sourceTree = "<group>"; };
+		118AFC46175DA1E800A6A2FF /* VTDBContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDBContext.m; sourceTree = "<group>"; };
 		11E59F5E1728C03B002DD63C /* IVTServiceContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVTServiceContainer.h; sourceTree = "<group>"; };
 		11E59F621728C785002DD63C /* VTStyleSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTStyleSheet.h; sourceTree = "<group>"; };
 		11E59F631728C785002DD63C /* VTStyleSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTStyleSheet.m; sourceTree = "<group>"; };
@@ -657,6 +669,7 @@
 		114772F71727DE5200196FB2 /* vTeam */ = {
 			isa = PBXGroup;
 			children = (
+				118AFC3C175D9EAD00A6A2FF /* DB */,
 				AC32502A173E2E1B0094A7A6 /* Form */,
 				AC324FB1173DFB630094A7A6 /* Layout */,
 				11619C701732399A00BD3561 /* Controller */,
@@ -779,6 +792,17 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
+		118AFC3C175D9EAD00A6A2FF /* DB */ = {
+			isa = PBXGroup;
+			children = (
+				118AFC41175DA15100A6A2FF /* VTDBObject.h */,
+				118AFC42175DA15100A6A2FF /* VTDBObject.m */,
+				118AFC45175DA1E800A6A2FF /* VTDBContext.h */,
+				118AFC46175DA1E800A6A2FF /* VTDBContext.m */,
+			);
+			name = DB;
+			sourceTree = "<group>";
+		};
 		11E59F601728C756002DD63C /* Style */ = {
 			isa = PBXGroup;
 			children = (
@@ -867,6 +891,8 @@
 				ACDE3AB0173647930046ED56 /* VTAppStatusView.m */,
 				11216B4017587B99004C4B1C /* VTPopWindow.h */,
 				11216B4117587B99004C4B1C /* VTPopWindow.m */,
+				118AFC2B175D9A9F00A6A2FF /* VTBarButtonItem.h */,
+				118AFC2C175D9A9F00A6A2FF /* VTBarButtonItem.m */,
 			);
 			name = UIKit;
 			sourceTree = "<group>";
@@ -1046,6 +1072,9 @@
 				113B5BD9174F77C6003211AD /* UIView+VTDataOutlet.h in Headers */,
 				11216B4217587B99004C4B1C /* VTPopWindow.h in Headers */,
 				11216B4D175895C3004C4B1C /* VTStyleController.h in Headers */,
+				118AFC2D175D9A9F00A6A2FF /* VTBarButtonItem.h in Headers */,
+				118AFC43175DA15100A6A2FF /* VTDBObject.h in Headers */,
+				118AFC47175DA1E800A6A2FF /* VTDBContext.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1227,6 +1256,9 @@
 				113B5BDA174F77C6003211AD /* UIView+VTDataOutlet.m in Sources */,
 				11216B4317587B99004C4B1C /* VTPopWindow.m in Sources */,
 				11216B4E175895C3004C4B1C /* VTStyleController.m in Sources */,
+				118AFC2E175D9A9F00A6A2FF /* VTBarButtonItem.m in Sources */,
+				118AFC44175DA15100A6A2FF /* VTDBObject.m in Sources */,
+				118AFC48175DA1E800A6A2FF /* VTDBContext.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
