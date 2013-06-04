@@ -29,6 +29,7 @@
 @synthesize notFoundDataView = _notFoundDataView;
 @synthesize autoHiddenViews = _autoHiddenViews;
 @synthesize itemViewClass = _itemViewClass;
+@synthesize itemViewBundle = _itemViewBundle;
 
 -(void) dealloc{
     [_containerView setDelegate:nil];
@@ -40,6 +41,7 @@
     [_containerView release];
     [_autoHiddenViews release];
     [_itemViewClass release];
+    [_itemViewBundle release];
     [super dealloc];
 }
 
@@ -129,9 +131,8 @@
             clazz = [VTItemViewController class];
         }
         
-        itemViewController = [[[clazz alloc] initWithNibName:_itemViewNib bundle:nil] autorelease];
+        itemViewController = [[[clazz alloc] initWithNibName:_itemViewNib bundle:_itemViewBundle] autorelease];
         [itemViewController setReuseIdentifier:@"ItemView"];
-        [itemViewController setContext:self.context];
         [itemViewController setDelegate:self];
     }
     
@@ -139,7 +140,12 @@
     
     UIView * itemView = [itemViewController view];
     
+    [itemViewController setContext:self.context];
+    
     [itemViewController setDataItem:data];
+    
+    [itemViewController.dataSource cancel];
+    [itemViewController.dataSource reloadData];
     
     [self loadImagesForView:itemView];
     

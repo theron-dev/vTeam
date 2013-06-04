@@ -68,6 +68,9 @@
     
     [itemViewController setDataItem:data];
     
+    [itemViewController.dataSource cancel];
+    [itemViewController.dataSource reloadData];
+    
     [self loadImagesForView:itemView];
     
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(downloadImagesForView:) object:itemView];

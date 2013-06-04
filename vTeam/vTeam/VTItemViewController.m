@@ -8,6 +8,10 @@
 
 #import "VTItemViewController.h"
 
+#import "IVTImageTask.h"
+
+#import "UIView+Search.h"
+
 @interface VTItemViewController ()
 
 @end
@@ -24,6 +28,7 @@
 @synthesize delegate = _delegate;
 @synthesize dataItem = _dataItem;
 @synthesize layoutContainer = _layoutContainer;
+@synthesize dataSource = _dataSource;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -59,6 +64,8 @@
     [_reuseIdentifier release];
     [_styleContainer release];
     [_dataOutletContainer release];
+    [_dataSource setDelegate:nil];
+    [_dataSource release];
     [super dealloc];
 }
 
@@ -86,6 +93,62 @@
 -(void) viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
     [_layoutContainer layout];
+}
+
+-(void) vtDataSourceDidLoadedFromCache:(VTDataSource *) dataSource timestamp:(NSDate *) timestamp{
+    [self.dataOutletContainer applyDataOutlet:dataSource];
+    [self downloadImagesForView:self.view];
+    [_layoutContainer layout];
+}
+
+-(void) vtDataSourceDidLoaded:(VTDataSource *) dataSource{
+    [self.dataOutletContainer applyDataOutlet:dataSource];
+    [self downloadImagesForView:self.view];
+    [_layoutContainer layout];
+}
+
+-(void) vtDataSourceDidContentChanged:(VTDataSource *) dataSource{
+    [self.dataOutletContainer applyDataOutlet:dataSource];
+    [self downloadImagesForView:self.view];
+    [_layoutContainer layout];
+}
+
+-(void) downloadImagesForView:(UIView *) view{
+    NSArray * imageViews = [view searchViewForProtocol:@protocol(IVTImageTask)];
+    for(id imageView in imageViews){
+        if([imageView httpTask] == nil && ![imageView isLoaded]){
+            [imageView setSource:self];
+            [self.context handle:@protocol(IVTImageTask) task:imageView priority:0];
+        }
+    }
+}
+
+-(void) loadImagesForView:(UIView *) view{
+    NSArray * imageViews = [view searchViewForProtocol:@protocol(IVTImageTask)];
+    for(id imageView in imageViews){
+        if([imageView httpTask]){
+            [self.context cancelHandle:@protocol(IVTImageTask) task:imageView];
+        }
+        if(![imageView isLoaded]){
+            [self.context handle:@protocol(IVTLocalImageTask) task:imageView priority:0];
+        }
+    }
+}
+
+-(void) cancelDownloadImagesForView:(UIView *) view{
+    NSArray * imageViews = [view searchViewForProtocol:@protocol(IVTImageTask)];
+    for(id imageView in imageViews){
+        if([imageView httpTask]){
+            [self.context cancelHandle:@protocol(IVTImageTask) task:imageView];
+        }
+    }
+}
+
+-(void) setContext:(id<IVTUIContext>)context{
+    if(_context != context){
+        _context = context;
+        [_dataSource setContext:context];
+    }
 }
 
 @end

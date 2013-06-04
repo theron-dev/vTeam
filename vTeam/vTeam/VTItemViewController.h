@@ -13,8 +13,9 @@
 #import <vTeam/IVTUIContext.h>
 #import <vTeam/IVTAction.h>
 #import <vTeam/VTLayoutContainer.h>
+#import <vTeam/VTDataSource.h>
 
-@interface VTItemViewController : UIViewController
+@interface VTItemViewController : UIViewController<VTDataSourceDelegate>
 
 @property(nonatomic,retain) id userInfo;
 @property(nonatomic,assign) NSInteger index;
@@ -27,7 +28,15 @@
 @property(nonatomic,assign) IBOutlet id delegate;
 @property(nonatomic,retain) id dataItem;
 
+@property(nonatomic,retain) IBOutlet VTDataSource * dataSource;
+
 -(IBAction) doAction :(id)sender;
+
+-(void) downloadImagesForView:(UIView *) view;
+
+-(void) loadImagesForView:(UIView *) view;
+
+-(void) cancelDownloadImagesForView:(UIView *) view;
 
 @end
 

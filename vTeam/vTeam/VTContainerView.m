@@ -106,7 +106,15 @@
     
     NSMutableDictionary * itemViewControllers = [NSMutableDictionary dictionaryWithCapacity:4];
     for(VTItemViewController * itemViewController in _itemViewControllers){
-        [itemViewControllers setObject:itemViewController forKey:[NSNumber numberWithInt:itemViewController.index]];
+        NSNumber * key = [NSNumber numberWithInt:itemViewController.index];
+        id t = [itemViewControllers objectForKey:key];
+        if(t){
+            [itemViewController setDataItem:nil];
+            [itemViewController setIndex:NSNotFound];
+            [self addQueueItemViewController:t];
+            [self removeItemViewController:t];
+        }
+        [itemViewControllers setObject:itemViewController forKey:key];
     }
     
     CGSize size = self.bounds.size;
@@ -183,6 +191,7 @@
                 [itemViewController setDataItem:nil];
                 [itemViewController setIndex:NSNotFound];
                 [self addQueueItemViewController:itemViewController];
+                [self removeItemViewController:itemViewController];
                 itemViewController = [(id)self.delegate vtContainerView:self itemViewAtIndex:index frame:rect];
             }
             
