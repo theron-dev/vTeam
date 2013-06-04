@@ -160,7 +160,9 @@
         id userInfo = [sender userInfo];
         if([actionName isEqualToString:@"url"]){
             if(userInfo){
-                [self openUrl:[NSURL URLWithString:userInfo relativeToURL:self.url] animated:YES];
+                [self openUrl:[NSURL URLWithString:
+                               [userInfo stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
+                                     relativeToURL:self.url] animated:YES];
             }
         }
         else if([actionName isEqualToString:@"openUrl"]){
