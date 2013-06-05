@@ -24,6 +24,7 @@
 @synthesize leftLoadingView = _leftLoadingView;
 @synthesize rightLoadingView = _rightLoadingView;
 @synthesize itemViewClass = _itemViewClass;
+@synthesize itemViewBundle = _itemViewBundle;
 
 -(void) dealloc{
     [_containerView setDelegate:nil];
@@ -32,6 +33,7 @@
     [_rightLoadingView release];
     [_containerView release];
     [_itemViewClass release];
+    [_itemViewBundle release];
     [super dealloc];
 }
 
@@ -56,15 +58,16 @@
             clazz = [VTItemViewController class];
         }
         
-        itemViewController = [[[clazz alloc] initWithNibName:_itemViewNib bundle:nil] autorelease];
+        itemViewController = [[[clazz alloc] initWithNibName:_itemViewNib bundle:_itemViewBundle] autorelease];
         [itemViewController setReuseIdentifier:@"ItemView"];
-        [itemViewController setContext:self.context];
         [itemViewController setDelegate:self];
     }
     
     id data = [self.dataSource dataObjectAtIndex:index];
     
     UIView * itemView = [itemViewController view];
+    
+    [itemViewController setContext:self.context];
     
     [itemViewController setDataItem:data];
     

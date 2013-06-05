@@ -38,6 +38,11 @@
     }
 }
 
+-(void) reloadData{
+    _pageIndex = 1;
+    [super reloadData];
+}
+
 -(BOOL) hasMoreData{
     return YES;
 }

@@ -83,6 +83,9 @@
         while(i < c){
             id request = [_requests objectAtIndex:i];
             if(request == task){
+                if([request httpTask]){
+                    [self.context cancelHandle:@protocol(IVTHttpAPITask) task:[request httpTask]];
+                }
                 [_requests removeObjectAtIndex:i];
                 c --;
             }
@@ -103,6 +106,9 @@
         while(i < c){
             id request = [_requests objectAtIndex:i];
             if([request task] == [(id)task task] && [request taskType] == [(id)task taskType]){
+                if([request httpTask]){
+                    [self.context cancelHandle:@protocol(IVTHttpAPITask) task:[request httpTask]];
+                }
                 [_requests removeObjectAtIndex:i];
                 c --;
             }

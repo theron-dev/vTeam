@@ -82,11 +82,9 @@
     if(_dataItem != dataItem){
         [_dataItem release];
         _dataItem = [dataItem retain];
-        if(_dataItem){
-            [self view];
-            [_dataOutletContainer applyDataOutlet:_dataItem];
-            [_layoutContainer layout];
-        }
+        [self view];
+        [_dataOutletContainer applyDataOutlet:self];
+        [_layoutContainer layout];
     }
 }
 
@@ -96,19 +94,19 @@
 }
 
 -(void) vtDataSourceDidLoadedFromCache:(VTDataSource *) dataSource timestamp:(NSDate *) timestamp{
-    [self.dataOutletContainer applyDataOutlet:dataSource];
+    [_dataOutletContainer applyDataOutlet:self];
     [self downloadImagesForView:self.view];
     [_layoutContainer layout];
 }
 
 -(void) vtDataSourceDidLoaded:(VTDataSource *) dataSource{
-    [self.dataOutletContainer applyDataOutlet:dataSource];
+    [_dataOutletContainer applyDataOutlet:self];
     [self downloadImagesForView:self.view];
     [_layoutContainer layout];
 }
 
 -(void) vtDataSourceDidContentChanged:(VTDataSource *) dataSource{
-    [self.dataOutletContainer applyDataOutlet:dataSource];
+    [_dataOutletContainer applyDataOutlet:self];
     [self downloadImagesForView:self.view];
     [_layoutContainer layout];
 }

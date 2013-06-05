@@ -16,9 +16,16 @@
 
 @end
 
+@interface NSString (VTDataOutlet)
+
+-(NSString *) stringByDataOutlet:(id) data;
+
+@end
+
+
 @interface VTDataOutlet : NSObject
 
-@property(nonatomic,retain) IBOutlet UIView * view;
+@property(nonatomic,retain) IBOutlet id view;
 @property(nonatomic,retain) NSString * keyPath;
 @property(nonatomic,retain) NSString * stringKeyPath;
 @property(nonatomic,retain) NSString * stringFormat;

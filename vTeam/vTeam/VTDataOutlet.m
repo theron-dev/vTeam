@@ -46,6 +46,59 @@
 
 @end
 
+@implementation NSString (VTDataOutlet)
+
+-(NSString *) stringByDataOutlet:(id) data{
+    NSMutableString * ms = [NSMutableString stringWithCapacity:30];
+    NSMutableString * keyPath = [NSMutableString stringWithCapacity:30];
+    
+    unichar uc;
+    
+    int length = [self length];
+    int s = 0;
+    
+    for(int i=0;i<length;i++){
+        
+        uc = [self characterAtIndex:i];
+        
+        switch (s) {
+            case 0:
+            {
+                if(uc == '{'){
+                    NSRange r = {0,[keyPath length]};
+                    [keyPath deleteCharactersInRange:r];
+                    s =1;
+                }
+                else{
+                    [ms appendString:[NSString stringWithCharacters:&uc length:1]];
+                }
+            }
+                break;
+            case 1:
+            {
+                if(uc == '}'){
+                    id v = [data dataForKeyPath:keyPath];
+                    if(v){
+                        [ms appendFormat:@"%@",v];
+                    }
+                    s = 0;
+                }
+                else{
+                    [keyPath appendString:[NSString stringWithCharacters:&uc length:1]];
+                }
+            }
+                break;
+            default:
+                break;
+        }
+        
+    }
+    
+    return ms;
+}
+
+@end
+
 @implementation VTDataOutlet
 
 @synthesize view = _view;
@@ -92,6 +145,9 @@
         else{
             value = [NSNumber numberWithBool:NO];
         }
+    }
+    else if(_stringFormat){
+        value = [_stringFormat stringByDataOutlet:data];
     }
     [_view setValue:value forKeyPath:self.keyPath];
 }
