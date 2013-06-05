@@ -42,4 +42,12 @@
     [self setBackgroundImage:backgroundImageSelected forState:UIControlStateSelected];
 }
 
+-(NSString *) title{
+    return [self titleForState:UIControlStateNormal];
+}
+
+-(void) setTitle:(NSString *)title{
+    [self setTitle:title forState:UIControlStateNormal];
+}
+
 @end

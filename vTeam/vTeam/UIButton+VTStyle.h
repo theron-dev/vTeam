@@ -14,5 +14,6 @@
 @property(nonatomic,retain) UIImage * backgroundImageHighlighted;
 @property(nonatomic,retain) UIImage * backgroundImageDisabled;
 @property(nonatomic,retain) UIImage * backgroundImageSelected;
+@property(nonatomic,retain) NSString * title;
 
 @end
