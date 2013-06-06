@@ -211,6 +211,17 @@
 		11E59F7E1728DBCD002DD63C /* NSURL+QueryValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E59F7C1728DBCD002DD63C /* NSURL+QueryValue.m */; };
 		11E59F811728DF6E002DD63C /* VTNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 11E59F7F1728DF6E002DD63C /* VTNavigationController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11E59F821728DF6E002DD63C /* VTNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E59F801728DF6E002DD63C /* VTNavigationController.m */; };
+		11EE82971760966800219D52 /* crypt.h in Headers */ = {isa = PBXBuildFile; fileRef = 11EE828E1760966800219D52 /* crypt.h */; };
+		11EE82981760966800219D52 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 11EE828F1760966800219D52 /* ioapi.c */; };
+		11EE82991760966800219D52 /* ioapi.h in Headers */ = {isa = PBXBuildFile; fileRef = 11EE82901760966800219D52 /* ioapi.h */; };
+		11EE829A1760966800219D52 /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = 11EE82911760966800219D52 /* mztools.c */; };
+		11EE829B1760966800219D52 /* mztools.h in Headers */ = {isa = PBXBuildFile; fileRef = 11EE82921760966800219D52 /* mztools.h */; };
+		11EE829C1760966800219D52 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 11EE82931760966800219D52 /* unzip.c */; };
+		11EE829D1760966800219D52 /* unzip.h in Headers */ = {isa = PBXBuildFile; fileRef = 11EE82941760966800219D52 /* unzip.h */; };
+		11EE829E1760966800219D52 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 11EE82951760966800219D52 /* zip.c */; };
+		11EE829F1760966800219D52 /* zip.h in Headers */ = {isa = PBXBuildFile; fileRef = 11EE82961760966800219D52 /* zip.h */; };
+		11EE82A31760972D00219D52 /* VTUnZip.h in Headers */ = {isa = PBXBuildFile; fileRef = 11EE82A11760972D00219D52 /* VTUnZip.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11EE82A41760972D00219D52 /* VTUnZip.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EE82A21760972D00219D52 /* VTUnZip.m */; };
 		AC324F6C173DD8FA0094A7A6 /* UIView+VTStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = AC324F6A173DD8FA0094A7A6 /* UIView+VTStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AC324F6D173DD8FA0094A7A6 /* UIView+VTStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = AC324F6B173DD8FA0094A7A6 /* UIView+VTStyle.m */; };
 		AC324F87173DE23B0094A7A6 /* UIButton+VTStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = AC324F85173DE23B0094A7A6 /* UIButton+VTStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -475,6 +486,17 @@
 		11E59F7C1728DBCD002DD63C /* NSURL+QueryValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+QueryValue.m"; sourceTree = "<group>"; };
 		11E59F7F1728DF6E002DD63C /* VTNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTNavigationController.h; sourceTree = "<group>"; };
 		11E59F801728DF6E002DD63C /* VTNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTNavigationController.m; sourceTree = "<group>"; };
+		11EE828E1760966800219D52 /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
+		11EE828F1760966800219D52 /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
+		11EE82901760966800219D52 /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
+		11EE82911760966800219D52 /* mztools.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mztools.c; sourceTree = "<group>"; };
+		11EE82921760966800219D52 /* mztools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mztools.h; sourceTree = "<group>"; };
+		11EE82931760966800219D52 /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unzip.c; sourceTree = "<group>"; };
+		11EE82941760966800219D52 /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
+		11EE82951760966800219D52 /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
+		11EE82961760966800219D52 /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
+		11EE82A11760972D00219D52 /* VTUnZip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTUnZip.h; sourceTree = "<group>"; };
+		11EE82A21760972D00219D52 /* VTUnZip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTUnZip.m; sourceTree = "<group>"; };
 		AC324F6A173DD8FA0094A7A6 /* UIView+VTStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+VTStyle.h"; sourceTree = "<group>"; };
 		AC324F6B173DD8FA0094A7A6 /* UIView+VTStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+VTStyle.m"; sourceTree = "<group>"; };
 		AC324F85173DE23B0094A7A6 /* UIButton+VTStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+VTStyle.h"; sourceTree = "<group>"; };
@@ -669,6 +691,7 @@
 		114772F71727DE5200196FB2 /* vTeam */ = {
 			isa = PBXGroup;
 			children = (
+				11EE82A01760971E00219D52 /* Zip */,
 				118AFC3C175D9EAD00A6A2FF /* DB */,
 				AC32502A173E2E1B0094A7A6 /* Form */,
 				AC324FB1173DFB630094A7A6 /* Layout */,
@@ -759,6 +782,7 @@
 		114D7985172A10BC0041468E /* C */ = {
 			isa = PBXGroup;
 			children = (
+				11EE828D1760966800219D52 /* zip */,
 				11313FE11749EC590081641F /* core */,
 			);
 			name = C;
@@ -895,6 +919,32 @@
 				118AFC2C175D9A9F00A6A2FF /* VTBarButtonItem.m */,
 			);
 			name = UIKit;
+			sourceTree = "<group>";
+		};
+		11EE828D1760966800219D52 /* zip */ = {
+			isa = PBXGroup;
+			children = (
+				11EE828E1760966800219D52 /* crypt.h */,
+				11EE828F1760966800219D52 /* ioapi.c */,
+				11EE82901760966800219D52 /* ioapi.h */,
+				11EE82911760966800219D52 /* mztools.c */,
+				11EE82921760966800219D52 /* mztools.h */,
+				11EE82931760966800219D52 /* unzip.c */,
+				11EE82941760966800219D52 /* unzip.h */,
+				11EE82951760966800219D52 /* zip.c */,
+				11EE82961760966800219D52 /* zip.h */,
+			);
+			name = zip;
+			path = ../../c/zip;
+			sourceTree = "<group>";
+		};
+		11EE82A01760971E00219D52 /* Zip */ = {
+			isa = PBXGroup;
+			children = (
+				11EE82A11760972D00219D52 /* VTUnZip.h */,
+				11EE82A21760972D00219D52 /* VTUnZip.m */,
+			);
+			name = Zip;
 			sourceTree = "<group>";
 		};
 		AC324FB1173DFB630094A7A6 /* Layout */ = {
@@ -1075,6 +1125,12 @@
 				118AFC2D175D9A9F00A6A2FF /* VTBarButtonItem.h in Headers */,
 				118AFC43175DA15100A6A2FF /* VTDBObject.h in Headers */,
 				118AFC47175DA1E800A6A2FF /* VTDBContext.h in Headers */,
+				11EE82971760966800219D52 /* crypt.h in Headers */,
+				11EE82991760966800219D52 /* ioapi.h in Headers */,
+				11EE829B1760966800219D52 /* mztools.h in Headers */,
+				11EE829D1760966800219D52 /* unzip.h in Headers */,
+				11EE829F1760966800219D52 /* zip.h in Headers */,
+				11EE82A31760972D00219D52 /* VTUnZip.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1259,6 +1315,11 @@
 				118AFC2E175D9A9F00A6A2FF /* VTBarButtonItem.m in Sources */,
 				118AFC44175DA15100A6A2FF /* VTDBObject.m in Sources */,
 				118AFC48175DA1E800A6A2FF /* VTDBContext.m in Sources */,
+				11EE82981760966800219D52 /* ioapi.c in Sources */,
+				11EE829A1760966800219D52 /* mztools.c in Sources */,
+				11EE829C1760966800219D52 /* unzip.c in Sources */,
+				11EE829E1760966800219D52 /* zip.c in Sources */,
+				11EE82A41760972D00219D52 /* VTUnZip.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
