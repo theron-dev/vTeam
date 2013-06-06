@@ -84,7 +84,10 @@
         _dataItem = [dataItem retain];
         [self view];
         [_dataOutletContainer applyDataOutlet:self];
+        [self loadImagesForView:self.view];
         [_layoutContainer layout];
+        [_dataSource cancel];
+        [_dataSource reloadData];
     }
 }
 

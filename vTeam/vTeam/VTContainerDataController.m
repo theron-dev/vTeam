@@ -138,16 +138,11 @@
     
     id data = [self.dataSource dataObjectAtIndex:index];
     
-    UIView * itemView = [itemViewController view];
+    [itemViewController view];
     
     [itemViewController setContext:self.context];
     
     [itemViewController setDataItem:data];
-    
-    [itemViewController.dataSource cancel];
-    [itemViewController.dataSource reloadData];
-    
-    [self loadImagesForView:itemView];
     
     return itemViewController;
 }

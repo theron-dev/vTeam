@@ -55,28 +55,34 @@
     return self;
 }
 
+static void VTHttpTaskOperatorDeallocDispatchFunction(void * queue){
+    
+    UIApplication * app = [UIApplication sharedApplication];
+    
+    if([(NSOperationQueue *)queue operationCount] ==0){
+        if([app isNetworkActivityIndicatorVisible]){
+            [app setNetworkActivityIndicatorVisible:NO];
+        }
+    }
+    else{
+        if(![app isNetworkActivityIndicatorVisible]){
+            [app setNetworkActivityIndicatorVisible:YES];
+        }
+    }
+    
+    [(NSOperationQueue *)queue release];
+    
+}
+
 -(void) dealloc{
     
     NSOperationQueue * opQueue = _queue;
     
     if(_allowShowNetworkStatus && opQueue){
-        dispatch_async(dispatch_get_main_queue(), ^(){
-            
-            UIApplication * app = [UIApplication sharedApplication];
-            
-            if([opQueue operationCount] ==0){
-                if([app isNetworkActivityIndicatorVisible]){
-                    [app setNetworkActivityIndicatorVisible:NO];
-                }
-            }
-            else{
-                if(![app isNetworkActivityIndicatorVisible]){
-                    [app setNetworkActivityIndicatorVisible:YES];
-                }
-            }
-            
-        });
+        [opQueue retain];
+        dispatch_async_f(dispatch_get_main_queue(), opQueue, VTHttpTaskOperatorDeallocDispatchFunction);
     }
+    
     [_conn cancel];
     [_conn release];
     [_request release];
@@ -335,7 +341,7 @@
 
 -(BOOL) cancelHandle:(Protocol *)taskType task:(id<IVTTask>)task{
     
-    NSArray * ops = [_operationQueue operations];
+    NSArray * ops = [NSArray arrayWithArray:[_operationQueue operations]];
     
     for(VTHttpTaskOperator * op in ops){
         if(op.taskType == taskType && (task == nil || task == op.task)){
@@ -348,7 +354,7 @@
 
 -(BOOL) cancelHandleForSource:(id) source{
     
-    NSArray * ops = [_operationQueue operations];
+    NSArray * ops = [NSArray arrayWithArray:[_operationQueue operations]];
     
     for(VTHttpTaskOperator * op in ops){
         if(op.task.source == source){
