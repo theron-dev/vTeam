@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		111638351762E1AD009979D3 /* hreport.c in Sources */ = {isa = PBXBuildFile; fileRef = 111638341762E1AD009979D3 /* hreport.c */; };
+		1116383F1762E99E009979D3 /* hreport.h in Headers */ = {isa = PBXBuildFile; fileRef = 111638331762DCBD009979D3 /* hreport.h */; settings = {ATTRIBUTES = (); }; };
+		111638441762EA80009979D3 /* VTReportDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = 111638421762EA80009979D3 /* VTReportDocument.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		111638451762EA80009979D3 /* VTReportDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 111638431762EA80009979D3 /* VTReportDocument.m */; };
 		11216B4217587B99004C4B1C /* VTPopWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 11216B4017587B99004C4B1C /* VTPopWindow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11216B4317587B99004C4B1C /* VTPopWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 11216B4117587B99004C4B1C /* VTPopWindow.m */; };
 		11216B4D175895C3004C4B1C /* VTStyleController.h in Headers */ = {isa = PBXBuildFile; fileRef = 11216B4B175895C3004C4B1C /* VTStyleController.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -276,6 +279,8 @@
 /* Begin PBXFileReference section */
 		111638331762DCBD009979D3 /* hreport.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hreport.h; sourceTree = "<group>"; };
 		111638341762E1AD009979D3 /* hreport.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hreport.c; sourceTree = "<group>"; };
+		111638421762EA80009979D3 /* VTReportDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTReportDocument.h; sourceTree = "<group>"; };
+		111638431762EA80009979D3 /* VTReportDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTReportDocument.m; sourceTree = "<group>"; };
 		11216B4017587B99004C4B1C /* VTPopWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTPopWindow.h; sourceTree = "<group>"; };
 		11216B4117587B99004C4B1C /* VTPopWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTPopWindow.m; sourceTree = "<group>"; };
 		11216B4B175895C3004C4B1C /* VTStyleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTStyleController.h; sourceTree = "<group>"; };
@@ -572,6 +577,15 @@
 			path = ../../c/report;
 			sourceTree = "<group>";
 		};
+		111638411762EA66009979D3 /* Report */ = {
+			isa = PBXGroup;
+			children = (
+				111638421762EA80009979D3 /* VTReportDocument.h */,
+				111638431762EA80009979D3 /* VTReportDocument.m */,
+			);
+			name = Report;
+			sourceTree = "<group>";
+		};
 		11313FE11749EC590081641F /* core */ = {
 			isa = PBXGroup;
 			children = (
@@ -704,6 +718,7 @@
 		114772F71727DE5200196FB2 /* vTeam */ = {
 			isa = PBXGroup;
 			children = (
+				111638411762EA66009979D3 /* Report */,
 				11EE82A01760971E00219D52 /* Zip */,
 				118AFC3C175D9EAD00A6A2FF /* DB */,
 				AC32502A173E2E1B0094A7A6 /* Form */,
@@ -1145,6 +1160,8 @@
 				11EE829D1760966800219D52 /* unzip.h in Headers */,
 				11EE829F1760966800219D52 /* zip.h in Headers */,
 				11EE82A31760972D00219D52 /* VTUnZip.h in Headers */,
+				1116383F1762E99E009979D3 /* hreport.h in Headers */,
+				111638441762EA80009979D3 /* VTReportDocument.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1335,6 +1352,7 @@
 				11EE829E1760966800219D52 /* zip.c in Sources */,
 				11EE82A41760972D00219D52 /* VTUnZip.m in Sources */,
 				111638351762E1AD009979D3 /* hreport.c in Sources */,
+				111638451762EA80009979D3 /* VTReportDocument.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

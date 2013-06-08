@@ -40,3 +40,4 @@
 #import <vTeam/VTBarButtonItem.h>
 #import <vTeam/VTDBContext.h>
 #import <vTeam/VTUnZip.h>
+#import <vTeam/VTReportDocument.h>
