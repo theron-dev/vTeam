@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		111638351762E1AD009979D3 /* hreport.c in Sources */ = {isa = PBXBuildFile; fileRef = 111638341762E1AD009979D3 /* hreport.c */; };
 		11216B4217587B99004C4B1C /* VTPopWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 11216B4017587B99004C4B1C /* VTPopWindow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11216B4317587B99004C4B1C /* VTPopWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 11216B4117587B99004C4B1C /* VTPopWindow.m */; };
 		11216B4D175895C3004C4B1C /* VTStyleController.h in Headers */ = {isa = PBXBuildFile; fileRef = 11216B4B175895C3004C4B1C /* VTStyleController.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -274,6 +275,7 @@
 
 /* Begin PBXFileReference section */
 		111638331762DCBD009979D3 /* hreport.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hreport.h; sourceTree = "<group>"; };
+		111638341762E1AD009979D3 /* hreport.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hreport.c; sourceTree = "<group>"; };
 		11216B4017587B99004C4B1C /* VTPopWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTPopWindow.h; sourceTree = "<group>"; };
 		11216B4117587B99004C4B1C /* VTPopWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTPopWindow.m; sourceTree = "<group>"; };
 		11216B4B175895C3004C4B1C /* VTStyleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTStyleController.h; sourceTree = "<group>"; };
@@ -564,6 +566,7 @@
 			isa = PBXGroup;
 			children = (
 				111638331762DCBD009979D3 /* hreport.h */,
+				111638341762E1AD009979D3 /* hreport.c */,
 			);
 			name = report;
 			path = ../../c/report;
@@ -1331,6 +1334,7 @@
 				11EE829C1760966800219D52 /* unzip.c in Sources */,
 				11EE829E1760966800219D52 /* zip.c in Sources */,
 				11EE82A41760972D00219D52 /* VTUnZip.m in Sources */,
+				111638351762E1AD009979D3 /* hreport.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1414,6 +1418,7 @@
 					__MACOS__,
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				HEADER_SEARCH_PATHS = "${SDKROOT}/usr/include/libxml2";
 				INFOPLIST_FILE = "vTeam/vTeam-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
@@ -1440,6 +1445,7 @@
 				GCC_PREFIX_HEADER = "vTeam/vTeam-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = __MACOS__;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				HEADER_SEARCH_PATHS = "${SDKROOT}/usr/include/libxml2";
 				INFOPLIST_FILE = "vTeam/vTeam-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
