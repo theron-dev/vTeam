@@ -42,12 +42,17 @@
     return NSStringFromProtocol(taskType);
 }
 
+-(id) cachedFromDownlinkTask:(id<IVTDownlinkTask>) downlinkTask forTaskType:(Protocol *) taskType{
+    NSString * key = [self cacheValueKey:downlinkTask forTaskType:taskType];
+    return [[self cached] valueForKey:key];
+}
+
 -(void) vtDownlinkTaskDidLoadedFromCache:(id<IVTDownlinkTask>) downlinkTask forTaskType:(Protocol *) taskType{
     NSString * key = [self cacheValueKey:downlinkTask forTaskType:taskType];
     id data = [[self cached] valueForKey:key];
     if(data && [downlinkTask respondsToSelector:@selector(vtDownlinkTaskDidLoadedFromCache:timestamp:forTaskType:)]){
         [downlinkTask vtDownlinkTaskDidLoadedFromCache:data timestamp:[[self cached] valueForKey:[key stringByAppendingString:@"-timestamp"]] forTaskType:taskType];
-    }
+    };
 }
 
 -(void) vtDownlinkTask:(id<IVTDownlinkTask>) downlinkTask didResponse:(id) data isCache:(BOOL) isCache forTaskType:(Protocol *) taskType{

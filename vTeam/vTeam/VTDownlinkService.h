@@ -12,6 +12,8 @@
 
 @interface VTDownlinkService : VTService
 
+-(id) cachedFromDownlinkTask:(id<IVTDownlinkTask>) downlinkTask forTaskType:(Protocol *) taskType;
+
 -(void) vtDownlinkTaskDidLoadedFromCache:(id<IVTDownlinkTask>) downlinkTask forTaskType:(Protocol *) taskType;
 
 -(void) vtDownlinkTask:(id<IVTDownlinkTask>) downlinkTask didResponse:(id) data isCache:(BOOL) isCache forTaskType:(Protocol *) taskType;

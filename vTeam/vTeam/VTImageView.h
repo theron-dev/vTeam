@@ -13,5 +13,6 @@
 @interface VTImageView : UIImageView<IVTLocalImageTask>
 
 @property(nonatomic,retain) UIImage * defaultImage;
+@property(nonatomic,retain) NSString * imageMode;
 
 @end
