@@ -273,6 +273,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		111638331762DCBD009979D3 /* hreport.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hreport.h; sourceTree = "<group>"; };
 		11216B4017587B99004C4B1C /* VTPopWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTPopWindow.h; sourceTree = "<group>"; };
 		11216B4117587B99004C4B1C /* VTPopWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTPopWindow.m; sourceTree = "<group>"; };
 		11216B4B175895C3004C4B1C /* VTStyleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTStyleController.h; sourceTree = "<group>"; };
@@ -559,6 +560,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		111638321762DC01009979D3 /* report */ = {
+			isa = PBXGroup;
+			children = (
+				111638331762DCBD009979D3 /* hreport.h */,
+			);
+			name = report;
+			path = ../../c/report;
+			sourceTree = "<group>";
+		};
 		11313FE11749EC590081641F /* core */ = {
 			isa = PBXGroup;
 			children = (
@@ -782,6 +792,7 @@
 		114D7985172A10BC0041468E /* C */ = {
 			isa = PBXGroup;
 			children = (
+				111638321762DC01009979D3 /* report */,
 				11EE828D1760966800219D52 /* zip */,
 				11313FE11749EC590081641F /* core */,
 			);
