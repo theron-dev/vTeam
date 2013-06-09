@@ -529,7 +529,7 @@ static void VTSqliteStmtBindData(sqlite3_stmt * stmt,id data){
         NSString * keyPath = nil;
         
         if(name){
-            keyPath = [NSString stringWithCString:name encoding:NSUTF8StringEncoding];
+            keyPath = [NSString stringWithCString:name + 1 encoding:NSUTF8StringEncoding];
         }
         else{
             keyPath = [NSString stringWithFormat:@"@%d",i];
