@@ -96,7 +96,7 @@ static NSString * VTDBContextPropertyDBType(objc_property_t prop){
         
         NSMutableString * mb = [NSMutableString stringWithCapacity:1024];
         
-        [mb appendFormat:@"CREATE TABLE IF NOT EXISTS [%@] ( [rowid] BIGINT PRIMARY KEY AUTOINCREMENT ",name];
+        [mb appendFormat:@"CREATE TABLE IF NOT EXISTS [%@] ( [rowid] INTEGER PRIMARY KEY AUTOINCREMENT ",name];
 
         for(int i=0;i<propCount;i++){
             
