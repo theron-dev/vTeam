@@ -11,6 +11,22 @@
 		1116383F1762E99E009979D3 /* hreport.h in Headers */ = {isa = PBXBuildFile; fileRef = 111638331762DCBD009979D3 /* hreport.h */; settings = {ATTRIBUTES = (); }; };
 		111638441762EA80009979D3 /* VTReportDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = 111638421762EA80009979D3 /* VTReportDocument.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		111638451762EA80009979D3 /* VTReportDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 111638431762EA80009979D3 /* VTReportDocument.m */; };
+		111638BC1764221F009979D3 /* UIDevice+VTUUID.h in Headers */ = {isa = PBXBuildFile; fileRef = 111638BA1764221F009979D3 /* UIDevice+VTUUID.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		111638BD1764221F009979D3 /* UIDevice+VTUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 111638BB1764221F009979D3 /* UIDevice+VTUUID.m */; };
+		111638C9176425F3009979D3 /* NSData+VTMD5String.h in Headers */ = {isa = PBXBuildFile; fileRef = 111638C7176425F3009979D3 /* NSData+VTMD5String.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		111638CA176425F3009979D3 /* NSData+VTMD5String.m in Sources */ = {isa = PBXBuildFile; fileRef = 111638C8176425F3009979D3 /* NSData+VTMD5String.m */; };
+		111638CD176426BB009979D3 /* NSString+VTMD5String.h in Headers */ = {isa = PBXBuildFile; fileRef = 111638CB176426BB009979D3 /* NSString+VTMD5String.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		111638CE176426BB009979D3 /* NSString+VTMD5String.m in Sources */ = {isa = PBXBuildFile; fileRef = 111638CC176426BB009979D3 /* NSString+VTMD5String.m */; };
+		111638D11764277E009979D3 /* NSData+VTBASE64String.h in Headers */ = {isa = PBXBuildFile; fileRef = 111638CF1764277D009979D3 /* NSData+VTBASE64String.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		111638D21764277E009979D3 /* NSData+VTBASE64String.m in Sources */ = {isa = PBXBuildFile; fileRef = 111638D01764277E009979D3 /* NSData+VTBASE64String.m */; };
+		111638D517642868009979D3 /* NSString+VTBASE64String.h in Headers */ = {isa = PBXBuildFile; fileRef = 111638D317642867009979D3 /* NSString+VTBASE64String.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		111638D617642868009979D3 /* NSString+VTBASE64String.m in Sources */ = {isa = PBXBuildFile; fileRef = 111638D417642867009979D3 /* NSString+VTBASE64String.m */; };
+		111638D9176428A9009979D3 /* NSString+VTBASE64Decode.h in Headers */ = {isa = PBXBuildFile; fileRef = 111638D7176428A9009979D3 /* NSString+VTBASE64Decode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		111638DA176428A9009979D3 /* NSString+VTBASE64Decode.m in Sources */ = {isa = PBXBuildFile; fileRef = 111638D8176428A9009979D3 /* NSString+VTBASE64Decode.m */; };
+		111638E117642949009979D3 /* NSData+CCCryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 111638DF17642948009979D3 /* NSData+CCCryptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		111638E217642949009979D3 /* NSData+CCCryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 111638E017642948009979D3 /* NSData+CCCryptor.m */; };
+		111638E617643AA2009979D3 /* VTSqlite.h in Headers */ = {isa = PBXBuildFile; fileRef = 111638E417643AA2009979D3 /* VTSqlite.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		111638E717643AA2009979D3 /* VTSqlite.m in Sources */ = {isa = PBXBuildFile; fileRef = 111638E517643AA2009979D3 /* VTSqlite.m */; };
 		11216B4217587B99004C4B1C /* VTPopWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 11216B4017587B99004C4B1C /* VTPopWindow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11216B4317587B99004C4B1C /* VTPopWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 11216B4117587B99004C4B1C /* VTPopWindow.m */; };
 		11216B4D175895C3004C4B1C /* VTStyleController.h in Headers */ = {isa = PBXBuildFile; fileRef = 11216B4B175895C3004C4B1C /* VTStyleController.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -281,6 +297,22 @@
 		111638341762E1AD009979D3 /* hreport.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hreport.c; sourceTree = "<group>"; };
 		111638421762EA80009979D3 /* VTReportDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTReportDocument.h; sourceTree = "<group>"; };
 		111638431762EA80009979D3 /* VTReportDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTReportDocument.m; sourceTree = "<group>"; };
+		111638BA1764221F009979D3 /* UIDevice+VTUUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+VTUUID.h"; sourceTree = "<group>"; };
+		111638BB1764221F009979D3 /* UIDevice+VTUUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+VTUUID.m"; sourceTree = "<group>"; };
+		111638C7176425F3009979D3 /* NSData+VTMD5String.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+VTMD5String.h"; sourceTree = "<group>"; };
+		111638C8176425F3009979D3 /* NSData+VTMD5String.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+VTMD5String.m"; sourceTree = "<group>"; };
+		111638CB176426BB009979D3 /* NSString+VTMD5String.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+VTMD5String.h"; sourceTree = "<group>"; };
+		111638CC176426BB009979D3 /* NSString+VTMD5String.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+VTMD5String.m"; sourceTree = "<group>"; };
+		111638CF1764277D009979D3 /* NSData+VTBASE64String.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+VTBASE64String.h"; sourceTree = "<group>"; };
+		111638D01764277E009979D3 /* NSData+VTBASE64String.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+VTBASE64String.m"; sourceTree = "<group>"; };
+		111638D317642867009979D3 /* NSString+VTBASE64String.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+VTBASE64String.h"; sourceTree = "<group>"; };
+		111638D417642867009979D3 /* NSString+VTBASE64String.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+VTBASE64String.m"; sourceTree = "<group>"; };
+		111638D7176428A9009979D3 /* NSString+VTBASE64Decode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+VTBASE64Decode.h"; sourceTree = "<group>"; };
+		111638D8176428A9009979D3 /* NSString+VTBASE64Decode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+VTBASE64Decode.m"; sourceTree = "<group>"; };
+		111638DF17642948009979D3 /* NSData+CCCryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+CCCryptor.h"; sourceTree = "<group>"; };
+		111638E017642948009979D3 /* NSData+CCCryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+CCCryptor.m"; sourceTree = "<group>"; };
+		111638E417643AA2009979D3 /* VTSqlite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTSqlite.h; sourceTree = "<group>"; };
+		111638E517643AA2009979D3 /* VTSqlite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTSqlite.m; sourceTree = "<group>"; };
 		11216B4017587B99004C4B1C /* VTPopWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTPopWindow.h; sourceTree = "<group>"; };
 		11216B4117587B99004C4B1C /* VTPopWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTPopWindow.m; sourceTree = "<group>"; };
 		11216B4B175895C3004C4B1C /* VTStyleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTStyleController.h; sourceTree = "<group>"; };
@@ -586,6 +618,34 @@
 			name = Report;
 			sourceTree = "<group>";
 		};
+		111638BE1764257C009979D3 /* NSCategory */ = {
+			isa = PBXGroup;
+			children = (
+				111638C7176425F3009979D3 /* NSData+VTMD5String.h */,
+				111638C8176425F3009979D3 /* NSData+VTMD5String.m */,
+				111638CF1764277D009979D3 /* NSData+VTBASE64String.h */,
+				111638D01764277E009979D3 /* NSData+VTBASE64String.m */,
+				111638CB176426BB009979D3 /* NSString+VTMD5String.h */,
+				111638CC176426BB009979D3 /* NSString+VTMD5String.m */,
+				111638D317642867009979D3 /* NSString+VTBASE64String.h */,
+				111638D417642867009979D3 /* NSString+VTBASE64String.m */,
+				111638D7176428A9009979D3 /* NSString+VTBASE64Decode.h */,
+				111638D8176428A9009979D3 /* NSString+VTBASE64Decode.m */,
+				111638DF17642948009979D3 /* NSData+CCCryptor.h */,
+				111638E017642948009979D3 /* NSData+CCCryptor.m */,
+			);
+			name = NSCategory;
+			sourceTree = "<group>";
+		};
+		111638E317643A93009979D3 /* Sqlite */ = {
+			isa = PBXGroup;
+			children = (
+				111638E417643AA2009979D3 /* VTSqlite.h */,
+				111638E517643AA2009979D3 /* VTSqlite.m */,
+			);
+			name = Sqlite;
+			sourceTree = "<group>";
+		};
 		11313FE11749EC590081641F /* core */ = {
 			isa = PBXGroup;
 			children = (
@@ -718,6 +778,7 @@
 		114772F71727DE5200196FB2 /* vTeam */ = {
 			isa = PBXGroup;
 			children = (
+				111638E317643A93009979D3 /* Sqlite */,
 				111638411762EA66009979D3 /* Report */,
 				11EE82A01760971E00219D52 /* Zip */,
 				118AFC3C175D9EAD00A6A2FF /* DB */,
@@ -729,6 +790,7 @@
 				114D796C172928A80041468E /* Tasks */,
 				114D796D172928AD0041468E /* Services */,
 				11E59F761728CF91002DD63C /* UIKit */,
+				111638BE1764257C009979D3 /* NSCategory */,
 				11E59F611728C75B002DD63C /* DataOutlet */,
 				11E59F601728C756002DD63C /* Style */,
 				114772F81727DE5200196FB2 /* Supporting Files */,
@@ -946,6 +1008,8 @@
 				11216B4117587B99004C4B1C /* VTPopWindow.m */,
 				118AFC2B175D9A9F00A6A2FF /* VTBarButtonItem.h */,
 				118AFC2C175D9A9F00A6A2FF /* VTBarButtonItem.m */,
+				111638BA1764221F009979D3 /* UIDevice+VTUUID.h */,
+				111638BB1764221F009979D3 /* UIDevice+VTUUID.m */,
 			);
 			name = UIKit;
 			sourceTree = "<group>";
@@ -1162,6 +1226,14 @@
 				11EE82A31760972D00219D52 /* VTUnZip.h in Headers */,
 				1116383F1762E99E009979D3 /* hreport.h in Headers */,
 				111638441762EA80009979D3 /* VTReportDocument.h in Headers */,
+				111638BC1764221F009979D3 /* UIDevice+VTUUID.h in Headers */,
+				111638C9176425F3009979D3 /* NSData+VTMD5String.h in Headers */,
+				111638CD176426BB009979D3 /* NSString+VTMD5String.h in Headers */,
+				111638D11764277E009979D3 /* NSData+VTBASE64String.h in Headers */,
+				111638D517642868009979D3 /* NSString+VTBASE64String.h in Headers */,
+				111638D9176428A9009979D3 /* NSString+VTBASE64Decode.h in Headers */,
+				111638E117642949009979D3 /* NSData+CCCryptor.h in Headers */,
+				111638E617643AA2009979D3 /* VTSqlite.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1353,6 +1425,14 @@
 				11EE82A41760972D00219D52 /* VTUnZip.m in Sources */,
 				111638351762E1AD009979D3 /* hreport.c in Sources */,
 				111638451762EA80009979D3 /* VTReportDocument.m in Sources */,
+				111638BD1764221F009979D3 /* UIDevice+VTUUID.m in Sources */,
+				111638CA176425F3009979D3 /* NSData+VTMD5String.m in Sources */,
+				111638CE176426BB009979D3 /* NSString+VTMD5String.m in Sources */,
+				111638D21764277E009979D3 /* NSData+VTBASE64String.m in Sources */,
+				111638D617642868009979D3 /* NSString+VTBASE64String.m in Sources */,
+				111638DA176428A9009979D3 /* NSString+VTBASE64Decode.m in Sources */,
+				111638E217642949009979D3 /* NSData+CCCryptor.m in Sources */,
+				111638E717643AA2009979D3 /* VTSqlite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

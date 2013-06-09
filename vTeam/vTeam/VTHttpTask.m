@@ -35,6 +35,7 @@
 @synthesize forceUpdateResource = _forceUpdateResource;
 @synthesize onlyLocalResource = _onlyLocalResource;
 @synthesize userInfo = _userInfo;
+@synthesize allowResume = _allowResume;
 
 -(void) dealloc{
     [_userInfo release];
@@ -111,6 +112,22 @@
             return nil;
         }
         
+        if(self.allowResume){
+            
+            NSString * tmpFilePath = [_responseBody stringByAppendingPathExtension:@"tmp"];
+            
+            if([fileManager fileExistsAtPath:tmpFilePath]){
+                
+                NSMutableURLRequest * req = [NSMutableURLRequest requestWithURL:_request.URL cachePolicy:_request.cachePolicy timeoutInterval:_request.timeoutInterval];
+                
+                _downloadLength = file_size([tmpFilePath UTF8String]);
+                
+                [req setValue:[NSString stringWithFormat:@"bytes=%d-",_downloadLength] forHTTPHeaderField:@"Range"];
+                
+                return req;
+            }
+            
+        }
         
         if(isFileExist){
             
@@ -170,7 +187,7 @@
 
 -(void) doReceiveData:(NSData *) data{
     if([_delegate respondsToSelector:@selector(vtHttpTask:didReceiveData:)]){
-        [_delegate vtHttpTask:self didReceiveData:data];
+        [_delegate vtHttpTask:self didReceiveData:data bytesDownload:_downloadLength totalBytes:_contentLength];
     }
 }
 
@@ -206,10 +223,11 @@
     }
     else if(_responseType == VTHttpTaskResponseTypeResource){
         NSString * t = [_responseBody stringByAppendingPathExtension:@"tmp"];
-        if(!self.allowCheckContentLength || _contentLength == 0 || _contentLength == _downloadLength){
+        if((!self.allowCheckContentLength && !self.allowResume)
+           || _contentLength == 0 || _contentLength == _downloadLength){
             file_rename([t UTF8String], [_responseBody UTF8String]);
         }
-        else{
+        else if(!self.allowResume){
             [[NSFileManager defaultManager] removeItemAtPath:t error:nil];
         }
     }
@@ -222,10 +240,12 @@
         self.responseBody = [NSMutableData dataWithCapacity:4];
     }
     else if(_responseType == VTHttpTaskResponseTypeResource){
-        NSString * t = [_responseBody stringByAppendingPathExtension:@"tmp"];
-        FILE * f = fopen([t UTF8String], "wb");
-        if(f){
-            fclose(f);
+        if(_downloadLength == 0){
+            NSString * t = [_responseBody stringByAppendingPathExtension:@"tmp"];
+            FILE * f = fopen([t UTF8String], "wb");
+            if(f){
+                fclose(f);
+            }
         }
     }
 }

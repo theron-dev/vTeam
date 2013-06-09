@@ -12,6 +12,8 @@
 
 @interface VTDownlinkService : VTService
 
+@property(nonatomic,retain) NSString * directory;
+
 -(id) cachedFromDownlinkTask:(id<IVTDownlinkTask>) downlinkTask forTaskType:(Protocol *) taskType;
 
 -(void) vtDownlinkTaskDidLoadedFromCache:(id<IVTDownlinkTask>) downlinkTask forTaskType:(Protocol *) taskType;

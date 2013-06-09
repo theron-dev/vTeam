@@ -10,6 +10,7 @@
 
 @implementation VTDBObject
 
-@synthesize rawid = _rawid;
+@synthesize rowid = _rowid;
+
 
 @end

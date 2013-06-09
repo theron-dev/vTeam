@@ -27,7 +27,7 @@ typedef enum {
 
 -(void) vtHttpTaskDidResponse:(id) httpTask;
 
--(void) vtHttpTask:(id) httpTask didReceiveData:(NSData *) data;
+-(void) vtHttpTask:(id) httpTask didReceiveData:(NSData *) data bytesDownload:(int)bytesDownload totalBytes:(int) totalBytes;
 
 -(void) vtHttpTask:(id) httpTask didSendBodyDataBytesWritten:(int) bytesWritten totalBytesWritten:(int) totalBytesWritten;
 
@@ -79,6 +79,7 @@ typedef enum {
 @property(assign) BOOL allowCheckContentLength;
 @property(assign) BOOL forceUpdateResource;
 @property(assign) BOOL onlyLocalResource;
+@property(assign) BOOL allowResume;
 
 @end
 

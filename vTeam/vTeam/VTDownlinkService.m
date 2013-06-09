@@ -18,10 +18,23 @@
 
 @implementation VTDownlinkService
 
+@synthesize directory = _directory;
+
+-(void) dealloc{
+    [_directory release];
+    [super dealloc];
+}
+
 -(NSMutableDictionary *) cached{
     if(_cached == nil){
         
-        NSString * filePath = [[NSTemporaryDirectory() stringByAppendingPathComponent:NSStringFromClass([self class])] stringByAppendingPathExtension:@"plist"];
+        NSString * directory = [self directory];
+        
+        if(directory == nil){
+            directory = NSTemporaryDirectory();
+        }
+        
+        NSString * filePath = [[directory stringByAppendingPathComponent:NSStringFromClass([self class])] stringByAppendingPathExtension:@"plist"];
         
         NSData * data = [[NSData alloc] initWithContentsOfFile:filePath];
         
@@ -78,7 +91,14 @@
 -(void) didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
     if(_cached ){
-        NSString * filePath = [[NSTemporaryDirectory() stringByAppendingPathComponent:NSStringFromClass([self class])] stringByAppendingPathExtension:@"plist"];
+        
+        NSString * directory = [self directory];
+        
+        if(directory == nil){
+            directory = NSTemporaryDirectory();
+        }
+        
+        NSString * filePath = [[directory stringByAppendingPathComponent:NSStringFromClass([self class])] stringByAppendingPathExtension:@"plist"];
         [[NSPropertyListSerialization dataFromPropertyList:_cached format:NSPropertyListBinaryFormat_v1_0 errorDescription:nil] writeToFile:filePath atomically:YES];
         [_cached release];
         _cached = nil;

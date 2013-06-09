@@ -10,6 +10,6 @@
 
 @interface VTDBObject : NSObject
 
-@property(nonatomic,assign) long long rawid;
+@property(nonatomic,assign) long long rowid;
 
 @end

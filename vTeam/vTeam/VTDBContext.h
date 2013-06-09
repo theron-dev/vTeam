@@ -9,17 +9,20 @@
 #import <Foundation/Foundation.h>
 
 #import <vTeam/VTDBObject.h>
+#import <vTeam/VTSqlite.h>
 
 @interface VTDBContext : NSObject
 
--(id) initWithPath:(NSString * ) dbPath;
+@property(nonatomic,retain) VTSqlite * db;
 
 -(void) regDBObjectClass:(Class) dbObjectClass;
 
--(void) insertObject:(VTDBObject *) dbObject;
+-(BOOL) insertObject:(VTDBObject *) dbObject;
 
--(void) deleteObject:(VTDBObject *) dbObject;
+-(BOOL) deleteObject:(VTDBObject *) dbObject;
 
--(void) updateObject:(VTDBObject *) dbObject;
+-(BOOL) updateObject:(VTDBObject *) dbObject;
+
+-(id<IVTSqliteCursor>) query:(Class) dbObjectClass sql:(NSString *) sql data:(id) data;
 
 @end

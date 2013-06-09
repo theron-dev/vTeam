@@ -41,3 +41,11 @@
 #import <vTeam/VTDBContext.h>
 #import <vTeam/VTUnZip.h>
 #import <vTeam/VTReportDocument.h>
+#import <vTeam/UIDevice+VTUUID.h>
+#import <vTeam/NSData+VTMD5String.h>
+#import <vTeam/NSData+VTBASE64String.h>
+#import <vTeam/NSString+VTMd5String.h>
+#import <vTeam/NSString+VTBASE64String.h>
+#import <vTeam/NSString+VTBASE64Decode.h>
+#import <vTeam/NSData+CCCryptor.h>
+#import <vTeam/VTSqlite.h>
