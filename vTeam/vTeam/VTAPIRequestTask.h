@@ -11,13 +11,17 @@
 #import <vTeam/VTHttpFormBody.h>
 #import <vTeam/VTHttpTask.h>
 
-@protocol IVTAPIRequestTask <IVTAPITask>
+@protocol IVTAPIWillRequestTask <IVTAPITask>
 
 @property(nonatomic,retain) NSString * apiKey;
 @property(nonatomic,retain) NSString * apiUrl;
 @property(nonatomic,retain) NSDictionary * queryValues;
 @property(nonatomic,retain) VTHttpFormBody * body;
 @property(nonatomic,retain) VTHttpTask * httpTask;
+
+@end
+
+@protocol IVTAPIRequestTask <IVTAPIWillRequestTask>
 
 @end
 

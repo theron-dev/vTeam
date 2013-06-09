@@ -44,13 +44,6 @@
     if((self = [super init])){
         _task = [task retain];
         _timeout = timeout;
-        
-        self.request = [_task doWillRequeset];
-        
-        if(_request == nil){
-            [self release];
-            return nil;
-        }
     }
     return self;
 }
@@ -119,6 +112,37 @@ static void VTHttpTaskOperatorDeallocDispatchFunction(void * queue){
     
 }
 
+-(void) startRequest{
+    
+    if(self.isCancelled){
+        return;
+    }
+    
+    if(self.request == nil){
+        _finished = YES;
+        return;
+    }
+    
+    dispatch_async(dispatch_get_main_queue(), ^(){
+        
+        if(self.isCancelled){
+            return;
+        }
+        
+        [self.task doLoading];
+        
+    });
+
+    self.conn = [NSURLConnection connectionWithRequest:self.request delegate:self];
+    
+    [_conn start];
+    
+    if(_timeout){
+        [self performSelector:@selector(connectTimeout) withObject:nil afterDelay:_timeout];
+    }
+
+}
+
 - (void)start{
     
     if([self isCancelled]){
@@ -152,25 +176,19 @@ static void VTHttpTaskOperatorDeallocDispatchFunction(void * queue){
     
     NSRunLoop * runloop = [NSRunLoop currentRunLoop];
     
+    NSThread * thread = [NSThread currentThread];
+    
     dispatch_async(dispatch_get_main_queue(), ^(){
         
         if(self.isCancelled){
             return;
         }
         
-        [self.task doLoading];
-    
+        self.request = [_task doWillRequeset];
+        
+        [self performSelector:@selector(startRequest) onThread:thread withObject:nil waitUntilDone:NO];
     });
-    
-    
-    self.conn = [NSURLConnection connectionWithRequest:self.request delegate:self];
-    
-    [_conn start];
-    
-    if(_timeout){
-        [self performSelector:@selector(connectTimeout) withObject:nil afterDelay:_timeout];
-    }
-    
+        
     while(![self isCancelled] && !_finished){
         [runloop runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.3]];
     }

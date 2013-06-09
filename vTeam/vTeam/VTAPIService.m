@@ -24,31 +24,10 @@
         
         id<IVTAPIRequestTask> reqTask = (id<IVTAPIRequestTask>) task;
         
-        NSString * apiKey = [reqTask apiKey];
         
-        NSString * url = [reqTask apiUrl];
-        
-        if(url == nil){
-            url = [self.config valueForKeyPath:apiKey];
-        }
-        
-        NSURL * u = [NSURL URLWithString:url queryValues:[reqTask queryValues]];
-        
-        NSLog(@"%@",u);
-        
-        NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:u cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:[[self.config valueForKey:@"timeout"] doubleValue]];
-        
-        VTHttpFormBody * body = [reqTask body];
-        
-        if(body){
-            [request setHTTPMethod:@"POST"];
-            [request setValue:[body contentType] forHTTPHeaderField:@"Content-Type"];
-            [request setHTTPBody:[body bytesBody]];
-        }
         
         VTHttpTask * httpTask = [[VTHttpTask alloc] init];
         
-        [httpTask setRequest:request];
         [httpTask setUserInfo:reqTask];
         [httpTask setSource:[task source]];
         [httpTask setResponseType:VTHttpTaskResponseTypeJSON];
@@ -181,5 +160,35 @@
     [respTask release];
 }
 
+-(void) vtHttpTaskWillRequest:(id)httpTask{
+    
+    id reqTask = [httpTask userInfo];
+    
+    [self.context handle:@protocol(IVTAPIWillRequestTask) task:reqTask priority:0];
+    
+    NSString * apiKey = [reqTask apiKey];
+    
+    NSString * url = [reqTask apiUrl];
+    
+    if(url == nil){
+        url = [self.config valueForKeyPath:apiKey];
+    }
+    
+    NSURL * u = [NSURL URLWithString:url queryValues:[reqTask queryValues]];
+    
+    NSLog(@"%@",u);
+    
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:u cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:[[self.config valueForKey:@"timeout"] doubleValue]];
+    
+    VTHttpFormBody * body = [reqTask body];
+    
+    if(body){
+        [request setHTTPMethod:@"POST"];
+        [request setValue:[body contentType] forHTTPHeaderField:@"Content-Type"];
+        [request setHTTPBody:[body bytesBody]];
+    }
+    
+    [httpTask setRequest:request];
+}
 
 @end
