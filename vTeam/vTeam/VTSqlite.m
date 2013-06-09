@@ -525,7 +525,7 @@ static void VTSqliteStmtBindData(sqlite3_stmt * stmt,id data){
     int c = sqlite3_bind_parameter_count(stmt);
     
     for(int i=0;i<c;i++){
-        const char * name = sqlite3_bind_parameter_name(stmt, i);
+        const char * name = sqlite3_bind_parameter_name(stmt, i + 1);
         NSString * keyPath = nil;
         
         if(name){
