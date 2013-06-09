@@ -44,11 +44,11 @@ static NSString * VTDBContextPropertyDBType(objc_property_t prop){
         return @"DOUBLE";
     }
     
-    if( [type hasPrefix:@"T@NSString"] ){
+    if( [type hasPrefix:@"T@\"NSString\""] ){
         return @"TEXT";
     }
     
-    if( [type hasPrefix:@"T@NSData"] ){
+    if( [type hasPrefix:@"T@\"NSData\""] ){
         return @"BLOB";
     }
     

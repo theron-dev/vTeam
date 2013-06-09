@@ -395,7 +395,7 @@ static void VTSqliteStmtBindData(sqlite3_stmt * stmt,id data);
     
     sqlite3_finalize(stmt);
     
-    return rs == SQLITE_OK || rs == SQLITE_ROW;
+    return rs == SQLITE_OK || rs == SQLITE_ROW || rs == SQLITE_DONE;
     
 }
 
