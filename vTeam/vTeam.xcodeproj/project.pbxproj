@@ -124,6 +124,8 @@
 		113140A01749EC590081641F /* sha1.h in Headers */ = {isa = PBXBuildFile; fileRef = 113140401749EC590081641F /* sha1.h */; };
 		113B5BD9174F77C6003211AD /* UIView+VTDataOutlet.h in Headers */ = {isa = PBXBuildFile; fileRef = 113B5BD7174F77C6003211AD /* UIView+VTDataOutlet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		113B5BDA174F77C6003211AD /* UIView+VTDataOutlet.m in Sources */ = {isa = PBXBuildFile; fileRef = 113B5BD8174F77C6003211AD /* UIView+VTDataOutlet.m */; };
+		11407290176999C800275493 /* VTFDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 1140728E176999C800275493 /* VTFDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11407291176999C800275493 /* VTFDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 1140728F176999C800275493 /* VTFDB.m */; };
 		114772FC1727DE5200196FB2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 114772FA1727DE5200196FB2 /* InfoPlist.strings */; };
 		114773031727DF0D00196FB2 /* vTeam.m in Sources */ = {isa = PBXBuildFile; fileRef = 114773021727DF0D00196FB2 /* vTeam.m */; };
 		114773051727DFE000196FB2 /* vTeam.h in Headers */ = {isa = PBXBuildFile; fileRef = 114773011727DF0D00196FB2 /* vTeam.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -417,6 +419,8 @@
 		113140411749EC590081641F /* shatest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = shatest.c; sourceTree = "<group>"; };
 		113B5BD7174F77C6003211AD /* UIView+VTDataOutlet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+VTDataOutlet.h"; sourceTree = "<group>"; };
 		113B5BD8174F77C6003211AD /* UIView+VTDataOutlet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+VTDataOutlet.m"; sourceTree = "<group>"; };
+		1140728E176999C800275493 /* VTFDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTFDB.h; sourceTree = "<group>"; };
+		1140728F176999C800275493 /* VTFDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTFDB.m; sourceTree = "<group>"; };
 		114772E21727DE0800196FB2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		114772F41727DE5200196FB2 /* vTeam.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = vTeam.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		114772F91727DE5200196FB2 /* vTeam-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "vTeam-Info.plist"; sourceTree = "<group>"; };
@@ -754,6 +758,15 @@
 			path = ../../c/core;
 			sourceTree = "<group>";
 		};
+		1140728D1769984900275493 /* FDB */ = {
+			isa = PBXGroup;
+			children = (
+				1140728E176999C800275493 /* VTFDB.h */,
+				1140728F176999C800275493 /* VTFDB.m */,
+			);
+			path = FDB;
+			sourceTree = "<group>";
+		};
 		114772D61727DE0700196FB2 = {
 			isa = PBXGroup;
 			children = (
@@ -782,6 +795,7 @@
 		114772F71727DE5200196FB2 /* vTeam */ = {
 			isa = PBXGroup;
 			children = (
+				1140728D1769984900275493 /* FDB */,
 				111638E317643A93009979D3 /* Sqlite */,
 				111638411762EA66009979D3 /* Report */,
 				11EE82A01760971E00219D52 /* Zip */,
@@ -1250,6 +1264,7 @@
 				111638E117642949009979D3 /* NSData+CCCryptor.h in Headers */,
 				111638E617643AA2009979D3 /* VTSqlite.h in Headers */,
 				AC339DA41766F48800EC2DAC /* hfdb.h in Headers */,
+				11407290176999C800275493 /* VTFDB.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1450,6 +1465,7 @@
 				111638E217642949009979D3 /* NSData+CCCryptor.m in Sources */,
 				111638E717643AA2009979D3 /* VTSqlite.m in Sources */,
 				AC339DA31765E9D800EC2DAC /* hfdb.c in Sources */,
+				11407291176999C800275493 /* VTFDB.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
