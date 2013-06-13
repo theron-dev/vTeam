@@ -15,6 +15,7 @@ NSString * kVTUnZipFileSize = @"kVTUnZipFileSize";
 
 @interface VTUnZip(){
     unzFile _zFile;
+    BOOL _isToFirst;
 }
 
 @end
@@ -24,7 +25,6 @@ NSString * kVTUnZipFileSize = @"kVTUnZipFileSize";
 -(id) initWithZipFile:(NSString *) filePath{
     if((self = [super init])){
         _zFile = unzOpen([filePath UTF8String]);
-        
         if(!_zFile){
             [self release];
             return nil;
@@ -41,6 +41,10 @@ NSString * kVTUnZipFileSize = @"kVTUnZipFileSize";
 }
 
 -(BOOL) nextZipEntity{
+    if(!_isToFirst){
+        _isToFirst = YES;
+        return UNZ_OK == unzGoToFirstFile(_zFile);
+    }
     return UNZ_OK == unzGoToNextFile(_zFile);
 }
 
@@ -60,6 +64,29 @@ NSString * kVTUnZipFileSize = @"kVTUnZipFileSize";
     return nil;
 }
 
+-(NSString *) entityFileName{
+    unz_file_info info;
+    char fileName[PATH_MAX];
+    
+    if(UNZ_OK == unzGetCurrentFileInfo(_zFile, &info, fileName, sizeof(fileName), NULL, 0, NULL, 0)){
+        
+        return [NSString stringWithCString:fileName encoding:NSUTF8StringEncoding];
+    }
+    
+    return nil;
+}
+
+-(NSUInteger) entityFileSize{
+    
+    unz_file_info info;
+    
+    if(UNZ_OK == unzGetCurrentFileInfo(_zFile, &info, NULL, 0, NULL, 0, NULL, 0)){
+        return info.uncompressed_size;
+    }
+    
+    return 0;
+}
+
 -(BOOL) openZipEntity{
     return UNZ_OK == unzOpenCurrentFile(_zFile);
 }
@@ -70,6 +97,31 @@ NSString * kVTUnZipFileSize = @"kVTUnZipFileSize";
 
 -(NSUInteger) read:(void *) buffer length:(NSUInteger) length{
     return unzReadCurrentFile(_zFile, buffer, length);
+}
+
+-(void) unZipToDirectory:(NSString *) directory{
+    NSFileManager * fileManager = [NSFileManager defaultManager];
+    [fileManager createDirectoryAtPath:directory withIntermediateDirectories:YES attributes:nil error:nil];
+    char sbuf[102400];
+    int len;
+    while([self nextZipEntity]){
+        NSString * fileName = [self entityFileName];
+        if([fileName hasSuffix:@"/"]){
+            [fileManager createDirectoryAtPath:[directory stringByAppendingPathComponent:fileName] withIntermediateDirectories:YES attributes:nil error:nil];
+        }
+        else{
+            if([self openZipEntity]){
+                FILE * f = fopen([[directory stringByAppendingPathComponent:fileName] UTF8String], "w");
+                if(f){
+                    while((len = [self read:sbuf length:sizeof(sbuf)])){
+                        fwrite(sbuf, 1, len, f);
+                    }
+                    fclose(f);
+                }
+                [self closeZipEntity];
+            }
+        }
+    }
 }
 
 @end

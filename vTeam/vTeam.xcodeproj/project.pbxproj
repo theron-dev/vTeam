@@ -45,7 +45,7 @@
 		1131404D1749EC590081641F /* hclass.c in Sources */ = {isa = PBXBuildFile; fileRef = 11313FED1749EC590081641F /* hclass.c */; };
 		1131404E1749EC590081641F /* hclass.h in Headers */ = {isa = PBXBuildFile; fileRef = 11313FEE1749EC590081641F /* hclass.h */; };
 		1131404F1749EC590081641F /* hconfig.c in Sources */ = {isa = PBXBuildFile; fileRef = 11313FEF1749EC590081641F /* hconfig.c */; };
-		113140501749EC590081641F /* hconfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 11313FF01749EC590081641F /* hconfig.h */; };
+		113140501749EC590081641F /* hconfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 11313FF01749EC590081641F /* hconfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		113140511749EC590081641F /* hdata.c in Sources */ = {isa = PBXBuildFile; fileRef = 11313FF11749EC590081641F /* hdata.c */; };
 		113140521749EC590081641F /* hdata.h in Headers */ = {isa = PBXBuildFile; fileRef = 11313FF21749EC590081641F /* hdata.h */; };
 		113140531749EC590081641F /* hdata_alloc.c in Sources */ = {isa = PBXBuildFile; fileRef = 11313FF31749EC590081641F /* hdata_alloc.c */; };
@@ -81,7 +81,7 @@
 		113140721749EC590081641F /* hmap.h in Headers */ = {isa = PBXBuildFile; fileRef = 113140121749EC590081641F /* hmap.h */; };
 		113140731749EC590081641F /* hmap2.c in Sources */ = {isa = PBXBuildFile; fileRef = 113140131749EC590081641F /* hmap2.c */; };
 		113140741749EC590081641F /* hmem.c in Sources */ = {isa = PBXBuildFile; fileRef = 113140141749EC590081641F /* hmem.c */; };
-		113140751749EC590081641F /* hmem.h in Headers */ = {isa = PBXBuildFile; fileRef = 113140151749EC590081641F /* hmem.h */; };
+		113140751749EC590081641F /* hmem.h in Headers */ = {isa = PBXBuildFile; fileRef = 113140151749EC590081641F /* hmem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		113140761749EC590081641F /* hmutex.c in Sources */ = {isa = PBXBuildFile; fileRef = 113140161749EC590081641F /* hmutex.c */; };
 		113140771749EC590081641F /* hmutex.h in Headers */ = {isa = PBXBuildFile; fileRef = 113140171749EC590081641F /* hmutex.h */; };
 		113140781749EC590081641F /* hnetbios.c in Sources */ = {isa = PBXBuildFile; fileRef = 113140181749EC590081641F /* hnetbios.c */; };
@@ -108,7 +108,7 @@
 		1131408E1749EC590081641F /* htime.c in Sources */ = {isa = PBXBuildFile; fileRef = 1131402E1749EC590081641F /* htime.c */; };
 		1131408F1749EC590081641F /* htime.h in Headers */ = {isa = PBXBuildFile; fileRef = 1131402F1749EC590081641F /* htime.h */; };
 		113140901749EC590081641F /* htypes.c in Sources */ = {isa = PBXBuildFile; fileRef = 113140301749EC590081641F /* htypes.c */; };
-		113140911749EC590081641F /* htypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 113140311749EC590081641F /* htypes.h */; };
+		113140911749EC590081641F /* htypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 113140311749EC590081641F /* htypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		113140921749EC590081641F /* huniquekey.c in Sources */ = {isa = PBXBuildFile; fileRef = 113140321749EC590081641F /* huniquekey.c */; };
 		113140931749EC590081641F /* huniquekey.h in Headers */ = {isa = PBXBuildFile; fileRef = 113140331749EC590081641F /* huniquekey.h */; };
 		113140941749EC590081641F /* hurl.c in Sources */ = {isa = PBXBuildFile; fileRef = 113140341749EC590081641F /* hurl.c */; };
@@ -274,6 +274,8 @@
 		AC32505D173E87D10094A7A6 /* VTFormPickerEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = AC32505B173E87D10094A7A6 /* VTFormPickerEditor.m */; };
 		AC325060173E884D0094A7A6 /* VTFormPickerEditorItem.h in Headers */ = {isa = PBXBuildFile; fileRef = AC32505E173E884B0094A7A6 /* VTFormPickerEditorItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AC325061173E884D0094A7A6 /* VTFormPickerEditorItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AC32505F173E884B0094A7A6 /* VTFormPickerEditorItem.m */; };
+		AC339DA31765E9D800EC2DAC /* hfdb.c in Sources */ = {isa = PBXBuildFile; fileRef = AC339DA21765E9D800EC2DAC /* hfdb.c */; };
+		AC339DA41766F48800EC2DAC /* hfdb.h in Headers */ = {isa = PBXBuildFile; fileRef = AC339DA11765E9D000EC2DAC /* hfdb.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ACDE3A501733EC410046ED56 /* UIView+Image.h in Headers */ = {isa = PBXBuildFile; fileRef = ACDE3A4E1733EC410046ED56 /* UIView+Image.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ACDE3A511733EC410046ED56 /* UIView+Image.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDE3A4F1733EC410046ED56 /* UIView+Image.m */; };
 		ACDE3A5717349D380046ED56 /* VTPageContainerLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = ACDE3A5517349D380046ED56 /* VTPageContainerLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -569,6 +571,8 @@
 		AC32505B173E87D10094A7A6 /* VTFormPickerEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTFormPickerEditor.m; sourceTree = "<group>"; };
 		AC32505E173E884B0094A7A6 /* VTFormPickerEditorItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTFormPickerEditorItem.h; sourceTree = "<group>"; };
 		AC32505F173E884B0094A7A6 /* VTFormPickerEditorItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTFormPickerEditorItem.m; sourceTree = "<group>"; };
+		AC339DA11765E9D000EC2DAC /* hfdb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hfdb.h; sourceTree = "<group>"; };
+		AC339DA21765E9D800EC2DAC /* hfdb.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hfdb.c; sourceTree = "<group>"; };
 		ACDE3A4E1733EC410046ED56 /* UIView+Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Image.h"; sourceTree = "<group>"; };
 		ACDE3A4F1733EC410046ED56 /* UIView+Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Image.m"; sourceTree = "<group>"; };
 		ACDE3A5517349D380046ED56 /* VTPageContainerLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTPageContainerLayout.h; sourceTree = "<group>"; };
@@ -872,6 +876,7 @@
 		114D7985172A10BC0041468E /* C */ = {
 			isa = PBXGroup;
 			children = (
+				AC339DA01765E96700EC2DAC /* db */,
 				111638321762DC01009979D3 /* report */,
 				11EE828D1760966800219D52 /* zip */,
 				11313FE11749EC590081641F /* core */,
@@ -1076,6 +1081,16 @@
 			name = Form;
 			sourceTree = "<group>";
 		};
+		AC339DA01765E96700EC2DAC /* db */ = {
+			isa = PBXGroup;
+			children = (
+				AC339DA11765E9D000EC2DAC /* hfdb.h */,
+				AC339DA21765E9D800EC2DAC /* hfdb.c */,
+			);
+			name = db;
+			path = ../../c/db;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1234,6 +1249,7 @@
 				111638D9176428A9009979D3 /* NSString+VTBASE64Decode.h in Headers */,
 				111638E117642949009979D3 /* NSData+CCCryptor.h in Headers */,
 				111638E617643AA2009979D3 /* VTSqlite.h in Headers */,
+				AC339DA41766F48800EC2DAC /* hfdb.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1433,6 +1449,7 @@
 				111638DA176428A9009979D3 /* NSString+VTBASE64Decode.m in Sources */,
 				111638E217642949009979D3 /* NSData+CCCryptor.m in Sources */,
 				111638E717643AA2009979D3 /* VTSqlite.m in Sources */,
+				AC339DA31765E9D800EC2DAC /* hfdb.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

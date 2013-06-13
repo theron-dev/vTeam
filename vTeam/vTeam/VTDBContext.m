@@ -67,7 +67,7 @@ static NSString * VTDBContextPropertyDBType(objc_property_t prop){
     
     BOOL isExists = NO;
    
-    id<IVTSqliteCursor> cursor = [_db query:@"SELECT [sql] FROM [sqlite_master] WHERE [type]='table' AND [name] = :name" withData:[NSDictionary dictionaryWithObject:name forKey:@"name"]];
+    id<IVTSqliteCursor> cursor = [_db query:@"SELECT [sql] FROM [sqlite_master] WHERE [type]='table' AND [name]=:name" withData:[NSDictionary dictionaryWithObject:name forKey:@"name"]];
     
     if([cursor next]){
         
@@ -77,11 +77,7 @@ static NSString * VTDBContextPropertyDBType(objc_property_t prop){
             NSString * n = [NSString stringWithFormat:@"[%s]",property_getName(prop[i])];
             
             if([sql rangeOfString:n].location == NSNotFound){
-                [_db execture:@"ALTER TABLE :name ADD COLUMN :column :type;" withData:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                                    name,@"name"
-                                                                                    ,n,@"column"
-                                                                                    ,VTDBContextPropertyDBType(prop[i]),@"type"
-                                                                                    , nil]];
+                [_db execture:[NSString stringWithFormat:@"ALTER TABLE [%@] ADD COLUMN %@ %@;",name,n,VTDBContextPropertyDBType(prop[i])] withData:nil];
             }
 
         }
@@ -89,7 +85,6 @@ static NSString * VTDBContextPropertyDBType(objc_property_t prop){
         isExists = YES;
         
     }
-    
     [cursor close];
     
     if(!isExists){
@@ -119,6 +114,7 @@ static NSString * VTDBContextPropertyDBType(objc_property_t prop){
     Class dbObjectClass = [dbObject class];
     unsigned int propCount = 0;
     objc_property_t * prop =  class_copyPropertyList(dbObjectClass, &propCount);
+    objc_property_t rowid = class_getProperty(dbObjectClass, "rowid");
     NSString * name = NSStringFromClass(dbObjectClass) ;
     
     NSMutableString * mb = [NSMutableString stringWithCapacity:1024];
@@ -127,11 +123,20 @@ static NSString * VTDBContextPropertyDBType(objc_property_t prop){
     [mb appendFormat:@"INSERT INTO [%@] ( ",name];
     [values appendString:@" VALUES("];
     
+    BOOL isFirst = YES;
+    
     for(int i=0;i<propCount;i++){
         
-        const char * n = property_getName(prop[i]);
+        if(rowid == prop[i]){
+            continue;
+        }
         
-        if(i !=0) {
+        const char * n = property_getName(prop[i]);
+    
+        if(isFirst){
+            isFirst = NO;
+        }
+        else {
             [mb appendString:@","];
             [values appendString:@","];
         }
@@ -165,24 +170,35 @@ static NSString * VTDBContextPropertyDBType(objc_property_t prop){
     Class dbObjectClass = [dbObject class];
     unsigned int propCount = 0;
     objc_property_t * prop =  class_copyPropertyList(dbObjectClass, &propCount);
+    objc_property_t rowid = class_getProperty(dbObjectClass, "rowid");
+    
     NSString * name = NSStringFromClass(dbObjectClass) ;
     
     NSMutableString * mb = [NSMutableString stringWithCapacity:1024];
 
     [mb appendFormat:@"UPDATE [%@] SET ",name];
     
+    BOOL isFirst = YES;
+    
     for(int i=0;i<propCount;i++){
         
-        const char * n = property_getName(prop[i]);
+        if(rowid == prop[i]){
+            continue;
+        }
         
-        if(i !=0) {
+        const char * n = property_getName(prop[i]);
+  
+        if(isFirst){
+            isFirst = NO;
+        }
+        else{
             [mb appendString:@","];
         }
         
         [mb appendFormat:@"[%s]=:%s",n,n];
     }
     
-    [mb appendString:@") WHERE [rowid]=:rowid"];
+    [mb appendString:@" WHERE [rowid]=:rowid"];
     
     return [_db execture:mb withData:dbObject];
 }

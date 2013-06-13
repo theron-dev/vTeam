@@ -11,6 +11,7 @@
 extern NSString * kVTUnZipFileName;
 extern NSString * kVTUnZipFileSize;
 
+
 @interface VTUnZip : NSObject
 
 -(id) initWithZipFile:(NSString *) filePath;
@@ -19,11 +20,17 @@ extern NSString * kVTUnZipFileSize;
 
 -(NSDictionary *) entityAttributes;
 
+-(NSString *) entityFileName;
+
+-(NSUInteger) entityFileSize;
+
 -(BOOL) openZipEntity;
 
 -(BOOL) closeZipEntity;
 
 -(NSUInteger) read:(void *) buffer length:(NSUInteger) length;
+
+-(void) unZipToDirectory:(NSString *) directory;
 
 @end
 

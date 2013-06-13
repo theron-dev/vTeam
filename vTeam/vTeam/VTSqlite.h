@@ -73,6 +73,14 @@
 
 @end
 
+@interface VTSqliteUnionCursor : NSObject<IVTSqliteCursor>
+
+@property(nonatomic,readonly,retain) NSArray * cursors;
+
+-(id) initWithCursors:(NSArray *) cursors;
+
+@end
+
 @interface VTSqlite : NSObject
 
 -(id) initWithPath:(NSString *) path;

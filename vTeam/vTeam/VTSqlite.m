@@ -11,7 +11,7 @@
 #include <sqlite3.h>
 #include <objc/runtime.h>
 
-static void VTSqliteStmtBindData(sqlite3_stmt * stmt,id data);
+static void VTSqliteStmtBindData(sqlite3_stmt * stmt,id data,sqlite3_destructor_type type);
 
 @interface VTSqliteCursor : NSObject<IVTSqliteCursor>{
     sqlite3_stmt * _stmt;
@@ -323,6 +323,186 @@ static void VTSqliteStmtBindData(sqlite3_stmt * stmt,id data);
 
 @end
 
+@interface VTSqliteUnionCursor (){
+    NSInteger _index;
+}
+
+-(id) currentCursor;
+
+@end
+
+@implementation VTSqliteUnionCursor
+
+@synthesize cursors = _cursors;
+@synthesize closed = _closed;
+
+-(void) dealloc{
+    [_cursors release];
+    [super dealloc];
+}
+
+
+-(id) initWithCursors:(NSArray *)cursors{
+    if((self = [super init])){
+        _cursors = [cursors retain];
+        _index = -1;
+    }
+    return self;
+}
+
+-(void) close{
+    if(!_closed){
+        for(id cursor in _cursors){
+            [cursor close];
+        }
+        _closed = YES;
+    }
+}
+
+-(id) currentCursor{
+    if(_index >=0 && _index < [_cursors count]){
+        return [_cursors objectAtIndex:_index];
+    }
+    return nil;
+}
+
+-(BOOL) reset{
+    BOOL rs = YES;
+    for(id cursor in _cursors){
+        if(![cursor reset]){
+            rs = NO;
+        }
+    }
+    return rs;
+}
+
+-(BOOL) next{
+    
+    NSInteger eofCount = 0;
+    NSInteger c = [_cursors count];
+
+    if(c >0){
+        while(eofCount < c){
+            _index = (_index + 1) % [_cursors count];
+            if([[self currentCursor] next]){
+                return YES;
+            }
+            else{
+                eofCount ++;
+            }
+        }
+    }
+    
+    return NO;
+}
+
+-(int) count{
+    return [[self currentCursor] count];
+}
+
+-(int) columnCount{
+    return [[self currentCursor] count];
+}
+
+-(int) columnIndexForName:(NSString *) name{
+    return [[self currentCursor] columnIndexForName:name];
+}
+
+-(NSString *) columnNameAtIndex:(int) index{
+    return [[self currentCursor] columnNameAtIndex:index];
+}
+
+-(int) intValueForName:(NSString *) name{
+    return [[self currentCursor] intValueForName:name];
+}
+
+-(int) intValueAtIndex:(int) index{
+    return [[self currentCursor] intValueAtIndex:index];
+}
+
+-(long) longValueForName:(NSString *) name{
+    return [[self currentCursor] longValueForName:name];
+}
+
+-(long) longValueAtIndex:(int) index{
+    return [[self currentCursor] longValueAtIndex:index];
+}
+
+-(long long) longLongValueForName:(NSString *) name{
+    return [[self currentCursor] longLongValueForName:name];
+}
+
+-(long long) longLongValueAtIndex:(int) index{
+    return [[self currentCursor] longLongValueAtIndex:index];
+}
+
+-(BOOL) boolValueForName:(NSString *) name{
+    return [[self currentCursor] boolValueForName:name];
+}
+
+-(BOOL) boolValueAtIndex:(int) index{
+    return [[self currentCursor] boolValueAtIndex:index];
+}
+
+-(double) doubleValueForName:(NSString *) name{
+    return [[self currentCursor] doubleValueForName:name];
+}
+
+-(double) doubleValueAtIndex:(int) index{
+    return [[self currentCursor] doubleValueAtIndex:index];
+}
+
+-(NSString *) stringValueForName:(NSString *) name{
+    return [[self currentCursor] stringValueForName:name];
+}
+
+-(NSString *) stringValueAtIndex:(int) index{
+    return [[self currentCursor] stringValueAtIndex:index];
+}
+
+-(NSDate *) dateValueForName:(NSString *) name{
+    return [[self currentCursor] dateValueForName:name];
+}
+
+-(NSDate *) dateValueAtIndex:(int) index{
+    return [[self currentCursor] dateValueAtIndex:index];
+}
+
+-(NSData *) dataValueForName:(NSString *) name{
+    return [[self currentCursor] dataValueForName:name];
+}
+
+-(NSData * ) dataValueAtIndex:(int) index{
+    return [[self currentCursor] dataValueAtIndex:index];
+}
+
+-(const char *) cStringValueForName:(NSString *) name{
+    return [[self currentCursor] cStringValueForName:name];
+}
+
+-(const char *) cStringValueAtIndex:(int) index{
+    return [[self currentCursor] cStringValueAtIndex:index];
+}
+
+-(id) valueForKey:(NSString *) key{
+    return [[self currentCursor] valueForKey:key];
+}
+
+-(id) objectAtIndex:(NSUInteger) index{
+    return [[self currentCursor] objectAtIndex:index];
+}
+
+-(void) toDataObject:(id) dataObject{
+    [[self currentCursor] toDataObject:dataObject];
+}
+
+-(NSArray *) dataObjects:(Class) dataObjectClass{
+    return [[self currentCursor] dataObjects:dataObjectClass];
+}
+
+
+@end
+
 @implementation VTSqlite
 
 -(id) initWithPath:(NSString *) path{
@@ -389,7 +569,7 @@ static void VTSqliteStmtBindData(sqlite3_stmt * stmt,id data);
         return NO;
     }
     
-    VTSqliteStmtBindData(stmt,data);
+    VTSqliteStmtBindData(stmt,data,SQLITE_STATIC);
     
     int rs = sqlite3_step(stmt);
     
@@ -483,7 +663,7 @@ static void VTSqliteStmtBindData(sqlite3_stmt * stmt,id data);
         return NO;
     }
     
-    VTSqliteStmtBindData(stmt,data);
+    VTSqliteStmtBindData(stmt,data,SQLITE_TRANSIENT);
     
     VTSqliteCursor * cursor = [[VTSqliteCursor alloc] initWithStmt:stmt sqlite:self];
     
@@ -520,19 +700,19 @@ static void VTSqliteStmtBindData(sqlite3_stmt * stmt,id data);
 
 @end
 
-static void VTSqliteStmtBindData(sqlite3_stmt * stmt,id data){
+static void VTSqliteStmtBindData(sqlite3_stmt * stmt,id data,sqlite3_destructor_type type){
     
     int c = sqlite3_bind_parameter_count(stmt);
     
-    for(int i=0;i<c;i++){
-        const char * name = sqlite3_bind_parameter_name(stmt, i + 1);
+    for(int i=1;i<=c;i++){
+        const char * name = sqlite3_bind_parameter_name(stmt, i);
         NSString * keyPath = nil;
         
         if(name){
             keyPath = [NSString stringWithCString:name + 1 encoding:NSUTF8StringEncoding];
         }
         else{
-            keyPath = [NSString stringWithFormat:@"@%d",i];
+            keyPath = [NSString stringWithFormat:@"@%d",i-1];
         }
    
         id v = [data valueForKeyPath:keyPath];
@@ -540,7 +720,7 @@ static void VTSqliteStmtBindData(sqlite3_stmt * stmt,id data){
             sqlite3_bind_null(stmt, i);
         }
         else if([v isKindOfClass:[NSData class]]){
-            sqlite3_bind_blob(stmt, i, [v bytes], [v length], SQLITE_STATIC);
+            sqlite3_bind_blob(stmt, i, [v bytes], [v length], type);
         }
         else if([v isKindOfClass:[NSDate class]]){
             sqlite3_bind_double(stmt, i, [v timeIntervalSince1970]);
@@ -569,15 +749,15 @@ static void VTSqliteStmtBindData(sqlite3_stmt * stmt,id data){
                 sqlite3_bind_double(stmt, i, [v doubleValue]);
             }
             else {
-                sqlite3_bind_text(stmt, i, [[v description] UTF8String], -1, SQLITE_STATIC);
+                sqlite3_bind_text(stmt, i, [[v description] UTF8String], -1, type);
             }
         }
         else if([v isKindOfClass:[NSString class]]){
-            sqlite3_bind_text(stmt, i, [v UTF8String], -1, SQLITE_STATIC);
+            sqlite3_bind_text(stmt, i, [v UTF8String], -1, type);
         }
         else {
             NSData * data = [NSPropertyListSerialization dataFromPropertyList:v format:NSPropertyListBinaryFormat_v1_0 errorDescription:nil];
-            sqlite3_bind_blob(stmt, i, [data bytes], [data length], SQLITE_STATIC);
+            sqlite3_bind_blob(stmt, i, [data bytes], [data length], type);
         }
         
     }
