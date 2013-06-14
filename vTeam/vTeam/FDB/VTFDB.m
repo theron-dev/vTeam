@@ -301,15 +301,6 @@ static hbool VTFDBCursorFilter (FDB * fdb,struct _FDBCursor * cursor,FDBDataItem
     }
     
     switch (property->type) {
-        case FDBPropertyTypeBytes:
-        {
-            huint32 length = 0;
-            void * v = FDBClassGetPropertyBytesValue(dataItem, property, &length);
-            if(v && length){
-                return [NSData dataWithBytes:v length:length];
-            }
-        }
-            break;
         case FDBPropertyTypeBlob:
         {
             FDBBlobValue v = FDBClassGetPropertyBlobValue(dataItem, property, 0);
