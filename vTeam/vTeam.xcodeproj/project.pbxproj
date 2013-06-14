@@ -126,6 +126,11 @@
 		113B5BDA174F77C6003211AD /* UIView+VTDataOutlet.m in Sources */ = {isa = PBXBuildFile; fileRef = 113B5BD8174F77C6003211AD /* UIView+VTDataOutlet.m */; };
 		11407290176999C800275493 /* VTFDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 1140728E176999C800275493 /* VTFDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11407291176999C800275493 /* VTFDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 1140728F176999C800275493 /* VTFDB.m */; };
+		11407299176AFD9900275493 /* hindex.c in Sources */ = {isa = PBXBuildFile; fileRef = 11407294176AFD9900275493 /* hindex.c */; };
+		1140729A176AFD9900275493 /* hindex.h in Headers */ = {isa = PBXBuildFile; fileRef = 11407295176AFD9900275493 /* hindex.h */; };
+		1140729B176AFD9900275493 /* hindex_db.c in Sources */ = {isa = PBXBuildFile; fileRef = 11407296176AFD9900275493 /* hindex_db.c */; };
+		1140729C176AFD9900275493 /* hindex_db.h in Headers */ = {isa = PBXBuildFile; fileRef = 11407297176AFD9900275493 /* hindex_db.h */; };
+		1140729D176AFD9900275493 /* hindex_io.c in Sources */ = {isa = PBXBuildFile; fileRef = 11407298176AFD9900275493 /* hindex_io.c */; };
 		114772FC1727DE5200196FB2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 114772FA1727DE5200196FB2 /* InfoPlist.strings */; };
 		114773031727DF0D00196FB2 /* vTeam.m in Sources */ = {isa = PBXBuildFile; fileRef = 114773021727DF0D00196FB2 /* vTeam.m */; };
 		114773051727DFE000196FB2 /* vTeam.h in Headers */ = {isa = PBXBuildFile; fileRef = 114773011727DF0D00196FB2 /* vTeam.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -421,6 +426,11 @@
 		113B5BD8174F77C6003211AD /* UIView+VTDataOutlet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+VTDataOutlet.m"; sourceTree = "<group>"; };
 		1140728E176999C800275493 /* VTFDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTFDB.h; sourceTree = "<group>"; };
 		1140728F176999C800275493 /* VTFDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTFDB.m; sourceTree = "<group>"; };
+		11407294176AFD9900275493 /* hindex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hindex.c; sourceTree = "<group>"; };
+		11407295176AFD9900275493 /* hindex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hindex.h; sourceTree = "<group>"; };
+		11407296176AFD9900275493 /* hindex_db.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hindex_db.c; sourceTree = "<group>"; };
+		11407297176AFD9900275493 /* hindex_db.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hindex_db.h; sourceTree = "<group>"; };
+		11407298176AFD9900275493 /* hindex_io.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hindex_io.c; sourceTree = "<group>"; };
 		114772E21727DE0800196FB2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		114772F41727DE5200196FB2 /* vTeam.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = vTeam.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		114772F91727DE5200196FB2 /* vTeam-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "vTeam-Info.plist"; sourceTree = "<group>"; };
@@ -767,6 +777,19 @@
 			path = FDB;
 			sourceTree = "<group>";
 		};
+		11407293176AFD9900275493 /* index */ = {
+			isa = PBXGroup;
+			children = (
+				11407294176AFD9900275493 /* hindex.c */,
+				11407295176AFD9900275493 /* hindex.h */,
+				11407296176AFD9900275493 /* hindex_db.c */,
+				11407297176AFD9900275493 /* hindex_db.h */,
+				11407298176AFD9900275493 /* hindex_io.c */,
+			);
+			name = index;
+			path = ../../c/index;
+			sourceTree = "<group>";
+		};
 		114772D61727DE0700196FB2 = {
 			isa = PBXGroup;
 			children = (
@@ -890,6 +913,7 @@
 		114D7985172A10BC0041468E /* C */ = {
 			isa = PBXGroup;
 			children = (
+				11407293176AFD9900275493 /* index */,
 				AC339DA01765E96700EC2DAC /* db */,
 				111638321762DC01009979D3 /* report */,
 				11EE828D1760966800219D52 /* zip */,
@@ -1265,6 +1289,8 @@
 				111638E617643AA2009979D3 /* VTSqlite.h in Headers */,
 				AC339DA41766F48800EC2DAC /* hfdb.h in Headers */,
 				11407290176999C800275493 /* VTFDB.h in Headers */,
+				1140729A176AFD9900275493 /* hindex.h in Headers */,
+				1140729C176AFD9900275493 /* hindex_db.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1466,6 +1492,9 @@
 				111638E717643AA2009979D3 /* VTSqlite.m in Sources */,
 				AC339DA31765E9D800EC2DAC /* hfdb.c in Sources */,
 				11407291176999C800275493 /* VTFDB.m in Sources */,
+				11407299176AFD9900275493 /* hindex.c in Sources */,
+				1140729B176AFD9900275493 /* hindex_db.c in Sources */,
+				1140729D176AFD9900275493 /* hindex_io.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
