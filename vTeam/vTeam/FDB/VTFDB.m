@@ -114,9 +114,11 @@ static hbool VTFDBCursorFilter (FDB * fdb,struct _FDBCursor * cursor,FDBDataItem
 
 @synthesize fdb = _fdb;
 @synthesize maxBufferCount = _maxBufferCount;
+@synthesize dbPath = _dbPath;
 
 -(id) initWithPath:(NSString *) dbPath{
     if((self = [super init])){
+        _dbPath = [dbPath retain];
         _fdb = FDBOpen([dbPath UTF8String]);
         if(_fdb == nil){
             [self release];
@@ -132,6 +134,7 @@ static hbool VTFDBCursorFilter (FDB * fdb,struct _FDBCursor * cursor,FDBDataItem
     if(_cursor.data.dbClass){
         FDBDataDelete(&_cursor.data);
     }
+    [_dbPath release];
     [super dealloc];
 }
 

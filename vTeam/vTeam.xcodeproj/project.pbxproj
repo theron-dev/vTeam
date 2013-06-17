@@ -127,6 +127,8 @@
 		11407290176999C800275493 /* VTFDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 1140728E176999C800275493 /* VTFDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11407291176999C800275493 /* VTFDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 1140728F176999C800275493 /* VTFDB.m */; };
 		114072A0176AFFBA00275493 /* hfdb_index.c in Sources */ = {isa = PBXBuildFile; fileRef = 1140729F176AFFBA00275493 /* hfdb_index.c */; };
+		1140741B176EAEC500275493 /* VTFDBIndex.h in Headers */ = {isa = PBXBuildFile; fileRef = 11407419176EAEC500275493 /* VTFDBIndex.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1140741C176EAEC500275493 /* VTFDBIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = 1140741A176EAEC500275493 /* VTFDBIndex.m */; };
 		114772FC1727DE5200196FB2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 114772FA1727DE5200196FB2 /* InfoPlist.strings */; };
 		114773031727DF0D00196FB2 /* vTeam.m in Sources */ = {isa = PBXBuildFile; fileRef = 114773021727DF0D00196FB2 /* vTeam.m */; };
 		114773051727DFE000196FB2 /* vTeam.h in Headers */ = {isa = PBXBuildFile; fileRef = 114773011727DF0D00196FB2 /* vTeam.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -424,6 +426,8 @@
 		1140728F176999C800275493 /* VTFDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTFDB.m; sourceTree = "<group>"; };
 		1140729E176AFFB000275493 /* hfdb_index.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hfdb_index.h; sourceTree = "<group>"; };
 		1140729F176AFFBA00275493 /* hfdb_index.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hfdb_index.c; sourceTree = "<group>"; };
+		11407419176EAEC500275493 /* VTFDBIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTFDBIndex.h; sourceTree = "<group>"; };
+		1140741A176EAEC500275493 /* VTFDBIndex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTFDBIndex.m; sourceTree = "<group>"; };
 		114772E21727DE0800196FB2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		114772F41727DE5200196FB2 /* vTeam.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = vTeam.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		114772F91727DE5200196FB2 /* vTeam-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "vTeam-Info.plist"; sourceTree = "<group>"; };
@@ -766,6 +770,8 @@
 			children = (
 				1140728E176999C800275493 /* VTFDB.h */,
 				1140728F176999C800275493 /* VTFDB.m */,
+				11407419176EAEC500275493 /* VTFDBIndex.h */,
+				1140741A176EAEC500275493 /* VTFDBIndex.m */,
 			);
 			path = FDB;
 			sourceTree = "<group>";
@@ -1270,6 +1276,7 @@
 				111638E617643AA2009979D3 /* VTSqlite.h in Headers */,
 				AC339DA41766F48800EC2DAC /* hfdb.h in Headers */,
 				11407290176999C800275493 /* VTFDB.h in Headers */,
+				1140741B176EAEC500275493 /* VTFDBIndex.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1472,6 +1479,7 @@
 				AC339DA31765E9D800EC2DAC /* hfdb.c in Sources */,
 				11407291176999C800275493 /* VTFDB.m in Sources */,
 				114072A0176AFFBA00275493 /* hfdb_index.c in Sources */,
+				1140741C176EAEC500275493 /* VTFDBIndex.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

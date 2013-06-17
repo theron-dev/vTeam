@@ -31,6 +31,7 @@ typedef BOOL (^VTFDBFilter)(VTFDB * fdb,id<IVTFDBCursor> cursor,void * dataItem)
 @property(nonatomic,assign) NSUInteger maxBufferCount;
 @property(nonatomic,readonly) struct _FDB * fdb;
 @property(nonatomic,readonly) struct _FDBClass * dbClass;
+@property(nonatomic,readonly) NSString * dbPath;
 
 -(id) initWithPath:(NSString *) dbPath;
 

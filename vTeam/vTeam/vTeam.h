@@ -49,3 +49,5 @@
 #import <vTeam/NSString+VTBASE64Decode.h>
 #import <vTeam/NSData+CCCryptor.h>
 #import <vTeam/VTSqlite.h>
+#import <vTeam/VTFDB.h>
+#import <vTeam/VTFDBIndex.h>
