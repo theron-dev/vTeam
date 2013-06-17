@@ -8,16 +8,16 @@
 
 #import "VTFDBIndex.h"
 
+#import <vTeam/VTFDB.h>
+
 #include "hconfig.h"
 #include "hfdb.h"
 #include "hfdb_index.h"
 
 @interface VTFDBIndex(){
     FDBIndexDB * _indexDB;
-    NSMutableArray * _cursors;
 }
 
--(void) removeCursor:(id) cursor;
 
 @end
 
@@ -33,7 +33,7 @@ typedef struct _VTFDBIndexCursorInternal{
     BOOL _inited;
 }
 
-@property(nonatomic,assign) VTFDBIndex * dbIndex;
+@property(assign) VTFDBIndex * dbIndex;
 @property(nonatomic,retain) id propertyValue;
 
 -(id) initWithDBIndex:(VTFDBIndex *) dbIndex;
@@ -47,7 +47,6 @@ typedef struct _VTFDBIndexCursorInternal{
 @synthesize propertyValue = _propertyValue;
 
 -(void) dealloc{
-    [_cursor.dbIndex removeCursor:self];
     if(_cursor.base.data.index){
         FDBIndexDataDelete(&_cursor.base.data);
     }
@@ -83,10 +82,6 @@ typedef struct _VTFDBIndexCursorInternal{
         }
     }
     return nil;
-}
-
--(void) close{
-    [_cursor.dbIndex removeCursor:self];
 }
 
 
@@ -147,7 +142,7 @@ typedef struct _VTFDBIndexCursorInternal{
 -(id) initWithDB:(VTFDB *) db indexName:(NSString *) indexName{
     if((self =[super init])){
         _maxBufferLength = 2000;
-        _db = [db retain];
+        _db = db;
         _indexDB = FDBIndexOpen([db.dbPath UTF8String], [indexName UTF8String]);
         if(_indexDB == nil){
             [self release];
@@ -161,7 +156,6 @@ typedef struct _VTFDBIndexCursorInternal{
     if(_indexDB){
         FDBIndexClose(_indexDB);
     }
-    [_db release];
     [super dealloc];
 }
 
@@ -196,13 +190,7 @@ typedef struct _VTFDBIndexCursorInternal{
     if(_indexDB && property){
         
         VTFDBIndexCursor * cursor = [[VTFDBIndexCursor alloc] initWithDBIndex:self property:property value:value mode:mode stringMatch:stringMatch];
-        
-        if(_cursors == nil){
-            _cursors = [[NSMutableArray alloc] init];
-        }
-        
-        [_cursors addObject:cursor];
-        
+
         return [cursor autorelease];
         
     }
@@ -214,12 +202,6 @@ typedef struct _VTFDBIndexCursorInternal{
         
         VTFDBIndexCursor * cursor = [[VTFDBIndexCursor alloc] initWithDBIndex:self];
         
-        if(_cursors == nil){
-            _cursors = [[NSMutableArray alloc] init];
-        }
-        
-        [_cursors addObject:cursor];
-        
         return [cursor autorelease];
         
     }
@@ -228,21 +210,10 @@ typedef struct _VTFDBIndexCursorInternal{
 
 -(void) close{
     if(_indexDB){
-        for(VTFDBIndexCursor * cur in _cursors){
-            cur.dbIndex = nil;
-            [cur close];
-        }
         FDBIndexClose(_indexDB);
         _indexDB = NULL;
-        [_cursors release];
-        _cursors = nil;
     }
 }
 
-
--(void) removeCursor:(id) cursor{
-    [cursor setDbIndex:nil];
-    [_cursors removeObject:cursor];
-}
 
 @end

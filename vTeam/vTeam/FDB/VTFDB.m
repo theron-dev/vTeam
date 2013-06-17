@@ -14,10 +14,9 @@
 
 @interface VTFDB(){
     FDBCursor _cursor;
-    NSMutableArray * _cursors;
+    NSMutableDictionary * _indexs;
 }
 
--(void) removeCursor:(id) cursor;
 
 @end
 
@@ -32,7 +31,7 @@ typedef struct _VTFDBCursorInternal{
     VTFDBCursorInternal _cursor;
 }
 
-@property(nonatomic,assign) VTFDB * fdb;
+@property(assign) VTFDB * fdb;
 
 -(id) initWithFDB:(VTFDB *) fdb;
 
@@ -44,7 +43,6 @@ typedef struct _VTFDBCursorInternal{
 
 
 -(void) dealloc{
-    [_cursor.fdb removeCursor:self];
     if(_cursor.base.data.dbClass){
         FDBDataDelete(&_cursor.base.data);
     }
@@ -58,9 +56,6 @@ typedef struct _VTFDBCursorInternal{
     return nil;
 }
 
--(void) close{
-    [_cursor.fdb removeCursor:self];
-}
 
 -(BOOL) commit{
     if(_cursor.fdb){
@@ -130,7 +125,6 @@ static hbool VTFDBCursorFilter (FDB * fdb,struct _FDBCursor * cursor,FDBDataItem
 
 -(void) dealloc{
     [self close];
-    [_cursors release];
     if(_cursor.data.dbClass){
         FDBDataDelete(&_cursor.data);
     }
@@ -138,10 +132,6 @@ static hbool VTFDBCursorFilter (FDB * fdb,struct _FDBCursor * cursor,FDBDataItem
     [super dealloc];
 }
 
--(void) removeCursor:(id) cursor{
-    [cursor setFdb:nil];
-    [_cursors removeObject:cursor];
-}
 
 -(struct _FDBProperty *) getProperty:(NSString *) name{
     if(_fdb){
@@ -173,11 +163,6 @@ static hbool VTFDBCursorFilter (FDB * fdb,struct _FDBCursor * cursor,FDBDataItem
         
         VTFDBCursor * cursor = [[VTFDBCursor alloc] initWithFDB:self];
         
-        if(_cursors == nil){
-            _cursors = [[NSMutableArray alloc] init];
-        }
-        
-        [_cursors addObject:cursor];
         
         return [cursor autorelease];
         
@@ -190,11 +175,6 @@ static hbool VTFDBCursorFilter (FDB * fdb,struct _FDBCursor * cursor,FDBDataItem
         
         VTFDBCursor * cursor = [[VTFDBCursor alloc] initWithFDB:self filter:filter];
         
-        if(_cursors == nil){
-            _cursors = [[NSMutableArray alloc] init];
-        }
-        
-        [_cursors addObject:cursor];
         
         return [cursor autorelease];
         
@@ -203,15 +183,13 @@ static hbool VTFDBCursorFilter (FDB * fdb,struct _FDBCursor * cursor,FDBDataItem
 }
 
 -(void) close{
+    for(VTFDBIndex * index in [_indexs allValues]){
+        [index close];
+    }
+    [_indexs removeAllObjects];
     if(_fdb){
-        for(VTFDBCursor * cur in _cursors){
-            cur.fdb = nil;
-            [cur close];
-        }
         FDBClose(_fdb);
         _fdb = NULL;
-        [_cursors release];
-        _cursors = nil;
     }
 }
 
@@ -330,6 +308,23 @@ static hbool VTFDBCursorFilter (FDB * fdb,struct _FDBCursor * cursor,FDBDataItem
             break;
     }
     return nil;
+}
+
+-(VTFDBIndex *) openIndex:(NSString *) indexName{
+    
+    VTFDBIndex * index = [_indexs objectForKey:indexName];
+    
+    if(index == nil || [index dbIndex] == nil){
+        index = [[[VTFDBIndex alloc] initWithDB:self indexName:indexName] autorelease];
+        if(index){
+            if(_indexs == nil){
+                _indexs = [[NSMutableDictionary alloc] initWithCapacity:4];
+            }
+            [_indexs setObject:index forKey:indexName];
+        }
+    }
+    
+    return index;
 }
 
 @end

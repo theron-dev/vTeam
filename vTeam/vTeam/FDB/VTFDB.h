@@ -8,15 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+#import "VTFDBIndex.h"
+
 struct _FDBProperty ;
 struct _FDBClass;
 struct _FDB;
 
+
 @protocol IVTFDBCursor <NSObject>
 
 -(void *) nextDataItem;
-
--(void) close;
 
 -(BOOL) commit;
 
@@ -54,5 +55,7 @@ typedef BOOL (^VTFDBFilter)(VTFDB * fdb,id<IVTFDBCursor> cursor,void * dataItem)
 -(NSString *) stringValue:(void *) dataItem property:(struct _FDBProperty *) property;
 
 -(NSData *) dataValue:(void *) dataItem property:(struct _FDBProperty *) property;
+
+-(VTFDBIndex *) openIndex:(NSString *) indexName;
 
 @end

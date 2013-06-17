@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-#import <vTeam/VTFDB.h>
+
+@class VTFDB;
 
 struct _FDBIndex;
 struct _FDBIndexDB;
@@ -26,8 +27,6 @@ typedef enum {
 -(void *) nextIndexItem;
 
 -(void *) getDataItem:(void *) indexItem;
-
--(void) close;
 
 @end
 
