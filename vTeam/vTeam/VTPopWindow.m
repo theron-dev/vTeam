@@ -11,14 +11,21 @@
 #import <QuartzCore/QuartzCore.h>
 
 #define SCALE_LEVEL     0.02
-#define ALPHA_LEVEL     0.1
+#define ALPHA_LEVEL     0.05
 
 
 static NSMutableArray * gVTPopWindows = nil;
 
+@interface VTPopWindow ()
+
+@property(nonatomic,retain) UIWindow * keyWindow;
+
+@end
+
 @implementation VTPopWindow
 
 @synthesize animating = _animating;
+@synthesize keyWindow = _keyWindow;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -27,6 +34,11 @@ static NSMutableArray * gVTPopWindows = nil;
         // Initialization code
     }
     return self;
+}
+
+-(void) dealloc{
+    [_keyWindow release];
+    [super dealloc];
 }
 
 /*
@@ -69,52 +81,33 @@ static NSMutableArray * gVTPopWindows = nil;
             [UIView setAnimationDidStopSelector:@selector(_showAnimatedStop)];
         }
         
-        CGFloat scale = 1.0 - ([gVTPopWindows count] +1) * SCALE_LEVEL;
-        CGFloat alpha = 1.0 - ([gVTPopWindows count] +1) * ALPHA_LEVEL;
+        CGFloat scale = 1.0 - SCALE_LEVEL;
+        CGFloat alpha = 1.0 -  ALPHA_LEVEL;
         
-        UIWindow * win = [[UIApplication sharedApplication] keyWindow];
+        self.keyWindow = [[UIApplication sharedApplication] keyWindow];
         
-        [win setTransform:CGAffineTransformMakeScale(scale, scale)];
+        [self makeKeyWindow];
         
-        if(win.layer.mask == nil){
+        [_keyWindow setTransform:CGAffineTransformMakeScale(scale, scale)];
+        
+        if(_keyWindow.layer.mask == nil){
             CALayer * mask = [[CALayer alloc] init];
             mask.backgroundColor = [UIColor colorWithWhite:1.0 alpha:alpha].CGColor;
-            mask.frame = win.layer.bounds;
-            win.layer.mask = mask;
+            mask.frame = _keyWindow.layer.bounds;
+            _keyWindow.layer.mask = mask;
             [mask release];
         }
         else{
-            win.layer.mask.backgroundColor = [UIColor colorWithWhite:0.0 alpha:alpha].CGColor;
+            _keyWindow.layer.mask.backgroundColor = [UIColor colorWithWhite:0.0 alpha:alpha].CGColor;
         }
         
-        scale += SCALE_LEVEL;
-        alpha += ALPHA_LEVEL;
-        
-        for(win in gVTPopWindows){
-            
-            [win setTransform:CGAffineTransformMakeScale(scale, scale)];
-            
-            if(win.layer.mask == nil){
-                CALayer * mask = [[CALayer alloc] init];
-                mask.backgroundColor = [UIColor colorWithWhite:0.0 alpha:alpha].CGColor;
-                mask.frame = win.layer.bounds;
-                win.layer.mask = mask;
-                [mask release];
-            }
-            else{
-                win.layer.mask.backgroundColor = [UIColor colorWithWhite:0.0 alpha:alpha].CGColor;
-            }
-            
-            scale += SCALE_LEVEL;
-            alpha -= ALPHA_LEVEL;
-        }
+        [_keyWindow setTransform:CGAffineTransformMakeScale(scale, scale)];
         
         if(gVTPopWindows == nil){
             gVTPopWindows = [[NSMutableArray alloc] initWithCapacity:4];
         }
         
         [gVTPopWindows addObject:self];
-        
         
         [self setTransform:CGAffineTransformIdentity];
         [self.layer setMask:nil];
@@ -150,60 +143,10 @@ static NSMutableArray * gVTPopWindows = nil;
             [UIView setAnimationDidStopSelector:@selector(_hideAnimatedStop)];
         }
         
-        CGFloat scale = 1.0 - (count -1) * SCALE_LEVEL;
-        CGFloat alpha = 1.0 - (count -1) * ALPHA_LEVEL;
- 
-        UIWindow * win = [[UIApplication sharedApplication] keyWindow];
+        [_keyWindow makeKeyWindow];
         
-        [win setTransform:CGAffineTransformMakeScale(scale, scale)];
-        
-        if(count == 1){
-            win.layer.mask = nil;
-        }
-        else if(win.layer.mask == nil){
-            CALayer * mask = [[CALayer alloc] init];
-            mask.backgroundColor = [UIColor colorWithWhite:1.0 alpha:alpha].CGColor;
-            mask.frame = win.layer.bounds;
-            win.layer.mask = mask;
-            [mask release];
-        }
-        else{
-            win.layer.mask.backgroundColor = [UIColor colorWithWhite:0.0 alpha:alpha].CGColor;
-        }
-        
-        scale += SCALE_LEVEL;
-        alpha += ALPHA_LEVEL;
-        
-        NSInteger index = 1;
-        
-        for(win in gVTPopWindows){
-            
-            if(win != self){
-                
-                [win setTransform:CGAffineTransformMakeScale(scale, scale)];
-                
-                if(index == count){
-                    win.layer.mask = nil;
-                }
-                else if(win.layer.mask == nil){
-                    CALayer * mask = [[CALayer alloc] init];
-                    mask.backgroundColor = [UIColor colorWithWhite:0.0 alpha:alpha].CGColor;
-                    mask.frame = win.layer.bounds;
-                    win.layer.mask = mask;
-                    [mask release];
-                }
-                else{
-                    win.layer.mask.backgroundColor = [UIColor colorWithWhite:0.0 alpha:alpha].CGColor;
-                }
-                
-                scale += SCALE_LEVEL;
-                alpha += ALPHA_LEVEL;
-                
-                
-            }
-            
-            index ++;
-        }
+        _keyWindow.layer.mask = nil;
+        [_keyWindow setTransform:CGAffineTransformMakeScale(1.0, 1.0)];
         
         if(animated){
             [self setAlpha:0.0f];

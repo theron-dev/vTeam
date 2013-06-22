@@ -51,3 +51,10 @@
 #import <vTeam/VTSqlite.h>
 #import <vTeam/VTFDB.h>
 #import <vTeam/VTFDBIndex.h>
+#import <vTeam/VTURLService.h>
+#import <vTeam/VTURLDataSource.h>
+#import <vTeam/VTStatusView.h>
+#import <vTeam/VTUplinkService.h>
+#import <vTeam/VTUplinkTask.h>
+#import <vTeam/VTButton.h>
+

@@ -298,11 +298,14 @@ static void VTSqliteStmtBindData(sqlite3_stmt * stmt,id data,sqlite3_destructor_
         }
         else{
             Class clazz = [object class];
-            unsigned int propCount = 0;
-            objc_property_t * prop =  class_copyPropertyList(clazz, &propCount);
-            for(int i=0;i<propCount;i++){
-                NSString * name = [NSString stringWithCString:property_getName(prop[i]) encoding:NSUTF8StringEncoding];
-                [object setValue:[self valueForProperty:prop[i]] forKey:name];
+            while(clazz && clazz != [NSObject class]){
+                unsigned int propCount = 0;
+                objc_property_t * prop =  class_copyPropertyList(clazz, &propCount);
+                for(int i=0;i<propCount;i++){
+                    NSString * name = [NSString stringWithCString:property_getName(prop[i]) encoding:NSUTF8StringEncoding];
+                    [object setValue:[self valueForProperty:prop[i]] forKey:name];
+                }
+                clazz = class_getSuperclass(clazz);
             }
         }
     }

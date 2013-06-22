@@ -30,6 +30,7 @@
 @synthesize autoHiddenViews = _autoHiddenViews;
 @synthesize itemViewClass = _itemViewClass;
 @synthesize itemViewBundle = _itemViewBundle;
+@synthesize itemSize = _itemSize;
 
 -(void) dealloc{
     [_containerView setDelegate:nil];
@@ -385,6 +386,9 @@
     [self downloadImagesForView:containerView];
 }
 
+-(CGSize) vtContainerLayout:(VTContainerLayout *)containerLayout itemSizeAtIndex:(NSInteger)index{
+    return _itemSize;
+}
 
 -(void) cancel{
     [super cancel];

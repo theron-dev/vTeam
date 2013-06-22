@@ -61,8 +61,11 @@ static NSString * VTDBContextPropertyDBType(objc_property_t prop){
 
 -(void) regDBObjectClass:(Class) dbObjectClass{
     
+    Class clazz = dbObjectClass;
     unsigned int propCount = 0;
-    objc_property_t * prop =  class_copyPropertyList(dbObjectClass, &propCount);
+    objc_property_t * prop  ;
+    objc_property_t rowid = class_getProperty([VTDBObject class], "rowid");
+    
     NSString * name = NSStringFromClass(dbObjectClass) ;
     
     BOOL isExists = NO;
@@ -73,13 +76,20 @@ static NSString * VTDBContextPropertyDBType(objc_property_t prop){
         
         NSString * sql = [cursor stringValueAtIndex:0];
         
-        for(int i=0;i<propCount;i++){
-            NSString * n = [NSString stringWithFormat:@"[%s]",property_getName(prop[i])];
+        while(clazz && clazz != [NSObject class]){
             
-            if([sql rangeOfString:n].location == NSNotFound){
-                [_db execture:[NSString stringWithFormat:@"ALTER TABLE [%@] ADD COLUMN %@ %@;",name,n,VTDBContextPropertyDBType(prop[i])] withData:nil];
-            }
+            prop =  class_copyPropertyList(clazz, &propCount);
+            
+            for(int i=0;i<propCount;i++){
+                NSString * n = [NSString stringWithFormat:@"[%s]",property_getName(prop[i])];
+                
+                if([sql rangeOfString:n].location == NSNotFound){
+                    [_db execture:[NSString stringWithFormat:@"ALTER TABLE [%@] ADD COLUMN %@ %@;",name,n,VTDBContextPropertyDBType(prop[i])] withData:nil];
+                }
 
+            }
+            
+            clazz = class_getSuperclass(clazz);
         }
         
         isExists = YES;
@@ -93,11 +103,22 @@ static NSString * VTDBContextPropertyDBType(objc_property_t prop){
         
         [mb appendFormat:@"CREATE TABLE IF NOT EXISTS [%@] ( [rowid] INTEGER PRIMARY KEY AUTOINCREMENT ",name];
 
-        for(int i=0;i<propCount;i++){
+        clazz = dbObjectClass;
+        
+        while(clazz && clazz != [NSObject class]){
             
-            const char * n = property_getName(prop[i]);
-            
-            [mb appendFormat:@",[%s] %@",n,VTDBContextPropertyDBType(prop[i])];
+            prop =  class_copyPropertyList(clazz, &propCount);
+      
+            for(int i=0;i<propCount;i++){
+                
+                if(prop[i] != rowid){
+                    const char * n = property_getName(prop[i]);
+                
+                    [mb appendFormat:@",[%s] %@",n,VTDBContextPropertyDBType(prop[i])];
+                }
+            }
+         
+            clazz = class_getSuperclass(clazz);
         }
         
         [mb appendString:@")"];
@@ -111,11 +132,11 @@ static NSString * VTDBContextPropertyDBType(objc_property_t prop){
 
 -(BOOL) insertObject:(VTDBObject *) dbObject{
     
-    Class dbObjectClass = [dbObject class];
+    Class clazz = [dbObject class];
     unsigned int propCount = 0;
-    objc_property_t * prop =  class_copyPropertyList(dbObjectClass, &propCount);
-    objc_property_t rowid = class_getProperty(dbObjectClass, "rowid");
-    NSString * name = NSStringFromClass(dbObjectClass) ;
+    objc_property_t * prop ;
+    objc_property_t rowid = class_getProperty([VTDBObject class], "rowid");
+    NSString * name = NSStringFromClass(clazz) ;
     
     NSMutableString * mb = [NSMutableString stringWithCapacity:1024];
     NSMutableString * values = [NSMutableString stringWithCapacity:1024];
@@ -125,24 +146,31 @@ static NSString * VTDBContextPropertyDBType(objc_property_t prop){
     
     BOOL isFirst = YES;
     
-    for(int i=0;i<propCount;i++){
-        
-        if(rowid == prop[i]){
-            continue;
-        }
-        
-        const char * n = property_getName(prop[i]);
+    while(clazz && clazz != [NSObject class]){
     
-        if(isFirst){
-            isFirst = NO;
-        }
-        else {
-            [mb appendString:@","];
-            [values appendString:@","];
+        prop =  class_copyPropertyList(clazz, &propCount);
+        
+        for(int i=0;i<propCount;i++){
+            
+            if(rowid == prop[i]){
+                continue;
+            }
+            
+            const char * n = property_getName(prop[i]);
+        
+            if(isFirst){
+                isFirst = NO;
+            }
+            else {
+                [mb appendString:@","];
+                [values appendString:@","];
+            }
+            
+            [mb appendFormat:@"[%s]",n];
+            [values appendFormat:@":%s",n];
         }
         
-        [mb appendFormat:@"[%s]",n];
-        [values appendFormat:@":%s",n];
+        clazz = class_getSuperclass(clazz);
     }
     
     [values appendString:@")"];
@@ -167,12 +195,12 @@ static NSString * VTDBContextPropertyDBType(objc_property_t prop){
 
 -(BOOL) updateObject:(VTDBObject *) dbObject{
     
-    Class dbObjectClass = [dbObject class];
+    Class clazz = [dbObject class];
     unsigned int propCount = 0;
-    objc_property_t * prop =  class_copyPropertyList(dbObjectClass, &propCount);
-    objc_property_t rowid = class_getProperty(dbObjectClass, "rowid");
+    objc_property_t * prop;
+    objc_property_t rowid = class_getProperty([VTDBObject class], "rowid");
     
-    NSString * name = NSStringFromClass(dbObjectClass) ;
+    NSString * name = NSStringFromClass(clazz) ;
     
     NSMutableString * mb = [NSMutableString stringWithCapacity:1024];
 
@@ -180,22 +208,29 @@ static NSString * VTDBContextPropertyDBType(objc_property_t prop){
     
     BOOL isFirst = YES;
     
-    for(int i=0;i<propCount;i++){
+    while(clazz && clazz != [NSObject class]){
         
-        if(rowid == prop[i]){
-            continue;
+        prop =  class_copyPropertyList(clazz, &propCount);
+        
+        for(int i=0;i<propCount;i++){
+            
+            if(rowid == prop[i]){
+                continue;
+            }
+            
+            const char * n = property_getName(prop[i]);
+      
+            if(isFirst){
+                isFirst = NO;
+            }
+            else{
+                [mb appendString:@","];
+            }
+            
+            [mb appendFormat:@"[%s]=:%s",n,n];
         }
         
-        const char * n = property_getName(prop[i]);
-  
-        if(isFirst){
-            isFirst = NO;
-        }
-        else{
-            [mb appendString:@","];
-        }
-        
-        [mb appendFormat:@"[%s]=:%s",n,n];
+        clazz = class_getSuperclass(clazz);
     }
     
     [mb appendString:@" WHERE [rowid]=:rowid"];

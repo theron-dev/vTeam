@@ -10,7 +10,8 @@
 
 @interface NSURL (QueryValue)
 
--(NSDictionary *) queryValues;
+@property(nonatomic,readonly) NSDictionary * queryValues;
+
 
 + (id)URLWithString:(NSString *)URLString relativeToURL:(NSURL *)baseURL queryValues:(NSDictionary *) queryValues;
 

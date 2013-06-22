@@ -19,7 +19,7 @@
 
 @property(assign) NSInteger contentLength;
 @property(assign) NSInteger downloadLength;
-
+@property(assign) NSInteger beginLength;
 @end
 
 @implementation VTHttpTask
@@ -36,6 +36,7 @@
 @synthesize onlyLocalResource = _onlyLocalResource;
 @synthesize userInfo = _userInfo;
 @synthesize allowResume = _allowResume;
+@synthesize beginLength = _beginLength;
 
 -(void) dealloc{
     [_userInfo release];
@@ -120,9 +121,9 @@
                 
                 NSMutableURLRequest * req = [NSMutableURLRequest requestWithURL:_request.URL cachePolicy:_request.cachePolicy timeoutInterval:_request.timeoutInterval];
                 
-                _downloadLength = file_size([tmpFilePath UTF8String]);
+                _beginLength = file_size([tmpFilePath UTF8String]);
                 
-                [req setValue:[NSString stringWithFormat:@"bytes=%d-",_downloadLength] forHTTPHeaderField:@"Range"];
+                [req setValue:[NSString stringWithFormat:@"bytes=%d-",_beginLength] forHTTPHeaderField:@"Range"];
                 
                 return req;
             }
@@ -187,7 +188,7 @@
 
 -(void) doReceiveData:(NSData *) data{
     if([_delegate respondsToSelector:@selector(vtHttpTask:didReceiveData:)]){
-        [_delegate vtHttpTask:self didReceiveData:data bytesDownload:_downloadLength totalBytes:_contentLength];
+        [_delegate vtHttpTask:self didReceiveData:data bytesDownload:_downloadLength + _beginLength totalBytes:_contentLength + _beginLength];
     }
 }
 
@@ -240,7 +241,7 @@
         self.responseBody = [NSMutableData dataWithCapacity:4];
     }
     else if(_responseType == VTHttpTaskResponseTypeResource){
-        if(_downloadLength == 0){
+        if(_beginLength == 0){
             NSString * t = [_responseBody stringByAppendingPathExtension:@"tmp"];
             FILE * f = fopen([t UTF8String], "wb");
             if(f){

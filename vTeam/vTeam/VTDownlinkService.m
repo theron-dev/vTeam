@@ -10,70 +10,124 @@
 
 #import <vTeam/VTAPITask.h>
 
+#import "VTDBContext.h"
+#import "VTDBObject.h"
+
+static VTDBContext * gDownlinkServiceDBContext = nil;
+
+@interface VTDownlinkServiceDBObject : VTDBObject
+
+@property(nonatomic,retain) NSString * service;
+@property(nonatomic,retain) NSString * key;
+@property(nonatomic,retain) id data;
+@property(nonatomic,assign) NSInteger timestamp;
+
+@end
+
+@implementation VTDownlinkServiceDBObject
+
+@synthesize service = _service;
+@synthesize key = _key;
+@synthesize data = _data;
+@synthesize timestamp = _timestamp;
+
+-(void) dealloc{
+    [_service release];
+    [_key release];
+    [_data release];
+    [super dealloc];
+}
+
+@end
+
 @interface VTDownlinkService(){
-    NSMutableDictionary * _cached;
+    NSMutableDictionary * _dataObjects;
 }
 
 @end
 
 @implementation VTDownlinkService
 
-@synthesize directory = _directory;
++(id) dbContext {
+
+    if(gDownlinkServiceDBContext == nil){
+        
+        NSString * dbPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Caches"];
+        
+        [[NSFileManager defaultManager] createDirectoryAtPath:dbPath withIntermediateDirectories:YES attributes:nil error:nil];
+        
+        gDownlinkServiceDBContext = [[VTDBContext alloc] init];
+        VTSqlite * db = [[VTSqlite alloc] initWithPath:[dbPath stringByAppendingPathComponent:@"VTDownlinkService.db"]];
+        [gDownlinkServiceDBContext setDb:db];
+        [db release];
+        
+        [gDownlinkServiceDBContext regDBObjectClass:[VTDownlinkServiceDBObject class]];
+    }
+    
+    return gDownlinkServiceDBContext;
+}
 
 -(void) dealloc{
-    [_directory release];
+    [_dataObjects release];
     [super dealloc];
 }
 
--(NSMutableDictionary *) cached{
-    if(_cached == nil){
-        
-        NSString * directory = [self directory];
-        
-        if(directory == nil){
-            directory = NSTemporaryDirectory();
+-(id) dataObjectForKey:(NSString *) key{
+    id dataObject = [_dataObjects objectForKey:key];
+    if(dataObject == nil){
+        id<IVTSqliteCursor> cursor = [[VTDownlinkService dbContext] query:[VTDownlinkServiceDBObject class] sql:@" WHERE [service]=:service AND [key]=:key" data:[NSDictionary dictionaryWithObjectsAndKeys:NSStringFromClass([self class]),@"service",key,@"key", nil]];
+        if([cursor next]){
+            dataObject = [[[VTDownlinkServiceDBObject alloc] init] autorelease];
+            [cursor toDataObject:dataObject];
+            if(_dataObjects == nil){
+                _dataObjects = [[NSMutableDictionary alloc] init];
+            }
+            [_dataObjects setObject:dataObject forKey:key];
         }
-        
-        NSString * filePath = [[directory stringByAppendingPathComponent:NSStringFromClass([self class])] stringByAppendingPathExtension:@"plist"];
-        
-        NSData * data = [[NSData alloc] initWithContentsOfFile:filePath];
-        
-        NSPropertyListFormat format = NSPropertyListBinaryFormat_v1_0;
-        
-        _cached = [[NSPropertyListSerialization propertyListFromData:data mutabilityOption:NSPropertyListMutableContainersAndLeaves format:&format errorDescription:nil] retain];
-        
-        [data release];
-        
-        if(_cached == nil){
-            _cached = [[NSMutableDictionary alloc] initWithCapacity:4];
-        }
+        [cursor close];
     }
-    return _cached;
+    return dataObject;
 }
 
--(NSString *) cacheValueKey:(id<IVTDownlinkTask>) task forTaskType:(Protocol *) taskType{
+-(id) dataObjectForKey:(NSString *) key setData:(id) data{
+    id dataObject = [self dataObjectForKey:key];
+    if(dataObject == nil){
+        dataObject = [[[VTDownlinkServiceDBObject alloc] init] autorelease];
+        [dataObject setValue:NSStringFromClass([self class]) forKey:@"service"];
+        [dataObject setValue:key forKey:@"key"];
+        [dataObject setValue:data forKey:@"data"];
+        [dataObject setValue:[NSNumber numberWithInt:time(NULL)] forKey:@"timestamp"];
+        [[VTDownlinkService dbContext] insertObject:dataObject];
+        if(_dataObjects == nil){
+            _dataObjects = [[NSMutableDictionary alloc] init];
+        }
+        [_dataObjects setObject:dataObject forKey:key];
+    }
+    else{
+        [dataObject setValue:[NSNumber numberWithInt:time(NULL)] forKey:@"timestamp"];
+        [[VTDownlinkService dbContext] updateObject:dataObject];
+    }
+    return dataObject;
+}
+
+-(NSString *) dataKey:(id<IVTDownlinkTask>) task forTaskType:(Protocol *) taskType{
     return NSStringFromProtocol(taskType);
 }
 
--(id) cachedFromDownlinkTask:(id<IVTDownlinkTask>) downlinkTask forTaskType:(Protocol *) taskType{
-    NSString * key = [self cacheValueKey:downlinkTask forTaskType:taskType];
-    return [[self cached] valueForKey:key];
-}
 
 -(void) vtDownlinkTaskDidLoadedFromCache:(id<IVTDownlinkTask>) downlinkTask forTaskType:(Protocol *) taskType{
-    NSString * key = [self cacheValueKey:downlinkTask forTaskType:taskType];
-    id data = [[self cached] valueForKey:key];
-    if(data && [downlinkTask respondsToSelector:@selector(vtDownlinkTaskDidLoadedFromCache:timestamp:forTaskType:)]){
-        [downlinkTask vtDownlinkTaskDidLoadedFromCache:data timestamp:[[self cached] valueForKey:[key stringByAppendingString:@"-timestamp"]] forTaskType:taskType];
+    NSString * dataKey = [self dataKey:downlinkTask forTaskType:taskType];
+    id dataObject = [self dataObjectForKey:dataKey];
+    if(dataObject && [downlinkTask respondsToSelector:@selector(vtDownlinkTaskDidLoadedFromCache:timestamp:forTaskType:)]){
+        [downlinkTask vtDownlinkTaskDidLoadedFromCache:[dataObject valueForKey:@"data"] timestamp:[NSDate dateWithTimeIntervalSince1970:[[dataObject valueForKey:@"timestamp"] intValue]] forTaskType:taskType];
     };
 }
 
 -(void) vtDownlinkTask:(id<IVTDownlinkTask>) downlinkTask didResponse:(id) data isCache:(BOOL) isCache forTaskType:(Protocol *) taskType{
     
     if(isCache){
-        NSString * key = [self cacheValueKey:downlinkTask forTaskType:taskType];
-        [[self cached] setValue:data forKey:key];
-        [[self cached] setValue:[NSDate date] forKey:[key stringByAppendingString:@"-timestamp"]];
+        NSString * dataKey = [self dataKey:downlinkTask forTaskType:taskType];
+        [self dataObjectForKey:dataKey setData:data];
     }
     
     if([downlinkTask respondsToSelector:@selector(vtDownlinkTaskDidLoaded:forTaskType:)]){
@@ -90,19 +144,8 @@
 
 -(void) didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
-    if(_cached ){
-        
-        NSString * directory = [self directory];
-        
-        if(directory == nil){
-            directory = NSTemporaryDirectory();
-        }
-        
-        NSString * filePath = [[directory stringByAppendingPathComponent:NSStringFromClass([self class])] stringByAppendingPathExtension:@"plist"];
-        [[NSPropertyListSerialization dataFromPropertyList:_cached format:NSPropertyListBinaryFormat_v1_0 errorDescription:nil] writeToFile:filePath atomically:YES];
-        [_cached release];
-        _cached = nil;
-    }
+    [_dataObjects release];
+    _dataObjects = nil;
 }
 
 -(BOOL) cancelHandle:(Protocol *)taskType task:(id<IVTTask>)task{

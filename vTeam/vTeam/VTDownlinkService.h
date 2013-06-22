@@ -12,9 +12,9 @@
 
 @interface VTDownlinkService : VTService
 
-@property(nonatomic,retain) NSString * directory;
+-(id) dataObjectForKey:(NSString *) key;
 
--(id) cachedFromDownlinkTask:(id<IVTDownlinkTask>) downlinkTask forTaskType:(Protocol *) taskType;
+-(id) dataObjectForKey:(NSString *) key setData:(id) data;
 
 -(void) vtDownlinkTaskDidLoadedFromCache:(id<IVTDownlinkTask>) downlinkTask forTaskType:(Protocol *) taskType;
 
@@ -22,6 +22,6 @@
 
 -(void) vtDownlinkTask:(id<IVTDownlinkTask>) downlinkTask didFitalError:(NSError *) error forTaskType:(Protocol *) taskType;
 
--(NSString *) cacheValueKey:(id<IVTDownlinkTask>) task forTaskType:(Protocol *) taskType;
+-(NSString *) dataKey:(id<IVTDownlinkTask>) task forTaskType:(Protocol *) taskType;
 
 @end
