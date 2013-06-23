@@ -43,6 +43,8 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil reuseIdentifier:(NSString *) reuseIdentifier;
 
++(id) tableViewCellWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
+
 @end
 
 @protocol VTTableViewCellDelegate

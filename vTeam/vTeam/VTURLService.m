@@ -196,6 +196,7 @@
             [_items removeObjectAtIndex:i];
             break;
         }
+        i ++;
     }
     
     NSLog(@"%@",[httpTask responseBody]);

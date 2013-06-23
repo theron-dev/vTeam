@@ -12,8 +12,8 @@
 
 @interface VTDataSource : VTTask<IVTDownlinkTask>
 
-@property(nonatomic,assign) id<IVTServiceContext> context;
-@property(nonatomic,assign) IBOutlet id delegate;
+@property(nonatomic,unsafe_unretained) id<IVTServiceContext> context;
+@property(nonatomic,unsafe_unretained) IBOutlet id delegate;
 @property(nonatomic,assign,getter = isLoading) BOOL loading;
 @property(nonatomic,assign,getter = isLoaded) BOOL loaded;
 @property(nonatomic,readonly,getter = isEmpty) BOOL empty;

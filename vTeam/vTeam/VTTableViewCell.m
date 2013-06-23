@@ -42,6 +42,18 @@
     [super dealloc];
 }
 
++(id) tableViewCellWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
+    UIViewController * viewController = [[[UIViewController alloc] initWithNibName:nibNameOrNil bundle:nibBundleOrNil] autorelease];
+    
+    UIView * view = [viewController view];
+    
+    if([view isKindOfClass:[VTTableViewCell class]]){
+        return view;
+    }
+    
+    return nil;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil reuseIdentifier:(NSString *) reuseIdentifier
 {
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
@@ -64,7 +76,7 @@
         [_dataItem release];
         _dataItem = [dataItem retain];
         [_dataOutletContainer applyDataOutlet:self];
-        [self loadImagesForView:self];
+        [self downloadImagesForView:self];
         [_layoutContainer layout];
         [_dataSource cancel];
         [_dataSource reloadData];

@@ -187,7 +187,7 @@
 }
 
 -(void) doReceiveData:(NSData *) data{
-    if([_delegate respondsToSelector:@selector(vtHttpTask:didReceiveData:)]){
+    if([_delegate respondsToSelector:@selector(vtHttpTask:didReceiveData:bytesDownload:totalBytes:)]){
         [_delegate vtHttpTask:self didReceiveData:data bytesDownload:_downloadLength + _beginLength totalBytes:_contentLength + _beginLength];
     }
 }
@@ -241,6 +241,7 @@
 
 -(void) doBackgroundResponse:(NSHTTPURLResponse *) response{
     self.response = response;
+    NSLog(@"%@",[response allHeaderFields]);
     self.contentLength = [[[response allHeaderFields] valueForKey:@"Content-Length"] intValue];
     if(_responseType == VTHttpTaskResponseTypeJSON || _responseType == VTHttpTaskResponseTypeString){
         self.responseBody = [NSMutableData dataWithCapacity:4];
