@@ -27,9 +27,9 @@ typedef enum {
 
 -(void) vtHttpTaskDidResponse:(id) httpTask;
 
--(void) vtHttpTask:(id) httpTask didReceiveData:(NSData *) data bytesDownload:(int)bytesDownload totalBytes:(int) totalBytes;
+-(void) vtHttpTask:(id) httpTask didReceiveData:(NSData *) data bytesDownload:(unsigned long long)bytesDownload totalBytes:(unsigned long long) totalBytes;
 
--(void) vtHttpTask:(id) httpTask didSendBodyDataBytesWritten:(int) bytesWritten totalBytesWritten:(int) totalBytesWritten;
+-(void) vtHttpTask:(id) httpTask didSendBodyDataBytesWritten:(unsigned long long) bytesWritten totalBytesWritten:(unsigned long long) totalBytesWritten;
 
 @end
 

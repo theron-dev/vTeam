@@ -17,9 +17,9 @@
 
 @interface VTHttpTask()
 
-@property(assign) NSInteger contentLength;
-@property(assign) NSInteger downloadLength;
-@property(assign) NSInteger beginLength;
+@property(assign) unsigned long long contentLength;
+@property(assign) unsigned long long downloadLength;
+@property(assign) unsigned long long beginLength;
 @end
 
 @implementation VTHttpTask
@@ -121,9 +121,9 @@
                 
                 NSMutableURLRequest * req = [NSMutableURLRequest requestWithURL:_request.URL cachePolicy:_request.cachePolicy timeoutInterval:_request.timeoutInterval];
                 
-                _beginLength = file_size([tmpFilePath UTF8String]);
+                _beginLength = [[fileManager attributesOfItemAtPath:tmpFilePath error:nil] fileSize];
                 
-                [req setValue:[NSString stringWithFormat:@"bytes=%d-",_beginLength] forHTTPHeaderField:@"Range"];
+                [req setValue:[NSString stringWithFormat:@"bytes=%llu-",_beginLength] forHTTPHeaderField:@"Range"];
                 
                 return req;
             }
@@ -224,11 +224,16 @@
     }
     else if(_responseType == VTHttpTaskResponseTypeResource){
         NSString * t = [_responseBody stringByAppendingPathExtension:@"tmp"];
-        if((!self.allowCheckContentLength && !self.allowResume)
+        if(self.allowResume){
+            if(_contentLength == _downloadLength){
+                file_rename([t UTF8String], [_responseBody UTF8String]);
+            }
+        }
+        else if(self.allowCheckContentLength 
            || _contentLength == 0 || _contentLength == _downloadLength){
             file_rename([t UTF8String], [_responseBody UTF8String]);
         }
-        else if(!self.allowResume){
+        else{
             [[NSFileManager defaultManager] removeItemAtPath:t error:nil];
         }
     }
