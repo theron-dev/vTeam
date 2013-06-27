@@ -151,46 +151,53 @@ static void VTHttpTaskOperatorDeallocDispatchFunction(void * queue){
     
     self.executing = YES;
     
-    NSOperationQueue * opQueue = [NSOperationQueue currentQueue];
-    
-    self.queue = opQueue;
-    
-    if(_allowShowNetworkStatus ){
-        dispatch_async(dispatch_get_main_queue(), ^(){
-            
-            UIApplication * app = [UIApplication sharedApplication];
-            
-            if([opQueue operationCount] ==0){
-                if([app isNetworkActivityIndicatorVisible]){
-                    [app setNetworkActivityIndicatorVisible:NO];
-                }
-            }
-            else{
-                if(![app isNetworkActivityIndicatorVisible]){
-                    [app setNetworkActivityIndicatorVisible:YES];
-                }
-            }
-            
-        });
-    }
-    
-    NSRunLoop * runloop = [NSRunLoop currentRunLoop];
-    
-    NSThread * thread = [NSThread currentThread];
-    
-    dispatch_async(dispatch_get_main_queue(), ^(){
+    @autoreleasepool {
         
-        if(self.isCancelled){
-            return;
+
+        NSOperationQueue * opQueue = [NSOperationQueue currentQueue];
+        
+        self.queue = opQueue;
+        
+        if(_allowShowNetworkStatus ){
+            dispatch_async(dispatch_get_main_queue(), ^(){
+                
+                UIApplication * app = [UIApplication sharedApplication];
+                
+                if([opQueue operationCount] ==0){
+                    if([app isNetworkActivityIndicatorVisible]){
+                        [app setNetworkActivityIndicatorVisible:NO];
+                    }
+                }
+                else{
+                    if(![app isNetworkActivityIndicatorVisible]){
+                        [app setNetworkActivityIndicatorVisible:YES];
+                    }
+                }
+                
+            });
         }
         
-        self.request = [_task doWillRequeset];
+        NSRunLoop * runloop = [NSRunLoop currentRunLoop];
         
-        [self performSelector:@selector(startRequest) onThread:thread withObject:nil waitUntilDone:NO];
-    });
+        NSThread * thread = [NSThread currentThread];
         
-    while(![self isCancelled] && !_finished){
-        [runloop runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.3]];
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            
+            if(self.isCancelled){
+                return;
+            }
+            
+            self.request = [_task doWillRequeset];
+            
+            [self performSelector:@selector(startRequest) onThread:thread withObject:nil waitUntilDone:NO];
+        });
+            
+        while(![self isCancelled] && !_finished){
+            @autoreleasepool {
+                [runloop runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.3]];
+            }
+        }
+    
     }
     
     self.executing = NO;
