@@ -106,7 +106,13 @@
 
 -(BOOL) canOpenUrl:(NSURL *)url{
     
-    if([url.scheme isEqualToString:@"content"]){
+    NSString * scheme = self.scheme;
+    
+    if(scheme == nil){
+        scheme = @"content";
+    }
+    
+    if([url.scheme isEqualToString:scheme]){
         
         return YES;
     }
@@ -116,7 +122,13 @@
 
 -(BOOL) openUrl:(NSURL *)url animated:(BOOL)animated{
     
-    if([url.scheme isEqualToString:@"content"]){
+    NSString * scheme = self.scheme;
+    
+    if(scheme == nil){
+        scheme = @"content";
+    }
+    
+    if([url.scheme isEqualToString:scheme]){
         
         NSString * alias = [url lastPathComponent];
         
@@ -180,4 +192,13 @@
     }
 }
 
+-(void) setConfig:(id)config{
+    [super setConfig:config];
+    
+    id v = [config valueForKey:@"scheme"];
+    
+    if(v){
+        self.scheme = v;
+    }
+}
 @end

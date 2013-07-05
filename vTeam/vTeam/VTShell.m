@@ -14,6 +14,8 @@
 
 #import <vTeam/NSURL+QueryValue.h>
 
+#import "VTCreatorViewController.h"
+
 extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
 
 
@@ -187,7 +189,9 @@ extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
         
         if(className){
             Class clazz = NSClassFromString(className);
-            if([clazz conformsToProtocol:@protocol(IVTUIViewController)]){
+            if([clazz conformsToProtocol:@protocol(IVTUIViewController)]
+               || [clazz isSubclassOfClass:[VTCreatorViewController class]]){
+                
                 id viewController = nil;
                 if([clazz isSubclassOfClass:[UIViewController class]]){
                     viewController = [[[clazz alloc] initWithNibName:[cfg valueForKey:@"view"] bundle:_bundle] autorelease];
@@ -195,6 +199,12 @@ extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
                 else{
                     viewController = [[[clazz alloc] init] autorelease];
                 }
+                
+                if([viewController isKindOfClass:[VTCreatorViewController class]]){
+                    [viewController view];
+                    viewController = [(VTCreatorViewController *) viewController viewController];
+                }
+                
                 if(viewController){
                     
                     [viewController setContext:self];

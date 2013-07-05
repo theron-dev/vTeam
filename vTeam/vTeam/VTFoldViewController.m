@@ -557,6 +557,12 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
 -(void) setConfig:(id)config{
     [super setConfig:config];
     
+    id v = [config valueForKey:@"scheme"];
+    
+    if(v){
+        self.scheme = v;
+    }
+    
     NSString * url = [config valueForKey:@"leftURL"];
     
     if(url){
@@ -571,6 +577,8 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
         [self setRightViewController:viewController];
     }
     
+    
+    
 }
 
 -(void) reloadURL{
@@ -584,7 +592,13 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
 
 -(BOOL) canOpenUrl:(NSURL *)url{
     
-    if([url.scheme isEqualToString:@"fold"]){
+    NSString * scheme = self.scheme;
+    
+    if(scheme == nil){
+        scheme = @"fold";
+    }
+    
+    if([url.scheme isEqualToString:scheme]){
         
         return YES;
     }
@@ -593,7 +607,14 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
 }
 
 -(BOOL) openUrl:(NSURL *)url animated:(BOOL)animated{
-    if([url.scheme isEqualToString:@"fold"]){
+    
+    NSString * scheme = self.scheme;
+    
+    if(scheme == nil){
+        scheme = @"fold";
+    }
+    
+    if([url.scheme isEqualToString:scheme]){
         
         NSString * path = [url firstPathComponent:@"/"];
         

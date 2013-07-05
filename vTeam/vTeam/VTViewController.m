@@ -52,6 +52,7 @@
 @synthesize dataOutletContainer = _dataOutletContainer;
 @synthesize basePath = _basePath;
 @synthesize layoutContainer = _layoutContainer;
+@synthesize scheme = _scheme;
 
 -(BOOL) isDisplaced{
     return _parentController == nil && ( ![self isViewLoaded] || self.view.superview == nil);
@@ -65,6 +66,7 @@
     [_styleContainer release];
     [_dataOutletContainer release];
     [_layoutContainer release];
+    [_scheme release];
     [super dealloc];
 }
 
@@ -182,6 +184,20 @@
 -(void) viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
     [_layoutContainer layout];
+}
+
+-(void) setConfig:(id)config{
+    if(_config != config){
+        [config retain];
+        [_config release];
+        _config = config;
+        
+        NSString * title = [config valueForKey:@"title"];
+        
+        if(title){
+            self.title = title;
+        }
+    }
 }
 
 @end

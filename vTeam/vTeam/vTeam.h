@@ -57,4 +57,6 @@
 #import <vTeam/VTUplinkService.h>
 #import <vTeam/VTUplinkTask.h>
 #import <vTeam/VTButton.h>
-
+#import <vTeam/VTTabBarController.h>
+#import <vTeam/VTTabViewController.h>
+#import <vTeam/VTCreatorViewController.h>

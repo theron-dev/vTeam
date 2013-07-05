@@ -612,7 +612,13 @@ typedef enum {
 }
 
 -(BOOL) canOpenUrl:(NSURL *) url{
-    if([[url scheme] isEqualToString:@"nav"]){
+    NSString * scheme = self.scheme;
+    
+    if(scheme == nil){
+        scheme = @"nav";
+    }
+    
+    if([[url scheme] isEqualToString:scheme]){
         return YES;
     }
     return [self.parentController canOpenUrl:url];
@@ -620,7 +626,13 @@ typedef enum {
 
 -(BOOL) openUrl:(NSURL *) url animated:(BOOL) animated{
     
-    if([[url scheme] isEqualToString:@"nav"]){
+    NSString * scheme = self.scheme;
+    
+    if(scheme == nil){
+        scheme = @"nav";
+    }
+    
+    if([[url scheme] isEqualToString:scheme]){
         
         NSLog(@"%@",[url absoluteString]);
         
@@ -679,6 +691,16 @@ typedef enum {
         }
     }
     
+}
+
+-(void) setConfig:(id)config{
+    [super setConfig:config];
+    
+    id v = [config valueForKey:@"scheme"];
+    
+    if(v){
+        self.scheme = v;
+    }
 }
 
 @end

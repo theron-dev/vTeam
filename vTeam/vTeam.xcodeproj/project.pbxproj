@@ -213,12 +213,20 @@
 		11619CCB17339A3300BD3561 /* VTZoomView.h in Headers */ = {isa = PBXBuildFile; fileRef = 11619CC917339A2E00BD3561 /* VTZoomView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11619CCC17339A3300BD3561 /* VTZoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11619CCA17339A3000BD3561 /* VTZoomView.m */; };
 		11619CD81733B1C700BD3561 /* IVTAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 11619CD71733B1A400BD3561 /* IVTAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		116CDE771786924D00BCD47D /* VTTabBarController.h in Headers */ = {isa = PBXBuildFile; fileRef = 116CDE751786924D00BCD47D /* VTTabBarController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		116CDE781786924D00BCD47D /* VTTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116CDE761786924D00BCD47D /* VTTabBarController.m */; };
+		116CDE7B1786A0BD00BCD47D /* VTTabBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 116CDE791786A0BC00BCD47D /* VTTabBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		116CDE7C1786A0BD00BCD47D /* VTTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 116CDE7A1786A0BC00BCD47D /* VTTabBar.m */; };
 		118AFC2D175D9A9F00A6A2FF /* VTBarButtonItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 118AFC2B175D9A9F00A6A2FF /* VTBarButtonItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		118AFC2E175D9A9F00A6A2FF /* VTBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 118AFC2C175D9A9F00A6A2FF /* VTBarButtonItem.m */; };
 		118AFC43175DA15100A6A2FF /* VTDBObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 118AFC41175DA15100A6A2FF /* VTDBObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		118AFC44175DA15100A6A2FF /* VTDBObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 118AFC42175DA15100A6A2FF /* VTDBObject.m */; };
 		118AFC47175DA1E800A6A2FF /* VTDBContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 118AFC45175DA1E800A6A2FF /* VTDBContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		118AFC48175DA1E800A6A2FF /* VTDBContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 118AFC46175DA1E800A6A2FF /* VTDBContext.m */; };
+		11C238211786BBC000DBADBD /* VTTabViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C2381F1786BBC000DBADBD /* VTTabViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11C238221786BBC000DBADBD /* VTTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C238201786BBC000DBADBD /* VTTabViewController.m */; };
+		11C238311786CB8200DBADBD /* VTCreatorViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C2382F1786CB8100DBADBD /* VTCreatorViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11C238321786CB8200DBADBD /* VTCreatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C238301786CB8200DBADBD /* VTCreatorViewController.m */; };
 		11E59F5F1728C197002DD63C /* IVTServiceContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 11E59F5E1728C03B002DD63C /* IVTServiceContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11E59F641728C785002DD63C /* VTStyleSheet.h in Headers */ = {isa = PBXBuildFile; fileRef = 11E59F621728C785002DD63C /* VTStyleSheet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11E59F651728C785002DD63C /* VTStyleSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E59F631728C785002DD63C /* VTStyleSheet.m */; };
@@ -527,12 +535,20 @@
 		11619CC917339A2E00BD3561 /* VTZoomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTZoomView.h; sourceTree = "<group>"; };
 		11619CCA17339A3000BD3561 /* VTZoomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTZoomView.m; sourceTree = "<group>"; };
 		11619CD71733B1A400BD3561 /* IVTAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVTAction.h; sourceTree = "<group>"; };
+		116CDE751786924D00BCD47D /* VTTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTTabBarController.h; sourceTree = "<group>"; };
+		116CDE761786924D00BCD47D /* VTTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTTabBarController.m; sourceTree = "<group>"; };
+		116CDE791786A0BC00BCD47D /* VTTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTTabBar.h; sourceTree = "<group>"; };
+		116CDE7A1786A0BC00BCD47D /* VTTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTTabBar.m; sourceTree = "<group>"; };
 		118AFC2B175D9A9F00A6A2FF /* VTBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTBarButtonItem.h; sourceTree = "<group>"; };
 		118AFC2C175D9A9F00A6A2FF /* VTBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTBarButtonItem.m; sourceTree = "<group>"; };
 		118AFC41175DA15100A6A2FF /* VTDBObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDBObject.h; sourceTree = "<group>"; };
 		118AFC42175DA15100A6A2FF /* VTDBObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDBObject.m; sourceTree = "<group>"; };
 		118AFC45175DA1E800A6A2FF /* VTDBContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDBContext.h; sourceTree = "<group>"; };
 		118AFC46175DA1E800A6A2FF /* VTDBContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDBContext.m; sourceTree = "<group>"; };
+		11C2381F1786BBC000DBADBD /* VTTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTTabViewController.h; sourceTree = "<group>"; };
+		11C238201786BBC000DBADBD /* VTTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTTabViewController.m; sourceTree = "<group>"; };
+		11C2382F1786CB8100DBADBD /* VTCreatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTCreatorViewController.h; sourceTree = "<group>"; };
+		11C238301786CB8200DBADBD /* VTCreatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTCreatorViewController.m; sourceTree = "<group>"; };
 		11E59F5E1728C03B002DD63C /* IVTServiceContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVTServiceContainer.h; sourceTree = "<group>"; };
 		11E59F621728C785002DD63C /* VTStyleSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTStyleSheet.h; sourceTree = "<group>"; };
 		11E59F631728C785002DD63C /* VTStyleSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTStyleSheet.m; sourceTree = "<group>"; };
@@ -1022,10 +1038,16 @@
 				114D7A72172A3E8E0041468E /* VTFoldViewController.m */,
 				AC32500E173E1AE10094A7A6 /* VTHeapViewController.h */,
 				AC32500F173E1AE20094A7A6 /* VTHeapViewController.m */,
+				116CDE751786924D00BCD47D /* VTTabBarController.h */,
+				116CDE761786924D00BCD47D /* VTTabBarController.m */,
+				11C2381F1786BBC000DBADBD /* VTTabViewController.h */,
+				11C238201786BBC000DBADBD /* VTTabViewController.m */,
 				114D7A68172A38DA0041468E /* VTImageView.h */,
 				114D7A69172A38DA0041468E /* VTImageView.m */,
 				114D7AC1172A6D7A0041468E /* VTToolbar.h */,
 				114D7AC2172A6D7A0041468E /* VTToolbar.m */,
+				116CDE791786A0BC00BCD47D /* VTTabBar.h */,
+				116CDE7A1786A0BC00BCD47D /* VTTabBar.m */,
 				114D7AC9172A75A90041468E /* VTNavigationBar.h */,
 				114D7ACA172A75A90041468E /* VTNavigationBar.m */,
 				114D7ADC172A88FC0041468E /* GIFView.h */,
@@ -1071,6 +1093,8 @@
 				AC875C4E177568F3009999A2 /* VTTableViewCell.m */,
 				AC875C7A1775BDB4009999A2 /* VTStatusView.h */,
 				AC875C7B1775BDB5009999A2 /* VTStatusView.m */,
+				11C2382F1786CB8100DBADBD /* VTCreatorViewController.h */,
+				11C238301786CB8200DBADBD /* VTCreatorViewController.m */,
 			);
 			name = UIKit;
 			sourceTree = "<group>";
@@ -1316,6 +1340,10 @@
 				AC875C6117758A03009999A2 /* IVTURLDownlinkTask.h in Headers */,
 				AC875C6417758AB9009999A2 /* VTURLService.h in Headers */,
 				AC875C7C1775BDB6009999A2 /* VTStatusView.h in Headers */,
+				116CDE771786924D00BCD47D /* VTTabBarController.h in Headers */,
+				116CDE7B1786A0BD00BCD47D /* VTTabBar.h in Headers */,
+				11C238211786BBC000DBADBD /* VTTabViewController.h in Headers */,
+				11C238311786CB8200DBADBD /* VTCreatorViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1524,6 +1552,10 @@
 				AC875C60177589FF009999A2 /* VTURLDataSource.m in Sources */,
 				AC875C6517758AB9009999A2 /* VTURLService.m in Sources */,
 				AC875C7D1775BDB6009999A2 /* VTStatusView.m in Sources */,
+				116CDE781786924D00BCD47D /* VTTabBarController.m in Sources */,
+				116CDE7C1786A0BD00BCD47D /* VTTabBar.m in Sources */,
+				11C238221786BBC000DBADBD /* VTTabViewController.m in Sources */,
+				11C238321786CB8200DBADBD /* VTCreatorViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

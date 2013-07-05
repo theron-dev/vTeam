@@ -26,6 +26,7 @@
 @property(nonatomic,retain) IBOutlet VTStyleOutletContainer * styleContainer;
 @property(nonatomic,retain) IBOutlet VTDataOutletContainer * dataOutletContainer;
 @property(nonatomic,retain) IBOutlet VTLayoutContainer * layoutContainer;
+@property(nonatomic,retain) NSString * scheme;
 
 -(void) receiveUrl:(NSURL *) url source:(id) source;
 

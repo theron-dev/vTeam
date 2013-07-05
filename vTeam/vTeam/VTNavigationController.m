@@ -9,6 +9,7 @@
 #import "VTNavigationController.h"
 
 #import "NSURL+QueryValue.h"
+#import "VTNavigationBar.h"
 
 @interface VTNavigationController ()
 
@@ -48,6 +49,7 @@
 @synthesize dataOutletContainer = _dataOutletContainer;
 @synthesize basePath = _basePath;
 @synthesize layoutContainer = _layoutContainer;
+@synthesize scheme = _scheme;
 
 -(BOOL) isDisplaced{
     return _parentController == nil && ( ![self isViewLoaded] || self.view.superview == nil);
@@ -61,6 +63,7 @@
     [_styleContainer release];
     [_dataOutletContainer release];
     [_layoutContainer release];
+    [_scheme release];
     [super dealloc];
 }
 
@@ -120,7 +123,14 @@
 }
 
 -(BOOL) canOpenUrl:(NSURL *) url{
-    if([[url scheme] isEqualToString:@"nav"]){
+    
+    NSString * scheme = self.scheme;
+    
+    if(scheme == nil){
+        scheme = @"nav";
+    }
+    
+    if([[url scheme] isEqualToString:scheme]){
         return YES;
     }
     return [_parentController canOpenUrl:url];
@@ -128,7 +138,13 @@
 
 -(BOOL) openUrl:(NSURL *) url animated:(BOOL) animated{
     
-    if([[url scheme] isEqualToString:@"nav"]){
+    NSString * scheme = self.scheme;
+    
+    if(scheme == nil){
+        scheme = @"nav";
+    }
+    
+    if([[url scheme] isEqualToString:scheme]){
 
         NSLog(@"%@",[url absoluteString]);
         
@@ -189,6 +205,25 @@
             [self setToolbarHidden:[v boolValue] animated:NO];
         }
         
+        NSString * title = [config valueForKey:@"title"];
+        
+        if(title){
+            self.title = title;
+        }
+        
+        v = [config valueForKey:@"navbar-bg"];
+        
+        if(v){
+            if([self.navigationBar respondsToSelector:@selector(setBackgroundImage:)]){
+                [(VTNavigationBar *)self.navigationBar setBackgroundImage:[UIImage imageNamed:v]];
+            }
+        }
+        
+        v = [config valueForKey:@"scheme"];
+        
+        if(v){
+            self.scheme = v;
+        }
     }
 }
 
