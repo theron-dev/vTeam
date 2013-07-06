@@ -60,3 +60,8 @@
 #import <vTeam/VTTabBarController.h>
 #import <vTeam/VTTabViewController.h>
 #import <vTeam/VTCreatorViewController.h>
+#import <vTeam/VTTableView.h>
+#import <vTeam/VTTableViewCell.h>
+#import <vTeam/VTTableDataController.h>
+
+
