@@ -28,17 +28,13 @@
 }
 */
 
--(void) didContentOffsetChanged{
-    if([self.delegate respondsToSelector:@selector(tableView:didContentOffsetChanged:)]){
-        [(id<VTTableViewDelegate>)self.delegate tableView:self didContentOffsetChanged:self.contentOffset];
-    }
-}
 
 -(void) setContentOffset:(CGPoint)contentOffset{
     [super setContentOffset:contentOffset];
     if([self.delegate respondsToSelector:@selector(tableView:didContentOffsetChanged:)]){
-        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(didContentOffsetChanged) object:nil];
-        [self performSelector:@selector(didContentOffsetChanged) withObject:nil afterDelay:0.01];
+        if([self.delegate respondsToSelector:@selector(tableView:didContentOffsetChanged:)]){
+            [(id<VTTableViewDelegate>)self.delegate tableView:self didContentOffsetChanged:self.contentOffset];
+        }
     }
 }
 

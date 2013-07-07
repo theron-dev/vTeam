@@ -12,6 +12,7 @@
 
 @interface VTStyleOutlet : NSObject
 
+@property(nonatomic,retain) NSString * status;
 @property(nonatomic,assign) VTStyleSheet * styleSheet;
 @property(nonatomic,retain) IBOutletCollection(UIView) NSArray * views;
 @property(nonatomic,retain) NSString * styleName;

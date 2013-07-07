@@ -8,6 +8,8 @@
 
 #import "VTDataSource.h"
 
+#import "VTDataOutlet.h"
+
 @interface VTDataSource(){
 
 }
@@ -72,7 +74,7 @@
 
 -(void) loadResultsData:(id) resultsData{
     
-    NSArray * items = _dataKey ? [resultsData valueForKeyPath:_dataKey] : resultsData;
+    NSArray * items = _dataKey ? [resultsData dataForKeyPath:_dataKey] : resultsData;
     
     if([items isKindOfClass:[NSArray class]]){
         [[self dataObjects] addObjectsFromArray:items];

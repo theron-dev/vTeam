@@ -11,15 +11,43 @@
 @implementation VTStyleOutletContainer
 
 @synthesize styles = _styles;
+@synthesize status = _status;
+@synthesize styleSheet = _styleSheet;
 
 -(void) dealloc{
     [_styles release];
+    [_status release];
+    [_styleSheet release];
     [super dealloc];
 }
 
--(void) setStyleSheet:(VTStyleSheet *) styleSheet{
+-(void) applyStyleSheet {
     for(id style in _styles){
-        [style setStyleSheet:styleSheet];
+        if(_status == nil || [style status] == nil
+           || [_status isEqualToString:[style status]]){
+            [style setStyleSheet:_styleSheet];
+        }
+        else{
+            [style setStyleSheet:nil];
+        }
+    }
+}
+
+-(void) setStyleSheet:(VTStyleSheet *) styleSheet{
+    if(_styleSheet != styleSheet){
+        [styleSheet retain];
+        [_styleSheet release];
+        _styleSheet = [styleSheet retain];
+        [self applyStyleSheet];
+    }
+}
+
+-(void) setStatus:(NSString *)status{
+    if(_status != status){
+        [status retain];
+        [_status release];
+        _status = status;
+        [self applyStyleSheet];
     }
 }
 

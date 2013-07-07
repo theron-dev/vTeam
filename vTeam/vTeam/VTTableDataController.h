@@ -17,7 +17,8 @@
 @property(nonatomic,retain) IBOutlet VTDragLoadingView * bottomLoadingView;
 @property(nonatomic,retain) IBOutlet UIView * notFoundDataView;
 @property(nonatomic,retain) IBOutletCollection(UIView) NSArray * autoHiddenViews;
-
+@property(nonatomic,retain) IBOutletCollection(UITableViewCell) NSArray * headerCells;
+@property(nonatomic,retain) IBOutletCollection(UITableViewCell) NSArray * footerCells;
 
 @end
 

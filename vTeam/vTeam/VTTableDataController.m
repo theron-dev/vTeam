@@ -31,6 +31,8 @@
 @synthesize notFoundDataView = _notFoundDataView;
 @synthesize autoHiddenViews = _autoHiddenViews;
 @synthesize itemViewBundle = _itemViewBundle;
+@synthesize headerCells = _headerCells;
+@synthesize footerCells = _footerCells;
 
 -(void) dealloc{
     [_tableView setDelegate:nil];
@@ -42,6 +44,8 @@
     [_tableView release];
     [_autoHiddenViews release];
     [_itemViewBundle release];
+    [_headerCells release];
+    [_footerCells release];
     [super dealloc];
 }
 
@@ -52,8 +56,25 @@
     return _dateFormatter;
 }
 
+-(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if(indexPath.row < [_headerCells count]){
+        return [[_headerCells objectAtIndex:indexPath.row] frame].size.height;
+    }
+    
+    if(indexPath.row >= [self.dataSource count] + [_headerCells count]){
+        return [[_footerCells objectAtIndex:indexPath.row
+                - [self.dataSource count] - [_headerCells count]] frame].size.height;
+    }
+    
+    return tableView.rowHeight;
+}
+
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [self.dataSource count];
+    if([self.dataSource count] >0){
+        return [self.dataSource count] + [_headerCells count] + [_footerCells count];
+    }
+    return 0;
 }
 
 -(void) setLastUpdateDate:(NSDate *)date{
@@ -120,6 +141,16 @@
 
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    
+    if(indexPath.row < [_headerCells count]){
+        return [_headerCells objectAtIndex:indexPath.row];
+    }
+    
+    if(indexPath.row >= [self.dataSource count] + [_headerCells count]){
+        return [_footerCells objectAtIndex:indexPath.row
+                - [self.dataSource count] - [_headerCells count]];
+    }
+    
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
     
     if(cell == nil){
@@ -131,7 +162,7 @@
         }
     }
     
-    id data = [self.dataSource dataObjectAtIndex:indexPath.row];
+    id data = [self.dataSource dataObjectAtIndex:indexPath.row - [_headerCells count]];
     
     if([cell isKindOfClass:[VTTableViewCell class]]){
         [(VTTableViewCell *) cell setContext:self.context];
@@ -179,8 +210,8 @@
         [_tableView setTableFooterView:nil];
     }
     else{
-        [_tableView setTableHeaderView:_bottomLoadingView];
-        [_tableView setTableFooterView:nil];
+        [_tableView setTableFooterView:_bottomLoadingView];
+        [_tableView setTableHeaderView:nil];
     }
     
     [_topLoadingView startAnimation];

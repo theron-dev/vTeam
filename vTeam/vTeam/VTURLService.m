@@ -74,7 +74,7 @@
         [httpTask setSource:[task source]];
         [httpTask setResponseType:VTHttpTaskResponseTypeJSON];
         [httpTask setDelegate:self];
-        [httpTask setRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:120]];
+        [httpTask setRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url queryValues:[self.config valueForKey:@"query-values"]] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:120]];
         
         VTURLServiceItem * item = [[[VTURLServiceItem alloc] init] autorelease];
         

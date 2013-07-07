@@ -13,8 +13,9 @@
 
 @interface VTStyleOutletContainer : NSObject
 
+@property(nonatomic,retain) NSString * status;
 @property(nonatomic,retain) IBOutletCollection(VTStyleOutlet) NSArray * styles;
+@property(nonatomic,retain) VTStyleSheet * styleSheet;
 
--(void) setStyleSheet:(VTStyleSheet *) styleSheet;
 
 @end

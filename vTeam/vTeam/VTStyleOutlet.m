@@ -16,11 +16,13 @@
 @synthesize views = _views;
 @synthesize styleSheet = _styleSheet;
 @synthesize version = _version;
+@synthesize status = _status;
 
 -(void) dealloc{
     [_styleSheet removeObserver:self forKeyPath:@"version"];
     [_views release];
     [_styleName release];
+    [_status release];
     [super dealloc];
 }
 
