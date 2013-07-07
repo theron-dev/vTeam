@@ -112,20 +112,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
-    UIViewController * viewController = [self selectedViewController];
-    
-    [viewController.view setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
-    [viewController.view setFrame:self.contentView.bounds];
-    
-    if(self.view.window){
-        [self.contentView addSubview:viewController.view];
-    }
-    else{
-        [viewController viewWillAppear:NO];
-        [self.contentView addSubview:viewController.view];
-        [viewController viewDidAppear:NO];
-    }
 
 }
 
@@ -212,11 +198,37 @@
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    [[self selectedViewController] viewWillAppear:animated];
+    if(animated){
+        UIViewController * viewController = [self selectedViewController];
+        
+        [viewController viewWillAppear:animated];
+        
+        CGSize size = [self.contentView bounds].size;
+        
+        [viewController.view setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+        [viewController.view setFrame:CGRectMake(0, 0, size.width, size.height)];
+        [viewController.view setBackgroundColor:[UIColor grayColor]];
+        [self.contentView addSubview:viewController.view];
+    }
+
+    
 }
 
 -(void) viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    
+    if(!animated){
+        UIViewController * viewController = [self selectedViewController];
+        
+        [viewController viewWillAppear:animated];
+        
+        CGSize size = [self.contentView bounds].size;
+        
+        [viewController.view setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+        [viewController.view setFrame:CGRectMake(0, 0, size.width, size.height)];
+        [viewController.view setBackgroundColor:[UIColor grayColor]];
+        [self.contentView addSubview:viewController.view];
+    }
     
     [[self selectedViewController] viewDidAppear:animated];
 }
@@ -230,7 +242,9 @@
 -(void) viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     
-    [[self selectedViewController] viewDidDisappear:animated];
+    UIViewController * viewController = [self selectedViewController];
+    [viewController.view removeFromSuperview];
+    [viewController viewDidDisappear:animated];
 }
 
 -(void) receiveUrl:(NSURL *)url source:(id)source{

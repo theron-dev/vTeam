@@ -12,7 +12,6 @@
 
 @property(nonatomic,retain) IBOutlet UITableView * tableView;
 @property(nonatomic,retain) NSString * itemViewNib;
-@property(nonatomic,retain) NSString * itemViewClass;
 @property(nonatomic,retain) NSBundle * itemViewBundle;
 @property(nonatomic,retain) IBOutlet VTDragLoadingView * topLoadingView;
 @property(nonatomic,retain) IBOutlet VTDragLoadingView * bottomLoadingView;

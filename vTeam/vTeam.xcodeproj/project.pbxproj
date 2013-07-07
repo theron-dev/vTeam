@@ -298,6 +298,8 @@
 		AC875C6517758AB9009999A2 /* VTURLService.m in Sources */ = {isa = PBXBuildFile; fileRef = AC875C6317758AB8009999A2 /* VTURLService.m */; };
 		AC875C7C1775BDB6009999A2 /* VTStatusView.h in Headers */ = {isa = PBXBuildFile; fileRef = AC875C7A1775BDB4009999A2 /* VTStatusView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AC875C7D1775BDB6009999A2 /* VTStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC875C7B1775BDB5009999A2 /* VTStatusView.m */; };
+		ACAB458C1788E3EB005D1CCD /* VTTabDataController.h in Headers */ = {isa = PBXBuildFile; fileRef = ACAB458A1788E3EB005D1CCD /* VTTabDataController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ACAB458D1788E3EB005D1CCD /* VTTabDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACAB458B1788E3EB005D1CCD /* VTTabDataController.m */; };
 		ACC50E881787924400F10F69 /* VTTableDataController.h in Headers */ = {isa = PBXBuildFile; fileRef = ACC50E861787924400F10F69 /* VTTableDataController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ACC50E891787924400F10F69 /* VTTableDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACC50E871787924400F10F69 /* VTTableDataController.m */; };
 		ACC50E8C178794C800F10F69 /* VTTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = ACC50E8A178794C800F10F69 /* VTTableView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -622,6 +624,8 @@
 		AC875C6317758AB8009999A2 /* VTURLService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTURLService.m; sourceTree = "<group>"; };
 		AC875C7A1775BDB4009999A2 /* VTStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTStatusView.h; sourceTree = "<group>"; };
 		AC875C7B1775BDB5009999A2 /* VTStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTStatusView.m; sourceTree = "<group>"; };
+		ACAB458A1788E3EB005D1CCD /* VTTabDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTTabDataController.h; sourceTree = "<group>"; };
+		ACAB458B1788E3EB005D1CCD /* VTTabDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTTabDataController.m; sourceTree = "<group>"; };
 		ACC50E861787924400F10F69 /* VTTableDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTTableDataController.h; sourceTree = "<group>"; };
 		ACC50E871787924400F10F69 /* VTTableDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTTableDataController.m; sourceTree = "<group>"; };
 		ACC50E8A178794C800F10F69 /* VTTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTTableView.h; sourceTree = "<group>"; };
@@ -980,6 +984,8 @@
 				AC325038173E39BC0094A7A6 /* VTKeyboardController.m */,
 				ACC50E861787924400F10F69 /* VTTableDataController.h */,
 				ACC50E871787924400F10F69 /* VTTableDataController.m */,
+				ACAB458A1788E3EB005D1CCD /* VTTabDataController.h */,
+				ACAB458B1788E3EB005D1CCD /* VTTabDataController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1351,6 +1357,7 @@
 				11C238311786CB8200DBADBD /* VTCreatorViewController.h in Headers */,
 				ACC50E881787924400F10F69 /* VTTableDataController.h in Headers */,
 				ACC50E8C178794C800F10F69 /* VTTableView.h in Headers */,
+				ACAB458C1788E3EB005D1CCD /* VTTabDataController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1564,6 +1571,7 @@
 				11C238321786CB8200DBADBD /* VTCreatorViewController.m in Sources */,
 				ACC50E891787924400F10F69 /* VTTableDataController.m in Sources */,
 				ACC50E8D178794C800F10F69 /* VTTableView.m in Sources */,
+				ACAB458D1788E3EB005D1CCD /* VTTabDataController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -54,14 +54,6 @@
     return nil;
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil reuseIdentifier:(NSString *) reuseIdentifier
-{
-    self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
-    if (self) {
-        [[UINib nibWithNibName:nibNameOrNil bundle:nibBundleOrNil] instantiateWithOwner:self options:nil];
-    }
-    return self;
-}
 
 -(IBAction) doAction :(id)sender{
     if([sender conformsToProtocol:@protocol(IVTAction)]){

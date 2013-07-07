@@ -30,7 +30,6 @@
 @synthesize bottomLoadingView = _bottomLoadingView;
 @synthesize notFoundDataView = _notFoundDataView;
 @synthesize autoHiddenViews = _autoHiddenViews;
-@synthesize itemViewClass = _itemViewClass;
 @synthesize itemViewBundle = _itemViewBundle;
 
 -(void) dealloc{
@@ -42,7 +41,6 @@
     [_dateFormatter release];
     [_tableView release];
     [_autoHiddenViews release];
-    [_itemViewClass release];
     [_itemViewBundle release];
     [super dealloc];
 }
@@ -126,13 +124,7 @@
     
     if(cell == nil){
         
-        Class clazz = NSClassFromString(_itemViewClass);
-        
-        if(clazz == nil){
-            clazz = [VTTableViewCell class];
-        }
-        
-        cell = (UITableViewCell *) [[[[clazz alloc] initWithNibName:_itemViewNib bundle:_itemViewBundle  reuseIdentifier:@"Cell"] autorelease] view];
+        cell = (UITableViewCell *) [VTTableViewCell tableViewCellWithNibName:_itemViewNib bundle:_itemViewBundle];
         
         if([cell isKindOfClass:[VTTableViewCell class]]){
             [(VTTableViewCell *) cell setDelegate:self];

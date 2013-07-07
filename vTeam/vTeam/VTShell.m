@@ -208,10 +208,10 @@ extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
                 if(viewController){
                     
                     [viewController setContext:self];
-                    [viewController setConfig:cfg];
                     [viewController setAlias:alias];
                     [viewController setBasePath:basePath];
                     [viewController setUrl:url];
+                    [viewController setConfig:cfg];
                     [viewController reloadURL];
                     
                     if(cached){

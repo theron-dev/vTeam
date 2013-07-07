@@ -10,6 +10,7 @@
 
 #import "NSURL+QueryValue.h"
 #import "VTNavigationBar.h"
+#import "VTPopWindow.h"
 
 @interface VTNavigationController ()
 
@@ -158,6 +159,12 @@
             
                 self.url = url;
                 
+                paths = [NSMutableArray arrayWithArray:paths];
+                
+                while([paths count] > [self.viewControllers count]){
+                    [(id)paths removeLastObject];
+                }
+                
                 [self setPaths:[_url pathComponents:[_basePath stringByAppendingPathComponent:_alias]] animated:animated];
                 
                 if([self.topViewController respondsToSelector:@selector(receiveUrl:source:)]){
@@ -168,6 +175,28 @@
             }
         }
     }
+    
+    if([[url scheme] isEqualToString:@"pop"]){
+        
+        NSLog(@"%@",[url absoluteString]);
+        
+        id viewController = [self.context getViewController:url basePath:@"/"];
+        
+        if(viewController){
+            
+            VTPopWindow * win = [VTPopWindow popWindow];
+            
+            win.backgroundColor = [UIColor clearColor];
+            
+            [win showAnimated:animated];
+            
+            win.rootViewController = viewController;
+            
+            return YES;
+        }
+    }
+    
+    
     return [_parentController openUrl:url animated:animated];
 }
 
