@@ -12,10 +12,12 @@
 
 @synthesize url = _url;
 @synthesize source = _source;
+@synthesize urlKey = _urlKey;
 
 -(void) dealloc{
     [self.context cancelHandle:@protocol(IVTURLDownlinkTask) task:self];
     [_url release];
+    [_urlKey release];
     [super dealloc];
 }
 

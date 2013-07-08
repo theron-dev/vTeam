@@ -58,6 +58,10 @@
         
         NSString * url = [urlTask url];
         
+        if(url == nil){
+            url = [self.config valueForKey:[urlTask urlKey]];
+        }
+        
         NSInteger offset = ( [urlTask vtDownlinkPageTaskPageIndex] - 1) * [urlTask vtDownlinkPageTaskPageSize];
         
         url = [url stringByReplacingOccurrencesOfString:@"{offset}" withString:[NSString stringWithFormat:@"%d",offset]];
@@ -66,7 +70,7 @@
         
         url = [url stringByReplacingOccurrencesOfString:@"{pageSize}" withString:[NSString stringWithFormat:@"%d",[urlTask vtDownlinkPageTaskPageSize]]];
         
-        NSLog(@"%@",url);
+        
         
         VTHttpTask * httpTask = [[VTHttpTask alloc] init];
         
@@ -75,6 +79,8 @@
         [httpTask setResponseType:VTHttpTaskResponseTypeJSON];
         [httpTask setDelegate:self];
         [httpTask setRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url queryValues:[self.config valueForKey:@"query-values"]] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:120]];
+        
+        NSLog(@"%@",httpTask.request);
         
         VTURLServiceItem * item = [[[VTURLServiceItem alloc] init] autorelease];
         
@@ -153,7 +159,14 @@
 
 -(NSString *) dataKey:(id<IVTDownlinkTask>)task forTaskType:(Protocol *)taskType{
     if(taskType == @protocol(IVTURLDownlinkTask)){
-        return [[(id<IVTURLDownlinkTask>)task url] vtMD5String];
+        
+        NSString * url = [(id<IVTURLDownlinkTask>)task url];
+        
+        if(url == nil){
+            url = [self.config valueForKey:[(id<IVTURLDownlinkTask>)task urlKey]];
+        }
+
+        return [url vtMD5String];
     }
     return [super dataKey:task forTaskType:taskType];
 }

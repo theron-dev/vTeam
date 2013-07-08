@@ -13,5 +13,6 @@
 @protocol IVTURLDownlinkTask <IVTDownlinkPageTask>
 
 @property(nonatomic,retain) NSString * url;
+@property(nonatomic,retain) NSString * urlKey;
 
 @end

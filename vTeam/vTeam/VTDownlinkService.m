@@ -127,7 +127,9 @@ static VTDBContext * gDownlinkServiceDBContext = nil;
     
     if(isCache){
         NSString * dataKey = [self dataKey:downlinkTask forTaskType:taskType];
-        [self dataObjectForKey:dataKey setData:data];
+        if(dataKey){
+            [self dataObjectForKey:dataKey setData:data];
+        }
     }
     
     if([downlinkTask respondsToSelector:@selector(vtDownlinkTaskDidLoaded:forTaskType:)]){

@@ -21,7 +21,10 @@
         return nil;
     }
     if([self isKindOfClass:[NSArray class]]){
-        if([key hasPrefix:@"@"]){
+        if([key hasPrefix:@"@last"]){
+            return [(NSArray *)self lastObject];
+        }
+        else if([key hasPrefix:@"@"]){
             NSInteger index = [[key substringFromIndex:1] intValue];
             if(index >=0 && index < [(NSArray *)self count]){
                 return [(NSArray *)self objectAtIndex:index];
