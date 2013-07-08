@@ -184,8 +184,8 @@
     
     if(body){
         [request setHTTPMethod:@"POST"];
-        [request setValue:[body contentType] forHTTPHeaderField:@"Content-Type"];
         [request setHTTPBody:[body bytesBody]];
+        [request setValue:[body contentType] forHTTPHeaderField:@"Content-Type"];
     }
     
     [httpTask setRequest:request];
