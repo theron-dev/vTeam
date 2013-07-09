@@ -12,5 +12,8 @@
 
 @synthesize rowid = _rowid;
 
++(Class) tableClass{
+    return [self class];
+}
 
 @end

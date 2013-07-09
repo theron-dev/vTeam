@@ -146,7 +146,7 @@
 		114D797B172929430041468E /* VTTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 114D7979172929430041468E /* VTTask.m */; };
 		114D797E172929A40041468E /* VTHttpTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D797C172929A40041468E /* VTHttpTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		114D797F172929A40041468E /* VTHttpTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 114D797D172929A40041468E /* VTHttpTask.m */; };
-		114D7A49172A130F0041468E /* VTJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D7A47172A130E0041468E /* VTJSON.h */; };
+		114D7A49172A130F0041468E /* VTJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D7A47172A130E0041468E /* VTJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		114D7A4A172A130F0041468E /* VTJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 114D7A48172A130E0041468E /* VTJSON.m */; };
 		114D7A4D172A20280041468E /* VTHttpFormBody.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D7A4B172A20280041468E /* VTHttpFormBody.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		114D7A4E172A20280041468E /* VTHttpFormBody.m in Sources */ = {isa = PBXBuildFile; fileRef = 114D7A4C172A20280041468E /* VTHttpFormBody.m */; };

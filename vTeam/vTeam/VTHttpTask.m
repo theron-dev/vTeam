@@ -20,6 +20,9 @@
 @property(assign) unsigned long long contentLength;
 @property(assign) unsigned long long downloadLength;
 @property(assign) unsigned long long beginLength;
+
+@property(retain) NSString * contentType;
+
 @end
 
 @implementation VTHttpTask
@@ -37,12 +40,14 @@
 @synthesize userInfo = _userInfo;
 @synthesize allowResume = _allowResume;
 @synthesize beginLength = _beginLength;
+@synthesize contentType = _contentType;
 
 -(void) dealloc{
     [_userInfo release];
     [_request release];
     [_responseBody release];
     [_response release];
+    [_contentType release];
     [super dealloc];
 }
 
@@ -215,7 +220,12 @@
 
 -(void) doBackgroundLoaded{
     if(_responseType == VTHttpTaskResponseTypeString && _responseBody){
-        self.responseBody = [[[NSString alloc] initWithData:_responseBody encoding:NSUTF8StringEncoding] autorelease];
+        if([[self.contentType lowercaseString] rangeOfString:@"charset=gbk"].location != NSNotFound){
+            self.responseBody = [[[NSString alloc] initWithData:_responseBody encoding:CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000)] autorelease];
+        }
+        else{
+            self.responseBody = [[[NSString alloc] initWithData:_responseBody encoding:NSUTF8StringEncoding] autorelease];
+        }
     }
     else if(_responseType == VTHttpTaskResponseTypeJSON && _responseBody){
         NSString * s = [[NSString alloc] initWithData:_responseBody encoding:NSUTF8StringEncoding];
@@ -243,6 +253,8 @@
     self.response = response;
     NSLog(@"%@",[response allHeaderFields]);
     self.contentLength = [[[response allHeaderFields] valueForKey:@"Content-Length"] intValue];
+    self.contentType =[[response allHeaderFields] valueForKey:@"Content-Type"];
+    
     if(_responseType == VTHttpTaskResponseTypeJSON || _responseType == VTHttpTaskResponseTypeString){
         self.responseBody = [NSMutableData dataWithCapacity:4];
     }

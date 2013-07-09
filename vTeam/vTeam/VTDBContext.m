@@ -64,7 +64,7 @@ static NSString * VTDBContextPropertyDBType(objc_property_t prop){
     Class clazz = dbObjectClass;
     unsigned int propCount = 0;
     objc_property_t * prop  ;
-    objc_property_t rowid = class_getProperty([VTDBObject class], "rowid");
+    objc_property_t rowid = class_getProperty([VTDBObject tableClass], "rowid");
     
     NSString * name = NSStringFromClass(dbObjectClass) ;
     
@@ -132,10 +132,10 @@ static NSString * VTDBContextPropertyDBType(objc_property_t prop){
 
 -(BOOL) insertObject:(VTDBObject *) dbObject{
     
-    Class clazz = [dbObject class];
+    Class clazz = [[dbObject class] tableClass];
     unsigned int propCount = 0;
     objc_property_t * prop ;
-    objc_property_t rowid = class_getProperty([VTDBObject class], "rowid");
+    objc_property_t rowid = class_getProperty([VTDBObject tableClass], "rowid");
     NSString * name = NSStringFromClass(clazz) ;
     
     NSMutableString * mb = [NSMutableString stringWithCapacity:1024];
@@ -188,17 +188,17 @@ static NSString * VTDBContextPropertyDBType(objc_property_t prop){
 }
 
 -(BOOL) deleteObject:(VTDBObject *) dbObject{
-    Class dbObjectClass = [dbObject class];
+    Class dbObjectClass = [[dbObject class] tableClass];
     NSString * name = NSStringFromClass(dbObjectClass) ;
     return [_db execture:[NSString stringWithFormat:@"DELETE FROM [%@] WHERE [rowid]=:rowid",name] withData:dbObject];
 }
 
 -(BOOL) updateObject:(VTDBObject *) dbObject{
     
-    Class clazz = [dbObject class];
+    Class clazz = [[dbObject class] tableClass];
     unsigned int propCount = 0;
     objc_property_t * prop;
-    objc_property_t rowid = class_getProperty([VTDBObject class], "rowid");
+    objc_property_t rowid = class_getProperty([VTDBObject tableClass], "rowid");
     
     NSString * name = NSStringFromClass(clazz) ;
     
@@ -242,5 +242,6 @@ static NSString * VTDBContextPropertyDBType(objc_property_t prop){
     NSString * name = NSStringFromClass(dbObjectClass) ;
     return [_db query:[NSString stringWithFormat:@"SELECT * FROM [%@] %@",name,sql ? sql : @""] withData:data];
 }
+
 
 @end

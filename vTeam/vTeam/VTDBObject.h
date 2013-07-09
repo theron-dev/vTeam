@@ -12,4 +12,6 @@
 
 @property(nonatomic,assign) long long rowid;
 
++(Class) tableClass;
+
 @end
