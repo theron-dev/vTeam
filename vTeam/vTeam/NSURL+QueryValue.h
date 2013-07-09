@@ -13,9 +13,9 @@
 @property(nonatomic,readonly) NSDictionary * queryValues;
 
 
-+ (id)URLWithString:(NSString *)URLString relativeToURL:(NSURL *)baseURL queryValues:(NSDictionary *) queryValues;
++ (id)URLWithString:(NSString *)URLString relativeToURL:(NSURL *)baseURL queryValues:(id) queryValues;
 
-+ (id)URLWithString:(NSString *)URLString queryValues:(NSDictionary *) queryValues;
++ (id)URLWithString:(NSString *)URLString queryValues:(id) queryValues;
 
 + (NSString *) decodeQueryValue:(NSString *) queryValue;
 

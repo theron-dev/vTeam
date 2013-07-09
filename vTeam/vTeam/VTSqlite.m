@@ -266,15 +266,15 @@ static void VTSqliteStmtBindData(sqlite3_stmt * stmt,id data,sqlite3_destructor_
         return [NSNumber numberWithBool:[self boolValueForName:name]];
     }
     
-    if([type hasPrefix:@"T@NSString"]){
+    if([type hasPrefix:@"T@\"NSString\""]){
         return [self stringValueForName:name];
     }
     
-    if([type hasPrefix:@"T@NSData"]){
+    if([type hasPrefix:@"T@\"NSData\""]){
         return [self dataValueForName:name];
     }
     
-    if([type hasPrefix:@"T@NSDate"]){
+    if([type hasPrefix:@"T@\"NSDate\""]){
         return [self dateValueForName:name];
     }
     

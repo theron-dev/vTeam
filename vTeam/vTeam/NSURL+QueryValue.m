@@ -8,6 +8,8 @@
 
 #import "NSURL+QueryValue.h"
 
+#include <objc/runtime.h>
+
 @implementation NSURL (QueryValue)
 
 -(NSDictionary *) queryValues{
@@ -22,7 +24,7 @@
     return d;
 }
 
-+ (id)URLWithString:(NSString *)URLString relativeToURL:(NSURL *)baseURL queryValues:(NSDictionary *) queryValues{
++ (id)URLWithString:(NSString *)URLString relativeToURL:(NSURL *)baseURL queryValues:(id) queryValues{
     NSRange r = [URLString rangeOfString:@"?"];
     NSMutableString * ms = [NSMutableString stringWithCapacity:64];
     BOOL isFirst = NO;
@@ -34,24 +36,54 @@
         isFirst = YES;
     }
     
-    for(NSString * key in queryValues){
-        if(isFirst){
-            isFirst = NO;
+    if([queryValues isKindOfClass:[NSDictionary class]]){
+        for(NSString * key in queryValues){
+            if(isFirst){
+                isFirst = NO;
+            }
+            else{
+                [ms appendString:@"&"];
+            }
+            id v = [queryValues valueForKey:key];
+            if(![v isKindOfClass:[NSString class]]){
+                v = [NSString stringWithFormat:@"%@",v];
+            }
+            [ms appendFormat:@"%@=%@",key ,[NSURL encodeQueryValue:v]];
         }
-        else{
-            [ms appendString:@"&"];
+    }
+    else if(queryValues){
+        Class clazz = [queryValues class];
+        while(clazz != [NSObject class]){
+            unsigned c = 0;
+            objc_property_t * prop = class_copyPropertyList(clazz, &c);
+            while(c >0){
+                
+                NSString * key = [NSString stringWithCString:property_getName(*prop)
+                                                    encoding:NSUTF8StringEncoding];
+                
+                if(isFirst){
+                    isFirst = NO;
+                }
+                else{
+                    [ms appendString:@"&"];
+                }
+                id v = [queryValues valueForKey:key];
+                if(![v isKindOfClass:[NSString class]]){
+                    v = [NSString stringWithFormat:@"%@",v];
+                }
+                [ms appendFormat:@"%@=%@",key ,[NSURL encodeQueryValue:v]];
+                
+                c --;
+                prop ++;
+            }
+            clazz = class_getSuperclass(clazz);
         }
-        id v = [queryValues valueForKey:key];
-        if(![v isKindOfClass:[NSString class]]){
-            v = [NSString stringWithFormat:@"%@",v];
-        }
-        [ms appendFormat:@"%@=%@",key ,[NSURL encodeQueryValue:v]];
     }
     
     return [NSURL URLWithString:[URLString stringByAppendingString:ms] relativeToURL:baseURL];
 }
 
-+ (id)URLWithString:(NSString *)URLString queryValues:(NSDictionary *) queryValues{
++ (id)URLWithString:(NSString *)URLString queryValues:(id) queryValues{
     return [NSURL URLWithString:URLString relativeToURL:nil queryValues:queryValues];
 }
 
