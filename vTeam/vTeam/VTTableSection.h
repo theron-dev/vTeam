@@ -13,6 +13,7 @@
 @property(nonatomic,retain) NSString * title;
 @property(nonatomic,assign) CGFloat height;
 @property(nonatomic,retain) IBOutlet UIView * view;
+@property(nonatomic,retain) IBOutlet UIView * footerView;
 @property(nonatomic,retain) IBOutletCollection(UITableViewCell) NSArray * cells;
 
 @end

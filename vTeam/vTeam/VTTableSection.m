@@ -14,11 +14,13 @@
 @synthesize title = _title;
 @synthesize view = _view;
 @synthesize cells = _cells;
+@synthesize footerView = _footerView;
 
 -(void) dealloc{
     [_title release];
     [_view release];
     [_cells release];
+    [_footerView release];
     [super dealloc];
 }
 

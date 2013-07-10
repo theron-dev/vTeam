@@ -36,6 +36,7 @@
 
 -(void) dealloc{
     [_tableView setDelegate:nil];
+    [_tableView setDataSource:nil];
     [_itemViewNib release];
     [_topLoadingView release];
     [_bottomLoadingView release];
