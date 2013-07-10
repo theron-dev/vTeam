@@ -35,6 +35,10 @@
     return [_dataObjects count] == 0;
 }
 
+-(void) refreshData{
+    [self reloadData];
+}
+
 -(void) reloadData{
     _loading = YES;
     if([_delegate respondsToSelector:@selector(vtDataSourceWillLoading:)]){

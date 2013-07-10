@@ -24,7 +24,7 @@
 -(void) applyStyleSheet {
     for(id style in _styles){
         if(_status == nil || [style status] == nil
-           || [_status isEqualToString:[style status]]){
+           || [_status rangeOfString:[style status]].location != NSNotFound){
             [style setStyleSheet:_styleSheet];
         }
         else{

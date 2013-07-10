@@ -72,4 +72,15 @@
     }
 }
 
+-(void) setStyleName:(NSString *)styleName{
+    if(_styleName != styleName){
+        [styleName retain];
+        [_styleName release];
+        _styleName = styleName;
+        if(_styleSheet){
+            [self applyStyle];
+        }
+    }
+}
+
 @end

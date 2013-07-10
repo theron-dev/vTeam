@@ -30,6 +30,9 @@
 @property(nonatomic,retain) NSString * stringKeyPath;
 @property(nonatomic,retain) NSString * stringFormat;
 @property(nonatomic,retain) NSString * booleanKeyPath;
+@property(nonatomic,retain) NSString * enabledKeyPath;
+@property(nonatomic,retain) NSString * disabledKeyPath;
+@property(nonatomic,retain) id value;
 
 -(void) applyDataOutlet:(id) data;
 

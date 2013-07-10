@@ -28,7 +28,7 @@
 @synthesize dataItem = _dataItem;
 @synthesize layoutContainer = _layoutContainer;
 @synthesize dataSource = _dataSource;
-
+@synthesize controller = _controller;
 
 -(void) dealloc{
     [_dataItem release];
@@ -72,6 +72,11 @@
         [_layoutContainer layout];
         [_dataSource cancel];
         [_dataSource reloadData];
+    }
+    else{
+        [_dataOutletContainer applyDataOutlet:self];
+        [self downloadImagesForView:self];
+        [_layoutContainer layout];
     }
 }
 

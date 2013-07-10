@@ -23,6 +23,7 @@
 @property(nonatomic,retain) id userInfo;
 @property(nonatomic,assign) NSInteger index;
 
+@property(nonatomic,assign) id controller;
 @property(nonatomic,assign) id<IVTUIContext> context;
 @property(nonatomic,retain) IBOutlet VTStyleOutletContainer * styleContainer;
 @property(nonatomic,retain) IBOutlet VTDataOutletContainer * dataOutletContainer;

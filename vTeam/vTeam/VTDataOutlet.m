@@ -109,6 +109,9 @@
 @synthesize stringKeyPath = _stringKeyPath;
 @synthesize stringFormat = _stringFormat;
 @synthesize booleanKeyPath = _booleanKeyPath;
+@synthesize enabledKeyPath = _enabledKeyPath;
+@synthesize disabledKeyPath = _disabledKeyPath;
+@synthesize value = _value;
 
 -(void) dealloc{
     [_view release];
@@ -116,11 +119,47 @@
     [_stringKeyPath release];
     [_stringFormat release];
     [_booleanKeyPath release];
+    [_enabledKeyPath release];
+    [_disabledKeyPath release];
+    [_value release];
     [super dealloc];
 }
 
+-(BOOL) booleanValue:(id) value{
+    if(value){
+        if([value isKindOfClass:[NSString class]]){
+            if([value isEqualToString:@"false"] || [value isEqualToString:@""] || [value isEqualToString:@"0"]){
+                return NO;
+            }
+            else{
+                return YES;
+            }
+        }
+        else if(![value boolValue]){
+            return NO;
+        }
+        else{
+            return YES;
+        }
+    }
+    return NO;
+}
+
 -(void) applyDataOutlet:(id)data{
-    id value = nil;
+    
+    if(_enabledKeyPath){
+        if(![self booleanValue:[data dataForKeyPath:_enabledKeyPath]]){
+            return;
+        }
+    }
+    
+    if(_disabledKeyPath){
+        if([self booleanValue:[data dataForKeyPath:_disabledKeyPath]]){
+            return;
+        }
+    }
+    
+    id value = _value;
     if(_stringKeyPath){
         value = [data dataForKeyPath:_stringKeyPath];
         if(value && ![value isKindOfClass:[NSString class]]){
@@ -129,25 +168,7 @@
     }
     else if(_booleanKeyPath){
         value = [data dataForKeyPath:_booleanKeyPath];
-        if(value){
-            if([value isKindOfClass:[NSString class]]){
-                if([value isEqualToString:@"false"] || [value isEqualToString:@""] || [value isEqualToString:@"0"]){
-                    value = [NSNumber numberWithBool:NO];
-                }
-                else{
-                    value = [NSNumber numberWithBool:YES];
-                }
-            }
-            else if(![value boolValue]){
-                value = [NSNumber numberWithBool:NO];
-            }
-            else{
-                value = [NSNumber numberWithBool:YES];
-            }
-        }
-        else{
-            value = [NSNumber numberWithBool:NO];
-        }
+        value = [NSNumber numberWithBool:[self booleanValue:value]];
     }
     else if(_stringFormat){
         value = [_stringFormat stringByDataOutlet:data];

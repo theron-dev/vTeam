@@ -8,7 +8,7 @@
 
 #import <vTeam/vTeam.h>
 
-@interface VTTableDataController : VTDataController<UITableViewDataSource,UITableViewDelegate,VTTableViewDelegate>
+@interface VTTableDataController : VTDataController<UITableViewDataSource,UITableViewDelegate,VTTableViewDelegate,VTTableViewCellDelegate>
 
 @property(nonatomic,retain) IBOutlet UITableView * tableView;
 @property(nonatomic,retain) NSString * itemViewNib;

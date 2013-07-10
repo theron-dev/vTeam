@@ -158,6 +158,7 @@
         cell = (UITableViewCell *) [VTTableViewCell tableViewCellWithNibName:_itemViewNib bundle:_itemViewBundle];
         
         if([cell isKindOfClass:[VTTableViewCell class]]){
+            [(VTTableViewCell *) cell setController:self];
             [(VTTableViewCell *) cell setDelegate:self];
         }
     }
@@ -313,11 +314,8 @@
         }
         else if(contentOffset.y  + size.height > contentSize.height){
             [_bottomLoadingView setDirect:VTDragLoadingViewDirectUp];
-            [_topLoadingView removeFromSuperview];
         }
-        else{
-            [_topLoadingView removeFromSuperview];
-        }
+
     }
     
     if(contentOffset.y > -contentInset.top && contentOffset.y + size.height < contentSize.height

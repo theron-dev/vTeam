@@ -20,6 +20,8 @@
 @property(nonatomic,retain) NSString * dataKey;
 @property(nonatomic,retain) NSMutableArray * dataObjects;
 
+-(void) refreshData;
+
 -(void) reloadData;
 
 -(void) cancel;
