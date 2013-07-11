@@ -135,7 +135,7 @@
                 return YES;
             }
         }
-        else if(![value boolValue]){
+        else if([value respondsToSelector:@selector(boolValue)] && ![value boolValue]){
             return NO;
         }
         else{

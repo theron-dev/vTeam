@@ -104,6 +104,7 @@ static VTDBContext * gDownlinkServiceDBContext = nil;
         [_dataObjects setObject:dataObject forKey:key];
     }
     else{
+        [dataObject setValue:data forKey:@"data"];
         [dataObject setValue:[NSNumber numberWithInt:time(NULL)] forKey:@"timestamp"];
         [[VTDownlinkService dbContext] updateObject:dataObject];
     }
