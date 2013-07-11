@@ -50,4 +50,100 @@
     [self setTitle:title forState:UIControlStateNormal];
 }
 
+-(UIColor *) textColor{
+    return [self titleColorForState:UIControlStateNormal];
+}
+
+-(void) setTextColor:(UIColor *)textColor{
+    [self setTitleColor:textColor forState:UIControlStateNormal];
+}
+
+-(UIColor *) textColorHighlighted{
+    return [self titleColorForState:UIControlStateHighlighted];
+}
+
+-(void) setTextColorHighlighted:(UIColor *)textColorHighlighted{
+    [self setTitleColor:textColorHighlighted forState:UIControlStateHighlighted];
+}
+
+-(UIColor *) textColorDisabled{
+    return [self titleColorForState:UIControlStateDisabled];
+}
+
+-(void) setTextColorDisabled:(UIColor *)textColorDisabled{
+    [self setTitleColor:textColorDisabled forState:UIControlStateDisabled];
+}
+
+-(UIColor *) textColorSelected{
+    return [self titleColorForState:UIControlStateSelected];
+}
+
+-(void) setTextColorSelected:(UIColor *)textColorSelected{
+    [self setTitleColor:textColorSelected forState:UIControlStateSelected];
+}
+
+-(UIColor *) titleColor{
+    return [self titleColorForState:UIControlStateNormal];
+}
+
+-(void) setTitleColor:(UIColor *)textColor{
+    [self setTitleColor:textColor forState:UIControlStateNormal];
+}
+
+-(UIColor *) titleColorHighlighted{
+    return [self titleColorForState:UIControlStateHighlighted];
+}
+
+-(void) setTitleColorHighlighted:(UIColor *)textColorHighlighted{
+    [self setTitleColor:textColorHighlighted forState:UIControlStateHighlighted];
+}
+
+-(UIColor *) titleColorDisabled{
+    return [self titleColorForState:UIControlStateDisabled];
+}
+
+-(void) setTitleColorDisabled:(UIColor *)textColorDisabled{
+    [self setTitleColor:textColorDisabled forState:UIControlStateDisabled];
+}
+
+-(UIColor *) titleColorSelected{
+    return [self titleColorForState:UIControlStateSelected];
+}
+
+-(void) setTitleColorSelected:(UIColor *)textColorSelected{
+    [self setTitleColor:textColorSelected forState:UIControlStateSelected];
+}
+
+-(UIImage *) image{
+    return [self imageForState:UIControlStateNormal];
+}
+
+-(void) setImage:(UIImage *)image{
+    [self setImage:image forState:UIControlStateNormal];
+}
+
+-(UIImage *) imageHighlighted{
+    return [self imageForState:UIControlStateHighlighted];
+}
+
+-(void) setImageHighlighted:(UIImage *)imageHighlighted{
+    [self setImage:imageHighlighted forState:UIControlStateHighlighted];
+}
+
+-(UIImage *) imageDisabled{
+    return [self imageForState:UIControlStateDisabled];
+}
+
+-(void) setImageDisabled:(UIImage *)imageDisabled{
+    [self setImage:imageDisabled forState:UIControlStateDisabled];
+}
+
+-(UIImage *) imageSelected{
+    return [self imageForState:UIControlStateSelected];
+}
+
+-(void) setImageSelected:(UIImage *)imageSelected{
+    [self setImage:imageSelected forState:UIControlStateSelected];
+}
+
 @end

@@ -15,5 +15,17 @@
 @property(nonatomic,retain) UIImage * backgroundImageDisabled;
 @property(nonatomic,retain) UIImage * backgroundImageSelected;
 @property(nonatomic,retain) NSString * title;
+@property(nonatomic,retain) UIColor * textColor;
+@property(nonatomic,retain) UIColor * textColorHighlighted;
+@property(nonatomic,retain) UIColor * textColorDisabled;
+@property(nonatomic,retain) UIColor * textColorSelected;
+@property(nonatomic,retain) UIColor * titleColor;
+@property(nonatomic,retain) UIColor * titleColorHighlighted;
+@property(nonatomic,retain) UIColor * titleColorDisabled;
+@property(nonatomic,retain) UIColor * titleColorSelected;
+@property(nonatomic,retain) UIImage * image;
+@property(nonatomic,retain) UIImage * imageHighlighted;
+@property(nonatomic,retain) UIImage * imageDisabled;
+@property(nonatomic,retain) UIImage * imageSelected;
 
 @end
