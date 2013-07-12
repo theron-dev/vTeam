@@ -173,6 +173,10 @@
 		114D7AE3172A89710041468E /* VTContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 114D7AE1172A89700041468E /* VTContainerView.m */; };
 		11541C57178FDC9C001D9FBF /* UIControl+VTDataOutlet.h in Headers */ = {isa = PBXBuildFile; fileRef = 11541C55178FDC9B001D9FBF /* UIControl+VTDataOutlet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11541C58178FDC9C001D9FBF /* UIControl+VTDataOutlet.m in Sources */ = {isa = PBXBuildFile; fileRef = 11541C56178FDC9B001D9FBF /* UIControl+VTDataOutlet.m */; };
+		11541C5F1790035A001D9FBF /* VTTabPageDataController.h in Headers */ = {isa = PBXBuildFile; fileRef = 11541C5D17900359001D9FBF /* VTTabPageDataController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11541C601790035A001D9FBF /* VTTabPageDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11541C5E1790035A001D9FBF /* VTTabPageDataController.m */; };
+		11541C63179005E2001D9FBF /* VTScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 11541C61179005E2001D9FBF /* VTScrollView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11541C64179005E2001D9FBF /* VTScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11541C62179005E2001D9FBF /* VTScrollView.m */; };
 		11619C4B17320E1F00BD3561 /* VTContainerLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 11619C4917320E1F00BD3561 /* VTContainerLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11619C4C17320E1F00BD3561 /* VTContainerLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 11619C4A17320E1F00BD3561 /* VTContainerLayout.m */; };
 		11619C4F17320FCE00BD3561 /* VTFlowContainerLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 11619C4D17320FCD00BD3561 /* VTFlowContainerLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -501,6 +505,10 @@
 		114D7AE1172A89700041468E /* VTContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTContainerView.m; sourceTree = "<group>"; };
 		11541C55178FDC9B001D9FBF /* UIControl+VTDataOutlet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+VTDataOutlet.h"; sourceTree = "<group>"; };
 		11541C56178FDC9B001D9FBF /* UIControl+VTDataOutlet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+VTDataOutlet.m"; sourceTree = "<group>"; };
+		11541C5D17900359001D9FBF /* VTTabPageDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTTabPageDataController.h; sourceTree = "<group>"; };
+		11541C5E1790035A001D9FBF /* VTTabPageDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTTabPageDataController.m; sourceTree = "<group>"; };
+		11541C61179005E2001D9FBF /* VTScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTScrollView.h; sourceTree = "<group>"; };
+		11541C62179005E2001D9FBF /* VTScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTScrollView.m; sourceTree = "<group>"; };
 		11619C4917320E1F00BD3561 /* VTContainerLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTContainerLayout.h; sourceTree = "<group>"; };
 		11619C4A17320E1F00BD3561 /* VTContainerLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTContainerLayout.m; sourceTree = "<group>"; };
 		11619C4D17320FCD00BD3561 /* VTFlowContainerLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTFlowContainerLayout.h; sourceTree = "<group>"; };
@@ -990,6 +998,8 @@
 				ACC50E871787924400F10F69 /* VTTableDataController.m */,
 				ACAB458A1788E3EB005D1CCD /* VTTabDataController.h */,
 				ACAB458B1788E3EB005D1CCD /* VTTabDataController.m */,
+				11541C5D17900359001D9FBF /* VTTabPageDataController.h */,
+				11541C5E1790035A001D9FBF /* VTTabPageDataController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1113,6 +1123,8 @@
 				11C238301786CB8200DBADBD /* VTCreatorViewController.m */,
 				ACC50E8A178794C800F10F69 /* VTTableView.h */,
 				ACC50E8B178794C800F10F69 /* VTTableView.m */,
+				11541C61179005E2001D9FBF /* VTScrollView.h */,
+				11541C62179005E2001D9FBF /* VTScrollView.m */,
 			);
 			name = UIKit;
 			sourceTree = "<group>";
@@ -1365,6 +1377,8 @@
 				ACC50E8C178794C800F10F69 /* VTTableView.h in Headers */,
 				ACAB458C1788E3EB005D1CCD /* VTTabDataController.h in Headers */,
 				11541C57178FDC9C001D9FBF /* UIControl+VTDataOutlet.h in Headers */,
+				11541C5F1790035A001D9FBF /* VTTabPageDataController.h in Headers */,
+				11541C63179005E2001D9FBF /* VTScrollView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1580,6 +1594,8 @@
 				ACC50E8D178794C800F10F69 /* VTTableView.m in Sources */,
 				ACAB458D1788E3EB005D1CCD /* VTTabDataController.m in Sources */,
 				11541C58178FDC9C001D9FBF /* UIControl+VTDataOutlet.m in Sources */,
+				11541C601790035A001D9FBF /* VTTabPageDataController.m in Sources */,
+				11541C64179005E2001D9FBF /* VTScrollView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

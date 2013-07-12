@@ -116,6 +116,9 @@
     if([_delegate respondsToSelector:@selector(vtDataSource:didFitalError:)]){
         [_delegate vtDataSource:self didFitalError:error];
     }
+    if([[self dataObjects] count]){
+        _loaded = YES;
+    }
 }
 
 @end

@@ -1,14 +1,14 @@
 //
-//  VTTableView.m
+//  VTScrollView.m
 //  vTeam
 //
-//  Created by Zhang Hailong on 13-7-6.
+//  Created by zhang hailong on 13-7-12.
 //  Copyright (c) 2013年 hailong.org. All rights reserved.
 //
 
-#import "VTTableView.h"
+#import "VTScrollView.h"
 
-@implementation VTTableView
+@implementation VTScrollView
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -28,11 +28,10 @@
 }
 */
 
-
 -(void) setContentOffset:(CGPoint)contentOffset{
     [super setContentOffset:contentOffset];
-    if([self.delegate respondsToSelector:@selector(tableView:didContentOffsetChanged:)]){
-        [(id<VTTableViewDelegate>)self.delegate tableView:self didContentOffsetChanged:self.contentOffset];
+    if([self.delegate respondsToSelector:@selector(scrollView:didContentOffsetChanged:)]){
+        [(id<VTScrollViewDelegate>)self.delegate scrollView:self didContentOffsetChanged:self.contentOffset];
     }
 }
 

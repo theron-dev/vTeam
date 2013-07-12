@@ -8,7 +8,11 @@
 
 #import <vTeam/VTDataController.h>
 
-@interface VTTabDataController : VTDataController
+@interface VTTabDataController : VTDataController{
+    
+@protected
+    NSUInteger _selectedIndex;
+}
 
 @property(nonatomic,retain) IBOutletCollection(VTDataController) NSArray * controllers;
 @property(nonatomic,retain) IBOutletCollection(UIButton) NSArray * tabButtons;

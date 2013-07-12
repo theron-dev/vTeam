@@ -67,4 +67,6 @@
 #import <vTeam/VTPopWindow.h>
 #import <vTeam/VTJSON.h>
 #import <vTeam/UIControl+VTDataOutlet.h>
+#import <vTeam/VTScrollView.h>
+#import <vTeam/VTTabPageDataController.h>
 
