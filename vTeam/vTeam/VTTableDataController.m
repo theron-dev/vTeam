@@ -203,15 +203,19 @@
 
 -(void) startLoading{
     
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(didStopLoading) object:nil];
+    
     [_bottomLoadingView removeFromSuperview];
     [_topLoadingView removeFromSuperview];
     
     if(![(id)self.dataSource respondsToSelector:@selector(pageIndex)]
        || [(id)self.dataSource pageIndex] == 1){
+        [_tableView setTableHeaderView:nil];
         [_tableView setTableHeaderView:_topLoadingView];
         [_tableView setTableFooterView:nil];
     }
     else{
+        [_tableView setTableFooterView:nil];
         [_tableView setTableFooterView:_bottomLoadingView];
         [_tableView setTableHeaderView:nil];
     }
@@ -221,15 +225,13 @@
     
 }
 
--(void) stopLoading{
+-(void) didStopLoading{
     
     [_tableView setTableHeaderView:nil];
     [_tableView setTableFooterView:nil];
     
-    
     [_topLoadingView removeFromSuperview];
     [_bottomLoadingView removeFromSuperview];
-    
     
     [_topLoadingView stopAnimation];
     [_bottomLoadingView stopAnimation];
@@ -280,6 +282,14 @@
     else{
         [_notFoundDataView removeFromSuperview];
     }
+
+}
+
+-(void) stopLoading{
+    
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(didStopLoading) object:nil];
+    
+    [self performSelector:@selector(didStopLoading) withObject:nil afterDelay:0.1];
     
 }
 
