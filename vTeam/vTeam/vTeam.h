@@ -66,3 +66,5 @@
 #import <vTeam/VTTabDataController.h>
 #import <vTeam/VTPopWindow.h>
 #import <vTeam/VTJSON.h>
+#import <vTeam/UIControl+VTDataOutlet.h>
+
