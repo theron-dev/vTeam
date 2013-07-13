@@ -12,12 +12,35 @@
 
 @synthesize pageContentView = _pageContentView;
 @synthesize tabBackgroundView = _tabBackgroundView;
+@synthesize leftSpaceWidth = _leftSpaceWidth;
+@synthesize rightSpaceWidth = _rightSpaceWidth;
 
 -(void) dealloc{
     [_pageContentView setDelegate:nil];
     [_pageContentView release];
     [_tabBackgroundView release];
     [super dealloc];
+}
+
+-(void) scrollToTabBackgroundVisable:(BOOL) animated{
+    if([_tabBackgroundView.superview isKindOfClass:[UIScrollView class]]){
+        UIScrollView * scrollView = (UIScrollView *) _tabBackgroundView.superview;
+        CGPoint contentOffset = [scrollView contentOffset];
+        CGSize size = [scrollView bounds].size;
+        CGRect r = _tabBackgroundView.frame;
+        if(r.origin.x - _leftSpaceWidth < contentOffset.x){
+            [scrollView setContentOffset:CGPointMake(r.origin.x - _leftSpaceWidth, 0) animated:YES];
+        }
+        else if(r.origin.x + r.size.width + _rightSpaceWidth > contentOffset.x + size.width){
+            [scrollView setContentOffset:CGPointMake(r.origin.x + r.size.width + _rightSpaceWidth - size.width, 0) animated:animated];
+        }
+    }
+}
+
+-(void) scrollToTabButton:(NSUInteger) index{
+    UIButton * tabButton = [self tabButtonAtIndex:index];
+    [_tabBackgroundView setCenter:tabButton.center];
+    [self scrollToTabBackgroundVisable:YES];
 }
 
 -(void) setSelectedIndex:(NSUInteger)selectedIndex animated:(BOOL) animated{
@@ -35,7 +58,7 @@
             [UIView setAnimationDuration:0.2];
         }
         
-        [_tabBackgroundView setCenter:[[self tabButtonAtIndex:selectedIndex] center]];
+        [self scrollToTabButton:selectedIndex];
         
         if(animated){
             [UIView commitAnimations];
@@ -50,6 +73,9 @@
         if([self.delegate respondsToSelector:@selector(vtTabDataController:didSelectedChanged:)]){
             [self.delegate vtTabDataController:self didSelectedChanged:_selectedIndex];
         }
+    }
+    else{
+        [self scrollToTabBackgroundVisable:animated];
     }
 }
 
@@ -97,18 +123,19 @@
         
         if(index <0){
             [self reloadDataController:[self controllerAtIndex:0]];
+            [self scrollToTabButton:0];
             [_tabBackgroundView setCenter:[[self tabButtonAtIndex:0] center]];
 
         }
         else if(index >= count){
             [self reloadDataController:[self controllerAtIndex:count -1]];
-            [_tabBackgroundView setCenter:[[self tabButtonAtIndex:count -1] center]];
+            [self scrollToTabButton:count - 1];
         }
         else{
             CGFloat r = (index - (int) index);
             if(r == 0.0f || index > count -1){
                 [self reloadDataController:[self controllerAtIndex:(int) index]];
-                [_tabBackgroundView setCenter:[[self tabButtonAtIndex:(int) index] center]];
+                [self scrollToTabButton:(int) index];
                 
             }
             else{
@@ -120,6 +147,7 @@
                 
                 [_tabBackgroundView setCenter:CGPointMake(p1.x + (p2.x - p1.x) * r, p1.y + (p2.y - p1.y) * r)];
                 
+                [self scrollToTabBackgroundVisable:NO];
             }
         }
     }

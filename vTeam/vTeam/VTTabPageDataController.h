@@ -12,5 +12,7 @@
 
 @property(nonatomic,retain) IBOutlet UIScrollView * pageContentView;
 @property(nonatomic,retain) IBOutlet UIView * tabBackgroundView;
+@property(nonatomic,assign) CGFloat leftSpaceWidth;
+@property(nonatomic,assign) CGFloat rightSpaceWidth;
 
 @end
