@@ -8,6 +8,12 @@
 
 #import "VTPageDataSource.h"
 
+@interface VTPageDataSource(){
+    BOOL _hasMoreData;
+}
+
+@end
+
 @implementation VTPageDataSource
 
 @synthesize pageIndex = _pageIndex;
@@ -44,18 +50,28 @@
 }
 
 -(BOOL) hasMoreData{
-    return YES;
+    return _hasMoreData;
+}
+
+-(void) vtDownlinkTaskDidLoadedFromCache:(id)data timestamp:(NSDate *)timestamp forTaskType:(Protocol *)taskType{
+    [super vtDownlinkTaskDidLoadedFromCache:data timestamp:timestamp forTaskType:taskType];
+    _hasMoreData = YES;
 }
 
 -(void) vtDownlinkTaskDidLoaded:(id) data forTaskType:(Protocol *) taskType{
+    
+    NSInteger count = [[self dataObjects] count];
     
     self.loading = NO;
     
     if(_pageIndex == 1){
         [[self dataObjects] removeAllObjects];
+        count = 0;
     }
     
     [self loadResultsData:data];
+    
+    _hasMoreData = [[self dataObjects] count] - count >0;
     
     if([self.delegate respondsToSelector:@selector(vtDataSourceDidLoaded:)]){
         [self.delegate vtDataSourceDidLoaded:self];

@@ -11,6 +11,7 @@
 #import "IVTURLDownlinkTask.h"
 #import <vTeam/NSURL+QueryValue.h>
 
+
 @interface VTURLServiceItem : NSObject
 
 @property(nonatomic,assign) Protocol * taskType;
@@ -215,8 +216,35 @@
     NSLog(@"%@",[httpTask responseBody]);
     
     if(task && taskType){
-        [self vtDownlinkTask:task didResponse:[httpTask responseBody] isCache:[task vtDownlinkPageTaskPageIndex] == 1 forTaskType:taskType];
+        NSError * error = [self errorByResponseBody:[httpTask responseBody] task:task];
+        if(error == nil){
+            [self vtDownlinkTask:task didResponse:[httpTask responseBody] isCache:[task vtDownlinkPageTaskPageIndex] == 1 forTaskType:taskType];
+        }
+        else{
+            [self vtDownlinkTask:task didFitalError:error forTaskType:taskType];
+        }
     }
+}
+
+-(NSError *) errorByResponseBody:(id) body task:(id) task{
+    NSString * errorCodeKeyPath = [task errorCodeKeyPath];
+    NSString * errorKeyPath = [task errorKeyPath];
+    if(errorCodeKeyPath){
+        int errorCode = [[body dataForKeyPath:errorCodeKeyPath] intValue];
+        
+        if(errorCode ==0){
+            return nil;
+        }
+        NSString * error = [body dataForKeyPath:errorKeyPath];
+        
+        if(error == nil){
+            error = @"";
+        }
+        
+        return [NSError errorWithDomain:@"VTURLService" code:errorCode
+                               userInfo:[NSDictionary dictionaryWithObject:error forKey:NSLocalizedDescriptionKey]];
+    }
+    return nil;
 }
 
 @end

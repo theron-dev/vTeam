@@ -326,6 +326,8 @@
 		ACDE3A8717350AE50046ED56 /* VTButton.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDE3A8517350AE40046ED56 /* VTButton.m */; };
 		ACDE3AB1173647950046ED56 /* VTAppStatusView.h in Headers */ = {isa = PBXBuildFile; fileRef = ACDE3AAF173647910046ED56 /* VTAppStatusView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ACDE3AB2173647950046ED56 /* VTAppStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDE3AB0173647930046ED56 /* VTAppStatusView.m */; };
+		ACE330A81792509B003B2D85 /* VTAnimationView.h in Headers */ = {isa = PBXBuildFile; fileRef = ACE330A61792509B003B2D85 /* VTAnimationView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ACE330A91792509B003B2D85 /* VTAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE330A71792509B003B2D85 /* VTAnimationView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -659,6 +661,8 @@
 		ACDE3AAF173647910046ED56 /* VTAppStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTAppStatusView.h; sourceTree = "<group>"; };
 		ACDE3AB0173647930046ED56 /* VTAppStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTAppStatusView.m; sourceTree = "<group>"; };
 		ACDE3AB317364EA10046ED56 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		ACE330A61792509B003B2D85 /* VTAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTAnimationView.h; sourceTree = "<group>"; };
+		ACE330A71792509B003B2D85 /* VTAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTAnimationView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1125,6 +1129,8 @@
 				ACC50E8B178794C800F10F69 /* VTTableView.m */,
 				11541C61179005E2001D9FBF /* VTScrollView.h */,
 				11541C62179005E2001D9FBF /* VTScrollView.m */,
+				ACE330A61792509B003B2D85 /* VTAnimationView.h */,
+				ACE330A71792509B003B2D85 /* VTAnimationView.m */,
 			);
 			name = UIKit;
 			sourceTree = "<group>";
@@ -1379,6 +1385,7 @@
 				11541C57178FDC9C001D9FBF /* UIControl+VTDataOutlet.h in Headers */,
 				11541C5F1790035A001D9FBF /* VTTabPageDataController.h in Headers */,
 				11541C63179005E2001D9FBF /* VTScrollView.h in Headers */,
+				ACE330A81792509B003B2D85 /* VTAnimationView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1596,6 +1603,7 @@
 				11541C58178FDC9C001D9FBF /* UIControl+VTDataOutlet.m in Sources */,
 				11541C601790035A001D9FBF /* VTTabPageDataController.m in Sources */,
 				11541C64179005E2001D9FBF /* VTScrollView.m in Sources */,
+				ACE330A91792509B003B2D85 /* VTAnimationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1717,6 +1725,7 @@
 				OTHER_LDFLAGS = "-Objc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;

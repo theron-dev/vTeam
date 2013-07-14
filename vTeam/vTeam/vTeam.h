@@ -69,4 +69,5 @@
 #import <vTeam/UIControl+VTDataOutlet.h>
 #import <vTeam/VTScrollView.h>
 #import <vTeam/VTTabPageDataController.h>
+#import <vTeam/VTAnimationView.h>
 

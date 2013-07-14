@@ -12,10 +12,12 @@
 
 @synthesize resultsData = _resultsData;
 @synthesize error = _error;
+@synthesize url = _url;
 
 -(void) dealloc{
     [_resultsData release];
     [_error release];
+    [_url release];
     [super dealloc];
 }
 

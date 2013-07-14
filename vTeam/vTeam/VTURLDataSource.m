@@ -13,11 +13,15 @@
 @synthesize url = _url;
 @synthesize source = _source;
 @synthesize urlKey = _urlKey;
+@synthesize errorCodeKeyPath =  _errorCodeKeyPath;
+@synthesize errorKeyPath = _errorKeyPath;
 
 -(void) dealloc{
     [self.context cancelHandle:@protocol(IVTURLDownlinkTask) task:self];
     [_url release];
     [_urlKey release];
+    [_errorCodeKeyPath release];
+    [_errorKeyPath release];
     [super dealloc];
 }
 

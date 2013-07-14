@@ -19,7 +19,7 @@ typedef enum {
 @property (retain, nonatomic) IBOutlet UILabel *upTitleLabel;
 @property (retain, nonatomic) IBOutlet UILabel *leftTitleLabel;
 @property (retain, nonatomic) IBOutlet UILabel *rightTitleLabel;
-@property (retain, nonatomic) IBOutlet UIActivityIndicatorView *loadingView;
+@property (retain, nonatomic) IBOutlet UIView *loadingView;
 @property (retain, nonatomic) IBOutlet UILabel *loadingTitleLabel;
 @property (retain, nonatomic) IBOutlet UILabel *timeLabel;
 @property (nonatomic,assign,getter = isAnimating) BOOL animating;

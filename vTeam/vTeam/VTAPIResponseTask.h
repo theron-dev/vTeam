@@ -13,6 +13,7 @@
 
 @property(nonatomic,retain) id resultsData;
 @property(nonatomic,retain) NSError * error;
+@property(nonatomic,retain) NSURL * url;
 
 @end
 

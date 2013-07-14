@@ -15,4 +15,7 @@
 @property(nonatomic,retain) NSString * url;
 @property(nonatomic,retain) NSString * urlKey;
 
+@property(nonatomic,retain) NSString * errorCodeKeyPath;
+@property(nonatomic,retain) NSString * errorKeyPath;
+
 @end

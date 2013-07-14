@@ -137,6 +137,7 @@
     [respTask setTaskType:[task taskType]];
     [respTask setUserInfo:[task userInfo]];
     [respTask setError:error];
+    [respTask setUrl:[[(VTHttpTask *)httpTask request] URL]];
     
     [self.context handle:@protocol(IVTAPIResponseTask) task:respTask priority:0];
     
@@ -154,6 +155,7 @@
     [respTask setTaskType:[task taskType]];
     [respTask setUserInfo:[task userInfo]];
     [respTask setResultsData:[httpTask responseBody]];
+    [respTask setUrl:[[(VTHttpTask *)httpTask request] URL]];
     
     [self.context handle:@protocol(IVTAPIResponseTask) task:respTask priority:0];
     

@@ -8,6 +8,8 @@
 
 #import "VTDragLoadingView.h"
 
+#import "VTAnimationView.h"
+
 @implementation VTDragLoadingView
 
 @synthesize directImageView = _directImageView;
@@ -54,7 +56,12 @@
 -(void) startAnimation{
     if(! _animating){
         [_loadingView setHidden:NO];
-        [_loadingView startAnimating];
+        if([_loadingView isKindOfClass:[UIActivityIndicatorView class]]){
+            [(UIActivityIndicatorView *)_loadingView startAnimating];
+        }
+        else if([_loadingView isKindOfClass:[VTAnimationView class]]){
+            [(VTAnimationView *) _loadingView startAnimating];
+        }
         [_directImageView setHidden:YES];
         [_downTitleLabel setHidden:YES];
         [_upTitleLabel setHidden:YES];
@@ -68,7 +75,12 @@
 
 -(void) stopAnimation{
     if( _animating ){
-        [_loadingView stopAnimating];
+        if([_loadingView isKindOfClass:[UIActivityIndicatorView class]]){
+            [(UIActivityIndicatorView *)_loadingView stopAnimating];
+        }
+        else if([_loadingView isKindOfClass:[VTAnimationView class]]){
+            [(VTAnimationView *) _loadingView stopAnimating];
+        }
         [_loadingView setHidden:YES];
         [_loadingTitleLabel setHidden:YES];
         [_directImageView setHidden:NO];
