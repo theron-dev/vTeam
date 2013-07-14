@@ -56,9 +56,11 @@
         while(clazz != [NSObject class]){
             unsigned c = 0;
             objc_property_t * prop = class_copyPropertyList(clazz, &c);
+            objc_property_t * p = prop;
+            
             while(c >0){
                 
-                NSString * key = [NSString stringWithCString:property_getName(*prop)
+                NSString * key = [NSString stringWithCString:property_getName(*p)
                                                     encoding:NSUTF8StringEncoding];
                 
                 if(isFirst){
@@ -74,8 +76,10 @@
                 [ms appendFormat:@"%@=%@",key ,[NSURL encodeQueryValue:v]];
                 
                 c --;
-                prop ++;
+                p ++;
             }
+            free(prop);
+            
             clazz = class_getSuperclass(clazz);
         }
     }

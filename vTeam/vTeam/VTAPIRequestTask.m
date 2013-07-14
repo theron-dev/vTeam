@@ -14,14 +14,12 @@
 @synthesize apiUrl = _apiUrl;
 @synthesize queryValues = _queryValues;
 @synthesize body = _body;
-@synthesize httpTask = _httpTask;
 
 -(void) dealloc{
     [_apiKey release];
     [_apiUrl release];
     [_queryValues release];
     [_body release];
-    [_httpTask release];
     [super dealloc];
 }
 

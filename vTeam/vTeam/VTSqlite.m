@@ -305,6 +305,7 @@ static void VTSqliteStmtBindData(sqlite3_stmt * stmt,id data,sqlite3_destructor_
                     NSString * name = [NSString stringWithCString:property_getName(prop[i]) encoding:NSUTF8StringEncoding];
                     [object setValue:[self valueForProperty:prop[i]] forKey:name];
                 }
+                free(prop);
                 clazz = class_getSuperclass(clazz);
             }
         }

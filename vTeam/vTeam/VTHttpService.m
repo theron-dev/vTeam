@@ -50,6 +50,8 @@
 
 static void VTHttpTaskOperatorDeallocDispatchFunction(void * queue){
     
+    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+    
     UIApplication * app = [UIApplication sharedApplication];
     
     if([(NSOperationQueue *)queue operationCount] ==0){
@@ -64,6 +66,8 @@ static void VTHttpTaskOperatorDeallocDispatchFunction(void * queue){
     }
     
     [(NSOperationQueue *)queue release];
+    
+    [pool release];
     
 }
 
@@ -104,10 +108,14 @@ static void VTHttpTaskOperatorDeallocDispatchFunction(void * queue){
             return;
         }
         
+        NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+        
         [self.task doFailError:
          [NSError errorWithDomain:@"VTHttpService" code:-3 userInfo:[NSDictionary dictionaryWithObject:@"http connect timeout" forKey:NSLocalizedDescriptionKey]]];
         
         self.finished = YES;
+        
+        [pool release];
     });
     
 }
@@ -129,8 +137,11 @@ static void VTHttpTaskOperatorDeallocDispatchFunction(void * queue){
             return;
         }
         
+        NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+        
         [self.task doLoading];
         
+        [pool release];
     });
 
     self.conn = [NSURLConnection connectionWithRequest:self.request delegate:self];
@@ -143,64 +154,72 @@ static void VTHttpTaskOperatorDeallocDispatchFunction(void * queue){
 
 }
 
-- (void)start{
+- (void) main{
+    
+    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
     
     if([self isCancelled]){
         return;
     }
     
     self.executing = YES;
-    
-    @autoreleasepool {
-        
 
-        NSOperationQueue * opQueue = [NSOperationQueue currentQueue];
-        
-        self.queue = opQueue;
-        
-        if(_allowShowNetworkStatus ){
-            dispatch_async(dispatch_get_main_queue(), ^(){
-                
-                UIApplication * app = [UIApplication sharedApplication];
-                
-                if([opQueue operationCount] ==0){
-                    if([app isNetworkActivityIndicatorVisible]){
-                        [app setNetworkActivityIndicatorVisible:NO];
-                    }
-                }
-                else{
-                    if(![app isNetworkActivityIndicatorVisible]){
-                        [app setNetworkActivityIndicatorVisible:YES];
-                    }
-                }
-                
-            });
-        }
-        
-        NSRunLoop * runloop = [NSRunLoop currentRunLoop];
-        
-        NSThread * thread = [NSThread currentThread];
-        
+    NSOperationQueue * opQueue = [NSOperationQueue currentQueue];
+    
+    self.queue = opQueue;
+    
+    if(_allowShowNetworkStatus ){
         dispatch_async(dispatch_get_main_queue(), ^(){
             
-            if(self.isCancelled){
-                return;
+            NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+            
+            UIApplication * app = [UIApplication sharedApplication];
+            
+            if([opQueue operationCount] ==0){
+                if([app isNetworkActivityIndicatorVisible]){
+                    [app setNetworkActivityIndicatorVisible:NO];
+                }
+            }
+            else{
+                if(![app isNetworkActivityIndicatorVisible]){
+                    [app setNetworkActivityIndicatorVisible:YES];
+                }
             }
             
-            self.request = [_task doWillRequeset];
+            [pool release];
             
-            [self performSelector:@selector(startRequest) onThread:thread withObject:nil waitUntilDone:NO];
         });
-            
-        while(![self isCancelled] && !_finished){
-            @autoreleasepool {
-                [runloop runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.3]];
-            }
-        }
+    }
     
+    NSRunLoop * runloop = [NSRunLoop currentRunLoop];
+    
+    NSThread * thread = [NSThread currentThread];
+    
+    dispatch_async(dispatch_get_main_queue(), ^(){
+        
+        if(self.isCancelled){
+            return;
+        }
+        
+        NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+        
+        self.request = [_task doWillRequeset];
+        
+        [self performSelector:@selector(startRequest) onThread:thread withObject:nil waitUntilDone:NO];
+        
+        [pool release];
+        
+    });
+        
+    while(![self isCancelled] && !_finished){
+        NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+        [runloop runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.3]];
+        [pool release];
     }
     
     self.executing = NO;
+    
+    [pool release];
 }
 
 -(void) cancel{
@@ -233,10 +252,13 @@ static void VTHttpTaskOperatorDeallocDispatchFunction(void * queue){
             return;
         }
         
+        NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+        
         [self.task doFailError:error];
         
         self.finished = YES;
         
+        [pool release];
     });
 }
 
@@ -256,9 +278,13 @@ static void VTHttpTaskOperatorDeallocDispatchFunction(void * queue){
             return;
         }
         
+        NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+        
         [self.task doLoaded];
         
         self.finished = YES;
+        
+        [pool release];
     });
     
     
@@ -279,8 +305,12 @@ static void VTHttpTaskOperatorDeallocDispatchFunction(void * queue){
             return;
         }
         
+        NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+        
         [self.task doReceiveData:data];
 
+        [pool release];
+        
     });
     
 }
@@ -299,8 +329,11 @@ static void VTHttpTaskOperatorDeallocDispatchFunction(void * queue){
             return;
         }
         
+        NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+        
         [self.task doResponse];
         
+        [pool release];
     });
 }
 
@@ -316,7 +349,11 @@ static void VTHttpTaskOperatorDeallocDispatchFunction(void * queue){
             return;
         }
         
+        NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+        
         [self.task doSendBodyDataBytesWritten:bytesWritten totalBytesWritten:totalBytesWritten];
+        
+        [pool release];
         
     });
 }

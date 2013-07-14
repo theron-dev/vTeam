@@ -10,6 +10,6 @@
 
 @interface VTURLService : VTDownlinkService<IVTHttpTaskDelegate>
 
--(NSError *) errorByResponseBody:(id) body;
+-(NSError *) errorByResponseBody:(id) body task:(id) task;
 
 @end

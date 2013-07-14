@@ -89,6 +89,8 @@ static NSString * VTDBContextPropertyDBType(objc_property_t prop){
 
             }
             
+            free(prop);
+            
             clazz = class_getSuperclass(clazz);
         }
         
@@ -118,6 +120,8 @@ static NSString * VTDBContextPropertyDBType(objc_property_t prop){
                 }
             }
          
+            free(prop);
+            
             clazz = class_getSuperclass(clazz);
         }
         
@@ -169,6 +173,8 @@ static NSString * VTDBContextPropertyDBType(objc_property_t prop){
             [mb appendFormat:@"[%s]",n];
             [values appendFormat:@":%s",n];
         }
+        
+        free(prop);
         
         clazz = class_getSuperclass(clazz);
     }
@@ -229,6 +235,8 @@ static NSString * VTDBContextPropertyDBType(objc_property_t prop){
             
             [mb appendFormat:@"[%s]=:%s",n,n];
         }
+        
+        free(prop);
         
         clazz = class_getSuperclass(clazz);
     }

@@ -29,11 +29,9 @@
         VTHttpTask * httpTask = [[VTHttpTask alloc] init];
         
         [httpTask setUserInfo:reqTask];
-        [httpTask setSource:[task source]];
+        [httpTask setSource:reqTask];
         [httpTask setResponseType:VTHttpTaskResponseTypeJSON];
         [httpTask setDelegate:self];
-        
-        [reqTask setHttpTask:httpTask];
         
         if(_requests == nil){
             _requests = [[NSMutableArray alloc] init];
@@ -62,8 +60,8 @@
         while(i < c){
             id request = [_requests objectAtIndex:i];
             if(request == task){
-                if([request httpTask]){
-                    [self.context cancelHandle:@protocol(IVTHttpAPITask) task:[request httpTask]];
+                if([request source]){
+                    [self.context cancelHandle:@protocol(IVTHttpAPITask) task:[request source]];
                 }
                 [_requests removeObjectAtIndex:i];
                 c --;
@@ -85,8 +83,8 @@
         while(i < c){
             id request = [_requests objectAtIndex:i];
             if([request task] == [(id)task task] && [request taskType] == [(id)task taskType]){
-                if([request httpTask]){
-                    [self.context cancelHandle:@protocol(IVTHttpAPITask) task:[request httpTask]];
+                if([request source]){
+                    [self.context cancelHandle:@protocol(IVTHttpAPITask) task:[request source]];
                 }
                 [_requests removeObjectAtIndex:i];
                 c --;
@@ -112,8 +110,8 @@
     while(i < c){
         id request = [_requests objectAtIndex:i];
         if([request source] == source){
-            if([request httpTask]){
-                [self.context cancelHandle:@protocol(IVTHttpAPITask) task:[request httpTask]];
+            if([request source]){
+                [self.context cancelHandle:@protocol(IVTHttpAPITask) task:[request source]];
             }
             [_requests removeObjectAtIndex:i];
             c --;
