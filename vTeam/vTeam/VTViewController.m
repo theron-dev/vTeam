@@ -34,7 +34,7 @@
 	// Do any additional setup after loading the view.
     [_styleContainer setStyleSheet:[self.context styleSheet]];
     [_layoutContainer layout];
-    
+    [_dataOutletContainer applyDataOutlet:self];
 }
 
 - (void)didReceiveMemoryWarning
