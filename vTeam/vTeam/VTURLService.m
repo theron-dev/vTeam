@@ -95,7 +95,9 @@
         
         [_items addObject:item];
         
-        [self.context handle:@protocol(IVTHttpTask) task:httpTask priority:priority];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.context handle:@protocol(IVTHttpTask) task:httpTask priority:priority];
+        });
         
         [httpTask release];
         
