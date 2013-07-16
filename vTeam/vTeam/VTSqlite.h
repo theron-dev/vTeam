@@ -83,6 +83,8 @@
 
 @interface VTSqlite : NSObject
 
+@property(nonatomic,readonly) NSString * path;
+
 -(id) initWithPath:(NSString *) path;
 
 -(void) close;

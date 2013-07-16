@@ -509,8 +509,11 @@ static void VTSqliteStmtBindData(sqlite3_stmt * stmt,id data,sqlite3_destructor_
 
 @implementation VTSqlite
 
+@synthesize path = _path;
+
 -(id) initWithPath:(NSString *) path{
     if((self = [super init])){
+        _path = [path retain];
         if(SQLITE_OK != sqlite3_open([path UTF8String], &_sqlite)){
             [self release];
             return nil;
@@ -530,6 +533,7 @@ static void VTSqliteStmtBindData(sqlite3_stmt * stmt,id data,sqlite3_destructor_
         [cursor setSqlite:nil];
     }
     [_cursurs release];
+    [_path release];
     [super dealloc];
 }
 
@@ -735,7 +739,7 @@ static void VTSqliteStmtBindData(sqlite3_stmt * stmt,id data,sqlite3_destructor_
                 sqlite3_bind_int(stmt, i, ([v boolValue] ? 1 : 0));
             }
             else if (strcmp([v objCType], @encode(int)) == 0) {
-                sqlite3_bind_int64(stmt, i, [v longValue]);
+                sqlite3_bind_int(stmt, i, [v intValue]);
             }
             else if (strcmp([v objCType], @encode(long)) == 0) {
                 sqlite3_bind_int64(stmt, i, [v longValue]);
