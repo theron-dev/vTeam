@@ -195,6 +195,11 @@
     [self stopLoading];
 }
 
+-(void) vtDataSourceDidContentChanged:(VTDataSource *)dataSource{
+    [super vtDataSourceDidContentChanged:dataSource];
+    [_tableView reloadData];
+}
+
 -(void) vtDataSource:(VTDataSource *)dataSource didFitalError:(NSError *)error{
     [self stopLoading];
     [super vtDataSource:dataSource didFitalError:error];
