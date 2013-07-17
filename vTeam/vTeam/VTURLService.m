@@ -79,7 +79,7 @@
         [httpTask setSource:[task source]];
         [httpTask setResponseType:VTHttpTaskResponseTypeJSON];
         [httpTask setDelegate:self];
-        [httpTask setRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url queryValues:[self.config valueForKey:@"query-values"]] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:120]];
+        [httpTask setRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url queryValues:[urlTask queryValues]] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:120]];
         
         NSLog(@"%@",httpTask.request);
         

@@ -112,8 +112,10 @@
 @synthesize enabledKeyPath = _enabledKeyPath;
 @synthesize disabledKeyPath = _disabledKeyPath;
 @synthesize value = _value;
+@synthesize status = _status;
 
 -(void) dealloc{
+    [_status release];
     [_view release];
     [_keyPath release];
     [_stringKeyPath release];

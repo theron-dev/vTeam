@@ -25,6 +25,7 @@
 
 @interface VTDataOutlet : NSObject
 
+@property(nonatomic,retain) NSString * status;
 @property(nonatomic,retain) IBOutlet id view;
 @property(nonatomic,retain) NSString * keyPath;
 @property(nonatomic,retain) NSString * stringKeyPath;

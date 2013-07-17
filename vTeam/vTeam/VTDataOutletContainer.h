@@ -12,6 +12,7 @@
 
 @interface VTDataOutletContainer : NSObject
 
+@property(nonatomic,retain) NSString * status;
 @property(nonatomic,retain) IBOutletCollection(VTDataOutlet) NSArray * dataOutlets;
 
 -(void) applyDataOutlet:(id) data;
