@@ -13,6 +13,8 @@
 #include "hstr.h"
 #include "hbase64.h"
 
+#include <objc/runtime.h>
+
 @interface NSNull(VTJSON)
 
 @end
@@ -148,6 +150,13 @@ static hjson_t VTJSONDecode = {
         NSString * key;
         BOOL first = YES;
         while((key = [keyEnum nextObject])){
+            
+            id value = [data valueForKey:key];
+            
+            if(value == nil || [value isKindOfClass:[NSNull class]]){
+                continue;
+            }
+            
             if(first){
                 first = NO;
             }
@@ -155,7 +164,7 @@ static hjson_t VTJSONDecode = {
                 [ret appendString:@","];
             }
             [ret appendFormat:@"\"%@\":",key];
-            [ret appendString:[VTJSON encodeObject:[data valueForKey:key]]];
+            [ret appendString:[VTJSON encodeObject:value]];
         }
         
         [ret appendString:@"}"];
@@ -173,6 +182,45 @@ static hjson_t VTJSONDecode = {
             [ret appendString:[VTJSON encodeObject:item]];
         }
         [ret appendString:@"]"];
+    }
+    else if([data isKindOfClass:[NSNull class]]){
+        [ret appendString:@"null"];
+    }
+    else if(data){
+        [ret appendString:@"{"];
+        BOOL first = YES;
+        {
+            Class clazz = [data class];
+            objc_property_t * prop;
+            unsigned int c;
+            while(clazz && clazz != [NSObject class]){
+                
+                prop = class_copyPropertyList(clazz, &c);
+                
+                for(int i=0;i<c;i++){
+                    NSString * key = [NSString stringWithCString:property_getName(prop[i]) encoding:NSUTF8StringEncoding];
+                    id value = [data valueForKey:key];
+                    if(value == nil || [value isKindOfClass:[NSNull class]]){
+                        continue;
+                    }
+                    
+                    if(first){
+                        first = NO;
+                    }
+                    else{
+                        [ret appendString:@","];
+                    }
+                    [ret appendFormat:@"\"%@\":",key];
+                    [ret appendString:[VTJSON encodeObject:value]];
+                    
+                }
+                
+                free(prop);
+                
+                clazz = class_getSuperclass(clazz);
+            }
+        }
+        [ret appendString:@"}"];
     }
     else{
         [ret appendString:@"null"];

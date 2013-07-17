@@ -11,6 +11,8 @@
 #include <sqlite3.h>
 #include <objc/runtime.h>
 
+#import "VTJSON.h"
+
 static void VTSqliteStmtBindData(sqlite3_stmt * stmt,id data,sqlite3_destructor_type type);
 
 @interface VTSqliteCursor : NSObject<IVTSqliteCursor>{
@@ -280,8 +282,10 @@ static void VTSqliteStmtBindData(sqlite3_stmt * stmt,id data,sqlite3_destructor_
     
     if([type hasPrefix:@"T@"]){
         NSData * data = [self dataValueForName:name];
-        NSPropertyListFormat format = NSPropertyListBinaryFormat_v1_0;
-        return [NSPropertyListSerialization propertyListFromData:data mutabilityOption:NSPropertyListMutableContainersAndLeaves format:&format errorDescription:nil];
+        NSString * str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        id v = [VTJSON decodeText:str];
+        [str release];
+        return v;
     }
     
     return [self stringValueForName:name];    
@@ -764,7 +768,7 @@ static void VTSqliteStmtBindData(sqlite3_stmt * stmt,id data,sqlite3_destructor_
             sqlite3_bind_text(stmt, i, [v UTF8String], -1, type);
         }
         else {
-            NSData * data = [NSPropertyListSerialization dataFromPropertyList:v format:NSPropertyListBinaryFormat_v1_0 errorDescription:nil];
+            NSData * data = [[VTJSON encodeObject:v] dataUsingEncoding:NSUTF8StringEncoding];
             sqlite3_bind_blob(stmt, i, [data bytes], [data length], type);
         }
         

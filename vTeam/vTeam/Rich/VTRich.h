@@ -16,6 +16,10 @@
 
 @end
 
+@protocol IVTRichLinkElement <IVTRichElement>
+
+@end
+
 @interface VTRichElement : NSObject<IVTRichElement>
 
 @end
@@ -55,11 +59,9 @@
 
 -(void) appendElement:(id<IVTRichElement>) element;
 
--(id<IVTRichElement>) appendText:(NSString *) text attributes:(NSDictionary *) attributes;
+-(void) appendText:(NSString *) text attributes:(NSDictionary *) attributes;
 
 -(void) removeAllElements;
-
--(id) renderValueForKey:(NSString *)key;
 
 -(CTFrameRef) frameWithWidth:(CGFloat) width;
 

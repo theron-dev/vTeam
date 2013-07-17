@@ -142,6 +142,8 @@ static CTRunDelegateCallbacks VTRichDelegateCallbacks = {
     NSAttributedString * string = [[NSAttributedString alloc] initWithString:text attributes:attr];
     
     [_attributedString appendAttributedString:string];
+    [self elements];
+    [_elements addObject:element];
     
     if(_frameWithWidth.frame){
         CFRelease(_frameWithWidth.frame);
@@ -159,10 +161,8 @@ static CTRunDelegateCallbacks VTRichDelegateCallbacks = {
     [self appendElement:element text:@" " attributes:nil];
 }
 
--(id<IVTRichElement>) appendText:(NSString *) text attributes:(NSDictionary *) attributes{
-    VTRichElement * element= [[VTRichElement alloc] init];
-    [self appendElement:element text:text attributes:attributes];
-    return [element autorelease];
+-(void) appendText:(NSString *) text attributes:(NSDictionary *) attributes{
+    [self appendElement:nil text:text attributes:attributes];
 }
 
 -(void) removeAllElements{
@@ -180,6 +180,7 @@ static CTRunDelegateCallbacks VTRichDelegateCallbacks = {
 }
 
 -(CTFrameRef) frameWithWidth:(CGFloat) width{
+    
     if(_frameWithWidth.frame == nil || _frameWithWidth.width != width){
         
         if(_frameWithWidth.frame){
@@ -196,6 +197,7 @@ static CTRunDelegateCallbacks VTRichDelegateCallbacks = {
         
         CGPathAddRect(path, nil, CGRectMake(0, 0, width, MAXFLOAT));
         
+        
         CFRange r = {0,[_attributedString length]};
         
         NSMutableDictionary * attr = [NSMutableDictionary dictionaryWithCapacity:4];
@@ -204,9 +206,9 @@ static CTRunDelegateCallbacks VTRichDelegateCallbacks = {
         
         _frameWithWidth.frame = CTFramesetterCreateFrame(_frameWithWidth.framesetter, r, path, (CFDictionaryRef)attr);
         
-        CFRelease(path);
-
+        CGPathRelease(path);
     }
+    
     return _frameWithWidth.frame;
 }
 
