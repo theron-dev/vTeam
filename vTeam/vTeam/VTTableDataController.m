@@ -33,6 +33,7 @@
 @synthesize itemViewBundle = _itemViewBundle;
 @synthesize headerCells = _headerCells;
 @synthesize footerCells = _footerCells;
+@synthesize reusableCellIdentifier = _reusableCellIdentifier;
 
 -(void) dealloc{
     [_tableView setDelegate:nil];
@@ -47,6 +48,7 @@
     [_itemViewBundle release];
     [_headerCells release];
     [_footerCells release];
+    [_reusableCellIdentifier release];
     [super dealloc];
 }
 
@@ -152,7 +154,13 @@
                 - [self.dataSource count] - [_headerCells count]];
     }
     
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    NSString * identifier = _reusableCellIdentifier;
+    
+    if(identifier == nil){
+        identifier = @"Cell";
+    }
+    
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
     if(cell == nil){
         
@@ -215,8 +223,22 @@
     
     if(![(id)self.dataSource respondsToSelector:@selector(pageIndex)]
        || [(id)self.dataSource pageIndex] == 1){
+        
         [_tableView setTableHeaderView:nil];
-        [_tableView setTableHeaderView:_topLoadingView];
+        
+        if(_tableView.contentOffset.y < _topLoadingView.frame.size.height){
+            [_tableView setTableHeaderView:_topLoadingView];
+        }
+        else{
+            CGRect r = _topLoadingView.frame;
+            
+            r.size.width = _tableView.bounds.size.width;
+            r.origin.y = - r.size.height;
+            
+            [_topLoadingView setFrame:r];
+            [_tableView addSubview:_topLoadingView];
+        }
+
         [_tableView setTableFooterView:nil];
     }
     else{

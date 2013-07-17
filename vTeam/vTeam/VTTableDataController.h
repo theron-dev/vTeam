@@ -11,6 +11,7 @@
 @interface VTTableDataController : VTDataController<UITableViewDataSource,UITableViewDelegate,VTTableViewDelegate,VTTableViewCellDelegate>
 
 @property(nonatomic,retain) IBOutlet UITableView * tableView;
+@property(nonatomic,retain) NSString * reusableCellIdentifier;
 @property(nonatomic,retain) NSString * itemViewNib;
 @property(nonatomic,retain) NSBundle * itemViewBundle;
 @property(nonatomic,retain) IBOutlet VTDragLoadingView * topLoadingView;
