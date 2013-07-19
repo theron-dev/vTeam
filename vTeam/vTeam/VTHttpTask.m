@@ -41,6 +41,7 @@
 @synthesize allowResume = _allowResume;
 @synthesize beginLength = _beginLength;
 @synthesize contentType = _contentType;
+@synthesize delayWillRequest = _delayWillRequest;
 
 -(void) dealloc{
     [_userInfo release];

@@ -44,6 +44,10 @@
     if((self = [super init])){
         _task = [task retain];
         _timeout = timeout;
+        
+        if(![task delayWillRequest]){
+            self.request = [_task doWillRequeset];
+        }
     }
     return self;
 }
@@ -193,24 +197,32 @@ static void VTHttpTaskOperatorDeallocDispatchFunction(void * queue){
     
     NSRunLoop * runloop = [NSRunLoop currentRunLoop];
     
-    NSThread * thread = [NSThread currentThread];
     
-    dispatch_async(dispatch_get_main_queue(), ^(){
+    
+    if([_task delayWillRequest]){
         
-        if(self.isCancelled){
-            return;
-        }
+        NSThread * thread = [NSThread currentThread];
         
-        NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-        
-        self.request = [_task doWillRequeset];
-        
-        [self performSelector:@selector(startRequest) onThread:thread withObject:nil waitUntilDone:NO];
-        
-        [pool release];
-        
-    });
-        
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            
+            if(self.isCancelled){
+                return;
+            }
+            
+            NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+            
+            self.request = [_task doWillRequeset];
+            
+            [self performSelector:@selector(startRequest) onThread:thread withObject:nil waitUntilDone:NO];
+            
+            [pool release];
+            
+        });
+    }
+    else{
+        [self startRequest];
+    }
+    
     while(![self isCancelled] && !_finished){
         NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
         [runloop runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.8]];
