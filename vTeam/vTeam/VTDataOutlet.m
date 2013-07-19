@@ -113,6 +113,7 @@
 @synthesize disabledKeyPath = _disabledKeyPath;
 @synthesize value = _value;
 @synthesize status = _status;
+@synthesize valueKeyPath = _valueKeyPath;
 
 -(void) dealloc{
     [_status release];
@@ -123,6 +124,7 @@
     [_booleanKeyPath release];
     [_enabledKeyPath release];
     [_disabledKeyPath release];
+    [_valueKeyPath release];
     [_value release];
     [super dealloc];
 }
@@ -174,6 +176,9 @@
     }
     else if(_stringFormat){
         value = [_stringFormat stringByDataOutlet:data];
+    }
+    else if(_valueKeyPath){
+        value = [data dataForKeyPath:_valueKeyPath];
     }
     [_view setValue:value forKeyPath:self.keyPath];
 }

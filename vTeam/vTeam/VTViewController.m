@@ -101,7 +101,6 @@
     return [_parentController openUrl:url animated:animated];
 }
 
-
 -(BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
     if([self.config valueForKey:@"orientations"]){
         NSArray * orientations = [self.config valueForKey:@"orientations"];
