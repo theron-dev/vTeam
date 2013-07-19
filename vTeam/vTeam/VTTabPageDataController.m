@@ -105,10 +105,10 @@
 }
 
 -(void) reloadDataController:(VTDataController *) dataController{
-    VTDataSource * dataSource = dataController.dataSource;
-    if(!dataSource.loading && !dataSource.loaded){
-        [dataController reloadData];
-    }
+//    VTDataSource * dataSource = dataController.dataSource;
+//    if(!dataSource.loading && !dataSource.loaded){
+//        [dataController reloadData];
+//    }
 }
 
 -(void) scrollViewDidScroll:(UIScrollView *)scrollView{

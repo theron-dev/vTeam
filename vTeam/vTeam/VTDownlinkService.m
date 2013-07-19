@@ -52,12 +52,10 @@ static VTDBContext * gDownlinkServiceDBContext = nil;
 
     if(gDownlinkServiceDBContext == nil){
         
-        NSString * dbPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Caches"];
-        
-        [[NSFileManager defaultManager] createDirectoryAtPath:dbPath withIntermediateDirectories:YES attributes:nil error:nil];
+        NSString * dbPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/VTDownlinkService.db"];
         
         gDownlinkServiceDBContext = [[VTDBContext alloc] init];
-        VTSqlite * db = [[VTSqlite alloc] initWithPath:[dbPath stringByAppendingPathComponent:@"VTDownlinkService.db"]];
+        VTSqlite * db = [[VTSqlite alloc] initWithPath:dbPath];
         [gDownlinkServiceDBContext setDb:db];
         [db release];
         

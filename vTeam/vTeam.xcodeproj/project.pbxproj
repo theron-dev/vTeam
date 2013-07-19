@@ -223,6 +223,8 @@
 		116CDE781786924D00BCD47D /* VTTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116CDE761786924D00BCD47D /* VTTabBarController.m */; };
 		116CDE7B1786A0BD00BCD47D /* VTTabBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 116CDE791786A0BC00BCD47D /* VTTabBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		116CDE7C1786A0BD00BCD47D /* VTTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 116CDE7A1786A0BC00BCD47D /* VTTabBar.m */; };
+		1174768617992E4B00FA7DF0 /* VTMonitorService.h in Headers */ = {isa = PBXBuildFile; fileRef = 1174768417992E4B00FA7DF0 /* VTMonitorService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1174768717992E4B00FA7DF0 /* VTMonitorService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1174768517992E4B00FA7DF0 /* VTMonitorService.m */; };
 		118AFC2D175D9A9F00A6A2FF /* VTBarButtonItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 118AFC2B175D9A9F00A6A2FF /* VTBarButtonItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		118AFC2E175D9A9F00A6A2FF /* VTBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 118AFC2C175D9A9F00A6A2FF /* VTBarButtonItem.m */; };
 		118AFC43175DA15100A6A2FF /* VTDBObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 118AFC41175DA15100A6A2FF /* VTDBObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -565,6 +567,8 @@
 		116CDE761786924D00BCD47D /* VTTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTTabBarController.m; sourceTree = "<group>"; };
 		116CDE791786A0BC00BCD47D /* VTTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTTabBar.h; sourceTree = "<group>"; };
 		116CDE7A1786A0BC00BCD47D /* VTTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTTabBar.m; sourceTree = "<group>"; };
+		1174768417992E4B00FA7DF0 /* VTMonitorService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTMonitorService.h; sourceTree = "<group>"; };
+		1174768517992E4B00FA7DF0 /* VTMonitorService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTMonitorService.m; sourceTree = "<group>"; };
 		118AFC2B175D9A9F00A6A2FF /* VTBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTBarButtonItem.h; sourceTree = "<group>"; };
 		118AFC2C175D9A9F00A6A2FF /* VTBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTBarButtonItem.m; sourceTree = "<group>"; };
 		118AFC41175DA15100A6A2FF /* VTDBObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDBObject.h; sourceTree = "<group>"; };
@@ -974,6 +978,8 @@
 				11619CB9173267D400BD3561 /* VTAPIService.m */,
 				AC875C6217758AB8009999A2 /* VTURLService.h */,
 				AC875C6317758AB8009999A2 /* VTURLService.m */,
+				1174768417992E4B00FA7DF0 /* VTMonitorService.h */,
+				1174768517992E4B00FA7DF0 /* VTMonitorService.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -1422,6 +1428,7 @@
 				11A2D1141796A69E00082380 /* VTRichView.h in Headers */,
 				11A2D1181796AC2500082380 /* VTRichImageElement.h in Headers */,
 				11A2D11C1796AF8900082380 /* VTHTMLRich.h in Headers */,
+				1174768617992E4B00FA7DF0 /* VTMonitorService.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1644,6 +1651,7 @@
 				11A2D1151796A69E00082380 /* VTRichView.m in Sources */,
 				11A2D1191796AC2500082380 /* VTRichImageElement.m in Sources */,
 				11A2D11D1796AF8900082380 /* VTHTMLRich.m in Sources */,
+				1174768717992E4B00FA7DF0 /* VTMonitorService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
