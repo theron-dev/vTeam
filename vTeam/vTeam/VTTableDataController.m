@@ -14,6 +14,7 @@
     BOOL _allowRefresh;
     NSDateFormatter * _dateFormatter;
     CGPoint _preContentOffset;
+    BOOL _animating;
 }
 
 @property(nonatomic,readonly) NSDateFormatter * dateFormatter;
@@ -254,6 +255,9 @@
 
 -(void) didStopLoading{
     
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.3];
+    
     [_tableView setTableHeaderView:nil];
     [_tableView setTableFooterView:nil];
     
@@ -273,6 +277,8 @@
         [_topLoadingView setFrame:r];
         [_tableView addSubview:_topLoadingView];
     }
+
+    [UIView commitAnimations];
     
     if([self.dataSource respondsToSelector:@selector(hasMoreData)]
        && [(id)self.dataSource hasMoreData]){
@@ -299,6 +305,7 @@
         [_bottomLoadingView removeFromSuperview];
     }
     
+    
     if([self.dataSource isEmpty]){
         if(_notFoundDataView && _notFoundDataView.superview == nil){
             _notFoundDataView.frame = _tableView.bounds;
@@ -309,18 +316,22 @@
     else{
         [_notFoundDataView removeFromSuperview];
     }
-
+    
 }
+
 
 -(void) stopLoading{
     
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(didStopLoading) object:nil];
-    
     [self performSelector:@selector(didStopLoading) withObject:nil afterDelay:0.1];
     
 }
 
 -(void) tableView:(UITableView *)tableView didContentOffsetChanged:(CGPoint)contentOffset{
+    
+    if(_animating){
+        return;
+    }
     
     CGSize contentSize = tableView.contentSize;
     UIEdgeInsets contentInset = tableView.contentInset;

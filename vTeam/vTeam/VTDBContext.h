@@ -23,6 +23,14 @@
 
 -(BOOL) updateObject:(VTDBObject *) dbObject;
 
+-(void) setObject:(VTDBObject *) dbObject;
+
+-(void) removeObject:(VTDBObject *) dbObject;
+
+-(void) removeObjects:(Class) dbObjectClass;
+
+-(NSSet *) queryObjects:(Class) dbObjectClass;
+
 -(id<IVTSqliteCursor>) query:(Class) dbObjectClass sql:(NSString *) sql data:(id) data;
 
 @end

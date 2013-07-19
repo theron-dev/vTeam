@@ -44,10 +44,6 @@
     if((self = [super init])){
         _task = [task retain];
         _timeout = timeout;
-        
-        if(![task delayWillRequest]){
-            self.request = [_task doWillRequeset];
-        }
     }
     return self;
 }
@@ -198,30 +194,23 @@ static void VTHttpTaskOperatorDeallocDispatchFunction(void * queue){
     NSRunLoop * runloop = [NSRunLoop currentRunLoop];
     
     
+    NSThread * thread = [NSThread currentThread];
     
-    if([_task delayWillRequest]){
+    dispatch_async(dispatch_get_main_queue(), ^(){
         
-        NSThread * thread = [NSThread currentThread];
+        if(self.isCancelled){
+            return;
+        }
         
-        dispatch_async(dispatch_get_main_queue(), ^(){
-            
-            if(self.isCancelled){
-                return;
-            }
-            
-            NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-            
-            self.request = [_task doWillRequeset];
-            
-            [self performSelector:@selector(startRequest) onThread:thread withObject:nil waitUntilDone:NO];
-            
-            [pool release];
-            
-        });
-    }
-    else{
-        [self startRequest];
-    }
+        NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+        
+        self.request = [_task doWillRequeset];
+        
+        [self performSelector:@selector(startRequest) onThread:thread withObject:nil waitUntilDone:NO];
+        
+        [pool release];
+        
+    });
     
     while(![self isCancelled] && !_finished){
         NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
@@ -249,6 +238,7 @@ static void VTHttpTaskOperatorDeallocDispatchFunction(void * queue){
 - (BOOL)isFinished{
     return _finished;
 }
+
 
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
@@ -308,7 +298,6 @@ static void VTHttpTaskOperatorDeallocDispatchFunction(void * queue){
         return;
     }
     
-   
     [self.task doBackgroundReceiveData:data];
     
     dispatch_async(dispatch_get_main_queue(), ^(){

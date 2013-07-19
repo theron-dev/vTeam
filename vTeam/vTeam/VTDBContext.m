@@ -13,7 +13,7 @@
 
 
 @interface VTDBContext(){
-  
+    NSMutableDictionary * _dbObjects;
 }
 
 @end
@@ -24,6 +24,7 @@
 
 -(void) dealloc{
     [_db release];
+    [_dbObjects release];
     [super dealloc];
 }
 
@@ -249,6 +250,41 @@ static NSString * VTDBContextPropertyDBType(objc_property_t prop){
 -(id<IVTSqliteCursor>) query:(Class) dbObjectClass sql:(NSString *) sql data:(id) data{
     NSString * name = NSStringFromClass(dbObjectClass) ;
     return [_db query:[NSString stringWithFormat:@"SELECT * FROM [%@] %@",name,sql ? sql : @""] withData:data];
+}
+
+-(void) setObject:(VTDBObject *) dbObject{
+    
+    NSString * key = NSStringFromClass([[dbObject class] tableClass]);
+    
+    if(_dbObjects == nil){
+        _dbObjects = [[NSMutableDictionary alloc] initWithCapacity:4];
+    }
+    
+    NSMutableSet * set = [_dbObjects objectForKey:key];
+    
+    if(set==nil){
+        set = [[NSMutableSet alloc] initWithCapacity:4];
+        [_dbObjects setObject:set forKey:key];
+    }
+    
+    [set addObject:dbObject];
+
+}
+
+-(void) removeObject:(VTDBObject *) dbObject{
+    NSString * key = NSStringFromClass([[dbObject class] tableClass]);
+    NSMutableSet * set = [_dbObjects objectForKey:key];
+    [set removeObject:dbObject];
+}
+
+-(void) removeObjects:(Class) dbObjectClass{
+    NSString * key = NSStringFromClass(dbObjectClass);
+    [_dbObjects removeObjectForKey:key];
+}
+
+-(NSSet *) queryObjects:(Class) dbObjectClass{
+    NSString * key = NSStringFromClass(dbObjectClass);
+    return [_dbObjects objectForKey:key];
 }
 
 
