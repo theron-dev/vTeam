@@ -7,6 +7,7 @@
 //
 
 #import "VTStatusView.h"
+#import "VTAnimationView.h"
 
 @implementation VTStatusViewItem
 
@@ -58,12 +59,18 @@
                 if([v isKindOfClass:[UIActivityIndicatorView class]]){
                     [(UIActivityIndicatorView *)v startAnimating];
                 }
+                if([v isKindOfClass:[VTAnimationView class]]){
+                    [(VTAnimationView *) v startAnimating];
+                }
             }
         }
         else{
             for(UIView * v in [item views]){
                 if([v isKindOfClass:[UIActivityIndicatorView class]]){
                     [(UIActivityIndicatorView *)v stopAnimating];
+                }
+                if([v isKindOfClass:[VTAnimationView class]]){
+                    [(VTAnimationView *) v stopAnimating];
                 }
                 [v setHidden:YES];
             }
