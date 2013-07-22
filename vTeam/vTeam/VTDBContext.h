@@ -17,6 +17,12 @@
 
 -(void) regDBObjectClass:(Class) dbObjectClass;
 
+-(NSString *) insertObjectSQL:(Class) dbObjectClass;
+
+-(NSString *) deleteObjectSQL:(Class) dbObjectClass;
+
+-(NSString *) updateObjectSQL:(Class) dbObjectClass;
+
 -(BOOL) insertObject:(VTDBObject *) dbObject;
 
 -(BOOL) deleteObject:(VTDBObject *) dbObject;

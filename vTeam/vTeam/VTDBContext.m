@@ -136,57 +136,8 @@ static NSString * VTDBContextPropertyDBType(objc_property_t prop){
 }
 
 -(BOOL) insertObject:(VTDBObject *) dbObject{
-    
-    Class clazz = [[dbObject class] tableClass];
-    unsigned int propCount = 0;
-    objc_property_t * prop ;
-    objc_property_t rowid = class_getProperty([VTDBObject tableClass], "rowid");
-    NSString * name = NSStringFromClass(clazz) ;
-    
-    NSMutableString * mb = [NSMutableString stringWithCapacity:1024];
-    NSMutableString * values = [NSMutableString stringWithCapacity:1024];
-    
-    [mb appendFormat:@"INSERT INTO [%@] ( ",name];
-    [values appendString:@" VALUES("];
-    
-    BOOL isFirst = YES;
-    
-    while(clazz && clazz != [NSObject class]){
-    
-        prop =  class_copyPropertyList(clazz, &propCount);
-        
-        for(int i=0;i<propCount;i++){
-            
-            if(rowid == prop[i]){
-                continue;
-            }
-            
-            const char * n = property_getName(prop[i]);
-        
-            if(isFirst){
-                isFirst = NO;
-            }
-            else {
-                [mb appendString:@","];
-                [values appendString:@","];
-            }
-            
-            [mb appendFormat:@"[%s]",n];
-            [values appendFormat:@":%s",n];
-        }
-        
-        free(prop);
-        
-        clazz = class_getSuperclass(clazz);
-    }
-    
-    [values appendString:@")"];
-    
-    [mb appendString:@")"];
-    
-    [mb appendString:values];
-    
-    if([_db execture:mb withData:dbObject]){
+
+    if([_db execture:[self insertObjectSQL:[[dbObject class] tableClass]] withData:dbObject]){
         [dbObject setRowid:[_db lastInsertRowid]];
         return YES;
     }
@@ -195,56 +146,11 @@ static NSString * VTDBContextPropertyDBType(objc_property_t prop){
 }
 
 -(BOOL) deleteObject:(VTDBObject *) dbObject{
-    Class dbObjectClass = [[dbObject class] tableClass];
-    NSString * name = NSStringFromClass(dbObjectClass) ;
-    return [_db execture:[NSString stringWithFormat:@"DELETE FROM [%@] WHERE [rowid]=:rowid",name] withData:dbObject];
+    return [_db execture:[self deleteObjectSQL:[[dbObject class] tableClass]] withData:dbObject];
 }
 
 -(BOOL) updateObject:(VTDBObject *) dbObject{
-    
-    Class clazz = [[dbObject class] tableClass];
-    unsigned int propCount = 0;
-    objc_property_t * prop;
-    objc_property_t rowid = class_getProperty([VTDBObject tableClass], "rowid");
-    
-    NSString * name = NSStringFromClass(clazz) ;
-    
-    NSMutableString * mb = [NSMutableString stringWithCapacity:1024];
-
-    [mb appendFormat:@"UPDATE [%@] SET ",name];
-    
-    BOOL isFirst = YES;
-    
-    while(clazz && clazz != [NSObject class]){
-        
-        prop =  class_copyPropertyList(clazz, &propCount);
-        
-        for(int i=0;i<propCount;i++){
-            
-            if(rowid == prop[i]){
-                continue;
-            }
-            
-            const char * n = property_getName(prop[i]);
-      
-            if(isFirst){
-                isFirst = NO;
-            }
-            else{
-                [mb appendString:@","];
-            }
-            
-            [mb appendFormat:@"[%s]=:%s",n,n];
-        }
-        
-        free(prop);
-        
-        clazz = class_getSuperclass(clazz);
-    }
-    
-    [mb appendString:@" WHERE [rowid]=:rowid"];
-    
-    return [_db execture:mb withData:dbObject];
+    return [_db execture:[self updateObjectSQL:[[dbObject class] tableClass]] withData:dbObject];
 }
 
 -(id<IVTSqliteCursor>) query:(Class) dbObjectClass sql:(NSString *) sql data:(id) data{
@@ -285,6 +191,110 @@ static NSString * VTDBContextPropertyDBType(objc_property_t prop){
 -(NSSet *) queryObjects:(Class) dbObjectClass{
     NSString * key = NSStringFromClass(dbObjectClass);
     return [_dbObjects objectForKey:key];
+}
+
+-(NSString *) insertObjectSQL:(Class) dbObjectClass{
+    Class clazz = dbObjectClass;
+    unsigned int propCount = 0;
+    objc_property_t * prop ;
+    objc_property_t rowid = class_getProperty([VTDBObject tableClass], "rowid");
+    NSString * name = NSStringFromClass(clazz) ;
+    
+    NSMutableString * mb = [NSMutableString stringWithCapacity:1024];
+    NSMutableString * values = [NSMutableString stringWithCapacity:1024];
+    
+    [mb appendFormat:@"INSERT INTO [%@] ( ",name];
+    [values appendString:@" VALUES("];
+    
+    BOOL isFirst = YES;
+    
+    while(clazz && clazz != [NSObject class]){
+        
+        prop =  class_copyPropertyList(clazz, &propCount);
+        
+        for(int i=0;i<propCount;i++){
+            
+            if(rowid == prop[i]){
+                continue;
+            }
+            
+            const char * n = property_getName(prop[i]);
+            
+            if(isFirst){
+                isFirst = NO;
+            }
+            else {
+                [mb appendString:@","];
+                [values appendString:@","];
+            }
+            
+            [mb appendFormat:@"[%s]",n];
+            [values appendFormat:@":%s",n];
+        }
+        
+        free(prop);
+        
+        clazz = class_getSuperclass(clazz);
+    }
+    
+    [values appendString:@")"];
+    
+    [mb appendString:@")"];
+    
+    [mb appendString:values];
+
+    return mb;
+}
+
+-(NSString *) deleteObjectSQL:(Class) dbObjectClass{
+    NSString * name = NSStringFromClass(dbObjectClass) ;
+    return [NSString stringWithFormat:@"DELETE FROM [%@] WHERE [rowid]=:rowid",name];
+}
+
+-(NSString *) updateObjectSQL:(Class) dbObjectClass{
+    Class clazz = dbObjectClass;
+    unsigned int propCount = 0;
+    objc_property_t * prop;
+    objc_property_t rowid = class_getProperty([VTDBObject tableClass], "rowid");
+    
+    NSString * name = NSStringFromClass(clazz) ;
+    
+    NSMutableString * mb = [NSMutableString stringWithCapacity:1024];
+    
+    [mb appendFormat:@"UPDATE [%@] SET ",name];
+    
+    BOOL isFirst = YES;
+    
+    while(clazz && clazz != [NSObject class]){
+        
+        prop =  class_copyPropertyList(clazz, &propCount);
+        
+        for(int i=0;i<propCount;i++){
+            
+            if(rowid == prop[i]){
+                continue;
+            }
+            
+            const char * n = property_getName(prop[i]);
+            
+            if(isFirst){
+                isFirst = NO;
+            }
+            else{
+                [mb appendString:@","];
+            }
+            
+            [mb appendFormat:@"[%s]=:%s",n,n];
+        }
+        
+        free(prop);
+        
+        clazz = class_getSuperclass(clazz);
+    }
+    
+    [mb appendString:@" WHERE [rowid]=:rowid"];
+    
+    return mb;
 }
 
 

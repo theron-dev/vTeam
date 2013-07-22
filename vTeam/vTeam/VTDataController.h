@@ -41,4 +41,6 @@
 
 -(void) vtDataController:(VTDataController *) controller didFitalError:(NSError *) error;
 
+-(void) vtDataControllerDidContentChanged:(VTDataController *) controller;
+
 @end

@@ -16,6 +16,7 @@
 @synthesize errorCodeKeyPath =  _errorCodeKeyPath;
 @synthesize errorKeyPath = _errorKeyPath;
 @synthesize queryValues = _queryValues;
+@synthesize httpClass = _httpClass;
 
 -(void) dealloc{
     [self.context cancelHandle:@protocol(IVTURLDownlinkTask) task:self];

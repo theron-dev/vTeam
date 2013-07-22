@@ -17,6 +17,7 @@
 
 @property(nonatomic,retain) NSString * errorCodeKeyPath;
 @property(nonatomic,retain) NSString * errorKeyPath;
+@property(nonatomic,assign) Class httpClass;
 
 @property(nonatomic,retain) id queryValues;
 

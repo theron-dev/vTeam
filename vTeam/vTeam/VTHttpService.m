@@ -71,6 +71,11 @@ static void VTHttpTaskOperatorDeallocDispatchFunction(void * queue){
     
 }
 
+static void VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction(void * task){
+    
+    [(id) task release];
+}
+
 -(void) dealloc{
     
     NSOperationQueue * opQueue = _queue;
@@ -83,8 +88,11 @@ static void VTHttpTaskOperatorDeallocDispatchFunction(void * queue){
     [_conn cancel];
     [_conn release];
     [_request release];
+    
     [NSObject cancelPreviousPerformRequestsWithTarget:_task];
-    [_task release];
+    
+    dispatch_async_f(dispatch_get_main_queue(), _task, VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction);
+
     [super dealloc];
 }
 

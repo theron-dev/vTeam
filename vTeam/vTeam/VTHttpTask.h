@@ -12,6 +12,9 @@ typedef enum {
     VTHttpTaskResponseTypeNone,VTHttpTaskResponseTypeString,VTHttpTaskResponseTypeJSON,VTHttpTaskResponseTypeResource
 } VTHttpTaskResponseType;
 
+typedef enum {
+    VTHttpTaskResponseEncodingNone,VTHttpTaskResponseEncodingGBK
+} VTHttpTaskResponseEncoding;
 
 @protocol IVTHttpTaskDelegate
 
@@ -38,6 +41,7 @@ typedef enum {
 @property(retain) NSURLRequest * request;
 @property(assign) id delegate;
 @property(retain) id responseBody;
+@property(assign) VTHttpTaskResponseEncoding responseEncoding;
 @property(assign) VTHttpTaskResponseType responseType;
 @property(retain) NSHTTPURLResponse * response;
 @property(retain) id userInfo;

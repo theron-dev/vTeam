@@ -41,6 +41,7 @@
 @synthesize allowResume = _allowResume;
 @synthesize beginLength = _beginLength;
 @synthesize contentType = _contentType;
+@synthesize responseEncoding = _responseEncoding;
 
 -(void) dealloc{
     [_userInfo release];
@@ -220,7 +221,7 @@
 
 -(void) doBackgroundLoaded{
     if(_responseType == VTHttpTaskResponseTypeString && _responseBody){
-        if([[self.contentType lowercaseString] rangeOfString:@"charset=gbk"].location != NSNotFound){
+        if([[self.contentType lowercaseString] rangeOfString:@"charset=gbk"].location != NSNotFound || _responseEncoding == VTHttpTaskResponseEncodingGBK){
             self.responseBody = [[[NSString alloc] initWithData:_responseBody encoding:CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000)] autorelease];
         }
         else{
