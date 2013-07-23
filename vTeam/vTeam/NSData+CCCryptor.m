@@ -173,4 +173,44 @@ static NSData * NSDataCCCryptorKey(CCAlgorithm algorithm, id key){
 
 }
 
+- (NSData *)AES256EncryptWithKey:(NSString *)key {
+    char keyPtr[kCCKeySizeAES256+1];
+    bzero(keyPtr, sizeof(keyPtr));
+    
+    [key getCString:keyPtr maxLength:sizeof(keyPtr) encoding:NSUTF8StringEncoding];
+    
+    NSUInteger dataLength = [self length];
+    
+    size_t bufferSize = dataLength + kCCBlockSizeAES128;
+    void *buffer = malloc(bufferSize);
+    
+    size_t numBytesEncrypted = 0;
+    //alternative to "AES/ECB/NoPadding" mode in java
+    CCCryptorStatus cryptStatus = CCCrypt(kCCEncrypt, kCCAlgorithmAES128, kCCOptionECBMode,
+                                          keyPtr, kCCKeySizeAES128,
+                                          NULL /* initialization vector (optional) */,
+                                          [self bytes], dataLength, /* input */
+                                          buffer, bufferSize, /* output */
+                                          &numBytesEncrypted);
+    if (cryptStatus == kCCSuccess) {
+        //the returned NSData takes ownership of the buffer and will free it on deallocation
+        return [NSData dataWithBytesNoCopy:buffer length:numBytesEncrypted];
+    }
+    
+    free(buffer); //free the buffer;
+    return nil;
+}
+
+-(NSString*) toHexString
+{
+    Byte *bytes = (Byte *)[self bytes];
+    NSString *hexStr=@"";
+    for(int i=0;i<[self length];i++)
+    {
+        NSString *newHexStr = [NSString stringWithFormat:@"%02X",bytes[i]&0xff];
+        hexStr = [NSString stringWithFormat:@"%@%@",hexStr,newHexStr];
+    }
+    return hexStr;
+}
+
 @end

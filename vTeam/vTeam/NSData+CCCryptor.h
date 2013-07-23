@@ -16,4 +16,8 @@
 
 -(NSData *) CCCryptorDecryptedUsingAlgorithm: (CCAlgorithm) algorithm key:(id) key;
 
+-(NSData *) AES256EncryptWithKey:(NSString *)key;
+
+-(NSString*) toHexString;
+
 @end
