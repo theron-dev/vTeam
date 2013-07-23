@@ -41,10 +41,7 @@
         return [self dataForKey:keyPath];
     }
     id v = [self dataForKey:[keyPath substringToIndex:r.location]];
-    if([keyPath length] > r.location + r.length){
-        return [v dataForKeyPath:[keyPath substringFromIndex:r.location + r.length]];
-    }
-    return v;
+    return [v dataForKeyPath:[keyPath substringFromIndex:r.location + r.length]];
 }
 
 @end

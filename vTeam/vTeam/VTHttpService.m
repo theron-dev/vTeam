@@ -272,6 +272,22 @@ static void VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction(void * task){
     });
 }
 
+-(void) didLoaded{
+    
+    if(self.isCancelled){
+        return;
+    }
+    
+    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+    
+    [self.task doLoaded];
+    
+    self.finished = YES;
+    
+    [pool release];
+    
+}
+
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection{
     
     if(_conn != connection || [self isCancelled]){
@@ -282,21 +298,7 @@ static void VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction(void * task){
     
     [self.task doBackgroundLoaded];
     
-    dispatch_async(dispatch_get_main_queue(), ^(){
-        
-        if(self.isCancelled){
-            return;
-        }
-        
-        NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-        
-        [self.task doLoaded];
-        
-        self.finished = YES;
-        
-        [pool release];
-    });
-    
+    [self performSelectorOnMainThread:@selector(didLoaded) withObject:nil waitUntilDone:NO];
     
 }
 
