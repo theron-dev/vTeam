@@ -42,6 +42,17 @@
 
 -(void) layout{
     CGSize size = [_view bounds].size;
+    
+    if([_view respondsToSelector:@selector(contentSize)]){
+        CGSize s = [(UIScrollView *) _view contentSize];
+        if(size.width < s.width){
+            size.width = s.width;
+        }
+        if(size.height < s.height){
+            size.height = s.height;
+        }
+    }
+    
     if(!CGSizeEqualToSize(size, _size) || _needsLayout){
         _size = size;
         [self doLayout];

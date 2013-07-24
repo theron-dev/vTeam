@@ -45,6 +45,7 @@ typedef enum {
 @property(assign) VTHttpTaskResponseType responseType;
 @property(retain) NSHTTPURLResponse * response;
 @property(retain) id userInfo;
+@property(assign,getter = isAllowWillRequest) BOOL allowWillRequest;
 
 -(NSURLRequest *) doWillRequeset;
 

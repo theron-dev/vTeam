@@ -86,6 +86,7 @@
                     [httpTask setDelegate:self];
                     [httpTask setOnlyLocalResource:YES];
                     [httpTask setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:imageTask,@"imageTask",@"defaultImage",@"keyPath", nil]];
+                    [httpTask setAllowWillRequest:YES];
                     
                     [self.context handle:@protocol(IVTHttpResourceTask) task:httpTask priority:0];
                     
@@ -141,6 +142,7 @@
                     [httpTask setAllowCheckContentLength:YES];
                     [httpTask setSource:imageTask];
                     [httpTask setDelegate:self];
+                    [httpTask setAllowWillRequest:YES];
                     
                     if(taskType == @protocol(IVTLocalImageTask)){
                         [httpTask setOnlyLocalResource:YES];

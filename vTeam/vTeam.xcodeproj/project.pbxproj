@@ -243,6 +243,8 @@
 		11C238221786BBC000DBADBD /* VTTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C238201786BBC000DBADBD /* VTTabViewController.m */; };
 		11C238311786CB8200DBADBD /* VTCreatorViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C2382F1786CB8100DBADBD /* VTCreatorViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11C238321786CB8200DBADBD /* VTCreatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C238301786CB8200DBADBD /* VTCreatorViewController.m */; };
+		11C29F56179F795E00E48A36 /* VTFlowViewLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C29F54179F795E00E48A36 /* VTFlowViewLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11C29F57179F795E00E48A36 /* VTFlowViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C29F55179F795E00E48A36 /* VTFlowViewLayout.m */; };
 		11E59F5F1728C197002DD63C /* IVTServiceContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 11E59F5E1728C03B002DD63C /* IVTServiceContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11E59F641728C785002DD63C /* VTStyleSheet.h in Headers */ = {isa = PBXBuildFile; fileRef = 11E59F621728C785002DD63C /* VTStyleSheet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11E59F651728C785002DD63C /* VTStyleSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E59F631728C785002DD63C /* VTStyleSheet.m */; };
@@ -281,7 +283,7 @@
 		AC325015173E23980094A7A6 /* VTLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AC325013173E23980094A7A6 /* VTLayout.m */; };
 		AC325018173E23A60094A7A6 /* VTLayoutData.h in Headers */ = {isa = PBXBuildFile; fileRef = AC325016173E23A60094A7A6 /* VTLayoutData.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AC325019173E23A60094A7A6 /* VTLayoutData.m in Sources */ = {isa = PBXBuildFile; fileRef = AC325017173E23A60094A7A6 /* VTLayoutData.m */; };
-		AC325020173E257D0094A7A6 /* VTViewLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = AC32501E173E257D0094A7A6 /* VTViewLayout.h */; };
+		AC325020173E257D0094A7A6 /* VTViewLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = AC32501E173E257D0094A7A6 /* VTViewLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AC325021173E257D0094A7A6 /* VTViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AC32501F173E257D0094A7A6 /* VTViewLayout.m */; };
 		AC325028173E2DF10094A7A6 /* VTFormController.h in Headers */ = {isa = PBXBuildFile; fileRef = AC325026173E2DF10094A7A6 /* VTFormController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AC325029173E2DF10094A7A6 /* VTFormController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC325027173E2DF10094A7A6 /* VTFormController.m */; };
@@ -587,6 +589,8 @@
 		11C238201786BBC000DBADBD /* VTTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTTabViewController.m; sourceTree = "<group>"; };
 		11C2382F1786CB8100DBADBD /* VTCreatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTCreatorViewController.h; sourceTree = "<group>"; };
 		11C238301786CB8200DBADBD /* VTCreatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTCreatorViewController.m; sourceTree = "<group>"; };
+		11C29F54179F795E00E48A36 /* VTFlowViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTFlowViewLayout.h; sourceTree = "<group>"; };
+		11C29F55179F795E00E48A36 /* VTFlowViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTFlowViewLayout.m; sourceTree = "<group>"; };
 		11E59F5E1728C03B002DD63C /* IVTServiceContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVTServiceContainer.h; sourceTree = "<group>"; };
 		11E59F621728C785002DD63C /* VTStyleSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTStyleSheet.h; sourceTree = "<group>"; };
 		11E59F631728C785002DD63C /* VTStyleSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTStyleSheet.m; sourceTree = "<group>"; };
@@ -1208,6 +1212,8 @@
 				AC325017173E23A60094A7A6 /* VTLayoutData.m */,
 				AC32501E173E257D0094A7A6 /* VTViewLayout.h */,
 				AC32501F173E257D0094A7A6 /* VTViewLayout.m */,
+				11C29F54179F795E00E48A36 /* VTFlowViewLayout.h */,
+				11C29F55179F795E00E48A36 /* VTFlowViewLayout.m */,
 				AC32504B173E7B1E0094A7A6 /* VTLayoutContainer.h */,
 				AC32504C173E7B1E0094A7A6 /* VTLayoutContainer.m */,
 			);
@@ -1429,6 +1435,7 @@
 				11A2D1181796AC2500082380 /* VTRichImageElement.h in Headers */,
 				11A2D11C1796AF8900082380 /* VTHTMLRich.h in Headers */,
 				1174768617992E4B00FA7DF0 /* VTMonitorService.h in Headers */,
+				11C29F56179F795E00E48A36 /* VTFlowViewLayout.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1652,6 +1659,7 @@
 				11A2D1191796AC2500082380 /* VTRichImageElement.m in Sources */,
 				11A2D11D1796AF8900082380 /* VTHTMLRich.m in Sources */,
 				1174768717992E4B00FA7DF0 /* VTMonitorService.m in Sources */,
+				11C29F57179F795E00E48A36 /* VTFlowViewLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

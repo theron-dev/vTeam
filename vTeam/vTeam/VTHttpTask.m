@@ -42,6 +42,7 @@
 @synthesize beginLength = _beginLength;
 @synthesize contentType = _contentType;
 @synthesize responseEncoding = _responseEncoding;
+@synthesize allowWillRequest = _allowWillRequest;
 
 -(void) dealloc{
     [_userInfo release];

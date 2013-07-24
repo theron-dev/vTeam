@@ -195,6 +195,8 @@
     [super vtDataSourceDidLoadedFromCache:dataSource timestamp:timestamp];
     [self setLastUpdateDate:timestamp];
     [_tableView reloadData];
+    [self cancelDownloadImagesForView:_tableView];
+    [self downloadImagesForView:_tableView];
 }
 
 -(void) vtDataSourceDidLoaded:(VTDataSource *) dataSource{
@@ -202,18 +204,21 @@
     [self setLastUpdateDate:[NSDate date]];
     [_tableView reloadData];
     [self stopLoading];
+    [self cancelDownloadImagesForView:_tableView];
+    [self downloadImagesForView:_tableView];
 }
 
 -(void) vtDataSourceDidContentChanged:(VTDataSource *)dataSource{
     [super vtDataSourceDidContentChanged:dataSource];
     [_tableView reloadData];
+    [self cancelDownloadImagesForView:_tableView];
+    [self downloadImagesForView:_tableView];
 }
 
 -(void) vtDataSource:(VTDataSource *)dataSource didFitalError:(NSError *)error{
     [self stopLoading];
     [super vtDataSource:dataSource didFitalError:error];
 }
-
 
 -(void) startLoading{
     
@@ -253,13 +258,15 @@
     
 }
 
--(void) didStopLoading{
+-(void) stopLoading{
     
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.3];
     
     [_tableView setTableHeaderView:nil];
     [_tableView setTableFooterView:nil];
+    
+    [UIView commitAnimations];
     
     [_topLoadingView removeFromSuperview];
     [_bottomLoadingView removeFromSuperview];
@@ -277,8 +284,8 @@
         [_topLoadingView setFrame:r];
         [_tableView addSubview:_topLoadingView];
     }
-
-    [UIView commitAnimations];
+    
+    
     
     if([self.dataSource respondsToSelector:@selector(hasMoreData)]
        && [(id)self.dataSource hasMoreData]){
@@ -316,15 +323,7 @@
     else{
         [_notFoundDataView removeFromSuperview];
     }
-    
-}
 
-
--(void) stopLoading{
-    
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(didStopLoading) object:nil];
-    [self performSelector:@selector(didStopLoading) withObject:nil afterDelay:0.1];
-    
 }
 
 -(void) tableView:(UITableView *)tableView didContentOffsetChanged:(CGPoint)contentOffset{

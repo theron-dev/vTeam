@@ -68,14 +68,18 @@
         [_dataItem release];
         _dataItem = [dataItem retain];
         [_dataOutletContainer applyDataOutlet:self];
-        [self downloadImagesForView:self];
+        [self cancelDownloadImagesForView:self];
+        [self loadImagesForView:self];
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(downloadImagesForView:) object:nil];
+        [self performSelector:@selector(downloadImagesForView:) withObject:self afterDelay:0.02];
         [_layoutContainer layout];
         [_dataSource cancel];
         [_dataSource reloadData];
     }
     else{
         [_dataOutletContainer applyDataOutlet:self];
-        [self downloadImagesForView:self];
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(downloadImagesForView:) object:nil];
+        [self performSelector:@selector(downloadImagesForView:) withObject:self afterDelay:0.02];
         [_layoutContainer layout];
     }
 }

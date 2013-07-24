@@ -44,6 +44,14 @@
     if((self = [super init])){
         _task = [task retain];
         _timeout = timeout;
+        
+        if([_task isAllowWillRequest]){
+            self.request = [_task doWillRequeset];
+            if(_request == nil){
+                [self release];
+                return nil;
+            }
+        }
     }
     return self;
 }
@@ -105,26 +113,36 @@ static void VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction(void * task){
     return YES;
 }
 
+-(void) mainDoFailError:(NSError *) error{
+    
+    if(self.isCancelled){
+        return;
+    }
+    
+    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+    
+    [self.task doFailError:error];
+    
+    self.finished = YES;
+    
+    [pool release];
+}
+
 -(void) connectTimeout{
     [_conn cancel];
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     self.conn = nil;
     
-    dispatch_async(dispatch_get_main_queue(), ^(){
-        
-        if(self.isCancelled){
-            return;
-        }
-        
-        NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-        
-        [self.task doFailError:
-         [NSError errorWithDomain:@"VTHttpService" code:-3 userInfo:[NSDictionary dictionaryWithObject:@"http connect timeout" forKey:NSLocalizedDescriptionKey]]];
-        
-        self.finished = YES;
-        
-        [pool release];
-    });
+    [self performSelectorOnMainThread:@selector(mainDoFailError:) withObject:[NSError errorWithDomain:@"VTHttpService" code:-3 userInfo:[NSDictionary dictionaryWithObject:@"http connect timeout" forKey:NSLocalizedDescriptionKey]] waitUntilDone:NO];
+}
+
+-(void) mainDoLoading{
+    
+    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+    
+    [self.task doLoading];
+    
+    [pool release];
     
 }
 
@@ -139,18 +157,7 @@ static void VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction(void * task){
         return;
     }
     
-    dispatch_async(dispatch_get_main_queue(), ^(){
-        
-        if(self.isCancelled){
-            return;
-        }
-        
-        NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-        
-        [self.task doLoading];
-        
-        [pool release];
-    });
+    [self performSelectorOnMainThread:@selector(mainDoLoading) withObject:nil waitUntilDone:NO];
 
     self.conn = [NSURLConnection connectionWithRequest:self.request delegate:self];
     
@@ -160,6 +167,22 @@ static void VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction(void * task){
         [self performSelector:@selector(connectTimeout) withObject:nil afterDelay:_timeout];
     }
 
+}
+
+-(void) mainWillRequest:(NSThread *) thread{
+    
+    if(self.isCancelled){
+        return;
+    }
+    
+    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+    
+    self.request = [_task doWillRequeset];
+    
+    [self performSelector:@selector(startRequest) onThread:thread withObject:nil waitUntilDone:NO];
+    
+    [pool release];
+    
 }
 
 - (void) main{
@@ -177,6 +200,7 @@ static void VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction(void * task){
     self.queue = opQueue;
     
     if(_allowShowNetworkStatus ){
+        
         dispatch_async(dispatch_get_main_queue(), ^(){
             
             NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
@@ -197,28 +221,21 @@ static void VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction(void * task){
             [pool release];
             
         });
+        
     }
     
     NSRunLoop * runloop = [NSRunLoop currentRunLoop];
     
-    
-    NSThread * thread = [NSThread currentThread];
-    
-    dispatch_async(dispatch_get_main_queue(), ^(){
+    if(![_task isAllowWillRequest]){
         
-        if(self.isCancelled){
-            return;
-        }
+        NSThread * thread = [NSThread currentThread];
         
-        NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-        
-        self.request = [_task doWillRequeset];
-        
-        [self performSelector:@selector(startRequest) onThread:thread withObject:nil waitUntilDone:NO];
-        
-        [pool release];
-        
-    });
+        [self performSelectorOnMainThread:@selector(mainWillRequest:) withObject:thread waitUntilDone:NO];
+
+    }
+    else{
+        [self startRequest];
+    }
     
     while(![self isCancelled] && !_finished){
         NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
@@ -257,19 +274,8 @@ static void VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction(void * task){
     
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     
-    dispatch_async(dispatch_get_main_queue(), ^(){
-        if(self.isCancelled){
-            return;
-        }
-        
-        NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-        
-        [self.task doFailError:error];
-        
-        self.finished = YES;
-        
-        [pool release];
-    });
+    [self performSelectorOnMainThread:@selector(mainDoFailError:) withObject:error waitUntilDone:NO];
+    
 }
 
 -(void) didLoaded{
@@ -302,6 +308,18 @@ static void VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction(void * task){
     
 }
 
+-(void) mainDoReceiveData:(NSData *) data{
+    if(self.isCancelled){
+        return;
+    }
+    
+    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+    
+    [self.task doReceiveData:data];
+    
+    [pool release];
+}
+
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
     
     if(_conn != connection || [self isCancelled]){
@@ -310,20 +328,20 @@ static void VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction(void * task){
     
     [self.task doBackgroundReceiveData:data];
     
-    dispatch_async(dispatch_get_main_queue(), ^(){
-        
-        if(self.isCancelled){
-            return;
-        }
-        
-        NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-        
-        [self.task doReceiveData:data];
+    [self performSelectorOnMainThread:@selector(mainDoReceiveData:) withObject:data waitUntilDone:NO];
 
-        [pool release];
-        
-    });
+}
+
+-(void) mainDoResponse{
+    if(self.isCancelled){
+        return;
+    }
     
+    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+    
+    [self.task doResponse];
+    
+    [pool release];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response{
@@ -334,18 +352,22 @@ static void VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction(void * task){
     
     [self.task doBackgroundResponse:(NSHTTPURLResponse *)response];
     
-    dispatch_async(dispatch_get_main_queue(), ^(){
-        
-        if(self.isCancelled){
-            return;
-        }
-        
-        NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-        
-        [self.task doResponse];
-        
-        [pool release];
-    });
+    [self performSelectorOnMainThread:@selector(mainDoResponse) withObject:nil waitUntilDone:NO];
+    
+}
+
+-(void) mainDoSendBodyDataBytes:(NSDictionary *) userInfo{
+    
+    if(self.isCancelled){
+        return;
+    }
+    
+    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+    
+    [self.task doSendBodyDataBytesWritten:[[userInfo valueForKey:@"bytesWritten"] intValue] totalBytesWritten:[[userInfo valueForKey:@"totalBytesWritten"] intValue]];
+    
+    [pool release];
+
 }
 
 - (void)connection:(NSURLConnection *)connection  didSendBodyData:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite{
@@ -354,19 +376,8 @@ static void VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction(void * task){
         return;
     }
     
-    dispatch_async(dispatch_get_main_queue(), ^(){
-        
-        if(self.isCancelled){
-            return;
-        }
-        
-        NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-        
-        [self.task doSendBodyDataBytesWritten:bytesWritten totalBytesWritten:totalBytesWritten];
-        
-        [pool release];
-        
-    });
+    [self performSelectorOnMainThread:@selector(mainDoSendBodyDataBytes:) withObject:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:bytesWritten],@"bytesWritten",[NSNumber numberWithInteger:totalBytesWritten],@"totalBytesWritten", nil] waitUntilDone:NO];
+
 }
 
 @end
