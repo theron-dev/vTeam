@@ -265,7 +265,6 @@ static void VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction(void * task){
 }
 
 
-
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
     
     if(_conn != connection || [self isCancelled]){
@@ -328,8 +327,9 @@ static void VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction(void * task){
     
     [self.task doBackgroundReceiveData:data];
     
-    [self performSelectorOnMainThread:@selector(mainDoReceiveData:) withObject:data waitUntilDone:NO];
-
+    if([self.task hasDoReceiveData]){
+        [self performSelectorOnMainThread:@selector(mainDoReceiveData:) withObject:data waitUntilDone:NO];
+    }
 }
 
 -(void) mainDoResponse{
@@ -350,9 +350,24 @@ static void VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction(void * task){
         return;
     }
     
+    if([self.task isAllowStatusCode302]){
+        if([(NSHTTPURLResponse *) response statusCode] == 302){
+            NSString * url = [[(NSHTTPURLResponse *) response allHeaderFields] valueForKey:@"Location"];
+            if(url){
+                self.request = [NSURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:_timeout];
+                [_conn cancel];
+                self.conn = nil;
+                [self startRequest];
+                return ;
+            }
+        }
+    }
+    
     [self.task doBackgroundResponse:(NSHTTPURLResponse *)response];
     
-    [self performSelectorOnMainThread:@selector(mainDoResponse) withObject:nil waitUntilDone:NO];
+    if([self.task hasDoResponse]){
+        [self performSelectorOnMainThread:@selector(mainDoResponse) withObject:nil waitUntilDone:NO];
+    }
     
 }
 
@@ -376,7 +391,9 @@ static void VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction(void * task){
         return;
     }
     
-    [self performSelectorOnMainThread:@selector(mainDoSendBodyDataBytes:) withObject:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:bytesWritten],@"bytesWritten",[NSNumber numberWithInteger:totalBytesWritten],@"totalBytesWritten", nil] waitUntilDone:NO];
+    if([self.task hasDoSendBodyDataBytes]){
+        [self performSelectorOnMainThread:@selector(mainDoSendBodyDataBytes:) withObject:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:bytesWritten],@"bytesWritten",[NSNumber numberWithInteger:totalBytesWritten],@"totalBytesWritten", nil] waitUntilDone:NO];
+    }
 
 }
 

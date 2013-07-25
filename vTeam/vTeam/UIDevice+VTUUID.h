@@ -11,5 +11,10 @@
 @interface UIDevice (VTUUID)
 
 @property(nonatomic,readonly,retain) NSString * vtUniqueIdentifier;
+@property(nonatomic,readonly,retain) NSString * MACAddress;
+@property(nonatomic,readonly,retain) NSString * WIFIAddress;
+@property(nonatomic,readonly,assign,getter = isActiveWWAN) BOOL activeWWAN;
+@property(nonatomic,readonly,assign,getter = isNetworkAvailable) BOOL networkAvailable;
+@property(nonatomic,readonly,assign,getter = isActiveWLAN) BOOL activeWLAN;
 
 @end

@@ -43,6 +43,7 @@
 @synthesize contentType = _contentType;
 @synthesize responseEncoding = _responseEncoding;
 @synthesize allowWillRequest = _allowWillRequest;
+@synthesize allowStatusCode302 = _allowStatusCode302;
 
 -(void) dealloc{
     [_userInfo release];
@@ -187,10 +188,18 @@
     }
 }
 
+-(BOOL) hasDoResponse{
+    return [_delegate respondsToSelector:@selector(vtHttpTaskDidResponse:)];
+}
+
 -(void) doResponse{
     if([_delegate respondsToSelector:@selector(vtHttpTaskDidResponse:)]){
         [_delegate vtHttpTaskDidResponse:self];
     }
+}
+
+-(BOOL) hasDoReceiveData{
+    return [_delegate respondsToSelector:@selector(vtHttpTask:didReceiveData:bytesDownload:totalBytes:)];
 }
 
 -(void) doReceiveData:(NSData *) data{
@@ -199,10 +208,15 @@
     }
 }
 
+
 -(void) doSendBodyDataBytesWritten:(int) bytesWritten totalBytesWritten:(int) totalBytesWritten{
     if([_delegate respondsToSelector:@selector(vtHttpTask:didSendBodyDataBytesWritten:totalBytesWritten:)]){
         [_delegate vtHttpTask:self didSendBodyDataBytesWritten:bytesWritten totalBytesWritten:totalBytesWritten];
     }
+}
+
+-(BOOL) hasDoSendBodyDataBytes{
+    return [_delegate respondsToSelector:@selector(vtHttpTask:didSendBodyDataBytesWritten:totalBytesWritten:)];
 }
 
 -(void) doBackgroundReceiveData:(NSData *) data{

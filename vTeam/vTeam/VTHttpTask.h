@@ -46,6 +46,7 @@ typedef enum {
 @property(retain) NSHTTPURLResponse * response;
 @property(retain) id userInfo;
 @property(assign,getter = isAllowWillRequest) BOOL allowWillRequest;
+@property(assign,getter = isAllowStatusCode302) BOOL allowStatusCode302;
 
 -(NSURLRequest *) doWillRequeset;
 
@@ -55,9 +56,15 @@ typedef enum {
 
 -(void) doLoading;
 
+-(BOOL) hasDoResponse;
+
 -(void) doResponse;
 
+-(BOOL) hasDoReceiveData;
+
 -(void) doReceiveData:(NSData *) data;
+
+-(BOOL) hasDoSendBodyDataBytes;
 
 -(void) doSendBodyDataBytesWritten:(int) bytesWritten totalBytesWritten:(int) totalBytesWritten;
 

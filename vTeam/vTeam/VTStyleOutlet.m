@@ -19,7 +19,6 @@
 @synthesize status = _status;
 
 -(void) dealloc{
-    [_styleSheet removeObserver:self forKeyPath:@"version"];
     [_views release];
     [_styleName release];
     [_status release];
@@ -58,18 +57,8 @@
 }
 
 -(void) setStyleSheet:(VTStyleSheet *)styleSheet{
-    [_styleSheet removeObserver:self forKeyPath:@"version"];
-    [styleSheet addObserver:self forKeyPath:@"version" options:NSKeyValueObservingOptionNew context:nil];
     _styleSheet = styleSheet;
     [self applyStyle];
-}
-
--(void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    if(object == _styleSheet){
-        if([keyPath isEqualToString:@"version"]){
-            [self applyStyle];
-        }
-    }
 }
 
 -(void) setStyleName:(NSString *)styleName{
