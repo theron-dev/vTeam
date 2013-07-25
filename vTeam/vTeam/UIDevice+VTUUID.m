@@ -25,8 +25,8 @@
 
 @implementation UIDevice (VTUUID)
 
-static SCNetworkConnectionFlags VTConnectionFlags = 0;
-static SCNetworkReachabilityRef VTReachability = nil;
+SCNetworkConnectionFlags VTConnectionFlags = 0;
+SCNetworkReachabilityRef VTReachability = nil;
 
 -(NSString * ) vtUniqueIdentifier{
     
@@ -135,9 +135,9 @@ static SCNetworkReachabilityRef VTReachability = nil;
 		VTReachability = SCNetworkReachabilityCreateWithAddress(kCFAllocatorDefault, (struct sockaddr *)&ipAddress);
 	}
 	
-	// Recover reachability flags
-	BOOL didRetrieveFlags = SCNetworkReachabilityGetFlags(VTReachability, &VTConnectionFlags);
-	if (!didRetrieveFlags) printf("Error. Could not recover network reachability flags\n");
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        SCNetworkReachabilityGetFlags(VTReachability, &VTConnectionFlags);
+    });
 }
 
 - (BOOL) isNetworkAvailable

@@ -107,7 +107,8 @@
 -(void) reloadDataController:(VTDataController *) dataController{
     VTDataSource * dataSource = dataController.dataSource;
     if(!dataSource.loading && !dataSource.loaded){
-        [dataController reloadData];
+        [NSObject cancelPreviousPerformRequestsWithTarget:dataController selector:@selector(reloadData) object:nil];
+        [dataController performSelector:@selector(reloadData) withObject:nil afterDelay:0.0];
     }
 }
 

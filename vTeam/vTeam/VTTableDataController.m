@@ -195,8 +195,6 @@
     [super vtDataSourceDidLoadedFromCache:dataSource timestamp:timestamp];
     [self setLastUpdateDate:timestamp];
     [_tableView reloadData];
-    [self cancelDownloadImagesForView:_tableView];
-    [self downloadImagesForView:_tableView];
 }
 
 -(void) vtDataSourceDidLoaded:(VTDataSource *) dataSource{
@@ -204,15 +202,11 @@
     [self setLastUpdateDate:[NSDate date]];
     [_tableView reloadData];
     [self stopLoading];
-    [self cancelDownloadImagesForView:_tableView];
-    [self downloadImagesForView:_tableView];
 }
 
 -(void) vtDataSourceDidContentChanged:(VTDataSource *)dataSource{
     [super vtDataSourceDidContentChanged:dataSource];
     [_tableView reloadData];
-    [self cancelDownloadImagesForView:_tableView];
-    [self downloadImagesForView:_tableView];
 }
 
 -(void) vtDataSource:(VTDataSource *)dataSource didFitalError:(NSError *)error{
@@ -413,7 +407,7 @@
 }
 
 -(void) scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
-    [self downloadImagesForView:scrollView];
+    
 }
 
 -(void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
@@ -422,7 +416,6 @@
        && scrollView.contentOffset.y - scrollView.contentSize.height + scrollView.frame.size.height > - _bottomLoadingView.frame.size.height){
         [(id)self.dataSource performSelectorOnMainThread:@selector(loadMoreData) withObject:nil waitUntilDone:NO];
     }
-    [self downloadImagesForView:scrollView];
 }
 
 -(void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
@@ -452,10 +445,6 @@
     if([self.delegate respondsToSelector:@selector(vtTableDataController:cell:doAction:)]){
         [self.delegate vtTableDataController:self cell:tableViewCell doAction:action];
     }
-}
-
--(void) vtContainerViewDidLayout:(VTContainerView *) containerView{
-    [self downloadImagesForView:containerView];
 }
 
 -(void) cancel{

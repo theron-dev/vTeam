@@ -71,7 +71,7 @@
         [self cancelDownloadImagesForView:self];
         [self loadImagesForView:self];
         [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(downloadImagesForView:) object:nil];
-        [self performSelector:@selector(downloadImagesForView:) withObject:self afterDelay:0.02];
+        [self performSelector:@selector(downloadImagesForView:) withObject:self afterDelay:0.0];
         [_layoutContainer layout];
         [_dataSource cancel];
         [_dataSource reloadData];
@@ -79,7 +79,7 @@
     else{
         [_dataOutletContainer applyDataOutlet:self];
         [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(downloadImagesForView:) object:nil];
-        [self performSelector:@selector(downloadImagesForView:) withObject:self afterDelay:0.02];
+        [self performSelector:@selector(downloadImagesForView:) withObject:self afterDelay:0.0];
         [_layoutContainer layout];
     }
 }

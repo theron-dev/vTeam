@@ -133,7 +133,10 @@ static void VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction(void * task){
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     self.conn = nil;
     
-    [self performSelectorOnMainThread:@selector(mainDoFailError:) withObject:[NSError errorWithDomain:@"VTHttpService" code:-3 userInfo:[NSDictionary dictionaryWithObject:@"http connect timeout" forKey:NSLocalizedDescriptionKey]] waitUntilDone:NO];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self performSelector:@selector(mainDoFailError:) withObject:[NSError errorWithDomain:@"VTHttpService" code:-3 userInfo:[NSDictionary dictionaryWithObject:@"http connect timeout" forKey:NSLocalizedDescriptionKey]] afterDelay:0.0];
+    });
+  
 }
 
 -(void) mainDoLoading{
@@ -157,8 +160,12 @@ static void VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction(void * task){
         return;
     }
     
-    [self performSelectorOnMainThread:@selector(mainDoLoading) withObject:nil waitUntilDone:NO];
-
+    dispatch_async(dispatch_get_main_queue(), ^{
+       
+        [self performSelector:@selector(mainDoLoading) withObject:nil afterDelay:0.0];
+        
+    });
+    
     self.conn = [NSURLConnection connectionWithRequest:self.request delegate:self];
     
     [_conn start];
@@ -230,8 +237,11 @@ static void VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction(void * task){
         
         NSThread * thread = [NSThread currentThread];
         
-        [self performSelectorOnMainThread:@selector(mainWillRequest:) withObject:thread waitUntilDone:NO];
-
+        dispatch_async(dispatch_get_main_queue(), ^{
+           
+            [self performSelector:@selector(mainWillRequest:) withObject:thread afterDelay:0.0];
+        });
+        
     }
     else{
         [self startRequest];
@@ -273,7 +283,10 @@ static void VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction(void * task){
     
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     
-    [self performSelectorOnMainThread:@selector(mainDoFailError:) withObject:error waitUntilDone:NO];
+    dispatch_async(dispatch_get_main_queue(), ^{
+    
+        [self performSelector:@selector(mainDoFailError:) withObject:error afterDelay:0.0];
+    });
     
 }
 
@@ -302,9 +315,13 @@ static void VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction(void * task){
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     
     [self.task doBackgroundLoaded];
-    
-    [self performSelectorOnMainThread:@selector(didLoaded) withObject:nil waitUntilDone:NO];
-    
+   
+    dispatch_async(dispatch_get_main_queue(), ^{
+       
+        [self performSelector:@selector(didLoaded) withObject:nil afterDelay:0.0];
+        
+    });
+   
 }
 
 -(void) mainDoReceiveData:(NSData *) data{
@@ -328,7 +345,9 @@ static void VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction(void * task){
     [self.task doBackgroundReceiveData:data];
     
     if([self.task hasDoReceiveData]){
-        [self performSelectorOnMainThread:@selector(mainDoReceiveData:) withObject:data waitUntilDone:NO];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self performSelector:@selector(mainDoReceiveData:) withObject:data afterDelay:0.0];
+        });
     }
 }
 
@@ -366,7 +385,9 @@ static void VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction(void * task){
     [self.task doBackgroundResponse:(NSHTTPURLResponse *)response];
     
     if([self.task hasDoResponse]){
-        [self performSelectorOnMainThread:@selector(mainDoResponse) withObject:nil waitUntilDone:NO];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self performSelector:@selector(mainDoResponse) withObject:nil afterDelay:0.0];
+        });
     }
     
 }
@@ -392,7 +413,10 @@ static void VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction(void * task){
     }
     
     if([self.task hasDoSendBodyDataBytes]){
-        [self performSelectorOnMainThread:@selector(mainDoSendBodyDataBytes:) withObject:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:bytesWritten],@"bytesWritten",[NSNumber numberWithInteger:totalBytesWritten],@"totalBytesWritten", nil] waitUntilDone:NO];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self performSelector:@selector(mainDoSendBodyDataBytes:) withObject:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:bytesWritten],@"bytesWritten",[NSNumber numberWithInteger:totalBytesWritten],@"totalBytesWritten", nil] afterDelay:0.0];
+        });
+        
     }
 
 }
