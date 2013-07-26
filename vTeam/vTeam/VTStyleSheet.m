@@ -121,6 +121,12 @@
         if(img == nil){
             img = [UIImage imageWithContentsOfFile:path];
         }
+        if(img == nil){
+            //如果没有一倍图，就用二倍图
+            NSString * pathExtension = [path pathExtension];
+            NSString * p = [[[path stringByDeletingPathExtension] stringByAppendingString:@"@2x"] stringByAppendingPathExtension:pathExtension];
+            img = [UIImage imageWithContentsOfFile:p];
+        }
 
         if(img){
             if(_images == nil){
