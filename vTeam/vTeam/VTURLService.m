@@ -203,6 +203,7 @@
             [_items removeObjectAtIndex:i];
             break;
         }
+        i ++;
     }
     if(taskType && task){
         [self vtDownlinkTask:task didFitalError:error forTaskType:taskType];
