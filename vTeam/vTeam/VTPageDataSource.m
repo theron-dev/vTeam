@@ -9,7 +9,6 @@
 #import "VTPageDataSource.h"
 
 @interface VTPageDataSource(){
-    BOOL _hasMoreData;
 }
 
 @end
@@ -18,7 +17,7 @@
 
 @synthesize pageIndex = _pageIndex;
 @synthesize pageSize = _pageSize;
-
+@synthesize hasMoreData = _hasMoreData;
 
 -(id) init{
     if((self = [super init])){

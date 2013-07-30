@@ -8,6 +8,12 @@
 
 #import "VTTabPageDataController.h"
 
+@interface VTTabPageDataController(){
+    BOOL _animating;
+}
+
+@end
+
 @implementation VTTabPageDataController
 
 @synthesize pageContentView = _pageContentView;
@@ -43,7 +49,7 @@
     [self scrollToTabBackgroundVisable:YES];
 }
 
--(void) setSelectedIndex:(NSUInteger)selectedIndex animated:(BOOL) animated{
+-(void) setSelectedIndex:(NSUInteger)selectedIndex animated:(BOOL) animated withoutOffset:(BOOL)withoutOffset{
     if(_selectedIndex != selectedIndex){
         
         NSUInteger index = 0;
@@ -66,8 +72,8 @@
         
         _selectedIndex = selectedIndex;
         
-        if(animated){
-            [_pageContentView setContentOffset:CGPointMake(_selectedIndex * _pageContentView.bounds.size.width,0) animated:YES];
+        if(!withoutOffset){
+            [_pageContentView setContentOffset:CGPointMake(_selectedIndex * _pageContentView.bounds.size.width,0) animated:animated];
         }
         
         if([self.delegate respondsToSelector:@selector(vtTabDataController:didSelectedChanged:)]){
@@ -79,8 +85,12 @@
     }
 }
 
+-(void) setSelectedIndex:(NSUInteger)selectedIndex animated:(BOOL)animated{
+    [self setSelectedIndex:selectedIndex animated:animated withoutOffset:NO];
+}
+
 -(void) setSelectedIndex:(NSUInteger)selectedIndex{
-    [self setSelectedIndex:selectedIndex animated:YES];
+    [self setSelectedIndex:selectedIndex animated:NO];
 }
 
 -(UIButton *) tabButtonAtIndex:(NSUInteger) index{
@@ -113,7 +123,7 @@
 }
 
 -(void) scrollViewDidScroll:(UIScrollView *)scrollView{
-    [self setSelectedIndex:scrollView.contentOffset.x / scrollView.bounds.size.width animated:NO];
+    [self setSelectedIndex:scrollView.contentOffset.x / scrollView.bounds.size.width animated:NO withoutOffset:YES];
 }
 
 -(void) scrollView:(UIScrollView *) scrollView didContentOffsetChanged:(CGPoint) contentOffset{

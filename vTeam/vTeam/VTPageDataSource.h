@@ -14,7 +14,7 @@
 
 @property(nonatomic,assign) NSInteger pageIndex;
 @property(nonatomic,assign) NSInteger pageSize;
-@property(nonatomic,readonly) BOOL hasMoreData;
+@property(nonatomic,assign) BOOL hasMoreData;
 
 -(void) loadMoreData;
 
