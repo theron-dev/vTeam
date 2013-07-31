@@ -126,6 +126,11 @@ extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
                     Class clazz = NSClassFromString(className);
                     if(clazz){
                         if([clazz conformsToProtocol:@protocol(IVTService)]){
+                            
+                            if([[cfg valueForKey:@"disabled"] boolValue]){
+                                continue;
+                            }
+                            
                             id container = [self addService:clazz];
                             [container setContext:self];
                             [container setConfig:cfg];

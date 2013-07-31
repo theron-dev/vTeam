@@ -32,10 +32,10 @@
 @end
 
 @interface VTMonitorService(){
-
+    dispatch_queue_t _dispatchQueue;
 }
 
-@property(nonatomic,readonly) VTDBContext * dbContext;
+@property(readonly) VTDBContext * dbContext;
 
 @end
 
@@ -44,6 +44,9 @@
 @synthesize dbContext = _dbContext;
 
 -(void) dealloc{
+    if(_dispatchQueue){
+        dispatch_release(_dispatchQueue);
+    }
     [_dbContext release];
     [super dealloc];
 }
@@ -58,7 +61,6 @@
         [db release];
         
         [_dbContext regDBObjectClass:[VTMonitorObject class]];
-        
     }
     
     return _dbContext;
@@ -68,7 +70,11 @@
     
     NSTimeInterval t = CFAbsoluteTimeGetCurrent();
 
-    dispatch_async(dispatch_get_current_queue(), ^{
+    if(_dispatchQueue == nil){
+        _dispatchQueue = dispatch_queue_create("org.hailong.vteam.monitor", NULL);
+    }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
        
         VTMonitorObject * dataObject = [[VTMonitorObject alloc] init];
         
@@ -76,7 +82,9 @@
         [dataObject setTaskType:NSStringFromProtocol(taskType)];
         [dataObject setTaskClass:NSStringFromClass([task class])];
         
-        [self.dbContext insertObject:dataObject];
+        dispatch_async(_dispatchQueue, ^{
+            [self.dbContext insertObject:dataObject];
+        });
         
         [dataObject release];
         
