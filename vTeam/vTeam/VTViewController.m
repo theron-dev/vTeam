@@ -94,6 +94,8 @@
             
             win.rootViewController = viewController;
             
+            [viewController setParentController:self];
+            
             return YES;
         }
     }

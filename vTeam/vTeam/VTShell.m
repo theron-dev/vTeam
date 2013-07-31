@@ -198,8 +198,30 @@ extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
                || [clazz isSubclassOfClass:[VTCreatorViewController class]]){
                 
                 id viewController = nil;
+                
+                NSString * view = [cfg valueForKey:@"view"];
+                
+                UIDevice * device = [UIDevice currentDevice];
+                UIScreen * screen = [UIScreen mainScreen];
+                
+                if([device respondsToSelector:@selector(userInterfaceIdiom)]){
+                    if([device userInterfaceIdiom] == UIUserInterfaceIdiomPad){
+                        if([cfg valueForKey:@"view-iPad"]){
+                            view = [cfg valueForKey:@"view-iPad"];
+                        }
+                    }
+                    else{
+                        CGSize screenSize = [screen bounds].size;
+                        if(screenSize.height == 568){
+                            if([cfg valueForKey:@"view-568h"]){
+                                view = [cfg valueForKey:@"view-568h"];
+                            }
+                        }
+                    }
+                }
+                
                 if([clazz isSubclassOfClass:[UIViewController class]]){
-                    viewController = [[[clazz alloc] initWithNibName:[cfg valueForKey:@"view"] bundle:_bundle] autorelease];
+                    viewController = [[[clazz alloc] initWithNibName:view bundle:_bundle] autorelease];
                 }
                 else{
                     viewController = [[[clazz alloc] init] autorelease];

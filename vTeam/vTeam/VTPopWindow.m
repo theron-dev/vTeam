@@ -41,6 +41,7 @@ static NSMutableArray * gVTPopWindows = nil;
     [super dealloc];
 }
 
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -123,6 +124,7 @@ static NSMutableArray * gVTPopWindows = nil;
 
 -(void) _hideAnimatedStop{
     _animating = NO;
+    [self setHidden:YES];
     [gVTPopWindows removeObject:self];
 }
 
@@ -133,9 +135,9 @@ static NSMutableArray * gVTPopWindows = nil;
     }
     
     NSInteger count = [gVTPopWindows count];
-    
+
     if(![self isHidden] && count > 0 && [gVTPopWindows indexOfObject:self] != NSNotFound){
-        
+ 
         if(animated){
             [UIView beginAnimations:nil context:nil];
             [UIView setAnimationDuration:0.3];
@@ -147,6 +149,8 @@ static NSMutableArray * gVTPopWindows = nil;
         
         _keyWindow.layer.mask = nil;
         [_keyWindow setTransform:CGAffineTransformMakeScale(1.0, 1.0)];
+        
+        self.keyWindow = nil;
         
         if(animated){
             [self setAlpha:0.0f];
