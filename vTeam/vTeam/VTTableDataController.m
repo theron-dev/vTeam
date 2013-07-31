@@ -97,19 +97,8 @@
         if(timeComponents.year == nowComponents.year){
             if(timeComponents.month == nowComponents.month){
                 if(timeComponents.day == nowComponents.day){
-                    
-                    NSTimeInterval d = [now timeIntervalSince1970] - [date timeIntervalSince1970];
-                    
-                    if(d < 60){
-                        text = [NSString stringWithFormat:@"最后更新: 刚刚"];
-                    }
-                    else if(d < 3600){
-                        text = [NSString stringWithFormat:@"最后更新: %d分钟前",(int)d / 60];
-                    }
-                    else{
-                        [dateFormatter setDateFormat:@"最后更新: HH:mm"];
-                        text = [dateFormatter stringFromDate:date];
-                    }
+                    [dateFormatter setDateFormat:@"最后更新: HH:mm:ss"];
+                    text = [dateFormatter stringFromDate:date];
                 }
                 else if(timeComponents.day +1 == nowComponents.day){
                     [dateFormatter setDateFormat:@"最后更新: 昨天 HH:mm"];
