@@ -205,8 +205,6 @@
 
 -(void) startLoading{
     
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(didStopLoading) object:nil];
-    
     [_bottomLoadingView removeFromSuperview];
     [_topLoadingView removeFromSuperview];
     
@@ -243,9 +241,25 @@
 
 -(void) stopLoading{
     
+    BOOL hasTopScroll = NO;
+    
+    if(_tableView.tableHeaderView){
+        if(_tableView.contentOffset.y <5){
+            hasTopScroll = YES;
+        }
+    }
+    
+    if(hasTopScroll){
+        [_tableView setContentOffset:CGPointMake(0, - _tableView.tableHeaderView.frame.size.height) animated:NO];
+    }
+    
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.3];
     
+    if(hasTopScroll){
+        [_tableView setContentOffset:CGPointMake(0, 0) animated:NO];
+    }
+
     [_tableView setTableHeaderView:nil];
     [_tableView setTableFooterView:nil];
     
@@ -256,6 +270,8 @@
     
     [_topLoadingView stopAnimation];
     [_bottomLoadingView stopAnimation];
+    
+
     
     if(_topLoadingView && _topLoadingView.superview == nil){
         
