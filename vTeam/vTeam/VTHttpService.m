@@ -162,7 +162,12 @@ static void VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction(void * task){
     
     dispatch_async(dispatch_get_main_queue(), ^{
        
-        [self performSelector:@selector(mainDoLoading) withObject:nil afterDelay:0.0];
+        if([_task isAllowRealtimeCallback]){
+            [self mainDoLoading];
+        }
+        else{
+            [self performSelector:@selector(mainDoLoading) withObject:nil afterDelay:0.0];
+        }
         
     });
     
@@ -239,7 +244,13 @@ static void VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction(void * task){
         
         dispatch_async(dispatch_get_main_queue(), ^{
            
-            [self performSelector:@selector(mainWillRequest:) withObject:thread afterDelay:0.0];
+            if([_task isAllowRealtimeCallback]){
+                [self mainWillRequest:thread];
+            }
+            else{
+                [self performSelector:@selector(mainWillRequest:) withObject:thread afterDelay:0.0];
+            }
+
         });
         
     }
@@ -285,7 +296,13 @@ static void VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction(void * task){
     
     dispatch_async(dispatch_get_main_queue(), ^{
     
-        [self performSelector:@selector(mainDoFailError:) withObject:error afterDelay:0.0];
+        if([_task isAllowRealtimeCallback]){
+            [self mainDoFailError:error];
+        }
+        else{
+            [self performSelector:@selector(mainDoFailError:) withObject:error afterDelay:0.0];
+        }
+
     });
     
 }
@@ -318,7 +335,12 @@ static void VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction(void * task){
    
     dispatch_async(dispatch_get_main_queue(), ^{
        
-        [self performSelector:@selector(didLoaded) withObject:nil afterDelay:0.0];
+        if([_task isAllowRealtimeCallback]){
+            [self didLoaded];
+        }
+        else{
+            [self performSelector:@selector(didLoaded) withObject:nil afterDelay:0.0];
+        }
         
     });
    
@@ -346,7 +368,12 @@ static void VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction(void * task){
     
     if([self.task hasDoReceiveData]){
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self performSelector:@selector(mainDoReceiveData:) withObject:data afterDelay:0.0];
+            if([_task isAllowRealtimeCallback]){
+                [self mainDoReceiveData:data];
+            }
+            else{
+                [self performSelector:@selector(mainDoReceiveData:) withObject:data afterDelay:0.0];
+            }
         });
     }
 }
@@ -386,7 +413,14 @@ static void VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction(void * task){
     
     if([self.task hasDoResponse]){
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self performSelector:@selector(mainDoResponse) withObject:nil afterDelay:0.0];
+            
+            if([_task isAllowRealtimeCallback]){
+                [self mainDoResponse];
+            }
+            else{
+                [self performSelector:@selector(mainDoResponse) withObject:nil afterDelay:0.0];
+            }
+            
         });
     }
     
@@ -414,7 +448,15 @@ static void VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction(void * task){
     
     if([self.task hasDoSendBodyDataBytes]){
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self performSelector:@selector(mainDoSendBodyDataBytes:) withObject:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:bytesWritten],@"bytesWritten",[NSNumber numberWithInteger:totalBytesWritten],@"totalBytesWritten", nil] afterDelay:0.0];
+            
+            NSDictionary * userInfo = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:bytesWritten],@"bytesWritten",[NSNumber numberWithInteger:totalBytesWritten],@"totalBytesWritten", nil];
+            
+            if([_task isAllowRealtimeCallback]){
+                [self mainDoSendBodyDataBytes:userInfo];
+            }
+            else{
+                [self performSelector:@selector(mainDoSendBodyDataBytes:) withObject:userInfo afterDelay:0.0];
+            }
         });
         
     }
