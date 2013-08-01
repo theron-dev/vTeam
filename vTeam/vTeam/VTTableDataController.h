@@ -21,6 +21,10 @@
 @property(nonatomic,retain) IBOutletCollection(UITableViewCell) NSArray * headerCells;
 @property(nonatomic,retain) IBOutletCollection(UITableViewCell) NSArray * footerCells;
 
+-(void) startLoading;
+
+-(void) stopLoading;
+    
 @end
 
 @protocol VTTableDataControllerDelegate <VTDataControllerDelegate>
