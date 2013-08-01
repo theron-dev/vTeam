@@ -74,4 +74,6 @@
 #import <vTeam/VTHTMLRich.h>
 #import <vTeam/VTRichImageElement.h>
 #import <vTeam/VTFlowViewLayout.h>
+#import <vTeam/VTBehaviorObject.h>
+#import <vTeam/VTBehaviorTransactionTask.h>
 
