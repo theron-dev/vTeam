@@ -143,6 +143,10 @@
     
 }
 
+-(void) sendResponseTask:(id<IVTAPIResponseTask>) respTask{
+    [self.context handle:@protocol(IVTAPIResponseTask) task:respTask priority:0];
+}
+
 -(void) vtHttpTaskDidLoaded:(id) httpTask{
     
     id task = [httpTask userInfo];
@@ -155,7 +159,7 @@
     [respTask setResultsData:[httpTask responseBody]];
     [respTask setUrl:[[(VTHttpTask *)httpTask request] URL]];
     
-    [self.context handle:@protocol(IVTAPIResponseTask) task:respTask priority:0];
+    [self performSelector:@selector(sendResponseTask:) withObject:respTask afterDelay:0];
     
     [respTask release];
 }

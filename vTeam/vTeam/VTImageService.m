@@ -87,7 +87,6 @@
                     [httpTask setOnlyLocalResource:YES];
                     [httpTask setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:imageTask,@"imageTask",@"defaultImage",@"keyPath", nil]];
                     [httpTask setAllowWillRequest:YES];
-                    [httpTask setAllowRealtimeCallback:YES];
                     
                     [self.context handle:@protocol(IVTHttpResourceTask) task:httpTask priority:0];
                     

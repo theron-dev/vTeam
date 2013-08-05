@@ -113,12 +113,23 @@ static VTDBContext * gDownlinkServiceDBContext = nil;
     return NSStringFromProtocol(taskType);
 }
 
+-(void) delayDidLoadedFromCache:(NSDictionary *) userInfo{
+    
+    id dataObject = [userInfo valueForKey:@"dataObject"];
+    id<IVTDownlinkTask> task = [userInfo valueForKey:@"task"];
+    Protocol * taskType = NSProtocolFromString([userInfo valueForKey:@"taskType"]);
+    
+    [task vtDownlinkTaskDidLoadedFromCache:[dataObject valueForKey:@"data"] timestamp:[NSDate dateWithTimeIntervalSince1970:[[dataObject valueForKey:@"timestamp"] intValue]]
+                               forTaskType:taskType];
+    
+}
 
 -(void) vtDownlinkTaskDidLoadedFromCache:(id<IVTDownlinkTask>) downlinkTask forTaskType:(Protocol *) taskType{
     NSString * dataKey = [self dataKey:downlinkTask forTaskType:taskType];
     id dataObject = [self dataObjectForKey:dataKey];
     if(dataObject && [downlinkTask respondsToSelector:@selector(vtDownlinkTaskDidLoadedFromCache:timestamp:forTaskType:)]){
-        [downlinkTask vtDownlinkTaskDidLoadedFromCache:[dataObject valueForKey:@"data"] timestamp:[NSDate dateWithTimeIntervalSince1970:[[dataObject valueForKey:@"timestamp"] intValue]] forTaskType:taskType];
+        [self performSelector:@selector(delayDidLoadedFromCache:)
+                   withObject:[NSDictionary dictionaryWithObjectsAndKeys:dataObject,@"dataObject",NSStringFromProtocol(taskType),@"taskType",downlinkTask,@"task", nil] afterDelay:0];
     };
 }
 

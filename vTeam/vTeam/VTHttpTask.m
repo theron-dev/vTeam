@@ -44,7 +44,6 @@
 @synthesize responseEncoding = _responseEncoding;
 @synthesize allowWillRequest = _allowWillRequest;
 @synthesize allowStatusCode302 = _allowStatusCode302;
-@synthesize allowRealtimeCallback = _allowRealtimeCallback;
 
 -(void) dealloc{
     [_userInfo release];

@@ -210,6 +210,21 @@
     }
 }
 
+-(void) didLoaded:(NSDictionary *) userInfo{
+    Protocol * taskType = NSProtocolFromString([userInfo valueForKey:@"taskType"]);
+    id task = [userInfo valueForKey:@"task"];
+    id body = [userInfo valueForKey:@"body"];
+    if(task && taskType){
+        NSError * error = [self errorByResponseBody:body task:task];
+        if(error == nil){
+            [self vtDownlinkTask:task didResponse:body isCache:[task vtDownlinkPageTaskPageIndex] == 1 forTaskType:taskType];
+        }
+        else{
+            [self vtDownlinkTask:task didFitalError:error forTaskType:taskType];
+        }
+    }
+}
+
 -(void) vtHttpTaskDidLoaded:(id) httpTask{
     
     id task = [httpTask userInfo];
@@ -232,13 +247,11 @@
     NSLog(@"%@",[httpTask responseBody]);
     
     if(task && taskType){
-        NSError * error = [self errorByResponseBody:[httpTask responseBody] task:task];
-        if(error == nil){
-            [self vtDownlinkTask:task didResponse:[httpTask responseBody] isCache:[task vtDownlinkPageTaskPageIndex] == 1 forTaskType:taskType];
-        }
-        else{
-            [self vtDownlinkTask:task didFitalError:error forTaskType:taskType];
-        }
+        [self performSelector:@selector(didLoaded:) withObject:
+            [NSDictionary dictionaryWithObjectsAndKeys:
+             NSStringFromProtocol(taskType),@"taskType"
+             ,task,@"task"
+             ,[httpTask responseBody],@"body", nil] afterDelay:0];
     }
 }
 
