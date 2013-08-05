@@ -318,7 +318,7 @@ static void VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction(void * task){
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     
     [self.task doBackgroundLoaded];
-   
+     
     dispatch_async(dispatch_get_main_queue(), ^{
        
         [self didLoaded];

@@ -11,13 +11,19 @@
 #import <vTeam/NSURL+QueryValue.h>
 
 @interface VTAPIService(){
-    NSMutableArray * _requests;
+    NSMutableArray * _httpTasks;
+    NSMutableArray * _responses;
 }
 
 @end
 
 @implementation VTAPIService
 
+-(void) dealloc{
+    [_httpTasks release];
+    [_responses release];
+    [super dealloc];
+}
 -(BOOL) handle:(Protocol *)taskType task:(id<IVTTask>)task priority:(NSInteger)priority{
     
     if(taskType == @protocol(IVTAPIRequestTask)){
@@ -25,19 +31,18 @@
         id<IVTAPIRequestTask> reqTask = (id<IVTAPIRequestTask>) task;
         
         
-        
         VTHttpTask * httpTask = [[VTHttpTask alloc] init];
         
         [httpTask setUserInfo:reqTask];
-        [httpTask setSource:reqTask];
+        [httpTask setSource:[reqTask source]];
         [httpTask setResponseType:VTHttpTaskResponseTypeJSON];
         [httpTask setDelegate:self];
         
-        if(_requests == nil){
-            _requests = [[NSMutableArray alloc] init];
+        if(_httpTasks == nil){
+            _httpTasks = [[NSMutableArray alloc] init];
         }
         
-        [_requests addObject:reqTask];
+        [_httpTasks addObject:httpTask];
         
         [self.context handle:@protocol(IVTHttpAPITask) task:httpTask priority:priority];
         
@@ -54,16 +59,30 @@
     
     if(taskType == @protocol(IVTAPIRequestTask)){
         
-        NSInteger c = [_requests count];
+        NSInteger c = [_httpTasks count];
         NSInteger i = 0;
         
         while(i < c){
-            id request = [_requests objectAtIndex:i];
-            if(request == task){
-                if([request source]){
-                    [self.context cancelHandle:@protocol(IVTHttpAPITask) task:[request source]];
-                }
-                [_requests removeObjectAtIndex:i];
+            VTHttpTask * httpTask = [_httpTasks objectAtIndex:i];
+            if([httpTask userInfo] == task){
+                [self.context cancelHandle:@protocol(IVTHttpAPITask) task:httpTask];
+                [_httpTasks removeObjectAtIndex:i];
+                c --;
+            }
+            else{
+                i ++;
+            }
+            
+        }
+        
+        c = [_responses count];
+        i = 0;
+        
+        while(i < c){
+            id resp = [_responses objectAtIndex:i];
+            if([resp task] == [(id)task task]){
+                [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(sendResponseTask:) object:resp];
+                [_responses removeObjectAtIndex:i];
                 c --;
             }
             else{
@@ -77,16 +96,31 @@
     
     if(taskType == @protocol(IVTAPICancelTask)){
         
-        NSInteger c = [_requests count];
+        NSInteger c = [_httpTasks count];
         NSInteger i = 0;
         
         while(i < c){
-            id request = [_requests objectAtIndex:i];
-            if([request task] == [(id)task task] && [request taskType] == [(id)task taskType]){
-                if([request source]){
-                    [self.context cancelHandle:@protocol(IVTHttpAPITask) task:[request source]];
-                }
-                [_requests removeObjectAtIndex:i];
+            VTHttpTask * httpTask = [_httpTasks objectAtIndex:i];
+            id<IVTAPIRequestTask> reqTask = [httpTask userInfo];
+            if([reqTask task] == [(id)task task] && [reqTask taskType] == [(id)task taskType]){
+                [self.context cancelHandle:@protocol(IVTHttpAPITask) task:httpTask];
+                [_httpTasks removeObjectAtIndex:i];
+                c --;
+            }
+            else{
+                i ++;
+            }
+            
+        }
+        
+        c = [_responses count];
+        i = 0;
+        
+        while(i < c){
+            id resp = [_responses objectAtIndex:i];
+            if([resp task] == [(id)task task] && [resp taskType] == [(id)task taskType]){
+                [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(sendResponseTask:) object:resp];
+                [_responses removeObjectAtIndex:i];
                 c --;
             }
             else{
@@ -104,22 +138,36 @@
 
 -(BOOL) cancelHandleForSource:(id)source{
     
-    NSInteger c = [_requests count];
+    NSInteger c = [_httpTasks count];
     NSInteger i = 0;
     
     while(i < c){
-        id request = [_requests objectAtIndex:i];
-        if([request source] == source){
-            if([request source]){
-                [self.context cancelHandle:@protocol(IVTHttpAPITask) task:[request source]];
-            }
-            [_requests removeObjectAtIndex:i];
+        VTHttpTask * httpTask = [_httpTasks objectAtIndex:i];
+        if([httpTask source] == source){
+            [self.context cancelHandle:@protocol(IVTHttpAPITask) task:httpTask];
+            [_httpTasks removeObjectAtIndex:i];
             c --;
         }
         else{
             i ++;
         }
 
+    }
+    
+    c = [_responses count];
+    i = 0;
+    
+    while(i < c){
+        id resp = [_responses objectAtIndex:i];
+        if([resp source] == source){
+            [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(sendResponseTask:) object:resp];
+            [_responses removeObjectAtIndex:i];
+            c --;
+        }
+        else{
+            i ++;
+        }
+        
     }
 
     return NO;
@@ -128,7 +176,8 @@
 -(void) vtHttpTask:(id) httpTask didFailError:(NSError *) error{
     
     id task = [httpTask userInfo];
-    [_requests removeObject:task];
+    
+    [_httpTasks removeObject:httpTask];
     
     VTAPIResponseTask * respTask =[[VTAPIResponseTask alloc] init];
     [respTask setTask:[task task]];
@@ -145,19 +194,27 @@
 
 -(void) sendResponseTask:(id<IVTAPIResponseTask>) respTask{
     [self.context handle:@protocol(IVTAPIResponseTask) task:respTask priority:0];
+    [_responses removeObject:respTask];
 }
 
 -(void) vtHttpTaskDidLoaded:(id) httpTask{
     
     id task = [httpTask userInfo];
-    [_requests removeObject:task];
+    [_httpTasks removeObject:httpTask];
     
     VTAPIResponseTask * respTask =[[VTAPIResponseTask alloc] init];
     [respTask setTask:[task task]];
+    [respTask setSource:[task source]];
     [respTask setTaskType:[task taskType]];
     [respTask setUserInfo:[task userInfo]];
     [respTask setResultsData:[httpTask responseBody]];
     [respTask setUrl:[[(VTHttpTask *)httpTask request] URL]];
+    
+    if(_responses == nil){
+        _responses = [[NSMutableArray alloc] initWithCapacity:4];
+    }
+    
+    [_responses addObject:respTask];
     
     [self performSelector:@selector(sendResponseTask:) withObject:respTask afterDelay:0];
     
