@@ -137,7 +137,9 @@ static NSMutableArray * gVTPopWindows = nil;
     NSInteger count = [gVTPopWindows count];
 
     if(![self isHidden] && count > 0 && [gVTPopWindows indexOfObject:self] != NSNotFound){
- 
+
+        [[self retain] autorelease];
+        
         if(animated){
             [UIView beginAnimations:nil context:nil];
             [UIView setAnimationDuration:0.3];

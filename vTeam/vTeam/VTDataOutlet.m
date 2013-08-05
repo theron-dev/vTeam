@@ -177,7 +177,22 @@
     else if(_valueKeyPath){
         value = [data dataForKeyPath:_valueKeyPath];
     }
+    
+    if([value isKindOfClass:[NSNull class]]){
+        value = nil;
+    }
+    
+#ifdef DEBUG
     [_view setValue:value forKeyPath:self.keyPath];
+#else
+    @try {
+        [_view setValue:value forKeyPath:self.keyPath];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@",exception);
+    }
+#endif
+    
 }
 
 @end
