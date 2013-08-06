@@ -267,6 +267,7 @@
 
 -(void) doBackgroundResponse:(NSHTTPURLResponse *) response{
     self.response = response;
+    NSLog(@"%@",self.request);
     NSLog(@"%@",[response allHeaderFields]);
     self.contentLength = [[[response allHeaderFields] valueForKey:@"Content-Length"] intValue];
     self.contentType =[[response allHeaderFields] valueForKey:@"Content-Type"];

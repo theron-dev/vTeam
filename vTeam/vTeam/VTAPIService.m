@@ -241,6 +241,8 @@
     
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:u cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:[[self.config valueForKey:@"timeout"] doubleValue]];
     
+    [request addValue:@"gzip, deflate" forHTTPHeaderField:@"Accept-Encoding"];
+    
     VTHttpFormBody * body = [reqTask body];
     
     if(body){
