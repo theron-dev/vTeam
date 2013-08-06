@@ -20,6 +20,7 @@
 -(void) dealloc{
     [self.context cancelHandleForSource:self];
     [_dataSource setDelegate:nil];
+    [_dataSource cancel];
     [_dataSource release];
     [super dealloc];
 }
