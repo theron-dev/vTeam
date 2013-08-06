@@ -231,6 +231,8 @@
 		118AFC44175DA15100A6A2FF /* VTDBObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 118AFC42175DA15100A6A2FF /* VTDBObject.m */; };
 		118AFC47175DA1E800A6A2FF /* VTDBContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 118AFC45175DA1E800A6A2FF /* VTDBContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		118AFC48175DA1E800A6A2FF /* VTDBContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 118AFC46175DA1E800A6A2FF /* VTDBContext.m */; };
+		1193DB5717B0B35900F19592 /* VTBESessionObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 1193DB5517B0B35900F19592 /* VTBESessionObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1193DB5817B0B35900F19592 /* VTBESessionObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1193DB5617B0B35900F19592 /* VTBESessionObject.m */; };
 		11A2D10C179690C600082380 /* VTRich.h in Headers */ = {isa = PBXBuildFile; fileRef = 11A2D10A179690C600082380 /* VTRich.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11A2D10E179696EC00082380 /* VTRich.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A2D10B179690C600082380 /* VTRich.m */; };
 		11A2D1141796A69E00082380 /* VTRichView.h in Headers */ = {isa = PBXBuildFile; fileRef = 11A2D1121796A69D00082380 /* VTRichView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -585,6 +587,8 @@
 		118AFC42175DA15100A6A2FF /* VTDBObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDBObject.m; sourceTree = "<group>"; };
 		118AFC45175DA1E800A6A2FF /* VTDBContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDBContext.h; sourceTree = "<group>"; };
 		118AFC46175DA1E800A6A2FF /* VTDBContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDBContext.m; sourceTree = "<group>"; };
+		1193DB5517B0B35900F19592 /* VTBESessionObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTBESessionObject.h; sourceTree = "<group>"; };
+		1193DB5617B0B35900F19592 /* VTBESessionObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTBESessionObject.m; sourceTree = "<group>"; };
 		11A2D10A179690C600082380 /* VTRich.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTRich.h; sourceTree = "<group>"; };
 		11A2D10B179690C600082380 /* VTRich.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTRich.m; sourceTree = "<group>"; };
 		11A2D1121796A69D00082380 /* VTRichView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTRichView.h; sourceTree = "<group>"; };
@@ -1089,6 +1093,8 @@
 			children = (
 				11D678E617AA4FF0000E02FA /* VTBehaviorObject.h */,
 				11D678E717AA4FF0000E02FA /* VTBehaviorObject.m */,
+				1193DB5517B0B35900F19592 /* VTBESessionObject.h */,
+				1193DB5617B0B35900F19592 /* VTBESessionObject.m */,
 			);
 			name = DataEntitys;
 			sourceTree = "<group>";
@@ -1472,6 +1478,7 @@
 				11D678E817AA4FF0000E02FA /* VTBehaviorObject.h in Headers */,
 				11D678EC17AA5097000E02FA /* VTBehaviorTask.h in Headers */,
 				11D678F017AA5243000E02FA /* VTBehaviorTransactionTask.h in Headers */,
+				1193DB5717B0B35900F19592 /* VTBESessionObject.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1700,6 +1707,7 @@
 				11D678E917AA4FF0000E02FA /* VTBehaviorObject.m in Sources */,
 				11D678ED17AA5097000E02FA /* VTBehaviorTask.m in Sources */,
 				11D678F117AA5243000E02FA /* VTBehaviorTransactionTask.m in Sources */,
+				1193DB5817B0B35900F19592 /* VTBESessionObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

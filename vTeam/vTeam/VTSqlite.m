@@ -291,6 +291,23 @@ static void VTSqliteStmtBindData(sqlite3_stmt * stmt,id data,sqlite3_destructor_
     return [self stringValueForName:name];    
 }
 
+-(void) toDataObject:(id) dataObject forClass:(Class) dataObjectClass{
+    
+    if(dataObject){
+        Class clazz = dataObjectClass;
+        while(clazz && clazz != [NSObject class]){
+            unsigned int propCount = 0;
+            objc_property_t * prop =  class_copyPropertyList(clazz, &propCount);
+            for(int i=0;i<propCount;i++){
+                NSString * name = [NSString stringWithCString:property_getName(prop[i]) encoding:NSUTF8StringEncoding];
+                [dataObject setValue:[self valueForProperty:prop[i]] forKey:name];
+            }
+            free(prop);
+            clazz = class_getSuperclass(clazz);
+        }
+    }
+}
+
 -(void) toDataObject:(id) object{
     if(object){
         
@@ -502,6 +519,10 @@ static void VTSqliteStmtBindData(sqlite3_stmt * stmt,id data,sqlite3_destructor_
 
 -(void) toDataObject:(id) dataObject{
     [[self currentCursor] toDataObject:dataObject];
+}
+
+-(void) toDataObject:(id) dataObject forClass:(Class) dataObjectClass{
+    [[self currentCursor] toDataObject:dataObject forClass:dataObjectClass];
 }
 
 -(NSArray *) dataObjects:(Class) dataObjectClass{

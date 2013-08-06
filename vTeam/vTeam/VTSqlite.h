@@ -68,6 +68,8 @@
 
 -(void) toDataObject:(id) dataObject;
 
+-(void) toDataObject:(id) dataObject forClass:(Class) dataObjectClass;
+
 -(NSArray *) dataObjects:(Class) dataObjectClass;
 
 
