@@ -83,7 +83,7 @@
     if([items isKindOfClass:[NSArray class]]){
         [[self dataObjects] addObjectsFromArray:items];
     }
-    else if(items){
+    else if([items isKindOfClass:[NSDictionary class]]){
         [[self dataObjects] addObject:items];
     }
 }
