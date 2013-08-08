@@ -257,7 +257,7 @@
     [UIView setAnimationDuration:0.3];
     
     if(hasTopScroll){
-        [_tableView setContentOffset:CGPointMake(0, 0) animated:NO];
+        [_tableView setContentOffset:CGPointMake(0, - _tableView.contentInset.top) animated:NO];
     }
 
     [_tableView setTableHeaderView:nil];
