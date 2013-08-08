@@ -252,7 +252,6 @@
             s = [[[NSString alloc] initWithData:_responseBody encoding:NSUTF8StringEncoding] autorelease];
         }
         self.responseBody = s ? [VTJSON decodeText:s] : nil;
-        [s release];
     }
     else if(_responseType == VTHttpTaskResponseTypeResource){
         NSString * t = [_responseBody stringByAppendingPathExtension:@"tmp"];
