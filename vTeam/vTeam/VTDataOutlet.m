@@ -29,8 +29,8 @@
             if(index >=0 && index < [(NSArray *)self count]){
                 return [(NSArray *)self objectAtIndex:index];
             }
-            return nil;
         }
+        return nil;
     }
     return [self valueForKey:key];
 }
