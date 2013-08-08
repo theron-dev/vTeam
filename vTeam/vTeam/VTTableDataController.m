@@ -205,33 +205,31 @@
 
 -(void) startLoading{
     
-    [_bottomLoadingView removeFromSuperview];
-    [_topLoadingView removeFromSuperview];
-    
     if(![(id)self.dataSource respondsToSelector:@selector(pageIndex)]
        || [(id)self.dataSource pageIndex] == 1){
+       
+        CGRect r = _topLoadingView.frame;
         
-        [_tableView setTableHeaderView:nil];
+        r.size.width = _tableView.bounds.size.width;
+        r.origin.y = - r.size.height;
         
-        if(_tableView.contentOffset.y < _topLoadingView.frame.size.height){
-            [_tableView setTableHeaderView:_topLoadingView];
-        }
-        else{
-            CGRect r = _topLoadingView.frame;
-            
-            r.size.width = _tableView.bounds.size.width;
-            r.origin.y = - r.size.height;
-            
-            [_topLoadingView setFrame:r];
+        [_topLoadingView setFrame:r];
+        
+        if(_topLoadingView.superview == nil){
             [_tableView addSubview:_topLoadingView];
         }
-
+        
+        if(_tableView.contentOffset.y < _topLoadingView.frame.size.height){
+            
+            [_tableView setContentOffset:CGPointMake(0, - r.size.height - _tableView.contentInset.top) animated:NO];
+            
+        }
+        
         [_tableView setTableFooterView:nil];
     }
     else{
         [_tableView setTableFooterView:nil];
         [_tableView setTableFooterView:_bottomLoadingView];
-        [_tableView setTableHeaderView:nil];
     }
     
     [_topLoadingView startAnimation];
@@ -249,28 +247,16 @@
         }
     }
     
-    if(hasTopScroll){
-        [_tableView setContentOffset:CGPointMake(0, - _tableView.tableHeaderView.frame.size.height) animated:NO];
-    }
-    
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:0.3];
-    
-    if(hasTopScroll){
-        [_tableView setContentOffset:CGPointMake(0, - _tableView.contentInset.top) animated:NO];
+    if(_tableView.contentOffset.y < _tableView.contentInset.top){
+        [_tableView setContentOffset:CGPointMake(0, -_tableView.contentInset.top) animated:YES];
     }
 
-    [_tableView setTableHeaderView:nil];
     [_tableView setTableFooterView:nil];
     
-    [UIView commitAnimations];
-    
-    [_topLoadingView removeFromSuperview];
     [_bottomLoadingView removeFromSuperview];
     
     [_topLoadingView stopAnimation];
     [_bottomLoadingView stopAnimation];
-    
 
     
     if(_topLoadingView && _topLoadingView.superview == nil){
@@ -415,7 +401,7 @@
     
 }
 
--(void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+-(void) scrollViewDidScroll:(UIScrollView *)scrollView{
     if(![_topLoadingView isAnimating] && ![_bottomLoadingView isAnimating] && _bottomLoadingView.superview
        && [self.dataSource respondsToSelector:@selector(hasMoreData)] && [(id)self.dataSource hasMoreData]
        && scrollView.contentOffset.y - scrollView.contentSize.height + scrollView.frame.size.height > - _bottomLoadingView.frame.size.height){
@@ -423,16 +409,12 @@
     }
 }
 
+-(void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+
+}
+
 -(void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    if(!decelerate){
-        [self downloadImagesForView:scrollView];
-        if(![_topLoadingView isAnimating] && ![_bottomLoadingView isAnimating] && _bottomLoadingView.superview
-           && [self.dataSource respondsToSelector:@selector(hasMoreData)] && [(id)self.dataSource hasMoreData]
-           && scrollView.contentOffset.y - scrollView.contentSize.height + scrollView.frame.size.height > -_bottomLoadingView.frame.size.height){
-            [self.dataSource performSelectorOnMainThread:@selector(loadMoreData) withObject:nil waitUntilDone:NO];
-        }
-    }
-    else{
+    if(decelerate){
         if(![_topLoadingView isAnimating]){
             if(- scrollView.contentOffset.y >= _topLoadingView.frame.size.height){
                 _allowRefresh = YES;
