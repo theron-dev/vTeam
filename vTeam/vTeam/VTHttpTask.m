@@ -244,8 +244,14 @@
         }
     }
     else if(_responseType == VTHttpTaskResponseTypeJSON && _responseBody){
-        NSString * s = [[NSString alloc] initWithData:_responseBody encoding:NSUTF8StringEncoding];
-        self.responseBody = [VTJSON decodeText:s];
+        NSString * s = nil;
+        if([[self.contentType lowercaseString] rangeOfString:@"charset=gbk"].location != NSNotFound || _responseEncoding == VTHttpTaskResponseEncodingGBK){
+            s = [[[NSString alloc] initWithData:_responseBody encoding:CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000)] autorelease];
+        }
+        else{
+            s = [[[NSString alloc] initWithData:_responseBody encoding:NSUTF8StringEncoding] autorelease];
+        }
+        self.responseBody = s ? [VTJSON decodeText:s] : nil;
         [s release];
     }
     else if(_responseType == VTHttpTaskResponseTypeResource){
