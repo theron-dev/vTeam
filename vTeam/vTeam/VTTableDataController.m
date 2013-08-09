@@ -239,17 +239,7 @@
 
 -(void) stopLoading{
     
-    BOOL hasTopScroll = NO;
-    
-    if(_tableView.tableHeaderView){
-        if(_tableView.contentOffset.y <5){
-            hasTopScroll = YES;
-        }
-    }
-    
-    if(_tableView.contentOffset.y < _tableView.contentInset.top){
-        [_tableView setContentOffset:CGPointMake(0, -_tableView.contentInset.top) animated:YES];
-    }
+
 
     [_tableView setTableFooterView:nil];
     
@@ -257,6 +247,7 @@
     
     [_topLoadingView stopAnimation];
     [_bottomLoadingView stopAnimation];
+
 
     
     if(_topLoadingView && _topLoadingView.superview == nil){
@@ -267,10 +258,17 @@
         r.origin.y = - r.size.height;
         
         [_topLoadingView setFrame:r];
-        [_tableView addSubview:_topLoadingView];
+        if(_topLoadingView.superview == nil){
+            [_tableView addSubview:_topLoadingView];
+        }
     }
     
-    
+    if(_tableView.contentOffset.y < _tableView.contentInset.top){
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:0.3];
+        [_tableView setContentOffset:CGPointMake(0, -_tableView.contentInset.top) animated:NO];
+        [UIView commitAnimations];
+    }
     
     if([self.dataSource respondsToSelector:@selector(hasMoreData)]
        && [(id)self.dataSource hasMoreData]){
