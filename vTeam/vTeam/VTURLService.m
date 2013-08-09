@@ -178,6 +178,18 @@
             url = [self.config valueForKey:[(id<IVTURLDownlinkTask>)task urlKey]];
         }
         
+        id<IVTURLDownlinkTask> urlTask = (id<IVTURLDownlinkTask>) task;
+        
+        NSInteger offset = ( [urlTask vtDownlinkPageTaskPageIndex] - 1) * [urlTask vtDownlinkPageTaskPageSize];
+        
+        url = [url stringByReplacingOccurrencesOfString:@"{offset}" withString:[NSString stringWithFormat:@"%d",offset]];
+        
+        url = [url stringByReplacingOccurrencesOfString:@"{pageIndex}" withString:[NSString stringWithFormat:@"%d",[urlTask vtDownlinkPageTaskPageIndex]]];
+        
+        url = [url stringByReplacingOccurrencesOfString:@"{pageSize}" withString:[NSString stringWithFormat:@"%d",[urlTask vtDownlinkPageTaskPageSize]]];
+        
+        url = [url stringByDataOutlet:urlTask];
+        
         url = [url stringByDataOutlet:task];
 
         url = [[NSURL URLWithString:url queryValues:[(id<IVTURLDownlinkTask>)task queryValues]] absoluteString];
