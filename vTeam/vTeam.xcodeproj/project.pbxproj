@@ -255,6 +255,10 @@
 		11D678ED17AA5097000E02FA /* VTBehaviorTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 11D678EB17AA5097000E02FA /* VTBehaviorTask.m */; };
 		11D678F017AA5243000E02FA /* VTBehaviorTransactionTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 11D678EE17AA5242000E02FA /* VTBehaviorTransactionTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11D678F117AA5243000E02FA /* VTBehaviorTransactionTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 11D678EF17AA5242000E02FA /* VTBehaviorTransactionTask.m */; };
+		11DE6CE517B8ADDF00B04782 /* VTDOMElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 11DE6CE317B8ADDF00B04782 /* VTDOMElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11DE6CE617B8ADDF00B04782 /* VTDOMElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 11DE6CE417B8ADDF00B04782 /* VTDOMElement.m */; };
+		11DE6CE917B8AE4400B04782 /* VTDOMStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 11DE6CE717B8AE4400B04782 /* VTDOMStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11DE6CEA17B8AE4400B04782 /* VTDOMStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 11DE6CE817B8AE4400B04782 /* VTDOMStyle.m */; };
 		11E59F5F1728C197002DD63C /* IVTServiceContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 11E59F5E1728C03B002DD63C /* IVTServiceContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11E59F641728C785002DD63C /* VTStyleSheet.h in Headers */ = {isa = PBXBuildFile; fileRef = 11E59F621728C785002DD63C /* VTStyleSheet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11E59F651728C785002DD63C /* VTStyleSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E59F631728C785002DD63C /* VTStyleSheet.m */; };
@@ -611,6 +615,10 @@
 		11D678EB17AA5097000E02FA /* VTBehaviorTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTBehaviorTask.m; sourceTree = "<group>"; };
 		11D678EE17AA5242000E02FA /* VTBehaviorTransactionTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTBehaviorTransactionTask.h; sourceTree = "<group>"; };
 		11D678EF17AA5242000E02FA /* VTBehaviorTransactionTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTBehaviorTransactionTask.m; sourceTree = "<group>"; };
+		11DE6CE317B8ADDF00B04782 /* VTDOMElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDOMElement.h; sourceTree = "<group>"; };
+		11DE6CE417B8ADDF00B04782 /* VTDOMElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDOMElement.m; sourceTree = "<group>"; };
+		11DE6CE717B8AE4400B04782 /* VTDOMStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDOMStyle.h; sourceTree = "<group>"; };
+		11DE6CE817B8AE4400B04782 /* VTDOMStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDOMStyle.m; sourceTree = "<group>"; };
 		11E59F5E1728C03B002DD63C /* IVTServiceContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVTServiceContainer.h; sourceTree = "<group>"; };
 		11E59F621728C785002DD63C /* VTStyleSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTStyleSheet.h; sourceTree = "<group>"; };
 		11E59F631728C785002DD63C /* VTStyleSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTStyleSheet.m; sourceTree = "<group>"; };
@@ -910,6 +918,7 @@
 		114772F71727DE5200196FB2 /* vTeam */ = {
 			isa = PBXGroup;
 			children = (
+				11DE6CE017B8AD2200B04782 /* DOM */,
 				11A2D1091796907E00082380 /* Rich */,
 				1140728D1769984900275493 /* FDB */,
 				111638E317643A93009979D3 /* Sqlite */,
@@ -1097,6 +1106,17 @@
 				1193DB5617B0B35900F19592 /* VTBESessionObject.m */,
 			);
 			name = DataEntitys;
+			sourceTree = "<group>";
+		};
+		11DE6CE017B8AD2200B04782 /* DOM */ = {
+			isa = PBXGroup;
+			children = (
+				11DE6CE717B8AE4400B04782 /* VTDOMStyle.h */,
+				11DE6CE817B8AE4400B04782 /* VTDOMStyle.m */,
+				11DE6CE317B8ADDF00B04782 /* VTDOMElement.h */,
+				11DE6CE417B8ADDF00B04782 /* VTDOMElement.m */,
+			);
+			path = DOM;
 			sourceTree = "<group>";
 		};
 		11E59F601728C756002DD63C /* Style */ = {
@@ -1479,6 +1499,8 @@
 				11D678EC17AA5097000E02FA /* VTBehaviorTask.h in Headers */,
 				11D678F017AA5243000E02FA /* VTBehaviorTransactionTask.h in Headers */,
 				1193DB5717B0B35900F19592 /* VTBESessionObject.h in Headers */,
+				11DE6CE517B8ADDF00B04782 /* VTDOMElement.h in Headers */,
+				11DE6CE917B8AE4400B04782 /* VTDOMStyle.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1708,6 +1730,8 @@
 				11D678ED17AA5097000E02FA /* VTBehaviorTask.m in Sources */,
 				11D678F117AA5243000E02FA /* VTBehaviorTransactionTask.m in Sources */,
 				1193DB5817B0B35900F19592 /* VTBESessionObject.m in Sources */,
+				11DE6CE617B8ADDF00B04782 /* VTDOMElement.m in Sources */,
+				11DE6CEA17B8AE4400B04782 /* VTDOMStyle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
