@@ -6,8 +6,11 @@
 //  Copyright (c) 2013年 hailong.org. All rights reserved.
 //
 
-#import <vTeam/vTeam.h>
+#import <vTeam/VTDOMElement.h>
 
 @interface VTDOMRichElement : VTDOMElement
+
+@property(nonatomic,readonly) UIFont * font;
+@property(nonatomic,readonly) UIColor * textColor;
 
 @end

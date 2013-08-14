@@ -10,4 +10,12 @@
 
 @implementation VTDOMElement (Frame)
 
+-(CGRect) frame{
+    return [[self valueForKey:@"frame"] CGRectValue];
+}
+
+-(void) setFrame:(CGRect)frame{
+    [self setValue:[NSValue valueWithCGRect:frame] forKey:@"frame"];
+}
+
 @end

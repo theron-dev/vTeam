@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+#import <vTeam/VTDOMDocument.h>
+#import <vTeam/VTDOMElement+Render.h>
+#import <vTeam/VTDOMElement+Layout.h>
+#import <vTeam/VTDOMView.h>
+#import <vTeam/VTDOMParse.h>
+
 @interface VTDOM : NSObject
 
 @end

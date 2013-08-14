@@ -8,6 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
+#import <vTeam/VTDOMStyle.h>
+
 @interface VTDOMStyleSheet : NSObject
+
+@property(nonatomic,readonly) NSArray * styles;
+
+-(void) addStyle:(VTDOMStyle *) style;
+
+-(void) removeStyle:(VTDOMStyle *) style;
+
+-(void) removeAllStyles;
+
+-(VTDOMStyle *) selectorStyleName:(NSString *) styleName;
 
 @end

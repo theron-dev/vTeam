@@ -7,8 +7,17 @@
 //
 
 #import "VTDOMView.h"
+#import "VTDOMElement+Layout.h"
 
 @implementation VTDOMView
+
+@synthesize element = _element;
+@synthesize allowAutoLayout = _allowAutoLayout;
+
+-(void) dealloc{
+    [_element release];
+    [super dealloc];
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -19,13 +28,37 @@
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
-    // Drawing code
+    [super drawRect:rect];
+    
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+      
+    [_element render:_element.frame context:ctx];
+    
 }
-*/
+
+
+
+-(void) setElement:(VTDOMElement *)element{
+    if(_element != element){
+        [element retain];
+        [_element release];
+        _element = element;
+        if(_allowAutoLayout){
+            [_element layout:self.bounds.size];
+        }
+        [self setNeedsDisplay];
+    }
+}
+
+-(void) setFrame:(CGRect)frame{
+    [super setFrame:frame];
+    if(_allowAutoLayout){
+        [_element layout:self.bounds.size];
+    }
+    [self setNeedsDisplay];
+}
+
 
 @end

@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface VTDOMView : UIScrollView
+#import <vTeam/VTDOMElement+Render.h>
+
+@interface VTDOMView : UIView
+
+@property(nonatomic,retain) VTDOMElement * element;
+@property(nonatomic,assign,getter = isAllowAutoLayout) BOOL allowAutoLayout;
 
 @end

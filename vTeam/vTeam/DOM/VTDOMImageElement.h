@@ -6,7 +6,7 @@
 //  Copyright (c) 2013年 hailong.org. All rights reserved.
 //
 
-#import <vTeam/vTeam.h>
+#import <vTeam/VTDOMElement.h>
 
 @interface VTDOMImageElement : VTDOMElement
 

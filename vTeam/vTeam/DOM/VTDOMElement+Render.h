@@ -6,8 +6,12 @@
 //  Copyright (c) 2013年 hailong.org. All rights reserved.
 //
 
-#import <vTeam/vTeam.h>
+#import <vTeam/VTDOMElement+Frame.h>
 
 @interface VTDOMElement (Render)
+
+-(void) render:(CGRect) rect context:(CGContextRef) context;
+
+-(void) draw:(CGRect) rect context:(CGContextRef) context;
 
 @end

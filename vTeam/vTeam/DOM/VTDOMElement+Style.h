@@ -6,8 +6,20 @@
 //  Copyright (c) 2013年 hailong.org. All rights reserved.
 //
 
-#import <vTeam/vTeam.h>
+#import <vTeam/VTDOMElement.h>
 
 @interface VTDOMElement (Style)
+
+-(NSString *) stringValueForKey:(NSString *) key;
+
+-(float) floatValueForKey:(NSString *) key;
+
+-(BOOL) booleanValueForKey:(NSString *) key;
+
+-(UIImage *) imageValueForKey:(NSString *) key bundle:(NSBundle *) bundle;
+
+-(UIColor *) colorValueForKey:(NSString *) key;
+
+-(UIFont *) fontValueForKey:(NSString *) key;
 
 @end

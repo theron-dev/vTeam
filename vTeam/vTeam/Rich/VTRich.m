@@ -90,7 +90,7 @@ static CTRunDelegateCallbacks VTRichDelegateCallbacks = {
 }
 
 -(NSAttributedString *) attributedString{
-    if(_attributedString){
+    if(_attributedString == nil){
         _attributedString = [[NSMutableAttributedString alloc] init];
     }
     return _attributedString;
@@ -109,6 +109,25 @@ static CTRunDelegateCallbacks VTRichDelegateCallbacks = {
     
     NSMutableDictionary * attr = [NSMutableDictionary dictionaryWithDictionary:attributes];
     
+    if([attr valueForKey:(id)kCTParagraphStyleAttributeName] == nil){
+        
+        CTTextAlignment textAlignment = kCTTextAlignmentJustified;
+        CGFloat firstLineHeadIndent = 0;
+        
+        CTParagraphStyleSetting settings[] = {
+            {kCTParagraphStyleSpecifierLineSpacingAdjustment,sizeof(_linesSpacing),&_linesSpacing},
+            {kCTParagraphStyleSpecifierAlignment,sizeof(textAlignment),&textAlignment},
+            {kCTParagraphStyleSpecifierFirstLineHeadIndent,sizeof(firstLineHeadIndent),&firstLineHeadIndent},
+        };
+        
+        CTParagraphStyleRef style = CTParagraphStyleCreate(settings, sizeof(settings) / sizeof(CTParagraphStyleSetting)) ;
+        
+        [attr setValue:(id)style forKey:(id)kCTParagraphStyleAttributeName];
+        
+        CFRelease(style);
+        
+    }
+    
     CTFontRef font = (CTFontRef)[attr valueForKey:(id)kCTFontAttributeName];
     
     if(font){
@@ -123,7 +142,7 @@ static CTRunDelegateCallbacks VTRichDelegateCallbacks = {
         [attr setValue:(id)font forKey:(id)kCTFontAttributeName];
         CFRelease(font);
     }
-    
+        
     CGColorRef textColor = (CGColorRef)[attr valueForKey:(id)kCTForegroundColorAttributeName];
     
     if(textColor == nil){
@@ -142,8 +161,13 @@ static CTRunDelegateCallbacks VTRichDelegateCallbacks = {
     NSAttributedString * string = [[NSAttributedString alloc] initWithString:text attributes:attr];
     
     [_attributedString appendAttributedString:string];
-    [self elements];
-    [_elements addObject:element];
+    
+    [string release];
+    
+    if(element){
+        [self elements];
+        [_elements addObject:element];
+    }
     
     if(_frameWithWidth.frame){
         CFRelease(_frameWithWidth.frame);
@@ -195,16 +219,11 @@ static CTRunDelegateCallbacks VTRichDelegateCallbacks = {
         
         CGMutablePathRef path = CGPathCreateMutable();
         
-        CGPathAddRect(path, nil, CGRectMake(0, 0, width, MAXFLOAT));
-        
+        CGPathAddRect(path, NULL, CGRectMake(0, 0, width, MAXFLOAT));
         
         CFRange r = {0,[_attributedString length]};
-        
-        NSMutableDictionary * attr = [NSMutableDictionary dictionaryWithCapacity:4];
-        
-        [attr setValue:[NSNumber numberWithFloat:_linesSpacing] forKey:(id)kCTParagraphStyleSpecifierLineSpacingAdjustment];
-        
-        _frameWithWidth.frame = CTFramesetterCreateFrame(_frameWithWidth.framesetter, r, path, (CFDictionaryRef)attr);
+ 
+        _frameWithWidth.frame = CTFramesetterCreateFrame(_frameWithWidth.framesetter, r, path, nil);
         
         CGPathRelease(path);
     }
@@ -218,14 +237,11 @@ static CTRunDelegateCallbacks VTRichDelegateCallbacks = {
         _frameWithWidth.framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)_attributedString);
     }
     
-    NSMutableDictionary * attr = [NSMutableDictionary dictionaryWithCapacity:4];
-    
-    [attr setValue:[NSNumber numberWithFloat:_linesSpacing] forKey:(id)kCTParagraphStyleSpecifierLineSpacingAdjustment];
-    
+
     CFRange r = {0,[_attributedString length]};
     
-    return CTFramesetterSuggestFrameSizeWithConstraints(_frameWithWidth.framesetter, r, (CFDictionaryRef)attr, CGSizeMake(width, MAXFLOAT), nil);
+    return CTFramesetterSuggestFrameSizeWithConstraints(_frameWithWidth.framesetter, r
+                                                        , nil, CGSizeMake(width, MAXFLOAT), nil);
 }
-
 
 @end
