@@ -86,8 +86,8 @@ static void VTDOMParseCSS_style_sheet_add(struct _hcss_scanf_t * css,hany styleS
 static hcss_scanf_t VTDOMParseCSSScanf = {
     VTDOMParseCSS_style_new,
     VTDOMParseCSS_style_attr_set,
+    VTDOMParseCSS_style_sheet_add,
     VTDOMParseCSS_style_release,
-    VTDOMParseCSS_style_sheet_add
 };
 
 
