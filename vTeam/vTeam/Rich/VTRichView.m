@@ -36,7 +36,7 @@
     //CGContextTranslateCTM(ctx, 0, -size.height);
     //CGContextScaleCTM(ctx, 1, -1);
     
-    CTFrameRef frame = [_rich frameWithWidth:self.bounds.size.width];
+    CTFrameRef frame = [_rich frameWithSize:self.bounds.size];
     
     CTFrameDraw(frame, ctx);
     
@@ -65,7 +65,7 @@
 
 -(void) handleViewElements{
     
-    CTFrameRef frame = [_rich frameWithWidth:self.bounds.size.width];
+    CTFrameRef frame = [_rich frameWithSize:self.bounds.size];
     
     CGPoint p;
     

@@ -20,9 +20,9 @@
     NSMutableArray * _elements;
     struct {
         CTFrameRef frame;
-        CGFloat width;
+        CGSize size;
         CTFramesetterRef framesetter;
-    } _frameWithWidth;
+    } _frameWithSize;
 }
 
 @end
@@ -58,6 +58,7 @@ static CTRunDelegateCallbacks VTRichDelegateCallbacks = {
 @synthesize incFontSize = _incFontSize;
 @synthesize textColor = _textColor;
 @synthesize linesSpacing = _linesSpacing;
+@synthesize charsetsSpacing = _charsetsSpacing;
 
 -(id) init{
     if((self = [super init])){
@@ -73,11 +74,11 @@ static CTRunDelegateCallbacks VTRichDelegateCallbacks = {
     [_elements release];
     [_textColor release];
     [_font release];
-    if(_frameWithWidth.frame){
-        CFRelease(_frameWithWidth.frame);
+    if(_frameWithSize.frame){
+        CFRelease(_frameWithSize.frame);
     }
-    if(_frameWithWidth.framesetter){
-        CFRelease(_frameWithWidth.framesetter);
+    if(_frameWithSize.framesetter){
+        CFRelease(_frameWithSize.framesetter);
     }
     [super dealloc];
 }
@@ -149,6 +150,10 @@ static CTRunDelegateCallbacks VTRichDelegateCallbacks = {
         [attr setValue:(id)_textColor.CGColor forKey:(id)kCTForegroundColorAttributeName];
     }
     
+    if([attr valueForKey:(id)kCTKernAttributeName] == nil){
+        [attr setValue:[NSNumber numberWithFloat:_charsetsSpacing] forKey:(id)kCTKernAttributeName];
+    }
+    
     if([element conformsToProtocol:@protocol(IVTRichDrawElement)] || [element conformsToProtocol:@protocol(IVTRichViewElement)]){
         
         CTRunDelegateRef delegate = CTRunDelegateCreate(&VTRichDelegateCallbacks, element);
@@ -169,14 +174,14 @@ static CTRunDelegateCallbacks VTRichDelegateCallbacks = {
         [_elements addObject:element];
     }
     
-    if(_frameWithWidth.frame){
-        CFRelease(_frameWithWidth.frame);
-        _frameWithWidth.frame = nil;
+    if(_frameWithSize.frame){
+        CFRelease(_frameWithSize.frame);
+        _frameWithSize.frame = nil;
     }
     
-    if(_frameWithWidth.framesetter){
-        CFRelease(_frameWithWidth.framesetter);
-        _frameWithWidth.framesetter = nil;
+    if(_frameWithSize.framesetter){
+        CFRelease(_frameWithSize.framesetter);
+        _frameWithSize.framesetter = nil;
     }
 
 }
@@ -193,55 +198,55 @@ static CTRunDelegateCallbacks VTRichDelegateCallbacks = {
     NSRange r = {0,[_attributedString length]};
     [_attributedString deleteCharactersInRange:r];
     [_elements removeAllObjects];
-    if(_frameWithWidth.frame){
-        CFRelease(_frameWithWidth.frame);
-        _frameWithWidth.frame = nil;
+    if(_frameWithSize.frame){
+        CFRelease(_frameWithSize.frame);
+        _frameWithSize.frame = nil;
     }
-    if(_frameWithWidth.framesetter){
-        CFRelease(_frameWithWidth.framesetter);
-        _frameWithWidth.framesetter = nil;
+    if(_frameWithSize.framesetter){
+        CFRelease(_frameWithSize.framesetter);
+        _frameWithSize.framesetter = nil;
     }
 }
 
--(CTFrameRef) frameWithWidth:(CGFloat) width{
+-(CTFrameRef) frameWithSize:(CGSize) size{
     
-    if(_frameWithWidth.frame == nil || _frameWithWidth.width != width){
+    if(_frameWithSize.frame == nil || !CGSizeEqualToSize(size, _frameWithSize.size)){
         
-        if(_frameWithWidth.frame){
-            CFRelease(_frameWithWidth.frame);
+        if(_frameWithSize.frame){
+            CFRelease(_frameWithSize.frame);
         }
         
-        _frameWithWidth.width = width;
+        _frameWithSize.size = size;
         
-        if(_frameWithWidth.framesetter == nil){
-            _frameWithWidth.framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)_attributedString);
+        if(_frameWithSize.framesetter == nil){
+            _frameWithSize.framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)_attributedString);
         }
         
         CGMutablePathRef path = CGPathCreateMutable();
         
-        CGPathAddRect(path, NULL, CGRectMake(0, 0, width, MAXFLOAT));
+        CGPathAddRect(path, NULL, CGRectMake(0, 0, size.width, size.height));
         
         CFRange r = {0,[_attributedString length]};
  
-        _frameWithWidth.frame = CTFramesetterCreateFrame(_frameWithWidth.framesetter, r, path, nil);
+        _frameWithSize.frame = CTFramesetterCreateFrame(_frameWithSize.framesetter, r, path, nil);
         
         CGPathRelease(path);
     }
     
-    return _frameWithWidth.frame;
+    return _frameWithSize.frame;
 }
 
--(CGSize) contentSizeWithWidth:(CGFloat) width{
+-(CGSize) contentSizeWithSize:(CGSize) size{
     
-    if(_frameWithWidth.framesetter == nil){
-        _frameWithWidth.framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)_attributedString);
+    if(_frameWithSize.framesetter == nil){
+        _frameWithSize.framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)_attributedString);
     }
     
 
     CFRange r = {0,[_attributedString length]};
     
-    return CTFramesetterSuggestFrameSizeWithConstraints(_frameWithWidth.framesetter, r
-                                                        , nil, CGSizeMake(width, MAXFLOAT), nil);
+    return CTFramesetterSuggestFrameSizeWithConstraints(_frameWithSize.framesetter, r
+                                                        , nil, size, nil);
 }
 
 @end

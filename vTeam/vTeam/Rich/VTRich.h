@@ -50,6 +50,7 @@
 @property(nonatomic,assign) CGFloat incFontSize;
 @property(nonatomic,retain) UIColor * textColor;
 @property(nonatomic,assign) CGFloat linesSpacing;
+@property(nonatomic,assign) CGFloat charsetsSpacing;
 @property(nonatomic,readonly) NSArray * elements;
 @property(nonatomic,readonly) NSAttributedString * attributedString;
 
@@ -63,8 +64,8 @@
 
 -(void) removeAllElements;
 
--(CTFrameRef) frameWithWidth:(CGFloat) width;
+-(CTFrameRef) frameWithSize:(CGSize) size;
 
--(CGSize) contentSizeWithWidth:(CGFloat) width;
+-(CGSize) contentSizeWithSize:(CGSize) size;
 
 @end

@@ -129,6 +129,7 @@
             }
         }
         
+        return [UIFont systemFontOfSize:fontSize];
     }
     return nil;
 }
