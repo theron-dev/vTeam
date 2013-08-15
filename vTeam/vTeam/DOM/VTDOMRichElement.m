@@ -16,8 +16,10 @@
 #import "VTDOMDocument.h"
 #import "VTRichImageElement.h"
 #import "VTRichLinkElement.h"
+#import "VTRichViewElement.h"
 
 #import "VTDOMImageElement.h"
+#import "VTDOMViewElement.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -117,6 +119,58 @@
         [rich appendElement:img];
         
         [img release];
+        
+    }
+    else if([element isKindOfClass:[VTDOMViewElement class]]){
+        
+        VTRichViewElement * viewElement = [[VTRichViewElement alloc] init];
+        
+        UIView * view = [(VTDOMViewElement *)element view];
+        
+        [viewElement setView:view];
+        
+        CGRect frame = view.frame;
+        CGSize size = frame.size;
+        CGRect r = self.frame;
+        
+        NSString * width = [element stringValueForKey:@"width"];
+        NSString * height = [element stringValueForKey:@"height"];
+        
+        if(width && ![width isEqualToString:@"auto"]){
+            if([width hasSuffix:@"%"]){
+                size.width = [width floatValue] * r.size.width / 100.0;
+            }
+            else{
+                size.width = [width floatValue];
+            }
+        }
+        else {
+            frame.size.width = 0;
+            [view setFrame:frame];
+            [view sizeToFit];
+            size.width = view.frame.size.width;
+        }
+        
+        if(height && ![height isEqualToString:@"auto"]){
+            if([height hasSuffix:@"%"]){
+                size.height = [height floatValue] * r.size.height / 100.0;
+            }
+            else{
+                size.height = [height floatValue];
+            }
+        }
+        else{
+            frame.size.height = 0;
+            frame.size.width = size.width;
+            [view sizeToFit];
+            size.height = view.frame.size.height;
+        }
+        
+        [viewElement setSize:size];
+        
+        [rich appendElement:viewElement];
+        
+        [viewElement release];
         
     }
     else if([name isEqualToString:@"a"] && [text length]){
