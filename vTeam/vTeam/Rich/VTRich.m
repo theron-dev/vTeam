@@ -526,4 +526,57 @@ static CTRunDelegateCallbacks VTRichDelegateCallbacks = {
     }
 }
 
+-(void) drawElement:(id<IVTRichDrawElement>) element context:(CGContextRef) context withSize:(CGSize) size{
+    
+    CTFrameRef frame = [self frameWithSize:size];
+ 
+    NSInteger lineIndex = 0;
+    CFArrayRef lines = CTFrameGetLines(frame);
+    NSInteger count = CFArrayGetCount(lines);
+    CGPoint lineOrigins[count];
+    
+    CTFrameGetLineOrigins(frame, CFRangeMake(0, 0), lineOrigins);
+    
+    while(lineIndex < count && element){
+        
+        CTLineRef line = CFArrayGetValueAtIndex(lines, lineIndex);
+        CFArrayRef runs = CTLineGetGlyphRuns(line);
+        
+        for(int i=0;i<CFArrayGetCount(runs);i++){
+            
+            CTRunRef run = CFArrayGetValueAtIndex(runs, i);
+            
+            CFRange r = CTRunGetStringRange(run);
+            
+            NSRange rr = [element range];
+            
+            if(r.location == rr.location && r.length == rr.length && r.length == 1){
+                
+                const CGPoint * p = CTRunGetPositionsPtr(run);
+                
+                CGSize s = CGSizeMake([element width], [element ascent] + [element descent]);
+                
+                CGContextSaveGState(context);
+                
+                CGContextTranslateCTM(context, p->x, p->y + lineOrigins[lineIndex].y);
+                CGContextClipToRect(context, CGRectMake(0, 0, s.width, s.height));
+                
+                [element drawRect:CGRectMake(0, 0, s.width, s.height) context:context];
+                
+                CGContextRestoreGState(context);
+                
+                element = nil;
+            }
+            else if(r.location>= r.location + r.length){
+                element = nil;
+            }
+            
+        }
+        
+        lineIndex ++;
+        
+    }
+    
+}
+
 @end

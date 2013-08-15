@@ -66,15 +66,16 @@
         CGFloat top = backgroundImage.topCapHeight / imageSize.height;
         
         if(left && top){
-            static UIButton * bgLayer = nil;
+            static CALayer * bgLayer = nil;
             if(bgLayer == nil){
-                bgLayer = [[UIButton alloc] initWithFrame:r];
+                bgLayer = [[CALayer alloc] init];
             }
-            else{
-                bgLayer.frame = r;
-            }
-            [bgLayer setBackgroundImage:backgroundImage forState:UIControlStateNormal];
-            [bgLayer.layer renderInContext:context];
+            bgLayer.frame = r;
+            bgLayer.contents = (id)[backgroundImage CGImage];
+            bgLayer.contentsScale = [backgroundImage scale];
+            bgLayer.contentsCenter  = CGRectMake(left, top, 1.0 / imageSize.width, 1.0 / imageSize.height);
+            
+            [bgLayer renderInContext:context];
         }
         else{
             [backgroundImage drawInRect:r];

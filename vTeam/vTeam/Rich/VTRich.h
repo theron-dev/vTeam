@@ -75,4 +75,6 @@
 
 -(void) uninstallView;
 
+-(void) drawElement:(id<IVTRichDrawElement>) element context:(CGContextRef) context withSize:(CGSize) size;
+
 @end
