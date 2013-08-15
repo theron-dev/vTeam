@@ -26,6 +26,7 @@
 @synthesize parentElement = _parentElement;
 @synthesize childs = _childs;
 @synthesize document = _document;
+@synthesize delegate = _delegate;
 
 -(void) dealloc{
     for(VTDOMElement * element in _childs){
@@ -110,6 +111,21 @@
         _values = [[NSMutableDictionary alloc] initWithCapacity:4];
     }
     [_values setValue:value forKey:key];
+}
+
+-(void) setNeedDisplay{
+    if([_delegate respondsToSelector:@selector(vtDOMElementDoNeedDisplay:)]){
+        [_delegate vtDOMElementDoNeedDisplay:self];
+    }
+}
+
+-(void) searchElementsByClass:(Class) clazz inherit:(BOOL)inherit toElements:(NSMutableArray *) elements{
+    if(inherit ? [self isKindOfClass:clazz] : [self class] == clazz){
+        [elements addObject:self];
+    }
+    for(VTDOMElement * el in [self childs]){
+        [el searchElementsByClass:clazz inherit:inherit toElements:elements];
+    }
 }
 
 @end

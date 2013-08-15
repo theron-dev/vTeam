@@ -36,30 +36,7 @@
     //CGContextTranslateCTM(ctx, 0, -size.height);
     //CGContextScaleCTM(ctx, 1, -1);
     
-    CTFrameRef frame = [_rich frameWithSize:self.bounds.size];
-    
-    CTFrameDraw(frame, ctx);
-    
-    CGPoint p;
-    
-    for(id element in [_rich elements]){
-        
-        if([element conformsToProtocol:@protocol(IVTRichDrawElement)]){
-            
-            NSRange r = [element range];
-            
-            CTFrameGetLineOrigins(frame, CFRangeMake(r.location, 1), &p);
-
-            CGContextSaveGState(ctx);
-            
-            CGContextTranslateCTM(ctx, p.x, p.y);
-            
-            [element drawRect:CGRectMake(0, 0, [element width], [element ascent] + [element descent]) context:ctx];
-            
-            CGContextRestoreGState(ctx);
-            
-        }
-    }
+    [_rich drawContext:ctx withSize:self.bounds.size];
     
 }
 

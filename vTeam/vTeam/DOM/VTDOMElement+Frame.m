@@ -18,4 +18,22 @@
     [self setValue:[NSValue valueWithCGRect:frame] forKey:@"frame"];
 }
 
+- (CGRect)convertRect:(CGRect)rect superElement:(VTDOMElement *) element{
+    
+    VTDOMElement * el = self;
+    
+    while(el != element){
+        
+        CGRect r = el.frame;
+        
+        rect.origin = CGPointMake(rect.origin.x + r.origin.x, rect.origin.y + r.origin.y);
+        
+        rect = CGRectIntersection(rect, r);
+        
+        el = [el parentElement];
+    }
+    
+    return rect;
+}
+
 @end

@@ -6,9 +6,13 @@
 //  Copyright (c) 2013年 hailong.org. All rights reserved.
 //
 
-#import <vTeam/vTeam.h>
+#import <vTeam/VTDataController.h>
+#import <vTeam/VTTableView.h>
+#import <vTeam/VTTableViewCell.h>
+#import <vTeam/VTDragLoadingView.h>
 
-@interface VTTableDataController : VTDataController<UITableViewDataSource,UITableViewDelegate,VTTableViewDelegate,VTTableViewCellDelegate>
+@interface VTTableDataController : VTDataController<UITableViewDataSource,UITableViewDelegate
+    ,VTTableViewDelegate,VTTableViewCellDelegate>
 
 @property(nonatomic,retain) IBOutlet UITableView * tableView;
 @property(nonatomic,retain) NSString * reusableCellIdentifier;

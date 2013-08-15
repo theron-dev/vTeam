@@ -16,6 +16,9 @@
 
 @implementation VTDOMStyleSheet
 
+@synthesize version = _version;
+@synthesize styles = _styles;
+
 -(void) dealloc{
     [_styles release];
     [super dealloc];
@@ -44,12 +47,12 @@
     
     for(NSString * name in names){
         
-        for(VTDOMStyle * style in _styles){
+        for(VTDOMStyle * s in _styles){
             
-            if([name isEqualToString:style.name]){
+            if([name isEqualToString:s.name]){
                 
-                for(NSString * key in style.allKeys){
-                    [style setStringValue:[style stringValueForKey:key] forKey:key];
+                for(NSString * key in s.allKeys){
+                    [style setStringValue:[s stringValueForKey:key] forKey:key];
                 }
                 
             }

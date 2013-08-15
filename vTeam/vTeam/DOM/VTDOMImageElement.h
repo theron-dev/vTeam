@@ -10,4 +10,6 @@
 
 @interface VTDOMImageElement : VTDOMElement
 
+@property(nonatomic,retain) UIImage * image;
+
 @end

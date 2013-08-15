@@ -158,7 +158,7 @@ static CTRunDelegateCallbacks VTRichDelegateCallbacks = {
         
         CTRunDelegateRef delegate = CTRunDelegateCreate(&VTRichDelegateCallbacks, element);
         
-        [attributes setValue:(id)delegate forKey:(id)kCTRunDelegateAttributeName];
+        [attr setValue:(id)delegate forKey:(id)kCTRunDelegateAttributeName];
         
         CFRelease(delegate);
     }
@@ -247,6 +247,283 @@ static CTRunDelegateCallbacks VTRichDelegateCallbacks = {
     
     return CTFramesetterSuggestFrameSizeWithConstraints(_frameWithSize.framesetter, r
                                                         , nil, size, nil);
+}
+
+-(BOOL) isNewLine{
+    if([_attributedString.string length]){
+        return [[_attributedString.string substringFromIndex:[_attributedString.string length] -1] isEqualToString:@"\n"];
+    }
+    return NO;
+}
+
+-(void) drawContext:(CGContextRef) context withSize:(CGSize) size{
+
+    CTFrameRef frame = [self frameWithSize:size];
+    
+    CTFrameDraw(frame, context);
+    
+    NSInteger elementIndex = 0;
+    NSInteger lineIndex = 0;
+    CFArrayRef lines = CTFrameGetLines(frame);
+    NSInteger count = CFArrayGetCount(lines);
+    NSArray * elements = [self elements];
+    id drawElement = nil;
+    CGPoint lineOrigins[count];
+    
+    while(elementIndex < [elements count] && drawElement == nil){
+        drawElement = [elements objectAtIndex:elementIndex ++];
+        if(![drawElement conformsToProtocol:@protocol(IVTRichDrawElement)]){
+            drawElement = nil;
+        }
+    }
+    
+    CTFrameGetLineOrigins(frame, CFRangeMake(0, 0), lineOrigins);
+    
+    while(lineIndex < count && drawElement){
+        
+        CTLineRef line = CFArrayGetValueAtIndex(lines, lineIndex);
+        CFArrayRef runs = CTLineGetGlyphRuns(line);
+
+        for(int i=0;i<CFArrayGetCount(runs);i++){
+            
+            CTRunRef run = CFArrayGetValueAtIndex(runs, i);
+            
+            CFRange r = CTRunGetStringRange(run);
+            
+            NSRange rr = [drawElement range];
+            
+            if(r.location == rr.location && r.length == rr.length && r.length == 1){
+                
+                const CGPoint * p = CTRunGetPositionsPtr(run);
+                
+                CGSize s = CGSizeMake([drawElement width], [drawElement ascent] + [drawElement descent]);
+                
+                CGContextSaveGState(context);
+                
+                CGContextTranslateCTM(context, p->x, p->y + lineOrigins[lineIndex].y);
+                CGContextClipToRect(context, CGRectMake(0, 0, s.width, s.height));
+                
+                [drawElement drawRect:CGRectMake(0, 0, s.width, s.height) context:context];
+                
+                CGContextRestoreGState(context);
+                
+                
+                drawElement = nil;
+                while(elementIndex < [elements count] && drawElement == nil){
+                    drawElement = [elements objectAtIndex:elementIndex ++];
+                    if(![drawElement conformsToProtocol:@protocol(IVTRichDrawElement)]){
+                        drawElement = nil;
+                    }
+                }
+            }
+            else if(r.location>= r.location + r.length){
+                drawElement = nil;
+                while(elementIndex < [elements count] && drawElement == nil){
+                    drawElement = [elements objectAtIndex:elementIndex ++];
+                    if(![drawElement conformsToProtocol:@protocol(IVTRichDrawElement)]){
+                        drawElement = nil;
+                    }
+                }
+            }
+            
+        }
+                                                                        
+        lineIndex ++;
+        
+    }
+    
+}
+
+-(id) elementByLocation:(CGPoint) location withSize:(CGSize) size{
+    
+    CTFrameRef frame = [self frameWithSize:size];
+    
+    NSInteger lineIndex = 0;
+    CFArrayRef lines = CTFrameGetLines(frame);
+    NSInteger count = CFArrayGetCount(lines);
+    CGPoint lineOrigins[count];
+    
+    CTFrameGetLineOrigins(frame, CFRangeMake(0, 0), lineOrigins);
+    
+    while(lineIndex < count ){
+        
+        CTLineRef line = CFArrayGetValueAtIndex(lines, lineIndex);
+
+        CGRect bounds = CTLineGetBoundsWithOptions(line, kCTLineBoundsUseOpticalBounds);
+        bounds.origin.y = lineOrigins[0].y - lineOrigins[lineIndex].y - bounds.origin.y;
+        
+        if(CGRectContainsPoint(bounds, location)){
+            CFIndex index = CTLineGetStringIndexForPosition(line, location);
+            
+            if(index != kCFNotFound){
+                
+                for(id element in [self elements]){
+                    
+                    NSRange rr = [element range];
+                    
+                    if(index >= rr.location && index <= rr.location +rr.length){
+                        return element;
+                    }
+                    else if(index < rr.location){
+                        break;
+                    }
+                }
+                
+                break;
+            }
+        }
+    
+        lineIndex ++;
+        
+    }
+    
+    return nil;
+}
+
+-(NSArray *) elementRects:(id) element withSize:(CGSize) size{
+    
+    if(element){
+        
+        NSMutableArray * rects = [NSMutableArray arrayWithCapacity:4];
+        
+        CTFrameRef frame = [self frameWithSize:size];
+        
+        NSInteger lineIndex = 0;
+        CFArrayRef lines = CTFrameGetLines(frame);
+        NSInteger count = CFArrayGetCount(lines);
+        CGPoint lineOrigins[count];
+        
+        CTFrameGetLineOrigins(frame, CFRangeMake(0, 0), lineOrigins);
+        
+        NSRange range = [element range];
+        NSInteger index = 0;
+        
+        while(lineIndex < count && index < range.length){
+            
+            CTLineRef line = CFArrayGetValueAtIndex(lines, lineIndex);
+            
+            CFRange r = CTLineGetStringRange(line);
+            CGRect bounds = CTLineGetBoundsWithOptions(line, kCTLineBoundsUseOpticalBounds);
+            
+            CGRect rect = CGRectMake(0, lineOrigins[0].y - lineOrigins[lineIndex].y - bounds.origin.y
+                                     , 0, bounds.size.height);
+            CGFloat beginOffset = kCFNotFound;
+            CGFloat endOffset = kCFNotFound;
+       
+            if (range.location + index >= r.location && range.location + index < r.location + r.length
+                   && index < range.length) {
+                
+                if(beginOffset == kCFNotFound){
+                    beginOffset = CTLineGetOffsetForStringIndex(line, range.location + index, NULL);
+                }
+                
+                if(range.location + range.length <= r.location + r.length){
+                    index = range.length;
+                    endOffset = CTLineGetOffsetForStringIndex(line, range.location + index, NULL);
+                }
+                else{
+                    endOffset = bounds.size.width;
+                    index = r.length - (range.location - r.location);
+                }
+            }
+            
+            if(beginOffset != kCFNotFound && endOffset != kCFNotFound){
+                
+                rect.origin.x = beginOffset;
+                rect.size.width = endOffset - beginOffset;
+
+                [rects addObject:[NSValue valueWithCGRect:rect]];
+                
+            }
+            
+            lineIndex ++;
+            
+        }
+        
+        return rects;
+    }
+    
+    return nil;
+}
+
+-(void) installView:(UIView *) view rect:(CGRect) rect{
+    
+    CTFrameRef frame = [self frameWithSize:rect.size];
+    
+    NSInteger elementIndex = 0;
+    NSInteger lineIndex = 0;
+    CFArrayRef lines = CTFrameGetLines(frame);
+    NSInteger count = CFArrayGetCount(lines);
+    NSArray * elements = [self elements];
+    id viewElement = nil;
+    CGPoint lineOrigins[count];
+    
+    while(elementIndex < [elements count] && viewElement == nil){
+        viewElement = [elements objectAtIndex:elementIndex ++];
+        if(![viewElement conformsToProtocol:@protocol(IVTRichViewElement)]){
+            viewElement = nil;
+        }
+    }
+    
+    CTFrameGetLineOrigins(frame, CFRangeMake(0, 0), lineOrigins);
+    
+    while(lineIndex < count && viewElement){
+        
+        CTLineRef line = CFArrayGetValueAtIndex(lines, lineIndex);
+        CFArrayRef runs = CTLineGetGlyphRuns(line);
+        
+        for(int i=0;i<CFArrayGetCount(runs);i++){
+            
+            CTRunRef run = CFArrayGetValueAtIndex(runs, i);
+            
+            CFRange r = CTRunGetStringRange(run);
+            
+            NSRange rr = [viewElement range];
+            
+            if(r.location == rr.location && r.length == rr.length && r.length == 1){
+                
+                const CGPoint * p = CTRunGetPositionsPtr(run);
+                
+                CGRect r = CGRectMake(rect.origin.x + p->x, rect.origin.y + p->y + lineOrigins[lineIndex].y, [viewElement width], [viewElement ascent] + [viewElement descent]);
+                
+                UIView * v = [viewElement view];
+                
+                if(v){
+                    v.frame = r;
+                    [view addSubview:v];
+                }
+                
+                viewElement = nil;
+                while(elementIndex < [elements count] && viewElement == nil){
+                    viewElement = [elements objectAtIndex:elementIndex ++];
+                    if(![viewElement conformsToProtocol:@protocol(IVTRichViewElement)]){
+                        viewElement = nil;
+                    }
+                }
+            }
+            else if(r.location>= r.location + r.length){
+                viewElement = nil;
+                while(elementIndex < [elements count] && viewElement == nil){
+                    viewElement = [elements objectAtIndex:elementIndex ++];
+                    if(![viewElement conformsToProtocol:@protocol(IVTRichViewElement)]){
+                        viewElement = nil;
+                    }
+                }
+            }
+            
+        }
+        
+        lineIndex ++;
+        
+    }
+}
+
+-(void) uninstallView{
+    for(id element in [self elements]){
+        if([element conformsToProtocol:@protocol(IVTRichViewElement)]){
+            [[element view] removeFromSuperview];
+        }
+    }
 }
 
 @end

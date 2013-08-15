@@ -23,6 +23,7 @@
 @synthesize styleSheet = _styleSheet;
 
 -(void) dealloc{
+    [_styleSheet removeObserver:self forKeyPath:@"version"];
     [_bundle release];
     [_rootElement release];
     [_styleSheet release];
@@ -34,8 +35,13 @@
     if(_styleSheet && element){
         NSString * styleName = [element attributeValueForKey:@"class"];
         if([styleName length]){
-            [element setStyle:[_styleSheet selectorStyleName:styleName]];
+            styleName = [NSString stringWithFormat:@"%@ %@",element.name, styleName];
         }
+        else{
+            styleName = element.name;
+        }
+        [element setStyle:[_styleSheet selectorStyleName:styleName]];
+        
         for(VTDOMElement * child in [element childs]){
             [self applyStyleSheet:child];
         }
@@ -78,9 +84,13 @@
     
     if(_styleSheet != styleSheet){
         
+        [_styleSheet removeObserver:self forKeyPath:@"version"];
+        
         [styleSheet retain];
         [_styleSheet release];
         _styleSheet = styleSheet;
+        
+        [_styleSheet addObserver:self forKeyPath:@"version" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
         
         [self applyStyleSheet:_rootElement];
         
@@ -90,6 +100,21 @@
 
 -(VTDOMElement *) elementById:(NSString *) eid{
     return [_elementsById objectForKey:eid];
+}
+
+-(NSArray *) elementsByClass:(Class) clazz inherit:(BOOL)inherit{
+    NSMutableArray * elements = [NSMutableArray arrayWithCapacity:4];
+    [_rootElement searchElementsByClass:clazz inherit:inherit toElements:elements];
+    return elements;
+}
+
+-(void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if(object == _styleSheet){
+        if([keyPath isEqualToString:@"version"]){
+            [self applyStyleSheet:_rootElement];
+            [_rootElement setNeedDisplay];
+        }
+    }
 }
 
 @end

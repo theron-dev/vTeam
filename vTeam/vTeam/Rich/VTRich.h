@@ -16,10 +16,6 @@
 
 @end
 
-@protocol IVTRichLinkElement <IVTRichElement>
-
-@end
-
 @interface VTRichElement : NSObject<IVTRichElement>
 
 @end
@@ -53,6 +49,7 @@
 @property(nonatomic,assign) CGFloat charsetsSpacing;
 @property(nonatomic,readonly) NSArray * elements;
 @property(nonatomic,readonly) NSAttributedString * attributedString;
+@property(nonatomic,readonly,getter = isNewLine) BOOL newLine;
 
 -(void) setAttributes:(NSDictionary *) attributes element:(id<IVTRichElement>) element;
 
@@ -67,5 +64,15 @@
 -(CTFrameRef) frameWithSize:(CGSize) size;
 
 -(CGSize) contentSizeWithSize:(CGSize) size;
+
+-(void) drawContext:(CGContextRef) context withSize:(CGSize) size;
+
+-(id) elementByLocation:(CGPoint) location withSize:(CGSize) size;
+
+-(NSArray *) elementRects:(id) element withSize:(CGSize) size;
+
+-(void) installView:(UIView *) view rect:(CGRect) rect;
+
+-(void) uninstallView;
 
 @end

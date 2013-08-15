@@ -16,6 +16,20 @@
 
 @implementation VTDOMImageElement
 
+@synthesize image = _image;
+
+-(void) dealloc{
+    [_image release];
+    [super dealloc];
+}
+
+-(UIImage *) image{
+    if(_image == nil){
+        self.image = [self imageValueForKey:@"src" bundle:self.document.bundle];
+    }
+    return _image;
+}
+
 -(void) draw:(CGRect) rect context:(CGContextRef) context{
     
     [super draw:rect context:context];
@@ -23,7 +37,7 @@
     CGSize size = self.frame.size;
     CGRect r = CGRectMake(0, 0, size.width, size.height);
     
-    UIImage * image = [self imageValueForKey:@"src" bundle:self.document.bundle];
+    UIImage * image = [self image];
     
     if(image ){
         

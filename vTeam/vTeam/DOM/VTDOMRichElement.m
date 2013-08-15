@@ -12,23 +12,141 @@
 #import "VTDOMElement+Render.h"
 #import "VTDOMElement+Style.h"
 #import "VTDOMElement+Layout.h"
+#import "VTDOMElement+Control.h"
 #import "VTDOMDocument.h"
+#import "VTRichImageElement.h"
+#import "VTRichLinkElement.h"
+
+#import "VTDOMImageElement.h"
+
+#import <QuartzCore/QuartzCore.h>
 
 @interface VTDOMRichElement(){
-   
+    NSMutableArray * _highlightedLayers;
 }
 
 @property(nonatomic,readonly) VTRich * rich;
+@property(nonatomic,retain) id focusElement;
 
 @end
 
 @implementation VTDOMRichElement
 
 @synthesize rich = _rich;
+@synthesize focusElement = _focusElement;
 
 -(void) dealloc{
+    for(CALayer * layer in _highlightedLayers){
+        [layer removeFromSuperlayer];
+    }
+    [_highlightedLayers release];
+    [_focusElement release];
     [_rich release];
     [super dealloc];
+}
+
+-(void) elementToRichElement:(VTDOMElement *) element rich:(VTRich *) rich attributes:(NSDictionary *) attributes{
+    
+    NSString * text = [element text];
+    NSString * name = [element name];
+    
+    NSMutableDictionary * attr = [NSMutableDictionary dictionaryWithDictionary:attributes];
+    
+    UIFont * font = [element fontValueForKey:@"font"];
+    
+    if(font == nil){
+        NSString * v = [element stringValueForKey:@"font-size"];
+        if(v){
+            font = [UIFont systemFontOfSize:[v floatValue]];
+        }
+    }
+    
+    if(font){
+        CTFontRef f = CTFontCreateWithName((CFStringRef)font.fontName, font.pointSize + rich.incFontSize, nil);
+        [attr setValue:(id)f forKey:(id)kCTFontAttributeName];
+        CFRelease(f);
+    }
+    
+    UIColor * textColor = [element colorValueForKey:@"color"];
+    
+    if(textColor){
+        [attr setValue:(id) textColor.CGColor forKey:(id)kCTForegroundColorAttributeName];
+    }
+    
+    if([name isEqualToString:@"br"]){
+        if(![rich isNewLine]){
+            [rich appendText:@"\n" attributes:attr];
+        }
+    }
+    else if([element isKindOfClass:[VTDOMImageElement class]]){
+        
+        VTRichImageElement * img = [[VTRichImageElement alloc] init];
+        
+        [img setImage:[(VTDOMImageElement *)element image]];
+        
+        CGSize size = img.image.size;
+        CGFloat dr = size.width ? size.height / size.width : 0;
+        CGRect r = self.frame;
+        
+        NSString * width = [element stringValueForKey:@"width"];
+        NSString * height = [element stringValueForKey:@"height"];
+        
+        if(width && ![width isEqualToString:@"auto"]){
+            if([width hasSuffix:@"%"]){
+                size.width = [width floatValue] * r.size.width / 100.0;
+            }
+            else{
+                size.width = [width floatValue];
+            }
+        }
+        
+        if(height && ![height isEqualToString:@"auto"]){
+            if([height hasSuffix:@"%"]){
+                size.height = [height floatValue] * r.size.height / 100.0;
+            }
+            else{
+                size.height = [height floatValue];
+            }
+        }
+        else if(dr){
+            size.height = size.width * dr;
+        }
+        
+        [img setSize:size];
+        
+        [rich appendElement:img];
+        
+        [img release];
+        
+    }
+    else if([name isEqualToString:@"a"] && [text length]){
+        VTRichLinkElement * link = [[VTRichLinkElement alloc] init];
+        [link setHref:[element stringValueForKey:@"href"]];
+        [rich appendElement:link text:text attributes:attr];
+        [link release];
+    }
+    else{
+        
+        if([name isEqualToString:@"p"]){
+            if(![rich isNewLine]){
+                [rich appendText:@"\n" attributes:attr];
+            }
+        }
+        
+        if([text length]){
+            [rich appendText:text attributes:attr];
+        }
+
+        for(VTDOMElement * el in [element childs]){
+            [self elementToRichElement:el rich:rich attributes:attr];
+        }
+        
+        if([name isEqualToString:@"p"]){
+            if(![rich isNewLine]){
+                [rich appendText:@"\n" attributes:attr];
+            }
+        }
+    }
 }
 
 -(VTRich *) rich{
@@ -39,10 +157,18 @@
         _rich.font = [self font];
         _rich.textColor = [self textColor];
         _rich.linesSpacing = [self floatValueForKey:@"line-spacing"];
+        _rich.charsetsSpacing = [self floatValueForKey:@"charset-spacing"];
         
-        if([self.text length]){
-            [_rich appendText:self.text attributes:nil];
-        }
+        NSMutableDictionary * attr = [NSMutableDictionary dictionaryWithCapacity:4];
+        
+        CTFontRef font = CTFontCreateWithName((CFStringRef)_rich.font.fontName, _rich.font.pointSize + _rich.incFontSize, nil);
+        [attr setValue:(id)font forKey:(id)kCTFontAttributeName];
+        CFRelease(font);
+        
+        [attr setValue:(id)_rich.textColor.CGColor forKey:(id)kCTForegroundColorAttributeName];
+        
+        [self elementToRichElement:self rich:_rich attributes:attr];
+
     }
     return _rich;
 }
@@ -72,6 +198,10 @@
     return color;
 }
 
+-(void) render:(CGRect)rect context:(CGContextRef)context{
+    [self draw:rect context:context];
+}
+
 -(void) draw:(CGRect)rect context:(CGContextRef)context{
     [super draw:rect context:context];
 
@@ -79,12 +209,7 @@
     CGContextTranslateCTM(context, 0, rect.size.height);
     CGContextScaleCTM(context, 1.0, -1.0);
 
-    CGSize size = self.frame.size;
-    
-    CTFrameRef frame = [self.rich frameWithSize:size];
-    
-    CTFrameDraw(frame, context);
-    
+    [_rich drawContext:context withSize:self.frame.size];
 }
 
 -(CGSize) layoutChildren:(UIEdgeInsets)padding{
@@ -106,6 +231,101 @@
         
     }
     return r.size;
+}
+
+-(void) touchesBegan:(CGPoint)location{
+    self.focusElement = [_rich elementByLocation:location withSize:self.frame.size];
+    if(![_focusElement isKindOfClass:[VTRichLinkElement class]]){
+        self.focusElement = nil;
+    }
+    [super touchesBegan:location];
+}
+
+-(void) setHighlighted:(BOOL)highlighted{
+    [super setHighlighted:highlighted];
+    
+    if(highlighted && _focusElement){
+        
+        NSMutableArray * layers = nil;
+        
+        if(_highlightedLayers== nil){
+            _highlightedLayers = [[NSMutableArray alloc] initWithCapacity:4];
+        }
+        else{
+            layers = [NSMutableArray arrayWithArray:_highlightedLayers];
+            [_highlightedLayers removeAllObjects];
+        }
+        
+        NSArray * rects = [_rich elementRects:_focusElement withSize:self.frame.size];
+        
+        NSInteger index = 0;
+        
+        CALayer * superLayer = nil;
+        
+        if([self.delegate isKindOfClass:[UIView class]]){
+            superLayer = [(UIView *)self.delegate layer];
+        }
+        else if([self.delegate isKindOfClass:[CALayer class]]){
+            superLayer = (CALayer *) self.delegate;
+        }
+        
+        CGPoint offset = self.frame.origin;
+        VTDOMElement * el = [self parentElement];
+        
+        while(el && [el delegate] == self.delegate){
+            CGRect r = [el frame];
+            offset = CGPointMake(offset.x + r.origin.x, offset.y + r.origin.y);
+            el = [el parentElement];
+        }
+        
+        for(id rect in rects){
+            
+            CALayer * layer = index < [layers count] ? [layers objectAtIndex:index] : nil;
+            
+            if(layer == nil){
+                layer = [[CALayer alloc] init];
+                layer.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.3].CGColor;
+                layer.cornerRadius = 3;
+                layer.masksToBounds = YES;
+            }
+            
+            CGRect r = [rect CGRectValue];
+            
+            r.origin = CGPointMake(r.origin.x + offset.x, r.origin.y + offset.y);
+            
+            layer.frame = r;
+            
+            [superLayer addSublayer:layer];
+            
+            [_highlightedLayers addObject:layer];
+            
+            index ++;
+            
+        }
+        
+        while(index < [layers count]){
+            [[layers objectAtIndex:index] removeFromSuperlayer];
+            index ++;
+        }
+        
+    }
+    else{
+        for(CALayer * layer in _highlightedLayers){
+            [layer removeFromSuperlayer];
+        }
+        [_highlightedLayers removeAllObjects];
+    }
+}
+
+-(void) touchesEnded:(CGPoint)location{
+    
+    if([self isHighlighted]){
+        if([self.delegate respondsToSelector:@selector(vtDOMElementDoAction:)]){
+            [self.delegate vtDOMElementDoAction:self];
+        }
+    }
+    
+    [super touchesEnded:location];
 }
 
 @end

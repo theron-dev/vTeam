@@ -12,4 +12,6 @@
 
 @property(nonatomic,assign) CGRect frame;
 
+- (CGRect)convertRect:(CGRect)rect superElement:(VTDOMElement *) element;
+
 @end

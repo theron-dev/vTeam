@@ -13,7 +13,6 @@
 
 @implementation VTDOMElement (Render)
 
-
 -(void) render:(CGRect) rect context:(CGContextRef) context{
     
     [self draw:rect context:context];

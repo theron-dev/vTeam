@@ -16,6 +16,8 @@
 
 #import "VTCreatorViewController.h"
 
+#import "VTDOMParse.h"
+
 extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
 
 
@@ -99,6 +101,7 @@ extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
 @synthesize config = _config;
 @synthesize rootViewController = _rootViewController;
 @synthesize styleSheet = _styleSheet;
+@synthesize domStyleSheet = _domStyleSheet;
 
 -(void) dealloc{
     [_bundle release];
@@ -108,6 +111,7 @@ extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
     [_serviceContainers release];
     [_styleSheet release];
     [_focusValues release];
+    [_domStyleSheet release];
     [super dealloc];
 }
 
@@ -346,6 +350,20 @@ extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
         _styleSheet = [[VTStyleSheet alloc] init];
     }
     return _styleSheet;
+}
+
+-(VTDOMStyleSheet *) domStyleSheet{
+    if(_domStyleSheet == nil){
+        _domStyleSheet = [[VTDOMStyleSheet alloc] init];
+    }
+    return _domStyleSheet;
+}
+
+-(void) loadDOMStyleSheet:(NSString *) cssContent{
+    VTDOMParse * parse = [[VTDOMParse alloc] init];
+    [parse parseCSS:cssContent toStyleSheet:self.domStyleSheet];
+    self.domStyleSheet.version ++;
+    [parse release];
 }
 
 @end

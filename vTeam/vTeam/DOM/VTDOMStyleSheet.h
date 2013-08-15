@@ -12,6 +12,8 @@
 
 @interface VTDOMStyleSheet : NSObject
 
+@property(nonatomic,assign) NSInteger version;
+
 @property(nonatomic,readonly) NSArray * styles;
 
 -(void) addStyle:(VTDOMStyle *) style;

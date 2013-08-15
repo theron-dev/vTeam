@@ -19,6 +19,8 @@
 
 -(VTDOMElement *) elementById:(NSString *) eid;
 
+-(NSArray *) elementsByClass:(Class) clazz inherit:(BOOL)inherit;
+
 -(void) applyStyleSheet:(VTDOMElement *) element;
 
 @end

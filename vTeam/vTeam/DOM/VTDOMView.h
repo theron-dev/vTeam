@@ -10,9 +10,18 @@
 
 #import <vTeam/VTDOMElement+Render.h>
 
-@interface VTDOMView : UIView
+@interface VTDOMView : UIView<VTDOMElementDelegate>
 
+@property(nonatomic,assign) IBOutlet id delegate;
 @property(nonatomic,retain) VTDOMElement * element;
 @property(nonatomic,assign,getter = isAllowAutoLayout) BOOL allowAutoLayout;
+
+@end
+
+@protocol VTDOMViewDelegate
+
+@optional
+
+-(void) vtDOMView:(VTDOMView *) view doActionElement:(VTDOMElement *) element;
 
 @end

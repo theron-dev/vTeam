@@ -23,6 +23,7 @@
 @property(nonatomic,readonly) NSArray * childs;
 @property(nonatomic,retain) NSString * eid;
 @property(nonatomic,assign) VTDOMDocument * document;
+@property(nonatomic,assign) id delegate;
 
 -(void) setAttributeValue:(NSString *) value forKey:(NSString *) key;
 
@@ -41,5 +42,19 @@
 -(id) valueForKey:(NSString *)key;
 
 -(void) setValue:(id)value forKey:(NSString *)key;
+
+-(void) setNeedDisplay;
+
+-(void) searchElementsByClass:(Class) clazz inherit:(BOOL)inherit toElements:(NSMutableArray *) elements;
+
+@end
+
+@protocol VTDOMElementDelegate
+
+@optional
+
+-(void) vtDOMElementDoAction:(VTDOMElement *) element;
+
+-(void) vtDOMElementDoNeedDisplay:(VTDOMElement *) element;
 
 @end

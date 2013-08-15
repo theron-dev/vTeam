@@ -16,6 +16,10 @@
 
 @implementation VTDOMStyle
 
+-(NSArray *) allKeys{
+    return [_values allKeys];
+}
+
 -(void) setStringValue:(NSString *) value forKey:(NSString *) key{
     if(_values == nil){
         _values = [[NSMutableDictionary alloc] initWithCapacity:4];
@@ -80,7 +84,9 @@
                 if([vs count] >2){
                     top = [[vs objectAtIndex:2] intValue];
                 }
-                image = [image stretchableImageWithLeftCapWidth:left topCapHeight:top];
+                if(left || top){
+                    image = [image stretchableImageWithLeftCapWidth:left topCapHeight:top];
+                }
             }
             
             return image;

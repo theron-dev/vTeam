@@ -8,6 +8,7 @@
 
 #import "VTTableDataController.h"
 
+#import "VTPageDataSource.h"
 #import "VTTableViewCell.h"
 
 @interface VTTableDataController(){

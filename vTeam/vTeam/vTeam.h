@@ -76,3 +76,5 @@
 #import <vTeam/VTBehaviorObject.h>
 #import <vTeam/VTBehaviorTransactionTask.h>
 #import <vTeam/VTDOM.h>
+#import <vTeam/VTDocumentDataController.h>
+#import <vTeam/VTDocumentViewController.h>
