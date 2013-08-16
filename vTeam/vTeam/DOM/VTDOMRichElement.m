@@ -323,37 +323,28 @@
             superLayer = (CALayer *) self.delegate;
         }
         
-        CGPoint offset = self.frame.origin;
-        VTDOMElement * el = [self parentElement];
-        
-        while(el && [el delegate] == self.delegate){
-            CGRect r = [el frame];
-            offset = CGPointMake(offset.x + r.origin.x, offset.y + r.origin.y);
-            el = [el parentElement];
-        }
-        
-        for(id rect in rects){
+        if([self.delegate respondsToSelector:@selector(vtDOMElement:addLayer:frame:)]){
             
-            CALayer * layer = index < [layers count] ? [layers objectAtIndex:index] : nil;
-            
-            if(layer == nil){
-                layer = [[CALayer alloc] init];
-                layer.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.3].CGColor;
-                layer.cornerRadius = 3;
-                layer.masksToBounds = YES;
+            for(id rect in rects){
+                
+                CALayer * layer = index < [layers count] ? [layers objectAtIndex:index] : nil;
+                
+                if(layer == nil){
+                    layer = [[CALayer alloc] init];
+                    layer.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.3].CGColor;
+                    layer.cornerRadius = 3;
+                    layer.masksToBounds = YES;
+                }
+                
+                CGRect r = [rect CGRectValue];
+                
+                [self.delegate vtDOMElement:self addLayer:layer frame:r];
+                
+                [_highlightedLayers addObject:layer];
+                
+                index ++;
+                
             }
-            
-            CGRect r = [rect CGRectValue];
-            
-            r.origin = CGPointMake(r.origin.x + offset.x, r.origin.y + offset.y);
-            
-            layer.frame = r;
-            
-            [superLayer addSublayer:layer];
-            
-            [_highlightedLayers addObject:layer];
-            
-            index ++;
             
         }
         

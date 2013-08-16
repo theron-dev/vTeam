@@ -57,4 +57,8 @@
 
 -(void) vtDOMElementDoNeedDisplay:(VTDOMElement *) element;
 
+-(void) vtDOMElement:(VTDOMElement *) element addLayer:(CALayer *) layer frame:(CGRect) frame;
+
+-(void) vtDOMElement:(VTDOMElement *) element addView:(UIView *) view frame:(CGRect) frame;
+
 @end

@@ -277,6 +277,8 @@
 		11A041AC17BCD560001992BE /* VTDocumentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A041AA17BCD560001992BE /* VTDocumentViewController.m */; };
 		11A041AF17BCD9C2001992BE /* VTDocumentDataController.h in Headers */ = {isa = PBXBuildFile; fileRef = 11A041AD17BCD9C2001992BE /* VTDocumentDataController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11A041B017BCD9C2001992BE /* VTDocumentDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A041AE17BCD9C2001992BE /* VTDocumentDataController.m */; };
+		11A041B717BDC259001992BE /* VTDOMScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 11A041B517BDC253001992BE /* VTDOMScrollView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11A041B817BDC259001992BE /* VTDOMScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A041B617BDC256001992BE /* VTDOMScrollView.m */; };
 		11A2D10C179690C600082380 /* VTRich.h in Headers */ = {isa = PBXBuildFile; fileRef = 11A2D10A179690C600082380 /* VTRich.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11A2D10E179696EC00082380 /* VTRich.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A2D10B179690C600082380 /* VTRich.m */; };
 		11A2D1141796A69E00082380 /* VTRichView.h in Headers */ = {isa = PBXBuildFile; fileRef = 11A2D1121796A69D00082380 /* VTRichView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -671,6 +673,8 @@
 		11A041AA17BCD560001992BE /* VTDocumentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDocumentViewController.m; sourceTree = "<group>"; };
 		11A041AD17BCD9C2001992BE /* VTDocumentDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDocumentDataController.h; sourceTree = "<group>"; };
 		11A041AE17BCD9C2001992BE /* VTDocumentDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDocumentDataController.m; sourceTree = "<group>"; };
+		11A041B517BDC253001992BE /* VTDOMScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDOMScrollView.h; sourceTree = "<group>"; };
+		11A041B617BDC256001992BE /* VTDOMScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDOMScrollView.m; sourceTree = "<group>"; };
 		11A2D10A179690C600082380 /* VTRich.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTRich.h; sourceTree = "<group>"; };
 		11A2D10B179690C600082380 /* VTRich.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTRich.m; sourceTree = "<group>"; };
 		11A2D1121796A69D00082380 /* VTRichView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTRichView.h; sourceTree = "<group>"; };
@@ -1223,6 +1227,8 @@
 				11A041A217BCA8D2001992BE /* VTDOMViewElement.m */,
 				11A0416917BB5C81001992BE /* VTDOMView.h */,
 				11A0416A17BB5C81001992BE /* VTDOMView.m */,
+				11A041B517BDC253001992BE /* VTDOMScrollView.h */,
+				11A041B617BDC256001992BE /* VTDOMScrollView.m */,
 				11A0416D17BB5E1B001992BE /* NSString+VTDOMSource.h */,
 				11A0416E17BB5E1B001992BE /* NSString+VTDOMSource.m */,
 				11A0417117BB6032001992BE /* VTDOM.h */,
@@ -1634,6 +1640,7 @@
 				11A041A717BCCDC0001992BE /* VTRichViewElement.h in Headers */,
 				11A041AB17BCD560001992BE /* VTDocumentViewController.h in Headers */,
 				11A041AF17BCD9C2001992BE /* VTDocumentDataController.h in Headers */,
+				11A041B717BDC259001992BE /* VTDOMScrollView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1884,6 +1891,7 @@
 				11A041A817BCCDC0001992BE /* VTRichViewElement.m in Sources */,
 				11A041AC17BCD560001992BE /* VTDocumentViewController.m in Sources */,
 				11A041B017BCD9C2001992BE /* VTDocumentDataController.m in Sources */,
+				11A041B817BDC259001992BE /* VTDOMScrollView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

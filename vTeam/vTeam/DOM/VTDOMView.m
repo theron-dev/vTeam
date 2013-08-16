@@ -9,6 +9,7 @@
 #import "VTDOMView.h"
 #import "VTDOMElement+Layout.h"
 #import "VTDOMElement+Control.h"
+#import <QuartzCore/QuartzCore.h>
 
 typedef  enum {
     VTDOMViewDisplayModeNone,VTDOMViewDisplayModeInited,VTDOMViewDisplayModePart,VTDOMViewDisplayModeRefresh
@@ -74,7 +75,7 @@ typedef  enum {
         [super drawRect:rect];
         
         CGContextRef ctx = UIGraphicsGetCurrentContext();
-          
+        
         [_element render:_element.frame context:ctx];
         
         _displayMode = VTDOMViewDisplayModeInited;
@@ -239,6 +240,18 @@ typedef  enum {
     }
     
     [self setNeedsDisplay];
+}
+
+-(void) vtDOMElement:(VTDOMElement *) element addLayer:(CALayer *) layer frame:(CGRect)frame{
+
+    layer.frame = [element convertRect:frame superElement:_element];
+    [self.layer addSublayer:layer];
+}
+
+-(void) vtDOMElement:(VTDOMElement *) element addView:(UIView *) view frame:(CGRect)frame{
+    
+    view.frame = [element convertRect:frame superElement:_element];
+    [self addSubview:view];
 }
 
 -(void) willMoveToWindow:(UIWindow *)newWindow{

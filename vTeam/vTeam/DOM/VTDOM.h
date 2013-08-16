@@ -13,6 +13,7 @@
 #import <vTeam/VTDOMElement+Layout.h>
 #import <vTeam/VTDOMView.h>
 #import <vTeam/VTDOMParse.h>
+#import <vTeam/VTDOMScrollView.h>
 #import <vTeam/NSString+VTDOMSource.h>
 
 @interface VTDOM : NSObject
