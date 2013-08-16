@@ -72,6 +72,7 @@
 
 @synthesize layoutSize = _layoutSize;
 @synthesize element = _element;
+@synthesize pageScale = _pageScale;
 
 -(void) dealloc{
     [_element release];
@@ -133,13 +134,6 @@
     [self reloadContents:NO];
 }
 
--(BOOL) isVisablePage:(NSInteger) pageIndex{
-    CGRect rect = self.bounds;
-    rect.origin = self.contentOffset;
-    CGRect rs = CGRectIntersection(rect, CGRectMake(0, pageIndex * rect.size.height, rect.size.width, rect.size.height));
-    return rs.size.width >0 && rs.size.height > 0;
-}
-
 -(void) reloadContents:(BOOL) reloadData{
     
     if(_element){
@@ -155,6 +149,8 @@
             [self setContentSize:CGSizeMake(0, contentSize.height)];
         }
         
+        CGFloat pageSize = _pageScale ? _layoutSize.height * _pageScale : _layoutSize.height * 2.0;
+        
         NSInteger pageIndex = 0;
         
         NSMutableDictionary * contentViews = [NSMutableDictionary dictionaryWithCapacity:4];
@@ -169,15 +165,22 @@
             
         }
         
-        while(pageIndex * _layoutSize.height < contentSize.height){
+        CGRect rect = self.bounds;
+        rect.origin = self.contentOffset;
+        
+        while(pageIndex * pageSize < contentSize.height){
             
             NSNumber * key = [NSNumber numberWithInteger:pageIndex];
             
-            if([self isVisablePage:pageIndex]){
+            CGRect r = CGRectMake(0, pageIndex * pageSize, _layoutSize.width, pageSize);
+            
+            CGRect rs = CGRectIntersection(rect, r);
+            
+            if(rs.size.width >0 && rs.size.height > 0){
                 
                 VTDOMScrollContentView * contentView = [contentViews objectForKey:key];
                 
-                CGRect r = CGRectMake(0, pageIndex * _layoutSize.height, _layoutSize.width, _layoutSize.height);
+                CGRect r = CGRectMake(0, pageIndex * pageSize, _layoutSize.width, pageSize);
                 
                 if(contentView == nil){
                     

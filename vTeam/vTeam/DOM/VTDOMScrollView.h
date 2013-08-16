@@ -12,6 +12,7 @@
 
 @interface VTDOMScrollView : UIScrollView<VTDOMElementDelegate>
 
+@property(nonatomic,assign) CGFloat pageScale;
 @property(nonatomic,retain) VTDOMElement * element;
 
 @end
