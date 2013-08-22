@@ -63,6 +63,7 @@ typedef enum {
     }
     
     _panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognizerAction:)];
+    [_panGestureRecognizer setCancelsTouchesInView:NO];
     [self.view addGestureRecognizer:_panGestureRecognizer];
     
 }
