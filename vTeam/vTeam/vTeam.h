@@ -82,5 +82,5 @@
 #import <vTeam/VTBESessionObject.h>
 #import <vTeam/VTBEEventObject.h>
 #import <vTeam/NSData+GZIP.h>
-
+#import <vTeam/VTDOMImageElement.h>
 

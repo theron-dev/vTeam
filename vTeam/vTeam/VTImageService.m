@@ -117,7 +117,7 @@
         if(src){
             if([src hasPrefix:@"@"]){
                 [imageTask setHttpTask:nil];
-                [imageTask setImage:[UIImage imageNamed:[src substringFromIndex:1]]];
+                [imageTask setImage:[UIImage imageNamed:[src substringFromIndex:1]] isLocal:YES];
             }
             else{
                 NSString * key = [VTImageService keySrc:src];
@@ -188,7 +188,7 @@
         }
         else{
             [imageTask setHttpTask:nil];
-            [imageTask setImage:nil];
+            [imageTask setImage:nil isLocal:NO];
         }
         
         if(_imageTasks == nil){
@@ -295,7 +295,7 @@
             
             [imageTask setHttpTask:nil];
 
-            [imageTask setImage:nil];
+            [imageTask setImage:nil isLocal:NO];
 
             [_imageTasks removeObject:imageTask];
 
@@ -352,7 +352,7 @@
             
             [imageTask setHttpTask:nil];
 
-            [imageTask setImage:image];
+            [imageTask setImage:image isLocal:NO];
 
             [_imageTasks removeObject:imageTask];
 

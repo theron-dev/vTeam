@@ -21,6 +21,7 @@
 @synthesize bundle = _bundle;
 @synthesize rootElement = _rootElement;
 @synthesize styleSheet = _styleSheet;
+@synthesize indexPath = _indexPath;
 
 -(void) dealloc{
     [_styleSheet removeObserver:self forKeyPath:@"version"];
@@ -28,6 +29,7 @@
     [_rootElement release];
     [_styleSheet release];
     [_elementsById release];
+    [_indexPath release];
     [super dealloc];
 }
 

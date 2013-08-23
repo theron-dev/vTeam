@@ -77,7 +77,7 @@
         
         if(dataObject){
             
-            dataObject.timestamp = CFAbsoluteTimeGetCurrent();
+            dataObject.timestamp = [[NSDate date] timeIntervalSince1970];
             
             dispatch_async(self.dispatchQueue, ^{
                 if([dataObject rowid]){

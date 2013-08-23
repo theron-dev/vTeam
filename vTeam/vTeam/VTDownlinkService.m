@@ -12,6 +12,7 @@
 
 #import "VTDBContext.h"
 #import "VTDBObject.h"
+#import "VTJSON.h"
 
 static VTDBContext * gDownlinkServiceDBContext = nil;
 
@@ -19,7 +20,7 @@ static VTDBContext * gDownlinkServiceDBContext = nil;
 
 @property(nonatomic,retain) NSString * service;
 @property(nonatomic,retain) NSString * key;
-@property(nonatomic,retain) id data;
+@property(nonatomic,retain) NSString * jsonString;
 @property(nonatomic,assign) NSInteger timestamp;
 
 @end
@@ -28,13 +29,13 @@ static VTDBContext * gDownlinkServiceDBContext = nil;
 
 @synthesize service = _service;
 @synthesize key = _key;
-@synthesize data = _data;
+@synthesize jsonString = _jsonString;
 @synthesize timestamp = _timestamp;
 
 -(void) dealloc{
     [_service release];
     [_key release];
-    [_data release];
+    [_jsonString release];
     [super dealloc];
 }
 
@@ -93,7 +94,7 @@ static VTDBContext * gDownlinkServiceDBContext = nil;
         dataObject = [[[VTDownlinkServiceDBObject alloc] init] autorelease];
         [dataObject setValue:NSStringFromClass([self class]) forKey:@"service"];
         [dataObject setValue:key forKey:@"key"];
-        [dataObject setValue:data forKey:@"data"];
+        [dataObject setValue:[VTJSON encodeObject:data] forKey:@"jsonString"];
         [dataObject setValue:[NSNumber numberWithInt:time(NULL)] forKey:@"timestamp"];
         [[VTDownlinkService dbContext] insertObject:dataObject];
         if(_dataObjects == nil){
@@ -102,7 +103,7 @@ static VTDBContext * gDownlinkServiceDBContext = nil;
         [_dataObjects setObject:dataObject forKey:key];
     }
     else{
-        [dataObject setValue:data forKey:@"data"];
+        [dataObject setValue:[VTJSON encodeObject:data] forKey:@"jsonString"];
         [dataObject setValue:[NSNumber numberWithInt:time(NULL)] forKey:@"timestamp"];
         [[VTDownlinkService dbContext] updateObject:dataObject];
     }
@@ -119,7 +120,7 @@ static VTDBContext * gDownlinkServiceDBContext = nil;
     id<IVTDownlinkTask> task = [userInfo valueForKey:@"task"];
     Protocol * taskType = NSProtocolFromString([userInfo valueForKey:@"taskType"]);
     
-    [task vtDownlinkTaskDidLoadedFromCache:[dataObject valueForKey:@"data"] timestamp:[NSDate dateWithTimeIntervalSince1970:[[dataObject valueForKey:@"timestamp"] intValue]]
+    [task vtDownlinkTaskDidLoadedFromCache:[VTJSON decodeText:[dataObject valueForKey:@"jsonString"]] timestamp:[NSDate dateWithTimeIntervalSince1970:[[dataObject valueForKey:@"timestamp"] intValue]]
                                forTaskType:taskType];
     
 }

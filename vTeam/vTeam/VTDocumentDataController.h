@@ -18,8 +18,12 @@
 
 -(VTDOMDocument *) documentByIndexPath:(NSIndexPath *) indexPath;
 
+-(void) document:(VTDOMDocument *) document didLoadedDataObject:(id) dataObject;
+
 -(NSString *) htmlContentByIndexPath:(NSIndexPath *) indexPath;
 
 -(id) dataObjectByIndexPath:(NSIndexPath *) indexPath;
+
+-(void) downloadImagesForElement:(VTDOMElement *) element;
 
 @end

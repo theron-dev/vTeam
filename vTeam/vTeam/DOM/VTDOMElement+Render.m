@@ -54,7 +54,6 @@
         CGContextSetStrokeColorWithColor(context, [backgroundColor CGColor]);
         
         CGContextFillRect(context, r);
-        
     }
 
     UIImage * backgroundImage = [self imageValueForKey:@"background-image" bundle:self.document.bundle];

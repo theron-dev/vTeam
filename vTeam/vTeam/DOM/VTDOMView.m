@@ -45,41 +45,45 @@ typedef  enum {
 
 - (void)drawRect:(CGRect)rect
 {
-    if(_displayMode == VTDOMViewDisplayModePart){
-        
-        CGContextRef ctx = UIGraphicsGetCurrentContext();
-        
-        for (VTDOMElement * el  in _needDisplayElements) {
-            
-            CGRect r = [el.parentElement convertRect:el.frame superElement:_element];
-            
-            if(r.size.width >0 && r.size.height >0){
-                
-                CGContextSaveGState(ctx);
-                
-                CGContextTranslateCTM(ctx, r.origin.x, r.origin.y);
-                
-                CGContextClipToRect(ctx, CGRectMake(0, 0, r.size.width, r.size.height));
-                
-                [el draw:CGRectMake(0, 0, r.size.width, r.size.height) context:ctx];
-                
-                CGContextRestoreGState(ctx);
-                
-            }
-            
-        }
-
-    }
-    else {
-        
+//    if(_displayMode == VTDOMViewDisplayModePart){
+//        
+//        CGContextRef ctx = UIGraphicsGetCurrentContext();
+//        
+//        CGContextSetTextMatrix(ctx , CGAffineTransformIdentity);
+//        
+//        for (VTDOMElement * el  in _needDisplayElements) {
+//            
+//            CGRect r = [el.parentElement convertRect:el.frame superElement:_element];
+//            
+//            if(r.size.width >0 && r.size.height >0){
+//                
+//                CGContextSaveGState(ctx);
+//                
+//                CGContextTranslateCTM(ctx, r.origin.x, r.origin.y);
+//                
+//                CGContextClipToRect(ctx, CGRectMake(0, 0, r.size.width, r.size.height));
+//                
+//                [el draw:CGRectMake(0, 0, r.size.width, r.size.height) context:ctx];
+//                
+//                CGContextRestoreGState(ctx);
+//                
+//            }
+//            
+//        }
+//
+//    }
+//    else {
+    
         [super drawRect:rect];
         
         CGContextRef ctx = UIGraphicsGetCurrentContext();
         
+        CGContextSetTextMatrix(ctx , CGAffineTransformIdentity);
+        
         [_element render:_element.frame context:ctx];
         
         _displayMode = VTDOMViewDisplayModeInited;
-    }
+//    }
     
     [_needDisplayElements removeAllObjects];
     
@@ -116,6 +120,15 @@ typedef  enum {
     }
 }
 
+-(void) setBounds:(CGRect)bounds{
+    [super setBounds:bounds];
+    if(_allowAutoLayout){
+        [_element layout:self.bounds.size];
+        _displayMode = VTDOMViewDisplayModeRefresh;
+    }
+    [self setNeedsDisplay];
+}
+
 -(void) setFrame:(CGRect)frame{
     [super setFrame:frame];
     if(_allowAutoLayout){
@@ -124,6 +137,7 @@ typedef  enum {
     }
     [self setNeedsDisplay];
 }
+
 
 -(CGPoint) locationInElement:(VTDOMElement *) element location:(CGPoint) location{
     
@@ -140,7 +154,7 @@ typedef  enum {
     
     CGRect r = [element frame];
     
-    if(location.x >=0 && location.y >=0 && location.x < r.size.width && location.y < r.size.height){
+    if( touchType || (location.x >=0 && location.y >=0 && location.x < r.size.width && location.y < r.size.height)){
 
         switch (touchType) {
             case 0:
@@ -232,7 +246,9 @@ typedef  enum {
     }
     
     if(!hasElement){
+        CGRect r = [el.parentElement convertRect:element.frame superElement:_element];
         [_needDisplayElements addObject:element];
+        [self setNeedsDisplayInRect:r];
     }
     
     if(_displayMode == VTDOMViewDisplayModeInited){

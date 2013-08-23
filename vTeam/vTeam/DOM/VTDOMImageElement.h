@@ -13,5 +13,6 @@
 @interface VTDOMImageElement : VTDOMElement<IVTLocalImageTask>
 
 @property(nonatomic,retain) UIImage * image;
+@property(nonatomic,retain) UIImage * defaultImage;
 
 @end

@@ -38,6 +38,7 @@
     [_style release];
     [_text release];
     [_values release];
+    [_childs release];
     [super dealloc];
 }
 

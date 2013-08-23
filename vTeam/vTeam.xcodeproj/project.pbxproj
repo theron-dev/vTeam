@@ -253,7 +253,7 @@
 		11A0415817BB42ED001992BE /* VTDOMElement+Render.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A0415617BB42ED001992BE /* VTDOMElement+Render.m */; };
 		11A0415F17BB4694001992BE /* VTDOMElement+Style.h in Headers */ = {isa = PBXBuildFile; fileRef = 11A0415D17BB4693001992BE /* VTDOMElement+Style.h */; };
 		11A0416017BB4694001992BE /* VTDOMElement+Style.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A0415E17BB4694001992BE /* VTDOMElement+Style.m */; };
-		11A0416317BB4D08001992BE /* VTDOMImageElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 11A0416117BB4D08001992BE /* VTDOMImageElement.h */; };
+		11A0416317BB4D08001992BE /* VTDOMImageElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 11A0416117BB4D08001992BE /* VTDOMImageElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11A0416417BB4D08001992BE /* VTDOMImageElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A0416217BB4D08001992BE /* VTDOMImageElement.m */; };
 		11A0416717BB50AF001992BE /* VTDOMLabelElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 11A0416517BB50AF001992BE /* VTDOMLabelElement.h */; };
 		11A0416817BB50AF001992BE /* VTDOMLabelElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A0416617BB50AF001992BE /* VTDOMLabelElement.m */; };

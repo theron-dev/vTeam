@@ -18,7 +18,14 @@
 
 @synthesize image = _image;
 
+@synthesize source = _source;
+@synthesize httpTask = _httpTask;
+@synthesize defaultImage = _defaultImage;
+@synthesize loaded = _loaded;
+
 -(void) dealloc{
+    [_httpTask release];
+    [_defaultImage release];
     [_image release];
     [super dealloc];
 }
@@ -30,6 +37,45 @@
     return _image;
 }
 
+-(UIImage *) defaultImage{
+    if(_defaultImage == nil){
+        self.defaultImage = [self imageValueForKey:@"defaultSrc" bundle:self.document.bundle];
+    }
+    return _defaultImage;
+}
+
+-(NSString *) src{
+    return [self attributeValueForKey:@"src"];
+}
+
+-(void) setSrc:(NSString *)src{
+    [self setAttributeValue:src forKey:@"src"];
+}
+
+-(NSString *) defaultSrc{
+    return [self attributeValueForKey:@"defaultSrc"];
+}
+
+-(void) setDefaultSrc:(NSString *)defaultSrc{
+    [self setAttributeValue:defaultSrc forKey:@"defaultSrc"];
+}
+
+-(void) setImage:(UIImage *) image isLocal:(BOOL) isLocal{
+    
+    if(image == nil){
+        if(!isLocal){
+            self.loaded = YES;
+        }
+    }
+    else{
+        self.loaded = YES;
+    }
+    
+    self.image = image;
+    
+    [self setNeedDisplay];
+}
+
 -(void) draw:(CGRect) rect context:(CGContextRef) context{
     
     [super draw:rect context:context];
@@ -38,6 +84,10 @@
     CGRect r = CGRectMake(0, 0, size.width, size.height);
     
     UIImage * image = [self image];
+    
+    if(image == nil){
+        image = [self defaultImage];
+    }
     
     if(image ){
         

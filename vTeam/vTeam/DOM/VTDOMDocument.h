@@ -6,7 +6,7 @@
 //  Copyright (c) 2013年 hailong.org. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 #import <vTeam/VTDOMElement.h>
 #import <vTeam/VTDOMStyleSheet.h>
@@ -16,6 +16,7 @@
 @property(nonatomic,retain) NSBundle * bundle;
 @property(nonatomic,retain) VTDOMElement * rootElement;
 @property(nonatomic,retain) VTDOMStyleSheet * styleSheet;
+@property(nonatomic,retain) NSIndexPath * indexPath;
 
 -(VTDOMElement *) elementById:(NSString *) eid;
 

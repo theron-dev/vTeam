@@ -12,6 +12,8 @@
 
 #import "NSString+VTDOMSource.h"
 
+#import "VTDOMImageElement.h"
+
 @implementation VTDocumentDataController
 
 @synthesize html = _html;
@@ -38,9 +40,9 @@
     
     VTDOMDocument * document = [self documentByIndexPath:indexPath];
     
-    CGSize contentSize = [[document rootElement] layout:CGSizeMake(tableView.bounds.size.width, INT32_MAX)];
+    [[document rootElement] layout:CGSizeMake(tableView.bounds.size.width, INT32_MAX)];
 
-    return contentSize.height;
+    return [[document rootElement] frame].size.height;
 }
 
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -66,12 +68,15 @@
         
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier] autorelease];
         
-        VTDOMView * documentView = [[VTDOMView alloc] initWithFrame:cell.bounds];
+        CGSize size = cell.contentView.bounds.size;
         
+        VTDOMView * documentView = [[VTDOMView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+        
+        [documentView setBackgroundColor:[UIColor clearColor]];
         [documentView setDelegate:self];
         [documentView setAllowAutoLayout:NO];
         [documentView setTag:100];
-        [documentView setAutoresizesSubviews:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
+        [documentView setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
         
         [cell.contentView addSubview:documentView];
         
@@ -85,8 +90,33 @@
     
     [documentView setElement:[document rootElement]];
     
+    if([document rootElement]){
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(downloadImagesForElement) object:[document rootElement]];
+        [self performSelector:@selector(downloadImagesForElement:) withObject:[document rootElement] afterDelay:0.0];
+    }
+    
     return cell;
 }
+
+-(void) downloadImagesForElement:(VTDOMElement *) element{
+    
+    if([element isKindOfClass:[VTDOMImageElement class]]){
+        
+        VTDOMImageElement * imgElement = (VTDOMImageElement *) element;
+        
+        if([imgElement httpTask] == nil && ![imgElement isLoaded]){
+            [imgElement setSource:self];
+            [self.context handle:@protocol(IVTImageTask) task:imgElement priority:0];
+        }
+        
+    }
+    
+    for(VTDOMElement * el in [element childs]){
+        [self downloadImagesForElement:el];
+    }
+    
+}
+
 
 -(NSString *) htmlContentByIndexPath:(NSIndexPath *) indexPath{
     
@@ -103,6 +133,10 @@
     htmlContent = [htmlContent htmlStringByDOMSource:self];
     
     return htmlContent;
+    
+}
+
+-(void) document:(VTDOMDocument *) document didLoadedDataObject:(id) dataObject;{
     
 }
 
@@ -125,6 +159,10 @@
             [document setStyleSheet:[self.context domStyleSheet]];
             
             [data setValue:document forKey:@"__document__"];
+            
+            document.indexPath = indexPath;
+            
+            [self document:document didLoadedDataObject:data];
         }
         
         return document;
