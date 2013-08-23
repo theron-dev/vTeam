@@ -8,7 +8,9 @@
 
 #import <vTeam/VTDOMElement.h>
 
-@interface VTDOMImageElement : VTDOMElement
+#import <vTeam/IVTImageTask.h>
+
+@interface VTDOMImageElement : VTDOMElement<IVTLocalImageTask>
 
 @property(nonatomic,retain) UIImage * image;
 
