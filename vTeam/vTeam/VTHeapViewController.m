@@ -31,6 +31,8 @@ typedef enum {
 
 @implementation VTHeapViewController
 
+@synthesize animating = _animating;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -321,16 +323,22 @@ typedef enum {
     
     [v setTransform:CGAffineTransformIdentity];
   
+    _animating = NO;
 }
 
 -(void) popViewController:(BOOL) animated{
     
+    if(_animating){
+        return;
+    }
     
     if([_viewControllers count] >1){
         UIViewController * topViewController = [_viewControllers lastObject];
         
         if(animated && [self isViewLoaded]){
          
+            _animating = YES;
+            
             UIView * view = self.view;
             CGSize size = view.bounds.size;
             
@@ -398,6 +406,7 @@ typedef enum {
 
 -(void) pushViewControllerAnimationDidStopAction:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context{
     
+    _animating = NO;
 }
 
 -(void) pushViewControllerAnimationTopDidStopAction:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context{
@@ -417,12 +426,17 @@ typedef enum {
 
 -(void) pushViewController:(UIViewController *) viewController animated:(BOOL)animated{
     
+    if(_animating){
+        return;
+    }
     
     if(_viewControllers == nil){
         _viewControllers = [[NSMutableArray alloc] initWithCapacity:4];
     }
     
     if(animated && [self isViewLoaded]){
+        
+        _animating  = YES;
         
         UIView * view = self.view;
         CGSize size = view.bounds.size;

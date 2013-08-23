@@ -6,12 +6,12 @@
 //  Copyright (c) 2013年 hailong.org. All rights reserved.
 //
 
-#import <vTeam/vTeam.h>
+#import <vTeam/VTBehaviorObject.h>
 
 @interface VTBESessionObject : VTBehaviorObject
 
 @property(nonatomic,retain) NSString * session;
-@property(nonatomic,assign) double beginTimestamp;
+@property(nonatomic,assign) double startTimestamp;
 
 +(NSString *) genSession;
 

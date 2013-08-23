@@ -8,10 +8,12 @@
 
 #import "VTBESessionObject.h"
 
+#import "NSString+VTMD5String.h"
+
 @implementation VTBESessionObject
 
 @synthesize session = _session;
-@synthesize beginTimestamp = _beginTimestamp;
+@synthesize startTimestamp = _startTimestamp;
 
 -(void) dealloc{
     [_session release];

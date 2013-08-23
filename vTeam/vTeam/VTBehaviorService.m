@@ -80,7 +80,12 @@
             dataObject.timestamp = CFAbsoluteTimeGetCurrent();
             
             dispatch_async(self.dispatchQueue, ^{
-                [self.dbContext insertObject:dataObject];
+                if([dataObject rowid]){
+                    [self.dbContext updateObject:dataObject];
+                }
+                else{
+                    [self.dbContext insertObject:dataObject];
+                }
             });
             
         }
@@ -90,7 +95,7 @@
 
     if(taskType == @protocol(IVTBehaviorTransactionTask)){
         
-        id<IVTBehaviorTransactionTask> behaviorTask = (id<IVTBehaviorTransactionTask>) task;
+        __strong id<IVTBehaviorTransactionTask> behaviorTask = (id<IVTBehaviorTransactionTask>) task;
         
         dispatch_async(self.dispatchQueue, ^{
             [behaviorTask onBehaviorDBContext:self.dbContext];

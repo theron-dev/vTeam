@@ -22,7 +22,7 @@ extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
 
 
 @interface VTServiceContainer : NSObject<IVTServiceContainer>{
-    NSMutableArray * _taskTypes;
+    NSMutableSet * _taskTypes;
     Class _instanceClass;
 }
 
@@ -53,18 +53,24 @@ extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
 }
 
 -(BOOL) hasTaskType:(Protocol *) taskType{
-    for(NSValue * v in _taskTypes){
-        Protocol * protocol = (Protocol *)[v pointerValue];
-        if(protocol == taskType || (_inherit && protocol_conformsToProtocol(taskType,protocol))){
-            return YES;
+    if(_inherit){
+        for(NSValue * v in _taskTypes){
+            Protocol * protocol = (Protocol *)[v pointerValue];
+            if(protocol == taskType || (_inherit && protocol_conformsToProtocol(taskType,protocol))){
+                return YES;
+            }
         }
+    }
+    else{
+        NSValue * v = [NSValue valueWithPointer:taskType];
+        return [_taskTypes containsObject:v];
     }
     return NO;
 }
 
 -(void) addTaskType:(Protocol *) taskType{
     if(_taskTypes == nil){
-        _taskTypes = [[NSMutableArray alloc] initWithCapacity:4];
+        _taskTypes = [[NSMutableSet alloc] initWithCapacity:4];
     }
     [_taskTypes addObject:[NSValue valueWithPointer:taskType]];
 }

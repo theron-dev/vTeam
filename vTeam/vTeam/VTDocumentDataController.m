@@ -122,6 +122,8 @@
             [parse parseHTML:[self htmlContentByIndexPath:indexPath] toDocument:document];
             [parse release];
             
+            [document setStyleSheet:[self.context domStyleSheet]];
+            
             [data setValue:document forKey:@"__document__"];
         }
         

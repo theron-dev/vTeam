@@ -6,7 +6,7 @@
 //  Copyright (c) 2013年 hailong.org. All rights reserved.
 //
 
-#import <vTeam/vTeam.h>
+#import <vTeam/VTDBObject.h>
 
 // 行为记录实体
 

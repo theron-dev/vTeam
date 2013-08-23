@@ -74,7 +74,10 @@
 #import <vTeam/VTRichImageElement.h>
 #import <vTeam/VTFlowViewLayout.h>
 #import <vTeam/VTBehaviorObject.h>
+#import <vTeam/VTBehaviorTask.h>
 #import <vTeam/VTBehaviorTransactionTask.h>
 #import <vTeam/VTDOM.h>
 #import <vTeam/VTDocumentDataController.h>
 #import <vTeam/VTDocumentViewController.h>
+#import <vTeam/VTBESessionObject.h>
+#import <vTeam/VTBEEventObject.h>

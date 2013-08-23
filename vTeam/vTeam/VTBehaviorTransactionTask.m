@@ -12,6 +12,7 @@
     void (^_onBehaviorDBContext)(VTDBContext * dbContext);
 }
 
+
 -(id) initWithOnBehaviorDBContext:(void (^)(VTDBContext * dbContext)) onBehaviorDBContext;
 
 @end
@@ -20,7 +21,7 @@
 
 -(id) initWithOnBehaviorDBContext:(void (^)(VTDBContext * dbContext)) onBehaviorDBContext{
     if((self = [super init])){
-        _onBehaviorDBContext = onBehaviorDBContext;
+        _onBehaviorDBContext = [onBehaviorDBContext copy];
     }
     return self;
 }
@@ -29,6 +30,11 @@
     if(_onBehaviorDBContext){
         _onBehaviorDBContext(dbContext);
     }
+}
+
+-(void) dealloc{
+    [_onBehaviorDBContext release];
+    [super dealloc];
 }
 
 @end

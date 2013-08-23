@@ -10,6 +10,8 @@
 
 @interface VTHeapViewController : VTViewController
 
+@property(nonatomic,assign,getter = isAnimating) BOOL animating;
+
 @property(nonatomic,readonly) UIViewController * topViewController;
 
 -(void) popViewController:(BOOL) animated;
