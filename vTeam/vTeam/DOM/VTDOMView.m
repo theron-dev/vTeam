@@ -20,6 +20,11 @@ typedef  enum {
     VTDOMViewDisplayMode _displayMode;
 }
 
+
+-(void) viewBindElement:(VTDOMElement *) element;
+
+-(void) viewUnBindElement:(VTDOMElement *) element;
+
 @end
 
 @implementation VTDOMView
@@ -30,6 +35,7 @@ typedef  enum {
 
 -(void) dealloc{
     [_needDisplayElements release];
+    [self viewUnBindElement:_element];
     [_element release];
     [super dealloc];
 }
