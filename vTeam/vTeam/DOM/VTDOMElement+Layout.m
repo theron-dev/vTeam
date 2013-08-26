@@ -39,6 +39,26 @@
     return insets;
 }
 
+-(UIEdgeInsets) margin{
+    
+    UIEdgeInsets insets = UIEdgeInsetsZero;
+    
+    NSString * margin = [self stringValueForKey:@"margin"];
+    NSString * marginLeft = [self stringValueForKey:@"margin-left"];
+    NSString * marginTop = [self stringValueForKey:@"margin-top"];
+    NSString * marginRight = [self stringValueForKey:@"margin-right"];
+    NSString * marginBottom = [self stringValueForKey:@"margin-bottom"];
+    
+    CGFloat value = [margin floatValue];
+    
+    insets.left = marginLeft == nil ? value : [marginLeft floatValue];
+    insets.top = marginTop == nil ? value : [marginTop floatValue];
+    insets.right = marginRight == nil ? value : [marginRight floatValue];
+    insets.bottom = marginBottom == nil ? value : [marginBottom floatValue];
+    
+    return insets;
+}
+
 -(CGSize) layoutChildren:(UIEdgeInsets) padding{
     
     CGRect frame = [self frame];
@@ -59,14 +79,15 @@
             [element layout:insetSize];
             
             CGRect r = [element frame];
+            UIEdgeInsets margin = [element margin];
             
-            if(p.x + r.size.width <= frame.size.width - padding.right){
+            if(p.x + r.size.width + margin.left + margin.right <= frame.size.width - padding.right){
                 
-                r.origin = p;
-                p.x += r.size.width;
+                r.origin = CGPointMake(p.x + margin.left, p.y + margin.top);
+                p.x += r.size.width + margin.left + margin.right;
                 
-                if(lineHeight < r.size.height){
-                    lineHeight = r.size.height;
+                if(lineHeight < r.size.height + margin.top + margin.bottom){
+                    lineHeight = r.size.height + margin.top + margin.bottom;
                 }
                 if(width < p.x + padding.right){
                     width = p.x + padding.right;
@@ -75,9 +96,9 @@
             else {
                 p.x = padding.left;
                 p.y += lineHeight;
-                lineHeight = r.size.height;
-                r.origin = p;
-                p.x += r.size.width;
+                lineHeight = r.size.height + margin.top + margin.bottom;
+                r.origin = CGPointMake(p.x + margin.left, p.y + margin.top);
+                p.x += r.size.width + margin.left + margin.right;
                 if(width < p.x + padding.right){
                     width = p.x + padding.right;
                 }

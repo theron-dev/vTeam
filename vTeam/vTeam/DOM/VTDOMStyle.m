@@ -16,6 +16,11 @@
 
 @implementation VTDOMStyle
 
+-(void) dealloc{
+    [_values release];
+    [super dealloc];
+}
+
 -(NSArray *) allKeys{
     return [_values allKeys];
 }

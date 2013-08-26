@@ -40,8 +40,6 @@
     
     VTDOMDocument * document = [self documentByIndexPath:indexPath];
     
-    [[document rootElement] layout:CGSizeMake(tableView.bounds.size.width, INT32_MAX)];
-
     return [[document rootElement] frame].size.height;
 }
 
@@ -141,6 +139,10 @@
     
 }
 
+-(void) document:(VTDOMDocument *) document willLoadDataObject:(id) dataObject{
+    
+}
+
 -(VTDOMDocument *) documentByIndexPath:(NSIndexPath *) indexPath{
     
     id data = [self dataObjectByIndexPath:indexPath];
@@ -157,13 +159,18 @@
             [parse parseHTML:[self htmlContentByIndexPath:indexPath] toDocument:document];
             [parse release];
             
+            [self document:document willLoadDataObject:data];
+            
             [document setStyleSheet:[self.context domStyleSheet]];
             
             [data setValue:document forKey:@"__document__"];
             
             document.indexPath = indexPath;
-            
+
             [self document:document didLoadedDataObject:data];
+            
+            [[document rootElement] layout:CGSizeMake(self.tableView.bounds.size.width, INT_MAX)];
+            
         }
         
         return document;
@@ -194,6 +201,20 @@
     
     if([data isKindOfClass:[NSMutableDictionary class]]){
         [data removeObjectForKey:@"__document__"];
+    }
+}
+
+-(void) layoutDocumentByIndexPath:(NSIndexPath *) indexPath{
+    
+    id data = [self dataObjectByIndexPath:indexPath];
+    
+    if([data isKindOfClass:[NSMutableDictionary class]]){
+        
+        VTDOMDocument * document = [data valueForKey:@"__document__"];
+        
+        if(document){
+            [[document rootElement] layout:CGSizeMake(self.tableView.bounds.size.width, INT_MAX)];
+        }
     }
 }
 

@@ -141,5 +141,40 @@
     
 }
 
+-(CGSize) layoutChildren:(UIEdgeInsets)padding{
+    CGRect r = [self frame];
+    
+    if(r.size.width == MAXFLOAT || r.size.height == MAXFLOAT){
+        
+        UIImage * image = [self image];
+        
+        if(image){
+            
+            CGSize s = image.size;
+            
+            if(r.size.width == MAXFLOAT){
+                r.size.width = s.width;
+            }
+            
+            if(r.size.height == MAXFLOAT){
+                r.size.height = s.height;
+            }
+
+        }
+        else{
+            if(r.size.width == MAXFLOAT){
+                r.size.width = 0;
+            }
+            
+            if(r.size.height == MAXFLOAT){
+                r.size.height = 0;
+            }
+        }
+       
+        [self setFrame:r];
+        
+    }
+    return r.size;
+}
 
 @end

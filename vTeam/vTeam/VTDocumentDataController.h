@@ -20,6 +20,8 @@
 
 -(void) document:(VTDOMDocument *) document didLoadedDataObject:(id) dataObject;
 
+-(void) document:(VTDOMDocument *) document willLoadDataObject:(id) dataObject;
+
 -(NSString *) htmlContentByIndexPath:(NSIndexPath *) indexPath;
 
 -(id) dataObjectByIndexPath:(NSIndexPath *) indexPath;
@@ -27,6 +29,8 @@
 -(void) downloadImagesForElement:(VTDOMElement *) element;
 
 -(void) removeDocumentByIndexPath:(NSIndexPath *) indexPath;
+
+-(void) layoutDocumentByIndexPath:(NSIndexPath *) indexPath;
 
 @end
 

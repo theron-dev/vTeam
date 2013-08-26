@@ -12,6 +12,7 @@
 
 @property(nonatomic,assign) CGSize contentSize;
 @property(nonatomic,readonly) UIEdgeInsets padding;
+@property(nonatomic,readonly) UIEdgeInsets margin;
 
 -(CGSize) layoutChildren:(UIEdgeInsets) padding;
 
