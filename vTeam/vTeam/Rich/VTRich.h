@@ -13,6 +13,7 @@
 @protocol IVTRichElement <NSObject>
 
 @property(nonatomic,assign) NSRange range;
+@property(nonatomic,retain) id userInfo;
 
 @end
 

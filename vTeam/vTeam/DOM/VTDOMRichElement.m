@@ -84,6 +84,8 @@
         
         VTRichImageElement * img = [[VTRichImageElement alloc] init];
         
+        [img setUserInfo:element];
+        
         [img setImage:[(VTDOMImageElement *)element image]];
         
         CGSize size = img.image.size;
@@ -124,6 +126,8 @@
     else if([element isKindOfClass:[VTDOMViewElement class]]){
         
         VTRichViewElement * viewElement = [[VTRichViewElement alloc] init];
+        
+        [viewElement setUserInfo:element];
         
         UIView * view = [(VTDOMViewElement *)element view];
         
@@ -175,6 +179,7 @@
     }
     else if([name isEqualToString:@"a"] && [text length]){
         VTRichLinkElement * link = [[VTRichLinkElement alloc] init];
+        [link setUserInfo:element];
         [link setHref:[element stringValueForKey:@"href"]];
         [rich appendElement:link text:text attributes:attr];
         [link release];
@@ -292,10 +297,11 @@
     if(![_focusElement isKindOfClass:[VTRichLinkElement class]]){
         self.focusElement = nil;
     }
-    if(_focusElement){
+    BOOL rs = [super touchesBegan:location];
+    if( _focusElement){
         return YES;
     }
-    return [super touchesBegan:location];
+    return rs;
 }
 
 -(void) setHighlighted:(BOOL)highlighted{
@@ -368,8 +374,10 @@
 -(void) touchesEnded:(CGPoint)location{
     
     if([self isHighlighted]){
-        if([self.delegate respondsToSelector:@selector(vtDOMElementDoAction:)]){
-            [self.delegate vtDOMElementDoAction:self];
+        if([_focusElement userInfo]){
+            if([self.delegate respondsToSelector:@selector(vtDOMElementDoAction:)]){
+                [self.delegate vtDOMElementDoAction:(VTDOMElement *)[_focusElement userInfo]];
+            }
         }
     }
     

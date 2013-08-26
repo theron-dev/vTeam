@@ -12,6 +12,12 @@
 @implementation VTRichElement
 
 @synthesize range = _range;
+@synthesize userInfo = _userInfo;
+
+-(void) dealloc{
+    [_userInfo release];
+    [super dealloc];
+}
 
 @end
 
@@ -403,9 +409,9 @@ static CTRunDelegateCallbacks VTRichDelegateCallbacks = {
             CTLineRef line = CFArrayGetValueAtIndex(lines, lineIndex);
             
             CFRange r = CTLineGetStringRange(line);
-            CGRect bounds = CTLineGetBoundsWithOptions(line, kCTLineBoundsUseOpticalBounds);
+            CGRect bounds = CTLineGetBoundsWithOptions(line, kCTLineBoundsUseHangingPunctuation);
             
-            CGRect rect = CGRectMake(0, lineOrigins[0].y - lineOrigins[lineIndex].y - bounds.origin.y
+            CGRect rect = CGRectMake(0, lineOrigins[0].y - lineOrigins[lineIndex].y - bounds.origin.y * 0.5
                                      , 0, bounds.size.height);
             CGFloat beginOffset = kCFNotFound;
             CGFloat endOffset = kCFNotFound;
