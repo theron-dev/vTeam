@@ -26,6 +26,7 @@
 }
 
 -(BOOL) touchesBegan:(CGPoint)location{
+    [super touchesBegan:location];
     return YES;
 }
 
