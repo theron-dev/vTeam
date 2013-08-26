@@ -91,8 +91,9 @@
     [documentView setElement:[document rootElement]];
     
     if([document rootElement]){
-        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(downloadImagesForElement) object:[document rootElement]];
-        [self performSelector:@selector(downloadImagesForElement:) withObject:[document rootElement] afterDelay:0.0];
+        dispatch_async(dispatch_get_current_queue(), ^{
+            [self downloadImagesForElement:[document rootElement]];
+        });
     }
     
     return cell;
@@ -172,7 +173,15 @@
 }
 
 -(void) vtDOMView:(VTDOMView *) view doActionElement:(VTDOMElement *) element{
-    
+    if([self.delegate respondsToSelector:@selector(vtDocumentDataController:element:doAction:)]){
+        if([element conformsToProtocol:@protocol(IVTAction)]) {
+            [self.delegate vtDocumentDataController:self element:element doAction:(id)element];
+        }
+        else{
+            [self.delegate vtDocumentDataController:self
+                                            element:element doAction:nil];
+        }
+    }
 }
 
 -(id) dataObjectByIndexPath:(NSIndexPath *) indexPath{

@@ -8,6 +8,8 @@
 
 #import <vTeam/VTDOMElement.h>
 
-@interface VTDOMActionElement : VTDOMElement
+#import <vTeam/IVTAction.h>
+
+@interface VTDOMActionElement : VTDOMElement<IVTAction>
 
 @end

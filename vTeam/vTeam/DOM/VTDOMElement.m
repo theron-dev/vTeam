@@ -129,4 +129,13 @@
     }
 }
 
+-(void) setStyle:(VTDOMStyle *)style{
+    if(_style != style){
+        [style retain];
+        [_style release];
+        _style  = style;
+        [self setNeedDisplay];
+    }
+}
+
 @end

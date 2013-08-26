@@ -73,7 +73,8 @@
     
     self.image = image;
     
-    [self setNeedDisplay];
+    [self performSelector:@selector(setNeedDisplay) withObject:nil afterDelay:0.0];
+    
 }
 
 -(void) draw:(CGRect) rect context:(CGContextRef) context{

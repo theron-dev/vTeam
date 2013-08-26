@@ -8,7 +8,9 @@
 
 #import <vTeam/VTDOMElement.h>
 
-@interface VTDOMRichElement : VTDOMElement
+#import <vTeam/IVTAction.h>
+
+@interface VTDOMRichElement : VTDOMElement<IVTAction>
 
 @property(nonatomic,readonly) UIFont * font;
 @property(nonatomic,readonly) UIColor * textColor;

@@ -29,3 +29,12 @@
 -(void) removeDocumentByIndexPath:(NSIndexPath *) indexPath;
 
 @end
+
+@protocol VTDocumentDataControllerDelegate <VTDataControllerDelegate>
+
+@optional
+
+-(void) vtDocumentDataController:(VTDocumentDataController *) dataController element:(VTDOMElement *) element
+                        doAction:(id<IVTAction>) action;
+
+@end
