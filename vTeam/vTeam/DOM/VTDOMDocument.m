@@ -24,6 +24,7 @@
 @synthesize indexPath = _indexPath;
 
 -(void) dealloc{
+    [_rootElement setDocument:nil];
     [_styleSheet removeObserver:self forKeyPath:@"version"];
     [_bundle release];
     [_rootElement release];

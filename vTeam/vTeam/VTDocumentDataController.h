@@ -26,4 +26,6 @@
 
 -(void) downloadImagesForElement:(VTDOMElement *) element;
 
+-(void) removeDocumentByIndexPath:(NSIndexPath *) indexPath;
+
 @end

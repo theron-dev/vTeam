@@ -287,12 +287,15 @@
     return r.size;
 }
 
--(void) touchesBegan:(CGPoint)location{
+-(BOOL) touchesBegan:(CGPoint)location{
     self.focusElement = [_rich elementByLocation:location withSize:self.frame.size];
     if(![_focusElement isKindOfClass:[VTRichLinkElement class]]){
         self.focusElement = nil;
     }
-    [super touchesBegan:location];
+    if(_focusElement){
+        return YES;
+    }
+    return [super touchesBegan:location];
 }
 
 -(void) setHighlighted:(BOOL)highlighted{
@@ -371,6 +374,21 @@
     }
     
     [super touchesEnded:location];
+}
+
+-(void) touchesCancelled:(CGPoint)location{
+    
+    self.focusElement = nil;
+    
+    [super touchesCancelled:location];
+}
+
+-(void) setDelegate:(id)delegate{
+    [super setDelegate:delegate];
+    for(CALayer * layer in _highlightedLayers){
+        [layer removeFromSuperlayer];
+    }
+    self.focusElement = nil;
 }
 
 @end

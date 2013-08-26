@@ -34,11 +34,12 @@
     [self setValue:[NSNumber numberWithBool:highlighted] forKey:@"highlighted"];
 }
 
-- (void)touchesBegan:(CGPoint) location{
+- (BOOL)touchesBegan:(CGPoint) location{
     CGSize size = self.frame.size;
     if(location.x >=0 && location.y >=0 && location.x < size.width && location.y < size.height){
         [self setHighlighted:YES];
     }
+    return NO;
 }
 
 - (void)touchesMoved:(CGPoint) location{

@@ -179,4 +179,13 @@
     return [self.dataSource dataObjectAtIndex:indexPath.row - [self.headerCells count]];
 }
 
+-(void) removeDocumentByIndexPath:(NSIndexPath *) indexPath{
+    
+    id data = [self dataObjectByIndexPath:indexPath];
+    
+    if([data isKindOfClass:[NSMutableDictionary class]]){
+        [data removeObjectForKey:@"__document__"];
+    }
+}
+
 @end

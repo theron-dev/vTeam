@@ -103,7 +103,9 @@ typedef  enum {
 }
 
 -(void) viewUnBindElement:(VTDOMElement *) element{
-    [element setDelegate:nil];
+    if(element.delegate == self){
+        [element setDelegate:nil];
+    }
     for(VTDOMElement * el in  [element childs]){
         [self viewUnBindElement:el];
     }
@@ -156,16 +158,44 @@ typedef  enum {
     return [self locationInElement:element.parentElement location:CGPointMake(location.x - r.origin.x, location.y - r.origin.y)];
 }
 
--(void) touchesElement:(VTDOMElement *) element location:(CGPoint) location touchType:(int)touchType{
+-(BOOL) touchesElement:(VTDOMElement *) element location:(CGPoint) location touchType:(int)touchType{
     
     CGRect r = [element frame];
     
-    if( touchType || (location.x >=0 && location.y >=0 && location.x < r.size.width && location.y < r.size.height)){
-
+    if(touchType == 0){
+        
+        if( touchType || (location.x >=0 && location.y >=0 && location.x < r.size.width && location.y < r.size.height)){
+            
+            
+            for(VTDOMElement * el in [element childs]){
+                
+                r = [el frame];
+                
+                if([self touchesElement:el location:CGPointMake(location.x - r.origin.x, location.y - r.origin.y) touchType:touchType]){
+                    return YES;
+                }
+                
+            }
+            
+            if([element touchesBegan:location]){
+                return YES;
+            }
+        }
+        
+    }
+    else{
+        
+        for(VTDOMElement * el in [element childs]){
+            
+            r = [el frame];
+            
+            if([self touchesElement:el location:CGPointMake(location.x - r.origin.x, location.y - r.origin.y) touchType:touchType]){
+                return YES;
+            }
+            
+        }
+        
         switch (touchType) {
-            case 0:
-                [element touchesBegan:location];
-                break;
             case 1:
                 [element touchesEnded:location];
                 break;
@@ -178,16 +208,9 @@ typedef  enum {
             default:
                 break;
         }
- 
-        for(VTDOMElement * el in [element childs]){
-            
-            r = [el frame];
-            
-            [self touchesElement:el location:CGPointMake(location.x - r.origin.x, location.y - r.origin.y) touchType:touchType];
-            
-        }
     }
     
+    return NO;
 }
 
 -(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{

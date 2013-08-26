@@ -14,7 +14,7 @@
 @property(nonatomic,assign,getter = isHighlighted) BOOL highlighted;
 @property(nonatomic,assign,getter = isSelected) BOOL selected;
 
-- (void)touchesBegan:(CGPoint) location;
+- (BOOL)touchesBegan:(CGPoint) location;
 - (void)touchesMoved:(CGPoint) location;
 - (void)touchesEnded:(CGPoint) location;
 - (void)touchesCancelled:(CGPoint) location;

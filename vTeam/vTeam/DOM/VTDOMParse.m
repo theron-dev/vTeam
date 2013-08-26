@@ -17,6 +17,7 @@
 #import "VTDOMImageElement.h"
 #import "VTDOMLabelElement.h"
 #import "VTDOMRichElement.h"
+#import "VTDOMActionElement.h"
 
 typedef struct _VTDOMParseScanf {
     hxml_scanf_t base;
@@ -104,6 +105,9 @@ static hcss_scanf_t VTDOMParseCSSScanf = {
     }
     else if([name isEqualToString:@"rich"]){
         elementClass = [VTDOMRichElement class];
+    }
+    else if([name isEqualToString:@"action"]){
+        elementClass = [VTDOMActionElement class];
     }
     
     VTDOMElement * element = [[elementClass alloc] init];
