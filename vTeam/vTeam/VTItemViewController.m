@@ -29,6 +29,7 @@
 @synthesize dataItem = _dataItem;
 @synthesize layoutContainer = _layoutContainer;
 @synthesize dataSource = _dataSource;
+@synthesize itemSize = _itemSize;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

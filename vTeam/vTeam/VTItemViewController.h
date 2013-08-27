@@ -27,7 +27,7 @@
 @property(nonatomic,retain) IBOutlet VTLayoutContainer * layoutContainer;
 @property(nonatomic,assign) IBOutlet id delegate;
 @property(nonatomic,retain) id dataItem;
-
+@property(nonatomic,assign) CGSize itemSize;
 @property(nonatomic,retain) IBOutlet VTDataSource * dataSource;
 
 -(IBAction) doAction :(id)sender;

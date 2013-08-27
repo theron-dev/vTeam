@@ -439,12 +439,7 @@
         
         VTItemViewController * itemViewController = [_headerItemViewControllers objectAtIndex:index];
         
-        [itemViewController setDelegate:self];
-        [itemViewController setContext:self.context];
-        
-        UIView * v =[itemViewController view];
-        
-        return v.frame.size;
+        return [itemViewController itemSize];
     }
     else{
         index -= [_headerItemViewControllers count];
@@ -461,12 +456,7 @@
         
         VTItemViewController * itemViewController = [_footerItemViewControllers objectAtIndex:index];
         
-        [itemViewController setDelegate:self];
-        [itemViewController setContext:self.context];
-        
-        UIView * v = [itemViewController view];
-        
-        return v.frame.size;
+        return [itemViewController itemSize];
     }
     
     return _itemSize;
