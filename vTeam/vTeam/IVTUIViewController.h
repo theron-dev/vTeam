@@ -13,6 +13,7 @@
 #import <vTeam/IVTUIContext.h>
 #import <vTeam/VTLayout.h>
 #import <vTeam/VTLayoutContainer.h>
+#import <vTeam/IVTController.h>
 
 @protocol IVTUIViewController <NSObject>
 
@@ -27,6 +28,7 @@
 @property(nonatomic,retain) IBOutlet VTDataOutletContainer * dataOutletContainer;
 @property(nonatomic,retain) IBOutlet VTLayoutContainer * layoutContainer;
 @property(nonatomic,retain) NSString * scheme;
+@property(nonatomic,retain) IBOutletCollection(id<IVTController>) NSArray * controllers;
 
 -(void) receiveUrl:(NSURL *) url source:(id) source;
 

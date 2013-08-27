@@ -29,4 +29,6 @@
 
 -(CGSize) vtContainerLayout:(VTContainerLayout *) containerLayout itemSizeAtIndex:(NSInteger) index;
 
+-(UIEdgeInsets) vtContainerLayout:(VTContainerLayout *) containerLayout itemMarginAtIndex:(NSInteger) index;
+
 @end

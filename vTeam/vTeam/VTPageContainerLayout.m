@@ -19,7 +19,14 @@
     CGSize size = self.size;
     
     for(int i=0;i<c;i++){
-        [itemRects addObject:[NSValue valueWithCGRect:CGRectMake(i * size.width, 0, size.width, size.height)]];
+        
+        UIEdgeInsets margin = UIEdgeInsetsZero;
+        
+        if([self.delegate respondsToSelector:@selector(vtContainerLayout:itemMarginAtIndex:)]){
+            margin = [self.delegate vtContainerLayout:self itemMarginAtIndex:i];
+        }
+        
+        [itemRects addObject:[NSValue valueWithCGRect:CGRectMake(i * size.width + margin.left, margin.top, size.width - margin.left - margin.right, size.height - margin.top - margin.bottom)]];
     }
     
     self.itemRects = itemRects;

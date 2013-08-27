@@ -41,9 +41,14 @@
     for(int i=0;i<c;i++){
         
         CGSize s =  self.itemSize;
+        UIEdgeInsets margin = UIEdgeInsetsZero;
         
         if([self.delegate respondsToSelector:@selector(vtContainerLayout:itemSizeAtIndex:)]){
             s = [self.delegate vtContainerLayout:self itemSizeAtIndex:i];
+        }
+        
+        if([self.delegate respondsToSelector:@selector(vtContainerLayout:itemMarginAtIndex:)]){
+            margin = [self.delegate vtContainerLayout:self itemMarginAtIndex:i];
         }
         
         columnIndex = 0;
@@ -57,10 +62,10 @@
         }
         
         [itemRects addObject:[NSValue valueWithCGRect:CGRectMake(
-                                                                 (_columnSplitWidth + columnWidth) * columnIndex + _columnSplitWidth
-                                                                 , columnTop + _columnTopHeight, columnWidth, s.height)]];
+                                                                 (_columnSplitWidth + columnWidth) * columnIndex + _columnSplitWidth + margin.left
+                                                                 , columnTop + _columnTopHeight + margin.top, columnWidth - margin.left - margin.right, s.height )]];
         
-        tops[columnIndex] += s.height + _columnTopHeight;
+        tops[columnIndex] += s.height + _columnTopHeight + margin.top + margin.bottom;
 
     }
     

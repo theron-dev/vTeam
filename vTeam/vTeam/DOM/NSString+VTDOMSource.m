@@ -52,7 +52,7 @@
                     s =1;
                 }
                 else{
-                    [ms appendString:[NSString stringWithCharacters:&uc length:1]];
+                    [ms appendFormat:@"%C",uc];
                 }
             }
                 break;
@@ -86,7 +86,7 @@
                     s = 0;
                 }
                 else{
-                    [keyPath appendString:[NSString stringWithCharacters:&uc length:1]];
+                    [keyPath appendFormat:@"%C",uc];
                 }
             }
                 break;

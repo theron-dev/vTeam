@@ -21,34 +21,34 @@
     CGPoint p = CGPointZero;
     CGFloat lineHeight = 0;
     
-    CGRect pr = CGRectZero;
-    
     for(int i=0;i<c;i++){
         
         CGSize s =  self.itemSize;
+        UIEdgeInsets margin = UIEdgeInsetsZero;
         
         if([self.delegate respondsToSelector:@selector(vtContainerLayout:itemSizeAtIndex:)]){
             s = [self.delegate vtContainerLayout:self itemSizeAtIndex:i];
         }
         
-        if(p.x + s.width > size.width  ){
+        if([self.delegate respondsToSelector:@selector(vtContainerLayout:itemMarginAtIndex:)]){
+            margin = [self.delegate vtContainerLayout:self itemMarginAtIndex:i];
+        }
+        
+        if(p.x + s.width + margin.left + margin.right > size.width  ){
             p.x = 0;
             p.y += lineHeight;
             lineHeight = 0;
         }
         
-        CGRect r = CGRectMake(p.x, p.y, s.width, s.height);
+        CGRect r = CGRectMake(p.x + margin.left, p.y + margin.top, s.width, s.height);
         
-        if(CGRectEqualToRect(r, pr)){
-            NSLog(@"");
-        }
         [itemRects addObject:[NSValue valueWithCGRect:r]];
         
-        if(s.height > lineHeight){
-            lineHeight = s.height;
+        if(s.height + margin.top + margin.right > lineHeight){
+            lineHeight = s.height + margin.top + margin.right;
         }
         
-        p.x += s.width;
+        p.x += s.width + margin.left + margin.right;
         
     }
     

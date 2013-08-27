@@ -322,6 +322,7 @@
 		11E59F7E1728DBCD002DD63C /* NSURL+QueryValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E59F7C1728DBCD002DD63C /* NSURL+QueryValue.m */; };
 		11E59F811728DF6E002DD63C /* VTNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 11E59F7F1728DF6E002DD63C /* VTNavigationController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11E59F821728DF6E002DD63C /* VTNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E59F801728DF6E002DD63C /* VTNavigationController.m */; };
+		11E6ABCD17CC9B6D00B9C3FE /* IVTController.h in Headers */ = {isa = PBXBuildFile; fileRef = 11E6ABCC17CC9B6C00B9C3FE /* IVTController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11EE82971760966800219D52 /* crypt.h in Headers */ = {isa = PBXBuildFile; fileRef = 11EE828E1760966800219D52 /* crypt.h */; };
 		11EE82981760966800219D52 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 11EE828F1760966800219D52 /* ioapi.c */; };
 		11EE82991760966800219D52 /* ioapi.h in Headers */ = {isa = PBXBuildFile; fileRef = 11EE82901760966800219D52 /* ioapi.h */; };
@@ -728,6 +729,7 @@
 		11E59F7C1728DBCD002DD63C /* NSURL+QueryValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+QueryValue.m"; sourceTree = "<group>"; };
 		11E59F7F1728DF6E002DD63C /* VTNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTNavigationController.h; sourceTree = "<group>"; };
 		11E59F801728DF6E002DD63C /* VTNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTNavigationController.m; sourceTree = "<group>"; };
+		11E6ABCC17CC9B6C00B9C3FE /* IVTController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVTController.h; sourceTree = "<group>"; };
 		11EE828E1760966800219D52 /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
 		11EE828F1760966800219D52 /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
 		11EE82901760966800219D52 /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
@@ -1045,6 +1047,7 @@
 				11E59F5E1728C03B002DD63C /* IVTServiceContainer.h */,
 				114773061727E04F00196FB2 /* IVTContext.h */,
 				114773071727E09700196FB2 /* IVTServiceContext.h */,
+				11E6ABCC17CC9B6C00B9C3FE /* IVTController.h */,
 				1147730F1727E33A00196FB2 /* IVTUIViewController.h */,
 				1147730E1727E2E100196FB2 /* IVTUIContext.h */,
 				1147730A1727E29600196FB2 /* VTShell.h */,
@@ -1662,6 +1665,7 @@
 				11CEBF4717C61EE5007A430A /* VTBEEventObject.h in Headers */,
 				11C3AB4417C7374800B16C3A /* NSData+GZIP.h in Headers */,
 				1174209917CAF348001EBEE7 /* VTDOMActionElement.h in Headers */,
+				11E6ABCD17CC9B6D00B9C3FE /* IVTController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

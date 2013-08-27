@@ -99,7 +99,8 @@
     NSInteger visableFocusIndex = NSNotFound;
     NSInteger fullVisableFocusIndex = NSNotFound;
     
- 
+    NSMutableArray * itemViews = [NSMutableArray arrayWithCapacity:4];
+    
     if(_queueItemViewControllers == nil){
         _queueItemViewControllers = [[NSMutableArray alloc] initWithCapacity:4];
     }
@@ -149,6 +150,8 @@
         if(_headerView.superview == nil){
             [self addSubview:_headerView];
         }
+        
+        [itemViews addObject:_headerView];
     }
     
     for(NSValue * vRect in [_containerLayout itemRects]){
@@ -201,6 +204,9 @@
             if(itemView.superview == nil){
                 [self addItemViewController:itemViewController];
             }
+            
+            [itemViews addObject:itemView];
+            
             [self removeQueueItemViewController:itemViewController];
             [itemViewControllers removeObjectForKey:nKey];
         }
@@ -230,6 +236,8 @@
         if(_footerView.superview == nil){
             [self addSubview:_footerView];
         }
+        
+        [itemViews addObject:_headerView];
     }
     
     for(VTItemViewController * itemViewController in [itemViewControllers allValues]){
@@ -237,6 +245,11 @@
         [itemViewController setIndex:NSNotFound];
         [self addQueueItemViewController:itemViewController];
         [self removeItemViewController:itemViewController];
+    }
+    
+    while([itemViews lastObject]){
+        [self sendSubviewToBack:[itemViews lastObject]];
+        [itemViews removeLastObject];
     }
     
     contentSize.height += top +bottom;

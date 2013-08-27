@@ -9,11 +9,11 @@
 #import <vTeam/VTTask.h>
 #import <vTeam/IVTDownlinkTask.h>
 #import <vTeam/IVTServiceContext.h>
+#import <vTeam/IVTController.h>
+#import <vTeam/IVTUIContext.h>
 
-@interface VTDataSource : VTTask<IVTDownlinkTask>
+@interface VTDataSource : VTTask<IVTDownlinkTask,IVTController>
 
-@property(nonatomic,unsafe_unretained) id<IVTServiceContext> context;
-@property(nonatomic,unsafe_unretained) IBOutlet id delegate;
 @property(nonatomic,assign,getter = isLoading) BOOL loading;
 @property(nonatomic,assign,getter = isLoaded) BOOL loaded;
 @property(nonatomic,readonly,getter = isEmpty) BOOL empty;

@@ -32,9 +32,23 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    for(id controller in _controllers){
+        [controller setContext:self.context];
+    }
+    
     [_styleContainer setStyleSheet:[self.context styleSheet]];
     [_layoutContainer layout];
     [_dataOutletContainer applyDataOutlet:self];
+
+}
+
+-(void) viewDidUnload{
+    for(id controller in _controllers){
+        [controller setDelegate:nil];
+        [controller setContext:nil];
+    }
+    [super viewDidUnload];
 }
 
 - (void)didReceiveMemoryWarning
@@ -53,12 +67,18 @@
 @synthesize basePath = _basePath;
 @synthesize layoutContainer = _layoutContainer;
 @synthesize scheme = _scheme;
+@synthesize controllers = _controllers;
 
 -(BOOL) isDisplaced{
     return _parentController == nil && ( ![self isViewLoaded] || self.view.superview == nil);
 }
 
 -(void) dealloc{
+    for(id controller in _controllers){
+        [controller setDelegate:nil];
+        [controller setContext:nil];
+    }
+    [_controllers release];
     [_config release];
     [_alias release];
     [_url release];
@@ -73,6 +93,7 @@
 -(BOOL) canOpenUrl:(NSURL *) url{
     return [_parentController canOpenUrl:url];
 }
+
 
 -(BOOL) openUrl:(NSURL *) url animated:(BOOL) animated{
     

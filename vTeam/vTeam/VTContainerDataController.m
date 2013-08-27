@@ -31,8 +31,12 @@
 @synthesize itemViewClass = _itemViewClass;
 @synthesize itemViewBundle = _itemViewBundle;
 @synthesize itemSize = _itemSize;
+@synthesize headerItemViewControllers = _headerItemViewControllers;
+@synthesize footerItemViewControllers = _footerItemViewControllers;
 
 -(void) dealloc{
+    [_headerItemViewControllers release];
+    [_footerItemViewControllers release];
     [_containerView setDelegate:nil];
     [_itemViewNib release];
     [_topLoadingView release];
@@ -54,7 +58,7 @@
 }
 
 -(NSInteger) numberOfVTContainerLayout:(VTContainerLayout *) containerLayout{
-    return [self.dataSource count];
+    return [self.dataSource count] + [_headerItemViewControllers count] + [_footerItemViewControllers count];
 }
 
 -(void) setLastUpdateDate:(NSDate *)date{
@@ -122,30 +126,73 @@
 
 -(VTItemViewController *) vtContainerView:(VTContainerView *) containerView itemViewAtIndex:(NSInteger) index frame:(CGRect) frame{
     
-    VTItemViewController * itemViewController = [containerView dequeueReusableItemViewWithIdentifier:@"ItemView"];
-    
-    if(itemViewController == nil){
+    if(index < [_headerItemViewControllers count]){
         
-        Class clazz = NSClassFromString(_itemViewClass);
+        VTItemViewController * itemViewController = [_headerItemViewControllers objectAtIndex:index];
         
-        if(clazz == nil){
-            clazz = [VTItemViewController class];
+        if(itemViewController.restorationIdentifier == nil){
+            [itemViewController setReuseIdentifier:@"HeaderItemView"];
         }
         
-        itemViewController = [[[clazz alloc] initWithNibName:_itemViewNib bundle:_itemViewBundle] autorelease];
-        [itemViewController setReuseIdentifier:@"ItemView"];
         [itemViewController setDelegate:self];
+        [itemViewController setContext:self.context];
+        [itemViewController view];
+        [itemViewController setDataItem:nil];
+        
+        return itemViewController;
+    }
+    else {
+        index -= [_headerItemViewControllers count];
     }
     
-    id data = [self.dataSource dataObjectAtIndex:index];
+    if(index < [self.dataSource count]){
     
-    [itemViewController view];
+        VTItemViewController * itemViewController = [containerView dequeueReusableItemViewWithIdentifier:@"ItemView"];
+        
+        if(itemViewController == nil){
+            
+            Class clazz = NSClassFromString(_itemViewClass);
+            
+            if(clazz == nil){
+                clazz = [VTItemViewController class];
+            }
+            
+            itemViewController = [[[clazz alloc] initWithNibName:_itemViewNib bundle:_itemViewBundle] autorelease];
+            [itemViewController setReuseIdentifier:@"ItemView"];
+            [itemViewController setDelegate:self];
+        }
+        
+        id data = [self.dataSource dataObjectAtIndex:index];
+        
+        [itemViewController setContext:self.context];
+        
+        [itemViewController view];
+
+        [itemViewController setDataItem:data];
+        
+        return itemViewController;
+    }
+    else{
+        index -= [self.dataSource count];
+    }
     
-    [itemViewController setContext:self.context];
+    if(index < [_footerItemViewControllers count]){
+        
+        VTItemViewController * itemViewController = [_headerItemViewControllers objectAtIndex:index];
+        
+        if(itemViewController.restorationIdentifier == nil){
+            [itemViewController setReuseIdentifier:@"FooterItemView"];
+        }
+        
+        [itemViewController setDelegate:self];
+        [itemViewController setContext:self.context];
+        [itemViewController view];
+        [itemViewController setDataItem:nil];
+        
+        return itemViewController;
+    }
     
-    [itemViewController setDataItem:data];
-    
-    return itemViewController;
+    return nil;
 }
 
 -(void) vtDataSourceWillLoading:(VTDataSource *)dataSource{
@@ -387,6 +434,41 @@
 }
 
 -(CGSize) vtContainerLayout:(VTContainerLayout *)containerLayout itemSizeAtIndex:(NSInteger)index{
+    
+    if(index < [_headerItemViewControllers count]){
+        
+        VTItemViewController * itemViewController = [_headerItemViewControllers objectAtIndex:index];
+        
+        [itemViewController setDelegate:self];
+        [itemViewController setContext:self.context];
+        
+        UIView * v =[itemViewController view];
+        
+        return v.frame.size;
+    }
+    else{
+        index -= [_headerItemViewControllers count];
+    }
+    
+    if(index < [self.dataSource count]){
+        return _itemSize;
+    }
+    else{
+        index -= [self.dataSource count];
+    }
+    
+    if(index < [_footerItemViewControllers count]){
+        
+        VTItemViewController * itemViewController = [_footerItemViewControllers objectAtIndex:index];
+        
+        [itemViewController setDelegate:self];
+        [itemViewController setContext:self.context];
+        
+        UIView * v = [itemViewController view];
+        
+        return v.frame.size;
+    }
+    
     return _itemSize;
 }
 
