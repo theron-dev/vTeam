@@ -51,4 +51,12 @@
     self.layer.shadowRadius = shadowRadius;
 }
 
+-(void) setBackgroundImage:(UIImage *)backgroundImage{
+    [self setBackgroundColor:[UIColor colorWithPatternImage:backgroundImage]];
+}
+
+-(UIImage *) backgroundImage{
+    return nil;
+}
+
 @end
