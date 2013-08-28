@@ -12,6 +12,17 @@
 
 #import "UIView+Search.h"
 
+@implementation UITableView(VTTableViewCell)
+
+-(void) applyDataOutlet{
+    for(VTTableViewCell * cell in [self visibleCells]){
+        if([cell isKindOfClass:[VTTableViewCell class]]){
+            [cell setDataItem:cell.dataItem];
+        }
+    }
+}
+
+@end
 
 @implementation VTTableViewCell
 

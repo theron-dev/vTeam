@@ -15,6 +15,12 @@
 #import <vTeam/VTLayoutContainer.h>
 #import <vTeam/VTDataSource.h>
 
+@interface UITableView (VTTableViewCell)
+
+-(void) applyDataOutlet;
+
+@end
+
 @interface VTTableViewCell : UITableViewCell
 
 @property(nonatomic,readonly) NSString * nibNameOrNil;

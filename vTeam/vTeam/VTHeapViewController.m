@@ -520,49 +520,15 @@ typedef enum {
 
 
 -(BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
-    if([self.config valueForKey:@"orientations"]){
-        NSArray * orientations = [self.config valueForKey:@"orientations"];
-        for(NSNumber * orientation in orientations){
-            if([orientation intValue] == toInterfaceOrientation){
-                return YES;
-            }
-        }
-        return NO;
-    }
-    return YES;
+    return [self.topViewController shouldAutorotateToInterfaceOrientation:toInterfaceOrientation];
 }
 
 - (BOOL)shouldAutorotate{
-    return YES;
+    return [self.topViewController shouldAutorotate];
 }
 
 - (NSUInteger)supportedInterfaceOrientations{
-    NSUInteger rs = 0;
-    
-    if([self.config valueForKey:@"orientations"]){
-        NSArray * orientations = [self.config valueForKey:@"orientations"];
-        for(NSNumber * orientation in orientations){
-            int i = [orientation intValue];
-            if(i == UIInterfaceOrientationPortrait){
-                rs = rs | UIInterfaceOrientationMaskPortrait;
-            }
-            else if(i == UIInterfaceOrientationPortraitUpsideDown){
-                rs = rs | UIInterfaceOrientationMaskPortraitUpsideDown;
-            }
-            else if(i == UIInterfaceOrientationLandscapeLeft){
-                rs = rs | UIInterfaceOrientationMaskLandscapeLeft;
-            }
-            else if(i == UIInterfaceOrientationLandscapeRight){
-                rs = rs | UIInterfaceOrientationMaskLandscapeRight;
-            }
-        }
-        
-    }
-    
-    if(rs == 0){
-        return UIInterfaceOrientationMaskPortrait;
-    }
-    return rs;
+    return [self.topViewController supportedInterfaceOrientations];
 }
 
 -(void) receiveUrl:(NSURL *) url source:(id) source{
