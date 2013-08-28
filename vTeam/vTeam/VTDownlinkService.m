@@ -15,6 +15,7 @@
 #import "VTJSON.h"
 
 static VTDBContext * gDownlinkServiceDBContext = nil;
+static dispatch_queue_t gDownlinkServiceDispatchQueue = nil;
 
 @interface VTDownlinkServiceDBObject : VTDBObject
 
@@ -42,8 +43,10 @@ static VTDBContext * gDownlinkServiceDBContext = nil;
 @end
 
 @interface VTDownlinkService(){
-    NSMutableDictionary * _dataObjects;
+    
 }
+
+-(id) dataObjectForKey:(NSString *) key;
 
 @end
 
@@ -66,87 +69,109 @@ static VTDBContext * gDownlinkServiceDBContext = nil;
     return gDownlinkServiceDBContext;
 }
 
++(dispatch_queue_t) dispatchQueue{
+    
+    if(gDownlinkServiceDispatchQueue == nil){
+        gDownlinkServiceDispatchQueue = dispatch_queue_create("org.hailong.vTeam.VTDownlinkService", NULL);
+    }
+    
+    return gDownlinkServiceDispatchQueue;
+}
+
 -(void) dealloc{
-    [_dataObjects release];
     [super dealloc];
 }
 
--(id) dataObjectForKey:(NSString *) key{
-    id dataObject = [_dataObjects objectForKey:key];
-    if(dataObject == nil){
-        id<IVTSqliteCursor> cursor = [[VTDownlinkService dbContext] query:[VTDownlinkServiceDBObject class] sql:@" WHERE [service]=:service AND [key]=:key" data:[NSDictionary dictionaryWithObjectsAndKeys:NSStringFromClass([self class]),@"service",key,@"key", nil]];
-        if([cursor next]){
-            dataObject = [[[VTDownlinkServiceDBObject alloc] init] autorelease];
-            [cursor toDataObject:dataObject];
-            if(_dataObjects == nil){
-                _dataObjects = [[NSMutableDictionary alloc] init];
-            }
-            [_dataObjects setObject:dataObject forKey:key];
-        }
-        [cursor close];
+-(VTDownlinkServiceDBObject *) dataObjectForKey:(NSString *) key{
+    VTDownlinkServiceDBObject * dataObject = nil;
+    id<IVTSqliteCursor> cursor = [[VTDownlinkService dbContext] query:[VTDownlinkServiceDBObject class] sql:@" WHERE [service]=:service AND [key]=:key" data:[NSDictionary dictionaryWithObjectsAndKeys:NSStringFromClass([self class]),@"service",key,@"key", nil]];
+    if([cursor next]){
+        dataObject = [[[VTDownlinkServiceDBObject alloc] init] autorelease];
+        [cursor toDataObject:dataObject];
     }
+    [cursor close];
     return dataObject;
 }
 
--(id) dataObjectForKey:(NSString *) key setData:(id) data{
-    id dataObject = [self dataObjectForKey:key];
-    if(dataObject == nil){
-        dataObject = [[[VTDownlinkServiceDBObject alloc] init] autorelease];
-        [dataObject setValue:NSStringFromClass([self class]) forKey:@"service"];
-        [dataObject setValue:key forKey:@"key"];
-        [dataObject setValue:[VTJSON encodeObject:data] forKey:@"jsonString"];
-        [dataObject setValue:[NSNumber numberWithInt:time(NULL)] forKey:@"timestamp"];
-        [[VTDownlinkService dbContext] insertObject:dataObject];
-        if(_dataObjects == nil){
-            _dataObjects = [[NSMutableDictionary alloc] init];
-        }
-        [_dataObjects setObject:dataObject forKey:key];
-    }
-    else{
-        [dataObject setValue:[VTJSON encodeObject:data] forKey:@"jsonString"];
-        [dataObject setValue:[NSNumber numberWithInt:time(NULL)] forKey:@"timestamp"];
-        [[VTDownlinkService dbContext] updateObject:dataObject];
-    }
-    return dataObject;
-}
 
 -(NSString *) dataKey:(id<IVTDownlinkTask>) task forTaskType:(Protocol *) taskType{
     return NSStringFromProtocol(taskType);
 }
 
--(void) delayDidLoadedFromCache:(NSDictionary *) userInfo{
-    
-    id dataObject = [userInfo valueForKey:@"dataObject"];
-    id<IVTDownlinkTask> task = [userInfo valueForKey:@"task"];
-    Protocol * taskType = NSProtocolFromString([userInfo valueForKey:@"taskType"]);
-    
-    [task vtDownlinkTaskDidLoadedFromCache:[VTJSON decodeText:[dataObject valueForKey:@"jsonString"]] timestamp:[NSDate dateWithTimeIntervalSince1970:[[dataObject valueForKey:@"timestamp"] intValue]]
-                               forTaskType:taskType];
-    
-}
-
 -(void) vtDownlinkTaskDidLoadedFromCache:(id<IVTDownlinkTask>) downlinkTask forTaskType:(Protocol *) taskType{
-    NSString * dataKey = [self dataKey:downlinkTask forTaskType:taskType];
-    id dataObject = [self dataObjectForKey:dataKey];
-    if(dataObject && [downlinkTask respondsToSelector:@selector(vtDownlinkTaskDidLoadedFromCache:timestamp:forTaskType:)]){
-        [self performSelector:@selector(delayDidLoadedFromCache:)
-                   withObject:[NSDictionary dictionaryWithObjectsAndKeys:dataObject,@"dataObject",NSStringFromProtocol(taskType),@"taskType",downlinkTask,@"task", nil] afterDelay:0];
-    };
+    
+    if([downlinkTask respondsToSelector:@selector(vtDownlinkTaskDidLoadedFromCache:timestamp:forTaskType:)]){
+        NSString * dataKey = [self dataKey:downlinkTask forTaskType:taskType];
+        
+        dispatch_async([VTDownlinkService dispatchQueue], ^{
+           
+            VTDownlinkServiceDBObject * dataObject = [self dataObjectForKey:dataKey];
+            
+            if(dataObject){
+                
+                id data = [VTJSON decodeText:dataObject.jsonString];
+                NSDate * timestamp = [NSDate dateWithTimeIntervalSince1970:dataObject.timestamp];
+                
+                if(data){
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [downlinkTask vtDownlinkTaskDidLoadedFromCache:data timestamp:timestamp forTaskType:taskType];
+                    });
+                    
+                }
+                
+            }
+        });
+    }
+
 }
 
 -(void) vtDownlinkTask:(id<IVTDownlinkTask>) downlinkTask didResponse:(id) data isCache:(BOOL) isCache forTaskType:(Protocol *) taskType{
+
+    NSString * dataKey = nil;
+    __block NSString * jsonString = nil;
     
     if(isCache){
-        NSString * dataKey = [self dataKey:downlinkTask forTaskType:taskType];
+        dataKey = [self dataKey:downlinkTask forTaskType:taskType];
         if(dataKey){
-            [self dataObjectForKey:dataKey setData:data];
+            dispatch_async([VTDownlinkService dispatchQueue], ^{
+                jsonString = [VTJSON encodeObject:data];
+            });
         }
     }
     
     if([downlinkTask respondsToSelector:@selector(vtDownlinkTaskDidLoaded:forTaskType:)]){
-        [downlinkTask vtDownlinkTaskDidLoaded:data forTaskType:taskType];
+     
+        dispatch_async([VTDownlinkService dispatchQueue], ^{
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [downlinkTask vtDownlinkTaskDidLoaded:data forTaskType:taskType];
+            });
+        });
+
     }
     
+    if(isCache && dataKey){
+
+        dispatch_async([VTDownlinkService dispatchQueue], ^{
+            VTDownlinkServiceDBObject * dataObject = [self dataObjectForKey:dataKey];
+            if(dataObject){
+                dataObject.jsonString = jsonString;
+                dataObject.timestamp = time(NULL);
+                [[VTDownlinkService dbContext] updateObject:dataObject];
+            }
+            else{
+                dataObject = [[VTDownlinkServiceDBObject alloc] init];
+                dataObject.key = dataKey;
+                dataObject.jsonString = jsonString;
+                dataObject.timestamp = time(NULL);
+                dataObject.service = NSStringFromClass([self class]);
+                [[VTDownlinkService dbContext] insertObject:dataObject];
+            }
+        });
+    }
+    
+
 }
 
 -(void) vtDownlinkTask:(id<IVTDownlinkTask>) downlinkTask didFitalError:(NSError *) error forTaskType:(Protocol *) taskType{
@@ -155,11 +180,6 @@ static VTDBContext * gDownlinkServiceDBContext = nil;
     }
 }
 
--(void) didReceiveMemoryWarning{
-    [super didReceiveMemoryWarning];
-    [_dataObjects release];
-    _dataObjects = nil;
-}
 
 -(BOOL) cancelHandle:(Protocol *)taskType task:(id<IVTTask>)task{
     

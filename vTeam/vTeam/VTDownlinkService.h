@@ -12,9 +12,7 @@
 
 @interface VTDownlinkService : VTService
 
--(id) dataObjectForKey:(NSString *) key;
 
--(id) dataObjectForKey:(NSString *) key setData:(id) data;
 
 -(void) vtDownlinkTaskDidLoadedFromCache:(id<IVTDownlinkTask>) downlinkTask forTaskType:(Protocol *) taskType;
 
