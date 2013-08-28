@@ -83,4 +83,5 @@
 #import <vTeam/VTBEEventObject.h>
 #import <vTeam/NSData+GZIP.h>
 #import <vTeam/VTDOMImageElement.h>
+#import <vTeam/IVTController.h>
 
