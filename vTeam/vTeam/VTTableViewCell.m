@@ -15,10 +15,16 @@
 @implementation UITableView(VTTableViewCell)
 
 -(void) applyDataOutlet{
-    for(VTTableViewCell * cell in [self visibleCells]){
-        if([cell isKindOfClass:[VTTableViewCell class]]){
-            [cell setDataItem:cell.dataItem];
+    NSArray * cells = [self visibleCells];
+    if([cells count]){
+        for(VTTableViewCell * cell in cells){
+            if([cell isKindOfClass:[VTTableViewCell class]]){
+                [cell setDataItem:cell.dataItem];
+            }
         }
+    }
+    else{
+        [self reloadData];
     }
 }
 
