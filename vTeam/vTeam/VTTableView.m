@@ -36,4 +36,11 @@
     }
 }
 
+-(void) didMoveToWindow{
+    [super didMoveToWindow];
+    if([self.delegate respondsToSelector:@selector(tableView:didMoveToWindow:)]){
+        [(id<VTTableViewDelegate>)self.delegate tableView:self didMoveToWindow:self.window];
+    }
+}
+
 @end
