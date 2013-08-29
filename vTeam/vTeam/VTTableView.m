@@ -43,4 +43,11 @@
     }
 }
 
+-(void) willMoveToWindow:(UIWindow *)newWindow{
+    [super willMoveToWindow:newWindow];
+    if([self.delegate respondsToSelector:@selector(tableView:willMoveToWindow:)]){
+        [(id<VTTableViewDelegate>)self.delegate tableView:self willMoveToWindow:newWindow];
+    }
+}
+
 @end

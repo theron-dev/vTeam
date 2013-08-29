@@ -18,6 +18,8 @@
 
 -(void) tableView:(UITableView *) tableView didContentOffsetChanged:(CGPoint) contentOffset;
 
+-(void) tableView:(UITableView *) tableView willMoveToWindow:(UIWindow *) window;
+
 -(void) tableView:(UITableView *) tableView didMoveToWindow:(UIWindow *) window;
 
 @end
