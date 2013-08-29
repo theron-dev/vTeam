@@ -135,7 +135,7 @@ static dispatch_queue_t gDownlinkServiceDispatchQueue = nil;
         dataKey = [self dataKey:downlinkTask forTaskType:taskType];
         if(dataKey){
             dispatch_async([VTDownlinkService dispatchQueue], ^{
-                jsonString = [VTJSON encodeObject:data];
+                jsonString = [[VTJSON encodeObject:data] retain];
             });
         }
     }
@@ -154,7 +154,9 @@ static dispatch_queue_t gDownlinkServiceDispatchQueue = nil;
     if(isCache && dataKey){
 
         dispatch_async([VTDownlinkService dispatchQueue], ^{
+            
             VTDownlinkServiceDBObject * dataObject = [self dataObjectForKey:dataKey];
+            
             if(dataObject){
                 dataObject.jsonString = jsonString;
                 dataObject.timestamp = time(NULL);
@@ -168,6 +170,8 @@ static dispatch_queue_t gDownlinkServiceDispatchQueue = nil;
                 dataObject.service = NSStringFromClass([self class]);
                 [[VTDownlinkService dbContext] insertObject:dataObject];
             }
+            
+            [jsonString release];
         });
     }
     

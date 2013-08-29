@@ -203,7 +203,15 @@ static hjson_t VTJSONDecode = {
                 
                 for(int i=0;i<c;i++){
                     NSString * key = [NSString stringWithCString:property_getName(prop[i]) encoding:NSUTF8StringEncoding];
-                    id value = [data valueForKey:key];
+                    id value = nil;
+                    
+                    @try {
+                        value = [data valueForKey:key];
+                    }
+                    @catch (NSException *exception) {
+                        value = nil;
+                    }
+                    
                     if(value == nil || [value isKindOfClass:[NSNull class]]){
                         continue;
                     }
