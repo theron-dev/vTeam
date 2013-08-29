@@ -8,6 +8,8 @@
 
 #import "VTHeapViewController.h"
 
+#import <QuartzCore/QuartzCore.h>
+
 #define ANIMATION_DURATION  0.3
 #define ANIMATION_SCALE     0.98
 #define ANIMATION_ALPHA     0.8
@@ -71,7 +73,13 @@ typedef enum {
 }
 
 -(void) panGestureRecognizerAction:(UIPanGestureRecognizer * ) gestureRecognizer{
+    
     UIGestureRecognizerState state = gestureRecognizer.state;
+    
+    if(_animating){
+        return;
+    }
+    
     if(state == UIGestureRecognizerStateBegan){
         if(!_panBeginTouch){
             _panBeginTouch = YES;
@@ -105,12 +113,16 @@ typedef enum {
                 if([_viewControllers count] >1){
                     
                     UIViewController * viewController = [_viewControllers objectAtIndex:[_viewControllers count] -2];
+                    
                     UIView * v = [viewController view];
+                    
+                    [v setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+                    [v setFrame:CGRectMake(0, 0, size.width, size.height)];
+                    
                     if(v.superview != view){
                         [viewController viewWillAppear:NO];
                         [view insertSubview:v atIndex:0];
                         [viewController viewDidAppear:NO];
-                        [v setFrame:CGRectMake(0, 0, size.width, size.height)];
                     }
                     
                     CGFloat r = d / size.width;
@@ -126,22 +138,34 @@ typedef enum {
                         alpha = 1.0;
                     }
                     
-                    [v setTransform:CGAffineTransformMakeScale(scale, scale)];
-                    [v setAlpha:alpha];
+                    if(v.layer.mask == nil){
+                        CALayer * mask = [[CALayer alloc] init];
+                        mask.backgroundColor = [UIColor colorWithWhite:1.0 alpha:alpha].CGColor;
+                        mask.frame = v.layer.bounds;
+                        v.layer.mask = mask;
+                        [mask release];
+                    }
+                    else{
+                        v.layer.mask.backgroundColor = [UIColor colorWithWhite:1.0 alpha:alpha].CGColor;
+                    }
+                    
+                    v.layer.transform = CATransform3DMakeScale(scale, scale, scale);
                     
                     v = [self.topViewController view];
                     
-                    [v setAlpha:1.0];
-                    [v setTransform:CGAffineTransformIdentity];
+                    v.layer.mask = nil;
+                    v.layer.transform = CATransform3DIdentity;
+                    
                     [v setFrame:CGRectMake( d, 0, size.width, size.height)];
                 }
                 else{
                     
                     UIView * v = [self.topViewController view];
                     
-                    [v setAlpha:1.0];
-                    [v setTransform:CGAffineTransformIdentity];
+                    v.layer.mask = nil;
+                    v.layer.transform = CATransform3DIdentity;
                     [v setFrame:CGRectMake( 0, 0, size.width, size.height)];
+
                 }
                 
                 
@@ -152,6 +176,7 @@ typedef enum {
                     
                     UIViewController * viewController = [_viewControllers objectAtIndex:[_viewControllers count] -2];
                     if([viewController isViewLoaded]){
+                        
                         UIView * v = [viewController view];
                         
                         if(v.superview ){
@@ -225,13 +250,11 @@ typedef enum {
                
                 UIView * v = [self.topViewController view];
                 
-                [v setFrame:CGRectMake(0, 0, size.width, size.height)];
-                
                 [UIView beginAnimations:nil context:nil];
                 [UIView setAnimationDuration:ANIMATION_DURATION];
                 
-                [v setAlpha:1.0];
-                [v setTransform:CGAffineTransformIdentity];
+                v.layer.mask = nil;
+                v.layer.transform = CATransform3DIdentity;
                 [v setFrame:CGRectMake(0, 0, size.width, size.height)];
                 
                 [UIView commitAnimations];
@@ -333,6 +356,7 @@ typedef enum {
     }
     
     if([_viewControllers count] >1){
+        
         UIViewController * topViewController = [_viewControllers lastObject];
         
         if(animated && [self isViewLoaded]){
@@ -348,6 +372,9 @@ typedef enum {
             [UIView setAnimationDelegate:self];
             [UIView setAnimationDidStopSelector:@selector(popViewControllerAnimationTopDidStopAction:finished:context:)];
             
+            v.layer.mask = nil;
+            v.layer.transform = CATransform3DIdentity;
+            
             [v setFrame:CGRectMake(size.width, 0, size.width, size.height)];
             
             [UIView commitAnimations];
@@ -357,10 +384,23 @@ typedef enum {
             v = [topViewController view];
             
             if(v.superview != view){
+                
                 [topViewController viewWillAppear:animated];
+                
                 [v setFrame:CGRectMake(0, 0, size.width, size.height)];
-                [v setTransform:CGAffineTransformMakeScale(ANIMATION_SCALE, ANIMATION_SCALE)];
-                [v setAlpha:ANIMATION_ALPHA];
+                
+                if(v.layer.mask == nil){
+                    CALayer * mask = [[CALayer alloc] init];
+                    mask.backgroundColor = [UIColor colorWithWhite:1.0 alpha:ANIMATION_ALPHA].CGColor;
+                    mask.frame = v.layer.bounds;
+                    v.layer.mask = mask;
+                    [mask release];
+                }
+                else{
+                    v.layer.mask.backgroundColor = [UIColor colorWithWhite:1.0 alpha:ANIMATION_ALPHA].CGColor;
+                }
+                
+                v.layer.transform = CATransform3DMakeScale(ANIMATION_SCALE, ANIMATION_SCALE, ANIMATION_SCALE);
                 
                 [view insertSubview:v atIndex:0];
                 [topViewController viewDidAppear:animated];
@@ -371,8 +411,9 @@ typedef enum {
             [UIView setAnimationDelegate:self];
             [UIView setAnimationDidStopSelector:@selector(popViewControllerAnimationDidStopAction:finished:context:)];
             
-            [v setTransform:CGAffineTransformIdentity];
-            [v setAlpha:1.0];
+            v.layer.mask = nil;
+            v.layer.transform = CATransform3DIdentity;
+            
             [v setFrame:CGRectMake(0, 0, size.width, size.height)];
             
             [UIView commitAnimations];
@@ -417,8 +458,8 @@ typedef enum {
     
     [v removeFromSuperview];
     
-    [v setTransform:CGAffineTransformIdentity];
-    [v setAlpha:1.0];
+    v.layer.mask = nil;
+    v.layer.transform = CATransform3DIdentity;
     
     [viewController viewDidDisappear:YES];
    
@@ -455,8 +496,18 @@ typedef enum {
             [UIView setAnimationDelegate:self];
             [UIView setAnimationDidStopSelector:@selector(pushViewControllerAnimationTopDidStopAction:finished:context:)];
             
-            [v setTransform:CGAffineTransformMakeScale(ANIMATION_SCALE, ANIMATION_SCALE)];
-            [v setAlpha:ANIMATION_ALPHA];
+            if(v.layer.mask == nil){
+                CALayer * mask = [[CALayer alloc] init];
+                mask.backgroundColor = [UIColor colorWithWhite:1.0 alpha:ANIMATION_ALPHA].CGColor;
+                mask.frame = v.layer.bounds;
+                v.layer.mask = mask;
+                [mask release];
+            }
+            else{
+                v.layer.mask.backgroundColor = [UIColor colorWithWhite:1.0 alpha:ANIMATION_ALPHA].CGColor;
+            }
+            
+            v.layer.transform = CATransform3DMakeScale(ANIMATION_SCALE, ANIMATION_SCALE, ANIMATION_SCALE);
             
             [UIView commitAnimations];
         }
@@ -481,8 +532,8 @@ typedef enum {
         [UIView setAnimationDidStopSelector:@selector(pushViewControllerAnimationDidStopAction:finished:context:)];
         
         [v setFrame:CGRectMake(0, 0, size.width, size.height)];
-        [v setAlpha:1.0];
-        [v setTransform:CGAffineTransformIdentity];
+        v.layer.mask = nil;
+        v.layer.transform = CATransform3DIdentity;
         
         [UIView commitAnimations];
         
