@@ -27,7 +27,7 @@
     NSMutableArray * _highlightedLayers;
 }
 
-@property(nonatomic,readonly) VTRich * rich;
+
 @property(nonatomic,retain) id focusElement;
 
 @end
@@ -272,6 +272,7 @@
 }
 
 -(CGSize) layoutChildren:(UIEdgeInsets)padding{
+    
     CGRect r = [self frame];
     
     if(r.size.width == MAXFLOAT || r.size.height == MAXFLOAT){
@@ -289,6 +290,7 @@
         [self setFrame:r];
         
     }
+    
     return r.size;
 }
 

@@ -16,5 +16,7 @@
 @property(nonatomic,assign) CGSize shadowOffset;
 @property(nonatomic,assign) CGFloat shadowRadius;
 @property(nonatomic,retain) UIImage * backgroundImage;
+@property(nonatomic,retain) UIColor * borderColor;
+@property(nonatomic,assign) float borderWidth;
 
 @end
