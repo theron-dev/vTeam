@@ -438,5 +438,17 @@
     [self stopLoading];
 }
 
+-(id) dataObjectForIndexPath:(NSIndexPath *) indexPath{
+    
+    if(indexPath.row < [_headerCells count]){
+        return nil;
+    }
+    
+    if(indexPath.row >= [self.dataSource count] + [_headerCells count]){
+        return nil;
+    }
+
+    return [self.dataSource dataObjectAtIndex:indexPath.row - [_headerCells count]];
+}
 
 @end

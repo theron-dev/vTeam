@@ -28,7 +28,9 @@
 -(void) startLoading;
 
 -(void) stopLoading;
-    
+
+-(id) dataObjectForIndexPath:(NSIndexPath *) indexPath;
+
 @end
 
 @protocol VTTableDataControllerDelegate <VTDataControllerDelegate>
