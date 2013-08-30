@@ -688,7 +688,7 @@ typedef enum {
             }
         }
     }
-    return [self.parentController openUrl:url animated:animated];
+    return [super openUrl:url animated:animated];
 }
 
 -(void) setViewControllers:(NSArray *) viewControllers animated:(BOOL)animated{

@@ -120,7 +120,64 @@
             return YES;
         }
     }
+    else if([schema isEqualToString:@"present"]){
+        
+        NSString * alias = [url firstPathComponent:@"/"];
     
+        if([alias length]){
+
+            if([url.host length]){
+                
+                if([url.host isEqualToString:self.scheme]){
+                    
+                    id modalViewController = self;
+                    
+                    while([modalViewController modalViewController]){
+                        modalViewController = [modalViewController modalViewController];
+                    }
+                    
+                    NSLog(@"%@",[url absoluteString]);
+                    
+                    id viewController = [self.context getViewController:url basePath:@"/"];
+                    
+                    if(viewController){
+                        
+                        [viewController setParentController:modalViewController];
+                        
+                        [modalViewController presentModalViewController:viewController animated:animated];
+                        
+                        return YES;
+                    }
+                
+                }
+                
+            }
+            else{
+                
+                NSLog(@"%@",[url absoluteString]);
+                
+                id viewController = [self.context getViewController:url basePath:@"/"];
+                
+                if(viewController){
+                    
+                    [viewController setParentController:self];
+                    
+                    [self presentModalViewController:viewController animated:animated];
+                    
+                    return YES;
+                }
+            }
+        }
+        else if([self.url.scheme isEqualToString:@"present"]){
+            
+            NSLog(@"%@",[url absoluteString]);
+
+            [self dismissModalViewControllerAnimated:animated];
+            
+            return YES;
+        }
+    }
+
     return [_parentController openUrl:url animated:animated];
 }
 

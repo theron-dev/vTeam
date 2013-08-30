@@ -191,8 +191,7 @@
             }
         }
     }
-    
-    if([[url scheme] isEqualToString:@"pop"]){
+    else if([[url scheme] isEqualToString:@"pop"]){
         
         NSLog(@"%@",[url absoluteString]);
         
@@ -209,6 +208,63 @@
             win.rootViewController = viewController;
             
             [viewController setParentController:self];
+            
+            return YES;
+        }
+    }
+    else if([[url scheme] isEqualToString:@"present"]){
+        
+        NSString * alias = [url firstPathComponent:@"/"];
+        
+        if([alias length]){
+            
+            if([url.host length]){
+                
+                if([url.host isEqualToString:scheme]){
+                    
+                    id modalViewController = self;
+                    
+                    while([modalViewController modalViewController]){
+                        modalViewController = [modalViewController modalViewController];
+                    }
+                    
+                    NSLog(@"%@",[url absoluteString]);
+                    
+                    id viewController = [self.context getViewController:url basePath:@"/"];
+                    
+                    if(viewController){
+                        
+                        [viewController setParentController:modalViewController];
+                        
+                        [modalViewController presentModalViewController:viewController animated:animated];
+                        
+                        return YES;
+                    }
+                    
+                }
+                
+            }
+            else{
+                
+                NSLog(@"%@",[url absoluteString]);
+                
+                id viewController = [self.context getViewController:url basePath:@"/"];
+                
+                if(viewController){
+                    
+                    [viewController setParentController:self];
+                    
+                    [self presentModalViewController:viewController animated:animated];
+                    
+                    return YES;
+                }
+            }
+        }
+        else if([self.url.scheme isEqualToString:@"present"]){
+            
+            NSLog(@"%@",[url absoluteString]);
+            
+            [self dismissModalViewControllerAnimated:animated];
             
             return YES;
         }
