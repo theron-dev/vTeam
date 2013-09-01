@@ -467,4 +467,11 @@
     [self stopLoading];
 }
 
+-(void) vtDataSourceDidContentChanged:(VTDataSource *) dataSource{
+    [super vtDataSourceDidLoaded:dataSource];
+    if(self.dataSource == dataSource){
+        [_containerView reloadData];
+    }
+}
+
 @end
