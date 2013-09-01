@@ -39,4 +39,8 @@
 
 -(id<IVTSqliteCursor>) query:(Class) dbObjectClass sql:(NSString *) sql data:(id) data;
 
+-(id) valueForKey:(NSString *)key;
+
+-(void) setValue:(id)value forKey:(NSString *)key;
+
 @end

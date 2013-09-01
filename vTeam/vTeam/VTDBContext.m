@@ -14,6 +14,7 @@
 
 @interface VTDBContext(){
     NSMutableDictionary * _dbObjects;
+    NSMutableDictionary * _values;
 }
 
 @end
@@ -25,6 +26,7 @@
 -(void) dealloc{
     [_db release];
     [_dbObjects release];
+    [_values release];
     [super dealloc];
 }
 
@@ -297,5 +299,15 @@ static NSString * VTDBContextPropertyDBType(objc_property_t prop){
     return mb;
 }
 
+-(id) valueForKey:(NSString *)key{
+    return [_values valueForKey:key];
+}
+
+-(void) setValue:(id)value forKey:(NSString *)key{
+    if(_values == nil){
+        _values = [[NSMutableDictionary alloc] initWithCapacity:4];
+    }
+    [_values setValue:value forKey:key];
+}
 
 @end
