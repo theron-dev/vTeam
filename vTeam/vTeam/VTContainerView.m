@@ -50,7 +50,6 @@
         _itemViewControllers = [[NSMutableArray alloc] initWithCapacity:4];
     }
     [_itemViewControllers addObject:viewController];
-    [self addSubview:[viewController view]];
 }
 
 -(void) removeItemViewController:(id) viewController{
@@ -131,15 +130,11 @@
         [_backgroundView setFrame:CGRectMake(contentOffset.x, contentOffset.y, size.width, size.height)];
         [_backgroundView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
         
-        if(_backgroundView.superview == nil){
-            [self insertSubview:_backgroundView atIndex:0];
-        }
-        else{
-            [self sendSubviewToBack:_backgroundView];
-        }
+        [itemViews addObject:_backgroundView];
     }
     
     if(_headerView){
+        
         CGRect r = _headerView.frame;
         r.origin = CGPointZero;
         r.size.width = size.width;
@@ -147,11 +142,9 @@
         
         [_headerView setFrame:r];
         [_headerView setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth];
-        if(_headerView.superview == nil){
-            [self addSubview:_headerView];
-        }
         
         [itemViews addObject:_headerView];
+
     }
     
     for(NSValue * vRect in [_containerLayout itemRects]){
@@ -201,6 +194,8 @@
             UIView * itemView = [itemViewController view];
             [itemViewController setIndex:index];
             [itemView setFrame:rect];
+            
+            
             if(itemView.superview == nil){
                 [self addItemViewController:itemViewController];
             }
@@ -233,11 +228,9 @@
         
         [_footerView setFrame:r];
         [_footerView setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth];
-        if(_footerView.superview == nil){
-            [self addSubview:_footerView];
-        }
         
-        [itemViews addObject:_headerView];
+        [itemViews addObject:_footerView];
+       
     }
     
     for(VTItemViewController * itemViewController in [itemViewControllers allValues]){
@@ -247,8 +240,17 @@
         [self removeItemViewController:itemViewController];
     }
     
-    while([itemViews lastObject]){
-        [self sendSubviewToBack:[itemViews lastObject]];
+    UIView * itemView;
+    
+    while((itemView = [itemViews lastObject])){
+       
+        if(itemView.superview == nil){
+            [self insertSubview:itemView atIndex:0];
+        }
+        else{
+            [self sendSubviewToBack:itemView];
+        }
+        
         [itemViews removeLastObject];
     }
     
