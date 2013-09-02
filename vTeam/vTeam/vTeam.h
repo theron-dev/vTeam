@@ -84,4 +84,5 @@
 #import <vTeam/NSData+GZIP.h>
 #import <vTeam/VTDOMImageElement.h>
 #import <vTeam/IVTController.h>
+#import <vTeam/VTHtmlDataController.h>
 

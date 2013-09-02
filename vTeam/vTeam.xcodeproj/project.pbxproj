@@ -401,6 +401,8 @@
 		ACDE3AB2173647950046ED56 /* VTAppStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDE3AB0173647930046ED56 /* VTAppStatusView.m */; };
 		ACE330A81792509B003B2D85 /* VTAnimationView.h in Headers */ = {isa = PBXBuildFile; fileRef = ACE330A61792509B003B2D85 /* VTAnimationView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ACE330A91792509B003B2D85 /* VTAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE330A71792509B003B2D85 /* VTAnimationView.m */; };
+		EA46D6C917D468F9006FAEA9 /* VTHtmlDataController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA46D6C717D468F9006FAEA9 /* VTHtmlDataController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA46D6CA17D468F9006FAEA9 /* VTHtmlDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA46D6C817D468F9006FAEA9 /* VTHtmlDataController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -809,6 +811,8 @@
 		ACDE3AB317364EA10046ED56 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		ACE330A61792509B003B2D85 /* VTAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTAnimationView.h; sourceTree = "<group>"; };
 		ACE330A71792509B003B2D85 /* VTAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTAnimationView.m; sourceTree = "<group>"; };
+		EA46D6C717D468F9006FAEA9 /* VTHtmlDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTHtmlDataController.h; sourceTree = "<group>"; };
+		EA46D6C817D468F9006FAEA9 /* VTHtmlDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTHtmlDataController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1168,6 +1172,8 @@
 				11541C5E1790035A001D9FBF /* VTTabPageDataController.m */,
 				11A041AD17BCD9C2001992BE /* VTDocumentDataController.h */,
 				11A041AE17BCD9C2001992BE /* VTDocumentDataController.m */,
+				EA46D6C717D468F9006FAEA9 /* VTHtmlDataController.h */,
+				EA46D6C817D468F9006FAEA9 /* VTHtmlDataController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1666,6 +1672,7 @@
 				11C3AB4417C7374800B16C3A /* NSData+GZIP.h in Headers */,
 				1174209917CAF348001EBEE7 /* VTDOMActionElement.h in Headers */,
 				11E6ABCD17CC9B6D00B9C3FE /* IVTController.h in Headers */,
+				EA46D6C917D468F9006FAEA9 /* VTHtmlDataController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1920,6 +1927,7 @@
 				11CEBF4817C61EE5007A430A /* VTBEEventObject.m in Sources */,
 				11C3AB4517C7374800B16C3A /* NSData+GZIP.m in Sources */,
 				1174209A17CAF348001EBEE7 /* VTDOMActionElement.m in Sources */,
+				EA46D6CA17D468F9006FAEA9 /* VTHtmlDataController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
