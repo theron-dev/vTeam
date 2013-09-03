@@ -19,4 +19,26 @@
     [super dealloc];
 }
 
+- (void)setShowShadows:(BOOL)bShow;
+{
+	// Reference: http://stackoverflow.com/questions/1074320/remove-uiwebview-shadow
+    
+	// 遍历UIScrollView隐藏阴影.
+	for (UIView *inScrollView in [_webView subviews])
+	{
+		if ([inScrollView isKindOfClass:[UIImageView class]])
+		{
+			inScrollView.hidden = !bShow;
+		}
+	}
+    
+    for (UIView *inScrollView in [[_webView subviews][0] subviews])
+	{
+		if ([inScrollView isKindOfClass:[UIImageView class]])
+		{
+			inScrollView.hidden = !bShow;
+		}
+	}
+}
+
 @end

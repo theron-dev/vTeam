@@ -12,4 +12,6 @@
 
 @property(nonatomic,retain) IBOutlet UIWebView * webView;
 
+- (void)setShowShadows:(BOOL)bShow;
+
 @end
