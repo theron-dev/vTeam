@@ -14,5 +14,6 @@
 @property(nonatomic,readonly) UIColor * textColor;
 @property(nonatomic,readonly) UILineBreakMode lineBreakMode;
 @property(nonatomic,readonly) UITextAlignment alignment;
+@property(nonatomic,readonly) CGFloat minFontSize;
 
 @end

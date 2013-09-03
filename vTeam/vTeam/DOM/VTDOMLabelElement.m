@@ -13,6 +13,12 @@
 #import "VTDOMElement+Layout.h"
 #import "VTDOMDocument.h"
 
+@interface VTDOMLabelElement(){
+    CGFloat _actualFontSize;
+}
+
+@end
+
 @implementation VTDOMLabelElement
 
 -(UIFont *) font{
@@ -27,6 +33,10 @@
     }
     
     return font;
+}
+
+-(CGFloat) minFontSize{
+    return [self floatValueForKey:@"min-font-size"];
 }
 
 -(UIColor *) textColor{
@@ -92,8 +102,24 @@
         
         if(text){
             
-            CGSize s = [text sizeWithFont:[self font] constrainedToSize:r.size lineBreakMode:self.lineBreakMode];
+            UIFont * font = [self font];
+            CGFloat minFontSize = [self minFontSize];
             
+            if(minFontSize == 0){
+                minFontSize = font.pointSize;
+            }
+            
+            CGFloat width = r.size.width;
+            
+            if(width == MAXFLOAT){
+                NSString * max = [self stringValueForKey:@"max-width"];
+                if(max){
+                    width = [max floatValue];
+                }
+            }
+            
+            CGSize s = [text sizeWithFont:font minFontSize:minFontSize actualFontSize:&_actualFontSize forWidth:width lineBreakMode:self.lineBreakMode];
+ 
             if(r.size.width == MAXFLOAT){
                 r.size.width = s.width;
             }
@@ -126,6 +152,12 @@
     if(text){
         
         UIFont * font = [self font];
+        
+        CGFloat minFontSize = [self minFontSize];
+        
+        if(minFontSize && _actualFontSize){
+            font = [UIFont fontWithName:font.fontName size:_actualFontSize];
+        }
         
         UIColor * color = [self textColor];
     
