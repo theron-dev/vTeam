@@ -27,6 +27,8 @@
 
 @property(nonatomic,retain) NSString * status;
 @property(nonatomic,retain) IBOutlet id view;
+@property(nonatomic,retain) IBOutletCollection(NSObject) NSArray * views;
+
 @property(nonatomic,retain) NSString * keyPath;
 @property(nonatomic,retain) NSString * stringKeyPath;
 @property(nonatomic,retain) NSString * stringFormat;

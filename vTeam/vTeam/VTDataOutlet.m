@@ -101,7 +101,6 @@
 
 @implementation VTDataOutlet
 
-@synthesize view = _view;
 @synthesize keyPath = _keyPath;
 @synthesize stringKeyPath = _stringKeyPath;
 @synthesize stringFormat = _stringFormat;
@@ -111,10 +110,10 @@
 @synthesize value = _value;
 @synthesize status = _status;
 @synthesize valueKeyPath = _valueKeyPath;
+@synthesize views = _views;
 
 -(void) dealloc{
     [_status release];
-    [_view release];
     [_keyPath release];
     [_stringKeyPath release];
     [_stringFormat release];
@@ -123,6 +122,7 @@
     [_disabledKeyPath release];
     [_valueKeyPath release];
     [_value release];
+    [_views release];
     [super dealloc];
 }
 
@@ -183,16 +183,28 @@
     }
     
 #ifdef DEBUG
-    [_view setValue:value forKeyPath:self.keyPath];
-#else
-    @try {
-        [_view setValue:value forKeyPath:self.keyPath];
+    for(id view in _views){
+        [view setValue:value forKeyPath:self.keyPath];
     }
-    @catch (NSException *exception) {
-        NSLog(@"%@",exception);
+#else
+    for(id view in _views){
+        @try {
+            [view setValue:value forKeyPath:self.keyPath];
+        }
+        @catch (NSException *exception) {
+            NSLog(@"%@",exception);
+        }
     }
 #endif
     
+}
+
+-(id) view{
+    return [_views lastObject];
+}
+
+-(void) setView:(id)view{
+    [self setViews:view ? [NSArray arrayWithObject:view] : nil];
 }
 
 @end
