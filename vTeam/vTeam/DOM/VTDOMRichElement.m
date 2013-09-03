@@ -23,6 +23,8 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+#import "NSString+TextLength.h"
+
 @interface VTDOMRichElement(){
     NSMutableArray * _highlightedLayers;
 }
@@ -51,6 +53,17 @@
     
     NSString * text = [element text];
     NSString * name = [element name];
+    
+    NSString * maxLength = [element stringValueForKey:@"max-length"];
+    
+    if(maxLength){
+        
+        NSInteger length = [text textIndexOfLength:[maxLength intValue]];
+        
+        if(length < [text length]){
+            text = [[text substringToIndex:length] stringByAppendingFormat:@"..."];
+        }
+    }
     
     NSMutableDictionary * attr = [NSMutableDictionary dictionaryWithDictionary:attributes];
     
@@ -268,7 +281,7 @@
     CGContextTranslateCTM(context, 0, rect.size.height);
     CGContextScaleCTM(context, 1.0, -1.0);
 
-    [_rich drawContext:context withSize:self.frame.size];
+    [self.rich drawContext:context withSize:self.frame.size];
 }
 
 -(CGSize) layoutChildren:(UIEdgeInsets)padding{

@@ -122,6 +122,10 @@
 		1131409D1749EC590081641F /* md5.h in Headers */ = {isa = PBXBuildFile; fileRef = 1131403D1749EC590081641F /* md5.h */; };
 		1131409F1749EC590081641F /* sha1.c in Sources */ = {isa = PBXBuildFile; fileRef = 1131403F1749EC590081641F /* sha1.c */; };
 		113140A01749EC590081641F /* sha1.h in Headers */ = {isa = PBXBuildFile; fileRef = 113140401749EC590081641F /* sha1.h */; };
+		113381F317D588E1005E4DCE /* VTDOMLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 113381F117D588E1005E4DCE /* VTDOMLabel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		113381F417D588E1005E4DCE /* VTDOMLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 113381F217D588E1005E4DCE /* VTDOMLabel.m */; };
+		113381F717D5901A005E4DCE /* NSString+TextLength.h in Headers */ = {isa = PBXBuildFile; fileRef = 113381F517D5901A005E4DCE /* NSString+TextLength.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		113381F817D5901A005E4DCE /* NSString+TextLength.m in Sources */ = {isa = PBXBuildFile; fileRef = 113381F617D5901A005E4DCE /* NSString+TextLength.m */; };
 		113B5BD9174F77C6003211AD /* UIView+VTDataOutlet.h in Headers */ = {isa = PBXBuildFile; fileRef = 113B5BD7174F77C6003211AD /* UIView+VTDataOutlet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		113B5BDA174F77C6003211AD /* UIView+VTDataOutlet.m in Sources */ = {isa = PBXBuildFile; fileRef = 113B5BD8174F77C6003211AD /* UIView+VTDataOutlet.m */; };
 		11407290176999C800275493 /* VTFDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 1140728E176999C800275493 /* VTFDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -530,6 +534,10 @@
 		1131403F1749EC590081641F /* sha1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sha1.c; sourceTree = "<group>"; };
 		113140401749EC590081641F /* sha1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sha1.h; sourceTree = "<group>"; };
 		113140411749EC590081641F /* shatest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = shatest.c; sourceTree = "<group>"; };
+		113381F117D588E1005E4DCE /* VTDOMLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDOMLabel.h; sourceTree = "<group>"; };
+		113381F217D588E1005E4DCE /* VTDOMLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDOMLabel.m; sourceTree = "<group>"; };
+		113381F517D5901A005E4DCE /* NSString+TextLength.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TextLength.h"; sourceTree = "<group>"; };
+		113381F617D5901A005E4DCE /* NSString+TextLength.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TextLength.m"; sourceTree = "<group>"; };
 		113B5BD7174F77C6003211AD /* UIView+VTDataOutlet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+VTDataOutlet.h"; sourceTree = "<group>"; };
 		113B5BD8174F77C6003211AD /* UIView+VTDataOutlet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+VTDataOutlet.m"; sourceTree = "<group>"; };
 		1140728E176999C800275493 /* VTFDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTFDB.h; sourceTree = "<group>"; };
@@ -862,6 +870,8 @@
 				111638E017642948009979D3 /* NSData+CCCryptor.m */,
 				11C3AB4217C7374700B16C3A /* NSData+GZIP.h */,
 				11C3AB4317C7374800B16C3A /* NSData+GZIP.m */,
+				113381F517D5901A005E4DCE /* NSString+TextLength.h */,
+				113381F617D5901A005E4DCE /* NSString+TextLength.m */,
 			);
 			name = NSCategory;
 			sourceTree = "<group>";
@@ -1256,6 +1266,8 @@
 				11A0416A17BB5C81001992BE /* VTDOMView.m */,
 				11A041B517BDC253001992BE /* VTDOMScrollView.h */,
 				11A041B617BDC256001992BE /* VTDOMScrollView.m */,
+				113381F117D588E1005E4DCE /* VTDOMLabel.h */,
+				113381F217D588E1005E4DCE /* VTDOMLabel.m */,
 				11A0416D17BB5E1B001992BE /* NSString+VTDOMSource.h */,
 				11A0416E17BB5E1B001992BE /* NSString+VTDOMSource.m */,
 				11A0417117BB6032001992BE /* VTDOM.h */,
@@ -1673,6 +1685,8 @@
 				1174209917CAF348001EBEE7 /* VTDOMActionElement.h in Headers */,
 				11E6ABCD17CC9B6D00B9C3FE /* IVTController.h in Headers */,
 				EA46D6C917D468F9006FAEA9 /* VTHtmlDataController.h in Headers */,
+				113381F317D588E1005E4DCE /* VTDOMLabel.h in Headers */,
+				113381F717D5901A005E4DCE /* NSString+TextLength.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1928,6 +1942,8 @@
 				11C3AB4517C7374800B16C3A /* NSData+GZIP.m in Sources */,
 				1174209A17CAF348001EBEE7 /* VTDOMActionElement.m in Sources */,
 				EA46D6CA17D468F9006FAEA9 /* VTHtmlDataController.m in Sources */,
+				113381F417D588E1005E4DCE /* VTDOMLabel.m in Sources */,
+				113381F817D5901A005E4DCE /* NSString+TextLength.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
