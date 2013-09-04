@@ -20,6 +20,8 @@
 
 @property(nonatomic,retain) VTDOMDocument * document;
 
+-(void) loadDocumentHtml:(NSString *) html;
+
 @end
 
 @implementation VTDOMLabel
@@ -36,6 +38,13 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+    }
+    return self;
+}
+
+-(id) initWithCoder:(NSCoder *)aDecoder{
+    if((self = [super initWithCoder:aDecoder])){
+        [self loadDocumentHtml:self.text];
     }
     return self;
 }
@@ -62,13 +71,25 @@
 - (void) setText:(NSString *)text{
     [super setText:text];
     
-    if(text){
-        
+    [self loadDocumentHtml:text];
+
+    [self setNeedsDisplay];
+}
+
+-(void) setFrame:(CGRect)frame{
+    [super setFrame:frame];
+    [_document.rootElement layout:self.bounds.size];
+    [self setNeedsDisplay];
+}
+
+-(void) loadDocumentHtml:(NSString *) html{
+    
+    if(html){
         VTDOMDocument * document = [[VTDOMDocument alloc] init];
         
         VTDOMParse * parse = [[VTDOMParse alloc] init];
         
-        [parse parseHTML:text toDocument:document];
+        [parse parseHTML:html toDocument:document];
         
         [document.rootElement layout:self.bounds.size];
         
@@ -78,16 +99,10 @@
         
         [parse release];
     }
-    else{
+    else {
         [self setDocument:nil];
     }
-    [self setNeedsDisplay];
-}
-
--(void) setFrame:(CGRect)frame{
-    [super setFrame:frame];
-    [_document.rootElement layout:self.bounds.size];
-    [self setNeedsDisplay];
+    
 }
 
 @end

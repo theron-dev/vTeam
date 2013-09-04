@@ -157,6 +157,8 @@
         
         cell = (UITableViewCell *) [VTTableViewCell tableViewCellWithNibName:_itemViewNib bundle:_itemViewBundle];
         
+        [cell setValue:identifier forKey:@"reuseIdentifier"];
+        
         if([cell isKindOfClass:[VTTableViewCell class]]){
             [(VTTableViewCell *) cell setController:self];
             [(VTTableViewCell *) cell setDelegate:self];
