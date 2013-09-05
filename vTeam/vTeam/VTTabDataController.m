@@ -59,7 +59,7 @@
         NSUInteger index = 0;
         
         for (UIButton * button in _tabButtons) {
-            [button setSelected:index == selectedIndex];
+            [button setEnabled:index != selectedIndex];
             index ++;
         }
         

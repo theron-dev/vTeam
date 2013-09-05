@@ -32,14 +32,26 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     for(id controller in _controllers){
-        [controller setContext:self.context];
+        if([controller respondsToSelector:@selector(setContext:)]){
+            [controller setContext:self.context];
+        }
+        if([controller respondsToSelector:@selector(setParentController:)]){
+            [controller setParentController:self];
+        }
     }
 }
 
 -(void) viewDidUnload{
     for(id controller in _controllers){
-        [controller setDelegate:nil];
-        [controller setContext:nil];
+        if([controller respondsToSelector:@selector(setDelegate:)]){
+            [controller setDelegate:nil];
+        }
+        if([controller respondsToSelector:@selector(setContext:)]){
+            [controller setContext:nil];
+        }
+        if([controller respondsToSelector:@selector(setParentController:)]){
+            [controller setParentController:nil];
+        }
     }
     [super viewDidUnload];
 }

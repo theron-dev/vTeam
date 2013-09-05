@@ -28,7 +28,7 @@
 @property(nonatomic,retain) IBOutlet VTDataOutletContainer * dataOutletContainer;
 @property(nonatomic,retain) IBOutlet VTLayoutContainer * layoutContainer;
 @property(nonatomic,retain) NSString * scheme;
-@property(nonatomic,retain) IBOutletCollection(id<IVTController>) NSArray * controllers;
+@property(nonatomic,retain) IBOutletCollection(id) NSArray * controllers;
 
 -(void) receiveUrl:(NSURL *) url source:(id) source;
 
