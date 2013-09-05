@@ -789,8 +789,8 @@ static void VTSqliteStmtBindData(sqlite3_stmt * stmt,id data,sqlite3_destructor_
             sqlite3_bind_text(stmt, i, [v UTF8String], -1, type);
         }
         else {
-            NSData * data = [[VTJSON encodeObject:v] dataUsingEncoding:NSUTF8StringEncoding];
-            sqlite3_bind_blob(stmt, i, [data bytes], [data length], type);
+            NSData * dataBytes = [[VTJSON encodeObject:v] dataUsingEncoding:NSUTF8StringEncoding];
+            sqlite3_bind_blob(stmt, i, [dataBytes bytes], [dataBytes length], type);
         }
         
     }
