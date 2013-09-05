@@ -29,6 +29,10 @@
     [_dataSource reloadData];
 }
 
+-(void) refreshData{
+    [self reloadData];
+}
+
 -(void) cancel{
     [_dataSource cancel];
 }

@@ -16,6 +16,8 @@
 
 @property(nonatomic,retain) IBOutlet VTDataSource * dataSource;
 
+-(void) refreshData;
+
 -(void) reloadData;
 
 -(void) cancel;

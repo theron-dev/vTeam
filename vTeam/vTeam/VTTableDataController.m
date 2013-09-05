@@ -330,7 +330,7 @@
             else{
                 [_topLoadingView setDirect:VTDragLoadingViewDirectDown];
                 if(_allowRefresh){
-                    [self.dataSource reloadData];
+                    [self refreshData];
                     _allowRefresh = NO;
                 }
             }
