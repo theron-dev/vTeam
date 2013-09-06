@@ -8,10 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
+
+typedef struct _VTDBObjectIndex{
+    char name[NAME_MAX];
+    char desc;
+} VTDBObjectIndex;
+
 @interface VTDBObject : NSObject
 
 @property(nonatomic,assign) long long rowid;
 
 +(Class) tableClass;
+
++(VTDBObjectIndex *) tableIndexs:(int *) length;
 
 @end

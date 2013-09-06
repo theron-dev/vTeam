@@ -123,6 +123,7 @@
                         [[viewController tabBarItem] setImage:[UIImage imageNamed:[item valueForKey:@"image"]]];
                     }
                     [viewController setParentController:self];
+                    [viewController loadUrl:[NSURL URLWithString:[item valueForKey:@"url"]] basePath:@"/" animated:NO];
                     [viewControllers addObject:viewController];
                 }
                 
@@ -133,8 +134,8 @@
     }
 }
 
--(void) reloadURL{
-
+-(NSString *) loadUrl:(NSURL *)url basePath:(NSString *)basePath animated:(BOOL)animated{
+    return [basePath stringByAppendingPathComponent:self.alias];
 }
 
 -(BOOL) canOpenUrl:(NSURL *)url{
@@ -178,6 +179,8 @@
                 [self setSelectedViewController:viewController];
             }
         }
+        
+        [(id)self.selectedViewController loadUrl:url basePath:@"/" animated:animated];
 
         return YES;
     }

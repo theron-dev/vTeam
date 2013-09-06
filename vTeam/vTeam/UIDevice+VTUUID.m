@@ -39,7 +39,7 @@ SCNetworkReachabilityRef VTReachability = nil;
     id vtUniqueIdentifier = [userDefaults valueForKey:@"vtUniqueIdentifier"];
     
     if(vtUniqueIdentifier == nil){
-        vtUniqueIdentifier = [[[[NSUUID UUID] UUIDString] vtMD5String] stringByAppendingString:@"_VT"];
+        vtUniqueIdentifier = [[[NSUUID UUID] UUIDString] vtMD5String];
         [userDefaults setValue:vtUniqueIdentifier forKey:@"vtUniqueIdentifier"];
         [userDefaults synchronize];
     }

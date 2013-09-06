@@ -567,6 +567,7 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
     
     if(url){
         id viewController = [self.context getViewController:[NSURL URLWithString:url] basePath:@"/"];
+        [viewController loadUrl:[NSURL URLWithString:url] basePath:@"/" animated:NO];
         [self setLeftViewController:viewController];
     }
     
@@ -574,20 +575,12 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
     
     if(url){
         id viewController = [self.context getViewController:[NSURL URLWithString:url] basePath:@"/"];
+        [viewController loadUrl:[NSURL URLWithString:url] basePath:@"/" animated:NO];
         [self setRightViewController:viewController];
     }
     
     
     
-}
-
--(void) reloadURL{
-    NSString * basePath = [self.basePath stringByAppendingPathComponent:self.alias];
-    NSString * alias = [self.url firstPathComponent:basePath];
-    if(![[_centerViewController alias] isEqualToString:alias]){
-        id viewController = [self.context getViewController:self.url basePath:basePath];
-        [self setCenterViewController:viewController];
-    }
 }
 
 -(BOOL) canOpenUrl:(NSURL *)url{
@@ -606,6 +599,27 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
     return [super canOpenUrl:url];
 }
 
+-(NSString *) loadUrl:(NSURL *)url basePath:(NSString *)basePath animated:(BOOL)animated{
+    
+    basePath = [basePath stringByAppendingPathComponent:self.alias];
+    
+    NSString * alias = [url firstPathComponent:basePath];
+    
+    if(alias){
+        
+        if(![alias isEqualToString:self.centerViewController.alias]){
+            self.centerViewController = [self.context getViewController:url basePath:basePath];
+        }
+        
+        if(self.centerViewController){
+            basePath = [self.centerViewController loadUrl:url basePath:basePath animated:animated];
+        }
+    }
+    
+    return basePath;
+    
+}
+
 -(BOOL) openUrl:(NSURL *)url animated:(BOOL)animated{
     
     NSString * scheme = self.scheme;
@@ -620,24 +634,16 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
         
         if([path isEqualToString:@"center"]){
             [self focusCenter:animated];
-            
-            if([self.centerViewController respondsToSelector:@selector(receiveUrl:source:)]){
-                [(id)self.centerViewController receiveUrl:url source:self];
-            }
+            [self.centerViewController loadUrl:url basePath:@"/" animated:animated];
         }
         else if([path isEqualToString:@"left"]){
             [self focusLeft:animated];
-            
-            if([self.leftViewController respondsToSelector:@selector(receiveUrl:source:)]){
-                [(id)self.leftViewController receiveUrl:url source:self];
-            }
+            [self.leftViewController loadUrl:url basePath:@"/" animated:animated];
         }
         else if([path isEqualToString:@"right"]){
             [self focusRight:animated];
+            [self.rightViewController loadUrl:url basePath:@"/" animated:animated];
             
-            if([self.rightViewController respondsToSelector:@selector(receiveUrl:source:)]){
-                [(id)self.rightViewController receiveUrl:url source:self];
-            }
         }
 
         return YES;
@@ -701,24 +707,5 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
 
 }
 
--(void) receiveUrl:(NSURL *)url source:(id)source{
-    UIView * leftView = [[self leftViewController] view];
-    UIView * rightView = [[self rightViewController] view];
-    if(leftView.superview){
-        if([self.leftViewController respondsToSelector:@selector(receiveUrl:source:)]){
-            [(id)self.leftViewController receiveUrl:url source:source];
-        }
-    }
-    else if(rightView.superview){
-        if([self.rightViewController respondsToSelector:@selector(receiveUrl:source:)]){
-            [(id)self.rightViewController receiveUrl:url source:source];
-        }
-    }
-    else{
-        if([self.centerViewController respondsToSelector:@selector(receiveUrl:source:)]){
-            [(id)self.centerViewController receiveUrl:url source:source];
-        }
-    }
-}
 
 @end

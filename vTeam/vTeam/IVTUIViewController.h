@@ -30,12 +30,10 @@
 @property(nonatomic,retain) NSString * scheme;
 @property(nonatomic,retain) IBOutletCollection(id) NSArray * controllers;
 
--(void) receiveUrl:(NSURL *) url source:(id) source;
-
 -(BOOL) canOpenUrl:(NSURL *) url;
 
 -(BOOL) openUrl:(NSURL *) url animated:(BOOL) animated;
 
--(void) reloadURL;
+-(NSString *) loadUrl:(NSURL *) url basePath:(NSString *) basePath animated:(BOOL) animated;
 
 @end

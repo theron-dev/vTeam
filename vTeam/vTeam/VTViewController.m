@@ -239,12 +239,9 @@
     return rs;
 }
 
--(void) reloadURL{
-    
-}
 
--(void) receiveUrl:(NSURL *) url source:(id) source{
-    
+-(NSString *) loadUrl:(NSURL *) url basePath:(NSString *) basePath animated:(BOOL) animated{
+    return [basePath stringByAppendingPathComponent:self.alias];
 }
 
 -(IBAction) doAction:(id)sender{

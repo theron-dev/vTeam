@@ -135,6 +135,24 @@ static NSString * VTDBContextPropertyDBType(objc_property_t prop){
         }
         
     }
+    
+    int length = 0;
+    
+    VTDBObjectIndex * indexs = [dbObjectClass tableIndexs:& length];
+    
+    if(indexs){
+        
+        for (int i=0;i<length; i++) {
+            
+            NSString * sql = [NSString stringWithFormat:@"CREATE INDEX IF NOT EXISTS [%@_%s] ON [%@]([%s] %@);",name,indexs[i].name,name,indexs[i].name,indexs[i].desc ? @"DESC" : @"ASC"];
+            
+            if(![_db execture:sql withData:nil]){
+                NSLog(@"%@",[_db errmsg]);
+            }
+            
+        }
+        
+    }
 }
 
 -(BOOL) insertObject:(VTDBObject *) dbObject{

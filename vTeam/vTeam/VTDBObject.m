@@ -16,4 +16,8 @@
     return [self class];
 }
 
++(VTDBObjectIndex *) tableIndexs:(int *) length{
+    return nil;
+}
+
 @end

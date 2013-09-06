@@ -129,17 +129,8 @@
     }
     
     if([url.scheme isEqualToString:scheme]){
-        
-        NSString * alias = [url lastPathComponent];
-        
-        if(![[_contentViewController alias] isEqualToString:alias]){
-            id viewController = [self.context getViewController:url basePath:@"/"];
-            [self setContentViewController:viewController];
-        }
-        
-        if([self.contentViewController respondsToSelector:@selector(receiveUrl:source:)]){
-            [(id)self.contentViewController receiveUrl:url source:self];
-        }
+    
+        [self loadUrl:url basePath:self.basePath animated:animated];
         
         return YES;
     }
@@ -172,24 +163,23 @@
     [[self contentViewController] viewDidDisappear:animated];
 }
 
--(void) receiveUrl:(NSURL *)url source:(id)source{
+-(NSString *) loadUrl:(NSURL *)url basePath:(NSString *)basePath animated:(BOOL)animated{
     
-    NSString * schema = [url scheme];
+    basePath = [basePath stringByAppendingPathComponent:self.alias];
     
-    if([schema isEqualToString:@"fold"]){
-        NSArray * paths = [url pathComponents:@"/"];
-        if([paths count] > 1){
-            NSString * alias = [paths objectAtIndex:1];
-            if(![[self.contentViewController alias] isEqualToString:alias]){
-                id viewController = [self.context getViewController:url basePath:[NSString stringWithFormat:@"/%@",[paths objectAtIndex:0]]];
-                [self setContentViewController:viewController];
-            }
+    NSString * alias = [url firstPathComponent:basePath];
+    
+    if(alias){
+        if(![alias isEqualToString:[self.contentViewController alias]]){
+            id viewController = [self.context getViewController:url basePath:basePath];
+            [self setContentViewController:viewController];
+        }
+        if(self.contentViewController){
+            basePath = [self.contentViewController loadUrl:url basePath:basePath animated:animated];
         }
     }
     
-    if([self.contentViewController respondsToSelector:@selector(receiveUrl:source:)]){
-        [(id)self.contentViewController receiveUrl:url source:source];
-    }
+    return basePath;
 }
 
 -(void) setConfig:(id)config{

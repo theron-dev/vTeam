@@ -143,10 +143,6 @@
 }
 
 
--(void) reloadURL{
-
-}
-
 -(BOOL) canOpenUrl:(NSURL *)url{
     
     NSString * scheme = self.scheme;
@@ -188,6 +184,8 @@
                 [self setSelectedIndex:[_viewControllers indexOfObject:viewController]];
             }
         }
+        
+         [(id)self.selectedViewController loadUrl:url basePath:@"/" animated:animated];
         
         return YES;
     }
@@ -248,13 +246,6 @@
     [viewController viewDidDisappear:animated];
 }
 
--(void) receiveUrl:(NSURL *)url source:(id)source{
-    
-    if([self.selectedViewController respondsToSelector:@selector(receiveUrl:source:)]){
-        [(id)self.selectedViewController receiveUrl:url source:source];
-    }
-}
-
 -(void) setConfig:(id)config{
     [super setConfig:config];
     
@@ -273,6 +264,7 @@
             id viewController = [self.context getViewController:[NSURL URLWithString:[item valueForKey:@"url"]] basePath:@"/"];
             if(viewController){
                 [viewController setParentController:self];
+                [viewController loadUrl:[NSURL URLWithString:[item valueForKey:@"url"]] basePath:@"/" animated:NO];
                 [viewControllers addObject:viewController];
             }
             

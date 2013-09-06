@@ -96,60 +96,56 @@
     [super dealloc];
 }
 
--(void) setPaths:(NSArray * ) paths animated:(BOOL) animated{
+-(NSString *) loadUrl:(NSURL *) url basePath:(NSString *) basePath animated:(BOOL) animated{
     
-    NSMutableArray * newViewControllers= [ NSMutableArray arrayWithCapacity:4];
+    NSMutableArray * viewControllers = [NSMutableArray arrayWithArray:self.viewControllers];
+    NSMutableArray * newViewControllers = [NSMutableArray arrayWithCapacity:4];
     
-    NSInteger index = 0;
-    NSArray * viewControllers = [self viewControllers];
-    NSString * basePath = [_basePath stringByAppendingPathComponent:_alias];
+    basePath = [basePath stringByAppendingPathComponent:self.alias];
     
-    while(index < [paths count] && index < [viewControllers count]){
+    NSString * alias = [url firstPathComponent:basePath];
+    
+    while(alias){
         
-        NSString * alias = [paths objectAtIndex:index];
         
-        id viewController = [viewControllers objectAtIndex:index];
-        
-        if([[viewController alias] isEqualToString:alias]){
-            basePath = [basePath stringByAppendingPathComponent:alias];
-            [newViewControllers addObject:viewController];
+        if([viewControllers count] >0){
+            
+            id viewController = [viewControllers objectAtIndex:0];
+            
+            if([alias isEqualToString:[viewController alias]]){
+                basePath = [viewController loadUrl:url basePath:basePath animated:animated];
+                [newViewControllers addObject:viewController];
+                [viewControllers removeObjectAtIndex:0];
+            }
+            else{
+                for(viewController in viewControllers){
+                    [viewController setParentController:nil];
+                }
+                [viewControllers removeAllObjects];
+            }
         }
         else{
-            break;
+            id viewController = [self.context getViewController:url basePath:basePath];
+            if(viewController){
+                [viewController setParentController:self];
+                basePath = [viewController loadUrl:url basePath:basePath animated:animated];
+                [newViewControllers addObject:viewController];
+            }
+            else{
+                break;
+            }
         }
         
-        index ++;
+        alias = [url firstPathComponent:basePath];
     }
     
-    NSInteger i = index;
-    
-    while (i < [viewControllers count]) {
-        id viewController = [viewControllers objectAtIndex:i];
-        [viewController setParentController:nil];
-        i++;
-    }
-    
-    while(index < [paths count]){
-        
-        NSString * alias = [paths objectAtIndex:index];
-        
-        id viewController = [self.context getViewController:_url basePath:basePath];
-        
-        [viewController setParentController:self];
-        [newViewControllers addObject:viewController];
-        
-        basePath = [basePath stringByAppendingPathComponent:alias];
-        
-        index ++;
-    }
+    [newViewControllers addObjectsFromArray:viewControllers];
     
     [self setViewControllers:newViewControllers animated:animated];
+    
+    return basePath;
 }
 
--(void) reloadURL{
-    NSString * path = [_url firstPathComponent:[_basePath stringByAppendingPathComponent:_alias]];
-    [self setPaths:[NSArray arrayWithObject:path] animated:NO];
-}
 
 -(BOOL) canOpenUrl:(NSURL *) url{
     
@@ -176,32 +172,11 @@
     if([[url scheme] isEqualToString:scheme]){
 
         NSLog(@"%@",[url absoluteString]);
+         
+        [self loadUrl:url basePath:_basePath animated:animated];
         
-        NSString * basePath = [_basePath stringByAppendingPathComponent:_alias];
+        return YES;
 
-        if([[url path] hasPrefix:basePath]){
-            
-            NSArray * paths = [url pathComponents:basePath];
-            
-            if([paths count] >0){
-            
-                self.url = url;
-                
-                paths = [NSMutableArray arrayWithArray:paths];
-                
-                while([paths count] > [self.viewControllers count]){
-                    [(id)paths removeLastObject];
-                }
-                
-                [self setPaths:[_url pathComponents:[_basePath stringByAppendingPathComponent:_alias]] animated:animated];
-                
-                if([self.topViewController respondsToSelector:@selector(receiveUrl:source:)]){
-                    [(id)self.topViewController receiveUrl:url source:self];
-                }
-                
-                return YES;
-            }
-        }
     }
     else if([[url scheme] isEqualToString:@"pop"]){
         
@@ -333,19 +308,9 @@
                 [(VTNavigationBar *)self.navigationBar setBackgroundImage:[UIImage imageNamed:v]];
             }
         }
-        
-        v = [config valueForKey:@"scheme"];
-        
-        if(v){
-            self.scheme = v;
-        }
+
     }
 }
 
--(void) receiveUrl:(NSURL *) url source:(id) source{
-    if([self.topViewController respondsToSelector:@selector(receiveUrl:source:)]){
-        [(id)self.topViewController receiveUrl:url source:source];
-    }
-}
 
 @end

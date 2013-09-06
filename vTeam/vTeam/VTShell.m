@@ -194,7 +194,6 @@ extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
                 if([[viewController alias] isEqualToString:alias] && [viewController isDisplaced]){
                     [viewController setBasePath:basePath];
                     [viewController setUrl:url];
-                    [viewController reloadURL];
                     return viewController;
                 }
             }
@@ -247,9 +246,9 @@ extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
                     [viewController setContext:self];
                     [viewController setAlias:alias];
                     [viewController setBasePath:basePath];
+                    [viewController setScheme:[cfg valueForKey:@"scheme"]];
                     [viewController setUrl:url];
                     [viewController setConfig:cfg];
-                    [viewController reloadURL];
                     
                     if(cached){
                         if(_viewControllers == nil){
@@ -338,6 +337,7 @@ extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
         NSString * url = [self.config valueForKey:@"url"];
         if(url){
             self.rootViewController = [self getViewController:[NSURL URLWithString:url] basePath:@"/"];
+            [_rootViewController loadUrl:[NSURL URLWithString:url] basePath:@"/" animated:NO];
         }
     }
     return _rootViewController;

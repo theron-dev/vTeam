@@ -582,65 +582,54 @@ typedef enum {
     return [self.topViewController supportedInterfaceOrientations];
 }
 
--(void) receiveUrl:(NSURL *) url source:(id) source{
-    if([self.topViewController respondsToSelector:@selector(receiveUrl:source:)]){
-        [(id)self.topViewController receiveUrl:url source:source];
-    }
-}
-
-
--(void) setPaths:(NSArray * ) paths animated:(BOOL) animated{
+-(NSString *) loadUrl:(NSURL *) url basePath:(NSString *) basePath animated:(BOOL) animated{
     
-    NSMutableArray * newViewControllers= [ NSMutableArray arrayWithCapacity:4];
+    NSMutableArray * viewControllers = [NSMutableArray arrayWithArray:_viewControllers];
+    NSMutableArray * newViewControllers = [NSMutableArray arrayWithCapacity:4];
     
-    NSInteger index = 0;
-    NSString * basePath = [self.basePath stringByAppendingPathComponent:self.alias];
+    basePath = [basePath stringByAppendingPathComponent:self.alias];
     
-    while(index < [paths count] && index < [_viewControllers count]){
+    NSString * alias = [url firstPathComponent:basePath];
+    
+    while(alias){
         
-        NSString * alias = [paths objectAtIndex:index];
         
-        id viewController = [_viewControllers objectAtIndex:index];
-        
-        if([[viewController alias] isEqualToString:alias]){
-            basePath = [basePath stringByAppendingPathComponent:alias];
-            [newViewControllers addObject:viewController];
+        if([viewControllers count] >0){
+            
+            id viewController = [viewControllers objectAtIndex:0];
+            
+            if([alias isEqualToString:[viewController alias]]){
+                basePath = [viewController loadUrl:url basePath:basePath animated:animated];
+                [newViewControllers addObject:viewController];
+                [viewControllers removeObjectAtIndex:0];
+            }
+            else{
+                for(viewController in viewControllers){
+                    [viewController setParentController:nil];
+                }
+                [viewControllers removeAllObjects];
+            }
         }
         else{
-            break;
+            id viewController = [self.context getViewController:url basePath:basePath];
+            if(viewController){
+                [viewController setParentController:self];
+                basePath = [viewController loadUrl:url basePath:basePath animated:animated];
+                [newViewControllers addObject:viewController];
+            }
+            else{
+                break;
+            }
         }
         
-        index ++;
+        alias = [url firstPathComponent:basePath];
     }
     
-    NSInteger i = index;
-    
-    while (i < [_viewControllers count]) {
-        id viewController = [_viewControllers objectAtIndex:i];
-        [viewController setParentController:nil];
-        i++;
-    }
-    
-    while(index < [paths count]){
-        
-        NSString * alias = [paths objectAtIndex:index];
-        
-        id viewController = [self.context getViewController:self.url basePath:basePath];
-        
-        [viewController setParentController:self];
-        [newViewControllers addObject:viewController];
-        
-        basePath = [basePath stringByAppendingPathComponent:alias];
-        
-        index ++;
-    }
+    [newViewControllers addObjectsFromArray:viewControllers];
     
     [self setViewControllers:newViewControllers animated:animated];
-}
-
--(void) reloadURL{
-    NSString * path = [self.url firstPathComponent:[self.basePath stringByAppendingPathComponent:self.alias]];
-    [self setPaths:[NSArray arrayWithObject:path] animated:NO];
+    
+    return basePath;
 }
 
 -(BOOL) canOpenUrl:(NSURL *) url{
@@ -668,25 +657,12 @@ typedef enum {
         
         NSLog(@"%@",[url absoluteString]);
         
-        NSString * basePath = [self.basePath stringByAppendingPathComponent:self.alias];
+        NSLog(@"%@",[url absoluteString]);
         
-        if([[url path] hasPrefix:basePath]){
-            
-            NSArray * paths = [url pathComponents:basePath];
-            
-            if([paths count] >0){
-                
-                self.url = url;
-                
-                [self setPaths:[self.url pathComponents:[self.basePath stringByAppendingPathComponent:self.alias]] animated:animated];
-                
-                if([self.topViewController respondsToSelector:@selector(receiveUrl:source:)]){
-                    [(id)self.topViewController receiveUrl:url source:self];
-                }
-                
-                return YES;
-            }
-        }
+        [self loadUrl:url basePath:self.basePath animated:animated];
+        
+        return YES;
+
     }
     return [super openUrl:url animated:animated];
 }
