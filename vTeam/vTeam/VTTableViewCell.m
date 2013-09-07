@@ -12,6 +12,8 @@
 
 #import "UIView+Search.h"
 
+#import "VTAction.h"
+
 @implementation UITableView(VTTableViewCell)
 
 -(void) applyDataOutlet{
@@ -160,5 +162,20 @@
     }
 }
 
+-(void) vtDOMView:(VTDOMView *) view doActionElement:(VTDOMElement *) element{
+    if([element conformsToProtocol:@protocol(IVTAction)]){
+        if([self.delegate respondsToSelector:@selector(vtTableViewCell:doAction:)]){
+            [self.delegate vtTableViewCell:self doAction:element];
+        }
+    }
+    else if([[element name] hasPrefix:@"a"] && [[element attributeValueForKey:@"href"] length]){
+        VTAction * action  =[[[VTAction alloc] init] autorelease];
+        [action setActionName:@"url"];
+        [action setUserInfo:[element attributeValueForKey:@"href"]];
+        if([self.delegate respondsToSelector:@selector(vtTableViewCell:doAction:)]){
+            [self.delegate vtTableViewCell:self doAction:action];
+        }
+    }
+}
 
 @end

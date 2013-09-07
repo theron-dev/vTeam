@@ -15,13 +15,15 @@
 #import <vTeam/VTLayoutContainer.h>
 #import <vTeam/VTDataSource.h>
 
+#import <vTeam/VTDOMView.h>
+
 @interface UITableView (VTTableViewCell)
 
 -(void) applyDataOutlet;
 
 @end
 
-@interface VTTableViewCell : UITableViewCell
+@interface VTTableViewCell : UITableViewCell<VTDOMViewDelegate>
 
 @property(nonatomic,readonly) NSString * nibNameOrNil;
 @property(nonatomic,readonly) NSBundle * nibBundleOrNil;

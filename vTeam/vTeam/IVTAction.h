@@ -6,7 +6,7 @@
 //  Copyright (c) 2013年 hailong.org. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @protocol IVTAction <NSObject>
 
