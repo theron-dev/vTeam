@@ -266,6 +266,10 @@ static CTRunDelegateCallbacks VTRichDelegateCallbacks = {
 
     CTFrameRef frame = [self frameWithSize:size];
     
+    if(frame == nil){
+        return;
+    }
+    
     CTFrameDraw(frame, context);
     
     NSInteger elementIndex = 0;
