@@ -193,7 +193,7 @@ static CTRunDelegateCallbacks VTRichDelegateCallbacks = {
 }
 
 -(void) appendElement:(id<IVTRichElement>) element{
-    [self appendElement:element text:@" " attributes:nil];
+    [self appendElement:element text:@"囧" attributes:[NSDictionary dictionaryWithObject:(id)[UIColor clearColor].CGColor forKey:(id)kCTForegroundColorAttributeName]];
 }
 
 -(void) appendText:(NSString *) text attributes:(NSDictionary *) attributes{
@@ -228,11 +228,9 @@ static CTRunDelegateCallbacks VTRichDelegateCallbacks = {
             _frameWithSize.framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)_attributedString);
         }
         
-        CGMutablePathRef path = CGPathCreateMutable();
-        
-        CGPathAddRect(path, NULL, CGRectMake(0, 0, size.width, size.height));
-        
-        CFRange r = {0,[_attributedString length]};
+        CGPathRef path = CGPathCreateWithRect(CGRectMake(0, 0, size.width, size.height), NULL);
+    
+        CFRange r = CFRangeMake(0, [_attributedString length]);
  
         _frameWithSize.frame = CTFramesetterCreateFrame(_frameWithSize.framesetter, r, path, nil);
         
@@ -246,8 +244,7 @@ static CTRunDelegateCallbacks VTRichDelegateCallbacks = {
     
     if(_frameWithSize.framesetter == nil){
         _frameWithSize.framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)_attributedString);
-    }
-    
+    }    
 
     CFRange r = {0,[_attributedString length]};
     
