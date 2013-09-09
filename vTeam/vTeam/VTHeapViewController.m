@@ -625,7 +625,9 @@ typedef enum {
         alias = [url firstPathComponent:basePath];
     }
     
-    [newViewControllers addObjectsFromArray:viewControllers];
+    for(id viewController in viewControllers){
+        [viewController setParentController:nil];
+    }
     
     [self setViewControllers:newViewControllers animated:animated];
     
@@ -656,9 +658,7 @@ typedef enum {
     if([[url scheme] isEqualToString:scheme]){
         
         NSLog(@"%@",[url absoluteString]);
-        
-        NSLog(@"%@",[url absoluteString]);
-        
+
         [self loadUrl:url basePath:self.basePath animated:animated];
         
         return YES;

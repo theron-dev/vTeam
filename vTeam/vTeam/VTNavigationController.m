@@ -139,7 +139,11 @@
         alias = [url firstPathComponent:basePath];
     }
     
-    [newViewControllers addObjectsFromArray:viewControllers];
+    for(id viewController in viewControllers){
+        [viewController setParentController:nil];
+    }
+    
+    [viewControllers removeAllObjects];
     
     [self setViewControllers:newViewControllers animated:animated];
     
