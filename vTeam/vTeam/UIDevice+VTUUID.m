@@ -20,6 +20,7 @@
 #import <ifaddrs.h>
 #import <unistd.h>
 #import <dlfcn.h>
+#include <uuid/uuid.h>
 
 #import <SystemConfiguration/SystemConfiguration.h>
 
@@ -39,7 +40,17 @@ SCNetworkReachabilityRef VTReachability = nil;
     id vtUniqueIdentifier = [userDefaults valueForKey:@"vtUniqueIdentifier"];
     
     if(vtUniqueIdentifier == nil){
-        vtUniqueIdentifier = [[[NSUUID UUID] UUIDString] vtMD5String];
+        NSString * mac = [self MACAddress];
+        if([mac length]){
+            vtUniqueIdentifier = [mac vtMD5String];
+        }
+        else{
+            uuid_t uu = {0};
+            uuid_string_t suuid;
+            uuid_generate(uu);
+            uuid_unparse(uu, suuid);
+            vtUniqueIdentifier = [[NSData dataWithBytes:suuid length:sizeof(suuid)] vtMD5String];
+        }
         [userDefaults setValue:vtUniqueIdentifier forKey:@"vtUniqueIdentifier"];
         [userDefaults synchronize];
     }
