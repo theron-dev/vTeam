@@ -50,44 +50,45 @@
     return color;
 }
 
--(UILineBreakMode) lineBreakMode{
+-(NSLineBreakMode) lineBreakMode{
     
-    UILineBreakMode breakMode = UILineBreakModeCharacterWrap;
+    NSLineBreakMode breakMode = NSLineBreakByCharWrapping;
     
     NSString * mode = [self stringValueForKey:@"break-mode"];
     
     if([mode isEqualToString:@"wrap"]){
-        breakMode = UILineBreakModeWordWrap;
+        breakMode = NSLineBreakByWordWrapping;
     }
     else if([mode isEqualToString:@"clip"]){
-        breakMode = UILineBreakModeClip;
+        breakMode = NSLineBreakByClipping;
     }
     else if([mode isEqualToString:@"head"]){
-        breakMode = UILineBreakModeHeadTruncation;
+        breakMode = NSLineBreakByTruncatingHead;
     }
     else if([mode isEqualToString:@"tail"]){
-        breakMode = UILineBreakModeTailTruncation;
+        breakMode = NSLineBreakByTruncatingTail;
     }
     else if([mode isEqualToString:@"middle"]){
-        breakMode = UILineBreakModeMiddleTruncation;
+        breakMode = NSLineBreakByTruncatingMiddle;
     }
     else{
-        breakMode = UILineBreakModeCharacterWrap;
+        breakMode = NSLineBreakByCharWrapping;
     }
 
     return breakMode;
 }
 
--(UITextAlignment) alignment{
-    UITextAlignment alignment = UITextAlignmentLeft;
+-(NSTextAlignment) alignment{
+    
+    NSTextAlignment alignment = NSTextAlignmentLeft;
     
     NSString * align = [self stringValueForKey:@"align"];
     
     if([align isEqualToString:@"center"]){
-        alignment = UITextAlignmentCenter;
+        alignment = NSTextAlignmentCenter;
     }
     else if([align isEqualToString:@"right"]){
-        alignment = UITextAlignmentRight;
+        alignment = NSTextAlignmentRight;
     }
 
     return alignment;
@@ -161,9 +162,9 @@
         
         UIColor * color = [self textColor];
     
-        UILineBreakMode breakMode = [self lineBreakMode];
+        NSLineBreakMode breakMode = [self lineBreakMode];
         
-        UITextAlignment alignment = [self alignment];
+        NSTextAlignment alignment = [self alignment];
         
         CGContextSetFillColorWithColor(context, [color CGColor]);
     

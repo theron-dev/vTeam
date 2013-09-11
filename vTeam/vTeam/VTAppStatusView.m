@@ -90,7 +90,7 @@ static NSMutableArray * gVTAppStatusViews = nil;
     if((self = [super init])){
         UILabel * label = [[UILabel alloc] initWithFrame:self.bounds];
         [label setBackgroundColor:[UIColor clearColor]];
-        [label setTextAlignment:UITextAlignmentCenter];
+        [label setTextAlignment:NSTextAlignmentCenter];
         [label setFont:[UIFont systemFontOfSize:12]];
         [label setTextColor:[UIColor whiteColor]];
         [label setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];

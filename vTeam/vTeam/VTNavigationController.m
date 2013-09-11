@@ -31,6 +31,40 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    if([self respondsToSelector:@selector(setEdgesForExtendedLayout:)]){
+        
+        UIRectEdge edge = UIRectEdgeNone;
+        
+        NSString * cfg = [self.config valueForKey:@"edgesForExtendedLayout"];
+        
+        if(cfg){
+            
+            if([cfg isEqualToString:@"all"]){
+                edge |= UIRectEdgeAll;
+            }
+            
+            if([cfg rangeOfString:@"left"].location != NSNotFound){
+                edge |= UIRectEdgeLeft;
+            }
+            
+            if([cfg rangeOfString:@"right"].location != NSNotFound){
+                edge |= UIRectEdgeRight;
+            }
+            
+            if([cfg rangeOfString:@"top"].location != NSNotFound){
+                edge |= UIRectEdgeTop;
+            }
+            
+            if([cfg rangeOfString:@"bottom"].location != NSNotFound){
+                edge |= UIRectEdgeBottom;
+            }
+            
+            [self setEdgesForExtendedLayout:edge];
+        }
+    }
+    
+    
     for(id controller in _controllers){
         if([controller respondsToSelector:@selector(setContext:)]){
             [controller setContext:self.context];

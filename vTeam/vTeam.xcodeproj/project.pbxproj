@@ -1725,7 +1725,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = VT;
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = hailong.org;
 			};
 			buildConfigurationList = 114772DA1727DE0700196FB2 /* Build configuration list for PBXProject "vTeam" */;
@@ -2024,7 +2024,6 @@
 		114772FF1727DE5200196FB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -2054,7 +2053,6 @@
 		114773001727DE5200196FB2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
