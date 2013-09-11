@@ -98,6 +98,7 @@ extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
 }
 
 @property(nonatomic,retain) id rootViewController;
+@property(nonatomic,readonly) NSMutableArray * viewKeys;
 
 @end
 
@@ -108,6 +109,7 @@ extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
 @synthesize rootViewController = _rootViewController;
 @synthesize styleSheet = _styleSheet;
 @synthesize domStyleSheet = _domStyleSheet;
+@synthesize viewKeys = _viewKeys;
 
 -(void) dealloc{
     [_bundle release];
@@ -118,7 +120,43 @@ extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
     [_styleSheet release];
     [_focusValues release];
     [_domStyleSheet release];
+    [_viewKeys release];
     [super dealloc];
+}
+
+-(NSMutableArray *) viewKeys{
+    if(_viewKeys == nil){
+        
+        _viewKeys = [[NSMutableArray alloc] initWithCapacity:4];
+        
+        UIDevice * device = [UIDevice currentDevice];
+        double systemVersion = [[device systemVersion] doubleValue];
+        
+        if([device respondsToSelector:@selector(userInterfaceIdiom)]){
+            if([device userInterfaceIdiom] == UIUserInterfaceIdiomPad){
+                if(systemVersion >= 7.0){
+                    [_viewKeys addObject:@"view-iPad-iOS7"];
+                }
+                [_viewKeys addObject:@"view-iPad"];
+            }
+            else{
+                CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+                if(screenSize.height == 568){
+                    if(systemVersion >= 7.0){
+                        [_viewKeys addObject:@"view-568h-iOS7"];
+                    }
+                    [_viewKeys addObject:@"view-568h"];
+                }
+            }
+        }
+        
+        if(systemVersion >= 7.0){
+            [_viewKeys addObject:@"view-iOS7"];
+        }
+        
+        [_viewKeys addObject:@"view"];
+    }
+    return _viewKeys;
 }
 
 -(id) initWithConfig:(id)config bundle:(NSBundle *) bundle{
@@ -208,24 +246,12 @@ extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
                 
                 id viewController = nil;
                 
-                NSString * view = [cfg valueForKey:@"view"];
+                NSString * view = nil;
                 
-                UIDevice * device = [UIDevice currentDevice];
-                UIScreen * screen = [UIScreen mainScreen];
-                
-                if([device respondsToSelector:@selector(userInterfaceIdiom)]){
-                    if([device userInterfaceIdiom] == UIUserInterfaceIdiomPad){
-                        if([cfg valueForKey:@"view-iPad"]){
-                            view = [cfg valueForKey:@"view-iPad"];
-                        }
-                    }
-                    else{
-                        CGSize screenSize = [screen bounds].size;
-                        if(screenSize.height == 568){
-                            if([cfg valueForKey:@"view-568h"]){
-                                view = [cfg valueForKey:@"view-568h"];
-                            }
-                        }
+                for(NSString * viewKey in self.viewKeys){
+                    view = [cfg valueForKey:viewKey];
+                    if(view){
+                        break;
                     }
                 }
                 
