@@ -144,6 +144,18 @@
 		1147734E1727E7C800196FB2 /* IVTServiceContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 114773071727E09700196FB2 /* IVTServiceContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1147734F1727E7C800196FB2 /* IVTUIViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 1147730F1727E33A00196FB2 /* IVTUIViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		114773501727E7C800196FB2 /* IVTUIContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 1147730E1727E2E100196FB2 /* IVTUIContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		114D642317E1BAE30021CB8A /* VTMontage.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D642117E1BAE30021CB8A /* VTMontage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		114D642417E1BAE30021CB8A /* VTMontage.m in Sources */ = {isa = PBXBuildFile; fileRef = 114D642217E1BAE30021CB8A /* VTMontage.m */; };
+		114D642717E1BAF20021CB8A /* VTMontageElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D642517E1BAF20021CB8A /* VTMontageElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		114D642817E1BAF20021CB8A /* VTMontageElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 114D642617E1BAF20021CB8A /* VTMontageElement.m */; };
+		114D642B17E1BBC20021CB8A /* VTMontageScenes.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D642917E1BBC20021CB8A /* VTMontageScenes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		114D642C17E1BBC20021CB8A /* VTMontageScenes.m in Sources */ = {isa = PBXBuildFile; fileRef = 114D642A17E1BBC20021CB8A /* VTMontageScenes.m */; };
+		114D642F17E1BBF90021CB8A /* VTMontageLocus.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D642D17E1BBF90021CB8A /* VTMontageLocus.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		114D643017E1BBF90021CB8A /* VTMontageLocus.m in Sources */ = {isa = PBXBuildFile; fileRef = 114D642E17E1BBF90021CB8A /* VTMontageLocus.m */; };
+		114D643317E1C62C0021CB8A /* VTMontagePlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D643117E1C62C0021CB8A /* VTMontagePlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		114D643417E1C62C0021CB8A /* VTMontagePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 114D643217E1C62C0021CB8A /* VTMontagePlayer.m */; };
+		114D643C17E1D0AB0021CB8A /* VTMontageViewElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D643A17E1D0AB0021CB8A /* VTMontageViewElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		114D643D17E1D0AB0021CB8A /* VTMontageViewElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 114D643B17E1D0AB0021CB8A /* VTMontageViewElement.m */; };
 		114D796817291F3B0041468E /* VTStyleOutlet.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D796617291F3B0041468E /* VTStyleOutlet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		114D796917291F3B0041468E /* VTStyleOutlet.m in Sources */ = {isa = PBXBuildFile; fileRef = 114D796717291F3B0041468E /* VTStyleOutlet.m */; };
 		114D797A172929430041468E /* VTTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D7978172929430041468E /* VTTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -563,6 +575,18 @@
 		1147730B1727E29600196FB2 /* VTShell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTShell.m; sourceTree = "<group>"; };
 		1147730E1727E2E100196FB2 /* IVTUIContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVTUIContext.h; sourceTree = "<group>"; };
 		1147730F1727E33A00196FB2 /* IVTUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVTUIViewController.h; sourceTree = "<group>"; };
+		114D642117E1BAE30021CB8A /* VTMontage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTMontage.h; sourceTree = "<group>"; };
+		114D642217E1BAE30021CB8A /* VTMontage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTMontage.m; sourceTree = "<group>"; };
+		114D642517E1BAF20021CB8A /* VTMontageElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTMontageElement.h; sourceTree = "<group>"; };
+		114D642617E1BAF20021CB8A /* VTMontageElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTMontageElement.m; sourceTree = "<group>"; };
+		114D642917E1BBC20021CB8A /* VTMontageScenes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTMontageScenes.h; sourceTree = "<group>"; };
+		114D642A17E1BBC20021CB8A /* VTMontageScenes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTMontageScenes.m; sourceTree = "<group>"; };
+		114D642D17E1BBF90021CB8A /* VTMontageLocus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTMontageLocus.h; sourceTree = "<group>"; };
+		114D642E17E1BBF90021CB8A /* VTMontageLocus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTMontageLocus.m; sourceTree = "<group>"; };
+		114D643117E1C62C0021CB8A /* VTMontagePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTMontagePlayer.h; sourceTree = "<group>"; };
+		114D643217E1C62C0021CB8A /* VTMontagePlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTMontagePlayer.m; sourceTree = "<group>"; };
+		114D643A17E1D0AB0021CB8A /* VTMontageViewElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTMontageViewElement.h; sourceTree = "<group>"; };
+		114D643B17E1D0AB0021CB8A /* VTMontageViewElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTMontageViewElement.m; sourceTree = "<group>"; };
 		114D796617291F3B0041468E /* VTStyleOutlet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTStyleOutlet.h; sourceTree = "<group>"; };
 		114D796717291F3B0041468E /* VTStyleOutlet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTStyleOutlet.m; sourceTree = "<group>"; };
 		114D7978172929430041468E /* VTTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTTask.h; sourceTree = "<group>"; };
@@ -1034,6 +1058,7 @@
 		114772F71727DE5200196FB2 /* vTeam */ = {
 			isa = PBXGroup;
 			children = (
+				114D642017E1BAC40021CB8A /* Montage */,
 				11DE6CE017B8AD2200B04782 /* DOM */,
 				11A2D1091796907E00082380 /* Rich */,
 				1140728D1769984900275493 /* FDB */,
@@ -1086,6 +1111,25 @@
 				114772FD1727DE5200196FB2 /* vTeam-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		114D642017E1BAC40021CB8A /* Montage */ = {
+			isa = PBXGroup;
+			children = (
+				114D642117E1BAE30021CB8A /* VTMontage.h */,
+				114D642217E1BAE30021CB8A /* VTMontage.m */,
+				114D642517E1BAF20021CB8A /* VTMontageElement.h */,
+				114D642617E1BAF20021CB8A /* VTMontageElement.m */,
+				114D642917E1BBC20021CB8A /* VTMontageScenes.h */,
+				114D642A17E1BBC20021CB8A /* VTMontageScenes.m */,
+				114D642D17E1BBF90021CB8A /* VTMontageLocus.h */,
+				114D642E17E1BBF90021CB8A /* VTMontageLocus.m */,
+				114D643117E1C62C0021CB8A /* VTMontagePlayer.h */,
+				114D643217E1C62C0021CB8A /* VTMontagePlayer.m */,
+				114D643A17E1D0AB0021CB8A /* VTMontageViewElement.h */,
+				114D643B17E1D0AB0021CB8A /* VTMontageViewElement.m */,
+			);
+			path = Montage;
 			sourceTree = "<group>";
 		};
 		114D796C172928A80041468E /* Tasks */ = {
@@ -1493,6 +1537,7 @@
 				1147730C1727E29600196FB2 /* VTShell.h in Headers */,
 				11E59F5F1728C197002DD63C /* IVTServiceContainer.h in Headers */,
 				11E59F641728C785002DD63C /* VTStyleSheet.h in Headers */,
+				114D642317E1BAE30021CB8A /* VTMontage.h in Headers */,
 				11E59F681728C798002DD63C /* VTStyle.h in Headers */,
 				11E59F6C1728CCAC002DD63C /* VTStyleOutletContainer.h in Headers */,
 				11E59F701728CD6C002DD63C /* VTDataOutlet.h in Headers */,
@@ -1559,6 +1604,7 @@
 				AC325030173E31440094A7A6 /* IVTFormItemView.h in Headers */,
 				AC325032173E35950094A7A6 /* IVTFormEditor.h in Headers */,
 				AC325035173E36C50094A7A6 /* VTFormKeyboardEditor.h in Headers */,
+				114D642F17E1BBF90021CB8A /* VTMontageLocus.h in Headers */,
 				AC325039173E39BD0094A7A6 /* VTKeyboardController.h in Headers */,
 				AC32504D173E7B1E0094A7A6 /* VTLayoutContainer.h in Headers */,
 				AC325054173E7EE30094A7A6 /* VTFormDateEditor.h in Headers */,
@@ -1574,6 +1620,7 @@
 				1131404E1749EC590081641F /* hclass.h in Headers */,
 				113140501749EC590081641F /* hconfig.h in Headers */,
 				113140521749EC590081641F /* hdata.h in Headers */,
+				114D643C17E1D0AB0021CB8A /* VTMontageViewElement.h in Headers */,
 				113140541749EC590081641F /* hdata_alloc.h in Headers */,
 				113140561749EC590081641F /* hdata_binary.h in Headers */,
 				113140581749EC590081641F /* hdata_json.h in Headers */,
@@ -1618,6 +1665,7 @@
 				118AFC2D175D9A9F00A6A2FF /* VTBarButtonItem.h in Headers */,
 				118AFC43175DA15100A6A2FF /* VTDBObject.h in Headers */,
 				118AFC47175DA1E800A6A2FF /* VTDBContext.h in Headers */,
+				114D643317E1C62C0021CB8A /* VTMontagePlayer.h in Headers */,
 				11EE82971760966800219D52 /* crypt.h in Headers */,
 				11EE82991760966800219D52 /* ioapi.h in Headers */,
 				11EE829B1760966800219D52 /* mztools.h in Headers */,
@@ -1671,6 +1719,7 @@
 				11A0414217BB2B24001992BE /* hcss_scanf.h in Headers */,
 				11A0414717BB3C37001992BE /* VTDOMElement+Layout.h in Headers */,
 				11A0414F17BB427B001992BE /* VTDOMElement+Frame.h in Headers */,
+				114D642B17E1BBC20021CB8A /* VTMontageScenes.h in Headers */,
 				11A0415717BB42ED001992BE /* VTDOMElement+Render.h in Headers */,
 				11A0415F17BB4694001992BE /* VTDOMElement+Style.h in Headers */,
 				11A0416317BB4D08001992BE /* VTDOMImageElement.h in Headers */,
@@ -1682,6 +1731,7 @@
 				11A0419B17BC7C5C001992BE /* VTDOMElement+Control.h in Headers */,
 				11A0419F17BC877B001992BE /* VTRichLinkElement.h in Headers */,
 				11A041A317BCA8DC001992BE /* VTDOMViewElement.h in Headers */,
+				114D642717E1BAF20021CB8A /* VTMontageElement.h in Headers */,
 				11A041A717BCCDC0001992BE /* VTRichViewElement.h in Headers */,
 				11A041AB17BCD560001992BE /* VTDocumentViewController.h in Headers */,
 				11A041AF17BCD9C2001992BE /* VTDocumentDataController.h in Headers */,
@@ -1794,6 +1844,7 @@
 				11619C65173232B500BD3561 /* VTUplinkTask.m in Sources */,
 				11619C6B1732338C00BD3561 /* VTDataSource.m in Sources */,
 				11619C6F1732383800BD3561 /* VTPageDataSource.m in Sources */,
+				114D642417E1BAE30021CB8A /* VTMontage.m in Sources */,
 				11619C74173239B000BD3561 /* VTDataController.m in Sources */,
 				11619C7817323BF500BD3561 /* VTContainerDataController.m in Sources */,
 				11619C7C17324C0A00BD3561 /* VTDownlinkService.m in Sources */,
@@ -1812,6 +1863,7 @@
 				ACDE3A7F1735087D0046ED56 /* VTTableSection.m in Sources */,
 				ACDE3A83173508FC0046ED56 /* VTTableSource.m in Sources */,
 				ACDE3A8717350AE50046ED56 /* VTButton.m in Sources */,
+				114D642C17E1BBC20021CB8A /* VTMontageScenes.m in Sources */,
 				ACDE3AB2173647950046ED56 /* VTAppStatusView.m in Sources */,
 				AC324F6D173DD8FA0094A7A6 /* UIView+VTStyle.m in Sources */,
 				AC324F88173DE23B0094A7A6 /* UIButton+VTStyle.m in Sources */,
@@ -1840,6 +1892,7 @@
 				113140551749EC590081641F /* hdata_binary.c in Sources */,
 				113140571749EC590081641F /* hdata_json.c in Sources */,
 				113140591749EC590081641F /* hdata_set.c in Sources */,
+				114D643417E1C62C0021CB8A /* VTMontagePlayer.m in Sources */,
 				1131405B1749EC590081641F /* hdata_storage.c in Sources */,
 				1131405D1749EC590081641F /* hdata_xml.c in Sources */,
 				1131405F1749EC590081641F /* hdebug.c in Sources */,
@@ -1869,6 +1922,7 @@
 				113140921749EC590081641F /* huniquekey.c in Sources */,
 				113140941749EC590081641F /* hurl.c in Sources */,
 				113140961749EC590081641F /* hwaiter.c in Sources */,
+				114D642817E1BAF20021CB8A /* VTMontageElement.m in Sources */,
 				113140981749EC590081641F /* hxml_scanf.c in Sources */,
 				1131409C1749EC590081641F /* md5.c in Sources */,
 				1131409F1749EC590081641F /* sha1.c in Sources */,
@@ -1881,6 +1935,7 @@
 				11EE82981760966800219D52 /* ioapi.c in Sources */,
 				11EE829A1760966800219D52 /* mztools.c in Sources */,
 				11EE829C1760966800219D52 /* unzip.c in Sources */,
+				114D643017E1BBF90021CB8A /* VTMontageLocus.m in Sources */,
 				11EE829E1760966800219D52 /* zip.c in Sources */,
 				11EE82A41760972D00219D52 /* VTUnZip.m in Sources */,
 				111638351762E1AD009979D3 /* hreport.c in Sources */,
@@ -1900,6 +1955,7 @@
 				AC875C50177568F4009999A2 /* VTTableViewCell.m in Sources */,
 				AC875C60177589FF009999A2 /* VTURLDataSource.m in Sources */,
 				AC875C6517758AB9009999A2 /* VTURLService.m in Sources */,
+				114D643D17E1D0AB0021CB8A /* VTMontageViewElement.m in Sources */,
 				AC875C7D1775BDB6009999A2 /* VTStatusView.m in Sources */,
 				116CDE781786924D00BCD47D /* VTTabBarController.m in Sources */,
 				116CDE7C1786A0BD00BCD47D /* VTTabBar.m in Sources */,
