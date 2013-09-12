@@ -33,6 +33,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+#ifdef __IPHONE_7_0
     if([self respondsToSelector:@selector(setEdgesForExtendedLayout:)]){
         
         UIRectEdge edge = UIRectEdgeNone;
@@ -64,6 +65,7 @@
             [self setEdgesForExtendedLayout:edge];
         }
     }
+#endif
     
     for(id controller in _controllers){
         if([controller respondsToSelector:@selector(setContext:)]){
