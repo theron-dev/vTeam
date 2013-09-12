@@ -12,6 +12,14 @@
 #import <vTeam/VTStyleSheet.h>
 #import <vTeam/VTDOMStyleSheet.h>
 
+#define VTUIPlatform_iPhone5_iOS7   @"iPhone5_iOS7"
+#define VTUIPlatform_iPhone_iOS7    @"iPhone_iOS7"
+#define VTUIPlatform_iPad_iOS7      @"iPad_iOS7"
+#define VTUIPlatform_iPhone5        @"iPhone5"
+#define VTUIPlatform_iPhone         @"iPhone"
+#define VTUIPlatform_iPad           @"iPad"
+#define VTUIPlatform_iOS7           @"iOS7"
+
 @protocol IVTUIContext <IVTServiceContext>
 
 @property(nonatomic,readonly) VTStyleSheet * styleSheet;

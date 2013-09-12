@@ -98,7 +98,8 @@ extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
 }
 
 @property(nonatomic,retain) id rootViewController;
-@property(nonatomic,readonly) NSMutableArray * viewKeys;
+@property(nonatomic,readonly) NSMutableArray * platformKeys;
+@property(nonatomic,readonly) NSMutableDictionary * storyboards;
 
 @end
 
@@ -109,7 +110,7 @@ extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
 @synthesize rootViewController = _rootViewController;
 @synthesize styleSheet = _styleSheet;
 @synthesize domStyleSheet = _domStyleSheet;
-@synthesize viewKeys = _viewKeys;
+@synthesize platformKeys = _platformKeys;
 
 -(void) dealloc{
     [_bundle release];
@@ -120,14 +121,16 @@ extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
     [_styleSheet release];
     [_focusValues release];
     [_domStyleSheet release];
-    [_viewKeys release];
+    [_storyboards release];
+    [_platformKeys release];
     [super dealloc];
 }
 
--(NSMutableArray *) viewKeys{
-    if(_viewKeys == nil){
+-(NSMutableArray *) platformKeys{
+    
+    if(_platformKeys == nil){
         
-        _viewKeys = [[NSMutableArray alloc] initWithCapacity:4];
+        _platformKeys = [[NSMutableArray alloc] initWithCapacity:4];
         
         UIDevice * device = [UIDevice currentDevice];
         double systemVersion = [[device systemVersion] doubleValue];
@@ -135,28 +138,29 @@ extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
         if([device respondsToSelector:@selector(userInterfaceIdiom)]){
             if([device userInterfaceIdiom] == UIUserInterfaceIdiomPad){
                 if(systemVersion >= 7.0){
-                    [_viewKeys addObject:@"view-iPad-iOS7"];
+                    [_platformKeys addObject:VTUIPlatform_iPad_iOS7];
                 }
-                [_viewKeys addObject:@"view-iPad"];
+                [_platformKeys addObject:VTUIPlatform_iPad];
             }
             else{
                 CGSize screenSize = [[UIScreen mainScreen] bounds].size;
                 if(screenSize.height == 568){
                     if(systemVersion >= 7.0){
-                        [_viewKeys addObject:@"view-568h-iOS7"];
+                        [_platformKeys addObject:VTUIPlatform_iPhone5_iOS7];
                     }
-                    [_viewKeys addObject:@"view-568h"];
+                    [_platformKeys addObject:VTUIPlatform_iPhone5];
                 }
+                [_platformKeys addObject:VTUIPlatform_iPhone];
             }
         }
         
         if(systemVersion >= 7.0){
-            [_viewKeys addObject:@"view-iOS7"];
+            [_platformKeys addObject:VTUIPlatform_iOS7];
         }
         
-        [_viewKeys addObject:@"view"];
     }
-    return _viewKeys;
+    
+    return _platformKeys;
 }
 
 -(id) initWithConfig:(id)config bundle:(NSBundle *) bundle{
@@ -226,6 +230,7 @@ extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
     NSString * alias = [url firstPathComponent:basePath];
     id cfg = [[_config valueForKey:@"ui"] valueForKey:alias];
     if(cfg){
+       
         BOOL cached = [[cfg valueForKey:@"cached"] boolValue];
         if(cached){
             for(id viewController in _viewControllers){
@@ -237,23 +242,32 @@ extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
             }
         }
         
-        NSString * className = [cfg valueForKey:@"class"];
+        id platform = nil;
+        
+        for(NSString * key in self.platformKeys){
+            platform = [cfg valueForKey:key];
+            if(platform){
+                break;
+            }
+        }
+        
+        if(platform == nil){
+            platform = cfg;
+        }
+        
+        id viewController = nil;
+        
+        NSString * className = [platform valueForKey:@"class"];
+        id storyboard = [platform valueForKey:@"storyboard"];
         
         if(className){
             Class clazz = NSClassFromString(className);
             if([clazz conformsToProtocol:@protocol(IVTUIViewController)]
                || [clazz isSubclassOfClass:[VTCreatorViewController class]]){
                 
-                id viewController = nil;
                 
-                NSString * view = nil;
                 
-                for(NSString * viewKey in self.viewKeys){
-                    view = [cfg valueForKey:viewKey];
-                    if(view){
-                        break;
-                    }
-                }
+                NSString * view = [platform valueForKey:@"view"];
                 
                 if([clazz isSubclassOfClass:[UIViewController class]]){
                     viewController = [[[clazz alloc] initWithNibName:view bundle:_bundle] autorelease];
@@ -266,27 +280,61 @@ extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
                     [viewController view];
                     viewController = [(VTCreatorViewController *) viewController viewController];
                 }
-                
-                if(viewController){
-                    
-                    [viewController setContext:self];
-                    [viewController setAlias:alias];
-                    [viewController setBasePath:basePath];
-                    [viewController setScheme:[cfg valueForKey:@"scheme"]];
-                    [viewController setUrl:url];
-                    [viewController setConfig:cfg];
-                    
-                    if(cached){
-                        if(_viewControllers == nil){
-                            _viewControllers = [[NSMutableArray alloc] initWithCapacity:4];
-                        }
-                        [_viewControllers addObject:viewController];
-                    }
-                }
-                
-                return viewController;
+    
             }
         }
+        else if(storyboard && NSClassFromString(@"UIStoryboard")){
+            
+            NSString * identifier = nil;
+            NSString * name = nil;
+            if([storyboard isKindOfClass:[NSDictionary class]]){
+                identifier = [storyboard valueForKey:@"identifier"];
+                name = [storyboard valueForKey:@"name"];
+            }
+            else{
+                name = storyboard;
+            }
+            
+            if(name){
+                
+                UIStoryboard * board = [self.storyboards valueForKey:name];
+                
+                if(board == nil){
+                    board = [UIStoryboard storyboardWithName:name bundle:self.bundle];
+                    [self.storyboards setValue:board forKey:name];
+                }
+                
+                if(identifier){
+                    viewController = [board instantiateViewControllerWithIdentifier:identifier];
+                }
+                else{
+                    viewController = [board instantiateInitialViewController];
+                }
+                
+                if(![viewController conformsToProtocol:@protocol(IVTUIViewController)]){
+                    viewController = nil;
+                }
+            }
+        }
+        
+        if(viewController){
+            
+            [viewController setContext:self];
+            [viewController setAlias:alias];
+            [viewController setBasePath:basePath];
+            [viewController setScheme:[cfg valueForKey:@"scheme"]];
+            [viewController setUrl:url];
+            [viewController setConfig:cfg];
+            
+            if(cached){
+                if(_viewControllers == nil){
+                    _viewControllers = [[NSMutableArray alloc] initWithCapacity:4];
+                }
+                [_viewControllers addObject:viewController];
+            }
+        }
+        
+        return viewController;
     }
     
     return nil;
