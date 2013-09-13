@@ -355,9 +355,13 @@ static CTRunDelegateCallbacks VTRichDelegateCallbacks = {
     while(lineIndex < count ){
         
         CTLineRef line = CFArrayGetValueAtIndex(lines, lineIndex);
-
-        CGRect bounds = CTLineGetBoundsWithOptions(line, kCTLineBoundsUseOpticalBounds);
-        bounds.origin.y = lineOrigins[0].y - lineOrigins[lineIndex].y - bounds.origin.y;
+        CGFloat ascent = 0.0f;
+        CGFloat descent = 0.0f;
+        CGFloat leading = 0.0f;
+        CGFloat width = CTLineGetTypographicBounds(line,&ascent,&descent,&leading);
+        CGRect bounds = CGRectMake(lineOrigins[lineIndex].x, lineOrigins[0].y - lineOrigins[lineIndex].y + descent + leading, width, ascent + descent + leading);
+//        CGRect bounds = CTLineGetBoundsWithOptions(line, kCTLineBoundsUseOpticalBounds);
+//        bounds.origin.y = lineOrigins[0].y - lineOrigins[lineIndex].y - bounds.origin.y;
         
         if(CGRectContainsPoint(bounds, location)){
             CFIndex index = CTLineGetStringIndexForPosition(line, location);
@@ -410,7 +414,13 @@ static CTRunDelegateCallbacks VTRichDelegateCallbacks = {
             CTLineRef line = CFArrayGetValueAtIndex(lines, lineIndex);
             
             CFRange r = CTLineGetStringRange(line);
-            CGRect bounds = CTLineGetBoundsWithOptions(line, kCTLineBoundsUseHangingPunctuation);
+            
+            CGFloat ascent = 0.0f;
+            CGFloat descent = 0.0f;
+            CGFloat leading = 0.0f;
+            CGFloat width = CTLineGetTypographicBounds(line,&ascent,&descent,&leading);
+            CGRect bounds = CGRectMake(lineOrigins[lineIndex].x, lineOrigins[0].y - lineOrigins[lineIndex].y + descent + leading, width, ascent + descent + leading);
+            //CGRect bounds = CTLineGetBoundsWithOptions(line, kCTLineBoundsUseHangingPunctuation);
             
             CGRect rect = CGRectMake(0, lineOrigins[0].y - lineOrigins[lineIndex].y - bounds.origin.y * 0.5
                                      , 0, bounds.size.height);
