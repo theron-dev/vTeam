@@ -419,7 +419,7 @@ static CTRunDelegateCallbacks VTRichDelegateCallbacks = {
             CGFloat descent = 0.0f;
             CGFloat leading = 0.0f;
             CGFloat width = CTLineGetTypographicBounds(line,&ascent,&descent,&leading);
-            CGRect bounds = CGRectMake(lineOrigins[lineIndex].x, lineOrigins[0].y - lineOrigins[lineIndex].y + descent + leading, width, ascent + descent + leading);
+            CGRect bounds = CGRectMake(lineOrigins[lineIndex].x,  - descent - leading, width, ascent + descent + leading);
             //CGRect bounds = CTLineGetBoundsWithOptions(line, kCTLineBoundsUseHangingPunctuation);
             
             CGRect rect = CGRectMake(0, lineOrigins[0].y - lineOrigins[lineIndex].y - bounds.origin.y * 0.5
