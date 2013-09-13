@@ -87,4 +87,5 @@
 #import <vTeam/VTHtmlDataController.h>
 #import <vTeam/NSString+TextLength.h>
 #import <vTeam/VTAction.h>
+#import <vTeam/VTMontage.h>
 
