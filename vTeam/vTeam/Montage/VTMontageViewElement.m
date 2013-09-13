@@ -21,19 +21,20 @@
 
 -(void) scenes:(VTMontageScenes *) scehes onValueChanged:(float) value{
     
-    VTMontageLocusPoint p = [[scehes locusForName:self.locusName] locusPoint:value element:self];
-    
-    UIView * contentView = [scehes contentView];
-    
-    if([contentView isKindOfClass:[UIView class]]){
+    if(value >=0 && value <=1.0){
         
-        CGSize size = contentView.bounds.size;
- 
-        CGRect r = _view.frame;
+        VTMontageLocusPoint p = [[scehes locusForName:self.locusName] locusPoint:value element:self];
         
-        _view.center = CGPointMake(size.width * p.x , (size.height -  r.size.height) * (1.0 - p.y) + r.size.height / 2.0);
- 
-        if(_view.superview != contentView){
+        UIView * contentView = [scehes contentView];
+        
+        if([contentView isKindOfClass:[UIView class]]){
+            
+            CGSize size = contentView.bounds.size;
+     
+            CGRect r = _view.frame;
+            
+            _view.center = CGPointMake(size.width * 0.5 , (size.height -  r.size.height) * (1.0 - p.y) + r.size.height / 2.0);
+        
             [contentView addSubview:_view];
         }
     }

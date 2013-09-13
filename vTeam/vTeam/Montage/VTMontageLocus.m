@@ -19,7 +19,7 @@
 }
 
 -(VTMontageLocusPoint) locusPoint:(float) value element:(VTMontageElement *) element{
-    VTMontageLocusPoint p = {0.5,value,0.0};
+    VTMontageLocusPoint p = {value,value,value};
     return p;
 }
 

@@ -8,6 +8,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "UIView+VTStyle.h"
+#import <CoreImage/CoreImage.h>
 
 @implementation UIView (VTStyle)
 
@@ -73,6 +74,26 @@
 
 -(void) setBorderColor:(UIColor *)borderColor{
     self.layer.borderColor = [borderColor CGColor];
+}
+
+-(CGFloat) blurOpacity{
+    if([self.layer.filters count] && NSClassFromString(@"CIFilter")){
+        for(CIFilter * filter in self.layer.filters){
+            return [[filter valueForKey:@"inputRadius"] floatValue];
+        }
+    }
+    return 0.0f;
+}
+
+-(void) setBlurOpacity:(CGFloat) blurOpacity{
+    if(NSClassFromString(@"CIFilter")){
+        CIFilter * filter = [CIFilter filterWithName:@"CIGaussianBlur"];
+        if(filter){
+            [filter setDefaults];
+            [filter setValue:[NSNumber numberWithFloat:blurOpacity] forKey:@"inputRadius"];
+            self.layer.filters = [NSArray arrayWithObject:filter];
+        }
+    }
 }
 
 @end

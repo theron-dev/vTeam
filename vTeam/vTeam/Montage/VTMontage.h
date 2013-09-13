@@ -12,6 +12,8 @@
 #import <vTeam/VTMontageScenes.h>
 #import <vTeam/VTMontageLocus.h>
 #import <vTeam/VTMontagePlayer.h>
+#import <vTeam/VTMontageViewElement.h>
+#import <vTeam/VTMontageGroupElement.h>
 
 @interface VTMontage : NSObject
 

@@ -16,11 +16,14 @@
 
 @implementation VTMontageScenes
 
+@synthesize startTimeInterval = _startTimeInterval;
 @synthesize current = _current;
 @synthesize duration = _duration;
 @synthesize locuss = _locuss;
 @synthesize contentView = _contentView;
 @synthesize rootElement = _rootElement;
+@synthesize repeatCount = repeatCount;
+@synthesize repeatAutoreverses =_repeatAutoreverses;
 
 -(void) dealloc{
     for (VTMontageLocus * locus in _locuss){

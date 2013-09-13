@@ -12,13 +12,17 @@
 
 @interface VTMontagePlayer : NSObject
 
-@property(nonatomic,readonly) VTMontageScenes * playScenes;
+@property(nonatomic,retain) IBOutletCollection(VTMontageScenes) NSArray * scenes;
 @property(nonatomic,assign,readonly,getter = isPlaying) BOOL playing;
 @property(nonatomic,assign) IBOutlet id delegate;
 
--(void) play:(VTMontageScenes *) scehes;
+-(void) play;
 
 -(void) stop;
+
+-(void) addPlayingScehes:(VTMontageScenes * )scenes;
+
+-(void) removePlayingScenes:(VTMontageScenes *) scenes;
 
 @end
 
@@ -26,8 +30,8 @@
 
 @optional
 
--(void) montagePlayerDidPlay:(VTMontagePlayer *) player;
+-(void) montagePlayer:(VTMontagePlayer *) player didPlayScenes:(VTMontageScenes *) scenes;
 
--(void) montagePlayerDidStop:(VTMontagePlayer *) player;
+-(void) montagePlayer:(VTMontagePlayer *) player didStopScenes:(VTMontageScenes *) scenes;
 
 @end

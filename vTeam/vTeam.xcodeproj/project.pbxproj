@@ -156,6 +156,8 @@
 		114D643417E1C62C0021CB8A /* VTMontagePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 114D643217E1C62C0021CB8A /* VTMontagePlayer.m */; };
 		114D643C17E1D0AB0021CB8A /* VTMontageViewElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D643A17E1D0AB0021CB8A /* VTMontageViewElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		114D643D17E1D0AB0021CB8A /* VTMontageViewElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 114D643B17E1D0AB0021CB8A /* VTMontageViewElement.m */; };
+		114D644417E2B1A80021CB8A /* VTMontageGroupElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D644217E2B1A80021CB8A /* VTMontageGroupElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		114D644517E2B1A80021CB8A /* VTMontageGroupElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 114D644317E2B1A80021CB8A /* VTMontageGroupElement.m */; };
 		114D796817291F3B0041468E /* VTStyleOutlet.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D796617291F3B0041468E /* VTStyleOutlet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		114D796917291F3B0041468E /* VTStyleOutlet.m in Sources */ = {isa = PBXBuildFile; fileRef = 114D796717291F3B0041468E /* VTStyleOutlet.m */; };
 		114D797A172929430041468E /* VTTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D7978172929430041468E /* VTTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -587,6 +589,8 @@
 		114D643217E1C62C0021CB8A /* VTMontagePlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTMontagePlayer.m; sourceTree = "<group>"; };
 		114D643A17E1D0AB0021CB8A /* VTMontageViewElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTMontageViewElement.h; sourceTree = "<group>"; };
 		114D643B17E1D0AB0021CB8A /* VTMontageViewElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTMontageViewElement.m; sourceTree = "<group>"; };
+		114D644217E2B1A80021CB8A /* VTMontageGroupElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTMontageGroupElement.h; sourceTree = "<group>"; };
+		114D644317E2B1A80021CB8A /* VTMontageGroupElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTMontageGroupElement.m; sourceTree = "<group>"; };
 		114D796617291F3B0041468E /* VTStyleOutlet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTStyleOutlet.h; sourceTree = "<group>"; };
 		114D796717291F3B0041468E /* VTStyleOutlet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTStyleOutlet.m; sourceTree = "<group>"; };
 		114D7978172929430041468E /* VTTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTTask.h; sourceTree = "<group>"; };
@@ -1128,6 +1132,8 @@
 				114D643217E1C62C0021CB8A /* VTMontagePlayer.m */,
 				114D643A17E1D0AB0021CB8A /* VTMontageViewElement.h */,
 				114D643B17E1D0AB0021CB8A /* VTMontageViewElement.m */,
+				114D644217E2B1A80021CB8A /* VTMontageGroupElement.h */,
+				114D644317E2B1A80021CB8A /* VTMontageGroupElement.m */,
 			);
 			path = Montage;
 			sourceTree = "<group>";
@@ -1650,6 +1656,7 @@
 				113140891749EC590081641F /* hstr.h in Headers */,
 				1131408B1749EC590081641F /* hstruct_list.h in Headers */,
 				1131408D1749EC590081641F /* hthread.h in Headers */,
+				114D644417E2B1A80021CB8A /* VTMontageGroupElement.h in Headers */,
 				1131408F1749EC590081641F /* htime.h in Headers */,
 				113140911749EC590081641F /* htypes.h in Headers */,
 				113140931749EC590081641F /* huniquekey.h in Headers */,
@@ -1951,6 +1958,7 @@
 				AC339DA31765E9D800EC2DAC /* hfdb.c in Sources */,
 				11407291176999C800275493 /* VTFDB.m in Sources */,
 				114072A0176AFFBA00275493 /* hfdb_index.c in Sources */,
+				114D644517E2B1A80021CB8A /* VTMontageGroupElement.m in Sources */,
 				1140741C176EAEC500275493 /* VTFDBIndex.m in Sources */,
 				AC875C50177568F4009999A2 /* VTTableViewCell.m in Sources */,
 				AC875C60177589FF009999A2 /* VTURLDataSource.m in Sources */,

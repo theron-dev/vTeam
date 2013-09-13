@@ -13,6 +13,9 @@
 
 @interface VTMontageScenes : NSObject
 
+@property(nonatomic,assign) NSTimeInterval startTimeInterval;
+@property(nonatomic,assign) NSUInteger repeatCount;
+@property(nonatomic,assign,getter = isRepeatAutoreverses) BOOL repeatAutoreverses;
 @property(nonatomic,retain) IBOutlet id contentView;
 @property(nonatomic,assign) NSTimeInterval current;
 @property(nonatomic,assign) NSTimeInterval duration;
