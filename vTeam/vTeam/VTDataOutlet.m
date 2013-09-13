@@ -32,7 +32,17 @@
         }
         return nil;
     }
+#ifdef DEBUG
     return [self valueForKey:key];
+#else
+    @try {
+        return [self valueForKey:key];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@",exception);
+        return nil;
+    }
+#endif
 }
 
 -(id) dataForKeyPath:(NSString *) keyPath{
