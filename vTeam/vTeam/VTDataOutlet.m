@@ -20,6 +20,12 @@
     if([self isKindOfClass:[NSNull class]]){
         return nil;
     }
+    if([self isKindOfClass:[NSData class]]){
+        return nil;
+    }
+    if([self isKindOfClass:[NSDate class]]){
+        return nil;
+    }
     if([self isKindOfClass:[NSArray class]]){
         if([key hasPrefix:@"@last"]){
             return [(NSArray *)self lastObject];
