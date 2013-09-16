@@ -184,7 +184,7 @@
                 [md appendBytes:(void *)"\r\n" length:2];
                 [md appendBytes:(void *)"Content-Disposition: form-data; name=\"" length:38];
                 [md appendData:[[item key] dataUsingEncoding:NSUTF8StringEncoding]];
-                [md appendBytes:(void *)"\"\r\n" length:3];
+                [md appendBytes:(void *)"\"\r\n\r\n" length:5];
                 
                 [md appendData:[[NSURL encodeQueryValue:[item value]] dataUsingEncoding:NSUTF8StringEncoding]];
                 
@@ -192,6 +192,8 @@
             }
         }
         
+        [md appendBytes:(void *)HTTP_MULTIPART_TOKEN_END length:HTTP_MULTIPART_TOKEN_END_SIZE];
+    
     }
     else{
         self.contentType = @"application/x-www-form-urlencoded";
