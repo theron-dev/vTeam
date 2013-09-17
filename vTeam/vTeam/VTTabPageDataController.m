@@ -45,7 +45,10 @@
 
 -(void) scrollToTabButton:(NSUInteger) index{
     UIButton * tabButton = [self tabButtonAtIndex:index];
-    [_tabBackgroundView setCenter:tabButton.center];
+    CGRect r = [_tabBackgroundView frame];
+    CGRect rr = [tabButton frame];
+    r.origin.x = rr.origin.x + (rr.size.width - r.size.width) / 2.0;
+    [_tabBackgroundView setFrame:r];
     [self scrollToTabBackgroundVisable:YES];
 }
 
@@ -156,7 +159,9 @@
                 CGPoint p1 = [[self tabButtonAtIndex:(int) index] center];
                 CGPoint p2 = [[self tabButtonAtIndex:(int) index + 1] center];
                 
-                [_tabBackgroundView setCenter:CGPointMake(p1.x + (p2.x - p1.x) * r, p1.y + (p2.y - p1.y) * r)];
+                CGPoint center = [_tabBackgroundView center];
+                center.x = p1.x + (p2.x - p1.x) * r;
+                [_tabBackgroundView setCenter:center];
                 
                 [self scrollToTabBackgroundVisable:NO];
             }
