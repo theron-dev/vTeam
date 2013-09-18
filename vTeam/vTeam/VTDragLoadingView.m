@@ -149,7 +149,8 @@
 -(void) setOffsetValue:(CGFloat)offsetValue{
     _offsetValue = offsetValue;
     if([_loadingView respondsToSelector:@selector(setOffsetValue:)]){
-        [_loadingView performSelector:@selector(setOffsetValue:) withObject:[NSNumber numberWithFloat:offsetValue]];
+        [(VTDragLoadingView*)_loadingView setOffsetValue:offsetValue];
+//        [_loadingView performSelector:@selector(setOffsetValue:) withObject:[NSNumber numberWithFloat:offsetValue]];
     }
 }
 
