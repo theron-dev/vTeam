@@ -24,6 +24,7 @@ typedef enum {
 @property (retain, nonatomic) IBOutlet UILabel *timeLabel;
 @property (nonatomic,assign,getter = isAnimating) BOOL animating;
 @property (assign,nonatomic) VTDragLoadingViewDirect direct;
+@property (assign,nonatomic) CGFloat offsetValue;
 
 -(void) startAnimation;
 

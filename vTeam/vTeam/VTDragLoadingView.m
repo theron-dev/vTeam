@@ -22,6 +22,7 @@
 @synthesize timeLabel = _timeLabel;
 @synthesize leftTitleLabel = _leftTitleLabel;
 @synthesize rightTitleLabel = _rightTitleLabel;
+@synthesize offsetValue = _offsetValue;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -55,12 +56,11 @@
 
 -(void) startAnimation{
     if(! _animating){
+        
         [_loadingView setHidden:NO];
-        if([_loadingView isKindOfClass:[UIActivityIndicatorView class]]){
-            [(UIActivityIndicatorView *)_loadingView startAnimating];
-        }
-        else if([_loadingView isKindOfClass:[VTAnimationView class]]){
-            [(VTAnimationView *) _loadingView startAnimating];
+        
+        if([_loadingView respondsToSelector:@selector(startAnimating)]){
+            [_loadingView performSelector:@selector(startAnimating) withObject:nil];
         }
         [_directImageView setHidden:YES];
         [_downTitleLabel setHidden:YES];
@@ -75,11 +75,8 @@
 
 -(void) stopAnimation{
     if( _animating ){
-        if([_loadingView isKindOfClass:[UIActivityIndicatorView class]]){
-            [(UIActivityIndicatorView *)_loadingView stopAnimating];
-        }
-        else if([_loadingView isKindOfClass:[VTAnimationView class]]){
-            [(VTAnimationView *) _loadingView stopAnimating];
+        if([_loadingView respondsToSelector:@selector(stopAnimating)]){
+            [_loadingView performSelector:@selector(stopAnimating) withObject:nil];
         }
         [_loadingView setHidden:YES];
         [_loadingTitleLabel setHidden:YES];
@@ -147,6 +144,13 @@
         [UIView commitAnimations];
     }
 
+}
+
+-(void) setOffsetValue:(CGFloat)offsetValue{
+    _offsetValue = offsetValue;
+    if([_loadingView respondsToSelector:@selector(setOffsetValue:)]){
+        [_loadingView performSelector:@selector(setOffsetValue:) withObject:[NSNumber numberWithFloat:offsetValue]];
+    }
 }
 
 @end

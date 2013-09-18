@@ -334,6 +334,9 @@
                     _allowRefresh = NO;
                 }
             }
+            
+            [_topLoadingView setOffsetValue: - (contentOffset.y + contentInset.top) / _topLoadingView.frame.size.height];
+            
             CGRect r = _topLoadingView.frame;
             
             r.size.width = size.width;
@@ -346,8 +349,12 @@
                 [tableView sendSubviewToBack:_topLoadingView];
             }
         }
-        else if(contentOffset.y  + size.height > contentSize.height){
+        else if(contentOffset.y  + size.height >= contentSize.height){
+            
             [_bottomLoadingView setDirect:VTDragLoadingViewDirectUp];
+            
+            [_bottomLoadingView setOffsetValue: (contentOffset.y  + size.height - contentSize.height) / _bottomLoadingView.frame.size.height];
+            
         }
 
     }
