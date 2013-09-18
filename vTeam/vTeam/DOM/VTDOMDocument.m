@@ -34,20 +34,49 @@
     [super dealloc];
 }
 
--(void) applyStyleSheet:(VTDOMElement *) element{
+-(NSString *) forStyleNameInElement:(VTDOMElement *) element{
+    VTDOMElement * el  = [element parentElement];
+    
+    while(el){
+        
+        NSString * v = [el attributeValueForKey:@"class"];
+        
+        if([v length]){
+            return [[v componentsSeparatedByString:@" "] lastObject];
+        }
+        
+        el = [element parentElement];
+    }
+    
+    return nil;
+}
+
+-(void) applyStyleSheet:(VTDOMElement *) element forStyleName:(NSString *) forStyleName{
     if(_styleSheet && element){
-        NSString * styleName = [element attributeValueForKey:@"class"];
-        if([styleName length]){
-            styleName = [NSString stringWithFormat:@"%@ %@",element.name, styleName];
+        
+        NSString * styleName = element.name;
+        
+        if([forStyleName length]){
+            styleName = [styleName stringByAppendingFormat:@" %@.%@",forStyleName,element.name];
         }
-        else{
-            styleName = element.name;
+        
+        NSString * v = [element attributeValueForKey:@"class"];
+        
+        if([v length]){
+            styleName = [styleName stringByAppendingFormat:@" %@",v];
         }
+       
         [element setStyle:[_styleSheet selectorStyleName:styleName]];
         
         for(VTDOMElement * child in [element childs]){
-            [self applyStyleSheet:child];
+            [self applyStyleSheet:child forStyleName: [v length] ? [[v componentsSeparatedByString:@" "] lastObject] : forStyleName];
         }
+    }
+}
+
+-(void) applyStyleSheet:(VTDOMElement *) element{
+    if(_styleSheet && element){
+        [self applyStyleSheet:element forStyleName:[self forStyleNameInElement:element]];
     }
 }
 
