@@ -260,7 +260,7 @@
                 file_rename([t UTF8String], [_responseBody UTF8String]);
             }
         }
-        else if(self.allowCheckContentLength 
+        else if(!self.allowCheckContentLength
            || _contentLength == 0 || _contentLength == _downloadLength){
             file_rename([t UTF8String], [_responseBody UTF8String]);
         }

@@ -125,8 +125,22 @@
     }
 }
 
--(void) scrollViewDidScroll:(UIScrollView *)scrollView{
+-(void) scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
     [self setSelectedIndex:scrollView.contentOffset.x / scrollView.bounds.size.width animated:NO withoutOffset:YES];
+}
+
+-(void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    if(!decelerate){
+        [self setSelectedIndex:scrollView.contentOffset.x / scrollView.bounds.size.width animated:NO withoutOffset:YES];
+    }
+}
+
+-(void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    [self setSelectedIndex:scrollView.contentOffset.x / scrollView.bounds.size.width animated:NO withoutOffset:YES];
+}
+
+-(void) scrollViewDidScroll:(UIScrollView *)scrollView{
+    
 }
 
 -(void) scrollView:(UIScrollView *) scrollView didContentOffsetChanged:(CGPoint) contentOffset{
