@@ -45,7 +45,7 @@
             return [[v componentsSeparatedByString:@" "] lastObject];
         }
         
-        el = [element parentElement];
+        el = [el parentElement];
     }
     
     return nil;
