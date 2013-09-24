@@ -39,5 +39,7 @@
 
 -(void) vtTableDataController:(VTTableDataController *) dataController cell:(VTTableViewCell *) cell doAction:(id<IVTAction>) action;
 
+-(void) vtTableDataControllerScrollViewWillBeginDragging:(VTTableDataController *) dataController;
+
 @end
 

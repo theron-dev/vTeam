@@ -438,6 +438,12 @@
     }
 }
 
+-(void) scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    if([self.delegate respondsToSelector:@selector(vtTableDataControllerScrollViewWillBeginDragging:)]){
+        [self.delegate vtTableDataControllerScrollViewWillBeginDragging:self];
+    }
+}
+
 -(void) vtTableViewCell:(VTTableViewCell *) tableViewCell doAction:(id) action{
     if([self.delegate respondsToSelector:@selector(vtTableDataController:cell:doAction:)]){
         [self.delegate vtTableDataController:self cell:tableViewCell doAction:action];
