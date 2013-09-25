@@ -152,7 +152,6 @@
         if(index <0){
             [self reloadDataController:[self controllerAtIndex:0]];
             [self scrollToTabButton:0];
-            [_tabBackgroundView setCenter:[[self tabButtonAtIndex:0] center]];
 
         }
         else if(index >= count){
@@ -173,9 +172,11 @@
                 CGPoint p1 = [[self tabButtonAtIndex:(int) index] center];
                 CGPoint p2 = [[self tabButtonAtIndex:(int) index + 1] center];
                 
-                CGPoint center = [_tabBackgroundView center];
-                center.x = p1.x + (p2.x - p1.x) * r;
-                [_tabBackgroundView setCenter:center];
+                CGRect rect = [_tabBackgroundView frame];
+                
+                rect.origin.x = p1.x + (p2.x - p1.x) * r - rect.size.width / 2.0;
+
+                [_tabBackgroundView setFrame:rect];
                 
                 [self scrollToTabBackgroundVisable:NO];
             }
