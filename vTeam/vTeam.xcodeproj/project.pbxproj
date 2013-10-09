@@ -305,6 +305,10 @@
 		11A2D1151796A69E00082380 /* VTRichView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A2D1131796A69D00082380 /* VTRichView.m */; };
 		11A2D1181796AC2500082380 /* VTRichImageElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 11A2D1161796AC2500082380 /* VTRichImageElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11A2D1191796AC2500082380 /* VTRichImageElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A2D1171796AC2500082380 /* VTRichImageElement.m */; };
+		11BC146E1804F6C60065A9EE /* UIImage+GaussianBlur.h in Headers */ = {isa = PBXBuildFile; fileRef = 11BC146C1804F6C60065A9EE /* UIImage+GaussianBlur.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11BC146F1804F6C60065A9EE /* UIImage+GaussianBlur.m in Sources */ = {isa = PBXBuildFile; fileRef = 11BC146D1804F6C60065A9EE /* UIImage+GaussianBlur.m */; };
+		11BC147B1804FE770065A9EE /* VTController.h in Headers */ = {isa = PBXBuildFile; fileRef = 11BC14791804FE770065A9EE /* VTController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11BC147C1804FE770065A9EE /* VTController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11BC147A1804FE770065A9EE /* VTController.m */; };
 		11C238211786BBC000DBADBD /* VTTabViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C2381F1786BBC000DBADBD /* VTTabViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11C238221786BBC000DBADBD /* VTTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C238201786BBC000DBADBD /* VTTabViewController.m */; };
 		11C238311786CB8200DBADBD /* VTCreatorViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C2382F1786CB8100DBADBD /* VTCreatorViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -730,6 +734,10 @@
 		11A2D1131796A69D00082380 /* VTRichView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTRichView.m; sourceTree = "<group>"; };
 		11A2D1161796AC2500082380 /* VTRichImageElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTRichImageElement.h; sourceTree = "<group>"; };
 		11A2D1171796AC2500082380 /* VTRichImageElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTRichImageElement.m; sourceTree = "<group>"; };
+		11BC146C1804F6C60065A9EE /* UIImage+GaussianBlur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+GaussianBlur.h"; sourceTree = "<group>"; };
+		11BC146D1804F6C60065A9EE /* UIImage+GaussianBlur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GaussianBlur.m"; sourceTree = "<group>"; };
+		11BC14791804FE770065A9EE /* VTController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTController.h; sourceTree = "<group>"; };
+		11BC147A1804FE770065A9EE /* VTController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTController.m; sourceTree = "<group>"; };
 		11C2381F1786BBC000DBADBD /* VTTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTTabViewController.h; sourceTree = "<group>"; };
 		11C238201786BBC000DBADBD /* VTTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTTabViewController.m; sourceTree = "<group>"; };
 		11C2382F1786CB8100DBADBD /* VTCreatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTCreatorViewController.h; sourceTree = "<group>"; };
@@ -904,6 +912,8 @@
 				11C3AB4317C7374800B16C3A /* NSData+GZIP.m */,
 				113381F517D5901A005E4DCE /* NSString+TextLength.h */,
 				113381F617D5901A005E4DCE /* NSString+TextLength.m */,
+				11BC146C1804F6C60065A9EE /* UIImage+GaussianBlur.h */,
+				11BC146D1804F6C60065A9EE /* UIImage+GaussianBlur.m */,
 			);
 			name = NSCategory;
 			sourceTree = "<group>";
@@ -1095,6 +1105,8 @@
 				114773061727E04F00196FB2 /* IVTContext.h */,
 				114773071727E09700196FB2 /* IVTServiceContext.h */,
 				11E6ABCC17CC9B6C00B9C3FE /* IVTController.h */,
+				11BC14791804FE770065A9EE /* VTController.h */,
+				11BC147A1804FE770065A9EE /* VTController.m */,
 				1147730F1727E33A00196FB2 /* IVTUIViewController.h */,
 				1147730E1727E2E100196FB2 /* IVTUIContext.h */,
 				1147730A1727E29600196FB2 /* VTShell.h */,
@@ -1627,6 +1639,7 @@
 				113140501749EC590081641F /* hconfig.h in Headers */,
 				113140521749EC590081641F /* hdata.h in Headers */,
 				114D643C17E1D0AB0021CB8A /* VTMontageViewElement.h in Headers */,
+				11BC146E1804F6C60065A9EE /* UIImage+GaussianBlur.h in Headers */,
 				113140541749EC590081641F /* hdata_alloc.h in Headers */,
 				113140561749EC590081641F /* hdata_binary.h in Headers */,
 				113140581749EC590081641F /* hdata_json.h in Headers */,
@@ -1742,6 +1755,7 @@
 				11A041A717BCCDC0001992BE /* VTRichViewElement.h in Headers */,
 				11A041AB17BCD560001992BE /* VTDocumentViewController.h in Headers */,
 				11A041AF17BCD9C2001992BE /* VTDocumentDataController.h in Headers */,
+				11BC147B1804FE770065A9EE /* VTController.h in Headers */,
 				11A041B717BDC259001992BE /* VTDOMScrollView.h in Headers */,
 				11CEBF4717C61EE5007A430A /* VTBEEventObject.h in Headers */,
 				11C3AB4417C7374800B16C3A /* NSData+GZIP.h in Headers */,
@@ -1962,6 +1976,7 @@
 				1140741C176EAEC500275493 /* VTFDBIndex.m in Sources */,
 				AC875C50177568F4009999A2 /* VTTableViewCell.m in Sources */,
 				AC875C60177589FF009999A2 /* VTURLDataSource.m in Sources */,
+				11BC146F1804F6C60065A9EE /* UIImage+GaussianBlur.m in Sources */,
 				AC875C6517758AB9009999A2 /* VTURLService.m in Sources */,
 				114D643D17E1D0AB0021CB8A /* VTMontageViewElement.m in Sources */,
 				AC875C7D1775BDB6009999A2 /* VTStatusView.m in Sources */,
@@ -1990,6 +2005,7 @@
 				11A0413717BB1C68001992BE /* VTDOMElement.m in Sources */,
 				11A0413917BB1C68001992BE /* VTDOMDocument.m in Sources */,
 				11A0413B17BB1C68001992BE /* VTDOMParse.m in Sources */,
+				11BC147C1804FE770065A9EE /* VTController.m in Sources */,
 				11A0414017BB25CD001992BE /* VTDOMStyleSheet.m in Sources */,
 				11A0414417BB2B35001992BE /* hcss_scanf.c in Sources */,
 				11A0414817BB3C37001992BE /* VTDOMElement+Layout.m in Sources */,

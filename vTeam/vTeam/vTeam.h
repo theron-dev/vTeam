@@ -88,4 +88,5 @@
 #import <vTeam/NSString+TextLength.h>
 #import <vTeam/VTAction.h>
 #import <vTeam/VTMontage.h>
-
+#import <vTeam/UIImage+GaussianBlur.h>
+#import <vTeam/VTController.h>
