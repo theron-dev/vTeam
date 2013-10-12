@@ -186,7 +186,7 @@
                 [md appendData:[[item key] dataUsingEncoding:NSUTF8StringEncoding]];
                 [md appendBytes:(void *)"\"\r\n\r\n" length:5];
                 
-                [md appendData:[[NSURL encodeQueryValue:[item value]] dataUsingEncoding:NSUTF8StringEncoding]];
+                [md appendData:[[item value] dataUsingEncoding:NSUTF8StringEncoding]];
                 
                 [md appendBytes:(void *)"\r\n" length:2];
             }
