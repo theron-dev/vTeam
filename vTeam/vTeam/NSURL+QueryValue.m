@@ -135,6 +135,9 @@
         else if(*p == '.'){
             [ms appendString:@"."];
         }
+        else if(*p == '_'){
+            [ms appendString:@"_"];
+        }
         else if((*p >='0' && *p <='9') || (*p >= 'a' && *p <='z') || (*p >= 'A' && *p <='Z')){
             [ms appendFormat:@"%c",*p];
         }
