@@ -38,7 +38,6 @@
 @synthesize nibBundleOrNil = _nibBundleOrNil;
 
 @synthesize context = _context;
-@synthesize styleContainer = _styleContainer;
 @synthesize dataOutletContainer = _dataOutletContainer;
 
 @synthesize index = _index;
@@ -49,10 +48,13 @@
 @synthesize dataSource = _dataSource;
 @synthesize controller = _controller;
 
+
+@synthesize styleContainers = _styleContainers;
+
 -(void) dealloc{
     [_dataItem release];
     [_userInfo release];
-    [_styleContainer release];
+    [_styleContainers release];
     [_dataOutletContainer release];
     [_dataSource setDelegate:nil];
     [_dataSource release];
@@ -157,7 +159,9 @@
     if(_context != context){
         _context = context;
         [_dataSource setContext:context];
-        [_styleContainer setStyleSheet:[context styleSheet]];
+        for(VTStyleOutletContainer * styleContainer in _styleContainers){
+            [styleContainer setStyleSheet:[context styleSheet]];
+        }
         [_layoutContainer layout];
     }
 }
@@ -176,6 +180,14 @@
             [self.delegate vtTableViewCell:self doAction:action];
         }
     }
+}
+
+-(VTStyleOutletContainer *) styleContainer{
+    return [_styleContainers lastObject];
+}
+
+-(void) setStyleContainer:(VTStyleOutletContainer *)styleContainer{
+    self.styleContainers = [NSArray arrayWithObject:styleContainer];
 }
 
 @end

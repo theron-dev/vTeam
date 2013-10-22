@@ -34,6 +34,7 @@
 @property(nonatomic,assign) id controller;
 @property(nonatomic,assign) id<IVTUIContext> context;
 @property(nonatomic,retain) IBOutlet VTStyleOutletContainer * styleContainer;
+@property(nonatomic,retain) IBOutletCollection(VTStyleOutletContainer) NSArray * styleContainers;
 @property(nonatomic,retain) IBOutlet VTDataOutletContainer * dataOutletContainer;
 @property(nonatomic,retain) IBOutlet VTLayoutContainer * layoutContainer;
 @property(nonatomic,assign) IBOutlet id delegate;
