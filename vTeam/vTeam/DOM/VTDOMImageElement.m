@@ -73,6 +73,46 @@
     
     self.image = image;
     
+    if(image){
+        
+        if([self attributeValueForKey:@"fit-width"]){
+            
+            CGRect r = [self frame];
+            
+            CGSize imageSize = [image size];
+            
+            if(r.size.width && r.size.height && imageSize.width && imageSize.height){
+                
+                if(r.size.width / r.size.height != imageSize.width / imageSize.height){
+                    r.size.width = imageSize.width / imageSize.height * r.size.height;
+                    
+                    [self setFrame:r];
+                }
+                
+            }
+            
+        }
+        
+        if([self attributeValueForKey:@"fit-height"]){
+            
+            CGRect r = [self frame];
+            
+            CGSize imageSize = [image size];
+            
+            if(r.size.width && r.size.height && imageSize.width && imageSize.height){
+                
+                if(r.size.width / r.size.height != imageSize.width / imageSize.height){
+                    
+                    r.size.height = imageSize.height / imageSize.width * r.size.width;
+                    
+                    [self setFrame:r];
+                }
+                
+            }
+            
+        }
+    }
+    
     [self performSelector:@selector(setNeedDisplay) withObject:nil afterDelay:0.0];
     
 }

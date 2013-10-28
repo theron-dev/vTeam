@@ -571,14 +571,38 @@ typedef enum {
 
 
 -(BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
+    if(_panBeginTouch){
+        return NO;
+    }
     return [self.topViewController shouldAutorotateToInterfaceOrientation:toInterfaceOrientation];
 }
 
 - (BOOL)shouldAutorotate{
+    if(_panBeginTouch){
+        return NO;
+    }
     return [self.topViewController shouldAutorotate];
 }
 
 - (NSUInteger)supportedInterfaceOrientations{
+    if(_panBeginTouch){
+        switch ([[UIApplication sharedApplication] statusBarOrientation]) {
+            case UIInterfaceOrientationPortrait:
+                return UIInterfaceOrientationMaskPortrait;
+                break;
+            case UIInterfaceOrientationPortraitUpsideDown:
+                return UIInterfaceOrientationMaskPortraitUpsideDown;
+                break;
+            case UIInterfaceOrientationLandscapeLeft:
+                return UIInterfaceOrientationMaskLandscapeLeft;
+                break;
+            case UIInterfaceOrientationLandscapeRight:
+                return UIInterfaceOrientationMaskLandscapeRight;
+                break;
+            default:
+                break;
+        };
+    }
     return [self.topViewController supportedInterfaceOrientations];
 }
 
