@@ -67,6 +67,8 @@ typedef enum {
     }
     
     _panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognizerAction:)];
+    [_panGestureRecognizer setMinimumNumberOfTouches:1];
+    [_panGestureRecognizer setMaximumNumberOfTouches:1];
     [_panGestureRecognizer setCancelsTouchesInView:NO];
     [self.view addGestureRecognizer:_panGestureRecognizer];
     
@@ -355,6 +357,10 @@ typedef enum {
         return;
     }
     
+    if(_panBeginTouch){
+        return;
+    }
+    
     if([_viewControllers count] >1){
         
         UIViewController * topViewController = [_viewControllers lastObject];
@@ -468,6 +474,10 @@ typedef enum {
 -(void) pushViewController:(UIViewController *) viewController animated:(BOOL)animated{
     
     if(_animating){
+        return;
+    }
+    
+    if(_panBeginTouch){
         return;
     }
     
@@ -672,6 +682,14 @@ typedef enum {
 }
 
 -(BOOL) openUrl:(NSURL *) url animated:(BOOL) animated{
+    
+    if(_animating){
+        return NO;
+    }
+    
+    if(_panBeginTouch){
+        return NO;
+    }
     
     NSString * scheme = self.scheme;
     
