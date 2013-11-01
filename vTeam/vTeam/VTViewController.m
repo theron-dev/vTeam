@@ -319,6 +319,12 @@
         if(title){
             self.title = title;
         }
+        
+        id hidesBottomBarWhenPushed = [config valueForKey:@"hidesBottomBarWhenPushed"];
+        
+        if(hidesBottomBarWhenPushed){
+            self.hidesBottomBarWhenPushed = [hidesBottomBarWhenPushed boolValue];
+        }
     }
 }
 

@@ -277,7 +277,7 @@
         }
     }
     
-    return NO;
+    return [self.parentController openUrl:url animated:animated];
 }
 
 
@@ -304,5 +304,6 @@
         [(id)self.selectedViewController receiveUrl:url source:source];
     }
 }
+
 
 @end
