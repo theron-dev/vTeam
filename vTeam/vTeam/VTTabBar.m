@@ -34,4 +34,14 @@
     }
 }
 
+-(NSUInteger) selectedIndex{
+    return [[self items] indexOfObject:self.selectedItem];
+}
+
+-(void) setSelectedIndex:(NSUInteger)selectedIndex{
+    if(selectedIndex < [self.items count]){
+        [self setSelectedItem:[self.items objectAtIndex:selectedIndex]];
+    }
+}
+    
 @end

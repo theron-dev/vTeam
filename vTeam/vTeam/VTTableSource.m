@@ -32,7 +32,7 @@
     if(view){
         return view.frame.size.height;
     }
-    return [item height];
+    return 0;
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -48,6 +48,15 @@
 
 -(UIView *) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     return [[_sections objectAtIndex:section] footerView];
+}
+    
+-(CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    id item = [_sections objectAtIndex:section];
+    UIView * view = [item footerView];
+    if(view){
+        return view.frame.size.height;
+    }
+    return 0;
 }
 
 @end

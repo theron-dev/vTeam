@@ -90,3 +90,4 @@
 #import <vTeam/VTMontage.h>
 #import <vTeam/UIImage+GaussianBlur.h>
 #import <vTeam/VTController.h>
+#import <vTeam/VTTabBarItem.h>

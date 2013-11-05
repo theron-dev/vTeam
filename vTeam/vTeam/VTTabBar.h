@@ -11,5 +11,6 @@
 @interface VTTabBar : UITabBar
 
 @property(nonatomic,retain) UIImage * backgroundImage;
-
+@property(nonatomic,assign) NSUInteger selectedIndex;
+    
 @end

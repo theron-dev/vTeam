@@ -241,6 +241,8 @@
 		116CDE781786924D00BCD47D /* VTTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116CDE761786924D00BCD47D /* VTTabBarController.m */; };
 		116CDE7B1786A0BD00BCD47D /* VTTabBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 116CDE791786A0BC00BCD47D /* VTTabBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		116CDE7C1786A0BD00BCD47D /* VTTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 116CDE7A1786A0BC00BCD47D /* VTTabBar.m */; };
+		116FD13D18288EE80001CB43 /* VTTabBarItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 116FD13B18288EE80001CB43 /* VTTabBarItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		116FD13E18288EE80001CB43 /* VTTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 116FD13C18288EE80001CB43 /* VTTabBarItem.m */; };
 		1174209917CAF348001EBEE7 /* VTDOMActionElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 1174209717CAF348001EBEE7 /* VTDOMActionElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1174209A17CAF348001EBEE7 /* VTDOMActionElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1174209817CAF348001EBEE7 /* VTDOMActionElement.m */; };
 		1174768617992E4B00FA7DF0 /* VTMonitorService.h in Headers */ = {isa = PBXBuildFile; fileRef = 1174768417992E4B00FA7DF0 /* VTMonitorService.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -678,6 +680,8 @@
 		116CDE761786924D00BCD47D /* VTTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTTabBarController.m; sourceTree = "<group>"; };
 		116CDE791786A0BC00BCD47D /* VTTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTTabBar.h; sourceTree = "<group>"; };
 		116CDE7A1786A0BC00BCD47D /* VTTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTTabBar.m; sourceTree = "<group>"; };
+		116FD13B18288EE80001CB43 /* VTTabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTTabBarItem.h; sourceTree = "<group>"; };
+		116FD13C18288EE80001CB43 /* VTTabBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTTabBarItem.m; sourceTree = "<group>"; };
 		1174209717CAF348001EBEE7 /* VTDOMActionElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDOMActionElement.h; sourceTree = "<group>"; };
 		1174209817CAF348001EBEE7 /* VTDOMActionElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDOMActionElement.m; sourceTree = "<group>"; };
 		1174768417992E4B00FA7DF0 /* VTMonitorService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTMonitorService.h; sourceTree = "<group>"; };
@@ -1458,6 +1462,8 @@
 				11A041AA17BCD560001992BE /* VTDocumentViewController.m */,
 				ACC8417717DB84BC004E3C38 /* VTAction.h */,
 				ACC8417817DB84BC004E3C38 /* VTAction.m */,
+				116FD13B18288EE80001CB43 /* VTTabBarItem.h */,
+				116FD13C18288EE80001CB43 /* VTTabBarItem.m */,
 			);
 			name = UIKit;
 			sourceTree = "<group>";
@@ -1579,6 +1585,7 @@
 				114D7ACB172A75A90041468E /* VTNavigationBar.h in Headers */,
 				114D7ADE172A88FD0041468E /* GIFView.h in Headers */,
 				114D7AE2172A89710041468E /* VTContainerView.h in Headers */,
+				116FD13D18288EE80001CB43 /* VTTabBarItem.h in Headers */,
 				11619C4B17320E1F00BD3561 /* VTContainerLayout.h in Headers */,
 				11619C4F17320FCE00BD3561 /* VTFlowContainerLayout.h in Headers */,
 				11619C53173213CD00BD3561 /* VTFallsContainerLayout.h in Headers */,
@@ -1919,6 +1926,7 @@
 				1131405F1749EC590081641F /* hdebug.c in Sources */,
 				113140611749EC590081641F /* hdevice.c in Sources */,
 				113140631749EC590081641F /* hext_obj.c in Sources */,
+				116FD13E18288EE80001CB43 /* VTTabBarItem.m in Sources */,
 				113140651749EC590081641F /* hfile.c in Sources */,
 				113140671749EC590081641F /* hinifile.c in Sources */,
 				113140691749EC590081641F /* hjson.c in Sources */,
