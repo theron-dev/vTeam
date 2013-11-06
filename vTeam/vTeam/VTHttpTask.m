@@ -36,7 +36,6 @@
 @synthesize downloadLength = _downloadLength;
 @synthesize allowCheckContentLength = _allowCheckContentLength;
 @synthesize forceUpdateResource = _forceUpdateResource;
-@synthesize onlyLocalResource = _onlyLocalResource;
 @synthesize userInfo = _userInfo;
 @synthesize allowResume = _allowResume;
 @synthesize beginLength = _beginLength;
@@ -80,39 +79,9 @@
             return nil;
         }
         
-        md5_state_t md5;
-        md5_byte_t digest[16];
-        int i;
-        
-        md5_init(&md5);
-        
-        NSData * bytes = [[url absoluteString] dataUsingEncoding:NSUTF8StringEncoding];
-        
-        md5_append(&md5, [bytes bytes], [bytes length]);
-        
-        md5_finish(&md5, digest);
-        
-        NSMutableString * md5String = [NSMutableString stringWithCapacity:32];
-        
-        for(i=0;i<16;i++){
-            [md5String appendFormat:@"%02x",digest[i]];
-        }
-       
-        self.responseBody = [NSTemporaryDirectory() stringByAppendingPathComponent:md5String];
+        self.responseBody = [VTHttpTask localResourcePathForURL:url];
         
         BOOL isFileExist = [fileManager fileExistsAtPath:_responseBody];
-        
-        if(_onlyLocalResource){
-            
-            if([fileManager fileExistsAtPath:_responseBody]){
-                [self doLoaded];
-            }
-            else{
-                [self doFailError:[NSError errorWithDomain:@"VTHttpTask" code:-4 userInfo:[NSDictionary dictionaryWithObject:@"not found file" forKey:NSLocalizedDescriptionKey]]];
-            }
-            
-            return nil;
-        }
         
         if(!_forceUpdateResource && isFileExist){
             
@@ -226,7 +195,7 @@
     }
     else if(_responseType == VTHttpTaskResponseTypeResource){
         NSString * t = [_responseBody stringByAppendingPathExtension:@"tmp"];
-        FILE * f = fopen([t UTF8String], "ab");
+        FILE * f = fopen([t UTF8String], "a");
         if(f){
             fwrite([data bytes], 1, [data length], f);
             fclose(f);
@@ -257,12 +226,12 @@
         NSString * t = [_responseBody stringByAppendingPathExtension:@"tmp"];
         if(self.allowResume){
             if(_contentLength == _downloadLength){
-                file_rename([t UTF8String], [_responseBody UTF8String]);
+                [[NSFileManager defaultManager] moveItemAtPath:t toPath:_responseBody error:nil];
             }
         }
         else if(!self.allowCheckContentLength
            || _contentLength == 0 || _contentLength == _downloadLength){
-            file_rename([t UTF8String], [_responseBody UTF8String]);
+            [[NSFileManager defaultManager] moveItemAtPath:t toPath:_responseBody error:nil];
         }
         else{
             [[NSFileManager defaultManager] removeItemAtPath:t error:nil];
@@ -281,12 +250,43 @@
     else if(_responseType == VTHttpTaskResponseTypeResource){
         if(_beginLength == 0){
             NSString * t = [_responseBody stringByAppendingPathExtension:@"tmp"];
-            FILE * f = fopen([t UTF8String], "wb");
+            FILE * f = fopen([t UTF8String], "w");
             if(f){
                 fclose(f);
             }
         }
     }
+}
+    
++(BOOL) hasResourceForURL:(NSURL *) url{
+    return [[NSFileManager defaultManager] fileExistsAtPath:[self localResourcePathForURL:url] isDirectory:nil];
+}
+    
++(BOOL) isLoadingResourceForURL:(NSURL *) url{
+    return [[NSFileManager defaultManager] fileExistsAtPath:[[self localResourcePathForURL:url] stringByAppendingPathExtension:@"tmp"] isDirectory:nil];
+}
+    
++(NSString *) localResourcePathForURL:(NSURL *) url{
+    
+    md5_state_t md5;
+    md5_byte_t digest[16];
+    int i;
+    
+    md5_init(&md5);
+    
+    NSData * bytes = [[url absoluteString] dataUsingEncoding:NSUTF8StringEncoding];
+    
+    md5_append(&md5, [bytes bytes], [bytes length]);
+    
+    md5_finish(&md5, digest);
+    
+    NSMutableString * md5String = [NSMutableString stringWithCapacity:32];
+    
+    for(i=0;i<16;i++){
+        [md5String appendFormat:@"%02x",digest[i]];
+    }
+    
+    return [NSTemporaryDirectory() stringByAppendingPathComponent:md5String];
 }
 
 @end

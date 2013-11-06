@@ -281,7 +281,7 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
         [centerView setFrame:r];
         
         if(leftView.superview == nil){
-            [self.view addSubview:leftView];
+            [self.view insertSubview:leftView atIndex:0];
             [leftView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
         }
         

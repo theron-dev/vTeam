@@ -51,7 +51,7 @@
 }
 
 -(NSInteger) count{
-    return [_dataObjects count];
+    return [self.dataObjects count];
 }
 
 -(NSMutableArray *) dataObjects{
@@ -62,16 +62,16 @@
 }
 
 -(id) dataObjectAtIndex:(NSInteger) index{
-    if(index>=0 && index < [_dataObjects count]){
-        return [_dataObjects objectAtIndex:index];
+    if(index>=0 && index < [self.dataObjects count]){
+        return [self.dataObjects objectAtIndex:index];
     }
     return nil;
 }
 
 
 -(id) dataObject{
-    if([_dataObjects count ]>0){
-        return [_dataObjects objectAtIndex:0];
+    if([self.dataObjects count ]>0){
+        return [self.dataObjects objectAtIndex:0];
     }
     return nil;
 }

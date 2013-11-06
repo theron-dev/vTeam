@@ -243,6 +243,12 @@
 		116CDE7C1786A0BD00BCD47D /* VTTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 116CDE7A1786A0BC00BCD47D /* VTTabBar.m */; };
 		116FD13D18288EE80001CB43 /* VTTabBarItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 116FD13B18288EE80001CB43 /* VTTabBarItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		116FD13E18288EE80001CB43 /* VTTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 116FD13C18288EE80001CB43 /* VTTabBarItem.m */; };
+		116FD2241829EEE40001CB43 /* VTStatusDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 116FD2221829EEE40001CB43 /* VTStatusDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		116FD2251829EEE40001CB43 /* VTStatusDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 116FD2231829EEE40001CB43 /* VTStatusDataSource.m */; };
+		116FD2281829EFC80001CB43 /* VTStatusGatherDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 116FD2261829EFC70001CB43 /* VTStatusGatherDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		116FD2291829EFC80001CB43 /* VTStatusGatherDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 116FD2271829EFC70001CB43 /* VTStatusGatherDataSource.m */; };
+		116FD2321829FD430001CB43 /* VTActionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 116FD2301829FD430001CB43 /* VTActionView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		116FD2331829FD430001CB43 /* VTActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 116FD2311829FD430001CB43 /* VTActionView.m */; };
 		1174209917CAF348001EBEE7 /* VTDOMActionElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 1174209717CAF348001EBEE7 /* VTDOMActionElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1174209A17CAF348001EBEE7 /* VTDOMActionElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1174209817CAF348001EBEE7 /* VTDOMActionElement.m */; };
 		1174768617992E4B00FA7DF0 /* VTMonitorService.h in Headers */ = {isa = PBXBuildFile; fileRef = 1174768417992E4B00FA7DF0 /* VTMonitorService.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -682,6 +688,12 @@
 		116CDE7A1786A0BC00BCD47D /* VTTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTTabBar.m; sourceTree = "<group>"; };
 		116FD13B18288EE80001CB43 /* VTTabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTTabBarItem.h; sourceTree = "<group>"; };
 		116FD13C18288EE80001CB43 /* VTTabBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTTabBarItem.m; sourceTree = "<group>"; };
+		116FD2221829EEE40001CB43 /* VTStatusDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTStatusDataSource.h; sourceTree = "<group>"; };
+		116FD2231829EEE40001CB43 /* VTStatusDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTStatusDataSource.m; sourceTree = "<group>"; };
+		116FD2261829EFC70001CB43 /* VTStatusGatherDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTStatusGatherDataSource.h; sourceTree = "<group>"; };
+		116FD2271829EFC70001CB43 /* VTStatusGatherDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTStatusGatherDataSource.m; sourceTree = "<group>"; };
+		116FD2301829FD430001CB43 /* VTActionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTActionView.h; sourceTree = "<group>"; };
+		116FD2311829FD430001CB43 /* VTActionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTActionView.m; sourceTree = "<group>"; };
 		1174209717CAF348001EBEE7 /* VTDOMActionElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDOMActionElement.h; sourceTree = "<group>"; };
 		1174209817CAF348001EBEE7 /* VTDOMActionElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDOMActionElement.m; sourceTree = "<group>"; };
 		1174768417992E4B00FA7DF0 /* VTMonitorService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTMonitorService.h; sourceTree = "<group>"; };
@@ -1227,6 +1239,10 @@
 				11619C6D1732383800BD3561 /* VTPageDataSource.m */,
 				AC875C5D177589FF009999A2 /* VTURLDataSource.h */,
 				AC875C5E177589FF009999A2 /* VTURLDataSource.m */,
+				116FD2221829EEE40001CB43 /* VTStatusDataSource.h */,
+				116FD2231829EEE40001CB43 /* VTStatusDataSource.m */,
+				116FD2261829EFC70001CB43 /* VTStatusGatherDataSource.h */,
+				116FD2271829EFC70001CB43 /* VTStatusGatherDataSource.m */,
 			);
 			name = DataSource;
 			sourceTree = "<group>";
@@ -1464,6 +1480,8 @@
 				ACC8417817DB84BC004E3C38 /* VTAction.m */,
 				116FD13B18288EE80001CB43 /* VTTabBarItem.h */,
 				116FD13C18288EE80001CB43 /* VTTabBarItem.m */,
+				116FD2301829FD430001CB43 /* VTActionView.h */,
+				116FD2311829FD430001CB43 /* VTActionView.m */,
 			);
 			name = UIKit;
 			sourceTree = "<group>";
@@ -1620,6 +1638,9 @@
 				ACDE3AB1173647950046ED56 /* VTAppStatusView.h in Headers */,
 				AC324F6C173DD8FA0094A7A6 /* UIView+VTStyle.h in Headers */,
 				AC324F87173DE23B0094A7A6 /* UIButton+VTStyle.h in Headers */,
+				116FD2241829EEE40001CB43 /* VTStatusDataSource.h in Headers */,
+				116FD2281829EFC80001CB43 /* VTStatusGatherDataSource.h in Headers */,
+				116FD2321829FD430001CB43 /* VTActionView.h in Headers */,
 				AC325010173E1AE30094A7A6 /* VTHeapViewController.h in Headers */,
 				AC325014173E23980094A7A6 /* VTLayout.h in Headers */,
 				AC325018173E23A60094A7A6 /* VTLayoutData.h in Headers */,
@@ -1879,6 +1900,7 @@
 				11619C841732559900BD3561 /* VTUplinkService.m in Sources */,
 				11619C9017325B5900BD3561 /* VTItemViewController.m in Sources */,
 				11619CAF173265B800BD3561 /* VTAPIRequestTask.m in Sources */,
+				116FD2291829EFC80001CB43 /* VTStatusGatherDataSource.m in Sources */,
 				11619CB3173266D100BD3561 /* VTAPITask.m in Sources */,
 				11619CB71732674C00BD3561 /* VTAPIResponseTask.m in Sources */,
 				11619CBB173267D400BD3561 /* VTAPIService.m in Sources */,
@@ -1935,6 +1957,7 @@
 				1131406F1749EC590081641F /* hlog.c in Sources */,
 				113140731749EC590081641F /* hmap2.c in Sources */,
 				113140741749EC590081641F /* hmem.c in Sources */,
+				116FD2331829FD430001CB43 /* VTActionView.m in Sources */,
 				113140761749EC590081641F /* hmutex.c in Sources */,
 				113140781749EC590081641F /* hnetbios.c in Sources */,
 				1131407A1749EC590081641F /* hprocess.c in Sources */,
@@ -2006,6 +2029,7 @@
 				11C29F57179F795E00E48A36 /* VTFlowViewLayout.m in Sources */,
 				11D678E417AA4E51000E02FA /* VTBehaviorService.m in Sources */,
 				11D678E917AA4FF0000E02FA /* VTBehaviorObject.m in Sources */,
+				116FD2251829EEE40001CB43 /* VTStatusDataSource.m in Sources */,
 				11D678ED17AA5097000E02FA /* VTBehaviorTask.m in Sources */,
 				11D678F117AA5243000E02FA /* VTBehaviorTransactionTask.m in Sources */,
 				1193DB5817B0B35900F19592 /* VTBESessionObject.m in Sources */,

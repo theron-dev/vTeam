@@ -91,3 +91,6 @@
 #import <vTeam/UIImage+GaussianBlur.h>
 #import <vTeam/VTController.h>
 #import <vTeam/VTTabBarItem.h>
+#import <vTeam/VTStatusDataSource.h>
+#import <vTeam/VTStatusGatherDataSource.h>
+#import <vTeam/VTActionView.h>

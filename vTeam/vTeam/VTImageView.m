@@ -14,7 +14,7 @@
 
 @synthesize src = _src;
 @synthesize source = _source;
-@synthesize httpTask = _httpTask;
+@synthesize loading = _loading;
 @synthesize defaultImage = _defaultImage;
 @synthesize loaded = _loaded;
 @synthesize defaultSrc = _defaultSrc;
@@ -22,7 +22,6 @@
 
 -(void) dealloc{
     [_src release];
-    [_httpTask release];
     [_defaultImage release];
     [_defaultSrc release];
     [_imageMode release];

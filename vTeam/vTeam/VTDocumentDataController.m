@@ -103,7 +103,7 @@
         
         VTDOMImageElement * imgElement = (VTDOMImageElement *) element;
         
-        if([imgElement httpTask] == nil && ![imgElement isLoaded]){
+        if(![imgElement isLoading] && ![imgElement isLoaded]){
             [imgElement setSource:self];
             [self.context handle:@protocol(IVTImageTask) task:imgElement priority:0];
         }

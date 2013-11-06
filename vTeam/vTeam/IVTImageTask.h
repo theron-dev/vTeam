@@ -9,16 +9,14 @@
 #import <UIKit/UIKit.h>
 
 #import <vTeam/VTTask.h>
-#import <vTeam/VTHttpTask.h>
-
 
 @protocol IVTImageTask <IVTTask>
 
 @property(nonatomic,assign,getter = isLoaded) BOOL loaded;
 @property(nonatomic,retain) NSString * defaultSrc;
 @property(nonatomic,retain) NSString * src;
-@property(nonatomic,retain) VTHttpTask * httpTask;
-
+@property(nonatomic,assign,getter = isLoading) BOOL loading;
+    
 -(void) setImage:(UIImage *) image;
 
 -(void) setImage:(UIImage *) image isLocal:(BOOL) isLocal;

@@ -127,7 +127,7 @@
 -(void) downloadImagesForView:(UIView *) view{
     NSArray * imageViews = [view searchViewForProtocol:@protocol(IVTImageTask)];
     for(id imageView in imageViews){
-        if([imageView httpTask] == nil && ![imageView isLoaded]){
+        if(![imageView isLoading] && ![imageView isLoaded]){
             [imageView setSource:self];
             [self.context handle:@protocol(IVTImageTask) task:imageView priority:0];
         }
@@ -137,7 +137,7 @@
 -(void) loadImagesForView:(UIView *) view{
     NSArray * imageViews = [view searchViewForProtocol:@protocol(IVTImageTask)];
     for(id imageView in imageViews){
-        if([imageView httpTask]){
+        if([imageView isLoading]){
             [self.context cancelHandle:@protocol(IVTImageTask) task:imageView];
         }
         if(![imageView isLoaded]){
@@ -149,7 +149,7 @@
 -(void) cancelDownloadImagesForView:(UIView *) view{
     NSArray * imageViews = [view searchViewForProtocol:@protocol(IVTImageTask)];
     for(id imageView in imageViews){
-        if([imageView httpTask]){
+        if([imageView isLoading]){
             [self.context cancelHandle:@protocol(IVTImageTask) task:imageView];
         }
     }

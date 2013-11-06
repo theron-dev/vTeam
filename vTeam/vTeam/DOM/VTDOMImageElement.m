@@ -19,12 +19,11 @@
 @synthesize image = _image;
 
 @synthesize source = _source;
-@synthesize httpTask = _httpTask;
+@synthesize loading = _loading;
 @synthesize defaultImage = _defaultImage;
 @synthesize loaded = _loaded;
 
 -(void) dealloc{
-    [_httpTask release];
     [_defaultImage release];
     [_image release];
     [super dealloc];

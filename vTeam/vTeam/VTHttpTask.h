@@ -90,13 +90,16 @@ typedef enum {
 
 @property(assign) BOOL allowCheckContentLength;
 @property(assign) BOOL forceUpdateResource;
-@property(assign) BOOL onlyLocalResource;
 @property(assign) BOOL allowResume;
 
 @end
 
 @interface VTHttpTask : VTTask<IVTHttpTask,IVTHttpAPITask,IVTHttpUploadTask,IVTHttpResourceTask>
 
++(BOOL) hasResourceForURL:(NSURL *) url;
++(BOOL) isLoadingResourceForURL:(NSURL *) url;
++(NSString *) localResourcePathForURL:(NSURL *) url;
+    
 @end
 
 
