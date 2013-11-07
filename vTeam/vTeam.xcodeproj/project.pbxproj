@@ -126,6 +126,8 @@
 		113381F417D588E1005E4DCE /* VTDOMLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 113381F217D588E1005E4DCE /* VTDOMLabel.m */; };
 		113381F717D5901A005E4DCE /* NSString+TextLength.h in Headers */ = {isa = PBXBuildFile; fileRef = 113381F517D5901A005E4DCE /* NSString+TextLength.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		113381F817D5901A005E4DCE /* NSString+TextLength.m in Sources */ = {isa = PBXBuildFile; fileRef = 113381F617D5901A005E4DCE /* NSString+TextLength.m */; };
+		1135CC03182B3EBC0074D26E /* VTWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1135CC01182B3EBC0074D26E /* VTWebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1135CC04182B3EBC0074D26E /* VTWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1135CC02182B3EBC0074D26E /* VTWebView.m */; };
 		113B5BD9174F77C6003211AD /* UIView+VTDataOutlet.h in Headers */ = {isa = PBXBuildFile; fileRef = 113B5BD7174F77C6003211AD /* UIView+VTDataOutlet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		113B5BDA174F77C6003211AD /* UIView+VTDataOutlet.m in Sources */ = {isa = PBXBuildFile; fileRef = 113B5BD8174F77C6003211AD /* UIView+VTDataOutlet.m */; };
 		11407290176999C800275493 /* VTFDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 1140728E176999C800275493 /* VTFDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -566,6 +568,8 @@
 		113381F217D588E1005E4DCE /* VTDOMLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDOMLabel.m; sourceTree = "<group>"; };
 		113381F517D5901A005E4DCE /* NSString+TextLength.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TextLength.h"; sourceTree = "<group>"; };
 		113381F617D5901A005E4DCE /* NSString+TextLength.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TextLength.m"; sourceTree = "<group>"; };
+		1135CC01182B3EBC0074D26E /* VTWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTWebView.h; sourceTree = "<group>"; };
+		1135CC02182B3EBC0074D26E /* VTWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTWebView.m; sourceTree = "<group>"; };
 		113B5BD7174F77C6003211AD /* UIView+VTDataOutlet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+VTDataOutlet.h"; sourceTree = "<group>"; };
 		113B5BD8174F77C6003211AD /* UIView+VTDataOutlet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+VTDataOutlet.m"; sourceTree = "<group>"; };
 		1140728E176999C800275493 /* VTFDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTFDB.h; sourceTree = "<group>"; };
@@ -1482,6 +1486,8 @@
 				116FD13C18288EE80001CB43 /* VTTabBarItem.m */,
 				116FD2301829FD430001CB43 /* VTActionView.h */,
 				116FD2311829FD430001CB43 /* VTActionView.m */,
+				1135CC01182B3EBC0074D26E /* VTWebView.h */,
+				1135CC02182B3EBC0074D26E /* VTWebView.m */,
 			);
 			name = UIKit;
 			sourceTree = "<group>";
@@ -1753,6 +1759,7 @@
 				11A2D1141796A69E00082380 /* VTRichView.h in Headers */,
 				11A2D1181796AC2500082380 /* VTRichImageElement.h in Headers */,
 				1174768617992E4B00FA7DF0 /* VTMonitorService.h in Headers */,
+				1135CC03182B3EBC0074D26E /* VTWebView.h in Headers */,
 				11C29F56179F795E00E48A36 /* VTFlowViewLayout.h in Headers */,
 				11D678E317AA4E51000E02FA /* VTBehaviorService.h in Headers */,
 				11D678E817AA4FF0000E02FA /* VTBehaviorObject.h in Headers */,
@@ -1874,6 +1881,7 @@
 				114D796917291F3B0041468E /* VTStyleOutlet.m in Sources */,
 				114D797B172929430041468E /* VTTask.m in Sources */,
 				114D797F172929A40041468E /* VTHttpTask.m in Sources */,
+				1135CC04182B3EBC0074D26E /* VTWebView.m in Sources */,
 				114D7A4A172A130F0041468E /* VTJSON.m in Sources */,
 				114D7A4E172A20280041468E /* VTHttpFormBody.m in Sources */,
 				114D7A52172A29EB0041468E /* VTHttpService.m in Sources */,
