@@ -61,6 +61,9 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
 -(id)initWithFrame:(CGRect)frame delegate:(id)controller{
     if((self = [super initWithFrame:frame])){
         UIPanGestureRecognizer * gestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognizerAction:)];
+        [gestureRecognizer setMinimumNumberOfTouches:1];
+        [gestureRecognizer setMaximumNumberOfTouches:1];
+        [gestureRecognizer setCancelsTouchesInView:YES];
         [self addGestureRecognizer:gestureRecognizer];
         gestureRecognizer.delegate = controller;
         [gestureRecognizer release];
@@ -313,7 +316,7 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
         
         
         if(rightView.superview == nil){
-            [self.view addSubview:rightView];
+            [self.view insertSubview:rightView atIndex:0];
             [rightView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
         }
         
@@ -707,5 +710,8 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
 
 }
 
+-(id) topController{
+    return [self centerViewController];
+}
 
 @end

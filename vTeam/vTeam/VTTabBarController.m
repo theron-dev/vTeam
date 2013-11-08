@@ -305,5 +305,8 @@
     }
 }
 
+-(id) topController{
+    return [self selectedViewController];
+}
 
 @end

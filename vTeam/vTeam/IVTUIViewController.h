@@ -19,6 +19,7 @@
 
 @property(nonatomic,assign) id<IVTUIContext> context;
 @property(nonatomic,assign) id parentController;
+@property(nonatomic,readonly) id topController;
 @property(nonatomic,readonly) BOOL isDisplaced;
 @property(nonatomic,retain) id config;
 @property(nonatomic,retain) NSString * alias;

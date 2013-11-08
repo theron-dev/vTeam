@@ -753,4 +753,8 @@ typedef enum {
     }
 }
 
+-(id) topController{
+    return [self topViewController];
+}
+
 @end

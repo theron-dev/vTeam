@@ -328,4 +328,8 @@
     }
 }
 
+-(id) topController{
+    return nil;
+}
+
 @end

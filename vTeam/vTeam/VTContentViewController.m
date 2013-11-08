@@ -191,4 +191,9 @@
         self.scheme = v;
     }
 }
+
+-(id) topController{
+    return [self contentViewController];
+}
+
 @end

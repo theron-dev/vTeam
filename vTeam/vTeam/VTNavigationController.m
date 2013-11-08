@@ -351,5 +351,8 @@
     }
 }
 
+-(id) topController{
+    return [self topViewController];
+}
 
 @end
