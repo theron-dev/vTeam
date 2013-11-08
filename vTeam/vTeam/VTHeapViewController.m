@@ -29,6 +29,14 @@ typedef enum {
 
 -(void) setViewControllers:(NSArray *) viewControllers animated:(BOOL)animated;
 
+-(void) removeViewController:(id) viewController animated:(BOOL) animated;
+
+-(void) addViewController:(id) viewController animated:(BOOL) animated;
+
+-(void) hiddenViewController:(id) viewController animated:(BOOL) animated;
+
+-(void) visableViewController:(id) viewController animated:(BOOL) animated;
+
 @end
 
 @implementation VTHeapViewController
@@ -239,14 +247,8 @@ typedef enum {
                 if([_viewControllers count] >1){
                     
                     UIViewController * viewController = [_viewControllers objectAtIndex:[_viewControllers count] -2];
-                    if([viewController isViewLoaded]){
-                        UIView * v = [viewController view];
-                        if(v.superview ){
-                            [viewController viewWillDisappear:NO];
-                            [v removeFromSuperview];
-                            [viewController viewDidDisappear:NO];
-                        }
-                    }
+                    
+                    [self hiddenViewController:viewController animated:YES];
                 }
                 
                
@@ -361,7 +363,7 @@ typedef enum {
         return;
     }
     
-    if([_viewControllers count] >0){
+    if([_viewControllers count] > 1){
         
         UIViewController * topViewController = [_viewControllers lastObject];
         
@@ -721,24 +723,38 @@ typedef enum {
     }
     
     if(index < [viewControllers count]){
+        
+        [self hiddenViewController:self.topController animated:animated];
+        
         while(index < [_viewControllers count]){
-            [self popViewController:NO];
+            [_viewControllers removeLastObject];
         }
         while(index + 1 < [viewControllers count]){
-            [self pushViewController:[viewControllers objectAtIndex:index] animated:NO];
+            id viewController= [viewControllers objectAtIndex:index];
+            [_viewControllers addObject:viewController];
             index ++;
         }
         if(index < [viewControllers count]){
-            [self pushViewController:[viewControllers objectAtIndex:index] animated:animated];
+            
+            if(_viewControllers == nil){
+                _viewControllers = [[NSMutableArray alloc] init];
+            }
+            
+            id viewController= [viewControllers objectAtIndex:index];
+            [_viewControllers addObject:viewController];
+            [self addViewController:viewController animated:animated];
         }
     }
     else {
-        while(index + 1 < [_viewControllers count]){
-            [self popViewController:NO];
+        
+        [self removeViewController:self.topController animated:animated];
+        
+        while(index < [_viewControllers count]){
+            [_viewControllers removeLastObject];
         }
-        if(index < [_viewControllers count]){
-            [self popViewController:animated];
-        }
+        
+        [self visableViewController:self.topController animated:animated];
+        
     }
     
 }
@@ -756,5 +772,201 @@ typedef enum {
 -(id) topController{
     return [self topViewController];
 }
+
+-(void) removeViewController:(id) viewController animated:(BOOL) animated{
+    
+    if(viewController == nil){
+        return;
+    }
+    
+    if(animated && [viewController isViewLoaded] && [[viewController view] window]){
+       
+        UIView * v = [viewController view];
+        
+        CGRect r = [v frame];
+        
+        [viewController viewWillDisappear:animated];
+        
+        [UIView animateWithDuration:0.3 animations:^{
+           
+            [v setFrame:CGRectMake(r.size.width, r.origin.y, r.size.width, r.size.height)];
+            
+        } completion:^(BOOL finished) {
+            
+            [v removeFromSuperview];
+            [viewController viewDidDisappear:animated];
+            
+        }];
+        
+    }
+    else if([viewController isViewLoaded]){
+        
+        UIView * v = [viewController view];
+        
+        [viewController viewWillDisappear:animated];
+        [v removeFromSuperview];
+        [viewController viewDidDisappear:animated];
+    }
+}
+
+-(void) hiddenViewController:(id) viewController animated:(BOOL) animated{
+    
+    if(viewController == nil){
+        return;
+    }
+    
+    
+    if(animated && [viewController isViewLoaded] && [[viewController view] window]){
+       
+        UIView * v = [viewController view];
+        
+        [viewController viewWillDisappear:animated];
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            
+            if(v.layer.mask == nil){
+                CALayer * mask = [[CALayer alloc] init];
+                mask.backgroundColor = [UIColor colorWithWhite:1.0 alpha:ANIMATION_ALPHA].CGColor;
+                mask.frame = v.layer.bounds;
+                v.layer.mask = mask;
+                [mask release];
+            }
+            else{
+                v.layer.mask.backgroundColor = [UIColor colorWithWhite:1.0 alpha:ANIMATION_ALPHA].CGColor;
+            }
+            
+            v.layer.transform = CATransform3DMakeScale(ANIMATION_SCALE, ANIMATION_SCALE, ANIMATION_SCALE);
+            
+        } completion:^(BOOL finished) {
+            
+            [v removeFromSuperview];
+            
+            v.layer.mask = nil;
+            v.layer.transform = CATransform3DIdentity;
+            
+            [viewController viewDidDisappear:animated];
+            
+        }];
+        
+    }
+    else if([viewController isViewLoaded]){
+        
+        UIView * v = [viewController view];
+        
+        [viewController viewWillDisappear:animated];
+        [v removeFromSuperview];
+        [viewController viewDidDisappear:animated];
+    }
+    
+}
+
+-(void) visableViewController:(id) viewController animated:(BOOL) animated{
+    
+    if(viewController == nil){
+        return;
+    }
+    
+    if(animated && [self isViewLoaded] && self.view.window){
+        
+        UIView * view = self.view;
+        
+        CGSize size = view.bounds.size;
+        
+        UIView * v = [viewController view];
+        
+        [v setFrame:CGRectMake(0, 0, size.width, size.height)];
+        [v setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
+        
+        [viewController viewWillAppear:animated];
+        
+        [view insertSubview:v atIndex:0];
+        
+        v.layer.mask = nil;
+        v.layer.transform = CATransform3DMakeScale(ANIMATION_SCALE, ANIMATION_SCALE, ANIMATION_SCALE);
+        
+        [UIView animateWithDuration:0.3 animations:^{
+        
+            v.layer.transform = CATransform3DIdentity;
+            [v setFrame:CGRectMake(0, 0, size.width, size.height)];
+            
+        } completion:^(BOOL finished) {
+            
+            [viewController viewDidAppear:animated];
+            
+        }];
+        
+    }
+    else if([self isViewLoaded]){
+        
+        UIView * view = self.view;
+        
+        CGSize size = view.bounds.size;
+        
+        UIView * v = [viewController view];
+        
+        [v setFrame:CGRectMake(0, 0, size.width, size.height)];
+        [v setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
+        
+        [viewController viewWillAppear:animated];
+        
+        [view addSubview:v];
+        
+        [viewController viewDidAppear:animated];
+    }
+    
+}
+
+-(void) addViewController:(id) viewController animated:(BOOL) animated{
+    
+    if(viewController == nil){
+        return;
+    }
+    
+    if(animated && [self isViewLoaded] && self.view.window){
+        
+        UIView * view = self.view;
+        
+        CGSize size = view.bounds.size;
+        
+        UIView * v = [viewController view];
+    
+        [v setFrame:CGRectMake(size.width, 0, size.width, size.height)];
+        [v setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
+   
+        [viewController viewWillAppear:animated];
+        
+        [view addSubview:v];
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            
+            [v setFrame:CGRectMake(0, 0, size.width, size.height)];
+            
+        } completion:^(BOOL finished) {
+            
+            [viewController viewDidAppear:animated];
+         
+        }];
+        
+    }
+    else if([self isViewLoaded]){
+        
+        UIView * view = self.view;
+        
+        CGSize size = view.bounds.size;
+        
+        UIView * v = [viewController view];
+        
+        [v setFrame:CGRectMake(0, 0, size.width, size.height)];
+        [v setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
+        
+        [viewController viewWillAppear:animated];
+        
+        [view addSubview:v];
+        
+        [viewController viewDidAppear:animated];
+    }
+    
+}
+
 
 @end
