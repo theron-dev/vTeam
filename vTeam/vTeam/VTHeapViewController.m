@@ -485,7 +485,7 @@ typedef enum {
         _viewControllers = [[NSMutableArray alloc] initWithCapacity:4];
     }
     
-    if(animated && [self isViewLoaded]){
+    if(animated && [self isViewLoaded] && [_viewControllers count] >0){
         
         _animating  = YES;
         
