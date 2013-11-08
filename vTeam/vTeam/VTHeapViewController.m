@@ -361,7 +361,7 @@ typedef enum {
         return;
     }
     
-    if([_viewControllers count] >1){
+    if([_viewControllers count] >0){
         
         UIViewController * topViewController = [_viewControllers lastObject];
         
@@ -713,7 +713,7 @@ typedef enum {
     NSInteger index = 0;
     while(index < [viewControllers count] && index < [_viewControllers count]){
         id viewController1 = [viewControllers objectAtIndex:index];
-        id viewController2 = [viewControllers objectAtIndex:index];
+        id viewController2 = [_viewControllers objectAtIndex:index];
         if(viewController1 != viewController2){
             break;
         }
