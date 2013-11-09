@@ -95,3 +95,4 @@
 #import <vTeam/VTStatusGatherDataSource.h>
 #import <vTeam/VTActionView.h>
 #import <vTeam/VTWebView.h>
+#import <vTeam/VTAlertView.h>

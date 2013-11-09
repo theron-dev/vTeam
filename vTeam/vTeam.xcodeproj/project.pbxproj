@@ -337,6 +337,8 @@
 		11D678ED17AA5097000E02FA /* VTBehaviorTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 11D678EB17AA5097000E02FA /* VTBehaviorTask.m */; };
 		11D678F017AA5243000E02FA /* VTBehaviorTransactionTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 11D678EE17AA5242000E02FA /* VTBehaviorTransactionTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11D678F117AA5243000E02FA /* VTBehaviorTransactionTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 11D678EF17AA5242000E02FA /* VTBehaviorTransactionTask.m */; };
+		11E41C32182DD79800ED6D40 /* VTAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = 11E41C30182DD79800ED6D40 /* VTAlertView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11E41C33182DD79800ED6D40 /* VTAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E41C31182DD79800ED6D40 /* VTAlertView.m */; };
 		11E59F5F1728C197002DD63C /* IVTServiceContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 11E59F5E1728C03B002DD63C /* IVTServiceContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11E59F641728C785002DD63C /* VTStyleSheet.h in Headers */ = {isa = PBXBuildFile; fileRef = 11E59F621728C785002DD63C /* VTStyleSheet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11E59F651728C785002DD63C /* VTStyleSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E59F631728C785002DD63C /* VTStyleSheet.m */; };
@@ -780,6 +782,8 @@
 		11DE6CE417B8ADDF00B04782 /* VTDOMElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDOMElement.m; sourceTree = "<group>"; };
 		11DE6CE717B8AE4400B04782 /* VTDOMStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDOMStyle.h; sourceTree = "<group>"; };
 		11DE6CE817B8AE4400B04782 /* VTDOMStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDOMStyle.m; sourceTree = "<group>"; };
+		11E41C30182DD79800ED6D40 /* VTAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTAlertView.h; sourceTree = "<group>"; };
+		11E41C31182DD79800ED6D40 /* VTAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTAlertView.m; sourceTree = "<group>"; };
 		11E59F5E1728C03B002DD63C /* IVTServiceContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVTServiceContainer.h; sourceTree = "<group>"; };
 		11E59F621728C785002DD63C /* VTStyleSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTStyleSheet.h; sourceTree = "<group>"; };
 		11E59F631728C785002DD63C /* VTStyleSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTStyleSheet.m; sourceTree = "<group>"; };
@@ -1488,6 +1492,8 @@
 				116FD2311829FD430001CB43 /* VTActionView.m */,
 				1135CC01182B3EBC0074D26E /* VTWebView.h */,
 				1135CC02182B3EBC0074D26E /* VTWebView.m */,
+				11E41C30182DD79800ED6D40 /* VTAlertView.h */,
+				11E41C31182DD79800ED6D40 /* VTAlertView.m */,
 			);
 			name = UIKit;
 			sourceTree = "<group>";
@@ -1621,6 +1627,7 @@
 				11619C6A1732338C00BD3561 /* VTDataSource.h in Headers */,
 				11619C6E1732383800BD3561 /* VTPageDataSource.h in Headers */,
 				11619C73173239B000BD3561 /* VTDataController.h in Headers */,
+				11E41C32182DD79800ED6D40 /* VTAlertView.h in Headers */,
 				11619C7717323BF500BD3561 /* VTContainerDataController.h in Headers */,
 				11619C7B17324C0A00BD3561 /* VTDownlinkService.h in Headers */,
 				11619C831732559900BD3561 /* VTUplinkService.h in Headers */,
@@ -1971,6 +1978,7 @@
 				1131407A1749EC590081641F /* hprocess.c in Sources */,
 				1131407C1749EC590081641F /* hqueue.c in Sources */,
 				113140801749EC590081641F /* hrwlock.c in Sources */,
+				11E41C33182DD79800ED6D40 /* VTAlertView.m in Sources */,
 				113140821749EC590081641F /* hserial_list.c in Sources */,
 				113140841749EC590081641F /* hserial_map.c in Sources */,
 				113140861749EC590081641F /* hstack.c in Sources */,
