@@ -10,6 +10,8 @@
 
 @interface VTDOMElement (Render)
 
+@property(nonatomic,readonly,getter = isHidden) BOOL hidden;
+
 -(void) render:(CGRect) rect context:(CGContextRef) context;
 
 -(void) draw:(CGRect) rect context:(CGContextRef) context;

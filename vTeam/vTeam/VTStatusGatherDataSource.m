@@ -10,28 +10,16 @@
 
 @implementation VTStatusGatherDataSource
 
-    /*
-     @property(nonatomic,assign,getter = isLoading) BOOL loading;
-     @property(nonatomic,assign,getter = isLoaded) BOOL loaded;
-     @property(nonatomic,readonly,getter = isEmpty) BOOL empty;
-     @property(nonatomic,retain) NSString * dataKey;
-     @property(nonatomic,retain) NSMutableArray * dataObjects;
-     
-     -(void) refreshData;
-     
-     -(void) reloadData;
-     
-     -(void) cancel;
-     
-     -(NSInteger) count;
-     
-     -(id) dataObjectAtIndex:(NSInteger) index;
-     
-     -(id) dataObject;
-     
-     -(void) loadResultsData:(id) resultsData;
-     */
-    
+-(void) dealloc{
+    for (VTStatusDataSource * dataSource in _dataSources) {
+        [dataSource setContext:nil];
+        [dataSource setDelegate:nil];
+    }
+    [_dataSources release];
+    _dataSources = nil;
+    [super dealloc];
+}
+
 -(BOOL) isLoading{
     return [[self dataSource] isLoading];
 }
@@ -128,5 +116,12 @@
     
     return [_dataSources count] > 0 ? [_dataSources objectAtIndex:0] : nil;
 }
-    
+
+-(void) setContext:(id<IVTUIContext>)context{
+    [super setContext:context];
+    for (VTStatusDataSource * dataSource in _dataSources) {
+        [dataSource setContext:context];
+    }
+}
+
 @end

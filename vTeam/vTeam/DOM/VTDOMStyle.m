@@ -103,6 +103,9 @@
 }
 
 +(UIColor *) colorValue:(NSString *) value{
+    if([value isEqualToString:@"clear"]){
+        return [UIColor clearColor];
+    }
     if(value){
         int r=0,g=0,b=0;
         float a = 1.0;

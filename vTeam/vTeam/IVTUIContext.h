@@ -36,4 +36,8 @@
 
 -(void) loadDOMStyleSheet:(NSString *) cssContent;
 
+-(void) setResultsData:(id) resultsData;
+
+-(void) waitResultsData:(void (^)(id resultsData)) callback;
+
 @end

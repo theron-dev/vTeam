@@ -136,6 +136,18 @@
         layer.contents = (id)[image CGImage];
         layer.contentsRect = CGRectMake(0, 0, 1.0, 1.0);
         
+        CGSize imageSize = [image size];
+        CGFloat leftCapWidth = [image leftCapWidth];
+        CGFloat topCapHeight = [image topCapHeight];
+        
+        if(leftCapWidth || topCapHeight){
+            
+            leftCapWidth = leftCapWidth / imageSize.width;
+            topCapHeight = topCapHeight / imageSize.height;
+            
+            layer.contentsCenter = CGRectMake(leftCapWidth, topCapHeight, 1.0 - leftCapWidth , 1.0 - topCapHeight);
+        }
+        
         NSString * gravity = [self stringValueForKey:@"gravity"];
         
         if([gravity isEqualToString:@"center"]){

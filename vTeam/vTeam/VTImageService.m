@@ -52,14 +52,45 @@
     return md5String;
 }
 
+-(NSString *) absoluteSrc:(NSString *)src{
+    
+    if(src == nil){
+        return nil;
+    }
+    
+    if([src hasPrefix:@"@"]){
+        return src;
+    }
+    
+    if([src hasPrefix:@"http://"]){
+        return src;
+    }
+    
+    NSRange r = [src rangeOfString:@"://"];
+    
+    if(r.location != NSNotFound){
+        
+        NSString * scheme = [src substringToIndex:r.location];
+        
+        NSString * baseUrl = [self.config valueForKey:scheme];
+        
+        if(baseUrl){
+            return [baseUrl stringByAppendingString:[src substringFromIndex:r.location + r.length]];
+        }
+        
+    }
+    
+    return src;
+}
+
 -(BOOL) handle:(Protocol *)taskType task:(id<IVTTask>)task priority:(NSInteger)priority{
     
     if([task conformsToProtocol:@protocol(IVTImageTask)]){
         
         id<IVTImageTask> imageTask = (id<IVTImageTask>) task;
         
-        NSString * defaultSrc = [imageTask defaultSrc];
-        
+        NSString * defaultSrc = [self absoluteSrc:[imageTask defaultSrc]];
+       
         if(defaultSrc){
             if([defaultSrc hasPrefix:@"@"]){
                 [imageTask setDefaultImage:[UIImage imageNamed:[defaultSrc substringFromIndex:1]]];
@@ -90,7 +121,7 @@
             }
         }
         
-        NSString * src = [imageTask src];
+        NSString * src = [self absoluteSrc:[imageTask src]];
         
         if(src){
             if([src hasPrefix:@"@"]){

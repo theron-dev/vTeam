@@ -28,6 +28,8 @@
 
 -(void) downloadImagesForElement:(VTDOMElement *) element;
 
+-(void) loadImagesForElement:(VTDOMElement *) element;
+
 -(void) removeDocumentByIndexPath:(NSIndexPath *) indexPath;
 
 -(void) layoutDocumentByIndexPath:(NSIndexPath *) indexPath;

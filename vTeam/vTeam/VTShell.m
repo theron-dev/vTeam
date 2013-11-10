@@ -95,11 +95,13 @@ extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
     NSMutableArray * _viewControllers;
     NSMutableArray * _serviceContainers;
     NSMutableDictionary * _focusValues;
+    
 }
 
 @property(nonatomic,retain) id rootViewController;
 @property(nonatomic,readonly) NSMutableArray * platformKeys;
 @property(nonatomic,readonly) NSMutableDictionary * storyboards;
+@property(nonatomic,copy) void (^ resultsCallback)(id resultsData);
 
 @end
 
@@ -111,6 +113,7 @@ extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
 @synthesize styleSheet = _styleSheet;
 @synthesize domStyleSheet = _domStyleSheet;
 @synthesize platformKeys = _platformKeys;
+@synthesize resultsCallback = _resultsCallback;
 
 -(void) dealloc{
     [_bundle release];
@@ -123,6 +126,7 @@ extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
     [_domStyleSheet release];
     [_storyboards release];
     [_platformKeys release];
+    self.resultsCallback = nil;
     [super dealloc];
 }
 
@@ -444,6 +448,17 @@ extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
     [parse parseCSS:cssContent toStyleSheet:self.domStyleSheet];
     self.domStyleSheet.version ++;
     [parse release];
+}
+
+-(void) waitResultsData:(void (^)(id resultsData))callback{
+    self.resultsCallback = callback;
+}
+
+-(void) setResultsData:(id)resultsData{
+    if(_resultsCallback){
+        _resultsCallback(resultsData);
+        self.resultsCallback = nil;
+    }
 }
 
 @end

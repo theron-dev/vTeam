@@ -70,7 +70,7 @@
                 actionColor = [UIColor colorWithWhite:0.0 alpha:0.3];
             }
             
-            _highlightedLayer.cornerRadius = [self floatValueForKey:@"action-corner-radius"];
+            _highlightedLayer.cornerRadius = [self floatValueForKey:@"corner-radius"];
             _highlightedLayer.masksToBounds = YES;
             _highlightedLayer.backgroundColor = [actionColor CGColor];
             

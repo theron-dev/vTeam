@@ -164,10 +164,14 @@ typedef  enum {
     
     if(touchType == 0){
         
-        if( touchType || (location.x >=0 && location.y >=0 && location.x < r.size.width && location.y < r.size.height)){
+        if( touchType || (location.x >=0 && location.y >=0 && location.x < r.size.width
+                          && location.y < r.size.height)){
             
+            NSInteger index = [[element childs] count] -1;
             
-            for(VTDOMElement * el in [element childs]){
+            for (; index >=0; index --) {
+                
+                VTDOMElement * el = [[element childs] objectAtIndex:index];
                 
                 r = [el frame];
                 

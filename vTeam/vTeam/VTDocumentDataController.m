@@ -66,6 +66,9 @@
         
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier] autorelease];
         
+        [cell setBackgroundColor:[UIColor clearColor]];
+        [cell.contentView setBackgroundColor:[UIColor clearColor]];
+        
         CGSize size = cell.contentView.bounds.size;
         
         VTDOMView * documentView = [[VTDOMView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
@@ -89,12 +92,34 @@
     [documentView setElement:[document rootElement]];
     
     if([document rootElement]){
+        
+        [self loadImagesForElement:[document rootElement]];
+        
         dispatch_async(dispatch_get_current_queue(), ^{
             [self downloadImagesForElement:[document rootElement]];
         });
     }
     
     return cell;
+}
+
+
+-(void) loadImagesForElement:(VTDOMElement *) element{
+    
+    if([element isKindOfClass:[VTDOMImageElement class]]){
+        
+        VTDOMImageElement * imgElement = (VTDOMImageElement *) element;
+        
+        if([imgElement isLoading]){
+            [self.context cancelHandle:@protocol(IVTImageTask) task:imgElement];
+        }
+        
+        [self.context handle:@protocol(IVTLocalImageTask) task:imgElement priority:0.0];
+    }
+    
+    for(VTDOMElement * el in [element childs]){
+        [self loadImagesForElement:el];
+    }
 }
 
 -(void) downloadImagesForElement:(VTDOMElement *) element{
