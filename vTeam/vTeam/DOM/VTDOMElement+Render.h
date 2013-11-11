@@ -11,6 +11,7 @@
 @interface VTDOMElement (Render)
 
 @property(nonatomic,readonly,getter = isHidden) BOOL hidden;
+@property(nonatomic,readonly) CALayer * layer;
 
 -(void) render:(CGRect) rect context:(CGContextRef) context;
 

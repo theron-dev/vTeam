@@ -168,10 +168,7 @@
         CGFloat top = backgroundImage.topCapHeight / imageSize.height;
         
         if(left && top){
-            static CALayer * bgLayer = nil;
-            if(bgLayer == nil){
-                bgLayer = [[CALayer alloc] init];
-            }
+            CALayer * bgLayer = [self layer];
             bgLayer.frame = r;
             bgLayer.contents = (id)[backgroundImage CGImage];
             bgLayer.contentsScale = [backgroundImage scale];
@@ -185,6 +182,14 @@
 
     }
 
+}
+
+-(CALayer *) layer{
+    static CALayer * layer = nil;
+    if(layer == nil){
+        layer = [[CALayer alloc] init];
+    }
+    return layer;
 }
 
 @end

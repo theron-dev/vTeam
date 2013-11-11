@@ -14,6 +14,11 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+@interface VTDOMImageElement()
+
+
+@end
+
 @implementation VTDOMImageElement
 
 @synthesize image = _image;
@@ -131,7 +136,7 @@
     
     if(image ){
         
-        CALayer * layer = [[[CALayer alloc] init] autorelease];
+        CALayer * layer = [self layer];
         layer.frame = r;
         layer.contents = (id)[image CGImage];
         layer.contentsRect = CGRectMake(0, 0, 1.0, 1.0);
