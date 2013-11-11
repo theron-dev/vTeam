@@ -51,9 +51,10 @@
 @synthesize clipsLastTitle = _clipsLastTitle;
 @synthesize colSpan = _colSpan;
 @synthesize view;
+
 -(id) init{
     if((self = [super init])){
-        _titleAlignment = UITextAlignmentCenter;
+        _titleAlignment = NSTextAlignmentCenter;
         _titleMinFontSize = 7;
         _colSpan = 1;
     }
@@ -106,21 +107,21 @@
     CGFloat fontSize = [font pointSize];
 
     NSString * title = _title;
-    
-    CGSize size = [title sizeWithFont:font minFontSize:_titleMinFontSize actualFontSize:&fontSize forWidth:rect.size.width lineBreakMode:UILineBreakModeTailTruncation];
+
+    CGSize size = [title sizeWithFont:font minFontSize:_titleMinFontSize actualFontSize:&fontSize forWidth:rect.size.width lineBreakMode:NSLineBreakByTruncatingTail];
 
     if(_clipsLastTitle && fontSize != [font pointSize]){
         NSArray * ss = [_title componentsSeparatedByString:@"-"];
         title = [ss lastObject];
         fontSize = [font pointSize];
-        size = [title sizeWithFont:font minFontSize:_titleMinFontSize actualFontSize:&fontSize forWidth:rect.size.width lineBreakMode:UILineBreakModeTailTruncation];
+        size = [title sizeWithFont:font minFontSize:_titleMinFontSize actualFontSize:&fontSize forWidth:rect.size.width lineBreakMode:NSLineBreakByTruncatingTail];
     }
     
     CGRect textRect = CGRectMake(0, (rect.size.height - size.height) * 0.5, rect.size.width, size.height);
     
     font = [font fontWithSize:fontSize];
     
-    [title drawInRect:textRect withFont:font lineBreakMode:UILineBreakModeTailTruncation alignment:_titleAlignment];
+    [title drawInRect:textRect withFont:font lineBreakMode:NSLineBreakByTruncatingTail alignment:_titleAlignment];
     
     UIGraphicsPopContext();
     

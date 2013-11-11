@@ -17,7 +17,7 @@
 @property(nonatomic,retain) UIColor * titleColor;
 @property(nonatomic,retain) UIFont * titleFont;
 @property(nonatomic,assign) CGFloat titleMinFontSize;
-@property(nonatomic,assign) UITextAlignment titleAlignment;
+@property(nonatomic,assign) NSTextAlignment titleAlignment;
 @property(nonatomic,retain) UIColor * backgroundColor;
 @property(nonatomic,retain) NSString * keyPath;
 @property(nonatomic,assign,getter = isClipsLastTitle) BOOL clipsLastTitle;
