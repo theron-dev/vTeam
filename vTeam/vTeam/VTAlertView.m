@@ -8,6 +8,8 @@
 
 #import "VTAlertView.h"
 
+#import <QuartzCore/QuartzCore.h>
+
 @interface VTAlertView(){
     UIWindow * _alertWindow;
 }
