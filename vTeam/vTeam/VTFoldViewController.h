@@ -12,4 +12,7 @@ extern NSString * FoldViewControllerToCenterNotification;
 
 @interface VTFoldViewController : VTViewController<UIGestureRecognizerDelegate>
 
+@property(nonatomic,readonly,getter = isAnimating) BOOL animating;
+@property(nonatomic,readonly,getter=isDragging)    BOOL dragging;
+
 @end

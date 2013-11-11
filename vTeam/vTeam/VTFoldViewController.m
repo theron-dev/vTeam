@@ -122,6 +122,7 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
 @property(nonatomic,retain) UIViewController<IVTUIViewController> * rightViewController;
 @property(nonatomic,assign) CGRect beginRect;
 @property(nonatomic,retain) UITapGestureRecognizer * tapGestureRecognizer;
+@property(nonatomic,assign) CGSize layoutSize;
 
 @end
 
@@ -136,6 +137,9 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
 @synthesize rightViewController = _rightViewController;
 @synthesize centerViewController = _centerViewController;
 @synthesize beginRect = _beginRect;
+@synthesize animating = _animating;
+@synthesize dragging = _dragging;
+@synthesize layoutSize =_layoutSize;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -164,7 +168,7 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
     self.tapGestureRecognizer = [[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureRecognizerAction:)] autorelease];
     self.tapGestureRecognizer.delegate = self;
     
-
+    
     UIView * centerView = [[self centerViewController] view];
     
     if(centerView){
@@ -231,17 +235,22 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
 -(void) viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
     
-    UIView * leftView = [[self leftViewController] view];
-    UIView * rightView = [[self rightViewController] view];
-    
-    if(leftView.superview){
-        [self focusLeft:YES];
-    }
-    else if(rightView.superview){
-        [self focusRight:YES];
-    }
-    else{
-        [self focusCenter:YES];
+    if(!CGSizeEqualToSize(self.view.bounds.size, _layoutSize)){
+        
+        _layoutSize = self.view.bounds.size;
+        
+        UIView * leftView = [[self leftViewController] view];
+        UIView * rightView = [[self rightViewController] view];
+        
+        if(leftView.superview){
+            [self focusLeft:YES];
+        }
+        else if(rightView.superview){
+            [self focusRight:YES];
+        }
+        else{
+            [self focusCenter:YES];
+        }
     }
 }
 
@@ -261,6 +270,8 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
 }
 
 -(void) foldView:(VTFoldView *) foldView didMovedFrom:(CGPoint) fromPoint to:(CGPoint) toPoint{
+    
+    _dragging = YES;
     
     UIView * leftView = [[self leftViewController] view];
     UIView * centerView = [[self centerViewController] view];
@@ -347,6 +358,10 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
 
 -(void) focusLeft:(BOOL) animated{
     
+    if(_animating){
+        return;
+    }
+    
     UIView * leftView = [[self leftViewController] view];
     UIView * centerView = [[self centerViewController] view];
     UIView * rightView = [[self rightViewController] view];
@@ -393,7 +408,11 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
         [leftView setFrame:CGRectMake(0, 0, size.width, size.height)];
         
         if(animated){
+            _animating = YES;
             [UIView commitAnimations];
+        }
+        else{
+            _animating = NO;
         }
         
         [self.view removeGestureRecognizer:_tapGestureRecognizer];
@@ -403,6 +422,11 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
 }
 
 -(void) focusRight:(BOOL) animated{
+    
+    if(_animating){
+        return;
+    }
+    
     UIView * leftView = [[self leftViewController] view];
     UIView * centerView = [[self centerViewController] view];
     UIView * rightView = [[self rightViewController] view];
@@ -447,7 +471,11 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
         [rightView setFrame:CGRectMake(0, 0, size.width, size.height)];
         
         if(animated){
+            _animating = YES;
             [UIView commitAnimations];
+        }
+        else{
+            _animating = NO;
         }
         
         [self.view removeGestureRecognizer:_tapGestureRecognizer];
@@ -456,6 +484,11 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
 }
 
 -(void) focusCenter:(BOOL) animated{
+    
+    if(_animating){
+        return;
+    }
+    
     UIView * leftView = [[self leftViewController] view];
     UIView * centerView = [[self centerViewController] view];
     UIView * rightView = [[self rightViewController] view];
@@ -482,9 +515,15 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
         [centerView setFrame:CGRectMake(0, 0, size.width, size.height)];
         
         if(animated){
+            
+            _animating = YES;
+            
             [UIView commitAnimations];
         }
         else{
+            
+            _animating = NO;
+            
             [centerView setUserInteractionEnabled:YES];
             if(leftView.superview){
                 [self.leftViewController viewWillDisappear:animated];
@@ -507,6 +546,8 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
 }
 
 -(void) foldViewDidEnd:(VTFoldView *) foldView{
+    
+    _dragging = NO;
     
     UIView * leftView = [[self leftViewController] view];
     UIView * rightView = [[self rightViewController] view];
@@ -532,6 +573,7 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
 
 
 -(void) _toCenterAnimatedDidStop{
+    _animating = NO;
     UIView * leftView = [[self leftViewController] view];
     UIView * centerView = [[self centerViewController] view];
     UIView * rightView = [[self rightViewController] view];
@@ -550,10 +592,12 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
 }
 
 -(void) _toLeftAnimatedDidStop{
+    _animating = NO;
     [self.view setUserInteractionEnabled:YES];
 }
 
 -(void) _toRightAnimatedDidStop{
+    _animating = NO;
     [self.view setUserInteractionEnabled:YES];
 }
 
@@ -695,6 +739,8 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
     [[self centerViewController] viewDidAppear:animated];
     
 
+    _layoutSize = self.view.bounds.size;
+    
 }
 
 -(void) viewWillDisappear:(BOOL)animated{
