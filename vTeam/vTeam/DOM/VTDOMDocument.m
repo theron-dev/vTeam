@@ -22,6 +22,7 @@
 @synthesize rootElement = _rootElement;
 @synthesize styleSheet = _styleSheet;
 @synthesize indexPath = _indexPath;
+@synthesize loaded = _loaded;
 
 -(void) dealloc{
     [_rootElement setDocument:nil];

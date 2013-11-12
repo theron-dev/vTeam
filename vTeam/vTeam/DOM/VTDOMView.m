@@ -11,15 +11,10 @@
 #import "VTDOMElement+Control.h"
 #import <QuartzCore/QuartzCore.h>
 
-typedef  enum {
-    VTDOMViewDisplayModeNone,VTDOMViewDisplayModeInited,VTDOMViewDisplayModePart,VTDOMViewDisplayModeRefresh
-}VTDOMViewDisplayMode;
 
 @interface VTDOMView(){
-    NSMutableSet * _needDisplayElements;
-    VTDOMViewDisplayMode _displayMode;
+    NSMutableDictionary * _elementViews;
 }
-
 
 -(void) viewBindElement:(VTDOMElement *) element;
 
@@ -34,7 +29,12 @@ typedef  enum {
 @synthesize delegate = _delegate;
 
 -(void) dealloc{
-    [_needDisplayElements release];
+    for(UIView * v in [_elementViews allValues]){
+        if([v respondsToSelector:@selector(setElement:)]){
+            [v performSelector:@selector(setElement:) withObject:nil];
+        }
+    }
+    [_elementViews release];
     [self viewUnBindElement:_element];
     [_element release];
     [super dealloc];
@@ -51,48 +51,14 @@ typedef  enum {
 
 - (void)drawRect:(CGRect)rect
 {
-//    if(_displayMode == VTDOMViewDisplayModePart){
-//        
-//        CGContextRef ctx = UIGraphicsGetCurrentContext();
-//        
-//        CGContextSetTextMatrix(ctx , CGAffineTransformIdentity);
-//        
-//        for (VTDOMElement * el  in _needDisplayElements) {
-//            
-//            CGRect r = [el.parentElement convertRect:el.frame superElement:_element];
-//            
-//            if(r.size.width >0 && r.size.height >0){
-//                
-//                CGContextSaveGState(ctx);
-//                
-//                CGContextTranslateCTM(ctx, r.origin.x, r.origin.y);
-//                
-//                CGContextClipToRect(ctx, CGRectMake(0, 0, r.size.width, r.size.height));
-//                
-//                [el draw:CGRectMake(0, 0, r.size.width, r.size.height) context:ctx];
-//                
-//                CGContextRestoreGState(ctx);
-//                
-//            }
-//            
-//        }
-//
-//    }
-//    else {
+
+    [super drawRect:rect];
     
-        [super drawRect:rect];
-        
-        CGContextRef ctx = UIGraphicsGetCurrentContext();
-        
-        CGContextSetTextMatrix(ctx , CGAffineTransformIdentity);
-        
-        [_element render:_element.frame context:ctx];
-        
-        _displayMode = VTDOMViewDisplayModeInited;
-//    }
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
     
-    [_needDisplayElements removeAllObjects];
+    CGContextSetTextMatrix(ctx , CGAffineTransformIdentity);
     
+    [_element render:_element.frame context:ctx];
 }
 
 -(void) viewBindElement:(VTDOMElement *) element{
@@ -115,15 +81,13 @@ typedef  enum {
 -(void) setElement:(VTDOMElement *)element{
     if(_element != element){
         [self viewUnBindElement:_element];
-        [self viewBindElement:element];
         [element retain];
         [_element release];
         _element = element;
         if(_allowAutoLayout){
             [_element layout:self.bounds.size];
         }
-        _displayMode = VTDOMViewDisplayModeRefresh;
-        [_needDisplayElements removeAllObjects];
+        [self viewBindElement:_element];
         [self setNeedsDisplay];
     }
 }
@@ -132,7 +96,6 @@ typedef  enum {
     [super setBounds:bounds];
     if(_allowAutoLayout){
         [_element layout:self.bounds.size];
-        _displayMode = VTDOMViewDisplayModeRefresh;
     }
     [self setNeedsDisplay];
 }
@@ -141,7 +104,6 @@ typedef  enum {
     [super setFrame:frame];
     if(_allowAutoLayout){
         [_element layout:self.bounds.size];
-        _displayMode = VTDOMViewDisplayModeRefresh;
     }
     [self setNeedsDisplay];
 }
@@ -260,34 +222,6 @@ typedef  enum {
 }
 
 -(void) vtDOMElementDoNeedDisplay:(VTDOMElement *) element{
-    
-    if(_needDisplayElements == nil){
-        _needDisplayElements = [[NSMutableSet alloc] initWithCapacity:4];
-    }
-    
-    BOOL hasElement = NO;
-    
-    VTDOMElement * el = element;
-    
-    while(el && el != _element){
-        
-        if([_needDisplayElements containsObject:el]){
-            hasElement = YES;
-        }
-        
-        el = [el parentElement];
-    }
-    
-    if(!hasElement){
-        CGRect r = [el.parentElement convertRect:element.frame superElement:_element];
-        [_needDisplayElements addObject:element];
-        [self setNeedsDisplayInRect:r];
-    }
-    
-    if(_displayMode == VTDOMViewDisplayModeInited){
-        _displayMode = VTDOMViewDisplayModePart;
-    }
-    
     [self setNeedsDisplay];
 }
 
@@ -300,12 +234,28 @@ typedef  enum {
 -(void) vtDOMElement:(VTDOMElement *) element addView:(UIView *) view frame:(CGRect)frame{
     
     view.frame = [element convertRect:frame superElement:_element];
+    
     [self addSubview:view];
 }
 
--(void) willMoveToWindow:(UIWindow *)newWindow{
-    [super willMoveToWindow:newWindow];
-    _displayMode = VTDOMViewDisplayModeNone;
+-(UIView *) vtDOMElementView:(VTDOMElement *) element viewClass:(Class)viewClass{
+    NSString * eid = [element attributeValueForKey:@"id"];
+    if(eid){
+        UIView * v = [_elementViews objectForKey:eid];
+        if(v == nil){
+            v = [[[viewClass alloc] initWithFrame:element.frame] autorelease];
+            if(_elementViews == nil){
+                _elementViews = [[NSMutableDictionary alloc] initWithCapacity:4];
+            }
+            [_elementViews setObject:v forKey:eid];
+        }
+        else{
+            v.frame = element.frame;
+        }
+        return v;
+    }
+    return nil;
 }
+
 
 @end

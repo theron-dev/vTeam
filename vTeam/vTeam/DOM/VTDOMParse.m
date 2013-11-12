@@ -18,6 +18,7 @@
 #import "VTDOMLabelElement.h"
 #import "VTDOMRichElement.h"
 #import "VTDOMActionElement.h"
+#import "VTDOMViewElement.h"
 
 typedef struct _VTDOMParseScanf {
     hxml_scanf_t base;
@@ -108,6 +109,9 @@ static hcss_scanf_t VTDOMParseCSSScanf = {
     }
     else if([name isEqualToString:@"action"]){
         elementClass = [VTDOMActionElement class];
+    }
+    else if([name isEqualToString:@"view"]){
+        elementClass = [VTDOMViewElement class];
     }
     
     VTDOMElement * element = [[elementClass alloc] init];

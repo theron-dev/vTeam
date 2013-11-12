@@ -135,6 +135,9 @@
         else if(*p == '.'){
             [ms appendString:@"."];
         }
+        else if(*p == '-'){
+            [ms appendString:@"-"];
+        }
         else if(*p == '_'){
             [ms appendString:@"_"];
         }

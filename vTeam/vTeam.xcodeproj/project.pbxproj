@@ -301,7 +301,7 @@
 		11A0415017BB427B001992BE /* VTDOMElement+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A0414E17BB427A001992BE /* VTDOMElement+Frame.m */; };
 		11A0415717BB42ED001992BE /* VTDOMElement+Render.h in Headers */ = {isa = PBXBuildFile; fileRef = 11A0415517BB42ED001992BE /* VTDOMElement+Render.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11A0415817BB42ED001992BE /* VTDOMElement+Render.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A0415617BB42ED001992BE /* VTDOMElement+Render.m */; };
-		11A0415F17BB4694001992BE /* VTDOMElement+Style.h in Headers */ = {isa = PBXBuildFile; fileRef = 11A0415D17BB4693001992BE /* VTDOMElement+Style.h */; };
+		11A0415F17BB4694001992BE /* VTDOMElement+Style.h in Headers */ = {isa = PBXBuildFile; fileRef = 11A0415D17BB4693001992BE /* VTDOMElement+Style.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11A0416017BB4694001992BE /* VTDOMElement+Style.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A0415E17BB4694001992BE /* VTDOMElement+Style.m */; };
 		11A0416317BB4D08001992BE /* VTDOMImageElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 11A0416117BB4D08001992BE /* VTDOMImageElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11A0416417BB4D08001992BE /* VTDOMImageElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A0416217BB4D08001992BE /* VTDOMImageElement.m */; };
@@ -339,6 +339,8 @@
 		11BC146F1804F6C60065A9EE /* UIImage+GaussianBlur.m in Sources */ = {isa = PBXBuildFile; fileRef = 11BC146D1804F6C60065A9EE /* UIImage+GaussianBlur.m */; };
 		11BC147B1804FE770065A9EE /* VTController.h in Headers */ = {isa = PBXBuildFile; fileRef = 11BC14791804FE770065A9EE /* VTController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11BC147C1804FE770065A9EE /* VTController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11BC147A1804FE770065A9EE /* VTController.m */; };
+		11BE4F8618311E830013722E /* UIView+VTDOMElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 11BE4F8418311E830013722E /* UIView+VTDOMElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11BE4F8718311E830013722E /* UIView+VTDOMElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 11BE4F8518311E830013722E /* UIView+VTDOMElement.m */; };
 		11C238211786BBC000DBADBD /* VTTabViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C2381F1786BBC000DBADBD /* VTTabViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11C238221786BBC000DBADBD /* VTTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C238201786BBC000DBADBD /* VTTabViewController.m */; };
 		11C238311786CB8200DBADBD /* VTCreatorViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C2382F1786CB8100DBADBD /* VTCreatorViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -800,6 +802,8 @@
 		11BC146D1804F6C60065A9EE /* UIImage+GaussianBlur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GaussianBlur.m"; sourceTree = "<group>"; };
 		11BC14791804FE770065A9EE /* VTController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTController.h; sourceTree = "<group>"; };
 		11BC147A1804FE770065A9EE /* VTController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTController.m; sourceTree = "<group>"; };
+		11BE4F8418311E830013722E /* UIView+VTDOMElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+VTDOMElement.h"; sourceTree = "<group>"; };
+		11BE4F8518311E830013722E /* UIView+VTDOMElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+VTDOMElement.m"; sourceTree = "<group>"; };
 		11C2381F1786BBC000DBADBD /* VTTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTTabViewController.h; sourceTree = "<group>"; };
 		11C238201786BBC000DBADBD /* VTTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTTabViewController.m; sourceTree = "<group>"; };
 		11C2382F1786CB8100DBADBD /* VTCreatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTCreatorViewController.h; sourceTree = "<group>"; };
@@ -1434,6 +1438,8 @@
 				11A0416E17BB5E1B001992BE /* NSString+VTDOMSource.m */,
 				11A0417117BB6032001992BE /* VTDOM.h */,
 				11A0417217BB6032001992BE /* VTDOM.m */,
+				11BE4F8418311E830013722E /* UIView+VTDOMElement.h */,
+				11BE4F8518311E830013722E /* UIView+VTDOMElement.m */,
 			);
 			path = DOM;
 			sourceTree = "<group>";
@@ -1828,6 +1834,7 @@
 				ACAB458C1788E3EB005D1CCD /* VTTabDataController.h in Headers */,
 				11541C57178FDC9C001D9FBF /* UIControl+VTDataOutlet.h in Headers */,
 				11541C5F1790035A001D9FBF /* VTTabPageDataController.h in Headers */,
+				11BE4F8618311E830013722E /* UIView+VTDOMElement.h in Headers */,
 				11541C63179005E2001D9FBF /* VTScrollView.h in Headers */,
 				ACE330A81792509B003B2D85 /* VTAnimationView.h in Headers */,
 				11A2D10C179690C600082380 /* VTRich.h in Headers */,
@@ -2096,6 +2103,7 @@
 				111638D617642868009979D3 /* NSString+VTBASE64String.m in Sources */,
 				111638DA176428A9009979D3 /* NSString+VTBASE64Decode.m in Sources */,
 				111638E217642949009979D3 /* NSData+CCCryptor.m in Sources */,
+				11BE4F8718311E830013722E /* UIView+VTDOMElement.m in Sources */,
 				111638E717643AA2009979D3 /* VTSqlite.m in Sources */,
 				AC339DA31765E9D800EC2DAC /* hfdb.c in Sources */,
 				11407291176999C800275493 /* VTFDB.m in Sources */,

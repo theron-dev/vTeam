@@ -14,6 +14,8 @@
 
 #import "VTDOMImageElement.h"
 
+#import "UIView+Search.h"
+
 @implementation VTDocumentDataController
 
 @synthesize html = _html;
@@ -91,18 +93,57 @@
     
     [documentView setElement:[document rootElement]];
     
-    if([document rootElement]){
+    [self loadImagesForView:documentView];
+    
+    dispatch_async(dispatch_get_current_queue(), ^{
+        [self downloadImagesForView:documentView];
+    });
+    
+    if([document rootElement] && ![document isLoaded]){
         
         [self loadImagesForElement:[document rootElement]];
         
         dispatch_async(dispatch_get_current_queue(), ^{
             [self downloadImagesForElement:[document rootElement]];
         });
+        
+        [document setLoaded:YES];
     }
     
     return cell;
 }
 
+
+-(void) downloadImagesForView:(UIView *) view{
+    NSArray * imageViews = [view searchViewForProtocol:@protocol(IVTImageTask)];
+    for(id imageView in imageViews){
+        if(![imageView isLoading] && ![imageView isLoaded]){
+            [imageView setSource:self];
+            [self.context handle:@protocol(IVTImageTask) task:imageView priority:0];
+        }
+    }
+}
+
+-(void) loadImagesForView:(UIView *) view{
+    NSArray * imageViews = [view searchViewForProtocol:@protocol(IVTImageTask)];
+    for(id imageView in imageViews){
+        if([imageView isLoading]){
+            [self.context cancelHandle:@protocol(IVTImageTask) task:imageView];
+        }
+        if(![imageView isLoaded]){
+            [self.context handle:@protocol(IVTLocalImageTask) task:imageView priority:0];
+        }
+    }
+}
+
+-(void) cancelDownloadImagesForView:(UIView *) view{
+    NSArray * imageViews = [view searchViewForProtocol:@protocol(IVTImageTask)];
+    for(id imageView in imageViews){
+        if([imageView isLoading]){
+            [self.context cancelHandle:@protocol(IVTImageTask) task:imageView];
+        }
+    }
+}
 
 -(void) loadImagesForElement:(VTDOMElement *) element{
     

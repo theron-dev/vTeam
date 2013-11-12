@@ -15,13 +15,16 @@
 @synthesize view = _view;
 
 -(void) dealloc{
+    if([_view respondsToSelector:@selector(setElement:)]){
+        [_view performSelector:@selector(setElement:) withObject:nil];
+    }
     [_view release];
     [super dealloc];
 }
 
 -(UIView *) view{
     if(_view == nil){
-        NSString * view = [self stringValueForKey:@"view"];
+        NSString * view = [self stringValueForKey:@"viewClass"];
         Class clazz = NSClassFromString(view);
         if(clazz == nil || ![clazz isSubclassOfClass:[UIView class]]){
             clazz = [UIView class];
@@ -36,6 +39,7 @@
         if([_view respondsToSelector:@selector(setElement:)]){
             [_view performSelector:@selector(setElement:) withObject:nil];
         }
+        [_view removeFromSuperview];
         if([view respondsToSelector:@selector(setElement:)]){
             [view performSelector:@selector(setElement:) withObject:self];
         }
@@ -49,10 +53,20 @@
     [super setDelegate:delegate];
     
     if([delegate isKindOfClass:[UIView class]]){
-        NSString * viewtag = [self stringValueForKey:@"viewtag"];
-        if(viewtag){
-            self.view = [(UIView *)delegate viewWithTag:[viewtag intValue]];
+        if([delegate respondsToSelector:@selector(vtDOMElementView:viewClass:)]){
+            NSString * view = [self stringValueForKey:@"viewClass"];
+            Class clazz = NSClassFromString(view);
+            if(clazz == nil || ![clazz isSubclassOfClass:[UIView class]]){
+                clazz = [UIView class];
+            }
+            self.view = [delegate vtDOMElementView:self viewClass:clazz];
         }
+        if([delegate respondsToSelector:@selector(vtDOMElement:addView:frame:)]){
+            [delegate vtDOMElement:self addView:self.view frame:self.frame];
+        }
+    }
+    else{
+        self.view = nil;
     }
 }
 

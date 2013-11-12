@@ -61,4 +61,6 @@
 
 -(void) vtDOMElement:(VTDOMElement *) element addView:(UIView *) view frame:(CGRect) frame;
 
+-(UIView *) vtDOMElementView:(VTDOMElement *) element viewClass:(Class)viewClass;
+
 @end

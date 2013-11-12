@@ -15,6 +15,7 @@
 
 @interface VTDOMScrollView(){
     NSMutableArray * _contentViews;
+    NSMutableDictionary * _elementViews;
 }
 
 @property(nonatomic,assign) CGSize layoutSize;
@@ -75,6 +76,13 @@
 @synthesize pageScale = _pageScale;
 
 -(void) dealloc{
+    for(UIView * v in [_elementViews allValues]){
+        if([v respondsToSelector:@selector(setElement:)]){
+            [v performSelector:@selector(setElement:) withObject:nil];
+        }
+    }
+    [_elementViews release];
+    [_contentViews release];
     [_element release];
     [super dealloc];
 }
@@ -350,5 +358,19 @@
     [super touchesMoved:touches withEvent:event];
 }
 
+-(UIView *) vtDOMElementView:(VTDOMElement *) element viewClass:(Class)viewClass{
+    NSString * eid = [element attributeValueForKey:@"id"];
+    if(eid){
+        UIView * v = [_elementViews objectForKey:eid];
+        if(v == nil){
+            v = [[[viewClass alloc] initWithFrame:element.frame] autorelease];
+            [_elementViews setObject:v forKey:eid];
+        }
+        else{
+            v.frame = element.frame;
+        }
+    }
+    return nil;
+}
 
 @end
