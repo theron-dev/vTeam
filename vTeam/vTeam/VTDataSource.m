@@ -24,6 +24,7 @@
 @synthesize loading = _loading;
 @synthesize loaded = _loaded;
 @synthesize dataKey = _dataKey;
+@synthesize skipCached = _skipCached;
 
 -(void) dealloc{
     [self cancel];
@@ -31,11 +32,13 @@
     [_dataObjects release];
     [super dealloc];
 }
+
 -(BOOL) isEmpty{
     return [_dataObjects count] == 0;
 }
 
 -(void) refreshData{
+    _skipCached = YES;
     [self reloadData];
 }
 
@@ -109,6 +112,7 @@
         [_delegate vtDataSourceDidLoaded:self];
     }
     _loaded = YES;
+    _skipCached = NO;
 }
 
 -(void) vtDownlinkTaskDidFitalError:(NSError *) error forTaskType:(Protocol *) taskType{
@@ -119,6 +123,7 @@
     if([[self dataObjects] count]){
         _loaded = YES;
     }
+    _skipCached = NO;
 }
 
 @end

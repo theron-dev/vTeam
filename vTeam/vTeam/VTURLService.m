@@ -53,7 +53,7 @@
         
         id<IVTURLDownlinkTask> urlTask = (id<IVTURLDownlinkTask>) task;
         
-        if([urlTask vtDownlinkPageTaskPageIndex] == 1){
+        if(![urlTask isSkipCached] && [urlTask vtDownlinkPageTaskPageIndex] == 1){
             [self vtDownlinkTaskDidLoadedFromCache:urlTask forTaskType:taskType];
         }
         

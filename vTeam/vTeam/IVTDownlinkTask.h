@@ -12,6 +12,8 @@
 
 @protocol IVTDownlinkTask <IVTTask>
 
+@property(nonatomic,assign,getter = isSkipCached) BOOL skipCached;
+
 @optional
 
 -(void) vtDownlinkTaskDidLoadedFromCache:(id) data timestamp:(NSDate *) timestamp forTaskType:(Protocol *) taskType;
