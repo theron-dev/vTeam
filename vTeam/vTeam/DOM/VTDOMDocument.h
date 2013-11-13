@@ -17,7 +17,6 @@
 @property(nonatomic,retain) VTDOMElement * rootElement;
 @property(nonatomic,retain) VTDOMStyleSheet * styleSheet;
 @property(nonatomic,retain) NSIndexPath * indexPath;
-@property(nonatomic,assign,getter = isLoaded) BOOL loaded;
 
 -(VTDOMElement *) elementById:(NSString *) eid;
 

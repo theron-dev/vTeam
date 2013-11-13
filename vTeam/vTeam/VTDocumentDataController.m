@@ -99,7 +99,7 @@
         [self downloadImagesForView:documentView];
     });
     
-    if([document rootElement] && ![document isLoaded]){
+    if([document rootElement]){
         
         [self loadImagesForElement:[document rootElement]];
         
@@ -107,7 +107,6 @@
             [self downloadImagesForElement:[document rootElement]];
         });
         
-        [document setLoaded:YES];
     }
     
     return cell;

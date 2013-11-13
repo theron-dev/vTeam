@@ -40,12 +40,12 @@
             [_view performSelector:@selector(setElement:) withObject:nil];
         }
         [_view removeFromSuperview];
-        if([view respondsToSelector:@selector(setElement:)]){
-            [view performSelector:@selector(setElement:) withObject:self];
-        }
         [view retain];
         [_view release];
         _view = view;
+        if([_view respondsToSelector:@selector(setElement:)]){
+            [_view performSelector:@selector(setElement:) withObject:self];
+        }
     }
 }
 

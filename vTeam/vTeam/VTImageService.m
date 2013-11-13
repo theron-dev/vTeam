@@ -243,6 +243,7 @@
         NSMutableArray * imageTasks = [_imageTasks objectForKey:key];
         if(imageTasks){
             [imageTasks removeObject:imageTask];
+            [imageTask setLoading:NO];
             if([imageTasks count] == 0){
                 [_imageTasks removeObjectForKey:key];
                 id httpTask = [_httpTasks objectForKey:key];
@@ -272,6 +273,10 @@
             id item = [tasks objectAtIndex:i];
             
             if([item source] == source){
+                
+                id imageTask = [tasks objectAtIndex:i];
+                
+                [imageTask setLoading:NO];
                 
                 [tasks removeObjectAtIndex:i];
                 
