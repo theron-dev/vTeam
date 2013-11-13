@@ -54,6 +54,9 @@
 
 -(void) setSrc:(NSString *)src{
     [self setAttributeValue:src forKey:@"src"];
+    _loaded = NO;
+    _loading = NO;
+    self.image = nil;
 }
 
 -(NSString *) defaultSrc{
