@@ -130,9 +130,9 @@ typedef enum {
                     [v setFrame:CGRectMake(0, 0, size.width, size.height)];
                     
                     if(v.superview != view){
-                        [viewController viewWillAppear:NO];
+//                        [viewController viewWillAppear:NO];
                         [view insertSubview:v atIndex:0];
-                        [viewController viewDidAppear:NO];
+//                        [viewController viewDidAppear:NO];
                     }
                     
                     CGFloat r = d / size.width;
@@ -190,9 +190,9 @@ typedef enum {
                         UIView * v = [viewController view];
                         
                         if(v.superview ){
-                            [viewController viewWillDisappear:NO];
+//                            [viewController viewWillDisappear:NO];
                             [v removeFromSuperview];
-                            [viewController viewDidDisappear:NO];
+//                            [viewController viewDidDisappear:NO];
                         }
                     }
                 }
@@ -235,9 +235,9 @@ typedef enum {
                     UIViewController * viewController = [_viewControllers objectAtIndex:[_viewControllers count] -2];
                     if([viewController isViewLoaded]){
                         UIView * v = [viewController view];
-                        [viewController viewWillDisappear:NO];
+//                        [viewController viewWillDisappear:NO];
                         [v removeFromSuperview];
-                        [viewController viewDidDisappear:NO];
+//                        [viewController viewDidDisappear:NO];
                     }
                 }
                 
@@ -290,26 +290,26 @@ typedef enum {
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    [[self topViewController] viewWillAppear:animated];
+//    [[self topViewController] viewWillAppear:animated];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
-    [[self topViewController] viewDidAppear:animated];
+//    [[self topViewController] viewDidAppear:animated];
 }
 
 -(void) viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     
-    [[self topViewController] viewWillDisappear:animated];
+//    [[self topViewController] viewWillDisappear:animated];
 }
 
 -(void) viewDidDisappear:(BOOL)animated{
     
     [super viewDidDisappear:animated];
     
-    [[self topViewController] viewDidDisappear:animated];
+//    [[self topViewController] viewDidDisappear:animated];
 }
 
 -(UIImage *) titleImage{
@@ -331,7 +331,7 @@ typedef enum {
 -(void) popViewControllerAnimationTopDidStopAction:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context{
     UIViewController * viewController = (UIViewController *) context;
     
-    [viewController viewWillDisappear:YES];
+//    [viewController viewWillDisappear:YES];
     
     UIView * v = [viewController view];
     
@@ -393,7 +393,7 @@ typedef enum {
             
             if(v.superview != view){
                 
-                [topViewController viewWillAppear:animated];
+//                [topViewController viewWillAppear:animated];
                 
                 [v setFrame:CGRectMake(0, 0, size.width, size.height)];
                 
@@ -431,9 +431,9 @@ typedef enum {
             if([topViewController isViewLoaded]){
                 UIView * v = [topViewController view];
                 if(v.superview){
-                    [topViewController viewWillDisappear:animated];
+//                    [topViewController viewWillDisappear:animated];
                     [v removeFromSuperview];
-                    [topViewController viewDidDisappear:animated];
+//                    [topViewController viewDidDisappear:animated];
                 }
             }
             
@@ -501,7 +501,7 @@ typedef enum {
             
             UIView * v = [topViewController view];
             
-            [topViewController viewWillDisappear:animated];
+//            [topViewController viewWillDisappear:animated];
             
             [UIView beginAnimations:nil context:topViewController];
             [UIView setAnimationDuration:ANIMATION_DURATION];
@@ -527,15 +527,15 @@ typedef enum {
         
         UIView * v = [viewController view];
         
-        [viewController viewWillAppear:animated];
+//        [viewController viewWillAppear:animated];
         
         [v setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
         
         if(v.superview != view){
             [v setFrame:CGRectMake(size.width, 0, size.width, size.height)];
-            [viewController viewWillAppear:animated];
+//            [viewController viewWillAppear:animated];
             [view addSubview:v];
-            [viewController viewDidAppear:animated];
+//            [viewController viewDidAppear:animated];
         }
       
         [UIView beginAnimations:nil context:viewController];
@@ -559,9 +559,9 @@ typedef enum {
         if([topViewController isViewLoaded]){
             UIView * v = [topViewController view];
             if(v.superview){
-                [topViewController viewWillDisappear:animated];
+//                [topViewController viewWillDisappear:animated];
                 [v removeFromSuperview];
-                [topViewController viewDidDisappear:animated];
+//                [topViewController viewDidDisappear:animated];
             }
         }
         
@@ -781,11 +781,13 @@ typedef enum {
     
     if(animated && [viewController isViewLoaded] && [[viewController view] window]){
        
+        [viewController retain];
+        
         UIView * v = [viewController view];
         
         CGRect r = [v frame];
         
-        [viewController viewWillDisappear:animated];
+//        [viewController viewWillDisappear:animated];
         
         [UIView animateWithDuration:0.3 animations:^{
            
@@ -794,7 +796,10 @@ typedef enum {
         } completion:^(BOOL finished) {
             
             [v removeFromSuperview];
-            [viewController viewDidDisappear:animated];
+            
+            [viewController release];
+            
+//            [viewController viewDidDisappear:animated];
             
         }];
         
@@ -803,9 +808,9 @@ typedef enum {
         
         UIView * v = [viewController view];
         
-        [viewController viewWillDisappear:animated];
+//        [viewController viewWillDisappear:animated];
         [v removeFromSuperview];
-        [viewController viewDidDisappear:animated];
+//        [viewController viewDidDisappear:animated];
     }
 }
 
@@ -818,9 +823,11 @@ typedef enum {
     
     if(animated && [viewController isViewLoaded] && [[viewController view] window]){
        
+        [viewController retain];
+        
         UIView * v = [viewController view];
         
-        [viewController viewWillDisappear:animated];
+//        [viewController viewWillDisappear:animated];
         
         [UIView animateWithDuration:0.3 animations:^{
             
@@ -844,7 +851,9 @@ typedef enum {
             v.layer.mask = nil;
             v.layer.transform = CATransform3DIdentity;
             
-            [viewController viewDidDisappear:animated];
+            [viewController release];
+            
+//            [viewController viewDidDisappear:animated];
             
         }];
         
@@ -853,9 +862,9 @@ typedef enum {
         
         UIView * v = [viewController view];
         
-        [viewController viewWillDisappear:animated];
+//        [viewController viewWillDisappear:animated];
         [v removeFromSuperview];
-        [viewController viewDidDisappear:animated];
+//        [viewController viewDidDisappear:animated];
     }
     
 }
@@ -877,7 +886,7 @@ typedef enum {
         [v setFrame:CGRectMake(0, 0, size.width, size.height)];
         [v setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
         
-        [viewController viewWillAppear:animated];
+//        [viewController viewWillAppear:animated];
         
         [view insertSubview:v atIndex:0];
         
@@ -891,7 +900,7 @@ typedef enum {
             
         } completion:^(BOOL finished) {
             
-            [viewController viewDidAppear:animated];
+//            [viewController viewDidAppear:animated];
             
         }];
         
@@ -907,11 +916,11 @@ typedef enum {
         [v setFrame:CGRectMake(0, 0, size.width, size.height)];
         [v setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
         
-        [viewController viewWillAppear:animated];
+//        [viewController viewWillAppear:animated];
         
         [view addSubview:v];
         
-        [viewController viewDidAppear:animated];
+//        [viewController viewDidAppear:animated];
     }
     
 }
@@ -933,7 +942,7 @@ typedef enum {
         [v setFrame:CGRectMake(size.width, 0, size.width, size.height)];
         [v setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
    
-        [viewController viewWillAppear:animated];
+//        [viewController viewWillAppear:animated];
         
         [view addSubview:v];
         
@@ -943,7 +952,7 @@ typedef enum {
             
         } completion:^(BOOL finished) {
             
-            [viewController viewDidAppear:animated];
+//            [viewController viewDidAppear:animated];
          
         }];
         
@@ -959,11 +968,11 @@ typedef enum {
         [v setFrame:CGRectMake(0, 0, size.width, size.height)];
         [v setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
         
-        [viewController viewWillAppear:animated];
+//        [viewController viewWillAppear:animated];
         
         [view addSubview:v];
         
-        [viewController viewDidAppear:animated];
+//        [viewController viewDidAppear:animated];
     }
     
 }

@@ -368,7 +368,7 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
     
     if(leftView && centerView){
         
-        [self.leftViewController viewWillAppear:animated];
+        //[self.leftViewController viewWillAppear:animated];
         if(leftView.superview == nil){
             [self.view addSubview:leftView];
             [leftView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
@@ -380,11 +380,11 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
         
         [self.view bringSubviewToFront:centerView];
         
-        [self.rightViewController viewWillDisappear:animated];
+        //[self.rightViewController viewWillDisappear:animated];
         [rightView removeFromSuperview];
         
-        [self.leftViewController viewDidAppear:animated];
-        [self.rightViewController viewDidDisappear:animated];
+        //[self.leftViewController viewDidAppear:animated];
+        //[self.rightViewController viewDidDisappear:animated];
         
         CGSize size = self.view.bounds.size;
         
@@ -433,7 +433,7 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
     
     if(rightView && centerView){
         
-        [self.rightViewController viewWillAppear:animated];
+//        [self.rightViewController viewWillAppear:animated];
         if(rightView.superview == nil){
             [self.view addSubview:rightView];
             [rightView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
@@ -445,11 +445,11 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
         
         [self.view bringSubviewToFront:centerView];
         
-        [self.leftViewController viewWillDisappear:animated];
+//        [self.leftViewController viewWillDisappear:animated];
         [leftView removeFromSuperview];
         
-        [self.rightViewController viewDidAppear:animated];
-        [self.leftViewController viewDidDisappear:animated];
+//        [self.rightViewController viewDidAppear:animated];
+//        [self.leftViewController viewDidDisappear:animated];
         
         CGSize size = self.view.bounds.size;
         
@@ -526,14 +526,14 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
             
             [centerView setUserInteractionEnabled:YES];
             if(leftView.superview){
-                [self.leftViewController viewWillDisappear:animated];
+//                [self.leftViewController viewWillDisappear:animated];
                 [leftView removeFromSuperview];
-                [self.leftViewController viewDidDisappear:animated];
+//                [self.leftViewController viewDidDisappear:animated];
             }
             if(rightView.superview){
-                [self.rightViewController viewWillDisappear:animated];
+//                [self.rightViewController viewWillDisappear:animated];
                 [rightView removeFromSuperview];
-                [self.rightViewController viewDidDisappear:animated];
+//                [self.rightViewController viewDidDisappear:animated];
             }
         }
         
@@ -579,14 +579,14 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
     UIView * rightView = [[self rightViewController] view];
     [centerView setUserInteractionEnabled:YES];
     if(leftView.superview){
-        [self.leftViewController viewWillDisappear:YES];
+//        [self.leftViewController viewWillDisappear:YES];
         [leftView removeFromSuperview];
-        [self.leftViewController viewDidDisappear:YES];
+//        [self.leftViewController viewDidDisappear:YES];
     }
     if(rightView.superview){
-        [self.rightViewController viewWillDisappear:YES];
+//        [self.rightViewController viewWillDisappear:YES];
         [rightView removeFromSuperview];
-        [self.rightViewController viewDidDisappear:YES];
+//        [self.rightViewController viewDidDisappear:YES];
     }
     [self.view setUserInteractionEnabled:YES];
 }
@@ -730,13 +730,13 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    [[self centerViewController] viewWillAppear:animated];
+//    [[self centerViewController] viewWillAppear:animated];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
-    [[self centerViewController] viewDidAppear:animated];
+//    [[self centerViewController] viewDidAppear:animated];
     
 
     _layoutSize = self.view.bounds.size;
@@ -746,13 +746,13 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
 -(void) viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     
-    [self.centerViewController viewWillDisappear:animated];
+//    [self.centerViewController viewWillDisappear:animated];
 }
 
 -(void) viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     
-    [self.centerViewController viewDidDisappear:animated];
+//    [self.centerViewController viewDidDisappear:animated];
 
 }
 
