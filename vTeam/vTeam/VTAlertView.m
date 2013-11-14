@@ -137,6 +137,13 @@
 
 -(void) showDuration:(NSTimeInterval) duration{
     
+    [self show];
+
+    [self performSelector:@selector(close) withObject:nil afterDelay:duration];
+    
+}
+
+-(void) show{
     if(_alertWindow == nil){
         _alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
         
@@ -151,8 +158,6 @@
     else{
         [_alertWindow setHidden:NO];
     }
-    [self performSelector:@selector(close) withObject:nil afterDelay:duration];
-    
 }
 
 @end

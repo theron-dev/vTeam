@@ -18,5 +18,8 @@
 
 -(void) showDuration:(NSTimeInterval) duration;
 
+-(void) show;
+
+-(void) close;
 
 @end
