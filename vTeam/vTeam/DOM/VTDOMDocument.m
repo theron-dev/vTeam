@@ -56,6 +56,10 @@
         
         NSString * styleName = element.name;
         
+        if(styleName == nil){
+            styleName = @"";
+        }
+        
         if([forStyleName length]){
             styleName = [styleName stringByAppendingFormat:@" %@.%@",forStyleName,element.name];
         }

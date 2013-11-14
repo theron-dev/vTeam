@@ -19,6 +19,7 @@
 #import <vTeam/NSString+VTDOMSource.h>
 #import <vTeam/VTDOMLabel.h>
 #import <vTeam/UIView+VTDOMElement.h>
+#import <vTeam/VTDOMLabelElement.h>
 
 @interface VTDOM : NSObject
 

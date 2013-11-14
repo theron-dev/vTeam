@@ -200,7 +200,7 @@
     
 }
 
--(void) document:(VTDOMDocument *) document didLoadedDataObject:(id) dataObject;{
+-(void) document:(VTDOMDocument *) document didLoadedDataObject:(id) dataObject{
     
 }
 
