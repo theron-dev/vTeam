@@ -63,7 +63,7 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
         UIPanGestureRecognizer * gestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognizerAction:)];
         [gestureRecognizer setMinimumNumberOfTouches:1];
         [gestureRecognizer setMaximumNumberOfTouches:1];
-        [gestureRecognizer setCancelsTouchesInView:YES];
+        [gestureRecognizer setCancelsTouchesInView:NO];
         [self addGestureRecognizer:gestureRecognizer];
         gestureRecognizer.delegate = controller;
         [gestureRecognizer release];
@@ -164,11 +164,7 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
-    self.tapGestureRecognizer = [[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureRecognizerAction:)] autorelease];
-    self.tapGestureRecognizer.delegate = self;
-    
-    
+
     UIView * centerView = [[self centerViewController] view];
     
     if(centerView){
@@ -184,6 +180,10 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
             [centerView setUserInteractionEnabled:YES];
         }
     }
+    
+    self.tapGestureRecognizer = [[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureRecognizerAction:)] autorelease];
+    
+    self.tapGestureRecognizer.delegate = self;
     
 }
 
@@ -368,6 +368,8 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
     
     if(leftView && centerView){
         
+        [self.view removeGestureRecognizer:_tapGestureRecognizer];
+        
         //[self.leftViewController viewWillAppear:animated];
         if(leftView.superview == nil){
             [self.view addSubview:leftView];
@@ -413,11 +415,9 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
         }
         else{
             _animating = NO;
+            [self.view addGestureRecognizer:_tapGestureRecognizer];
         }
-        
-        [self.view removeGestureRecognizer:_tapGestureRecognizer];
-        [self.view addGestureRecognizer:_tapGestureRecognizer];
-        
+    
     }
 }
 
@@ -432,6 +432,8 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
     UIView * rightView = [[self rightViewController] view];
     
     if(rightView && centerView){
+        
+         [self.view removeGestureRecognizer:_tapGestureRecognizer];
         
 //        [self.rightViewController viewWillAppear:animated];
         if(rightView.superview == nil){
@@ -476,10 +478,11 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
         }
         else{
             _animating = NO;
+            [self.view addGestureRecognizer:_tapGestureRecognizer];
         }
         
-        [self.view removeGestureRecognizer:_tapGestureRecognizer];
-        [self.view addGestureRecognizer:_tapGestureRecognizer];
+       
+        
     }
 }
 
@@ -594,11 +597,13 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
 -(void) _toLeftAnimatedDidStop{
     _animating = NO;
     [self.view setUserInteractionEnabled:YES];
+    [self.view addGestureRecognizer:_tapGestureRecognizer];
 }
 
 -(void) _toRightAnimatedDidStop{
     _animating = NO;
     [self.view setUserInteractionEnabled:YES];
+    [self.view addGestureRecognizer:_tapGestureRecognizer];
 }
 
 -(void) setConfig:(id)config{

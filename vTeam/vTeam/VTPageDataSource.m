@@ -21,8 +21,8 @@
 
 -(id) init{
     if((self = [super init])){
-        _pageIndex = 1;
-        _pageSize = 20;
+        self.pageIndex = 1;
+        self.pageSize = 20;
     }
     return self;
 }
@@ -36,7 +36,7 @@
 }
 
 -(void) loadMoreData{
-    _pageIndex ++;
+    self.pageIndex ++;
     self.loading = YES;
     if([self.delegate respondsToSelector:@selector(vtDataSourceWillLoading:)]){
         [self.delegate vtDataSourceWillLoading:self];
@@ -44,7 +44,7 @@
 }
 
 -(void) reloadData{
-    _pageIndex = 1;
+    self.pageIndex = 1;
     [super reloadData];
 }
 

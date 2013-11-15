@@ -148,6 +148,10 @@
     NSString * identifier = _reusableCellIdentifier;
     
     if(identifier == nil){
+        identifier = self.itemViewNib;
+    }
+    
+    if(identifier == nil){
         identifier = @"Cell";
     }
     
@@ -155,7 +159,7 @@
     
     if(cell == nil){
         
-        cell = (UITableViewCell *) [VTTableViewCell tableViewCellWithNibName:_itemViewNib bundle:_itemViewBundle];
+        cell = (UITableViewCell *) [VTTableViewCell tableViewCellWithNibName:self.itemViewNib bundle:self.itemViewBundle];
         
         [cell setValue:identifier forKey:@"reuseIdentifier"];
         
