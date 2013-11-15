@@ -101,4 +101,7 @@
 #import <vTeam/GridScrollView.h>
 #import <vTeam/GridApposeDataView.h>
 #import <vTeam/GridApposeHeadView.h>
+#import <vTeam/VTCrashTask.h>
+#import <vTeam/VTCrashService.h>
+
 
