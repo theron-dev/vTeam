@@ -76,7 +76,9 @@
 
 -(void) vtDataSourceDidContentChanged:(VTDataSource *) dataSource{
     if(dataSource == _dataSource){
-
+        if([_delegate respondsToSelector:@selector(vtDataControllerDidContentChanged:)]){
+            [_delegate vtDataControllerDidContentChanged:self];
+        }
     }
 }
 
