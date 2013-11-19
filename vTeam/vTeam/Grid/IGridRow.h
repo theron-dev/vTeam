@@ -19,4 +19,6 @@
 
 -(void) applyCellViewTo:(UIView *) superview rect:(CGRect) rect;
 
+-(void) heightToFit;
+
 @end

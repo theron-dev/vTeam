@@ -13,6 +13,11 @@
 
 @property(nonatomic,assign,getter = isHidden) BOOL hidden;
 
+@property(nonatomic,assign) UIEdgeInsets dataPadding;
+@property(nonatomic,assign) NSLineBreakMode dataLineBreakMode;
+@property(nonatomic,assign) NSTextAlignment dataTitleAlignment;
+@property(nonatomic,assign) CGFloat dataTitleMinFontSize;
+
 -(id<IGridCell>) newDataCell:(id) data;
 
 @end

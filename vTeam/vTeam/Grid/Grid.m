@@ -51,9 +51,12 @@
 @synthesize clipsLastTitle = _clipsLastTitle;
 @synthesize colSpan = _colSpan;
 @synthesize view;
+@synthesize padding = _padding;
+@synthesize lineBreakMode = _lineBreakMode;
 
 -(id) init{
     if((self = [super init])){
+        _lineBreakMode = NSLineBreakByTruncatingTail;
         _titleAlignment = NSTextAlignmentCenter;
         _titleMinFontSize = 7;
         _colSpan = 1;
@@ -107,21 +110,39 @@
     CGFloat fontSize = [font pointSize];
 
     NSString * title = _title;
+    
+    CGSize innerSize = CGSizeMake(rect.size.width - _padding.left - _padding.right, rect.size.height - _padding.top - _padding.bottom);
 
-    CGSize size = [title sizeWithFont:font minFontSize:_titleMinFontSize actualFontSize:&fontSize forWidth:rect.size.width lineBreakMode:NSLineBreakByTruncatingTail];
-
+    CGSize size;
+    
+    if(_titleMinFontSize >0){
+        size = [title sizeWithFont:font minFontSize:_titleMinFontSize actualFontSize:&fontSize forWidth:innerSize.width lineBreakMode:_lineBreakMode];
+        font = [UIFont fontWithName:font.fontName size:fontSize];
+    }
+    else{
+        size = [title sizeWithFont:font constrainedToSize:innerSize lineBreakMode:_lineBreakMode];
+    }
+    
     if(_clipsLastTitle && fontSize != [font pointSize]){
         NSArray * ss = [_title componentsSeparatedByString:@"-"];
         title = [ss lastObject];
         fontSize = [font pointSize];
-        size = [title sizeWithFont:font minFontSize:_titleMinFontSize actualFontSize:&fontSize forWidth:rect.size.width lineBreakMode:NSLineBreakByTruncatingTail];
+        
+        if(_titleMinFontSize >0){
+            size = [title sizeWithFont:font minFontSize:_titleMinFontSize actualFontSize:&fontSize forWidth:innerSize.width lineBreakMode:_lineBreakMode];
+            font = [UIFont fontWithName:font.fontName size:fontSize];
+        }
+        else{
+            size = [title sizeWithFont:font constrainedToSize:innerSize lineBreakMode:_lineBreakMode];
+        }
     }
     
-    CGRect textRect = CGRectMake(0, (rect.size.height - size.height) * 0.5, rect.size.width, size.height);
+    CGRect textRect = CGRectMake(_padding.left, _padding.top + (rect.size.height - size.height - _padding.top - _padding.bottom) * 0.5
+                                 , innerSize.width, innerSize.height);
     
     font = [font fontWithSize:fontSize];
     
-    [title drawInRect:textRect withFont:font lineBreakMode:NSLineBreakByTruncatingTail alignment:_titleAlignment];
+    [title drawInRect:textRect withFont:font lineBreakMode:_lineBreakMode alignment:_titleAlignment];
     
     UIGraphicsPopContext();
     
@@ -136,6 +157,19 @@
 @implementation GridColumn
 
 @synthesize hidden = _hidden;
+@synthesize dataLineBreakMode = _dataLineBreakMode;
+@synthesize dataPadding = _dataPadding;
+@synthesize dataTitleAlignment = _dataTitleAlignment;
+@synthesize dataTitleMinFontSize = _dataTitleMinFontSize;
+
+-(id) init{
+    if((self = [super init])){
+        _dataLineBreakMode = NSLineBreakByTruncatingTail;
+        _dataTitleAlignment = NSTextAlignmentCenter;
+        _dataTitleMinFontSize = 7;
+    }
+    return self;
+}
 
 -(id<IGridCell>) newDataCell:(id) data{
     GridCell * cell = [[GridCell alloc] init];
@@ -148,6 +182,10 @@
     [cell setTitle:[keyPath expressionOfData:data]];
     [cell setWidth:self.width];
     [cell setClipsLastTitle:self.clipsLastTitle];
+    [cell setTitleAlignment:self.dataTitleAlignment];
+    [cell setLineBreakMode:self.dataLineBreakMode];
+    [cell setPadding:self.dataPadding];
+    [cell setTitleMinFontSize:_dataTitleMinFontSize];
     
     return [cell autorelease];
 }
@@ -283,6 +321,45 @@
     }
 }
 
+-(void) heightToFit{
+    
+    _height = 0.0f;
+    
+    for (id<IGridCell> cell in _cells) {
+        
+        NSString * title = [cell title];
+        UIFont * font = [cell titleFont];
+        UIEdgeInsets padding = [cell padding];
+        CGFloat width = [cell width];
+        
+        if(font == nil){
+            font = [self.grid dataTitleFont];
+        }
+        
+        CGSize innerSize = CGSizeMake(width - padding.left - padding.right, MAXFLOAT);
+        
+        CGFloat fontSize = [font pointSize];
+        
+        CGSize size = [title sizeWithFont:font minFontSize:[cell titleMinFontSize] actualFontSize:&fontSize forWidth:innerSize.width lineBreakMode:[cell lineBreakMode]];
+        
+        
+        if([cell titleMinFontSize] >0){
+            size = [title sizeWithFont:font minFontSize:[cell titleMinFontSize]
+                        actualFontSize:&fontSize forWidth:innerSize.width lineBreakMode:[cell lineBreakMode]];
+        }
+        else{
+            size = [title sizeWithFont:font constrainedToSize:innerSize lineBreakMode:[cell lineBreakMode]];
+        }
+        
+        size.height += padding.top + padding.bottom;
+        
+        if(size.height > _height){
+            _height = size.height;
+        }
+    }
+    
+}
+
 @end
 
 
@@ -304,6 +381,7 @@
 @synthesize limitRows = _limitRows;
 @synthesize apposeLeftColumns = _apposeLeftColumns;
 @synthesize apposeRightColumns = _apposeRightColumns;
+
 
 -(void) dealloc{
     [_columnBackgroundColor release];

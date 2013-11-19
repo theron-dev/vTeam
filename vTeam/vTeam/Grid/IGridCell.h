@@ -23,5 +23,7 @@
 @property(nonatomic,assign,getter = isClipsLastTitle) BOOL clipsLastTitle;
 @property(nonatomic,assign) NSUInteger colSpan;
 @property(nonatomic,retain) UIView * view;
+@property(nonatomic,assign) UIEdgeInsets padding;
+@property(nonatomic,assign) NSLineBreakMode lineBreakMode;
 
 @end
