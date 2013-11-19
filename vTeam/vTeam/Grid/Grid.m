@@ -389,6 +389,8 @@
 -(id<IGridColumn>) addColumn{
     GridColumn * column = [[GridColumn alloc] init];
     [column setGrid:self];
+    [column setTitleColor:self.columnTitleColor];
+    [column setTitleFont:self.columnTitleFont];
     if(_columns == nil){
         _columns = [[NSMutableArray alloc] init];
     }
@@ -530,7 +532,7 @@
         CGContextTranslateCTM(ctx, p.x, p.y);
         
         CGContextClipToRect(ctx, CGRectMake(0, 0, [column width], rect.size.height));
-        
+
         [column drawToContext:ctx rect:CGRectMake(0, 0, [column width], rect.size.height)];
         
         CGContextRestoreGState(ctx);
