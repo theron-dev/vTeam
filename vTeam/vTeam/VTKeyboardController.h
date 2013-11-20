@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface VTKeyboardController : NSObject
+#import <vTeam/VTController.h>
 
-@property(nonatomic,assign) IBOutlet id delegate;
+@interface VTKeyboardController : VTController
 
 @end
 
