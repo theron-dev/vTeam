@@ -2,7 +2,7 @@
 //  VTHtmlDataController.m
 //  vTeam
 //
-//  Created by sinanews on 13-9-2.
+//  Created by shenyue on 13-9-2.
 //  Copyright (c) 2013年 hailong.org. All rights reserved.
 //
 

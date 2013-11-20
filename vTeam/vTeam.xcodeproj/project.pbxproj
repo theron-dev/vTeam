@@ -345,6 +345,8 @@
 		11BE4FD618360C790013722E /* VTCrashTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 11BE4FD418360C790013722E /* VTCrashTask.m */; };
 		11BE4FD918360CC80013722E /* VTCrashService.h in Headers */ = {isa = PBXBuildFile; fileRef = 11BE4FD718360CC80013722E /* VTCrashService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11BE4FDA18360CC80013722E /* VTCrashService.m in Sources */ = {isa = PBXBuildFile; fileRef = 11BE4FD818360CC80013722E /* VTCrashService.m */; };
+		11BE50B4183CAA150013722E /* VTDocumentController.h in Headers */ = {isa = PBXBuildFile; fileRef = 11BE50B2183CAA150013722E /* VTDocumentController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11BE50B5183CAA150013722E /* VTDocumentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11BE50B3183CAA150013722E /* VTDocumentController.m */; };
 		11C238211786BBC000DBADBD /* VTTabViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C2381F1786BBC000DBADBD /* VTTabViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11C238221786BBC000DBADBD /* VTTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C238201786BBC000DBADBD /* VTTabViewController.m */; };
 		11C238311786CB8200DBADBD /* VTCreatorViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C2382F1786CB8100DBADBD /* VTCreatorViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -812,6 +814,8 @@
 		11BE4FD418360C790013722E /* VTCrashTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTCrashTask.m; sourceTree = "<group>"; };
 		11BE4FD718360CC80013722E /* VTCrashService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTCrashService.h; sourceTree = "<group>"; };
 		11BE4FD818360CC80013722E /* VTCrashService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTCrashService.m; sourceTree = "<group>"; };
+		11BE50B2183CAA150013722E /* VTDocumentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDocumentController.h; sourceTree = "<group>"; };
+		11BE50B3183CAA150013722E /* VTDocumentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDocumentController.m; sourceTree = "<group>"; };
 		11C2381F1786BBC000DBADBD /* VTTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTTabViewController.h; sourceTree = "<group>"; };
 		11C238201786BBC000DBADBD /* VTTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTTabViewController.m; sourceTree = "<group>"; };
 		11C2382F1786CB8100DBADBD /* VTCreatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTCreatorViewController.h; sourceTree = "<group>"; };
@@ -1362,6 +1366,8 @@
 				11A041AE17BCD9C2001992BE /* VTDocumentDataController.m */,
 				EA46D6C717D468F9006FAEA9 /* VTHtmlDataController.h */,
 				EA46D6C817D468F9006FAEA9 /* VTHtmlDataController.m */,
+				11BE50B2183CAA150013722E /* VTDocumentController.h */,
+				11BE50B3183CAA150013722E /* VTDocumentController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1764,6 +1770,7 @@
 				1131404B1749EC590081641F /* hbytes.h in Headers */,
 				1131404C1749EC590081641F /* hcgi.h in Headers */,
 				1131404E1749EC590081641F /* hclass.h in Headers */,
+				11BE50B4183CAA150013722E /* VTDocumentController.h in Headers */,
 				113140501749EC590081641F /* hconfig.h in Headers */,
 				113140521749EC590081641F /* hdata.h in Headers */,
 				114D643C17E1D0AB0021CB8A /* VTMontageViewElement.h in Headers */,
@@ -2159,6 +2166,7 @@
 				11A0413917BB1C68001992BE /* VTDOMDocument.m in Sources */,
 				11A0413B17BB1C68001992BE /* VTDOMParse.m in Sources */,
 				11BC147C1804FE770065A9EE /* VTController.m in Sources */,
+				11BE50B5183CAA150013722E /* VTDocumentController.m in Sources */,
 				11A0414017BB25CD001992BE /* VTDOMStyleSheet.m in Sources */,
 				11A0414417BB2B35001992BE /* hcss_scanf.c in Sources */,
 				11A0414817BB3C37001992BE /* VTDOMElement+Layout.m in Sources */,
