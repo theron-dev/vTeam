@@ -173,6 +173,8 @@
         [self documentWillLayout];
         
         [[_document rootElement] layout:size];
+        
+        [self documentDidLayout];
     
         [self downloadImagesForElement:_document.rootElement];
     }
@@ -204,6 +206,32 @@
 
 -(CGSize) contentSize{
     return [[self.document rootElement] contentSize];
+}
+
+-(void) documentLayout{
+    
+    CGSize size = [_documentView bounds].size;
+    
+    if(_allowAutoWidth){
+        size.width = MAXFLOAT;
+    }
+    
+    if(_allowAutoHeight){
+        size.height = MAXFLOAT;
+    }
+    
+    [self documentWillLayout];
+    
+    [[_document rootElement] layout:size];
+    
+    [self documentDidLayout];
+    
+    [self downloadImagesForElement:_document.rootElement];
+    
+    [_documentView setElement:nil];
+    [_documentView setElement:_document.rootElement];
+    
+    [self downloadImagesForView:_documentView];
 }
 
 @end

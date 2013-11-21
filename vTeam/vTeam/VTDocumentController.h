@@ -45,6 +45,8 @@
 
 -(void) onActionElement:(VTDOMElement *) element;
 
+-(void) documentLayout;
+
 @end
 
 @protocol VTDocumentControllerDelegate
