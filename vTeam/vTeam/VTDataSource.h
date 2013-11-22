@@ -30,9 +30,9 @@
 
 -(id) dataObjectAtIndex:(NSInteger) index;
 
--(id) dataObject;
-
 -(void) loadResultsData:(id) resultsData;
+
+-(id) dataObject;
 
 @end
 

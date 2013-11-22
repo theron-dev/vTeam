@@ -18,6 +18,13 @@
 @synthesize queryValues = _queryValues;
 @synthesize httpClass = _httpClass;
 
+-(id) queryValues{
+    if(_queryValues == nil){
+        _queryValues = [[NSMutableDictionary alloc] initWithCapacity:4];
+    }
+    return _queryValues;
+}
+
 -(void) dealloc{
     [self.context cancelHandle:@protocol(IVTURLDownlinkTask) task:self];
     [_url release];
