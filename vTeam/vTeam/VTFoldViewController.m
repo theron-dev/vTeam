@@ -292,12 +292,17 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
 
     if(r.origin.x >0 && leftView){
         
-        [centerView setFrame:r];
-        
         if(leftView.superview == nil){
+            
+            if([[[self.topController config] valueForKeyPath:@"fold.disabledLeft"] boolValue]){
+                return;
+            }
+            
             [self.view insertSubview:leftView atIndex:0];
             [leftView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
         }
+        
+        [centerView setFrame:r];
         
         [self.view bringSubviewToFront:centerView];
         
@@ -322,15 +327,19 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
         [centerView setUserInteractionEnabled:NO];
     }
     else if(r.origin.x <0 && rightView){
-        
-        [centerView setFrame:r];
-        
-        
+
         if(rightView.superview == nil){
+            
+            if([[[self.topController config] valueForKeyPath:@"fold.disabledRight"] boolValue]){
+                return;
+            }
+            
             [self.view insertSubview:rightView atIndex:0];
             [rightView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
         }
         
+        [centerView setFrame:r];
+
         [self.view bringSubviewToFront:centerView];
         
         [leftView removeFromSuperview];
@@ -762,7 +771,7 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
 }
 
 -(id) topController{
-    return [self centerViewController];
+    return [[self centerViewController] topController];
 }
 
 @end

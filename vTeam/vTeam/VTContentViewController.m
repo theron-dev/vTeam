@@ -193,7 +193,7 @@
 }
 
 -(id) topController{
-    return [self contentViewController];
+    return [[self contentViewController] topController];
 }
 
 @end

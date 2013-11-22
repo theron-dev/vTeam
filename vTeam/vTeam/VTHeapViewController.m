@@ -724,7 +724,7 @@ typedef enum {
     
     if(index < [viewControllers count]){
         
-        [self hiddenViewController:self.topController animated:animated];
+        [self hiddenViewController:self.topViewController animated:animated];
         
         while(index < [_viewControllers count]){
             [_viewControllers removeLastObject];
@@ -747,13 +747,13 @@ typedef enum {
     }
     else {
         
-        [self removeViewController:self.topController animated:animated];
+        [self removeViewController:self.topViewController animated:animated];
         
         while(index < [_viewControllers count]){
             [_viewControllers removeLastObject];
         }
         
-        [self visableViewController:self.topController animated:animated];
+        [self visableViewController:self.topViewController animated:animated];
         
     }
     
@@ -770,7 +770,7 @@ typedef enum {
 }
 
 -(id) topController{
-    return [self topViewController];
+    return [(id)[self topViewController] topController];
 }
 
 -(void) removeViewController:(id) viewController animated:(BOOL) animated{

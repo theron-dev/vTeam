@@ -306,7 +306,7 @@
 }
 
 -(id) topController{
-    return [self selectedViewController];
+    return [(id)[self selectedViewController] topController];
 }
 
 @end

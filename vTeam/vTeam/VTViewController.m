@@ -329,7 +329,7 @@
 }
 
 -(id) topController{
-    return nil;
+    return self;
 }
 
 @end
