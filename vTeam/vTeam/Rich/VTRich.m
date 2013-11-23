@@ -345,6 +345,10 @@ static CTRunDelegateCallbacks VTRichDelegateCallbacks = {
     
     CTFrameRef frame = [self frameWithSize:size];
     
+    if(frame == nil){
+        return nil;
+    }
+    
     NSInteger lineIndex = 0;
     CFArrayRef lines = CTFrameGetLines(frame);
     NSInteger count = CFArrayGetCount(lines);

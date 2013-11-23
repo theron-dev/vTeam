@@ -103,6 +103,7 @@
         
         if(text){
             
+            UIEdgeInsets padding = [self padding];
             UIFont * font = [self font];
             CGFloat minFontSize = [self minFontSize];
             
@@ -122,11 +123,29 @@
             CGSize s = [text sizeWithFont:font minFontSize:minFontSize actualFontSize:&_actualFontSize forWidth:width lineBreakMode:self.lineBreakMode];
  
             if(r.size.width == MAXFLOAT){
-                r.size.width = s.width;
+                r.size.width = s.width + padding.left + padding.right;
+                NSString * min = [self stringValueForKey:@"min-width"];
+                if(min){
+                    if(r.size.width < [min floatValue]){
+                        r.size.width = [min floatValue];
+                    }
+                }
             }
             
             if(r.size.height == MAXFLOAT){
-                r.size.height = s.height;
+                r.size.height = s.height + padding.top + padding.bottom;
+                NSString * min = [self stringValueForKey:@"min-height"];
+                if(min){
+                    if(r.size.height < [min floatValue]){
+                        r.size.height = [min floatValue];
+                    }
+                }
+                NSString * max = [self stringValueForKey:@"max-height"];
+                if(max){
+                    if(r.size.height > [max floatValue]){
+                        r.size.height = [max floatValue];
+                    }
+                }
             }
         }
         else{
@@ -152,6 +171,8 @@
     
     if(text){
         
+        UIEdgeInsets padding = [self padding];
+        
         UIFont * font = [self font];
         
         CGFloat minFontSize = [self minFontSize];
@@ -174,7 +195,10 @@
 
         CGSize size = self.frame.size;
         
-        [text drawInRect:CGRectMake(0, 0, size.width, size.height) withFont:font lineBreakMode:breakMode alignment:alignment];
+        [text drawInRect:CGRectMake(padding.left, padding.top
+                                    , size.width - padding.left - padding.right
+                                    , size.height - padding.top - padding.bottom)
+                withFont:font lineBreakMode:breakMode alignment:alignment];
         
         UIGraphicsPopContext();
     }
