@@ -104,4 +104,5 @@
 #import <vTeam/VTCrashTask.h>
 #import <vTeam/VTCrashService.h>
 #import <vTeam/VTDocumentController.h>
+#import <vTeam/NSString+Pinyin.h>
 

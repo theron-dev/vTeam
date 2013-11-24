@@ -396,6 +396,10 @@
 		11EE829F1760966800219D52 /* zip.h in Headers */ = {isa = PBXBuildFile; fileRef = 11EE82961760966800219D52 /* zip.h */; };
 		11EE82A31760972D00219D52 /* VTUnZip.h in Headers */ = {isa = PBXBuildFile; fileRef = 11EE82A11760972D00219D52 /* VTUnZip.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11EE82A41760972D00219D52 /* VTUnZip.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EE82A21760972D00219D52 /* VTUnZip.m */; };
+		11F977611840E30300F697D7 /* hpinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 11F9775F1840E30300F697D7 /* hpinyin.c */; };
+		11F977621840E30300F697D7 /* hpinyin.h in Headers */ = {isa = PBXBuildFile; fileRef = 11F977601840E30300F697D7 /* hpinyin.h */; };
+		11F977651840E34100F697D7 /* NSString+Pinyin.h in Headers */ = {isa = PBXBuildFile; fileRef = 11F977631840E34100F697D7 /* NSString+Pinyin.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11F977661840E34100F697D7 /* NSString+Pinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = 11F977641840E34100F697D7 /* NSString+Pinyin.m */; };
 		AC324F6C173DD8FA0094A7A6 /* UIView+VTStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = AC324F6A173DD8FA0094A7A6 /* UIView+VTStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AC324F6D173DD8FA0094A7A6 /* UIView+VTStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = AC324F6B173DD8FA0094A7A6 /* UIView+VTStyle.m */; };
 		AC324F87173DE23B0094A7A6 /* UIButton+VTStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = AC324F85173DE23B0094A7A6 /* UIButton+VTStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -869,6 +873,10 @@
 		11EE82961760966800219D52 /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
 		11EE82A11760972D00219D52 /* VTUnZip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTUnZip.h; sourceTree = "<group>"; };
 		11EE82A21760972D00219D52 /* VTUnZip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTUnZip.m; sourceTree = "<group>"; };
+		11F9775F1840E30300F697D7 /* hpinyin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hpinyin.c; sourceTree = "<group>"; };
+		11F977601840E30300F697D7 /* hpinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hpinyin.h; sourceTree = "<group>"; };
+		11F977631840E34100F697D7 /* NSString+Pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Pinyin.h"; sourceTree = "<group>"; };
+		11F977641840E34100F697D7 /* NSString+Pinyin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Pinyin.m"; sourceTree = "<group>"; };
 		AC324F6A173DD8FA0094A7A6 /* UIView+VTStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+VTStyle.h"; sourceTree = "<group>"; };
 		AC324F6B173DD8FA0094A7A6 /* UIView+VTStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+VTStyle.m"; sourceTree = "<group>"; };
 		AC324F85173DE23B0094A7A6 /* UIButton+VTStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+VTStyle.h"; sourceTree = "<group>"; };
@@ -994,6 +1002,8 @@
 				113381F617D5901A005E4DCE /* NSString+TextLength.m */,
 				11BC146C1804F6C60065A9EE /* UIImage+GaussianBlur.h */,
 				11BC146D1804F6C60065A9EE /* UIImage+GaussianBlur.m */,
+				11F977631840E34100F697D7 /* NSString+Pinyin.h */,
+				11F977641840E34100F697D7 /* NSString+Pinyin.m */,
 			);
 			name = NSCategory;
 			sourceTree = "<group>";
@@ -1318,6 +1328,7 @@
 		114D7985172A10BC0041468E /* C */ = {
 			isa = PBXGroup;
 			children = (
+				11F9775E1840E30300F697D7 /* pinyin */,
 				AC339DA01765E96700EC2DAC /* db */,
 				111638321762DC01009979D3 /* report */,
 				11EE828D1760966800219D52 /* zip */,
@@ -1616,6 +1627,15 @@
 			name = Zip;
 			sourceTree = "<group>";
 		};
+		11F9775E1840E30300F697D7 /* pinyin */ = {
+			isa = PBXGroup;
+			children = (
+				11F9775F1840E30300F697D7 /* hpinyin.c */,
+				11F977601840E30300F697D7 /* hpinyin.h */,
+			);
+			path = pinyin;
+			sourceTree = "<group>";
+		};
 		AC324FB1173DFB630094A7A6 /* Layout */ = {
 			isa = PBXGroup;
 			children = (
@@ -1871,6 +1891,7 @@
 				1193DB5717B0B35900F19592 /* VTBESessionObject.h in Headers */,
 				11A0413417BB1C68001992BE /* VTDOMStyle.h in Headers */,
 				11A0413617BB1C68001992BE /* VTDOMElement.h in Headers */,
+				11F977621840E30300F697D7 /* hpinyin.h in Headers */,
 				11A0413817BB1C68001992BE /* VTDOMDocument.h in Headers */,
 				11A0413A17BB1C68001992BE /* VTDOMParse.h in Headers */,
 				11A0413F17BB25CD001992BE /* VTDOMStyleSheet.h in Headers */,
@@ -1907,6 +1928,7 @@
 				1117023118308BE000CFD179 /* GridApposeDataView.h in Headers */,
 				1117023318308BE000CFD179 /* GridApposeHeadView.h in Headers */,
 				1117023518308BE000CFD179 /* GridDataView.h in Headers */,
+				11F977651840E34100F697D7 /* NSString+Pinyin.h in Headers */,
 				1117023718308BE000CFD179 /* GridHeadView.h in Headers */,
 				1117023918308BE000CFD179 /* GridScrollView.h in Headers */,
 				1117023B18308BE000CFD179 /* IGrid.h in Headers */,
@@ -2008,6 +2030,7 @@
 				114D7A75172A5B4B0041468E /* VTFoldViewController.m in Sources */,
 				114D7AC4172A6D7A0041468E /* VTToolbar.m in Sources */,
 				114D7ACC172A75A90041468E /* VTNavigationBar.m in Sources */,
+				11F977661840E34100F697D7 /* NSString+Pinyin.m in Sources */,
 				114D7ADF172A88FD0041468E /* GIFView.m in Sources */,
 				114D7AE3172A89710041468E /* VTContainerView.m in Sources */,
 				11619C4C17320E1F00BD3561 /* VTContainerLayout.m in Sources */,
@@ -2118,6 +2141,7 @@
 				11EE82A41760972D00219D52 /* VTUnZip.m in Sources */,
 				111638351762E1AD009979D3 /* hreport.c in Sources */,
 				111638451762EA80009979D3 /* VTReportDocument.m in Sources */,
+				11F977611840E30300F697D7 /* hpinyin.c in Sources */,
 				111638BD1764221F009979D3 /* UIDevice+VTUUID.m in Sources */,
 				111638CA176425F3009979D3 /* NSData+VTMD5String.m in Sources */,
 				111638CE176426BB009979D3 /* NSString+VTMD5String.m in Sources */,

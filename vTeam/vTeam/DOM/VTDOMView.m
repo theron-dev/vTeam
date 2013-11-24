@@ -80,6 +80,9 @@
 
 -(void) setElement:(VTDOMElement *)element{
     if(_element != element){
+        for (UIView * v in [_elementViews allValues]) {
+            [v removeFromSuperview];
+        }
         [self viewUnBindElement:_element];
         [element retain];
         [_element release];
@@ -88,6 +91,12 @@
             [_element layout:self.bounds.size];
         }
         [self viewBindElement:_element];
+        for (id key in [_elementViews allKeys]) {
+            UIView * v = [_elementViews objectForKey:key];
+            if(v.superview == nil){
+                [_elementViews removeObjectForKey:key];
+            }
+        }
         [self setNeedsDisplay];
     }
 }

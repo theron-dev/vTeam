@@ -233,4 +233,8 @@
     
 }
 
+-(CGSize) layout{
+    return [self layoutChildren:self.padding];
+}
+
 @end

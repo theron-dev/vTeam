@@ -228,6 +228,8 @@
     
     [self downloadImagesForElement:_document.rootElement];
     
+    [self cancelDownloadImagesForView:_documentView];
+    
     [_documentView setElement:nil];
     [_documentView setElement:_document.rootElement];
     

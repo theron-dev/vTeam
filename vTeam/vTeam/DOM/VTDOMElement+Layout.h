@@ -18,4 +18,6 @@
 
 -(CGSize) layout:(CGSize) size;
 
+-(CGSize) layout;
+
 @end

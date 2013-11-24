@@ -8,7 +8,7 @@
 
 #import <vTeam/vTeam.h>
 
-@interface VTDOMViewElement : VTDOMElement
+@interface VTDOMViewElement : VTDOMElement<IVTAction>
 
 @property(nonatomic,retain) UIView * view;
 
