@@ -31,6 +31,12 @@
     return YES;
 }
 
+-(void) touchesCancelled:(CGPoint)location{
+    if([self isHighlighted]){
+        [self setHighlighted:NO];
+    }
+}
+
 -(void) touchesEnded:(CGPoint)location{
     
     if([self isHighlighted]){
