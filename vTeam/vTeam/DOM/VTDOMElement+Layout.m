@@ -179,8 +179,28 @@
     else if([width hasSuffix:@"%"]){
         frame.size.width = [width floatValue] * size.width / 100.0;
     }
-    else{
-        frame.size.width = [width floatValue];
+    else if(width){
+        
+        NSRange r = [width rangeOfString:@"%+"];
+        
+        if(r.location != NSNotFound){
+            
+            frame.size.width = [[width substringToIndex:r.location] floatValue] * size.width / 100.0 + [[width substringFromIndex:r.length] floatValue];
+            
+        }
+        else{
+            
+            r = [width rangeOfString:@"%-"];
+            
+            if(r.location != NSNotFound){
+                frame.size.width = [[width substringToIndex:r.location] floatValue] * size.width / 100.0 -[[width substringFromIndex:r.length] floatValue];
+            }
+            else{
+               frame.size.width = [width floatValue]; 
+            }
+        }
+        
+        
     }
     
     if([height isEqualToString:@"auto"]){
@@ -189,8 +209,26 @@
     else if([height hasSuffix:@"%"]){
         frame.size.height = [height floatValue] * size.height / 100.0;
     }
-    else{
-        frame.size.height = [height floatValue];
+    else if(height){
+        
+        NSRange r = [height rangeOfString:@"%+"];
+        
+        if(r.location != NSNotFound){
+            
+            frame.size.height = [[height substringToIndex:r.location] floatValue] * size.height / 100.0 + [[height substringFromIndex:r.length] floatValue];
+            
+        }
+        else{
+            
+            r = [height rangeOfString:@"%-"];
+            
+            if(r.location != NSNotFound){
+                frame.size.height = [[height substringToIndex:r.location] floatValue] * size.height / 100.0 -[[height substringFromIndex:r.length] floatValue];
+            }
+            else{
+                frame.size.height = [height floatValue];
+            }
+        }
     }
     
     [self setFrame:frame];

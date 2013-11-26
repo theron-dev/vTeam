@@ -205,7 +205,16 @@
 }
 
 -(CGSize) contentSize{
-    return [[self.document rootElement] contentSize];
+    VTDOMElement * element =  [self.document rootElement];
+    CGSize size = [element contentSize];
+    CGRect r = [element frame];
+    if(size.width < r.size.width){
+        size.width = r.size.width;
+    }
+    if(size.height < r.size.height){
+        size.height = r.size.height;
+    }
+    return size;
 }
 
 -(void) documentLayout{
