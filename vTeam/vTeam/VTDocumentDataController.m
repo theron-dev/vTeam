@@ -107,11 +107,11 @@
         
         [self loadImagesForView:documentView];
         
-        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(downloadImagesForView:) object:documentView];
-        
-        [self performSelector:@selector(downloadImagesForView:) withObject:documentView afterDelay:0.0];
-        
     }
+    
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(downloadImagesForView:) object:nil];
+    
+    [self performSelector:@selector(downloadImagesForView:) withObject:tableView afterDelay:0.0];
  
     return cell;
 }

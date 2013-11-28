@@ -105,7 +105,7 @@
                     
                     if([defaultSrc hasPrefix:@"http://"]){
                         NSString * localPath = [VTHttpTask localResourcePathForURL:[NSURL URLWithString:defaultSrc]];
-                        image = [UIImage imageNamed:localPath];
+                        image = [UIImage imageWithContentsOfFile:localPath];
                     }
                     else {
                         image = [UIImage imageNamed:defaultSrc];
@@ -139,9 +139,9 @@
                 
                 if(image == nil){
                     
-                    NSString * localPath = [VTHttpTask localResourcePathForURL:[NSURL URLWithString:defaultSrc]];
+                    NSString * localPath = [VTHttpTask localResourcePathForURL:[NSURL URLWithString:src]];
                     
-                    image = [UIImage imageNamed:localPath];
+                    image = [UIImage imageWithContentsOfFile:localPath];
                     
                     if(image){
                         if(_imageCached == nil){
