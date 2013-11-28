@@ -95,9 +95,9 @@
         
         [self loadImagesForElement:[document rootElement]];
         
-        dispatch_async(dispatch_get_current_queue(), ^{
-            [self downloadImagesForElement:[document rootElement]];
-        });
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(downloadImagesForElement:) object:[document rootElement]];
+        
+        [self performSelector:@selector(downloadImagesForElement:) withObject:[document rootElement] afterDelay:0.0];
         
     }
     
@@ -107,10 +107,10 @@
         
         [self loadImagesForView:documentView];
         
-        dispatch_async(dispatch_get_current_queue(), ^{
-            [self downloadImagesForView:documentView];
-        });
-    
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(downloadImagesForView:) object:documentView];
+        
+        [self performSelector:@selector(downloadImagesForView:) withObject:documentView afterDelay:0.0];
+        
     }
  
     return cell;
@@ -133,9 +133,7 @@
         if([imageView isLoading]){
             [self.context cancelHandle:@protocol(IVTImageTask) task:imageView];
         }
-        if(![imageView isLoaded]){
-            [self.context handle:@protocol(IVTLocalImageTask) task:imageView priority:0];
-        }
+        [self.context handle:@protocol(IVTLocalImageTask) task:imageView priority:0];
     }
 }
 

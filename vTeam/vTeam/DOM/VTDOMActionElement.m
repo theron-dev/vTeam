@@ -16,10 +16,13 @@
     CALayer * _highlightedLayer;
 }
 
+@property(nonatomic,assign) BOOL insetTouch;
+
 @end
 
 @implementation VTDOMActionElement
 
+@synthesize insetTouch = _insetTouch;
 
 -(void) dealloc{
     [_highlightedLayer release];
@@ -28,6 +31,7 @@
 
 -(BOOL) touchesBegan:(CGPoint)location{
     [super touchesBegan:location];
+    _insetTouch = YES;
     return YES;
 }
 
@@ -35,15 +39,18 @@
     if([self isHighlighted]){
         [self setHighlighted:NO];
     }
+    _insetTouch = NO;
 }
 
 -(void) touchesEnded:(CGPoint)location{
     
-    if([self isHighlighted]){
+    if(_insetTouch){
         if([self.delegate respondsToSelector:@selector(vtDOMElementDoAction:)]){
             [self.delegate vtDOMElementDoAction:self];
         }
     }
+    
+     _insetTouch = NO;
     
     [super touchesEnded:location];
 }
@@ -137,6 +144,7 @@
     }
     else{
         [_highlightedLayer removeFromSuperlayer];
+       
     }
 }
 
