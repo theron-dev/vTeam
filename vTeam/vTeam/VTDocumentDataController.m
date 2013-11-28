@@ -90,15 +90,7 @@
     VTDOMView * documentView = (VTDOMView *) [cell.contentView viewWithTag:100];
     
     VTDOMDocument * document = [self documentByIndexPath:indexPath];
-    
-    [documentView setElement:[document rootElement]];
-    
-    [self loadImagesForView:documentView];
-    
-    dispatch_async(dispatch_get_current_queue(), ^{
-        [self downloadImagesForView:documentView];
-    });
-    
+
     if([document rootElement]){
         
         [self loadImagesForElement:[document rootElement]];
@@ -107,6 +99,18 @@
             [self downloadImagesForElement:[document rootElement]];
         });
         
+    }
+    
+    if([documentView element] != [document rootElement]){
+        
+        [documentView setElement:[document rootElement]];
+        
+        [self loadImagesForView:documentView];
+        
+        dispatch_async(dispatch_get_current_queue(), ^{
+            [self downloadImagesForView:documentView];
+        });
+    
     }
  
     return cell;
@@ -150,11 +154,9 @@
         
         VTDOMImageElement * imgElement = (VTDOMImageElement *) element;
         
-        if([imgElement isLoading]){
-            [self.context cancelHandle:@protocol(IVTImageTask) task:imgElement];
+        if(![imgElement isLoading] && ![imgElement isLoaded]){
+            [self.context handle:@protocol(IVTLocalImageTask) task:imgElement priority:0.0];
         }
-        
-        [self.context handle:@protocol(IVTLocalImageTask) task:imgElement priority:0.0];
     }
     
     for(VTDOMElement * el in [element childs]){
