@@ -76,11 +76,13 @@
         
         for(VTDOMElement * element in [self childs]){
             
-            [element layout:insetSize];
-            
-            CGRect r = [element frame];
             UIEdgeInsets margin = [element margin];
             
+            [element layout:CGSizeMake(insetSize.width - margin.left - margin.right
+                                       , insetSize.height - margin.top - margin.bottom)];
+            
+            CGRect r = [element frame];
+  
             if(p.x + r.size.width + margin.left + margin.right <= frame.size.width - padding.right){
                 
                 r.origin = CGPointMake(p.x + margin.left, p.y + margin.top);
