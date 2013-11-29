@@ -95,6 +95,8 @@
     
 }
 
-
+-(BOOL) isViewLoaded{
+    return _view != nil;
+}
 
 @end

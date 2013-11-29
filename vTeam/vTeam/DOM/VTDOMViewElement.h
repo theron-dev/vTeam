@@ -12,4 +12,6 @@
 
 @property(nonatomic,retain) UIView * view;
 
+@property(nonatomic,readonly,getter = isViewLoaded) BOOL viewLoaded;
+
 @end
