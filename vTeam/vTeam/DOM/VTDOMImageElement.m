@@ -10,6 +10,7 @@
 
 #import "VTDOMElement+Render.h"
 #import "VTDOMElement+Style.h"
+#import "VTDOMElement+Layout.h"
 #import "VTDOMDocument.h"
 
 #import <QuartzCore/QuartzCore.h>
@@ -142,8 +143,8 @@
         CALayer * layer = [self layer];
         layer.frame = r;
         layer.contents = (id)[image CGImage];
-        layer.contentsRect = CGRectMake(0, 0, 1.0, 1.0);
         layer.contentsCenter = CGRectMake(0, 0, 1, 1);
+        layer.contentsScale = [image scale];
         
         CGSize imageSize = [image size];
         CGFloat leftCapWidth = [image leftCapWidth];
@@ -156,6 +157,13 @@
             
             layer.contentsCenter = CGRectMake(leftCapWidth, topCapHeight, 1.0 / imageSize.width , 1.0 / imageSize.height);
         }
+        
+        UIEdgeInsets padding = [self padding];
+        
+        layer.contentsRect = CGRectMake(padding.left / imageSize.width, padding.top / imageSize.height
+                                        , 1.0 - (padding.left + padding.right) / imageSize.width
+                                        , 1.0 - (padding.top + padding.bottom) / imageSize.height);
+
         
         NSString * gravity = [self stringValueForKey:@"gravity"];
         

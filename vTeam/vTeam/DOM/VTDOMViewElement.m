@@ -62,7 +62,7 @@
             self.view = [delegate vtDOMElementView:self viewClass:clazz];
         }
         if([delegate respondsToSelector:@selector(vtDOMElement:addView:frame:)]){
-            [delegate vtDOMElement:self addView:self.view frame:self.frame];
+            [delegate vtDOMElement:self.parentElement addView:self.view frame:self.frame];
         }
     }
     else{

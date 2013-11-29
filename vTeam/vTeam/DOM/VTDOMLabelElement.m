@@ -107,10 +107,6 @@
             UIFont * font = [self font];
             CGFloat minFontSize = [self minFontSize];
             
-            if(minFontSize == 0){
-                minFontSize = font.pointSize;
-            }
-            
             CGFloat width = r.size.width;
             
             if(width == MAXFLOAT){
@@ -120,8 +116,16 @@
                 }
             }
             
-            CGSize s = [text sizeWithFont:font minFontSize:minFontSize actualFontSize:&_actualFontSize forWidth:width lineBreakMode:self.lineBreakMode];
- 
+            CGSize s = CGSizeZero;
+            
+            if(minFontSize ==0){
+                _actualFontSize = 0;
+                s = [text sizeWithFont:font constrainedToSize:CGSizeMake(width, MAXFLOAT) lineBreakMode:self.lineBreakMode];
+            }
+            else{
+                s = [text sizeWithFont:font minFontSize:minFontSize actualFontSize:&_actualFontSize forWidth:width lineBreakMode:self.lineBreakMode];
+            }
+      
             if(r.size.width == MAXFLOAT){
                 r.size.width = s.width + padding.left + padding.right;
                 NSString * min = [self stringValueForKey:@"min-width"];

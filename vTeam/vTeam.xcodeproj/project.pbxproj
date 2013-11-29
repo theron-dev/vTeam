@@ -211,6 +211,8 @@
 		114D7ADF172A88FD0041468E /* GIFView.m in Sources */ = {isa = PBXBuildFile; fileRef = 114D7ADD172A88FD0041468E /* GIFView.m */; };
 		114D7AE2172A89710041468E /* VTContainerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D7AE0172A89700041468E /* VTContainerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		114D7AE3172A89710041468E /* VTContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 114D7AE1172A89700041468E /* VTContainerView.m */; };
+		1150F8661848626700176DDD /* UIButton+VTDOMElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 1150F8641848626700176DDD /* UIButton+VTDOMElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1150F8671848626700176DDD /* UIButton+VTDOMElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1150F8651848626700176DDD /* UIButton+VTDOMElement.m */; };
 		11541C57178FDC9C001D9FBF /* UIControl+VTDataOutlet.h in Headers */ = {isa = PBXBuildFile; fileRef = 11541C55178FDC9B001D9FBF /* UIControl+VTDataOutlet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11541C58178FDC9C001D9FBF /* UIControl+VTDataOutlet.m in Sources */ = {isa = PBXBuildFile; fileRef = 11541C56178FDC9B001D9FBF /* UIControl+VTDataOutlet.m */; };
 		11541C5F1790035A001D9FBF /* VTTabPageDataController.h in Headers */ = {isa = PBXBuildFile; fileRef = 11541C5D17900359001D9FBF /* VTTabPageDataController.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -692,6 +694,8 @@
 		114D7ADD172A88FD0041468E /* GIFView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GIFView.m; sourceTree = "<group>"; };
 		114D7AE0172A89700041468E /* VTContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTContainerView.h; sourceTree = "<group>"; };
 		114D7AE1172A89700041468E /* VTContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTContainerView.m; sourceTree = "<group>"; };
+		1150F8641848626700176DDD /* UIButton+VTDOMElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+VTDOMElement.h"; sourceTree = "<group>"; };
+		1150F8651848626700176DDD /* UIButton+VTDOMElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+VTDOMElement.m"; sourceTree = "<group>"; };
 		11541C55178FDC9B001D9FBF /* UIControl+VTDataOutlet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+VTDataOutlet.h"; sourceTree = "<group>"; };
 		11541C56178FDC9B001D9FBF /* UIControl+VTDataOutlet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+VTDataOutlet.m"; sourceTree = "<group>"; };
 		11541C5D17900359001D9FBF /* VTTabPageDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTTabPageDataController.h; sourceTree = "<group>"; };
@@ -1465,10 +1469,12 @@
 				113381F217D588E1005E4DCE /* VTDOMLabel.m */,
 				11A0416D17BB5E1B001992BE /* NSString+VTDOMSource.h */,
 				11A0416E17BB5E1B001992BE /* NSString+VTDOMSource.m */,
-				11A0417117BB6032001992BE /* VTDOM.h */,
-				11A0417217BB6032001992BE /* VTDOM.m */,
 				11BE4F8418311E830013722E /* UIView+VTDOMElement.h */,
 				11BE4F8518311E830013722E /* UIView+VTDOMElement.m */,
+				1150F8641848626700176DDD /* UIButton+VTDOMElement.h */,
+				1150F8651848626700176DDD /* UIButton+VTDOMElement.m */,
+				11A0417117BB6032001992BE /* VTDOM.h */,
+				11A0417217BB6032001992BE /* VTDOM.m */,
 			);
 			path = DOM;
 			sourceTree = "<group>";
@@ -1709,6 +1715,7 @@
 				11E59F701728CD6C002DD63C /* VTDataOutlet.h in Headers */,
 				11E59F741728CE81002DD63C /* VTDataOutletContainer.h in Headers */,
 				11E59F791728CFA8002DD63C /* VTViewController.h in Headers */,
+				1150F8661848626700176DDD /* UIButton+VTDOMElement.h in Headers */,
 				11E59F7D1728DBCD002DD63C /* NSURL+QueryValue.h in Headers */,
 				11E59F811728DF6E002DD63C /* VTNavigationController.h in Headers */,
 				114D796817291F3B0041468E /* VTStyleOutlet.h in Headers */,
@@ -2214,6 +2221,7 @@
 				11C3AB4517C7374800B16C3A /* NSData+GZIP.m in Sources */,
 				1174209A17CAF348001EBEE7 /* VTDOMActionElement.m in Sources */,
 				EA46D6CA17D468F9006FAEA9 /* VTHtmlDataController.m in Sources */,
+				1150F8671848626700176DDD /* UIButton+VTDOMElement.m in Sources */,
 				113381F417D588E1005E4DCE /* VTDOMLabel.m in Sources */,
 				113381F817D5901A005E4DCE /* NSString+TextLength.m in Sources */,
 				ACC8417A17DB84BC004E3C38 /* VTAction.m in Sources */,

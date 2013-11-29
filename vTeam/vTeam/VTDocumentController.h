@@ -31,6 +31,10 @@
 
 -(NSString *) htmlContent;
 
+-(BOOL) hasDocumentDynamicDataBind;
+
+-(void) documentDynamicDataBind;
+
 -(void) downloadImagesForElement:(VTDOMElement *) element;
 
 -(void) loadImagesForElement:(VTDOMElement *) element;

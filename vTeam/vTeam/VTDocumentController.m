@@ -12,6 +12,28 @@
 
 #import "NSString+VTDOMSource.h"
 
+@interface VTDocumentControllerDynamicData : NSObject
+
+@property(nonatomic,retain) VTDOMElement * element;
+@property(nonatomic,retain) NSString * text;
+@property(nonatomic,retain) NSString * key;
+@property(nonatomic,retain) NSString * value;
+
+@end
+
+@implementation VTDocumentControllerDynamicData
+
+
+@end
+
+
+@interface VTDocumentController()
+
+
+@property(nonatomic,readonly) NSMutableArray * dynamicDatas;
+
+@end
+
 @implementation VTDocumentController
 
 @synthesize documentView = _documentView;
@@ -21,22 +43,25 @@
 @synthesize document = _document;
 @synthesize allowAutoHeight = _allowAutoHeight;
 @synthesize allowAutoWidth = _allowAutoWidth;
+@synthesize dynamicDatas = _dynamicDatas;
 
 -(void) dealloc{
     
     if([_documentView respondsToSelector:@selector(setDelegate:)]){
         [(id)_documentView setDelegate:nil];
     }
-    
-    [_documentView release];
-    
+
     [_html release];
     
     [_bundle release];
     
     [_dataItem release];
     
+    [_dynamicDatas release];
+    
     [_document release];
+    
+    [_documentView release];
     
     [super dealloc];
 }
@@ -49,7 +74,63 @@
     
 }
 
+-(NSMutableArray *) dynamicDatas{
+    if(_dynamicDatas == nil){
+        _dynamicDatas = [[NSMutableArray alloc] initWithCapacity:4];
+    }
+    return _dynamicDatas;
+}
+
+-(void) addElement:(VTDOMElement *)element toDynamicDatas:(NSMutableArray *) dynamicDatas{
+    if(element){
+        
+        NSString * text = [element text];
+        
+        if(text && [text rangeOfString:@"{"].location != NSNotFound){
+            
+            VTDocumentControllerDynamicData * dynamic = [[VTDocumentControllerDynamicData alloc] init];
+            
+            [dynamic setText:[NSString stringWithString:text]];
+            [dynamic setElement:element];
+            
+            [dynamicDatas addObject:dynamic];
+            
+            [dynamic release];
+        }
+        
+        for(NSString * key in [[element attributes] allKeys]){
+            
+            NSString * v = [element attributeValueForKey:key];
+            
+            if(v && [v rangeOfString:@"{"].location != NSNotFound){
+                
+                VTDocumentControllerDynamicData * dynamic = [[VTDocumentControllerDynamicData alloc] init];
+                
+                [dynamic setKey:key];
+                [dynamic setValue:[NSString stringWithString:v]];
+                [dynamic setElement:element];
+                
+                [dynamicDatas addObject:dynamic];
+                
+                [dynamic release];
+                
+            }
+            
+        }
+        
+    }
+}
+
 -(void) documentWillLayout{
+    
+    if([self hasDocumentDynamicDataBind]){
+        
+        NSMutableArray * dynamicDatas = [self dynamicDatas];
+        
+        [self addElement:self.document.rootElement toDynamicDatas:dynamicDatas];
+        
+        [self documentDynamicDataBind];
+    }
     
 }
 
@@ -67,12 +148,36 @@
     
     NSString * htmlContent = [NSString stringWithContentsOfFile:[[bundle bundlePath] stringByAppendingPathComponent:self.html] encoding:NSUTF8StringEncoding error:nil];
     
-    htmlContent = [htmlContent htmlStringByDOMSource:self];
+    if(![self hasDocumentDynamicDataBind]){
+        htmlContent = [htmlContent htmlStringByDOMSource:self];
+    }
     
     return htmlContent;
     
 }
 
+-(BOOL) hasDocumentDynamicDataBind{
+    return NO;
+}
+
+-(void) documentDynamicDataBind{
+    
+    for(VTDocumentControllerDynamicData * dynamic in _dynamicDatas){
+        
+        VTDOMElement * element = [dynamic element];
+        
+        NSString * text = [dynamic text];
+        NSString * key = [dynamic key];
+        
+        if(text){
+            [element setText:[text htmlStringByDOMSource:self]];
+        }
+        else if(key){
+            [element setAttributeValue:key forKey:[[dynamic value] htmlStringByDOMSource:self]];
+        }
+    }
+    
+}
 
 -(void) downloadImagesForView:(UIView *) view{
     NSArray * imageViews = [view searchViewForProtocol:@protocol(IVTImageTask)];
