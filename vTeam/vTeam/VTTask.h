@@ -12,5 +12,6 @@
 
 @interface VTTask : NSObject<IVTTask>
 
+-(id) initWithSource:(id) source;
 
 @end

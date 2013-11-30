@@ -12,4 +12,11 @@
 
 @synthesize source = _source;
 
+-(id) initWithSource:(id) source{
+    if((self = [super init])){
+        _source = source;
+    }
+    return self;
+}
+
 @end
