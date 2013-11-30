@@ -124,6 +124,9 @@
     [self.context cancelHandleForSource:self];
     
     for(id controller in _controllers){
+        if([controller respondsToSelector:@selector(cancel)]){
+            [controller cancel];
+        }
         if([controller respondsToSelector:@selector(setDelegate:)]){
             [controller setDelegate:nil];
         }
