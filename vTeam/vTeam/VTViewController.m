@@ -90,9 +90,6 @@
         if([controller respondsToSelector:@selector(setDelegate:)]){
             [controller setDelegate:nil];
         }
-        if([controller respondsToSelector:@selector(setContext:)]){
-            [controller setContext:nil];
-        }
         if([controller respondsToSelector:@selector(setParentController:)]){
             [controller setParentController:nil];
         }
@@ -127,9 +124,14 @@
     [self.context cancelHandleForSource:self];
     
     for(id controller in _controllers){
-        [controller setDelegate:nil];
-        [controller setContext:nil];
+        if([controller respondsToSelector:@selector(setDelegate:)]){
+            [controller setDelegate:nil];
+        }
+        if([controller respondsToSelector:@selector(setParentController:)]){
+            [controller setParentController:nil];
+        }
     }
+    
     [_controllers release];
     [_config release];
     [_alias release];

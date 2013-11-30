@@ -130,7 +130,6 @@ static dispatch_queue_t gDownlinkServiceDispatchQueue = nil;
 
     NSString * dataKey = nil;
     __block NSString * jsonString = nil;
-    
     if(isCache){
         dataKey = [self dataKey:downlinkTask forTaskType:taskType];
         if(dataKey){
@@ -145,7 +144,9 @@ static dispatch_queue_t gDownlinkServiceDispatchQueue = nil;
         dispatch_async([VTDownlinkService dispatchQueue], ^{
             
             dispatch_async(dispatch_get_main_queue(), ^{
+                
                 [downlinkTask vtDownlinkTaskDidLoaded:data forTaskType:taskType];
+            
             });
         });
 
