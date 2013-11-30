@@ -9,6 +9,7 @@
 #import "UIView+VTDOMElement.h"
 
 #import <vTeam/VTDOMElement+Style.h>
+#import <vTeam/VTDOMElement+Render.h>
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -20,6 +21,7 @@
     self.layer.borderWidth = [element floatValueForKey:@"border-width"];
     self.layer.borderColor = [element colorValueForKey:@"border-color"].CGColor;
     self.layer.masksToBounds = YES;
+    [self setHidden:[element isHidden]];
 }
 
 @end

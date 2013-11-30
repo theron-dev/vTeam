@@ -86,7 +86,7 @@ typedef enum {
     
     UIGestureRecognizerState state = gestureRecognizer.state;
     
-    if(_animating){
+    if(_animating || [[[[self topController] config] valueForKeyPath:@"heap.disabled"] boolValue]){
         return;
     }
     
