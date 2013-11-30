@@ -147,7 +147,13 @@
     
     if(index < [self.dataSource count]){
     
-        VTItemViewController * itemViewController = [containerView dequeueReusableItemViewWithIdentifier:@"ItemView"];
+        NSString * reseIdentifier = _itemViewNib;
+        
+        if(reseIdentifier == nil){
+            reseIdentifier = @"ItemView";
+        }
+        
+        VTItemViewController * itemViewController = [containerView dequeueReusableItemViewWithIdentifier:reseIdentifier];
         
         if(itemViewController == nil){
             
@@ -157,8 +163,10 @@
                 clazz = [VTItemViewController class];
             }
             
+            
+            
             itemViewController = [[[clazz alloc] initWithNibName:_itemViewNib bundle:_itemViewBundle] autorelease];
-            [itemViewController setReuseIdentifier:@"ItemView"];
+            [itemViewController setReuseIdentifier:reseIdentifier];
             [itemViewController setDelegate:self];
         }
         
