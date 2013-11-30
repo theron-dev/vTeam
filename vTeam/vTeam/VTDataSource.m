@@ -126,4 +126,11 @@
     _skipCached = NO;
 }
 
+-(void) setContext:(id<IVTUIContext>)context{
+    if(_context != context){
+        [_context cancelHandleForSource:self];
+        _context = context;
+    }
+}
+
 @end

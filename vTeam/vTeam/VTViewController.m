@@ -12,6 +12,9 @@
 
 #import "VTPopWindow.h"
 #import "NSURL+QueryValue.h"
+#import "UIView+Search.h"
+
+#import "IVTImageTask.h"
 
 @interface VTViewController ()
 
@@ -94,6 +97,7 @@
             [controller setParentController:nil];
         }
     }
+    [self.context cancelHandleForSource:self];
     [super viewDidUnload];
 }
 
@@ -120,6 +124,8 @@
 }
 
 -(void) dealloc{
+    [self.context cancelHandleForSource:self];
+    
     for(id controller in _controllers){
         [controller setDelegate:nil];
         [controller setContext:nil];
@@ -330,6 +336,37 @@
 
 -(id) topController{
     return self;
+}
+
+
+
+-(void) downloadImagesForView:(UIView *) view{
+    NSArray * imageViews = [view searchViewForProtocol:@protocol(IVTImageTask)];
+    for(id imageView in imageViews){
+        if(![imageView isLoading] && ![imageView isLoaded]){
+            [imageView setSource:self];
+            [self.context handle:@protocol(IVTImageTask) task:imageView priority:0];
+        }
+    }
+}
+
+-(void) loadImagesForView:(UIView *) view{
+    NSArray * imageViews = [view searchViewForProtocol:@protocol(IVTImageTask)];
+    for(id imageView in imageViews){
+        if([imageView isLoading]){
+            [self.context cancelHandle:@protocol(IVTImageTask) task:imageView];
+        }
+        [self.context handle:@protocol(IVTLocalImageTask) task:imageView priority:0];
+    }
+}
+
+-(void) cancelDownloadImagesForView:(UIView *) view{
+    NSArray * imageViews = [view searchViewForProtocol:@protocol(IVTImageTask)];
+    for(id imageView in imageViews){
+        if([imageView isLoading]){
+            [self.context cancelHandle:@protocol(IVTImageTask) task:imageView];
+        }
+    }
 }
 
 @end

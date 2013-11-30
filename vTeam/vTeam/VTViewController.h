@@ -14,4 +14,12 @@
 
 -(IBAction) doAction:(id)sender;
 
+-(void) downloadImagesForView:(UIView *) view;
+
+-(void) loadImagesForView:(UIView *) view;
+
+-(void) cancelDownloadImagesForView:(UIView *) view;
+
+
+
 @end

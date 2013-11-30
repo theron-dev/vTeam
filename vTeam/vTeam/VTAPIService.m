@@ -160,7 +160,6 @@
     while(i < c){
         id resp = [_responses objectAtIndex:i];
         if([resp source] == source){
-            [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(sendResponseTask:) object:resp];
             [_responses removeObjectAtIndex:i];
             c --;
         }
@@ -185,16 +184,12 @@
     [respTask setUserInfo:[task userInfo]];
     [respTask setError:error];
     [respTask setUrl:[[(VTHttpTask *)httpTask request] URL]];
+    [respTask setSource:[task source]];
     
     [self.context handle:@protocol(IVTAPIResponseTask) task:respTask priority:0];
     
     [respTask release];
     
-}
-
--(void) sendResponseTask:(id<IVTAPIResponseTask>) respTask{
-    [self.context handle:@protocol(IVTAPIResponseTask) task:respTask priority:0];
-    [_responses removeObject:respTask];
 }
 
 -(void) vtHttpTaskDidLoaded:(id) httpTask{
@@ -219,8 +214,19 @@
     
     [_responses addObject:respTask];
     
-    [self performSelector:@selector(sendResponseTask:) withObject:respTask afterDelay:0];
-    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        NSUInteger index = [_responses indexOfObject:respTask];
+        
+        if(index != NSNotFound){
+            
+            [self.context handle:@protocol(IVTAPIResponseTask) task:respTask priority:0];
+            
+            [_responses removeObjectAtIndex:index];
+            
+        }
+    });
+  
     [respTask release];
 }
 

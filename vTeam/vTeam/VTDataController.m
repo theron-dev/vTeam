@@ -38,6 +38,9 @@
 }
 
 -(void) setContext:(id<IVTUIContext>)context{
+    if(_context != context){
+        [_context cancelHandleForSource:self];
+    }
     _context = context;
     [_dataSource setContext:context];
 }
