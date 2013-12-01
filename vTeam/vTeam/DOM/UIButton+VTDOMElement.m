@@ -35,6 +35,11 @@
     [self setBackgroundImage:[element imageValueForKey:@"background-image-disabled" bundle:element.document.bundle] forState:UIControlStateDisabled];
     [self setBackgroundImage:[element imageValueForKey:@"background-image-selected" bundle:element.document.bundle] forState:UIControlStateSelected];
     
+    [self setImage:[element imageValueForKey:@"image" bundle:element.document.bundle] forState:UIControlStateNormal];
+    [self setImage:[element imageValueForKey:@"image-highlighted" bundle:element.document.bundle] forState:UIControlStateHighlighted];
+    [self setImage:[element imageValueForKey:@"image-disabled" bundle:element.document.bundle] forState:UIControlStateDisabled];
+    [self setImage:[element imageValueForKey:@"image-selected" bundle:element.document.bundle] forState:UIControlStateSelected];
+    
     [self.titleLabel setFont:[element fontValueForKey:@"font"]];
     
     [self setEnabled:![element booleanValueForKey:@"disabled"]];
