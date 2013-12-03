@@ -14,6 +14,7 @@
 
 @interface VTDOMView(){
     NSMutableDictionary * _elementViews;
+    NSMutableSet * _elementViewSet;
 }
 
 -(void) viewBindElement:(VTDOMElement *) element;
@@ -34,9 +35,10 @@
             [v performSelector:@selector(setElement:) withObject:nil];
         }
     }
-    [_elementViews release];
     [self viewUnBindElement:_element];
     [_element release];
+    [_elementViews release];
+    [_elementViewSet release];
     [super dealloc];
 }
 
@@ -80,9 +82,11 @@
 
 -(void) setElement:(VTDOMElement *)element{
     if(_element != element){
-        for (UIView * v in [_elementViews allValues]) {
-            [v removeFromSuperview];
+        
+        if(_elementViewSet == nil){
+            _elementViewSet = [[NSMutableSet alloc] initWithCapacity:4];
         }
+        
         [self viewUnBindElement:_element];
         [element retain];
         [_element release];
@@ -90,13 +94,18 @@
         if(_allowAutoLayout){
             [_element layout:self.bounds.size];
         }
+        
         [self viewBindElement:_element];
+        
         for (id key in [_elementViews allKeys]) {
             UIView * v = [_elementViews objectForKey:key];
-            if(v.superview == nil){
+            if(![_elementViewSet containsObject:v]){
+                [v removeFromSuperview];
                 [_elementViews removeObjectForKey:key];
             }
         }
+        [_elementViewSet removeAllObjects];
+        
         [self setNeedsDisplay];
     }
 }
@@ -245,10 +254,26 @@
     view.frame = [element convertRect:frame superElement:_element];
     
     [self addSubview:view];
+    
+    [_elementViewSet addObject:view];
 }
 
 -(UIView *) vtDOMElementView:(VTDOMElement *) element viewClass:(Class)viewClass{
     NSString * eid = [element attributeValueForKey:@"id"];
+    
+    if(eid == nil){
+        eid = [element attributeValueForKey:@"uuid"];
+    }
+    
+    if(eid == nil){
+        uuid_t uuid;
+        uuid_generate_random(uuid);
+        eid = [NSString stringWithFormat:@"%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x"
+               ,uuid[0],uuid[1],uuid[2],uuid[3],uuid[4],uuid[5],uuid[6],uuid[7]
+               ,uuid[8],uuid[9],uuid[10],uuid[11],uuid[12],uuid[13],uuid[14],uuid[15]];
+        [element setAttributeValue:eid forKey:@"uuid"];
+    }
+    
     if(eid){
         UIView * v = [_elementViews objectForKey:eid];
         if(v == nil){

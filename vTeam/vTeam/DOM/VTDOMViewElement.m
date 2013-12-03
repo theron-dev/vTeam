@@ -22,24 +22,11 @@
     [super dealloc];
 }
 
--(UIView *) view{
-    if(_view == nil){
-        NSString * view = [self stringValueForKey:@"viewClass"];
-        Class clazz = NSClassFromString(view);
-        if(clazz == nil || ![clazz isSubclassOfClass:[UIView class]]){
-            clazz = [UIView class];
-        }
-        self.view = [[[clazz alloc] initWithFrame:self.frame] autorelease];
-    }
-    return _view;
-}
-
 -(void) setView:(UIView *)view{
     if(_view != view){
         if([_view respondsToSelector:@selector(setElement:)]){
             [_view performSelector:@selector(setElement:) withObject:nil];
         }
-        [_view removeFromSuperview];
         [view retain];
         [_view release];
         _view = view;

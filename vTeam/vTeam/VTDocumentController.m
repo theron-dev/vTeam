@@ -68,6 +68,15 @@
 
 -(void) documentWillLoad{
     
+    if([self hasDocumentDynamicDataBind]){
+        
+        NSMutableArray * dynamicDatas = [self dynamicDatas];
+        
+        [self addElement:self.document.rootElement toDynamicDatas:dynamicDatas];
+        
+        [self documentDynamicDataBind];
+    }
+    
 }
 
 -(void) documentDidLoad{
@@ -118,19 +127,16 @@
             
         }
         
+        for(VTDOMElement * child in [element childs]){
+            [self addElement:child toDynamicDatas:dynamicDatas];
+        }
+        
     }
 }
 
 -(void) documentWillLayout{
     
-    if([self hasDocumentDynamicDataBind]){
-        
-        NSMutableArray * dynamicDatas = [self dynamicDatas];
-        
-        [self addElement:self.document.rootElement toDynamicDatas:dynamicDatas];
-        
-        [self documentDynamicDataBind];
-    }
+
     
 }
 
@@ -173,7 +179,7 @@
             [element setText:[text htmlStringByDOMSource:self]];
         }
         else if(key){
-            [element setAttributeValue:key forKey:[[dynamic value] htmlStringByDOMSource:self]];
+            [element setAttributeValue:[[dynamic value] htmlStringByDOMSource:self] forKey:key];
         }
     }
     
@@ -344,7 +350,6 @@
     
     [self cancelDownloadImagesForView:_documentView];
     
-    [_documentView setElement:nil];
     [_documentView setElement:_document.rootElement];
     
     [self downloadImagesForView:_documentView];
