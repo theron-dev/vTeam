@@ -220,9 +220,11 @@
         
         if(index != NSNotFound){
             
-            [self.context handle:@protocol(IVTAPIResponseTask) task:respTask priority:0];
+            [[respTask retain] autorelease];
             
             [_responses removeObjectAtIndex:index];
+            
+            [self.context handle:@protocol(IVTAPIResponseTask) task:respTask priority:0];
             
         }
     });
