@@ -105,9 +105,8 @@
             }
         }
         [_elementViewSet removeAllObjects];
-        
-        [self setNeedsDisplay];
     }
+    [self setNeedsDisplay];
 }
 
 -(void) setBounds:(CGRect)bounds{
