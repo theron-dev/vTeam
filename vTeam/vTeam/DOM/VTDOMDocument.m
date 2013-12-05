@@ -84,6 +84,10 @@
     }
 }
 
+-(void) applyStyleSheet{
+    [self applyStyleSheet:self.rootElement];
+}
+
 -(void) scanfElements:(VTDOMElement *) element{
     if(element){
         NSString * eid = [element attributeValueForKey:@"id"];

@@ -85,8 +85,8 @@ typedef enum {
 -(void) panGestureRecognizerAction:(UIPanGestureRecognizer * ) gestureRecognizer{
     
     UIGestureRecognizerState state = gestureRecognizer.state;
-    
-    if(_animating || [[[[self topController] config] valueForKeyPath:@"heap.disabled"] boolValue]){
+
+    if(_animating || [[[self topController] valueForKeyPath:@"config.heap.disabled"] boolValue]){
         return;
     }
     

@@ -24,4 +24,6 @@
 
 -(void) applyStyleSheet:(VTDOMElement *) element;
 
+-(void) applyStyleSheet;
+
 @end
