@@ -20,6 +20,7 @@
 @property(nonatomic,assign,getter = isAllowAutoHeight) BOOL allowAutoHeight;
 @property(nonatomic,assign,getter = isAllowAutoWidth) BOOL allowAutoWidth;
 @property(nonatomic,readonly) CGSize contentSize;
+@property(nonatomic,readonly,getter = isDocumentLoaded) BOOL documentLoaded;
 
 -(void) documentWillLoad;
 

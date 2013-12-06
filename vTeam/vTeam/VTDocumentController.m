@@ -356,4 +356,8 @@
 
 }
 
+-(BOOL) isDocumentLoaded{
+    return _document != nil;
+}
+
 @end
