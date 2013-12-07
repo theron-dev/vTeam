@@ -459,7 +459,7 @@
     [self stopLoading];
 }
 
--(id) dataObjectForIndexPath:(NSIndexPath *) indexPath{
+-(id) dataObjectByIndexPath:(NSIndexPath *) indexPath{
     
     if(indexPath.row < [_headerCells count]){
         return nil;

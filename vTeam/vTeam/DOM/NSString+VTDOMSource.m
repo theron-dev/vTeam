@@ -11,7 +11,9 @@
 @implementation NSString (VTDOMSource)
 
 -(NSString *) htmlEncodeString{
-    NSString * v = [self stringByReplacingOccurrencesOfString:@" " withString:@"&nbsp;"];
+    NSString * v = self;
+    v = [v stringByReplacingOccurrencesOfString:@"&" withString:@"&amp;"];
+    v = [v stringByReplacingOccurrencesOfString:@" " withString:@"&nbsp;"];
     v = [v stringByReplacingOccurrencesOfString:@"<" withString:@"&lt;"];
     v = [v stringByReplacingOccurrencesOfString:@">" withString:@"&gt;"];
     v = [v stringByReplacingOccurrencesOfString:@"\n" withString:@"\\n"];
@@ -21,9 +23,11 @@
 }
 
 -(NSString *) htmlDecodeString{
-    NSString * v = [self stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+    NSString * v = self;
+    v = [v stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
     v = [v stringByReplacingOccurrencesOfString:@"&lt;" withString:@"<"];
     v = [v stringByReplacingOccurrencesOfString:@"&gt;" withString:@">"];
+    v = [v stringByReplacingOccurrencesOfString:@"&amp;" withString:@"&"];
     v = [v stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
     v = [v stringByReplacingOccurrencesOfString:@"\\t" withString:@"\t"];
     return v;

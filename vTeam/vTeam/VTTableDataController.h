@@ -29,7 +29,7 @@
 
 -(void) stopLoading;
 
--(id) dataObjectForIndexPath:(NSIndexPath *) indexPath;
+-(id) dataObjectByIndexPath:(NSIndexPath *) indexPath;
 
 @end
 

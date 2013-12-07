@@ -56,7 +56,13 @@
                 - [self.dataSource count] - [self.headerCells count]];
     }
     
+    VTDOMDocument * document = [self documentByIndexPath:indexPath];
+
     NSString * identifier = self.reusableCellIdentifier;
+    
+    if(identifier == nil){
+        identifier = self.html;
+    }
     
     if(identifier == nil){
         identifier = @"Document";
@@ -88,9 +94,7 @@
     }
     
     VTDOMView * documentView = (VTDOMView *) [cell.contentView viewWithTag:100];
-    
-    VTDOMDocument * document = [self documentByIndexPath:indexPath];
-
+   
     if([document rootElement]){
         
         [self loadImagesForElement:[document rootElement]];

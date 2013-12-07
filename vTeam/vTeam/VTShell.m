@@ -461,4 +461,8 @@ extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
     }
 }
 
+-(BOOL) hasWaitResultsData{
+    return _resultsCallback != nil;
+}
+
 @end
