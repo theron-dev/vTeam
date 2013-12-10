@@ -167,6 +167,9 @@ typedef enum {
                     v.layer.transform = CATransform3DIdentity;
                     
                     [v setFrame:CGRectMake( d, 0, size.width, size.height)];
+                    
+                    [v setUserInteractionEnabled:NO];
+                    
                 }
                 else{
                     
@@ -175,35 +178,19 @@ typedef enum {
                     v.layer.mask = nil;
                     v.layer.transform = CATransform3DIdentity;
                     [v setFrame:CGRectMake( 0, 0, size.width, size.height)];
-
                 }
                 
                 
             }
             else if(d < 0){
-                
-                if([_viewControllers count] >1){
-                    
-                    UIViewController * viewController = [_viewControllers objectAtIndex:[_viewControllers count] -2];
-                    if([viewController isViewLoaded]){
-                        
-                        UIView * v = [viewController view];
-                        
-                        if(v.superview ){
-//                            [viewController viewWillDisappear:NO];
-                            [v removeFromSuperview];
-//                            [viewController viewDidDisappear:NO];
-                        }
-                    }
-                }
-                
+
                 UIView * v = [self.topViewController view];
                 [v setFrame:CGRectMake(0, 0, size.width, size.height)];
             }
             
         }
     }
-    else if(state == UIGestureRecognizerStateEnded || state == UIGestureRecognizerStateFailed){
+    else if(state == UIGestureRecognizerStateEnded || state == UIGestureRecognizerStateFailed || state == UIGestureRecognizerStateCancelled){
         if(_panBeginTouch){
             _panBeginTouch = NO;
             
@@ -225,6 +212,8 @@ typedef enum {
                     }
                 }
 
+                [[[self topViewController] view] setUserInteractionEnabled:YES];
+                
                 [self popViewController:YES];
             }
             else if(d <0 && _direction == VTHeapViewControllerPanDirectionLeft){
@@ -241,6 +230,8 @@ typedef enum {
                     }
                 }
                 
+                [[[self topViewController] view] setUserInteractionEnabled:YES];
+                
             }
             else{
                 
@@ -251,17 +242,24 @@ typedef enum {
                     [self hiddenViewController:viewController animated:YES];
                 }
                 
-               
                 UIView * v = [self.topViewController view];
                 
-                [UIView beginAnimations:nil context:nil];
-                [UIView setAnimationDuration:ANIMATION_DURATION];
+                _animating = YES;
                 
-                v.layer.mask = nil;
-                v.layer.transform = CATransform3DIdentity;
-                [v setFrame:CGRectMake(0, 0, size.width, size.height)];
-                
-                [UIView commitAnimations];
+                [UIView animateWithDuration:ANIMATION_DURATION animations:^{
+                    
+                    v.layer.mask = nil;
+                    v.layer.transform = CATransform3DIdentity;
+                    [v setFrame:CGRectMake(0, 0, size.width, size.height)];
+                    
+                    
+                } completion:^(BOOL finished) {
+                    
+                    [v setUserInteractionEnabled:YES];
+                    _animating = NO;
+                    
+                }];
+               
             }
             
         }
@@ -411,7 +409,7 @@ typedef enum {
                 v.layer.transform = CATransform3DMakeScale(ANIMATION_SCALE, ANIMATION_SCALE, ANIMATION_SCALE);
                 
                 [view insertSubview:v atIndex:0];
-                [topViewController viewDidAppear:animated];
+                //[topViewController viewDidAppear:animated];
             }
             
             [UIView beginAnimations:nil context:topViewController];
