@@ -710,6 +710,11 @@ typedef enum {
 }
 
 -(void) setViewControllers:(NSArray *) viewControllers animated:(BOOL)animated{
+    
+    if(_animating){
+        return;
+    }
+    
     NSInteger index = 0;
     while(index < [viewControllers count] && index < [_viewControllers count]){
         id viewController1 = [viewControllers objectAtIndex:index];
@@ -740,6 +745,7 @@ typedef enum {
             
             id viewController= [viewControllers objectAtIndex:index];
             [_viewControllers addObject:viewController];
+
             [self addViewController:viewController animated:animated];
         }
     }
@@ -891,6 +897,8 @@ typedef enum {
         v.layer.mask = nil;
         v.layer.transform = CATransform3DMakeScale(ANIMATION_SCALE, ANIMATION_SCALE, ANIMATION_SCALE);
         
+        _animating = YES;
+        
         [UIView animateWithDuration:0.3 animations:^{
         
             v.layer.transform = CATransform3DIdentity;
@@ -898,6 +906,7 @@ typedef enum {
             
         } completion:^(BOOL finished) {
             
+            _animating = NO;
 //            [viewController viewDidAppear:animated];
             
         }];
@@ -944,11 +953,15 @@ typedef enum {
         
         [view addSubview:v];
         
+        _animating = YES;
+        
         [UIView animateWithDuration:0.3 animations:^{
             
             [v setFrame:CGRectMake(0, 0, size.width, size.height)];
             
         } completion:^(BOOL finished) {
+            
+            _animating = NO;
             
 //            [viewController viewDidAppear:animated];
          
