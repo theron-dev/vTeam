@@ -16,4 +16,6 @@
 
 -(NSString *) htmlStringByDOMSource:(id) data;
 
+-(NSString *) htmlStringByDOMSource:(id) data htmlEncoded:(BOOL) htmlEncoded;
+
 @end

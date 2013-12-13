@@ -21,6 +21,10 @@
 
 + (NSString *) encodeQueryValue:(NSString *) queryValue;
 
++ (NSDictionary *) decodeQuery:(NSString *) query;
+
++ (NSString *) encodeQueryValues:(NSDictionary *) queryValues;
+
 -(NSString *) firstPathComponent;
 
 -(NSString *) firstPathComponent:(NSString *) basePath;

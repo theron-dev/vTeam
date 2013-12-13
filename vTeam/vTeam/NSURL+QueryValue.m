@@ -153,6 +153,38 @@
     return ms;
 }
 
++ (NSDictionary *) decodeQuery:(NSString *) query{
+    
+    NSArray * items = [query componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"&?"]];
+    
+    NSMutableDictionary * queryValues = [NSMutableDictionary dictionaryWithCapacity:4];
+    
+    for(NSString * item in items){
+        
+        NSArray * vs = [item componentsSeparatedByString:@"="];
+        
+        if([vs count] > 1){
+            [queryValues setValue:[self decodeQueryValue:[vs objectAtIndex:1]] forKey:[vs objectAtIndex:0]];
+        }
+        
+    }
+    
+    return queryValues;
+}
+
++ (NSString *) encodeQueryValues:(NSDictionary *) queryValues{
+    
+    NSMutableString * query = [NSMutableString stringWithCapacity:64];
+    
+    for(NSString * key in queryValues){
+        
+        [query appendFormat:@"%@=%@",key,[self encodeQueryValue:[queryValues valueForKey:key]]];
+        
+    }
+    
+    return query;
+}
+
 -(NSString *) lastPathComponent:(NSInteger) skip{
     NSArray * paths = [self pathComponents];
     NSInteger index = [paths count] - skip -1;

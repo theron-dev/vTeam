@@ -176,10 +176,10 @@
         NSString * key = [dynamic key];
         
         if(text){
-            [element setText:[text htmlStringByDOMSource:self]];
+            [element setText:[text htmlStringByDOMSource:self htmlEncoded:NO]];
         }
         else if(key){
-            [element setAttributeValue:[[dynamic value] htmlStringByDOMSource:self] forKey:key];
+            [element setAttributeValue:[[dynamic value] htmlStringByDOMSource:self htmlEncoded:NO] forKey:key];
         }
     }
     

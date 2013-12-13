@@ -33,7 +33,11 @@
     return v;
 }
 
--(NSString *) htmlStringByDOMSource:(id) data{
+-(NSString *) htmlStringByDOMSource:(id)data{
+    return [self htmlStringByDOMSource:data htmlEncoded:YES];
+}
+
+-(NSString *) htmlStringByDOMSource:(id) data htmlEncoded:(BOOL) htmlEncoded{
     
     NSMutableString * ms = [NSMutableString stringWithCapacity:30];
     NSMutableString * keyPath = [NSMutableString stringWithCapacity:30];
@@ -79,7 +83,7 @@
                         id v = [data dataForKeyPath:keyPath];
                         if(v){
                             if([v isKindOfClass:[NSString class]]){
-                                [ms appendString:[v htmlEncodeString]];
+                                [ms appendString:htmlEncoded ? [v htmlEncodeString] : v];
                             }
                             else{
                                 [ms appendFormat:@"%@",v];
