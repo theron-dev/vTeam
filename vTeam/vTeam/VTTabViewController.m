@@ -206,7 +206,6 @@
         
         [viewController.view setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
         [viewController.view setFrame:CGRectMake(0, 0, size.width, size.height)];
-        [viewController.view setBackgroundColor:[UIColor grayColor]];
         [self.contentView addSubview:viewController.view];
     }
 
@@ -225,7 +224,6 @@
         
         [viewController.view setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
         [viewController.view setFrame:CGRectMake(0, 0, size.width, size.height)];
-        [viewController.view setBackgroundColor:[UIColor grayColor]];
         [self.contentView addSubview:viewController.view];
     }
     
