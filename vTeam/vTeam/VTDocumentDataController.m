@@ -287,4 +287,9 @@
     }
 }
 
+-(void) vtDOMView:(VTDOMView *)view downloadImagesForElement:(VTDOMElement *)element{
+    [self downloadImagesForElement:element];
+}
+
+
 @end

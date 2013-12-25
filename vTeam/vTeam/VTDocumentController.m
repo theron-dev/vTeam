@@ -360,4 +360,8 @@
     return _document != nil;
 }
 
+-(void) vtDOMView:(VTDOMView *)view downloadImagesForElement:(VTDOMElement *)element{
+    [self downloadImagesForElement:element];
+}
+
 @end
