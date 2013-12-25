@@ -230,6 +230,24 @@
         _rich.textColor = [self textColor];
         _rich.linesSpacing = [self floatValueForKey:@"line-spacing"];
         _rich.charsetsSpacing = [self floatValueForKey:@"charset-spacing"];
+        _rich.firstLineHeadIndent = [self floatValueForKey:@"indent"];
+        _rich.paragraphSpacing = [self floatValueForKey:@"paragraph-spacing"];
+        
+        NSString * align = [self stringValueForKey:@"align"];
+
+        if([align isEqualToString:@"left"]){
+            _rich.textAlignment = kCTTextAlignmentLeft;
+        }
+        else if([align isEqualToString:@"right"]){
+            _rich.textAlignment = kCTTextAlignmentRight;
+        }
+        else if([align isEqualToString:@"center"]){
+            _rich.textAlignment = kCTTextAlignmentCenter;
+        }
+        else if([align isEqualToString:@"natural"]){
+            _rich.textAlignment = kCTTextAlignmentNatural;
+        }
+
         
         NSMutableDictionary * attr = [NSMutableDictionary dictionaryWithCapacity:4];
         

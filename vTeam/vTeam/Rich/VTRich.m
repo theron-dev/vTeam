@@ -65,12 +65,16 @@ static CTRunDelegateCallbacks VTRichDelegateCallbacks = {
 @synthesize textColor = _textColor;
 @synthesize linesSpacing = _linesSpacing;
 @synthesize charsetsSpacing = _charsetsSpacing;
+@synthesize firstLineHeadIndent = _firstLineHeadIndent;
+@synthesize textAlignment = _textAlignment;
+@synthesize paragraphSpacing = _paragraphSpacing;
 
 -(id) init{
     if((self = [super init])){
         self.font = [UIFont systemFontOfSize:14];
         self.textColor = [UIColor blackColor];
         self.linesSpacing = 3;
+        self.textAlignment = kCTTextAlignmentJustified;
     }
     return self;
 }
@@ -118,13 +122,11 @@ static CTRunDelegateCallbacks VTRichDelegateCallbacks = {
     
     if([attr valueForKey:(id)kCTParagraphStyleAttributeName] == nil){
         
-        CTTextAlignment textAlignment = kCTTextAlignmentJustified;
-        CGFloat firstLineHeadIndent = 0;
-        
         CTParagraphStyleSetting settings[] = {
             {kCTParagraphStyleSpecifierLineSpacingAdjustment,sizeof(_linesSpacing),&_linesSpacing},
-            {kCTParagraphStyleSpecifierAlignment,sizeof(textAlignment),&textAlignment},
-            {kCTParagraphStyleSpecifierFirstLineHeadIndent,sizeof(firstLineHeadIndent),&firstLineHeadIndent},
+            {kCTParagraphStyleSpecifierAlignment,sizeof(_textAlignment),&_textAlignment},
+            {kCTParagraphStyleSpecifierFirstLineHeadIndent,sizeof(_firstLineHeadIndent),&_firstLineHeadIndent},
+            {kCTParagraphStyleSpecifierParagraphSpacing,sizeof(_paragraphSpacing),&_paragraphSpacing},
         };
         
         CTParagraphStyleRef style = CTParagraphStyleCreate(settings, sizeof(settings) / sizeof(CTParagraphStyleSetting)) ;

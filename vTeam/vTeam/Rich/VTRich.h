@@ -48,6 +48,9 @@
 @property(nonatomic,retain) UIColor * textColor;
 @property(nonatomic,assign) CGFloat linesSpacing;
 @property(nonatomic,assign) CGFloat charsetsSpacing;
+@property(nonatomic,assign) CGFloat firstLineHeadIndent;
+@property(nonatomic,assign) CTTextAlignment textAlignment;
+@property(nonatomic,assign) CGFloat paragraphSpacing;
 @property(nonatomic,readonly) NSArray * elements;
 @property(nonatomic,readonly) NSAttributedString * attributedString;
 @property(nonatomic,readonly,getter = isNewLine) BOOL newLine;

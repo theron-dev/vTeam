@@ -152,7 +152,9 @@
             
             _layoutSize = self.bounds.size;
     
-            contentSize = [_element layout:CGSizeMake(_layoutSize.width, INT32_MAX)];
+            [_element layout:CGSizeMake(_layoutSize.width, MAXFLOAT)];
+            
+            contentSize = [_element contentSize];
             
             [self setContentSize:CGSizeMake(0, contentSize.height)];
         }
