@@ -18,7 +18,9 @@
 
 #import "VTDOMParse.h"
 
-extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
+#import <Security/Security.h>
+
+#import <objc/objc-runtime.h>
 
 
 @interface VTServiceContainer : NSObject<IVTServiceContainer>{
@@ -102,6 +104,7 @@ extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
 @property(nonatomic,readonly) NSMutableArray * platformKeys;
 @property(nonatomic,readonly) NSMutableDictionary * storyboards;
 @property(nonatomic,copy) void (^ resultsCallback)(id resultsData);
+@property(nonatomic,readonly) NSMutableDictionary * authValues;
 
 @end
 
@@ -114,6 +117,7 @@ extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
 @synthesize domStyleSheet = _domStyleSheet;
 @synthesize platformKeys = _platformKeys;
 @synthesize resultsCallback = _resultsCallback;
+@synthesize authValues = _authValues;
 
 -(void) dealloc{
     [_bundle release];
@@ -126,6 +130,7 @@ extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
     [_domStyleSheet release];
     [_storyboards release];
     [_platformKeys release];
+    [_authValues release];
     self.resultsCallback = nil;
     [super dealloc];
 }
@@ -463,6 +468,121 @@ extern BOOL protocol_conformsToProtocol(Protocol *proto, Protocol *other);
 
 -(BOOL) hasWaitResultsData{
     return _resultsCallback != nil;
+}
+
+-(NSString *) domain{
+    return [[NSBundle mainBundle] bundleIdentifier];
+}
+
+-(id) uid{
+    return [self authValueForKey:@"uid"];
+}
+
+-(void) setUid:(id)uid{
+    [self setAuthValue:uid forKey:@"uid"];
+}
+
+-(NSString *) token{
+    return [self authValueForKey:@"token"];
+}
+
+-(void) setToken:(NSString *)token{
+    [self setAuthValue:token forKey:@"token"];
+}
+
+-(NSMutableDictionary *) authValues{
+    
+    if(_authValues == nil){
+        
+        NSString * domain = [self domain];
+        
+        NSMutableDictionary * query = [NSMutableDictionary dictionaryWithObjectsAndKeys:(NSString *)kSecClassGenericPassword,(NSString *)kSecClass
+                                , domain,(NSString *) kSecAttrAccount
+                                , domain,(NSString *) kSecAttrService
+                                , domain,(NSString *) kSecAttrLabel
+                                , [NSNumber numberWithBool:YES],(NSString *) kSecReturnData
+                                , nil];
+        
+        NSData * data = nil;
+        
+        OSStatus status = SecItemCopyMatching((CFDictionaryRef)query,(CFTypeRef *) & data);
+        
+        [data autorelease];
+        
+        if(status != noErr){
+            SecItemDelete((CFDictionaryRef) query);
+            data = nil;
+        }
+        
+        if(data == nil){
+            
+            _authValues = [[NSMutableDictionary alloc] initWithCapacity:4];
+            
+            data = [NSMutableData dataWithCapacity:128];
+            
+            NSKeyedArchiver * archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:(NSMutableData *)data];
+            
+            [_authValues encodeWithCoder:archiver];
+            
+            [archiver finishEncoding];
+            [archiver release];
+            
+            [query removeObjectForKey:(NSString *)kSecReturnData];
+            [query setValue:data forKey:(NSString *)kSecValueData];
+            
+            SecItemAdd( (CFDictionaryRef) query, nil);
+        }
+        else{
+
+            NSKeyedUnarchiver * archiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+            
+            _authValues = [[NSMutableDictionary alloc] initWithCoder:archiver];
+            
+            [archiver finishDecoding];
+            [archiver release];
+        }
+    }
+    
+    if(_authValues == nil){
+        _authValues = [[NSMutableDictionary alloc] initWithCapacity:4];
+    }
+    
+    return _authValues;
+}
+
+-(void) setAuthValue:(id) value forKey:(NSString *)key{
+    
+    if(value){
+        [self.authValues setValue:value forKey:key];
+    }
+    else{
+        [self.authValues removeObjectForKey:key];
+    }
+    
+    NSMutableData * data = [NSMutableData dataWithCapacity:128];
+    
+    NSKeyedArchiver * archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
+    
+    [self.authValues encodeWithCoder:archiver];
+    
+    [archiver finishEncoding];
+    
+    [archiver release];
+    
+    NSString * domain = [self domain];
+    
+    NSDictionary * query = [NSDictionary dictionaryWithObjectsAndKeys:(NSString *)kSecClassGenericPassword,(NSString *)kSecClass
+                          , domain,(NSString *) kSecAttrAccount
+                          , domain,(NSString *) kSecAttrService
+                          , domain,(NSString *) kSecAttrLabel
+                          , nil];
+    
+    SecItemUpdate((CFDictionaryRef) query, (CFDictionaryRef) [NSDictionary dictionaryWithObject:data forKey:(NSString *)kSecValueData]);
+    
+}
+
+-(id) authValueForKey:(NSString *) key{
+    return [[self authValues] valueForKey:key];
 }
 
 @end

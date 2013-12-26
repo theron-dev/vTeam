@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-#import <vTeam/IVTContext.h>
+#import <vTeam/IVTAuthContext.h>
 #import <vTeam/IVTTask.h>
 
-@protocol IVTServiceContext <IVTContext>
+@protocol IVTServiceContext <IVTAuthContext>
 
 -(BOOL) handle:(Protocol *)taskType task:(id<IVTTask>)task priority:(NSInteger)priority;
 

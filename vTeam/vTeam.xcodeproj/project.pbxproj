@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		110843C1186BD6DD00ECA4CB /* IVTAuthContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 110843C0186BD6DD00ECA4CB /* IVTAuthContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		111638351762E1AD009979D3 /* hreport.c in Sources */ = {isa = PBXBuildFile; fileRef = 111638341762E1AD009979D3 /* hreport.c */; };
 		1116383F1762E99E009979D3 /* hreport.h in Headers */ = {isa = PBXBuildFile; fileRef = 111638331762DCBD009979D3 /* hreport.h */; settings = {ATTRIBUTES = (); }; };
 		111638441762EA80009979D3 /* VTReportDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = 111638421762EA80009979D3 /* VTReportDocument.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -476,6 +477,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		110843C0186BD6DD00ECA4CB /* IVTAuthContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVTAuthContext.h; sourceTree = "<group>"; };
 		1114FC9917B9DB5800B8C2CB /* VTDOMDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDOMDocument.h; sourceTree = "<group>"; };
 		1114FC9A17B9DB5800B8C2CB /* VTDOMDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDOMDocument.m; sourceTree = "<group>"; };
 		1114FCA117B9E02600B8C2CB /* VTDOMParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDOMParse.h; sourceTree = "<group>"; };
@@ -1225,6 +1227,7 @@
 				114D7A54172A2A3E0041468E /* VTService.m */,
 				11E59F5E1728C03B002DD63C /* IVTServiceContainer.h */,
 				114773061727E04F00196FB2 /* IVTContext.h */,
+				110843C0186BD6DD00ECA4CB /* IVTAuthContext.h */,
 				114773071727E09700196FB2 /* IVTServiceContext.h */,
 				11E6ABCC17CC9B6C00B9C3FE /* IVTController.h */,
 				11BC14791804FE770065A9EE /* VTController.h */,
@@ -1710,6 +1713,7 @@
 				11E59F5F1728C197002DD63C /* IVTServiceContainer.h in Headers */,
 				11E59F641728C785002DD63C /* VTStyleSheet.h in Headers */,
 				114D642317E1BAE30021CB8A /* VTMontage.h in Headers */,
+				110843C1186BD6DD00ECA4CB /* IVTAuthContext.h in Headers */,
 				11E59F681728C798002DD63C /* VTStyle.h in Headers */,
 				11E59F6C1728CCAC002DD63C /* VTStyleOutletContainer.h in Headers */,
 				11E59F701728CD6C002DD63C /* VTDataOutlet.h in Headers */,
