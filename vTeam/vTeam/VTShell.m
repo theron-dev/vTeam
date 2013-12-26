@@ -363,6 +363,9 @@
     for(id serviceContainer in _serviceContainers){
         [serviceContainer didReceiveMemoryWarning];
     }
+    
+    [_authValues release];
+    _authValues = nil;
 }
 
 -(BOOL) handle:(Protocol *)taskType task:(id<IVTTask>)task priority:(NSInteger)priority{
