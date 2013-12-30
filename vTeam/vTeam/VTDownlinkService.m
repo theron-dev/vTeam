@@ -9,6 +9,7 @@
 #import "VTDownlinkService.h"
 
 #import <vTeam/VTAPITask.h>
+#import "VTCleanupTask.h"
 
 #import "VTDBContext.h"
 #import "VTDBObject.h"
@@ -185,6 +186,20 @@ static dispatch_queue_t gDownlinkServiceDispatchQueue = nil;
     }
 }
 
+-(BOOL) handle:(Protocol *)taskType task:(id<IVTTask>)task priority:(NSInteger)priority{
+    
+    if(taskType == @protocol(IVTCleanupTask)){
+        
+        dispatch_async([VTDownlinkService dispatchQueue], ^{
+            
+            [[[VTDownlinkService dbContext] db] execture:[NSString stringWithFormat:@"DELETE FROM [%@] WHERE [service]='%@'",NSStringFromClass([VTDownlinkServiceDBObject tableClass]),NSStringFromClass([self class])] withData:nil];
+            
+        });
+        
+    }
+    
+    return NO;
+}
 
 -(BOOL) cancelHandle:(Protocol *)taskType task:(id<IVTTask>)task{
     

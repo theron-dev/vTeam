@@ -8,6 +8,8 @@
 
 #import "VTHttpService.h"
 
+#import "VTCleanupTask.h"
+
 #import "VTHttpTask.h"
 
 @interface VTHttpTaskOperator : NSOperation{
@@ -468,6 +470,22 @@ static void VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction(void * task){
         [op release];
         
         return YES;
+    }
+    
+    if(taskType == @protocol(IVTCleanupTask)){
+        
+        NSFileManager * fileManager = [NSFileManager defaultManager];
+        
+        NSDirectoryEnumerator * dirEnum = [fileManager enumeratorAtPath:NSTemporaryDirectory()];
+        
+        NSString * dir;
+        
+        while((dir = [dirEnum nextObject])){
+            
+            [fileManager removeItemAtPath:[NSTemporaryDirectory() stringByAppendingPathComponent:dir] error:nil];
+            
+        }
+
     }
     
     return NO;

@@ -156,6 +156,8 @@
 		114072A0176AFFBA00275493 /* hfdb_index.c in Sources */ = {isa = PBXBuildFile; fileRef = 1140729F176AFFBA00275493 /* hfdb_index.c */; };
 		1140741B176EAEC500275493 /* VTFDBIndex.h in Headers */ = {isa = PBXBuildFile; fileRef = 11407419176EAEC500275493 /* VTFDBIndex.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1140741C176EAEC500275493 /* VTFDBIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = 1140741A176EAEC500275493 /* VTFDBIndex.m */; };
+		11442A87187122D40072D9CA /* VTCleanupTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 11442A85187122D40072D9CA /* VTCleanupTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11442A88187122D40072D9CA /* VTCleanupTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 11442A86187122D40072D9CA /* VTCleanupTask.m */; };
 		114772FC1727DE5200196FB2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 114772FA1727DE5200196FB2 /* InfoPlist.strings */; };
 		114773031727DF0D00196FB2 /* vTeam.m in Sources */ = {isa = PBXBuildFile; fileRef = 114773021727DF0D00196FB2 /* vTeam.m */; };
 		114773051727DFE000196FB2 /* vTeam.h in Headers */ = {isa = PBXBuildFile; fileRef = 114773011727DF0D00196FB2 /* vTeam.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -636,6 +638,8 @@
 		1140729F176AFFBA00275493 /* hfdb_index.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hfdb_index.c; sourceTree = "<group>"; };
 		11407419176EAEC500275493 /* VTFDBIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTFDBIndex.h; sourceTree = "<group>"; };
 		1140741A176EAEC500275493 /* VTFDBIndex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTFDBIndex.m; sourceTree = "<group>"; };
+		11442A85187122D40072D9CA /* VTCleanupTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTCleanupTask.h; sourceTree = "<group>"; };
+		11442A86187122D40072D9CA /* VTCleanupTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTCleanupTask.m; sourceTree = "<group>"; };
 		114772E21727DE0800196FB2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		114772F41727DE5200196FB2 /* vTeam.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = vTeam.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		114772F91727DE5200196FB2 /* vTeam-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "vTeam-Info.plist"; sourceTree = "<group>"; };
@@ -1303,6 +1307,8 @@
 				11D678EF17AA5242000E02FA /* VTBehaviorTransactionTask.m */,
 				11BE4FD318360C790013722E /* VTCrashTask.h */,
 				11BE4FD418360C790013722E /* VTCrashTask.m */,
+				11442A85187122D40072D9CA /* VTCleanupTask.h */,
+				11442A86187122D40072D9CA /* VTCleanupTask.m */,
 			);
 			name = Tasks;
 			sourceTree = "<group>";
@@ -1949,6 +1955,7 @@
 				1117023F18308BE000CFD179 /* IGridRow.h in Headers */,
 				1117024018308BE000CFD179 /* IGridView.h in Headers */,
 				1117024318308C8700CFD179 /* NSString+Grid.h in Headers */,
+				11442A87187122D40072D9CA /* VTCleanupTask.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2236,6 +2243,7 @@
 				1117023818308BE000CFD179 /* GridHeadView.m in Sources */,
 				1117023A18308BE000CFD179 /* GridScrollView.m in Sources */,
 				1117024418308C8700CFD179 /* NSString+Grid.m in Sources */,
+				11442A88187122D40072D9CA /* VTCleanupTask.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

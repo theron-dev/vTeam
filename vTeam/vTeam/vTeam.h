@@ -105,4 +105,4 @@
 #import <vTeam/VTCrashService.h>
 #import <vTeam/VTDocumentController.h>
 #import <vTeam/NSString+Pinyin.h>
-
+#import <vTeam/VTCleanupTask.h>
