@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		110843C1186BD6DD00ECA4CB /* IVTAuthContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 110843C0186BD6DD00ECA4CB /* IVTAuthContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		110D4C5C18714F2900681A23 /* NSObject+VTValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 110D4C5A18714F2900681A23 /* NSObject+VTValue.h */; };
 		111638351762E1AD009979D3 /* hreport.c in Sources */ = {isa = PBXBuildFile; fileRef = 111638341762E1AD009979D3 /* hreport.c */; };
 		1116383F1762E99E009979D3 /* hreport.h in Headers */ = {isa = PBXBuildFile; fileRef = 111638331762DCBD009979D3 /* hreport.h */; settings = {ATTRIBUTES = (); }; };
 		111638441762EA80009979D3 /* VTReportDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = 111638421762EA80009979D3 /* VTReportDocument.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -480,6 +481,8 @@
 
 /* Begin PBXFileReference section */
 		110843C0186BD6DD00ECA4CB /* IVTAuthContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVTAuthContext.h; sourceTree = "<group>"; };
+		110D4C5A18714F2900681A23 /* NSObject+VTValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+VTValue.h"; sourceTree = "<group>"; };
+		110D4C5B18714F2900681A23 /* NSObject+VTValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+VTValue.m"; sourceTree = "<group>"; };
 		1114FC9917B9DB5800B8C2CB /* VTDOMDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDOMDocument.h; sourceTree = "<group>"; };
 		1114FC9A17B9DB5800B8C2CB /* VTDOMDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDOMDocument.m; sourceTree = "<group>"; };
 		1114FCA117B9E02600B8C2CB /* VTDOMParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDOMParse.h; sourceTree = "<group>"; };
@@ -1014,6 +1017,8 @@
 				11BC146D1804F6C60065A9EE /* UIImage+GaussianBlur.m */,
 				11F977631840E34100F697D7 /* NSString+Pinyin.h */,
 				11F977641840E34100F697D7 /* NSString+Pinyin.m */,
+				110D4C5A18714F2900681A23 /* NSObject+VTValue.h */,
+				110D4C5B18714F2900681A23 /* NSObject+VTValue.m */,
 			);
 			name = NSCategory;
 			sourceTree = "<group>";
@@ -1956,6 +1961,7 @@
 				1117024018308BE000CFD179 /* IGridView.h in Headers */,
 				1117024318308C8700CFD179 /* NSString+Grid.h in Headers */,
 				11442A87187122D40072D9CA /* VTCleanupTask.h in Headers */,
+				110D4C5C18714F2900681A23 /* NSObject+VTValue.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -31,8 +31,10 @@
 
 -(void) setContentOffset:(CGPoint)contentOffset{
     [super setContentOffset:contentOffset];
-    if([self.delegate respondsToSelector:@selector(tableView:didContentOffsetChanged:)]){
-        [(id<VTTableViewDelegate>)self.delegate tableView:self didContentOffsetChanged:self.contentOffset];
+    if(self.window){
+        if([self.delegate respondsToSelector:@selector(tableView:didContentOffsetChanged:)]){
+            [(id<VTTableViewDelegate>)self.delegate tableView:self didContentOffsetChanged:self.contentOffset];
+        }
     }
 }
 
