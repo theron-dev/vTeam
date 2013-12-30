@@ -113,7 +113,7 @@
         return YES;
     }
     
-    return NO;
+    return [super handle:taskType task:task priority:0];
 }
 
 -(BOOL) cancelHandle:(Protocol *)taskType task:(id<IVTTask>)task{
