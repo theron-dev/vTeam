@@ -78,7 +78,7 @@
 
 -(void) setFormItem:(VTHttpFormItem *) item{
     if(_formItems == nil){
-        _formItems = [NSMutableArray array];
+        _formItems = [[NSMutableArray alloc] initWithCapacity:4];
     }
     else{
         NSInteger c = [_formItems count];
