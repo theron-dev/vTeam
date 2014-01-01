@@ -24,6 +24,8 @@
 
 -(void) vtDOMView:(VTDOMView *) view doActionElement:(VTDOMElement *) element;
 
--(void) vtDOMView:(VTDOMView *)view downloadImagesForElement:(VTDOMElement *)element;
+-(void) vtDOMView:(VTDOMView *)view downloadImagesForElement:(VTDOMElement *) element;
+
+-(void) vtDOMView:(VTDOMView *)view downloadImagesForView:(UIView *) forView;
 
 @end

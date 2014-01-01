@@ -9,6 +9,7 @@
 #import "VTDOMViewElement.h"
 
 #import "VTDOMElement+Style.h"
+#import "VTDOMElement+Frame.h"
 
 @implementation VTDOMViewElement
 
@@ -36,17 +37,21 @@
     }
 }
 
+-(Class) viewClass{
+    NSString * view = [self stringValueForKey:@"viewClass"];
+    Class clazz = NSClassFromString(view);
+    if(clazz == nil || ![clazz isSubclassOfClass:[UIView class]]){
+        clazz = [UIView class];
+    }
+    return clazz;
+}
+
 -(void) setDelegate:(id)delegate{
     [super setDelegate:delegate];
     
     if([delegate isKindOfClass:[UIView class]]){
         if([delegate respondsToSelector:@selector(vtDOMElementView:viewClass:)]){
-            NSString * view = [self stringValueForKey:@"viewClass"];
-            Class clazz = NSClassFromString(view);
-            if(clazz == nil || ![clazz isSubclassOfClass:[UIView class]]){
-                clazz = [UIView class];
-            }
-            self.view = [delegate vtDOMElementView:self viewClass:clazz];
+            self.view = [delegate vtDOMElementView:self viewClass:[self viewClass]];
         }
         if([delegate respondsToSelector:@selector(vtDOMElement:addView:frame:)]){
             [delegate vtDOMElement:self.parentElement addView:self.view frame:self.frame];
@@ -85,5 +90,56 @@
 -(BOOL) isViewLoaded{
     return _view != nil;
 }
+
+-(CGSize) layoutChildren:(UIEdgeInsets)padding{
+    
+    CGRect r = [self frame];
+    
+    if(r.size.width == MAXFLOAT || r.size.height == MAXFLOAT){
+        
+        UIView * v = [self view];
+        
+        [v sizeToFit];
+        
+        CGRect rr = [v frame];
+        
+        if(r.size.width == MAXFLOAT){
+            r.size.width = rr.size.width + padding.left + padding.right;
+            NSString * min = [self stringValueForKey:@"min-width"];
+            if(min){
+                if(r.size.width < [min floatValue]){
+                    r.size.width = [min floatValue];
+                }
+            }
+            NSString * max = [self stringValueForKey:@"max-width"];
+            if(max){
+                if(r.size.width > [max floatValue]){
+                    r.size.width = [max floatValue];
+                }
+            }
+        }
+        
+        if(r.size.height == MAXFLOAT){
+            r.size.height = rr.size.height + padding.top + padding.bottom;
+            NSString * min = [self stringValueForKey:@"min-height"];
+            if(min){
+                if(r.size.height < [min floatValue]){
+                    r.size.height = [min floatValue];
+                }
+            }
+            NSString * max = [self stringValueForKey:@"max-height"];
+            if(max){
+                if(r.size.height > [max floatValue]){
+                    r.size.height = [max floatValue];
+                }
+            }
+        }
+        
+        [self setFrame:r];
+        
+    }
+    return r.size;
+}
+
 
 @end

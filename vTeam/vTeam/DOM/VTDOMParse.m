@@ -19,6 +19,7 @@
 #import "VTDOMRichElement.h"
 #import "VTDOMActionElement.h"
 #import "VTDOMViewElement.h"
+#import "VTDOMPageScrollElement.h"
 
 typedef struct _VTDOMParseScanf {
     hxml_scanf_t base;
@@ -62,9 +63,6 @@ static hbool VTDOMParse_scanf_tag_has_children(struct _hxml_scanf_t * xml,hcchar
 static void VTDOMParse_scanf_element_release(struct _hxml_scanf_t * xml,hany element,InvokeTickDeclare){
     
 }
-
-
-
 
 
 static hany VTDOMParseCSS_style_new(struct _hcss_scanf_t * css,hcchar * name, InvokeTickDeclare){
@@ -112,6 +110,9 @@ static hcss_scanf_t VTDOMParseCSSScanf = {
     }
     else if([name isEqualToString:@"view"]){
         elementClass = [VTDOMViewElement class];
+    }
+    else if([name isEqualToString:@"page"]){
+        elementClass = [VTDOMPageScrollElement class];
     }
     
     VTDOMElement * element = [[elementClass alloc] init];

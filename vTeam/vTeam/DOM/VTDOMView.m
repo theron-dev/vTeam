@@ -244,13 +244,14 @@
 
 -(void) vtDOMElement:(VTDOMElement *) element addLayer:(CALayer *) layer frame:(CGRect)frame{
 
-    layer.frame = [element convertRect:frame superElement:_element];
+    layer.frame = element ? [element convertRect:frame superElement:_element] : frame;
+    
     [self.layer addSublayer:layer];
 }
 
 -(void) vtDOMElement:(VTDOMElement *) element addView:(UIView *) view frame:(CGRect)frame{
     
-    view.frame = [element convertRect:frame superElement:_element];
+    view.frame = element ? [element convertRect:frame superElement:_element] : frame;
     
     [self addSubview:view];
     

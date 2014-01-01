@@ -291,5 +291,8 @@
     [self downloadImagesForElement:element];
 }
 
+-(void) vtDOMView:(VTDOMView *)view downloadImagesForView:(UIView *) forView{
+    [self downloadImagesForView:forView];
+}
 
 @end
