@@ -399,6 +399,16 @@ static void VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction(void * task){
     
 }
 
+- (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)response{
+    if(response){
+        if([self.task isAllowStatusCode302]){
+            return request;
+        }
+        return nil;
+    }
+    return request;
+}
+
 -(void) mainDoSendBodyDataBytes:(NSDictionary *) userInfo{
     
     if(self.isCancelled){
