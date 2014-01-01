@@ -1,31 +1,32 @@
 //
-//  VTDOMPageScrollElement.m
+//  VTDOMVScrollElement.m
 //  vTeam
 //
 //  Created by zhang hailong on 14-1-1.
 //  Copyright (c) 2014年 hailong.org. All rights reserved.
 //
 
-#import "VTDOMPageScrollElement.h"
+#import "VTDOMVScrollElement.h"
 
 #import "VTDOMView.h"
 
 #import "VTDOMElement+Layout.h"
 #import "VTDOMElement+Style.h"
 
-@interface VTDOMPageScrollItemView : VTDOMView
+@interface VTDOMVScrollItemView : VTDOMView
 
-@property(nonatomic,assign) NSInteger pageIndex;
-
-@end
-
-@implementation VTDOMPageScrollItemView
-
-@synthesize pageIndex = _pageIndex;
+@property(nonatomic,assign) NSInteger index;
 
 @end
 
-@implementation VTDOMPageScrollElement
+@implementation VTDOMVScrollItemView
+
+@synthesize index = _index;
+
+@end
+
+@implementation VTDOMVScrollElement
+
 
 -(void) dealloc{
     
@@ -46,8 +47,11 @@
     for (VTDOMElement * element in [self childs]) {
         
         [element layout:size];
-    
-        contentSize.width += size.width;
+        
+        CGRect r = element.frame;
+        UIEdgeInsets margin = [element margin];
+        
+        contentSize.height += r.size.height + margin.top + margin.bottom;
     }
     
     [self setContentSize:contentSize];
@@ -60,7 +64,7 @@
 }
 
 -(void) render:(CGRect) rect context:(CGContextRef) context{
-
+    
 }
 
 -(UIScrollView *) contentView{
@@ -84,8 +88,6 @@
     [super setView:view];
     
     [self.contentView setContentSize:self.contentSize];
-    [self.contentView setPagingEnabled:YES];
-    [self.contentView setShowsHorizontalScrollIndicator:NO];
     [self.contentView setDelegate:self];
     [self.contentView addObserver:self forKeyPath:@"contentOffset"
                           options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
@@ -102,22 +104,22 @@
     UIScrollView * contentView = [self contentView];
     
     if(contentView){
-    
+        
         NSMutableDictionary * itemViews = [NSMutableDictionary dictionaryWithCapacity:4];
         
         NSMutableArray * dequeueItemViews = [NSMutableArray arrayWithCapacity:4];
         
-        for (VTDOMPageScrollItemView * itemView in [contentView subviews]) {
+        for (VTDOMVScrollItemView * itemView in [contentView subviews]) {
             
-            if([itemView isKindOfClass:[VTDOMPageScrollItemView class]]){
+            if([itemView isKindOfClass:[VTDOMVScrollItemView class]]){
                 
-                [itemViews setObject:itemView forKey:[NSNumber numberWithInt:itemView.pageIndex]];
+                [itemViews setObject:itemView forKey:[NSNumber numberWithInt:itemView.index]];
                 
             }
             
         }
         
-        NSInteger pageIndex = 0;
+        NSInteger index = 0;
         
         VTDOMView * domView = self.delegate;
         
@@ -126,14 +128,23 @@
         }
         
         CGSize size = contentView.bounds.size;
+        CGSize contentSize = CGSizeMake(0, 0);
         
         for (VTDOMElement * element in [self childs]) {
             
-            CGRect r = CGRectMake(pageIndex * size.width, 0, size.width, size.height);
+            CGRect r = element.frame;
+            
+            UIEdgeInsets margin = [element margin];
+            
+            r.origin.x = 0;
+            r.origin.y = contentSize.height + margin.top;
+            r.size.width = size.width;
+            
+            contentSize.height += r.size.height + margin.top + margin.bottom;
             
             if([self isVisableRect:r]){
                 
-                VTDOMPageScrollItemView * itemView = [itemViews objectForKey:[NSNumber numberWithInt:pageIndex]];
+                VTDOMVScrollItemView * itemView = [itemViews objectForKey:[NSNumber numberWithInt:index]];
                 
                 if(itemView == nil){
                     itemView = [dequeueItemViews lastObject];
@@ -143,7 +154,7 @@
                 }
                 
                 if(itemView == nil){
-                    itemView = [[[VTDOMPageScrollItemView alloc] initWithFrame:r] autorelease];
+                    itemView = [[[VTDOMVScrollItemView alloc] initWithFrame:r] autorelease];
                     [itemView setBackgroundColor:[UIColor clearColor]];
                     [itemView setAllowAutoLayout:NO];
                     [contentView addSubview:itemView];
@@ -153,7 +164,7 @@
                 itemView.delegate = domView.delegate;
                 
                 [itemView setFrame:r];
-                [itemView setPageIndex:pageIndex];
+                [itemView setIndex:index];
                 
                 if(itemView.element != element){
                     
@@ -165,30 +176,30 @@
                     
                 }
                 
-                [itemViews removeObjectForKey:[NSNumber numberWithInt:pageIndex]];
+                [itemViews removeObjectForKey:[NSNumber numberWithInt:index]];
                 
             }
             else{
                 
-                VTDOMPageScrollItemView * itemView = [itemViews objectForKey:[NSNumber numberWithInt:pageIndex]];
+                VTDOMVScrollItemView * itemView = [itemViews objectForKey:[NSNumber numberWithInt:index]];
                 
                 if(itemView){
-                    [itemView setPageIndex:NSNotFound];
-                    [itemViews removeObjectForKey:[NSNumber numberWithInt:pageIndex]];
+                    [itemView setIndex:NSNotFound];
+                    [itemViews removeObjectForKey:[NSNumber numberWithInt:index]];
                     [dequeueItemViews addObject:itemView];
                 }
             }
             
-            pageIndex ++;
+            index ++;
         }
         
-        for (VTDOMPageScrollItemView * itemView in [itemViews allValues]) {
+        for (VTDOMVScrollItemView * itemView in [itemViews allValues]) {
             
             [itemView removeFromSuperview];
             
         }
         
-        for (VTDOMPageScrollItemView * itemView in dequeueItemViews) {
+        for (VTDOMVScrollItemView * itemView in dequeueItemViews) {
             
             [itemView removeFromSuperview];
             
@@ -214,7 +225,5 @@
     }
     
 }
-
-
 
 @end

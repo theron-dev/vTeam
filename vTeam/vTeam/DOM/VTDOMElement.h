@@ -47,6 +47,10 @@
 
 -(void) searchElementsByClass:(Class) clazz inherit:(BOOL)inherit toElements:(NSMutableArray *) elements;
 
+-(void) bindDelegate:(id) delegate;
+
+-(void) unbindDelegate:(id) delegate;
+
 @end
 
 @protocol VTDOMElementDelegate

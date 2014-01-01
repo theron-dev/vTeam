@@ -23,6 +23,9 @@
 #import <vTeam/UIButton+VTDOMElement.h>
 #import <vTeam/VTDOMViewElement.h>
 #import <vTeam/VTDOMPageScrollElement.h>
+#import <vTeam/VTDOMHScrollElement.h>
+#import <vTeam/VTDOMVScrollElement.h>
+
 
 @interface VTDOM : NSObject
 

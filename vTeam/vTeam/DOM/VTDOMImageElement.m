@@ -121,7 +121,7 @@
         }
     }
     
-    [self performSelector:@selector(setNeedDisplay) withObject:nil afterDelay:0.0];
+    [self setNeedDisplay];
     
 }
 

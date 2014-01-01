@@ -99,7 +99,8 @@
         
         [self loadImagesForElement:[document rootElement]];
         
-        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(downloadImagesForElement:) object:[document rootElement]];
+        [NSObject cancelPreviousPerformRequestsWithTarget:self
+                                                 selector:@selector(downloadImagesForElement:) object:[document rootElement]];
         
         [self performSelector:@selector(downloadImagesForElement:) withObject:[document rootElement] afterDelay:0.0];
         

@@ -154,6 +154,10 @@
 		113B5BDA174F77C6003211AD /* UIView+VTDataOutlet.m in Sources */ = {isa = PBXBuildFile; fileRef = 113B5BD8174F77C6003211AD /* UIView+VTDataOutlet.m */; };
 		113F9E4E1874441800E6948C /* VTDOMPageScrollElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 113F9E4C1874441800E6948C /* VTDOMPageScrollElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		113F9E4F1874441800E6948C /* VTDOMPageScrollElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 113F9E4D1874441800E6948C /* VTDOMPageScrollElement.m */; };
+		113F9E521874649900E6948C /* VTDOMHScrollElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 113F9E501874649900E6948C /* VTDOMHScrollElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		113F9E531874649900E6948C /* VTDOMHScrollElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 113F9E511874649900E6948C /* VTDOMHScrollElement.m */; };
+		113F9E5818746D6B00E6948C /* VTDOMVScrollElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 113F9E5618746D6B00E6948C /* VTDOMVScrollElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		113F9E5918746D6B00E6948C /* VTDOMVScrollElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 113F9E5718746D6B00E6948C /* VTDOMVScrollElement.m */; };
 		11407290176999C800275493 /* VTFDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 1140728E176999C800275493 /* VTFDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11407291176999C800275493 /* VTFDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 1140728F176999C800275493 /* VTFDB.m */; };
 		114072A0176AFFBA00275493 /* hfdb_index.c in Sources */ = {isa = PBXBuildFile; fileRef = 1140729F176AFFBA00275493 /* hfdb_index.c */; };
@@ -639,6 +643,10 @@
 		113B5BD8174F77C6003211AD /* UIView+VTDataOutlet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+VTDataOutlet.m"; sourceTree = "<group>"; };
 		113F9E4C1874441800E6948C /* VTDOMPageScrollElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDOMPageScrollElement.h; sourceTree = "<group>"; };
 		113F9E4D1874441800E6948C /* VTDOMPageScrollElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDOMPageScrollElement.m; sourceTree = "<group>"; };
+		113F9E501874649900E6948C /* VTDOMHScrollElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDOMHScrollElement.h; sourceTree = "<group>"; };
+		113F9E511874649900E6948C /* VTDOMHScrollElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDOMHScrollElement.m; sourceTree = "<group>"; };
+		113F9E5618746D6B00E6948C /* VTDOMVScrollElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDOMVScrollElement.h; sourceTree = "<group>"; };
+		113F9E5718746D6B00E6948C /* VTDOMVScrollElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDOMVScrollElement.m; sourceTree = "<group>"; };
 		1140728E176999C800275493 /* VTFDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTFDB.h; sourceTree = "<group>"; };
 		1140728F176999C800275493 /* VTFDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTFDB.m; sourceTree = "<group>"; };
 		1140729E176AFFB000275493 /* hfdb_index.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hfdb_index.h; sourceTree = "<group>"; };
@@ -1481,6 +1489,10 @@
 				1174209817CAF348001EBEE7 /* VTDOMActionElement.m */,
 				113F9E4C1874441800E6948C /* VTDOMPageScrollElement.h */,
 				113F9E4D1874441800E6948C /* VTDOMPageScrollElement.m */,
+				113F9E501874649900E6948C /* VTDOMHScrollElement.h */,
+				113F9E511874649900E6948C /* VTDOMHScrollElement.m */,
+				113F9E5618746D6B00E6948C /* VTDOMVScrollElement.h */,
+				113F9E5718746D6B00E6948C /* VTDOMVScrollElement.m */,
 				11A0416917BB5C81001992BE /* VTDOMView.h */,
 				11A0416A17BB5C81001992BE /* VTDOMView.m */,
 				11A041B517BDC253001992BE /* VTDOMScrollView.h */,
@@ -1939,6 +1951,7 @@
 				11A0419B17BC7C5C001992BE /* VTDOMElement+Control.h in Headers */,
 				11A0419F17BC877B001992BE /* VTRichLinkElement.h in Headers */,
 				11A041A317BCA8DC001992BE /* VTDOMViewElement.h in Headers */,
+				113F9E5818746D6B00E6948C /* VTDOMVScrollElement.h in Headers */,
 				114D642717E1BAF20021CB8A /* VTMontageElement.h in Headers */,
 				11A041A717BCCDC0001992BE /* VTRichViewElement.h in Headers */,
 				11A041AB17BCD560001992BE /* VTDocumentViewController.h in Headers */,
@@ -1961,6 +1974,7 @@
 				1117023718308BE000CFD179 /* GridHeadView.h in Headers */,
 				1117023918308BE000CFD179 /* GridScrollView.h in Headers */,
 				1117023B18308BE000CFD179 /* IGrid.h in Headers */,
+				113F9E521874649900E6948C /* VTDOMHScrollElement.h in Headers */,
 				1117023C18308BE000CFD179 /* IGridCell.h in Headers */,
 				1117023D18308BE000CFD179 /* IGridColumn.h in Headers */,
 				1117023E18308BE000CFD179 /* IGridDraw.h in Headers */,
@@ -2093,6 +2107,7 @@
 				ACDE3A8717350AE50046ED56 /* VTButton.m in Sources */,
 				114D642C17E1BBC20021CB8A /* VTMontageScenes.m in Sources */,
 				ACDE3AB2173647950046ED56 /* VTAppStatusView.m in Sources */,
+				113F9E5918746D6B00E6948C /* VTDOMVScrollElement.m in Sources */,
 				AC324F6D173DD8FA0094A7A6 /* UIView+VTStyle.m in Sources */,
 				AC324F88173DE23B0094A7A6 /* UIButton+VTStyle.m in Sources */,
 				AC325011173E1AE30094A7A6 /* VTHeapViewController.m in Sources */,
@@ -2186,6 +2201,7 @@
 				11407291176999C800275493 /* VTFDB.m in Sources */,
 				114072A0176AFFBA00275493 /* hfdb_index.c in Sources */,
 				114D644517E2B1A80021CB8A /* VTMontageGroupElement.m in Sources */,
+				113F9E531874649900E6948C /* VTDOMHScrollElement.m in Sources */,
 				1140741C176EAEC500275493 /* VTFDBIndex.m in Sources */,
 				AC875C50177568F4009999A2 /* VTTableViewCell.m in Sources */,
 				AC875C60177589FF009999A2 /* VTURLDataSource.m in Sources */,

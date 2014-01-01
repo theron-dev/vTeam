@@ -106,27 +106,14 @@
 */
 
 
--(void) viewBindElement:(VTDOMElement *) element{
-    [element setDelegate:self];
-    for(VTDOMElement * el in  [element childs]){
-        [self viewBindElement:el];
-    }
-}
-
--(void) viewUnBindElement:(VTDOMElement *) element{
-    [element setDelegate:nil];
-    for(VTDOMElement * el in  [element childs]){
-        [self viewUnBindElement:el];
-    }
-}
 
 -(void) setElement:(VTDOMElement *)element{
     if(_element != element){
-        [self viewUnBindElement:_element];
-        [self viewBindElement:element];
+        [_element unbindDelegate:self];
         [element retain];
         [_element release];
         _element = element;
+        [_element bindDelegate:self];
         [self reloadContents:YES];
     }
 }

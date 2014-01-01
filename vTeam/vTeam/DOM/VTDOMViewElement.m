@@ -141,5 +141,14 @@
     return r.size;
 }
 
+-(void) unbindDelegate:(id)delegate{
+    if(self.delegate == delegate){
+        self.delegate = nil;
+    }
+}
+
+-(void) bindDelegate:(id)delegate{
+    self.delegate = delegate;
+}
 
 @end

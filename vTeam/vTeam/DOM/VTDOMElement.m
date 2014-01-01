@@ -138,4 +138,20 @@
     }
 }
 
+-(void) bindDelegate:(id) delegate{
+    [self setDelegate:delegate];
+    for (VTDOMElement * element in [self childs]) {
+        [element bindDelegate:delegate];
+    }
+}
+
+-(void) unbindDelegate:(id) delegate{
+    if(self.delegate == delegate){
+        [self setDelegate:nil];
+        for (VTDOMElement * element in [self childs]) {
+            [element unbindDelegate:nil];
+        }
+    }
+}
+
 @end

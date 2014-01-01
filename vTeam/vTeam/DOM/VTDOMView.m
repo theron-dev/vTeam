@@ -17,10 +17,6 @@
     NSMutableSet * _elementViewSet;
 }
 
--(void) viewBindElement:(VTDOMElement *) element;
-
--(void) viewUnBindElement:(VTDOMElement *) element;
-
 @end
 
 @implementation VTDOMView
@@ -35,7 +31,7 @@
             [v performSelector:@selector(setElement:) withObject:nil];
         }
     }
-    [self viewUnBindElement:_element];
+    [_element unbindDelegate:self];
     [_element release];
     [_elementViews release];
     [_elementViewSet release];
@@ -63,23 +59,6 @@
     [_element render:_element.frame context:ctx];
 }
 
--(void) viewBindElement:(VTDOMElement *) element{
-    [element setDelegate:self];
-    for(VTDOMElement * el in  [element childs]){
-        [self viewBindElement:el];
-    }
-}
-
--(void) viewUnBindElement:(VTDOMElement *) element{
-    if(element.delegate == self){
-        [element setDelegate:nil];
-    }
-    for(VTDOMElement * el in  [element childs]){
-        [self viewUnBindElement:el];
-    }
-}
-
-
 -(void) setElement:(VTDOMElement *)element{
     if(_element != element){
         
@@ -87,7 +66,8 @@
             _elementViewSet = [[NSMutableSet alloc] initWithCapacity:4];
         }
         
-        [self viewUnBindElement:_element];
+        [_element unbindDelegate:self];
+        
         [element retain];
         [_element release];
         _element = element;
@@ -95,7 +75,7 @@
             [_element layout:self.bounds.size];
         }
         
-        [self viewBindElement:_element];
+        [_element bindDelegate:self];
         
         for (id key in [_elementViews allKeys]) {
             UIView * v = [_elementViews objectForKey:key];
