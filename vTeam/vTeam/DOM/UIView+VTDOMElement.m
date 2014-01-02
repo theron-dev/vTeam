@@ -20,7 +20,10 @@
     self.layer.cornerRadius = [element floatValueForKey:@"corner-radius"];
     self.layer.borderWidth = [element floatValueForKey:@"border-width"];
     self.layer.borderColor = [element colorValueForKey:@"border-color"].CGColor;
-    self.layer.masksToBounds = YES;
+    self.layer.masksToBounds = self.layer.borderWidth > 0.0f;
+    if(!self.layer.masksToBounds){
+        self.layer.masksToBounds = [element booleanValueForKey:@"clips"];
+    }
     [self setHidden:[element isHidden]];
 }
 

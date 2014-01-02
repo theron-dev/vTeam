@@ -14,5 +14,6 @@
 
 @property(nonatomic,retain) UIImage * image;
 @property(nonatomic,retain) UIImage * defaultImage;
+@property(nonatomic,readonly,getter = isPreload) BOOL preload;
 
 @end

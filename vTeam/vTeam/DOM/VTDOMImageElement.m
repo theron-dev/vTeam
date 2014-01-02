@@ -37,20 +37,27 @@
 
 -(UIImage *) image{
     if(_image == nil){
-        self.image = [self imageValueForKey:@"src" bundle:self.document.bundle];
+        self.image = [VTDOMStyle imageValue:[self src] bundle:self.document.bundle];
     }
     return _image;
 }
 
 -(UIImage *) defaultImage{
     if(_defaultImage == nil){
-        self.defaultImage = [self imageValueForKey:@"defaultSrc" bundle:self.document.bundle];
+        self.defaultImage = [VTDOMStyle imageValue:[self defaultSrc] bundle:self.document.bundle];
     }
     return _defaultImage;
 }
 
 -(NSString *) src{
-    return [self attributeValueForKey:@"src"];
+    
+    NSString * src = [self attributeValueForKey:@"src"];
+    
+    if(src && ![src hasPrefix:@"@"] && self.document.documentURL){
+        return [[NSURL URLWithString:src relativeToURL:self.document.documentURL] absoluteString];
+    }
+    
+    return src;
 }
 
 -(void) setSrc:(NSString *)src{
@@ -61,7 +68,14 @@
 }
 
 -(NSString *) defaultSrc{
-    return [self attributeValueForKey:@"defaultSrc"];
+    
+    NSString * src = [self attributeValueForKey:@"defaultSrc"];
+    
+    if(src && ![src hasPrefix:@"@"] && self.document.documentURL){
+        return [[NSURL URLWithString:src relativeToURL:self.document.documentURL] absoluteString];
+    }
+    
+    return src;
 }
 
 -(void) setDefaultSrc:(NSString *)defaultSrc{
@@ -243,6 +257,10 @@
         
     }
     return r.size;
+}
+
+-(BOOL) isPreload{
+    return [self booleanValueForKey:@"preload"];
 }
 
 @end

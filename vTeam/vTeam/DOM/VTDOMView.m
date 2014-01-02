@@ -93,6 +93,7 @@
     [super setBounds:bounds];
     if(_allowAutoLayout){
         [_element layout:self.bounds.size];
+        [_element bindDelegate:self];
     }
     [self setNeedsDisplay];
 }
@@ -101,6 +102,7 @@
     [super setFrame:frame];
     if(_allowAutoLayout){
         [_element layout:self.bounds.size];
+        [_element bindDelegate:self];
     }
     [self setNeedsDisplay];
 }

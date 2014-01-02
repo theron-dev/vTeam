@@ -170,6 +170,10 @@
                     
                     [itemView setElement:element];
                     
+                    if([[domView delegate] respondsToSelector:@selector(vtDOMView:downloadImagesForElement:)]){
+                        [[domView delegate] vtDOMView:domView downloadImagesForElement:element];
+                    }
+                    
                     if([[domView delegate] respondsToSelector:@selector(vtDOMView:downloadImagesForView:)]){
                         [[domView delegate] vtDOMView:domView downloadImagesForView:itemView];
                     }

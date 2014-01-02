@@ -22,18 +22,20 @@
     
     VTDOMElement * el = self;
     
-    while(el != element){
+    CGRect rs = rect;
+    
+    while(el && el != element){
         
         CGRect r = el.frame;
         
-        rect.origin = CGPointMake(rect.origin.x + r.origin.x, rect.origin.y + r.origin.y);
+        rs.origin = CGPointMake(rs.origin.x + r.origin.x, rs.origin.y + r.origin.y);
         
-        rect = CGRectIntersection(rect, r);
+        rs = CGRectIntersection(rs, r);
         
         el = [el parentElement];
     }
     
-    return rect;
+    return el ? rs : rect;
 }
 
 @end

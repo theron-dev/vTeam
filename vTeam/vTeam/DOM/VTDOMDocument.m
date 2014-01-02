@@ -22,6 +22,7 @@
 @synthesize rootElement = _rootElement;
 @synthesize styleSheet = _styleSheet;
 @synthesize indexPath = _indexPath;
+@synthesize documentURL = _documentURL;
 
 -(void) dealloc{
     [_rootElement setDocument:nil];
@@ -31,6 +32,7 @@
     [_styleSheet release];
     [_elementsById release];
     [_indexPath release];
+    [_documentURL release];
     [super dealloc];
 }
 

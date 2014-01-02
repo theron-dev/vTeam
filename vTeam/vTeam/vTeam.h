@@ -106,3 +106,4 @@
 #import <vTeam/VTDocumentController.h>
 #import <vTeam/NSString+Pinyin.h>
 #import <vTeam/VTCleanupTask.h>
+#import <vTeam/VTURLDocumentController.h>

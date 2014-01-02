@@ -17,6 +17,7 @@
 @property(nonatomic,retain) VTDOMElement * rootElement;
 @property(nonatomic,retain) VTDOMStyleSheet * styleSheet;
 @property(nonatomic,retain) NSIndexPath * indexPath;
+@property(nonatomic,retain) NSURL * documentURL;
 
 -(VTDOMElement *) elementById:(NSString *) eid;
 
