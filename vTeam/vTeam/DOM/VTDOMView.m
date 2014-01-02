@@ -26,7 +26,7 @@
 @synthesize delegate = _delegate;
 
 -(void) dealloc{
-    for(UIView * v in [_elementViews allValues]){
+    for(UIView * v in [NSArray arrayWithArray: [_elementViews allValues]]){
         if([v respondsToSelector:@selector(setElement:)]){
             [v performSelector:@selector(setElement:) withObject:nil];
         }
@@ -94,8 +94,8 @@
     if(_allowAutoLayout){
         [_element layout:self.bounds.size];
         [_element bindDelegate:self];
+        [self setNeedsDisplay];
     }
-    [self setNeedsDisplay];
 }
 
 -(void) setFrame:(CGRect)frame{
@@ -103,8 +103,8 @@
     if(_allowAutoLayout){
         [_element layout:self.bounds.size];
         [_element bindDelegate:self];
+        [self setNeedsDisplay];
     }
-    [self setNeedsDisplay];
 }
 
 

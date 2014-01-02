@@ -16,16 +16,42 @@
 @interface VTDOMHScrollItemView : VTDOMView
 
 @property(nonatomic,assign) NSInteger index;
+@property(nonatomic,retain) NSString * reuseIdentifier;
 
 @end
+
+
 
 @implementation VTDOMHScrollItemView
 
 @synthesize index = _index;
+@synthesize reuseIdentifier = _reuseIdentifier;
+
+-(void) dealloc{
+    
+    [_reuseIdentifier release];
+    
+    [super dealloc];
+}
+@end
+
+@interface VTDOMHScrollElement()
+
+
+@property(nonatomic,readonly) NSMutableArray * dequeueItemViews;
 
 @end
 
 @implementation VTDOMHScrollElement
+
+@synthesize dequeueItemViews = _dequeueItemViews;
+
+-(NSMutableArray *) dequeueItemViews{
+    if(_dequeueItemViews == nil){
+        _dequeueItemViews = [[NSMutableArray alloc] initWithCapacity:4];
+    }
+    return _dequeueItemViews;
+}
 
 
 -(void) dealloc{
@@ -34,6 +60,8 @@
         [[self contentView] setDelegate:nil];
         [self.contentView removeObserver:self forKeyPath:@"contentOffset"];
     }
+    
+    [_dequeueItemViews release];
     
     [super dealloc];
 }
@@ -108,7 +136,7 @@
         
         NSMutableDictionary * itemViews = [NSMutableDictionary dictionaryWithCapacity:4];
         
-        NSMutableArray * dequeueItemViews = [NSMutableArray arrayWithCapacity:4];
+        NSMutableArray * dequeueItemViews = [self dequeueItemViews];
         
         for (VTDOMHScrollItemView * itemView in [contentView subviews]) {
             
@@ -145,13 +173,18 @@
             
             if([self isVisableRect:r]){
                 
+                NSString * reuseIdentifier = [element attributeValueForKey:@"reuse"];
+                
                 VTDOMHScrollItemView * itemView = [itemViews objectForKey:[NSNumber numberWithInt:index]];
                 
                 if(itemView == nil){
-                    itemView = [dequeueItemViews lastObject];
-                    if(itemView){
-                        [dequeueItemViews removeLastObject];
+                    
+                    for(itemView in dequeueItemViews){
+                        if(reuseIdentifier == nil || [reuseIdentifier isEqualToString:itemView.reuseIdentifier]){
+                            break;
+                        }
                     }
+                
                 }
                 
                 if(itemView == nil){
@@ -164,7 +197,17 @@
                 
                 itemView.delegate = domView.delegate;
                 
+                [itemView setReuseIdentifier:reuseIdentifier];
                 [itemView setFrame:r];
+                
+                if(itemView.superview == nil){
+                    [contentView addSubview:itemView];
+                }
+                
+                if(itemView.index == NSNotFound){
+                    [dequeueItemViews removeObject:itemView];
+                }
+                
                 [itemView setIndex:index];
                 
                 if(itemView.element != element){

@@ -16,16 +16,39 @@
 @interface VTDOMPageScrollItemView : VTDOMView
 
 @property(nonatomic,assign) NSInteger pageIndex;
+@property(nonatomic,retain) NSString * reuseIdentifier;
 
 @end
 
 @implementation VTDOMPageScrollItemView
 
 @synthesize pageIndex = _pageIndex;
+@synthesize reuseIdentifier = _reuseIdentifier;
+
+-(void) dealloc{
+    [_reuseIdentifier release];
+    [super dealloc];
+}
+
+@end
+
+@interface VTDOMPageScrollElement()
+
+
+@property(nonatomic,readonly) NSMutableArray * dequeueItemViews;
 
 @end
 
 @implementation VTDOMPageScrollElement
+
+@synthesize dequeueItemViews = _dequeueItemViews;
+
+-(NSMutableArray *) dequeueItemViews{
+    if(_dequeueItemViews == nil){
+        _dequeueItemViews = [[NSMutableArray alloc] initWithCapacity:4];
+    }
+    return _dequeueItemViews;
+}
 
 -(void) dealloc{
     
@@ -33,6 +56,8 @@
         [[self contentView] setDelegate:nil];
         [self.contentView removeObserver:self forKeyPath:@"contentOffset"];
     }
+    
+    [_dequeueItemViews release];
     
     [super dealloc];
 }
@@ -105,7 +130,7 @@
     
         NSMutableDictionary * itemViews = [NSMutableDictionary dictionaryWithCapacity:4];
         
-        NSMutableArray * dequeueItemViews = [NSMutableArray arrayWithCapacity:4];
+        NSMutableArray * dequeueItemViews = [self dequeueItemViews];
         
         for (VTDOMPageScrollItemView * itemView in [contentView subviews]) {
             
@@ -135,10 +160,14 @@
                 
                 VTDOMPageScrollItemView * itemView = [itemViews objectForKey:[NSNumber numberWithInt:pageIndex]];
                 
+                NSString * reuseIdentifier = [element attributeValueForKey:@"reuse"];
+                
                 if(itemView == nil){
-                    itemView = [dequeueItemViews lastObject];
-                    if(itemView){
-                        [dequeueItemViews removeLastObject];
+                    
+                    for(itemView in dequeueItemViews){
+                        if(reuseIdentifier == nil || [reuseIdentifier isEqualToString:itemView.reuseIdentifier]){
+                            break;
+                        }
                     }
                 }
                 
@@ -152,7 +181,17 @@
                 
                 itemView.delegate = domView.delegate;
                 
+                [itemView setReuseIdentifier:reuseIdentifier];
                 [itemView setFrame:r];
+                
+                if(itemView.superview == nil){
+                    [contentView addSubview:itemView];
+                }
+                
+                if(itemView.pageIndex == NSNotFound){
+                    [dequeueItemViews removeObject:itemView];
+                }
+                
                 [itemView setPageIndex:pageIndex];
                 
                 if(itemView.element != element){
