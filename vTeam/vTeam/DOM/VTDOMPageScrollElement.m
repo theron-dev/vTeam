@@ -217,6 +217,7 @@
                 
                 if(itemView){
                     [itemView setPageIndex:NSNotFound];
+                    [itemView setElement:nil];
                     [itemViews removeObjectForKey:[NSNumber numberWithInt:pageIndex]];
                     [dequeueItemViews addObject:itemView];
                 }

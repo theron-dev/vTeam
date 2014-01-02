@@ -229,6 +229,7 @@
                 
                 if(itemView){
                     [itemView setIndex:NSNotFound];
+                    [itemView setElement:nil];
                     [itemViews removeObjectForKey:[NSNumber numberWithInt:index]];
                     [dequeueItemViews addObject:itemView];
                 }
