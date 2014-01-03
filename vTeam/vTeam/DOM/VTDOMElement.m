@@ -149,7 +149,7 @@
     if(self.delegate == delegate){
         [self setDelegate:nil];
         for (VTDOMElement * element in [self childs]) {
-            [element unbindDelegate:nil];
+            [element unbindDelegate:delegate];
         }
     }
 }

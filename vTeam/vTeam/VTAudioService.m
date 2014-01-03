@@ -139,6 +139,8 @@
         
         id<IVTAudioTask> audioTask = (id<IVTAudioTask>) task;
         
+        [audioTask setStatus:VTAudioTaskStatusNone];
+        
         if([task conformsToProtocol:@protocol(IVTAudioPlayTask)]
            && [self isPlaying: (id<IVTAudioPlayTask>) audioTask]){
             [audioTask setStatus:VTAudioTaskStatusPlaying];
