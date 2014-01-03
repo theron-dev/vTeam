@@ -146,6 +146,10 @@
 		113140A01749EC590081641F /* sha1.h in Headers */ = {isa = PBXBuildFile; fileRef = 113140401749EC590081641F /* sha1.h */; };
 		113351EF18750A0E00F0E315 /* VTURLDocumentController.h in Headers */ = {isa = PBXBuildFile; fileRef = 113351ED18750A0D00F0E315 /* VTURLDocumentController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		113351F018750A0E00F0E315 /* VTURLDocumentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 113351EE18750A0E00F0E315 /* VTURLDocumentController.m */; };
+		113351FB18768BEC00F0E315 /* VTAudioService.h in Headers */ = {isa = PBXBuildFile; fileRef = 113351F918768BEC00F0E315 /* VTAudioService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		113351FC18768BEC00F0E315 /* VTAudioService.m in Sources */ = {isa = PBXBuildFile; fileRef = 113351FA18768BEC00F0E315 /* VTAudioService.m */; };
+		113351FF18768C1700F0E315 /* VTAudioTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 113351FD18768C1700F0E315 /* VTAudioTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1133520018768C1700F0E315 /* VTAudioTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 113351FE18768C1700F0E315 /* VTAudioTask.m */; };
 		113381F317D588E1005E4DCE /* VTDOMLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 113381F117D588E1005E4DCE /* VTDOMLabel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		113381F417D588E1005E4DCE /* VTDOMLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 113381F217D588E1005E4DCE /* VTDOMLabel.m */; };
 		113381F717D5901A005E4DCE /* NSString+TextLength.h in Headers */ = {isa = PBXBuildFile; fileRef = 113381F517D5901A005E4DCE /* NSString+TextLength.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -637,6 +641,10 @@
 		113140411749EC590081641F /* shatest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = shatest.c; sourceTree = "<group>"; };
 		113351ED18750A0D00F0E315 /* VTURLDocumentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTURLDocumentController.h; sourceTree = "<group>"; };
 		113351EE18750A0E00F0E315 /* VTURLDocumentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTURLDocumentController.m; sourceTree = "<group>"; };
+		113351F918768BEC00F0E315 /* VTAudioService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTAudioService.h; sourceTree = "<group>"; };
+		113351FA18768BEC00F0E315 /* VTAudioService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTAudioService.m; sourceTree = "<group>"; };
+		113351FD18768C1700F0E315 /* VTAudioTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTAudioTask.h; sourceTree = "<group>"; };
+		113351FE18768C1700F0E315 /* VTAudioTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTAudioTask.m; sourceTree = "<group>"; };
 		113381F117D588E1005E4DCE /* VTDOMLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDOMLabel.h; sourceTree = "<group>"; };
 		113381F217D588E1005E4DCE /* VTDOMLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDOMLabel.m; sourceTree = "<group>"; };
 		113381F517D5901A005E4DCE /* NSString+TextLength.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TextLength.h"; sourceTree = "<group>"; };
@@ -1330,6 +1338,8 @@
 				11BE4FD418360C790013722E /* VTCrashTask.m */,
 				11442A85187122D40072D9CA /* VTCleanupTask.h */,
 				11442A86187122D40072D9CA /* VTCleanupTask.m */,
+				113351FD18768C1700F0E315 /* VTAudioTask.h */,
+				113351FE18768C1700F0E315 /* VTAudioTask.m */,
 			);
 			name = Tasks;
 			sourceTree = "<group>";
@@ -1355,6 +1365,8 @@
 				11D678E217AA4E51000E02FA /* VTBehaviorService.m */,
 				11BE4FD718360CC80013722E /* VTCrashService.h */,
 				11BE4FD818360CC80013722E /* VTCrashService.m */,
+				113351F918768BEC00F0E315 /* VTAudioService.h */,
+				113351FA18768BEC00F0E315 /* VTAudioService.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -1748,6 +1760,7 @@
 				11E59F5F1728C197002DD63C /* IVTServiceContainer.h in Headers */,
 				11E59F641728C785002DD63C /* VTStyleSheet.h in Headers */,
 				114D642317E1BAE30021CB8A /* VTMontage.h in Headers */,
+				113351FF18768C1700F0E315 /* VTAudioTask.h in Headers */,
 				110843C1186BD6DD00ECA4CB /* IVTAuthContext.h in Headers */,
 				11E59F681728C798002DD63C /* VTStyle.h in Headers */,
 				11E59F6C1728CCAC002DD63C /* VTStyleOutletContainer.h in Headers */,
@@ -1818,6 +1831,7 @@
 				AC325018173E23A60094A7A6 /* VTLayoutData.h in Headers */,
 				AC325020173E257D0094A7A6 /* VTViewLayout.h in Headers */,
 				AC325028173E2DF10094A7A6 /* VTFormController.h in Headers */,
+				113351FB18768BEC00F0E315 /* VTAudioService.h in Headers */,
 				AC32502D173E2EF60094A7A6 /* VTFormItem.h in Headers */,
 				AC325030173E31440094A7A6 /* IVTFormItemView.h in Headers */,
 				AC325032173E35950094A7A6 /* IVTFormEditor.h in Headers */,
@@ -2162,6 +2176,7 @@
 				113140761749EC590081641F /* hmutex.c in Sources */,
 				113140781749EC590081641F /* hnetbios.c in Sources */,
 				1131407A1749EC590081641F /* hprocess.c in Sources */,
+				113351FC18768BEC00F0E315 /* VTAudioService.m in Sources */,
 				1131407C1749EC590081641F /* hqueue.c in Sources */,
 				113140801749EC590081641F /* hrwlock.c in Sources */,
 				11E41C33182DD79800ED6D40 /* VTAlertView.m in Sources */,
@@ -2170,6 +2185,7 @@
 				113140861749EC590081641F /* hstack.c in Sources */,
 				113140881749EC590081641F /* hstr.c in Sources */,
 				1131408A1749EC590081641F /* hstruct_list.c in Sources */,
+				1133520018768C1700F0E315 /* VTAudioTask.m in Sources */,
 				1131408C1749EC590081641F /* hthread.c in Sources */,
 				1131408E1749EC590081641F /* htime.c in Sources */,
 				113140901749EC590081641F /* htypes.c in Sources */,

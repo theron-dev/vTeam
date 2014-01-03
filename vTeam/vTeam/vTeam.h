@@ -107,3 +107,5 @@
 #import <vTeam/NSString+Pinyin.h>
 #import <vTeam/VTCleanupTask.h>
 #import <vTeam/VTURLDocumentController.h>
+#import <vTeam/VTAudioTask.h>
+#import <vTeam/VTAudioService.h>

@@ -16,18 +16,12 @@
 @synthesize view = _view;
 
 -(void) dealloc{
-    if([_view respondsToSelector:@selector(setElement:)]){
-        [_view performSelector:@selector(setElement:) withObject:nil];
-    }
     [_view release];
     [super dealloc];
 }
 
 -(void) setView:(UIView *)view{
     if(_view != view){
-        if([_view respondsToSelector:@selector(setElement:)]){
-            [_view performSelector:@selector(setElement:) withObject:nil];
-        }
         [view retain];
         [_view release];
         _view = view;
@@ -91,17 +85,31 @@
     return _view != nil;
 }
 
++(CGRect) sizeToFit:(CGRect) rect element:(VTDOMElement *) element{
+    return rect;
+}
+
 -(CGSize) layoutChildren:(UIEdgeInsets)padding{
     
     CGRect r = [self frame];
     
     if(r.size.width == MAXFLOAT || r.size.height == MAXFLOAT){
         
-        UIView * v = [self view];
+        CGRect rr = r;
         
-        [v sizeToFit];
+        Class clazz = [self viewClass];
         
-        CGRect rr = [v frame];
+        if([clazz methodForSelector:@selector(sizeToFit:element:)]){
+            rr = [clazz sizeToFit:r element:self];
+        }
+        else {
+            if(rr.size.width == MAXFLOAT){
+                rr.size.width = 0;
+            }
+            if(rr.size.height == MAXFLOAT){
+                rr.size.height = 0;
+            }
+        }
         
         if(r.size.width == MAXFLOAT){
             r.size.width = rr.size.width + padding.left + padding.right;
