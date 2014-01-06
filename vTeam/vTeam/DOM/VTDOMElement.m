@@ -28,6 +28,53 @@
 @synthesize document = _document;
 @synthesize delegate = _delegate;
 
+
+- (void)encodeWithCoder:(NSCoder *)aCoder{
+    
+    [aCoder encodeObject:_name forKey:@"name"];
+    [aCoder encodeObject:_ns forKey:@"ns"];
+    [aCoder encodeObject:_text forKey:@"text"];
+    [aCoder encodeObject:_attributes forKey:@"attributes"];
+    [aCoder encodeObject:_childs forKey:@"childs"];
+    
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder{
+    if((self = [super init])){
+        
+        _name = [[aDecoder decodeObjectForKey:@"name"] retain];
+        _ns = [[aDecoder decodeObjectForKey:@"ns"] retain];
+        _text = [[aDecoder decodeObjectForKey:@"text"] retain];
+        
+        _attributes = [[aDecoder decodeObjectForKey:@"attributes"] retain];
+        _childs = [[aDecoder decodeObjectForKey:@"childs"] retain];
+        
+        for(VTDOMElement * element in _childs){
+            [element setParentElement:self];
+            [element setDocument:_document];
+        }
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone *)zone{
+    
+    VTDOMElement * element = [[[[self class] alloc] init] autorelease];
+
+    element.name = self.name;
+    element.ns = self.ns;
+    element.text = self.text;
+    element->_attributes = _attributes ? [[NSMutableDictionary alloc] initWithDictionary:_attributes] : nil;
+    
+    for(VTDOMElement * el in _childs){
+        
+        [element addElement:[el copyWithZone:zone]];
+        
+    }
+    
+    return element;
+}
+
 -(void) dealloc{
     for(VTDOMElement * element in _childs){
         [element setParentElement:nil];

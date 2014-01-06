@@ -12,7 +12,7 @@
 
 @class VTDOMDocument;
 
-@interface VTDOMElement : NSObject
+@interface VTDOMElement : NSObject<NSCoding,NSCopying>
 
 @property(nonatomic,retain) NSString * ns;
 @property(nonatomic,retain) NSString * name;

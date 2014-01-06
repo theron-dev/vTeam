@@ -207,6 +207,7 @@
     [respTask setUserInfo:[task userInfo]];
     [respTask setResultsData:[httpTask responseBody]];
     [respTask setUrl:[[(VTHttpTask *)httpTask request] URL]];
+    [respTask setStatusCode:[(NSHTTPURLResponse *)[httpTask response] statusCode]];
     
     if(_responses == nil){
         _responses = [[NSMutableArray alloc] initWithCapacity:4];
@@ -252,7 +253,17 @@
     
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:u cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:[[self.config valueForKey:@"timeout"] doubleValue]];
     
-    [request addValue:@"gzip, deflate" forHTTPHeaderField:@"Accept-Encoding"];
+    [request setValue:@"gzip, deflate" forHTTPHeaderField:@"Accept-Encoding"];
+    
+    NSDictionary * httpHeaders = [reqTask httpHeaders];
+    
+    for (NSString * key in httpHeaders) {
+        [request setValue:[httpHeaders valueForKey:key] forHTTPHeaderField:key];
+    }
+    
+    if([reqTask httpMethod]){
+        [request setHTTPMethod:[reqTask httpMethod]];
+    }
     
     VTHttpFormBody * body = [reqTask body];
     

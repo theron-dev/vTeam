@@ -17,6 +17,8 @@
 @property(nonatomic,retain) NSString * apiUrl;
 @property(nonatomic,retain) NSDictionary * queryValues;
 @property(nonatomic,retain) VTHttpFormBody * body;
+@property(nonatomic,retain) NSString * httpMethod;
+@property(nonatomic,retain) NSDictionary * httpHeaders;
 
 @end
 

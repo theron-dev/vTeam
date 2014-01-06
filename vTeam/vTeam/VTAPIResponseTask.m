@@ -13,6 +13,7 @@
 @synthesize resultsData = _resultsData;
 @synthesize error = _error;
 @synthesize url = _url;
+@synthesize statusCode = _statusCode;
 
 -(void) dealloc{
     [_resultsData release];

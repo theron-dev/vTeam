@@ -25,7 +25,7 @@
 #import <vTeam/VTDOMPageScrollElement.h>
 #import <vTeam/VTDOMHScrollElement.h>
 #import <vTeam/VTDOMVScrollElement.h>
-
+#import <vTeam/VTDOMLinkElement.h>
 
 @interface VTDOM : NSObject
 

@@ -16,9 +16,13 @@
 
 @end
 
+typedef  NSString * (^ VTDataOutletStringValue) (id data,NSString * keyPath);
+
 @interface NSString (VTDataOutlet)
 
 -(NSString *) stringByDataOutlet:(id) data;
+
+-(NSString *) stringByDataOutlet:(id) data stringValue: (VTDataOutletStringValue)value;
 
 @end
 

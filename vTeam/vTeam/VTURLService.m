@@ -71,7 +71,16 @@
         
         url = [url stringByReplacingOccurrencesOfString:@"{pageSize}" withString:[NSString stringWithFormat:@"%d",[urlTask vtDownlinkPageTaskPageSize]]];
         
-        url = [url stringByDataOutlet:urlTask];
+        url = [url stringByDataOutlet:urlTask stringValue:^NSString *(id data, NSString *keyPath) {
+            id v = [data dataForKeyPath:keyPath];
+            if([v isKindOfClass:[NSString class]]){
+                return [v stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            }
+            else if(v){
+                return [NSString stringWithFormat:@"%@",v];
+            }
+            return @"";
+        }];
         
         VTHttpTask * httpTask = nil;
         
@@ -188,10 +197,17 @@
         
         url = [url stringByReplacingOccurrencesOfString:@"{pageSize}" withString:[NSString stringWithFormat:@"%d",[urlTask vtDownlinkPageTaskPageSize]]];
         
-        url = [url stringByDataOutlet:urlTask];
+        url = [url stringByDataOutlet:urlTask stringValue:^NSString *(id data, NSString *keyPath) {
+            id v = [data dataForKeyPath:keyPath];
+            if([v isKindOfClass:[NSString class]]){
+                return [v stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            }
+            else if(v){
+                return [NSString stringWithFormat:@"%@",v];
+            }
+            return @"";
+        }];
         
-        url = [url stringByDataOutlet:task];
-
         url = [[NSURL URLWithString:url queryValues:[(id<IVTURLDownlinkTask>)task queryValues]] absoluteString];
         
         return [url vtMD5String];

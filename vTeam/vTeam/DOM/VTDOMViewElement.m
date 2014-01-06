@@ -159,4 +159,8 @@
     self.delegate = delegate;
 }
 
+-(void) draw:(CGRect) rect context:(CGContextRef) context{
+    
+}
+
 @end

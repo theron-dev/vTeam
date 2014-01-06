@@ -22,6 +22,7 @@
 #import "VTDOMPageScrollElement.h"
 #import "VTDOMHScrollElement.h"
 #import "VTDOMVScrollElement.h"
+#import "VTDOMLinkElement.h"
 
 typedef struct _VTDOMParseScanf {
     hxml_scanf_t base;
@@ -121,6 +122,9 @@ static hcss_scanf_t VTDOMParseCSSScanf = {
     }
     else if([name isEqualToString:@"vscroll"]){
         elementClass = [VTDOMVScrollElement class];
+    }
+    else if([name isEqualToString:@"a"]){
+        elementClass = [VTDOMLinkElement class];
     }
     
     VTDOMElement * element = [[elementClass alloc] init];
