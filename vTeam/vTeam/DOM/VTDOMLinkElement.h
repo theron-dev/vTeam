@@ -8,6 +8,9 @@
 
 #import <vTeam/VTDOMLabelElement.h>
 
-@interface VTDOMLinkElement : VTDOMLabelElement
+
+#import <vTeam/IVTAction.h>
+
+@interface VTDOMLinkElement : VTDOMLabelElement<IVTAction>
 
 @end

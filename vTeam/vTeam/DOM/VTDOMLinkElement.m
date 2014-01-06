@@ -151,4 +151,29 @@
 }
 
 
+-(NSString *) actionName{
+    return [self attributeValueForKey:@"action-name"];
+}
+
+-(void) setActionName:(NSString *)actionName{
+    [self setAttributeValue:actionName forKey:@"action-name"];
+}
+
+-(id) userInfo{
+    return [self attributeValueForKey:@"user-info"];
+}
+
+-(void) setUserInfo:(id)userInfo{
+    [self setAttributeValue:userInfo forKey:@"user-info"];
+}
+
+-(NSArray *) actionViews{
+    return nil;
+}
+
+-(void) setActionViews:(NSArray *)actionViews{
+    
+}
+
+
 @end
