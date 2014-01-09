@@ -10,7 +10,9 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-@interface VTChartViewLayer : CALayer<IVTChartView>
+@interface VTChartViewLayer : CALayer<IVTChartView>{
+
+}
 
 @end
 
@@ -30,30 +32,46 @@
     return self;
 }
 
-+(BOOL) needsDisplayForKey:(NSString *)key{
-    if([key isEqualToString:@"animationValue"] || [key isEqualToString:@"chart"] || [key isEqualToString:@"frame"]){
-        return YES;
+-(void) display{
+    
+    CGFloat scale = 1.0;
+    
+    if([[UIScreen mainScreen] respondsToSelector:@selector(scale)]){
+        scale = [[UIScreen mainScreen] scale];
     }
-    return [super needsDisplayForKey:key];
-}
-
--(void) drawInContext:(CGContextRef)ctx{
-    [super drawInContext:ctx];
     
     CGSize size = self.bounds.size;
-
-    CGContextTranslateCTM(ctx, 0.0, size.height);
-    CGContextScaleCTM(ctx, 1.0 ,  -1.0 );
     
-    [_chart drawToContext:ctx rect:CGRectMake(0, 0, size.width, size.height)];
+    size.width *= scale;
+    size.height *= scale;
+    
+    UIGraphicsBeginImageContext(size);
+
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    
+    CGContextScaleCTM(ctx,  scale, scale);
+    
+    [_chart drawToContext:ctx rect:CGRectMake(0, 0, size.width / scale, size.height / scale)];
+    
+    UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndPDFContext();
+    
+    self.contentsScale = scale;
+    self.contents = (id)[image CGImage];
+    
 }
 
 -(void) setChart:(id<IVTChart>)chart{
-    [chart retain];
-    [_chart release];
-    _chart = chart;
-    [self setNeedsDisplay];
+    if(_chart != chart){
+        [chart retain];
+        [_chart release];
+        _chart = chart;
+        [self setNeedsDisplay];
+    }
 }
+
+
 -(void) setAnimationValue:(double)animationValue{
     [_chart setAnimationValue:animationValue];
 }

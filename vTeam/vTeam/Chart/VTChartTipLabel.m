@@ -80,15 +80,6 @@
     CGRect textRect = CGRectMake(_padding.left, _padding.top
                                  , size.width - _padding.left - _padding.right, size.height - _padding.top - _padding.bottom);
     
-    CGContextTranslateCTM(ctx, textRect.origin.x, textRect.origin.y);
-    
-    textRect.origin = CGPointZero;
-    
-    CGContextClipToRect(ctx, textRect);
-
-    CGContextTranslateCTM(ctx, 0.0, textRect.size.height);
-    CGContextScaleCTM(ctx, 1.0 ,  -1.0 );
-    
     UIGraphicsPushContext(ctx);
     
     [_title drawInRect:textRect withFont:_font lineBreakMode:NSLineBreakByTruncatingTail];

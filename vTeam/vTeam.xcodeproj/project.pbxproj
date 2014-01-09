@@ -30,6 +30,10 @@
 		1107F5B6187D5AAD0093AE80 /* VTChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1107F5B4187D5AAD0093AE80 /* VTChartView.m */; };
 		1107F5B9187E48120093AE80 /* VTChartTipLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 1107F5B7187E48110093AE80 /* VTChartTipLabel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1107F5BA187E48120093AE80 /* VTChartTipLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1107F5B8187E48110093AE80 /* VTChartTipLabel.m */; };
+		1107F5BD187E6CCC0093AE80 /* VTPillarChart.h in Headers */ = {isa = PBXBuildFile; fileRef = 1107F5BB187E6CCA0093AE80 /* VTPillarChart.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1107F5BE187E6CCC0093AE80 /* VTPillarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 1107F5BC187E6CCB0093AE80 /* VTPillarChart.m */; };
+		1107F5C1187E81800093AE80 /* VTChartRectangle.h in Headers */ = {isa = PBXBuildFile; fileRef = 1107F5BF187E817E0093AE80 /* VTChartRectangle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1107F5C2187E81810093AE80 /* VTChartRectangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 1107F5C0187E817F0093AE80 /* VTChartRectangle.m */; };
 		110843C1186BD6DD00ECA4CB /* IVTAuthContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 110843C0186BD6DD00ECA4CB /* IVTAuthContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		110D4C5C18714F2900681A23 /* NSObject+VTValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 110D4C5A18714F2900681A23 /* NSObject+VTValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		111638351762E1AD009979D3 /* hreport.c in Sources */ = {isa = PBXBuildFile; fileRef = 111638341762E1AD009979D3 /* hreport.c */; };
@@ -322,6 +326,8 @@
 		118AFC44175DA15100A6A2FF /* VTDBObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 118AFC42175DA15100A6A2FF /* VTDBObject.m */; };
 		118AFC47175DA1E800A6A2FF /* VTDBContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 118AFC45175DA1E800A6A2FF /* VTDBContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		118AFC48175DA1E800A6A2FF /* VTDBContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 118AFC46175DA1E800A6A2FF /* VTDBContext.m */; };
+		118D5351187E9447003716B3 /* VTChartLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 118D534F187E9447003716B3 /* VTChartLabel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		118D5352187E9447003716B3 /* VTChartLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 118D5350187E9447003716B3 /* VTChartLabel.m */; };
 		1193DB5717B0B35900F19592 /* VTBESessionObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 1193DB5517B0B35900F19592 /* VTBESessionObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1193DB5817B0B35900F19592 /* VTBESessionObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1193DB5617B0B35900F19592 /* VTBESessionObject.m */; };
 		11968205187A68B5006509B0 /* VTDOMLinkElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 11968203187A68B5006509B0 /* VTDOMLinkElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -539,6 +545,10 @@
 		1107F5B4187D5AAD0093AE80 /* VTChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTChartView.m; sourceTree = "<group>"; };
 		1107F5B7187E48110093AE80 /* VTChartTipLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTChartTipLabel.h; sourceTree = "<group>"; };
 		1107F5B8187E48110093AE80 /* VTChartTipLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTChartTipLabel.m; sourceTree = "<group>"; };
+		1107F5BB187E6CCA0093AE80 /* VTPillarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTPillarChart.h; sourceTree = "<group>"; };
+		1107F5BC187E6CCB0093AE80 /* VTPillarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTPillarChart.m; sourceTree = "<group>"; };
+		1107F5BF187E817E0093AE80 /* VTChartRectangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTChartRectangle.h; sourceTree = "<group>"; };
+		1107F5C0187E817F0093AE80 /* VTChartRectangle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTChartRectangle.m; sourceTree = "<group>"; };
 		110843C0186BD6DD00ECA4CB /* IVTAuthContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVTAuthContext.h; sourceTree = "<group>"; };
 		110D4C5A18714F2900681A23 /* NSObject+VTValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+VTValue.h"; sourceTree = "<group>"; };
 		110D4C5B18714F2900681A23 /* NSObject+VTValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+VTValue.m"; sourceTree = "<group>"; };
@@ -846,6 +856,8 @@
 		118AFC42175DA15100A6A2FF /* VTDBObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDBObject.m; sourceTree = "<group>"; };
 		118AFC45175DA1E800A6A2FF /* VTDBContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDBContext.h; sourceTree = "<group>"; };
 		118AFC46175DA1E800A6A2FF /* VTDBContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDBContext.m; sourceTree = "<group>"; };
+		118D534F187E9447003716B3 /* VTChartLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTChartLabel.h; sourceTree = "<group>"; };
+		118D5350187E9447003716B3 /* VTChartLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTChartLabel.m; sourceTree = "<group>"; };
 		1193DB5517B0B35900F19592 /* VTBESessionObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTBESessionObject.h; sourceTree = "<group>"; };
 		1193DB5617B0B35900F19592 /* VTBESessionObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTBESessionObject.m; sourceTree = "<group>"; };
 		11968203187A68B5006509B0 /* VTDOMLinkElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDOMLinkElement.h; sourceTree = "<group>"; };
@@ -1065,12 +1077,18 @@
 				1107F5AE187D543E0093AE80 /* VTChartContainer.m */,
 				1107F5A9187D53CC0093AE80 /* VTChartArc.h */,
 				1107F5AA187D53CC0093AE80 /* VTChartArc.m */,
+				118D534F187E9447003716B3 /* VTChartLabel.h */,
+				118D5350187E9447003716B3 /* VTChartLabel.m */,
 				1107F5B7187E48110093AE80 /* VTChartTipLabel.h */,
 				1107F5B8187E48110093AE80 /* VTChartTipLabel.m */,
+				1107F5BF187E817E0093AE80 /* VTChartRectangle.h */,
+				1107F5C0187E817F0093AE80 /* VTChartRectangle.m */,
 				1107F5A0187D4AAA0093AE80 /* VTChartDataReader.h */,
 				1107F5A1187D4AAA0093AE80 /* VTChartDataReader.m */,
 				1107F5A5187D51400093AE80 /* VTPieChart.h */,
 				1107F5A6187D51400093AE80 /* VTPieChart.m */,
+				1107F5BB187E6CCA0093AE80 /* VTPillarChart.h */,
+				1107F5BC187E6CCB0093AE80 /* VTPillarChart.m */,
 				1107F5B3187D5AAD0093AE80 /* VTChartView.h */,
 				1107F5B4187D5AAD0093AE80 /* VTChartView.m */,
 			);
@@ -2100,6 +2118,9 @@
 				1107F5B2187D54850093AE80 /* IVTChartContainer.h in Headers */,
 				1107F5B5187D5AAD0093AE80 /* VTChartView.h in Headers */,
 				1107F5B9187E48120093AE80 /* VTChartTipLabel.h in Headers */,
+				1107F5BD187E6CCC0093AE80 /* VTPillarChart.h in Headers */,
+				1107F5C1187E81800093AE80 /* VTChartRectangle.h in Headers */,
+				118D5351187E9447003716B3 /* VTChartLabel.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2404,6 +2425,9 @@
 				1107F5B0187D543E0093AE80 /* VTChartContainer.m in Sources */,
 				1107F5B6187D5AAD0093AE80 /* VTChartView.m in Sources */,
 				1107F5BA187E48120093AE80 /* VTChartTipLabel.m in Sources */,
+				1107F5BE187E6CCC0093AE80 /* VTPillarChart.m in Sources */,
+				1107F5C2187E81810093AE80 /* VTChartRectangle.m in Sources */,
+				118D5352187E9447003716B3 /* VTChartLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

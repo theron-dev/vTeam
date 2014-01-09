@@ -38,11 +38,11 @@
     
     [self removeAllComponents];
     
-    NSArray * dataItems = [_dataItemsReader dataItemsValue:self.dataSource];
+    NSArray * dataItems = [_dataItemsReader dataItemsValue:self.dataSource] ;
     
     double totalValue = [_totalValueReader doubleValue:self.dataSource];
     
-    CGFloat angle = 0;
+    CGFloat angle = M_PI * 2.0;
     
     CGSize innerSize = self.size;
     
@@ -53,7 +53,11 @@
     
     CGPoint position =  CGPointMake(self.size.width / 2.0, self.size.height / 2.0);
     
-    for(id dataItem in dataItems){
+    NSEnumerator * enumDataItem = [dataItems objectEnumerator];
+    
+    id dataItem = nil;
+    
+    while((dataItem = [enumDataItem nextObject])){
         
         double v = [_valueReader doubleValue:dataItem];
         
@@ -61,15 +65,15 @@
         
         arc.position = position;
         arc.radius = radius;
-        arc.startAngle = angle;
-        arc.endAngle = angle + M_PI * 2.0 * v / totalValue;
+        arc.endAngle = angle;
+        arc.startAngle = angle - M_PI * 2.0 * v / totalValue;
         arc.backgroundColor = [_colorReader colorValue:dataItem];
         arc.borderWidth = _borderWidth;
         arc.borderColor = [_borderColorReader colorValue:dataItem];
         
         [self addComponent:arc];
         
-        angle = arc.endAngle;
+        angle = arc.startAngle;
         
         NSString * title = [_titleReader stringValue:dataItem];
         
