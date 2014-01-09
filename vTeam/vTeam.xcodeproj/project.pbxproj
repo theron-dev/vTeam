@@ -404,6 +404,39 @@
 		11C29F57179F795E00E48A36 /* VTFlowViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C29F55179F795E00E48A36 /* VTFlowViewLayout.m */; };
 		11C3AB4417C7374800B16C3A /* NSData+GZIP.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C3AB4217C7374700B16C3A /* NSData+GZIP.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11C3AB4517C7374800B16C3A /* NSData+GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C3AB4317C7374800B16C3A /* NSData+GZIP.m */; };
+		11C87810187EA5AB00E787C4 /* hvermin.c in Sources */ = {isa = PBXBuildFile; fileRef = 11C877F1187EA5AB00E787C4 /* hvermin.c */; };
+		11C87811187EA5AB00E787C4 /* hvermin.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C877F2187EA5AB00E787C4 /* hvermin.h */; };
+		11C87813187EA5AB00E787C4 /* hvermin_bin.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C877F4187EA5AB00E787C4 /* hvermin_bin.h */; };
+		11C87815187EA5AB00E787C4 /* hvermin_build.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C877F6187EA5AB00E787C4 /* hvermin_build.h */; };
+		11C87817187EA5AB00E787C4 /* hvermin_compile.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C877F8187EA5AB00E787C4 /* hvermin_compile.h */; };
+		11C87819187EA5AB00E787C4 /* hvermin_compile_expression.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C877FA187EA5AB00E787C4 /* hvermin_compile_expression.h */; };
+		11C8781B187EA5AB00E787C4 /* hvermin_compile_scanner.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C877FC187EA5AB00E787C4 /* hvermin_compile_scanner.h */; };
+		11C8781D187EA5AB00E787C4 /* hvermin_debug.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C877FE187EA5AB00E787C4 /* hvermin_debug.h */; };
+		11C8781E187EA5AB00E787C4 /* hvermin_object.c in Sources */ = {isa = PBXBuildFile; fileRef = 11C877FF187EA5AB00E787C4 /* hvermin_object.c */; };
+		11C8781F187EA5AB00E787C4 /* hvermin_object.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C87800187EA5AB00E787C4 /* hvermin_object.h */; };
+		11C87820187EA5AB00E787C4 /* hvermin_runtime.c in Sources */ = {isa = PBXBuildFile; fileRef = 11C87801187EA5AB00E787C4 /* hvermin_runtime.c */; };
+		11C87821187EA5AB00E787C4 /* hvermin_runtime.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C87802187EA5AB00E787C4 /* hvermin_runtime.h */; };
+		11C87822187EA5AB00E787C4 /* hvermin_runtime_variant.c in Sources */ = {isa = PBXBuildFile; fileRef = 11C87803187EA5AB00E787C4 /* hvermin_runtime_variant.c */; };
+		11C87823187EA5AB00E787C4 /* hvermin_runtime_variant.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C87804187EA5AB00E787C4 /* hvermin_runtime_variant.h */; };
+		11C87825187EA5AB00E787C4 /* hvermin_scanner.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C87806187EA5AB00E787C4 /* hvermin_scanner.h */; };
+		11C87826187EA5AB00E787C4 /* hvmfile.c in Sources */ = {isa = PBXBuildFile; fileRef = 11C87808187EA5AB00E787C4 /* hvmfile.c */; };
+		11C87827187EA5AB00E787C4 /* hvmfile.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C87809187EA5AB00E787C4 /* hvmfile.h */; };
+		11C87828187EA5AB00E787C4 /* hvmjson.c in Sources */ = {isa = PBXBuildFile; fileRef = 11C8780A187EA5AB00E787C4 /* hvmjson.c */; };
+		11C87829187EA5AB00E787C4 /* hvmjson.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C8780B187EA5AB00E787C4 /* hvmjson.h */; };
+		11C8782A187EA5AB00E787C4 /* hvmsqlite.c in Sources */ = {isa = PBXBuildFile; fileRef = 11C8780C187EA5AB00E787C4 /* hvmsqlite.c */; };
+		11C8782B187EA5AB00E787C4 /* hvmsqlite.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C8780D187EA5AB00E787C4 /* hvmsqlite.h */; };
+		11C8782C187EA5AB00E787C4 /* hvmxml.c in Sources */ = {isa = PBXBuildFile; fileRef = 11C8780E187EA5AB00E787C4 /* hvmxml.c */; };
+		11C8782D187EA5AB00E787C4 /* hvmxml.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C8780F187EA5AB00E787C4 /* hvmxml.h */; };
+		11C87839187EA5DE00E787C4 /* hstream.c in Sources */ = {isa = PBXBuildFile; fileRef = 11C8782F187EA5DE00E787C4 /* hstream.c */; };
+		11C8783A187EA5DE00E787C4 /* hstream.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C87830187EA5DE00E787C4 /* hstream.h */; };
+		11C8783B187EA5DE00E787C4 /* hstream_pipe.c in Sources */ = {isa = PBXBuildFile; fileRef = 11C87831187EA5DE00E787C4 /* hstream_pipe.c */; };
+		11C8783C187EA5DE00E787C4 /* hstream_pipe.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C87832187EA5DE00E787C4 /* hstream_pipe.h */; };
+		11C8783D187EA5DE00E787C4 /* hstream_process.c in Sources */ = {isa = PBXBuildFile; fileRef = 11C87833187EA5DE00E787C4 /* hstream_process.c */; };
+		11C8783E187EA5DE00E787C4 /* hstream_process.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C87834187EA5DE00E787C4 /* hstream_process.h */; };
+		11C8783F187EA5DE00E787C4 /* hstream_tcp.c in Sources */ = {isa = PBXBuildFile; fileRef = 11C87835187EA5DE00E787C4 /* hstream_tcp.c */; };
+		11C87840187EA5DE00E787C4 /* hstream_tcp.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C87836187EA5DE00E787C4 /* hstream_tcp.h */; };
+		11C87841187EA5DE00E787C4 /* hstream_websocket.c in Sources */ = {isa = PBXBuildFile; fileRef = 11C87837187EA5DE00E787C4 /* hstream_websocket.c */; };
+		11C87842187EA5DE00E787C4 /* hstream_websocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C87838187EA5DE00E787C4 /* hstream_websocket.h */; };
 		11CEBF4717C61EE5007A430A /* VTBEEventObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 11CEBF4517C61EE4007A430A /* VTBEEventObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11CEBF4817C61EE5007A430A /* VTBEEventObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 11CEBF4617C61EE4007A430A /* VTBEEventObject.m */; };
 		11D678E317AA4E51000E02FA /* VTBehaviorService.h in Headers */ = {isa = PBXBuildFile; fileRef = 11D678E117AA4E50000E02FA /* VTBehaviorService.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -926,6 +959,46 @@
 		11C29F55179F795E00E48A36 /* VTFlowViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTFlowViewLayout.m; sourceTree = "<group>"; };
 		11C3AB4217C7374700B16C3A /* NSData+GZIP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+GZIP.h"; sourceTree = "<group>"; };
 		11C3AB4317C7374800B16C3A /* NSData+GZIP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+GZIP.m"; sourceTree = "<group>"; };
+		11C877F1187EA5AB00E787C4 /* hvermin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hvermin.c; sourceTree = "<group>"; };
+		11C877F2187EA5AB00E787C4 /* hvermin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hvermin.h; sourceTree = "<group>"; };
+		11C877F3187EA5AB00E787C4 /* hvermin_bin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hvermin_bin.c; sourceTree = "<group>"; };
+		11C877F4187EA5AB00E787C4 /* hvermin_bin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hvermin_bin.h; sourceTree = "<group>"; };
+		11C877F5187EA5AB00E787C4 /* hvermin_build.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hvermin_build.c; sourceTree = "<group>"; };
+		11C877F6187EA5AB00E787C4 /* hvermin_build.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hvermin_build.h; sourceTree = "<group>"; };
+		11C877F7187EA5AB00E787C4 /* hvermin_compile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hvermin_compile.c; sourceTree = "<group>"; };
+		11C877F8187EA5AB00E787C4 /* hvermin_compile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hvermin_compile.h; sourceTree = "<group>"; };
+		11C877F9187EA5AB00E787C4 /* hvermin_compile_expression.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hvermin_compile_expression.c; sourceTree = "<group>"; };
+		11C877FA187EA5AB00E787C4 /* hvermin_compile_expression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hvermin_compile_expression.h; sourceTree = "<group>"; };
+		11C877FB187EA5AB00E787C4 /* hvermin_compile_scanner.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hvermin_compile_scanner.c; sourceTree = "<group>"; };
+		11C877FC187EA5AB00E787C4 /* hvermin_compile_scanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hvermin_compile_scanner.h; sourceTree = "<group>"; };
+		11C877FD187EA5AB00E787C4 /* hvermin_debug.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hvermin_debug.c; sourceTree = "<group>"; };
+		11C877FE187EA5AB00E787C4 /* hvermin_debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hvermin_debug.h; sourceTree = "<group>"; };
+		11C877FF187EA5AB00E787C4 /* hvermin_object.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hvermin_object.c; sourceTree = "<group>"; };
+		11C87800187EA5AB00E787C4 /* hvermin_object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hvermin_object.h; sourceTree = "<group>"; };
+		11C87801187EA5AB00E787C4 /* hvermin_runtime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hvermin_runtime.c; sourceTree = "<group>"; };
+		11C87802187EA5AB00E787C4 /* hvermin_runtime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hvermin_runtime.h; sourceTree = "<group>"; };
+		11C87803187EA5AB00E787C4 /* hvermin_runtime_variant.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hvermin_runtime_variant.c; sourceTree = "<group>"; };
+		11C87804187EA5AB00E787C4 /* hvermin_runtime_variant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hvermin_runtime_variant.h; sourceTree = "<group>"; };
+		11C87805187EA5AB00E787C4 /* hvermin_scanner.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hvermin_scanner.c; sourceTree = "<group>"; };
+		11C87806187EA5AB00E787C4 /* hvermin_scanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hvermin_scanner.h; sourceTree = "<group>"; };
+		11C87808187EA5AB00E787C4 /* hvmfile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hvmfile.c; sourceTree = "<group>"; };
+		11C87809187EA5AB00E787C4 /* hvmfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hvmfile.h; sourceTree = "<group>"; };
+		11C8780A187EA5AB00E787C4 /* hvmjson.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hvmjson.c; sourceTree = "<group>"; };
+		11C8780B187EA5AB00E787C4 /* hvmjson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hvmjson.h; sourceTree = "<group>"; };
+		11C8780C187EA5AB00E787C4 /* hvmsqlite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hvmsqlite.c; sourceTree = "<group>"; };
+		11C8780D187EA5AB00E787C4 /* hvmsqlite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hvmsqlite.h; sourceTree = "<group>"; };
+		11C8780E187EA5AB00E787C4 /* hvmxml.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hvmxml.c; sourceTree = "<group>"; };
+		11C8780F187EA5AB00E787C4 /* hvmxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hvmxml.h; sourceTree = "<group>"; };
+		11C8782F187EA5DE00E787C4 /* hstream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hstream.c; sourceTree = "<group>"; };
+		11C87830187EA5DE00E787C4 /* hstream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hstream.h; sourceTree = "<group>"; };
+		11C87831187EA5DE00E787C4 /* hstream_pipe.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hstream_pipe.c; sourceTree = "<group>"; };
+		11C87832187EA5DE00E787C4 /* hstream_pipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hstream_pipe.h; sourceTree = "<group>"; };
+		11C87833187EA5DE00E787C4 /* hstream_process.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hstream_process.c; sourceTree = "<group>"; };
+		11C87834187EA5DE00E787C4 /* hstream_process.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hstream_process.h; sourceTree = "<group>"; };
+		11C87835187EA5DE00E787C4 /* hstream_tcp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hstream_tcp.c; sourceTree = "<group>"; };
+		11C87836187EA5DE00E787C4 /* hstream_tcp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hstream_tcp.h; sourceTree = "<group>"; };
+		11C87837187EA5DE00E787C4 /* hstream_websocket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hstream_websocket.c; sourceTree = "<group>"; };
+		11C87838187EA5DE00E787C4 /* hstream_websocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hstream_websocket.h; sourceTree = "<group>"; };
 		11CEBF4517C61EE4007A430A /* VTBEEventObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTBEEventObject.h; sourceTree = "<group>"; };
 		11CEBF4617C61EE4007A430A /* VTBEEventObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTBEEventObject.m; sourceTree = "<group>"; };
 		11D678E117AA4E50000E02FA /* VTBehaviorService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTBehaviorService.h; sourceTree = "<group>"; };
@@ -1471,6 +1544,8 @@
 		114D7985172A10BC0041468E /* C */ = {
 			isa = PBXGroup;
 			children = (
+				11C8782E187EA5DE00E787C4 /* stream */,
+				11C877F0187EA5AB00E787C4 /* vermin */,
 				11F9775E1840E30300F697D7 /* pinyin */,
 				AC339DA01765E96700EC2DAC /* db */,
 				111638321762DC01009979D3 /* report */,
@@ -1554,6 +1629,70 @@
 				11A041A617BCCDBE001992BE /* VTRichViewElement.m */,
 			);
 			path = Rich;
+			sourceTree = "<group>";
+		};
+		11C877F0187EA5AB00E787C4 /* vermin */ = {
+			isa = PBXGroup;
+			children = (
+				11C877F1187EA5AB00E787C4 /* hvermin.c */,
+				11C877F2187EA5AB00E787C4 /* hvermin.h */,
+				11C877F3187EA5AB00E787C4 /* hvermin_bin.c */,
+				11C877F4187EA5AB00E787C4 /* hvermin_bin.h */,
+				11C877F5187EA5AB00E787C4 /* hvermin_build.c */,
+				11C877F6187EA5AB00E787C4 /* hvermin_build.h */,
+				11C877F7187EA5AB00E787C4 /* hvermin_compile.c */,
+				11C877F8187EA5AB00E787C4 /* hvermin_compile.h */,
+				11C877F9187EA5AB00E787C4 /* hvermin_compile_expression.c */,
+				11C877FA187EA5AB00E787C4 /* hvermin_compile_expression.h */,
+				11C877FB187EA5AB00E787C4 /* hvermin_compile_scanner.c */,
+				11C877FC187EA5AB00E787C4 /* hvermin_compile_scanner.h */,
+				11C877FD187EA5AB00E787C4 /* hvermin_debug.c */,
+				11C877FE187EA5AB00E787C4 /* hvermin_debug.h */,
+				11C877FF187EA5AB00E787C4 /* hvermin_object.c */,
+				11C87800187EA5AB00E787C4 /* hvermin_object.h */,
+				11C87801187EA5AB00E787C4 /* hvermin_runtime.c */,
+				11C87802187EA5AB00E787C4 /* hvermin_runtime.h */,
+				11C87803187EA5AB00E787C4 /* hvermin_runtime_variant.c */,
+				11C87804187EA5AB00E787C4 /* hvermin_runtime_variant.h */,
+				11C87805187EA5AB00E787C4 /* hvermin_scanner.c */,
+				11C87806187EA5AB00E787C4 /* hvermin_scanner.h */,
+				11C87807187EA5AB00E787C4 /* lib */,
+			);
+			name = vermin;
+			path = ../../c/vermin;
+			sourceTree = "<group>";
+		};
+		11C87807187EA5AB00E787C4 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				11C87808187EA5AB00E787C4 /* hvmfile.c */,
+				11C87809187EA5AB00E787C4 /* hvmfile.h */,
+				11C8780A187EA5AB00E787C4 /* hvmjson.c */,
+				11C8780B187EA5AB00E787C4 /* hvmjson.h */,
+				11C8780C187EA5AB00E787C4 /* hvmsqlite.c */,
+				11C8780D187EA5AB00E787C4 /* hvmsqlite.h */,
+				11C8780E187EA5AB00E787C4 /* hvmxml.c */,
+				11C8780F187EA5AB00E787C4 /* hvmxml.h */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		11C8782E187EA5DE00E787C4 /* stream */ = {
+			isa = PBXGroup;
+			children = (
+				11C8782F187EA5DE00E787C4 /* hstream.c */,
+				11C87830187EA5DE00E787C4 /* hstream.h */,
+				11C87831187EA5DE00E787C4 /* hstream_pipe.c */,
+				11C87832187EA5DE00E787C4 /* hstream_pipe.h */,
+				11C87833187EA5DE00E787C4 /* hstream_process.c */,
+				11C87834187EA5DE00E787C4 /* hstream_process.h */,
+				11C87835187EA5DE00E787C4 /* hstream_tcp.c */,
+				11C87836187EA5DE00E787C4 /* hstream_tcp.h */,
+				11C87837187EA5DE00E787C4 /* hstream_websocket.c */,
+				11C87838187EA5DE00E787C4 /* hstream_websocket.h */,
+			);
+			name = stream;
+			path = ../../c/stream;
 			sourceTree = "<group>";
 		};
 		11D678E517AA4FBA000E02FA /* DataEntitys */ = {
@@ -2121,6 +2260,26 @@
 				1107F5BD187E6CCC0093AE80 /* VTPillarChart.h in Headers */,
 				1107F5C1187E81800093AE80 /* VTChartRectangle.h in Headers */,
 				118D5351187E9447003716B3 /* VTChartLabel.h in Headers */,
+				11C87811187EA5AB00E787C4 /* hvermin.h in Headers */,
+				11C87813187EA5AB00E787C4 /* hvermin_bin.h in Headers */,
+				11C87815187EA5AB00E787C4 /* hvermin_build.h in Headers */,
+				11C87817187EA5AB00E787C4 /* hvermin_compile.h in Headers */,
+				11C87819187EA5AB00E787C4 /* hvermin_compile_expression.h in Headers */,
+				11C8781B187EA5AB00E787C4 /* hvermin_compile_scanner.h in Headers */,
+				11C8781D187EA5AB00E787C4 /* hvermin_debug.h in Headers */,
+				11C8781F187EA5AB00E787C4 /* hvermin_object.h in Headers */,
+				11C87821187EA5AB00E787C4 /* hvermin_runtime.h in Headers */,
+				11C87823187EA5AB00E787C4 /* hvermin_runtime_variant.h in Headers */,
+				11C87825187EA5AB00E787C4 /* hvermin_scanner.h in Headers */,
+				11C87827187EA5AB00E787C4 /* hvmfile.h in Headers */,
+				11C87829187EA5AB00E787C4 /* hvmjson.h in Headers */,
+				11C8782B187EA5AB00E787C4 /* hvmsqlite.h in Headers */,
+				11C8782D187EA5AB00E787C4 /* hvmxml.h in Headers */,
+				11C8783A187EA5DE00E787C4 /* hstream.h in Headers */,
+				11C8783C187EA5DE00E787C4 /* hstream_pipe.h in Headers */,
+				11C8783E187EA5DE00E787C4 /* hstream_process.h in Headers */,
+				11C87840187EA5DE00E787C4 /* hstream_tcp.h in Headers */,
+				11C87842187EA5DE00E787C4 /* hstream_websocket.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2428,6 +2587,19 @@
 				1107F5BE187E6CCC0093AE80 /* VTPillarChart.m in Sources */,
 				1107F5C2187E81810093AE80 /* VTChartRectangle.m in Sources */,
 				118D5352187E9447003716B3 /* VTChartLabel.m in Sources */,
+				11C87810187EA5AB00E787C4 /* hvermin.c in Sources */,
+				11C8781E187EA5AB00E787C4 /* hvermin_object.c in Sources */,
+				11C87820187EA5AB00E787C4 /* hvermin_runtime.c in Sources */,
+				11C87822187EA5AB00E787C4 /* hvermin_runtime_variant.c in Sources */,
+				11C87826187EA5AB00E787C4 /* hvmfile.c in Sources */,
+				11C87828187EA5AB00E787C4 /* hvmjson.c in Sources */,
+				11C8782A187EA5AB00E787C4 /* hvmsqlite.c in Sources */,
+				11C8782C187EA5AB00E787C4 /* hvmxml.c in Sources */,
+				11C87839187EA5DE00E787C4 /* hstream.c in Sources */,
+				11C8783B187EA5DE00E787C4 /* hstream_pipe.c in Sources */,
+				11C8783D187EA5DE00E787C4 /* hstream_process.c in Sources */,
+				11C8783F187EA5DE00E787C4 /* hstream_tcp.c in Sources */,
+				11C87841187EA5DE00E787C4 /* hstream_websocket.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
