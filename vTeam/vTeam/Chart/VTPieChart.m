@@ -42,6 +42,12 @@
     
     double totalValue = [_totalValueReader doubleValue:self.dataSource];
     
+    if(_totalValueReader == nil){
+        for(id dataItem in dataItems){
+            totalValue += [_valueReader doubleValue:dataItem];
+        }
+    }
+    
     CGFloat angle = M_PI * 2.0;
     
     CGSize innerSize = self.size;
