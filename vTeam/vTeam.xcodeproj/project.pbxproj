@@ -437,6 +437,8 @@
 		11C87840187EA5DE00E787C4 /* hstream_tcp.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C87836187EA5DE00E787C4 /* hstream_tcp.h */; };
 		11C87841187EA5DE00E787C4 /* hstream_websocket.c in Sources */ = {isa = PBXBuildFile; fileRef = 11C87837187EA5DE00E787C4 /* hstream_websocket.c */; };
 		11C87842187EA5DE00E787C4 /* hstream_websocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C87838187EA5DE00E787C4 /* hstream_websocket.h */; };
+		11C87846187EA7F500E787C4 /* hxml.c in Sources */ = {isa = PBXBuildFile; fileRef = 11C87844187EA7F500E787C4 /* hxml.c */; };
+		11C87847187EA7F500E787C4 /* hxml.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C87845187EA7F500E787C4 /* hxml.h */; };
 		11CEBF4717C61EE5007A430A /* VTBEEventObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 11CEBF4517C61EE4007A430A /* VTBEEventObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11CEBF4817C61EE5007A430A /* VTBEEventObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 11CEBF4617C61EE4007A430A /* VTBEEventObject.m */; };
 		11D678E317AA4E51000E02FA /* VTBehaviorService.h in Headers */ = {isa = PBXBuildFile; fileRef = 11D678E117AA4E50000E02FA /* VTBehaviorService.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -999,6 +1001,8 @@
 		11C87836187EA5DE00E787C4 /* hstream_tcp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hstream_tcp.h; sourceTree = "<group>"; };
 		11C87837187EA5DE00E787C4 /* hstream_websocket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hstream_websocket.c; sourceTree = "<group>"; };
 		11C87838187EA5DE00E787C4 /* hstream_websocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hstream_websocket.h; sourceTree = "<group>"; };
+		11C87844187EA7F500E787C4 /* hxml.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hxml.c; sourceTree = "<group>"; };
+		11C87845187EA7F500E787C4 /* hxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hxml.h; sourceTree = "<group>"; };
 		11CEBF4517C61EE4007A430A /* VTBEEventObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTBEEventObject.h; sourceTree = "<group>"; };
 		11CEBF4617C61EE4007A430A /* VTBEEventObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTBEEventObject.m; sourceTree = "<group>"; };
 		11D678E117AA4E50000E02FA /* VTBehaviorService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTBehaviorService.h; sourceTree = "<group>"; };
@@ -1544,6 +1548,7 @@
 		114D7985172A10BC0041468E /* C */ = {
 			isa = PBXGroup;
 			children = (
+				11C87843187EA7F500E787C4 /* xml */,
 				11C8782E187EA5DE00E787C4 /* stream */,
 				11C877F0187EA5AB00E787C4 /* vermin */,
 				11F9775E1840E30300F697D7 /* pinyin */,
@@ -1693,6 +1698,16 @@
 			);
 			name = stream;
 			path = ../../c/stream;
+			sourceTree = "<group>";
+		};
+		11C87843187EA7F500E787C4 /* xml */ = {
+			isa = PBXGroup;
+			children = (
+				11C87844187EA7F500E787C4 /* hxml.c */,
+				11C87845187EA7F500E787C4 /* hxml.h */,
+			);
+			name = xml;
+			path = ../../c/xml;
 			sourceTree = "<group>";
 		};
 		11D678E517AA4FBA000E02FA /* DataEntitys */ = {
@@ -2280,6 +2295,7 @@
 				11C8783E187EA5DE00E787C4 /* hstream_process.h in Headers */,
 				11C87840187EA5DE00E787C4 /* hstream_tcp.h in Headers */,
 				11C87842187EA5DE00E787C4 /* hstream_websocket.h in Headers */,
+				11C87847187EA7F500E787C4 /* hxml.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2600,6 +2616,7 @@
 				11C8783D187EA5DE00E787C4 /* hstream_process.c in Sources */,
 				11C8783F187EA5DE00E787C4 /* hstream_tcp.c in Sources */,
 				11C87841187EA5DE00E787C4 /* hstream_websocket.c in Sources */,
+				11C87846187EA7F500E787C4 /* hxml.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
