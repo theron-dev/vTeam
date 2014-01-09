@@ -30,4 +30,65 @@
 
 -(NSArray *) arrayValueForKey:(NSString *) key;
 
+
+
+
+-(NSString *) stringValueForKeyPath:(NSString *) keyPath;
+
+-(BOOL) booleanValueForKeyPath:(NSString *) keyPath;
+
+-(int) intValueForKeyPath:(NSString *) keyPath;
+
+-(long) longValueForKeyPath:(NSString *) keyPath;
+
+-(long long) longLongValueForKeyPath:(NSString *) keyPath;
+
+-(float) floatValueForKeyPath:(NSString *) keyPath;
+
+-(double) doubleValueForKeyPath:(NSString *) keyPath;
+
+-(id) objectValueForKeyPath:(NSString *) key;
+
+-(NSDictionary *) dictionaryValueForKeyPath:(NSString *) key;
+
+-(NSArray *) arrayValueForKeyPath:(NSString *) key;
+
+
+-(NSString *) stringValueForKey:(NSString *) key defaultValue:(NSString *) defalutValue;
+
+-(BOOL) booleanValueForKey:(NSString *) key defaultValue:(BOOL) defalutValue;
+
+-(int) intValueForKey:(NSString *) key defaultValue:(int) defalutValue;
+
+-(long) longValueForKey:(NSString *) key defaultValue:(long) defalutValue;
+
+-(long long) longLongValueForKey:(NSString *) key defaultValue:(long long) defalutValue;
+
+-(float) floatValueForKey:(NSString *) key defaultValue:(float) defalutValue;
+
+-(double) doubleValueForKey:(NSString *) key defaultValue:(double) defalutValue;
+
+-(id) objectValueForKey:(NSString *) key defaultValue:(id) defalutValue;
+
+
+
+-(NSString *) stringValueForKeyPath:(NSString *) keyPath defaultValue:(NSString *) defalutValue;
+
+-(BOOL) booleanValueForKeyPath:(NSString *) keyPath defaultValue:(BOOL) defalutValue;
+
+-(int) intValueForKeyPath:(NSString *) keyPath defaultValue:(int) defalutValue;
+
+-(long) longValueForKeyPath:(NSString *) keyPath defaultValue:(long) defalutValue;
+
+-(long long) longLongValueForKeyPath:(NSString *) keyPath defaultValue:(long long) defalutValue;
+
+-(float) floatValueForKeyPath:(NSString *) keyPath defaultValue:(float) defalutValue;
+
+-(double) doubleValueForKeyPath:(NSString *) keyPath defaultValue:(double) defalutValue;
+
+-(id) objectValueForKeyPath:(NSString *) key defaultValue:(id) defalutValue;
+
+
+
+
 @end

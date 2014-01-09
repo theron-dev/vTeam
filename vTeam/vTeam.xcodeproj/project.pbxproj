@@ -7,8 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1107F58B187D40BD0093AE80 /* IVTChart.h in Headers */ = {isa = PBXBuildFile; fileRef = 1107F58A187D40BD0093AE80 /* IVTChart.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1107F58E187D41E00093AE80 /* IVTChartDraw.h in Headers */ = {isa = PBXBuildFile; fileRef = 1107F58D187D41DD0093AE80 /* IVTChartDraw.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1107F591187D42980093AE80 /* IVTChartComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = 1107F590187D42980093AE80 /* IVTChartComponent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1107F595187D44F60093AE80 /* VTChart.h in Headers */ = {isa = PBXBuildFile; fileRef = 1107F593187D44F60093AE80 /* VTChart.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1107F596187D44F60093AE80 /* VTChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 1107F594187D44F60093AE80 /* VTChart.m */; };
+		1107F597187D44FC0093AE80 /* IVTChartView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1107F592187D44AA0093AE80 /* IVTChartView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1107F599187D45E70093AE80 /* IVTChartAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1107F598187D45E30093AE80 /* IVTChartAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1107F59C187D464B0093AE80 /* VTChartComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = 1107F59A187D464B0093AE80 /* VTChartComponent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1107F59D187D464B0093AE80 /* VTChartComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 1107F59B187D464B0093AE80 /* VTChartComponent.m */; };
+		1107F5A2187D4AAA0093AE80 /* VTChartDataReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 1107F5A0187D4AAA0093AE80 /* VTChartDataReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1107F5A3187D4AAA0093AE80 /* VTChartDataReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1107F5A1187D4AAA0093AE80 /* VTChartDataReader.m */; };
+		1107F5A4187D4BDF0093AE80 /* NSObject+VTValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 110D4C5B18714F2900681A23 /* NSObject+VTValue.m */; };
+		1107F5A7187D51400093AE80 /* VTPieChart.h in Headers */ = {isa = PBXBuildFile; fileRef = 1107F5A5187D51400093AE80 /* VTPieChart.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1107F5A8187D51400093AE80 /* VTPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 1107F5A6187D51400093AE80 /* VTPieChart.m */; };
+		1107F5AB187D53CD0093AE80 /* VTChartArc.h in Headers */ = {isa = PBXBuildFile; fileRef = 1107F5A9187D53CC0093AE80 /* VTChartArc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1107F5AC187D53CD0093AE80 /* VTChartArc.m in Sources */ = {isa = PBXBuildFile; fileRef = 1107F5AA187D53CC0093AE80 /* VTChartArc.m */; };
+		1107F5AF187D543E0093AE80 /* VTChartContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 1107F5AD187D543D0093AE80 /* VTChartContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1107F5B0187D543E0093AE80 /* VTChartContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1107F5AE187D543E0093AE80 /* VTChartContainer.m */; };
+		1107F5B2187D54850093AE80 /* IVTChartContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 1107F5B1187D54810093AE80 /* IVTChartContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1107F5B5187D5AAD0093AE80 /* VTChartView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1107F5B3187D5AAD0093AE80 /* VTChartView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1107F5B6187D5AAD0093AE80 /* VTChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1107F5B4187D5AAD0093AE80 /* VTChartView.m */; };
+		1107F5B9187E48120093AE80 /* VTChartTipLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 1107F5B7187E48110093AE80 /* VTChartTipLabel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1107F5BA187E48120093AE80 /* VTChartTipLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1107F5B8187E48110093AE80 /* VTChartTipLabel.m */; };
 		110843C1186BD6DD00ECA4CB /* IVTAuthContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 110843C0186BD6DD00ECA4CB /* IVTAuthContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		110D4C5C18714F2900681A23 /* NSObject+VTValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 110D4C5A18714F2900681A23 /* NSObject+VTValue.h */; };
+		110D4C5C18714F2900681A23 /* NSObject+VTValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 110D4C5A18714F2900681A23 /* NSObject+VTValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		111638351762E1AD009979D3 /* hreport.c in Sources */ = {isa = PBXBuildFile; fileRef = 111638341762E1AD009979D3 /* hreport.c */; };
 		1116383F1762E99E009979D3 /* hreport.h in Headers */ = {isa = PBXBuildFile; fileRef = 111638331762DCBD009979D3 /* hreport.h */; settings = {ATTRIBUTES = (); }; };
 		111638441762EA80009979D3 /* VTReportDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = 111638421762EA80009979D3 /* VTReportDocument.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -241,7 +264,7 @@
 		11619C5017320FCE00BD3561 /* VTFlowContainerLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 11619C4E17320FCD00BD3561 /* VTFlowContainerLayout.m */; };
 		11619C53173213CD00BD3561 /* VTFallsContainerLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 11619C51173213CD00BD3561 /* VTFallsContainerLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11619C54173213CD00BD3561 /* VTFallsContainerLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 11619C52173213CD00BD3561 /* VTFallsContainerLayout.m */; };
-		11619C5717322FD400BD3561 /* UIView+Search.h in Headers */ = {isa = PBXBuildFile; fileRef = 11619C5517322FD300BD3561 /* UIView+Search.h */; };
+		11619C5717322FD400BD3561 /* UIView+Search.h in Headers */ = {isa = PBXBuildFile; fileRef = 11619C5517322FD300BD3561 /* UIView+Search.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11619C5817322FD400BD3561 /* UIView+Search.m in Sources */ = {isa = PBXBuildFile; fileRef = 11619C5617322FD400BD3561 /* UIView+Search.m */; };
 		11619C5F173231F000BD3561 /* IVTDownlinkTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 11619C591732315D00BD3561 /* IVTDownlinkTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11619C60173231F300BD3561 /* IVTDownlinkPageTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 11619C5E173231E700BD3561 /* IVTDownlinkPageTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -494,6 +517,28 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1107F58A187D40BD0093AE80 /* IVTChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVTChart.h; sourceTree = "<group>"; };
+		1107F58D187D41DD0093AE80 /* IVTChartDraw.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVTChartDraw.h; sourceTree = "<group>"; };
+		1107F590187D42980093AE80 /* IVTChartComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVTChartComponent.h; sourceTree = "<group>"; };
+		1107F592187D44AA0093AE80 /* IVTChartView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVTChartView.h; sourceTree = "<group>"; };
+		1107F593187D44F60093AE80 /* VTChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTChart.h; sourceTree = "<group>"; };
+		1107F594187D44F60093AE80 /* VTChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTChart.m; sourceTree = "<group>"; };
+		1107F598187D45E30093AE80 /* IVTChartAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVTChartAnimation.h; sourceTree = "<group>"; };
+		1107F59A187D464B0093AE80 /* VTChartComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTChartComponent.h; sourceTree = "<group>"; };
+		1107F59B187D464B0093AE80 /* VTChartComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTChartComponent.m; sourceTree = "<group>"; };
+		1107F5A0187D4AAA0093AE80 /* VTChartDataReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTChartDataReader.h; sourceTree = "<group>"; };
+		1107F5A1187D4AAA0093AE80 /* VTChartDataReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTChartDataReader.m; sourceTree = "<group>"; };
+		1107F5A5187D51400093AE80 /* VTPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTPieChart.h; sourceTree = "<group>"; };
+		1107F5A6187D51400093AE80 /* VTPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTPieChart.m; sourceTree = "<group>"; };
+		1107F5A9187D53CC0093AE80 /* VTChartArc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTChartArc.h; sourceTree = "<group>"; };
+		1107F5AA187D53CC0093AE80 /* VTChartArc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTChartArc.m; sourceTree = "<group>"; };
+		1107F5AD187D543D0093AE80 /* VTChartContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTChartContainer.h; sourceTree = "<group>"; };
+		1107F5AE187D543E0093AE80 /* VTChartContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTChartContainer.m; sourceTree = "<group>"; };
+		1107F5B1187D54810093AE80 /* IVTChartContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVTChartContainer.h; sourceTree = "<group>"; };
+		1107F5B3187D5AAD0093AE80 /* VTChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTChartView.h; sourceTree = "<group>"; };
+		1107F5B4187D5AAD0093AE80 /* VTChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTChartView.m; sourceTree = "<group>"; };
+		1107F5B7187E48110093AE80 /* VTChartTipLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTChartTipLabel.h; sourceTree = "<group>"; };
+		1107F5B8187E48110093AE80 /* VTChartTipLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTChartTipLabel.m; sourceTree = "<group>"; };
 		110843C0186BD6DD00ECA4CB /* IVTAuthContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVTAuthContext.h; sourceTree = "<group>"; };
 		110D4C5A18714F2900681A23 /* NSObject+VTValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+VTValue.h"; sourceTree = "<group>"; };
 		110D4C5B18714F2900681A23 /* NSObject+VTValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+VTValue.m"; sourceTree = "<group>"; };
@@ -1003,6 +1048,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1107F589187D408E0093AE80 /* Chart */ = {
+			isa = PBXGroup;
+			children = (
+				1107F598187D45E30093AE80 /* IVTChartAnimation.h */,
+				1107F58D187D41DD0093AE80 /* IVTChartDraw.h */,
+				1107F58A187D40BD0093AE80 /* IVTChart.h */,
+				1107F590187D42980093AE80 /* IVTChartComponent.h */,
+				1107F5B1187D54810093AE80 /* IVTChartContainer.h */,
+				1107F592187D44AA0093AE80 /* IVTChartView.h */,
+				1107F593187D44F60093AE80 /* VTChart.h */,
+				1107F594187D44F60093AE80 /* VTChart.m */,
+				1107F59A187D464B0093AE80 /* VTChartComponent.h */,
+				1107F59B187D464B0093AE80 /* VTChartComponent.m */,
+				1107F5AD187D543D0093AE80 /* VTChartContainer.h */,
+				1107F5AE187D543E0093AE80 /* VTChartContainer.m */,
+				1107F5A9187D53CC0093AE80 /* VTChartArc.h */,
+				1107F5AA187D53CC0093AE80 /* VTChartArc.m */,
+				1107F5B7187E48110093AE80 /* VTChartTipLabel.h */,
+				1107F5B8187E48110093AE80 /* VTChartTipLabel.m */,
+				1107F5A0187D4AAA0093AE80 /* VTChartDataReader.h */,
+				1107F5A1187D4AAA0093AE80 /* VTChartDataReader.m */,
+				1107F5A5187D51400093AE80 /* VTPieChart.h */,
+				1107F5A6187D51400093AE80 /* VTPieChart.m */,
+				1107F5B3187D5AAD0093AE80 /* VTChartView.h */,
+				1107F5B4187D5AAD0093AE80 /* VTChartView.m */,
+			);
+			path = Chart;
+			sourceTree = "<group>";
+		};
 		111638321762DC01009979D3 /* report */ = {
 			isa = PBXGroup;
 			children = (
@@ -1232,6 +1306,7 @@
 		114772F71727DE5200196FB2 /* vTeam */ = {
 			isa = PBXGroup;
 			children = (
+				1107F589187D408E0093AE80 /* Chart */,
 				1117021C18308BA800CFD179 /* Grid */,
 				114D642017E1BAC40021CB8A /* Montage */,
 				11DE6CE017B8AD2200B04782 /* DOM */,
@@ -2011,6 +2086,20 @@
 				1117024318308C8700CFD179 /* NSString+Grid.h in Headers */,
 				11442A87187122D40072D9CA /* VTCleanupTask.h in Headers */,
 				110D4C5C18714F2900681A23 /* NSObject+VTValue.h in Headers */,
+				1107F58B187D40BD0093AE80 /* IVTChart.h in Headers */,
+				1107F58E187D41E00093AE80 /* IVTChartDraw.h in Headers */,
+				1107F591187D42980093AE80 /* IVTChartComponent.h in Headers */,
+				1107F595187D44F60093AE80 /* VTChart.h in Headers */,
+				1107F597187D44FC0093AE80 /* IVTChartView.h in Headers */,
+				1107F599187D45E70093AE80 /* IVTChartAnimation.h in Headers */,
+				1107F59C187D464B0093AE80 /* VTChartComponent.h in Headers */,
+				1107F5A2187D4AAA0093AE80 /* VTChartDataReader.h in Headers */,
+				1107F5A7187D51400093AE80 /* VTPieChart.h in Headers */,
+				1107F5AB187D53CD0093AE80 /* VTChartArc.h in Headers */,
+				1107F5AF187D543E0093AE80 /* VTChartContainer.h in Headers */,
+				1107F5B2187D54850093AE80 /* IVTChartContainer.h in Headers */,
+				1107F5B5187D5AAD0093AE80 /* VTChartView.h in Headers */,
+				1107F5B9187E48120093AE80 /* VTChartTipLabel.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2306,6 +2395,15 @@
 				1117023A18308BE000CFD179 /* GridScrollView.m in Sources */,
 				1117024418308C8700CFD179 /* NSString+Grid.m in Sources */,
 				11442A88187122D40072D9CA /* VTCleanupTask.m in Sources */,
+				1107F596187D44F60093AE80 /* VTChart.m in Sources */,
+				1107F59D187D464B0093AE80 /* VTChartComponent.m in Sources */,
+				1107F5A3187D4AAA0093AE80 /* VTChartDataReader.m in Sources */,
+				1107F5A4187D4BDF0093AE80 /* NSObject+VTValue.m in Sources */,
+				1107F5A8187D51400093AE80 /* VTPieChart.m in Sources */,
+				1107F5AC187D53CD0093AE80 /* VTChartArc.m in Sources */,
+				1107F5B0187D543E0093AE80 /* VTChartContainer.m in Sources */,
+				1107F5B6187D5AAD0093AE80 /* VTChartView.m in Sources */,
+				1107F5BA187E48120093AE80 /* VTChartTipLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

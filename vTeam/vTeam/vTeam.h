@@ -109,3 +109,6 @@
 #import <vTeam/VTURLDocumentController.h>
 #import <vTeam/VTAudioTask.h>
 #import <vTeam/VTAudioService.h>
+#import <vTeam/VTPieChart.h>
+#import <vTeam/VTChartView.h>
+#import <vTeam/UIView+Search.h>
