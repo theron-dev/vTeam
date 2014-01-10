@@ -97,7 +97,10 @@
         [httpTask setUserInfo:urlTask];
         [httpTask setSource:[task source]];
         [httpTask setDelegate:self];
-        [httpTask setRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url queryValues:[urlTask queryValues]] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:120]];
+        
+        NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url queryValues:[urlTask queryValues]] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:120];
+        
+        [httpTask setRequest:request];
         
         NSLog(@"%@",httpTask.request);
         

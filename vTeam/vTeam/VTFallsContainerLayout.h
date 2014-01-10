@@ -15,5 +15,6 @@
 @property(nonatomic,assign) NSInteger numberOfColumn;
 @property(nonatomic,assign) CGFloat columnSplitWidth;
 @property(nonatomic,assign) CGFloat columnTopHeight;
+@property(nonatomic,readonly) CGFloat columnWidth;
 
 @end

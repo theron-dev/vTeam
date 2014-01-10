@@ -23,6 +23,7 @@
 @property(nonatomic,retain) VTDOMDocument * document;
 @property(nonatomic,readonly,getter = isLoading) BOOL loading;
 @property(nonatomic,assign) NSTimeInterval timeoutInterval;
+@property(nonatomic,readonly) NSString * documentFilePath;
 
 -(void) reloadData;
 

@@ -72,4 +72,17 @@
     self.itemRects = itemRects;
 }
 
+-(CGFloat) columnWidth{
+    
+    NSInteger numberOfColumn = self.numberOfColumn;
+   
+    if(numberOfColumn < 1){
+        numberOfColumn = 3;
+    }
+    
+    CGSize size = self.size;
+    
+    return ( size.width - (numberOfColumn +1) * _columnSplitWidth ) / numberOfColumn;
+}
+
 @end
