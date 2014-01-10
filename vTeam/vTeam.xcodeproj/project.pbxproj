@@ -320,6 +320,7 @@
 		1174209A17CAF348001EBEE7 /* VTDOMActionElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1174209817CAF348001EBEE7 /* VTDOMActionElement.m */; };
 		1174768617992E4B00FA7DF0 /* VTMonitorService.h in Headers */ = {isa = PBXBuildFile; fileRef = 1174768417992E4B00FA7DF0 /* VTMonitorService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1174768717992E4B00FA7DF0 /* VTMonitorService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1174768517992E4B00FA7DF0 /* VTMonitorService.m */; };
+		1181E720187F9712004C4425 /* hvermin_debug.c in Sources */ = {isa = PBXBuildFile; fileRef = 11C877FD187EA5AB00E787C4 /* hvermin_debug.c */; };
 		118AFC2D175D9A9F00A6A2FF /* VTBarButtonItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 118AFC2B175D9A9F00A6A2FF /* VTBarButtonItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		118AFC2E175D9A9F00A6A2FF /* VTBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 118AFC2C175D9A9F00A6A2FF /* VTBarButtonItem.m */; };
 		118AFC43175DA15100A6A2FF /* VTDBObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 118AFC41175DA15100A6A2FF /* VTDBObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -2571,6 +2572,7 @@
 				11A2D1151796A69E00082380 /* VTRichView.m in Sources */,
 				11BE4FD618360C790013722E /* VTCrashTask.m in Sources */,
 				11A2D1191796AC2500082380 /* VTRichImageElement.m in Sources */,
+				1181E720187F9712004C4425 /* hvermin_debug.c in Sources */,
 				1174768717992E4B00FA7DF0 /* VTMonitorService.m in Sources */,
 				11C29F57179F795E00E48A36 /* VTFlowViewLayout.m in Sources */,
 				11D678E417AA4E51000E02FA /* VTBehaviorService.m in Sources */,
