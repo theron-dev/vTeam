@@ -70,10 +70,11 @@
 }
 
 -(void) contentOffsetChanged{
-    
-    [self layoutItemViews:NO];
-    if([self.delegate respondsToSelector:@selector(vtContainerView:didContentOffsetChanged:)]){
-        [(id)self.delegate vtContainerView:self didContentOffsetChanged:self.contentOffset];
+    if(self.window){
+        [self layoutItemViews:NO];
+        if([self.delegate respondsToSelector:@selector(vtContainerView:didContentOffsetChanged:)]){
+            [(id)self.delegate vtContainerView:self didContentOffsetChanged:self.contentOffset];
+        }
     }
 }
 
