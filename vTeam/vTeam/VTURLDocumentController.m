@@ -202,6 +202,8 @@
             [fileManager createDirectoryAtPath:dir withIntermediateDirectories:YES attributes:nil error:nil];
         }
         
+        [fileManager removeItemAtPath:filePath error:nil];
+        
         [fileManager moveItemAtPath:[httpTask responseBody] toPath:filePath error:nil];
         
         [self didLoadedHTMLContent:[NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil]];

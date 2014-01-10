@@ -26,6 +26,8 @@
 @property(nonatomic,retain) IBOutletCollection(VTItemViewController) NSArray * headerItemViewControllers;
 @property(nonatomic,retain) IBOutletCollection(VTItemViewController) NSArray * footerItemViewControllers;
 
+-(id) dataObjectByIndexPath:(NSIndexPath *) indexPath;
+
 @end
 
 @protocol VTContainerDataControllerDelegate <VTDataControllerDelegate>

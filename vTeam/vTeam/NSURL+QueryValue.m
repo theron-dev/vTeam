@@ -63,13 +63,21 @@
                 NSString * key = [NSString stringWithCString:property_getName(*p)
                                                     encoding:NSUTF8StringEncoding];
                 
+                id v = [queryValues valueForKey:key];
+
+                if(v == nil){
+                    c --;
+                    p ++;
+                    continue;
+                }
+                
                 if(isFirst){
                     isFirst = NO;
                 }
                 else{
                     [ms appendString:@"&"];
                 }
-                id v = [queryValues valueForKey:key];
+                
                 if(![v isKindOfClass:[NSString class]]){
                     v = [NSString stringWithFormat:@"%@",v];
                 }

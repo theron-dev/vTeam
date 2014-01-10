@@ -170,7 +170,7 @@
             [itemViewController setDelegate:self];
         }
         
-        id data = [self.dataSource dataObjectAtIndex:index];
+        id data = [self dataObjectByIndexPath:[NSIndexPath indexPathForRow:index + [self.headerItemViewControllers count] inSection:0]];
         
         [itemViewController setContext:self.context];
         
@@ -480,6 +480,10 @@
     if(self.dataSource == dataSource){
         [_containerView reloadData];
     }
+}
+
+-(id) dataObjectByIndexPath:(NSIndexPath *) indexPath{
+    return [self.dataSource dataObjectAtIndex:indexPath.row - [self.headerItemViewControllers count]];
 }
 
 @end
