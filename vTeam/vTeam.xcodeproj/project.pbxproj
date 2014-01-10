@@ -439,6 +439,12 @@
 		11C87842187EA5DE00E787C4 /* hstream_websocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C87838187EA5DE00E787C4 /* hstream_websocket.h */; };
 		11C87846187EA7F500E787C4 /* hxml.c in Sources */ = {isa = PBXBuildFile; fileRef = 11C87844187EA7F500E787C4 /* hxml.c */; };
 		11C87847187EA7F500E787C4 /* hxml.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C87845187EA7F500E787C4 /* hxml.h */; };
+		11C8784B187EA9F100E787C4 /* vmVariant.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C87849187EA9F100E787C4 /* vmVariant.h */; };
+		11C8784C187EA9F100E787C4 /* vmVariant.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C8784A187EA9F100E787C4 /* vmVariant.m */; };
+		11C8784F187EAA3E00E787C4 /* vmDOMElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C8784D187EAA3D00E787C4 /* vmDOMElement.h */; };
+		11C87850187EAA3E00E787C4 /* vmDOMElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C8784E187EAA3E00E787C4 /* vmDOMElement.m */; };
+		11C87853187EB55C00E787C4 /* vmDOMDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = 11C87851187EB55C00E787C4 /* vmDOMDocument.h */; };
+		11C87854187EB55C00E787C4 /* vmDOMDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C87852187EB55C00E787C4 /* vmDOMDocument.m */; };
 		11CEBF4717C61EE5007A430A /* VTBEEventObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 11CEBF4517C61EE4007A430A /* VTBEEventObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11CEBF4817C61EE5007A430A /* VTBEEventObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 11CEBF4617C61EE4007A430A /* VTBEEventObject.m */; };
 		11D678E317AA4E51000E02FA /* VTBehaviorService.h in Headers */ = {isa = PBXBuildFile; fileRef = 11D678E117AA4E50000E02FA /* VTBehaviorService.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1003,6 +1009,12 @@
 		11C87838187EA5DE00E787C4 /* hstream_websocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hstream_websocket.h; sourceTree = "<group>"; };
 		11C87844187EA7F500E787C4 /* hxml.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hxml.c; sourceTree = "<group>"; };
 		11C87845187EA7F500E787C4 /* hxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hxml.h; sourceTree = "<group>"; };
+		11C87849187EA9F100E787C4 /* vmVariant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vmVariant.h; sourceTree = "<group>"; };
+		11C8784A187EA9F100E787C4 /* vmVariant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = vmVariant.m; sourceTree = "<group>"; };
+		11C8784D187EAA3D00E787C4 /* vmDOMElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vmDOMElement.h; sourceTree = "<group>"; };
+		11C8784E187EAA3E00E787C4 /* vmDOMElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = vmDOMElement.m; sourceTree = "<group>"; };
+		11C87851187EB55C00E787C4 /* vmDOMDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vmDOMDocument.h; sourceTree = "<group>"; };
+		11C87852187EB55C00E787C4 /* vmDOMDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = vmDOMDocument.m; sourceTree = "<group>"; };
 		11CEBF4517C61EE4007A430A /* VTBEEventObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTBEEventObject.h; sourceTree = "<group>"; };
 		11CEBF4617C61EE4007A430A /* VTBEEventObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTBEEventObject.m; sourceTree = "<group>"; };
 		11D678E117AA4E50000E02FA /* VTBehaviorService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTBehaviorService.h; sourceTree = "<group>"; };
@@ -1401,6 +1413,7 @@
 		114772F71727DE5200196FB2 /* vTeam */ = {
 			isa = PBXGroup;
 			children = (
+				11C87848187EA84200E787C4 /* Vermin */,
 				1107F589187D408E0093AE80 /* Chart */,
 				1117021C18308BA800CFD179 /* Grid */,
 				114D642017E1BAC40021CB8A /* Montage */,
@@ -1708,6 +1721,19 @@
 			);
 			name = xml;
 			path = ../../c/xml;
+			sourceTree = "<group>";
+		};
+		11C87848187EA84200E787C4 /* Vermin */ = {
+			isa = PBXGroup;
+			children = (
+				11C87849187EA9F100E787C4 /* vmVariant.h */,
+				11C8784A187EA9F100E787C4 /* vmVariant.m */,
+				11C8784D187EAA3D00E787C4 /* vmDOMElement.h */,
+				11C8784E187EAA3E00E787C4 /* vmDOMElement.m */,
+				11C87851187EB55C00E787C4 /* vmDOMDocument.h */,
+				11C87852187EB55C00E787C4 /* vmDOMDocument.m */,
+			);
+			path = Vermin;
 			sourceTree = "<group>";
 		};
 		11D678E517AA4FBA000E02FA /* DataEntitys */ = {
@@ -2296,6 +2322,9 @@
 				11C87840187EA5DE00E787C4 /* hstream_tcp.h in Headers */,
 				11C87842187EA5DE00E787C4 /* hstream_websocket.h in Headers */,
 				11C87847187EA7F500E787C4 /* hxml.h in Headers */,
+				11C8784B187EA9F100E787C4 /* vmVariant.h in Headers */,
+				11C8784F187EAA3E00E787C4 /* vmDOMElement.h in Headers */,
+				11C87853187EB55C00E787C4 /* vmDOMDocument.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2617,6 +2646,9 @@
 				11C8783F187EA5DE00E787C4 /* hstream_tcp.c in Sources */,
 				11C87841187EA5DE00E787C4 /* hstream_websocket.c in Sources */,
 				11C87846187EA7F500E787C4 /* hxml.c in Sources */,
+				11C8784C187EA9F100E787C4 /* vmVariant.m in Sources */,
+				11C87850187EAA3E00E787C4 /* vmDOMElement.m in Sources */,
+				11C87854187EB55C00E787C4 /* vmDOMDocument.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
