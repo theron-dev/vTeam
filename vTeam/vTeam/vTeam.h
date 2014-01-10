@@ -113,3 +113,4 @@
 #import <vTeam/VTPillarChart.h>
 #import <vTeam/VTChartView.h>
 #import <vTeam/UIView+Search.h>
+#import <vTeam/NSObject+VTValue.h>
