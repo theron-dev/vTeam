@@ -18,6 +18,7 @@
 @property(nonatomic,retain) NSString * itemViewNib;
 @property(nonatomic,retain) NSString * itemViewClass;
 @property(nonatomic,retain) NSBundle * itemViewBundle;
+@property(nonatomic,retain) NSString * reseIdentifier;
 @property(nonatomic,assign) CGSize itemSize;
 @property(nonatomic,retain) IBOutlet VTDragLoadingView * topLoadingView;
 @property(nonatomic,retain) IBOutlet VTDragLoadingView * bottomLoadingView;

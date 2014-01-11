@@ -21,11 +21,13 @@
 @synthesize html = _html;
 @synthesize dataItem = _dataItem;
 @synthesize bundle = _bundle;
+@synthesize documentURL = _documentURL;
 
 -(void) dealloc{
     [_bundle release];
     [_dataItem release];
     [_html release];
+    [_documentURL release];
     [super dealloc];
 }
 
@@ -224,6 +226,8 @@
         if(document == nil){
             
             document = [[[VTDOMDocument alloc] init] autorelease];
+            
+            document.documentURL = self.documentURL;
             
             VTDOMParse * parse = [[VTDOMParse alloc] init];
             [parse parseHTML:[self htmlContentByIndexPath:indexPath] toDocument:document];

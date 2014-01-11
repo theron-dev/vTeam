@@ -14,6 +14,7 @@
 
 @property(nonatomic,retain) NSBundle * bundle;
 @property(nonatomic,retain) NSString * html;
+@property(nonatomic,retain) NSURL * documentURL;
 @property(nonatomic,retain) id dataItem;
 
 -(VTDOMDocument *) documentByIndexPath:(NSIndexPath *) indexPath;

@@ -147,7 +147,11 @@
     
     if(index < [self.dataSource count]){
     
-        NSString * reseIdentifier = _itemViewNib;
+        NSString * reseIdentifier = self.reseIdentifier;
+        
+        if(reseIdentifier == nil){
+            reseIdentifier = _itemViewNib;
+        }
         
         if(reseIdentifier == nil){
             reseIdentifier = @"ItemView";
