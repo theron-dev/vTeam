@@ -263,6 +263,11 @@
 
 -(void) vtDOMElementDoNeedDisplay:(VTDOMElement *) element{
     
+    for(VTDOMScrollContentView * contentView in _contentViews){
+        
+        [contentView setNeedsDisplay];        
+    }
+    
 }
 
 -(void) vtDOMElement:(VTDOMElement *) element addLayer:(CALayer *) layer frame:(CGRect)frame{
