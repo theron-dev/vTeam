@@ -187,7 +187,7 @@
         
         if(r.location != NSNotFound){
             
-            frame.size.width = [[width substringToIndex:r.location] floatValue] * size.width / 100.0 + [[width substringFromIndex:r.length] floatValue];
+            frame.size.width = [[width substringToIndex:r.location] floatValue] * size.width / 100.0 + [[width substringFromIndex:r.location + r.length] floatValue];
             
         }
         else{
@@ -195,7 +195,7 @@
             r = [width rangeOfString:@"%-"];
             
             if(r.location != NSNotFound){
-                frame.size.width = [[width substringToIndex:r.location] floatValue] * size.width / 100.0 -[[width substringFromIndex:r.length] floatValue];
+                frame.size.width = [[width substringToIndex:r.location] floatValue] * size.width / 100.0 -[[width substringFromIndex:r.location + r.length] floatValue];
             }
             else{
                frame.size.width = [width floatValue]; 
@@ -217,7 +217,7 @@
         
         if(r.location != NSNotFound){
             
-            frame.size.height = [[height substringToIndex:r.location] floatValue] * size.height / 100.0 + [[height substringFromIndex:r.length] floatValue];
+            frame.size.height = [[height substringToIndex:r.location] floatValue] * size.height / 100.0 + [[height substringFromIndex:r.location + r.length] floatValue];
             
         }
         else{
@@ -225,7 +225,7 @@
             r = [height rangeOfString:@"%-"];
             
             if(r.location != NSNotFound){
-                frame.size.height = [[height substringToIndex:r.location] floatValue] * size.height / 100.0 -[[height substringFromIndex:r.length] floatValue];
+                frame.size.height = [[height substringToIndex:r.location] floatValue] * size.height / 100.0 -[[height substringFromIndex:r.location + r.length] floatValue];
             }
             else{
                 frame.size.height = [height floatValue];
