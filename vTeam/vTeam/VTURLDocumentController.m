@@ -85,6 +85,21 @@
         
     }
     else{
+        
+        if(_allowPreloadCached){
+            
+            NSString * filePath = [self documentFilePath];
+            
+            NSFileManager * fileManager = [NSFileManager defaultManager];
+            
+            if([fileManager fileExistsAtPath:filePath]){
+                
+                [self loadHTMLContent:[NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil]];
+      
+            }
+            
+        }
+        
         VTHttpTask * httpTask = [[VTHttpTask alloc] init];
         
         [httpTask setSource:self];
@@ -132,7 +147,7 @@
     return filePath;
 }
 
--(void) didLoadedHTMLContent:(NSString *) htmlContent{
+-(void) loadHTMLContent:(NSString *) htmlContent{
     
     VTDOMParse * parse = [[VTDOMParse alloc] init];
     
@@ -154,6 +169,13 @@
     [self downloadImagesForElement:_document.rootElement];
     [self downloadImagesForView:_documentView];
     
+    
+}
+
+-(void) didLoadedHTMLContent:(NSString *) htmlContent{
+    
+    [self loadHTMLContent:htmlContent];
+   
     if([self.delegate respondsToSelector:@selector(vtURLDocumentControllerDidLoaded:)]){
         [self.delegate vtURLDocumentControllerDidLoaded:self];
     }

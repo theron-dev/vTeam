@@ -24,6 +24,7 @@
 @property(nonatomic,readonly,getter = isLoading) BOOL loading;
 @property(nonatomic,assign) NSTimeInterval timeoutInterval;
 @property(nonatomic,readonly) NSString * documentFilePath;
+@property(nonatomic,assign,getter = isAllowPreloadCached) BOOL allowPreloadCached;
 
 -(void) reloadData;
 
