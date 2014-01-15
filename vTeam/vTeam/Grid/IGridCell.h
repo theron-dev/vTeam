@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 #import <vTeam/IGridDraw.h>
+#import <vTeam/IGridValue.h>
 
-@protocol IGridCell <IGridDraw>
+@protocol IGridCell <IGridDraw,IGridValue>
 
 @property(nonatomic,retain) NSString * title;
 @property(nonatomic,assign) CGFloat width;

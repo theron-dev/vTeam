@@ -18,15 +18,32 @@
 
 @end
 
-@interface GridDraw : NSObject<IGridDraw>
-
+@interface GridDraw : NSObject<IGridDraw,IGridValue>{
+    NSMutableDictionary * _values;
+}
 
 @end
 
 @implementation GridDraw
 
+-(void) dealloc{
+    [_values release];
+    [super dealloc];
+}
+
 -(void) drawToContext:(CGContextRef)ctx rect:(CGRect)rect{
     
+}
+
+-(id) valueForKey:(NSString *)key{
+    return [_values valueForKey:key];
+}
+
+-(void) setValue:(id)value forKey:(NSString *)key{
+    if(_values == nil){
+        _values = [[NSMutableDictionary alloc] initWithCapacity:4];
+    }
+    [_values setValue:value forKey:key];
 }
 
 @end
@@ -147,6 +164,7 @@
     UIGraphicsPopContext();
     
 }
+
 
 @end
 
@@ -358,6 +376,15 @@
         }
     }
     
+}
+
+-(void) updateData:(id) data{
+  
+    for(GridCell * cell in _cells){
+        
+        [cell setTitle:[cell.keyPath expressionOfData:data]];
+        
+    }
 }
 
 @end

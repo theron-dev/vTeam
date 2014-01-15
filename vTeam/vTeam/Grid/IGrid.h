@@ -9,10 +9,10 @@
 #import <Foundation/Foundation.h>
 
 #import <vTeam/IGridRow.h>
-
+#import <vTeam/IGridValue.h>
 #import <vTeam/IGridColumn.h>
 
-@protocol IGrid <NSObject>
+@protocol IGrid <NSObject,IGridValue>
 
 @property(nonatomic,readonly) CGSize size;
 @property(nonatomic,assign) CGFloat columnSplitWidth;

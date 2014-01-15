@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 
 #import <vTeam/IGridCell.h>
+#import <vTeam/IGridValue.h>
 
-@protocol IGridRow <IGridDraw>
+@protocol IGridRow <IGridDraw,IGridValue>
 
 @property(nonatomic,assign) CGFloat height;
 @property(nonatomic,readonly) NSArray * cells;
@@ -20,5 +21,7 @@
 -(void) applyCellViewTo:(UIView *) superview rect:(CGRect) rect;
 
 -(void) heightToFit;
+
+-(void) updateData:(id) data;
 
 @end
