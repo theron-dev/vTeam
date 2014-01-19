@@ -93,4 +93,8 @@
 
 -(void) setObjectValue:(id) value forKeyPath:(NSString *) keyPath;
 
+-(NSArray *) arrayValue;
+
+-(NSDictionary *) dictionaryValue;
+
 @end

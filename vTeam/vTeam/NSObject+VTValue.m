@@ -131,7 +131,7 @@
 }
 
 -(NSArray *) arrayValueForKey:(NSString *)key{
-    id v = [self arrayValueForKey:key];
+    id v = [self objectValueForKey:key];
     if([v isKindOfClass:[NSArray class]]){
         return v;
     }
@@ -283,6 +283,20 @@
     }
     @catch (NSException *exception) {
     }
+}
+
+-(NSArray *) arrayValue{
+    if([self isKindOfClass:[NSArray class]]){
+        return (NSArray *) self;
+    }
+    return nil;
+}
+
+-(NSDictionary *) dictionaryValue{
+    if([self isKindOfClass:[NSDictionary class]]){
+        return (NSDictionary *) self;
+    }
+    return nil;
 }
 
 @end
