@@ -89,6 +89,8 @@
 -(id) objectValueForKeyPath:(NSString *) key defaultValue:(id) defalutValue;
 
 
+-(void) setObjectValue:(id) value forKey:(NSString *) key;
 
+-(void) setObjectValue:(id) value forKeyPath:(NSString *) keyPath;
 
 @end

@@ -267,4 +267,22 @@
     return nil;
 }
 
+-(void) setObjectValue:(id) value forKey:(NSString *) key{
+    
+    @try {
+        [self setValue:value forKey:key];
+    }
+    @catch (NSException *exception) {
+    }
+}
+
+-(void) setObjectValue:(id) value forKeyPath:(NSString *) keyPath{
+    
+    @try {
+        [self setValue:value forKeyPath:keyPath];
+    }
+    @catch (NSException *exception) {
+    }
+}
+
 @end
