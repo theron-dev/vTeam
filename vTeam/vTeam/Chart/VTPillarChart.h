@@ -23,5 +23,6 @@
 @property(nonatomic,assign) CGFloat lineWidth;
 @property(nonatomic,assign) CGFloat borderWidth;
 @property(nonatomic,assign) UIEdgeInsets padding;
+@property(nonatomic,assign) CGFloat minHeight;
 
 @end

@@ -78,60 +78,72 @@
         for(id dataItem in dataItems){
             
             double v = [_valueReader doubleValue:dataItem];
+   
+            VTChartRectangle * rectangle = [[VTChartRectangle alloc] init];
             
-            if(v != 0.0){
+            rectangle.borderWidth = _borderWidth;
+            rectangle.borderColor = [_borderColorReader colorValue:dataItem];
+            rectangle.backgroundColor = [_colorReader colorValue:dataItem];
+            
+            if(v >= 0){
                 
-                VTChartRectangle * rectangle = [[VTChartRectangle alloc] init];
+                CGFloat height= v * innerSize.height / dValue;
                 
-                rectangle.borderWidth = _borderWidth;
-                rectangle.borderColor = [_borderColorReader colorValue:dataItem];
-                rectangle.backgroundColor = [_colorReader colorValue:dataItem];
+                if(height < _minHeight){
+                    height = _minHeight;
+                }
                 
-                if(v >0){
-                    rectangle.size = CGSizeMake(itemWidth, v * innerSize.height / dValue );
-                    rectangle.anchor = CGPointMake(0.0, 1.0);
-                    rectangle.position = CGPointMake(_padding.left + (index * 2.0 + 1) * itemWidth, cTop - _lineWidth / 2.0);
+                rectangle.size = CGSizeMake(itemWidth ,height );
+                rectangle.anchor = CGPointMake(0.0, 1.0);
+                rectangle.position = CGPointMake(_padding.left + (index * 2.0 + 1) * itemWidth, cTop - _lineWidth / 2.0);
+            }
+            else{
+                
+                CGFloat height= - v * innerSize.height / dValue;
+                
+                if(height < _minHeight){
+                    height = _minHeight;
+                }
+                
+                rectangle.size = CGSizeMake(itemWidth, height );
+                rectangle.anchor = CGPointMake(0.0, 0.0);
+                rectangle.position = CGPointMake(_padding.left +(index * 2.0 + 1) * itemWidth, cTop + _lineWidth / 2.0 );
+            }
+            
+            
+            [self addComponent:rectangle];
+            
+            
+            
+            NSString * title = [_titleReader stringValue:dataItem];
+            
+            if(title){
+                
+                VTChartLabel * label = [[VTChartLabel alloc] init];
+                
+                [label setTitle:title];
+                [label setTitleColor:_titleColor];
+                [label setFont:_font];
+                
+                [label sizeToFit];
+                
+                if(v >=0){
+                    label.anchor = CGPointMake(0.5, 1.0);
+                    label.position = CGPointMake(_padding.left +(index * 2.0 + 1.5) * itemWidth,cTop - _lineWidth / 2.0 - rectangle.size.height);
                 }
                 else{
-                    rectangle.size = CGSizeMake(itemWidth, - v * innerSize.height / dValue );
-                    rectangle.anchor = CGPointMake(0.0, 0.0);
-                    rectangle.position = CGPointMake(_padding.left +(index * 2.0 + 1) * itemWidth, cTop + _lineWidth / 2.0 );
+                    label.anchor = CGPointMake(0.5, 0.0);
+                    label.position = CGPointMake(_padding.left +(index * 2.0 + 1.5) * itemWidth,cTop + _lineWidth / 2.0 + rectangle.size.height);
                 }
                 
+                [self addComponent:label];
                 
-                [self addComponent:rectangle];
+                [label release];
                 
-                
-                
-                NSString * title = [_titleReader stringValue:dataItem];
-                
-                if(title){
-                    
-                    VTChartLabel * label = [[VTChartLabel alloc] init];
-                    
-                    [label setTitle:title];
-                    [label setTitleColor:_titleColor];
-                    [label setFont:_font];
-                    
-                    [label sizeToFit];
-                    
-                    if(v >0){
-                        label.anchor = CGPointMake(0.5, 1.0);
-                        label.position = CGPointMake(_padding.left +(index * 2.0 + 1.5) * itemWidth,cTop - _lineWidth / 2.0 - rectangle.size.height);
-                    }
-                    else{
-                        label.anchor = CGPointMake(0.5, 0.0);
-                        label.position = CGPointMake(_padding.left +(index * 2.0 + 1.5) * itemWidth,cTop + _lineWidth / 2.0 + rectangle.size.height);
-                    }
-                    
-                    [self addComponent:label];
-                    
-                    [label release];
-                    
-                }
-                
-                [rectangle release];
             }
+            
+            [rectangle release];
+
             
             index ++;
         }
