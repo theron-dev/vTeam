@@ -48,6 +48,10 @@
         }
     }
     
+    if(totalValue == 0.0){
+        return;
+    }
+    
     CGFloat angle = M_PI * 2.0;
     
     CGSize innerSize = self.size;
