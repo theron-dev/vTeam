@@ -289,7 +289,7 @@
     return [basePath stringByAppendingPathComponent:self.alias];
 }
 
--(IBAction) doAction:(id)sender{
+-(void) doDelayAction:(id) sender{
     if([sender conformsToProtocol:@protocol(IVTAction)]){
         NSString * actionName = [sender actionName];
         id userInfo = [sender userInfo];
@@ -312,6 +312,14 @@
             [[VTPopWindow topPopWindow] closeAnimated:NO];
         }
     }
+}
+
+-(IBAction) doAction:(id)sender{
+    
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(doDelayAction:) object:nil];
+    
+    [self performSelector:@selector(doDelayAction:) withObject:sender afterDelay:0.1];
+    
 }
 
 -(void) viewDidLayoutSubviews{
