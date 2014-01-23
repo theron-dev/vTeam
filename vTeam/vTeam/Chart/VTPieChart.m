@@ -53,6 +53,7 @@
     }
     
     CGFloat angle = M_PI * 2.0;
+    CGFloat centerAngle = angle;
     
     CGSize innerSize = self.size;
     
@@ -66,6 +67,8 @@
     NSEnumerator * enumDataItem = [dataItems objectEnumerator];
     
     id dataItem = nil;
+    
+    CGFloat minAngle =  10.0 * M_PI / 180.0;
     
     while((dataItem = [enumDataItem nextObject])){
         
@@ -83,8 +86,6 @@
         
         [self addComponent:arc];
         
-        angle = arc.startAngle;
-        
         NSString * title = [_titleReader stringValue:dataItem];
         
         if(title){
@@ -99,22 +100,28 @@
 
             CGFloat angle = [arc angle];
 
+            if(centerAngle - angle < minAngle){
+                
+                angle = centerAngle - minAngle;
+                
+            }
+            
             CGPoint p = [arc vertex];
             
             CGFloat dis = 10;
             
             if(p.x >= position.x){
                 
-                [tipLabel setPosition:CGPointMake(p.x + cosf(angle) * dis, p.y + sinf(angle) * dis)];
+                [tipLabel setPosition:CGPointMake(position.x + cosf(angle) * ( dis + radius), position.y + sinf(angle) * (dis +radius))];
                 [tipLabel setAnchor:CGPointMake(0, 0.5)];
-                [tipLabel setToLocation:CGPointMake(- cosf(angle) * dis, - sinf(angle) * dis)];
+                [tipLabel setToPosition:p];
                 [tipLabel setPadding:UIEdgeInsetsMake(0, 6, 0, 0)];
             }
             else{
                 
-                [tipLabel setPosition:CGPointMake(p.x + cosf(angle) * dis, p.y + sinf(angle) * dis)];
+                [tipLabel setPosition:CGPointMake(position.x + cosf(angle) * ( dis + radius), position.y + sinf(angle) * ( dis + radius))];
                 [tipLabel setAnchor:CGPointMake(1.0, 0.5)];
-                [tipLabel setToLocation:CGPointMake(- cosf(angle) * dis, - sinf(angle) * dis)];
+                [tipLabel setToPosition:p];
                 [tipLabel setPadding:UIEdgeInsetsMake(0, 0, 0, 6)];
             }
             
@@ -125,6 +132,15 @@
             [tipLabel release];
             
         }
+
+        if(arc.endAngle - arc.startAngle < minAngle){
+            centerAngle -= minAngle;
+        }
+        else{
+            centerAngle -= arc.endAngle - arc.startAngle;
+        }
+        
+        angle = arc.startAngle;
         
         [arc release];
     }

@@ -40,7 +40,7 @@
     
     CGSize size = self.size;
 
-    if(_toLocation.x != 0.0f && _toLocation.y != 0.0f){
+    if(_toLocation.x != 0.0f || _toLocation.y != 0.0f){
         
         CGPoint p = CGPointMake(rect.origin.x + size.width * self.anchor.x
                                 , rect.origin.y + size.height * self.anchor.y);
@@ -91,6 +91,11 @@
 -(void) sizeToFit{
     CGSize size = [_title sizeWithFont:_font];
     [self setSize:CGSizeMake(size.width + _padding.left + _padding.right , size.height + _padding.top + _padding.bottom)];
+}
+
+-(void) setToPosition:(CGPoint) position{
+    _toLocation.x = position.x - self.position.x;
+    _toLocation.y = position.y - self.position.y;
 }
 
 @end

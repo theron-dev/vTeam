@@ -23,4 +23,6 @@
 
 -(void) sizeToFit;
 
+-(void) setToPosition:(CGPoint) position;
+
 @end
