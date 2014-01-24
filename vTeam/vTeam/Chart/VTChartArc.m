@@ -28,6 +28,8 @@
     CGContextSetStrokeColorWithColor(ctx, _borderColor.CGColor);
     CGContextSetFillColorWithColor(ctx, _backgroundColor.CGColor);
     CGContextSetLineWidth(ctx, _borderWidth);
+    CGContextSetLineCap(ctx, kCGLineCapRound);
+    CGContextSetLineJoin(ctx, kCGLineJoinRound);
     
     CGFloat startAngle = self.animationValue * self.startAngle;
     CGFloat endAngle = self.animationValue * self.endAngle;

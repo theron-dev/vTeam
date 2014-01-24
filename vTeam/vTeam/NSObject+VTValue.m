@@ -178,7 +178,7 @@
 }
 
 -(int) intValueForKeyPath:(NSString *) keyPath{
-    return [self intValueForKey:keyPath defaultValue:0];
+    return [self intValueForKeyPath:keyPath defaultValue:0];
 }
 
 -(long) longValueForKeyPath:(NSString *) keyPath defaultValue:(long)defalutValue{
