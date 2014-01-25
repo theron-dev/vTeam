@@ -229,6 +229,8 @@
             
             NSLog(@"%@",[url absoluteString]);
 
+            [self setParentController:nil];
+            
             [self dismissModalViewControllerAnimated:animated];
             
             return YES;
