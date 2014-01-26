@@ -23,6 +23,13 @@
 
 @implementation VTDocumentControllerDynamicData
 
+-(void) dealloc{
+    [_element release];
+    [_text release];
+    [_key release];
+    [_value release];
+    [super dealloc];
+}
 
 @end
 
