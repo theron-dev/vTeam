@@ -335,7 +335,7 @@ typedef enum {
     
     [v removeFromSuperview];
     
-    [viewController viewDidDisappear:YES];
+//    [viewController viewDidDisappear:YES];
  
     [_viewControllers removeLastObject];
 }
@@ -467,7 +467,7 @@ typedef enum {
     v.layer.mask = nil;
     v.layer.transform = CATransform3DIdentity;
     
-    [viewController viewDidDisappear:YES];
+//    [viewController viewDidDisappear:YES];
    
 }
 

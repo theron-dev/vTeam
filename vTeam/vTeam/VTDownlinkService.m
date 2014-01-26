@@ -106,6 +106,8 @@ static dispatch_queue_t gDownlinkServiceDispatchQueue = nil;
         
         dispatch_async([VTDownlinkService dispatchQueue], ^{
            
+            NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+            
             VTDownlinkServiceDBObject * dataObject = [self dataObjectForKey:dataKey];
             
             if(dataObject){
@@ -122,6 +124,9 @@ static dispatch_queue_t gDownlinkServiceDispatchQueue = nil;
                 }
                 
             }
+            
+            [pool release];
+            
         });
     }
 
@@ -131,11 +136,17 @@ static dispatch_queue_t gDownlinkServiceDispatchQueue = nil;
 
     NSString * dataKey = nil;
     __block NSString * jsonString = nil;
+    
     if(isCache){
         dataKey = [self dataKey:downlinkTask forTaskType:taskType];
         if(dataKey){
             dispatch_async([VTDownlinkService dispatchQueue], ^{
+                
+                NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+                
                 jsonString = [[VTJSON encodeObject:data] retain];
+                
+                [pool release];
             });
         }
     }
@@ -157,6 +168,8 @@ static dispatch_queue_t gDownlinkServiceDispatchQueue = nil;
 
         dispatch_async([VTDownlinkService dispatchQueue], ^{
             
+            NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+            
             VTDownlinkServiceDBObject * dataObject = [self dataObjectForKey:dataKey];
             
             if(dataObject){
@@ -171,12 +184,17 @@ static dispatch_queue_t gDownlinkServiceDispatchQueue = nil;
                 dataObject.timestamp = time(NULL);
                 dataObject.service = NSStringFromClass([self class]);
                 [[VTDownlinkService dbContext] insertObject:dataObject];
+                [dataObject release];
             }
             
             [jsonString release];
+            
+            [pool release];
         });
     }
-    
+    else{
+        [jsonString release];
+    }
 
 }
 

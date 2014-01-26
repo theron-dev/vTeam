@@ -111,6 +111,7 @@ SCNetworkReachabilityRef VTReachability = nil;
 			{
 				NSString *name = [NSString stringWithUTF8String:cursor->ifa_name];
 				if ([name isEqualToString:@"en0"])  // Wi-Fi adapter
+                    freeifaddrs(addrs);
 					return [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)cursor->ifa_addr)->sin_addr)];
 			}
 			cursor = cursor->ifa_next;

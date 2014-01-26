@@ -189,7 +189,7 @@ static NSString * VTDBContextPropertyDBType(objc_property_t prop){
     NSMutableSet * set = [_dbObjects objectForKey:key];
     
     if(set==nil){
-        set = [[NSMutableSet alloc] initWithCapacity:4];
+        set = [NSMutableSet setWithCapacity:4];
         [_dbObjects setObject:set forKey:key];
     }
     
