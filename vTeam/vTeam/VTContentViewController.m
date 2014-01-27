@@ -34,17 +34,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
-    if(_contentViewController){
-        UIView * contentView = [self contentView];
-        if(contentView == nil){
-            contentView = self.view;
-        }
-        UIView * v = [_contentViewController view];
-        [v setFrame:contentView.bounds];
-        [v setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
-        [contentView addSubview:v];
-    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -142,25 +131,37 @@
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-//    [[self contentViewController] viewWillAppear:animated];
 }
 
 -(void) viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
-//    [[self contentViewController] viewDidAppear:animated];
+    if(_contentViewController){
+        
+        UIView * contentView = [self contentView];
+        if(contentView == nil){
+            contentView = self.view;
+        }
+        
+        UIView * v = [_contentViewController view];
+        
+        if(v.superview == nil){
+            [v setFrame:contentView.bounds];
+            [v setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+            [contentView addSubview:v];
+        }
+    }
+
 }
 
 -(void) viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     
-//    [[self contentViewController] viewWillDisappear:animated];
 }
 
 -(void) viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     
-//    [[self contentViewController] viewDidDisappear:animated];
 }
 
 -(NSString *) loadUrl:(NSURL *)url basePath:(NSString *)basePath animated:(BOOL)animated{

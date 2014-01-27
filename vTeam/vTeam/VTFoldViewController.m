@@ -164,22 +164,6 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-
-    UIView * centerView = [[self centerViewController] view];
-    
-    if(centerView){
-        
-        if(centerView.superview == nil){
-            [centerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
-            [self.view addSubview:centerView];
-            [self.view bringSubviewToFront:centerView];
-            
-            CGSize size = self.view.bounds.size;
-            
-            [centerView setFrame:CGRectMake(0, 0, size.width, size.height)];
-            [centerView setUserInteractionEnabled:YES];
-        }
-    }
     
     self.tapGestureRecognizer = [[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureRecognizerAction:)] autorelease];
     
@@ -743,16 +727,28 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
-//    [[self centerViewController] viewWillAppear:animated];
+
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    
-//    [[self centerViewController] viewDidAppear:animated];
-    
 
+    UIView * centerView = [[self centerViewController] view];
+    
+    if(centerView){
+        
+        if(centerView.superview == nil){
+            [centerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+            [self.view addSubview:centerView];
+            [self.view bringSubviewToFront:centerView];
+            
+            CGSize size = self.view.bounds.size;
+            
+            [centerView setFrame:CGRectMake(0, 0, size.width, size.height)];
+            [centerView setUserInteractionEnabled:YES];
+        }
+    }
+    
     _layoutSize = self.view.bounds.size;
     
 }
@@ -760,13 +756,10 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
 -(void) viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     
-//    [self.centerViewController viewWillDisappear:animated];
 }
 
 -(void) viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    
-//    [self.centerViewController viewDidDisappear:animated];
 
 }
 
