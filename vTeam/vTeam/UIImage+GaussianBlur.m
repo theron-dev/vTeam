@@ -17,7 +17,7 @@
     if(NSClassFromString(@"CIFilter")){
         
         CIFilter * filter = [CIFilter filterWithName:@"CIGaussianBlur"];
-        
+         
         if(filter){
             
             CIContext *context = [CIContext contextWithOptions:nil];
