@@ -364,4 +364,11 @@
     return [(id)[self topViewController] topController];
 }
 
+-(BOOL) gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
+    if([self.viewControllers count] <2){
+        return NO;
+    }
+    return YES;
+}
+
 @end
