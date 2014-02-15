@@ -37,9 +37,36 @@
     [super dealloc];
 }
 
+-(NSInteger) pageIndex{
+    
+    CGSize size = _containerView.bounds.size;
+    CGSize contentSize = _containerView.contentSize;
+    CGPoint contentOffset = _containerView.contentOffset;
+    
+    NSInteger pageIndex = contentOffset.x / size.width;
+    
+    
+    if(contentSize.width < size.width){
+        contentSize.width = size.width;
+    }
+    
+    NSInteger pageCount = contentSize.width / size.width;
+    
+    if(pageIndex >= pageCount ){
+        pageIndex = pageCount -1;
+    }
+    
+    if(pageIndex < 0){
+        pageIndex = 0;
+    }
+    
+    return pageIndex;
+}
 
 -(NSInteger) numberOfVTContainerLayout:(VTContainerLayout *) containerLayout{
-    return [self.dataSource count];
+    NSInteger pageCount = [self.dataSource count];
+    [_pageControl setNumberOfPages:pageCount];
+    return pageCount;
 }
 
 -(CGSize) vtContainerLayout:(VTContainerLayout *) containerLayout itemSizeAtIndex:(NSInteger) index{
@@ -223,6 +250,10 @@
 
 -(void) scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
     //[self downloadImagesForView:scrollView];
+}
+
+-(void) scrollViewDidScroll:(UIScrollView *)scrollView{
+    [_pageControl setCurrentPage:self.pageIndex];
 }
 
 -(void) vtItemViewController:(VTItemViewController *) itemViewController doAction:(id) action{

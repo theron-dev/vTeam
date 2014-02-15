@@ -11,8 +11,10 @@
 #import <vTeam/VTContainerView.h>
 #import <vTeam/VTDragLoadingView.h>
 #import <vTeam/VTItemViewController.h>
+#import <vTeam/VTFallsContainerLayout.h>
 
-@interface VTContainerDataController : VTDataController<VTContainerViewDelegate,VTContainerLayoutDelegate,VTItemViewControllerDelegate>
+
+@interface VTContainerDataController : VTDataController<VTContainerViewDelegate,VTContainerLayoutDelegate,VTItemViewControllerDelegate,VTFallsContainerLayoutDelegate>
 
 @property(nonatomic,retain) IBOutlet VTContainerView * containerView;
 @property(nonatomic,retain) NSString * itemViewNib;

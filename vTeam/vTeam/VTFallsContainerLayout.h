@@ -18,3 +18,11 @@
 @property(nonatomic,readonly) CGFloat columnWidth;
 
 @end
+
+@protocol VTFallsContainerLayoutDelegate <VTContainerLayoutDelegate>
+
+@optional
+
+-(BOOL) vtFallsContainerLayout:(VTFallsContainerLayout *) containerLayout isFillWidthAtIndex:(NSInteger) index;
+
+@end

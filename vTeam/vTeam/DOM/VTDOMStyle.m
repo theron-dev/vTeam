@@ -78,7 +78,14 @@
                 path = [vs objectAtIndex:0];
             }
             
-            UIImage * image = [UIImage imageNamed: bundle == nil ? path : [[bundle bundlePath] stringByAppendingPathComponent:path]];
+            UIImage * image = nil;
+            
+            if([path hasPrefix:@"@"]){
+                image = [UIImage imageNamed:[path substringFromIndex:1]];
+            }
+            else{
+                image = [UIImage imageNamed: bundle == nil ? path : [[bundle bundlePath] stringByAppendingPathComponent:path]];
+            }
             
             if(image){
                 NSInteger left = 0;

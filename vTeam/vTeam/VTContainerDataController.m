@@ -474,6 +474,31 @@
     return _itemSize;
 }
 
+-(BOOL) vtFallsContainerLayout:(VTFallsContainerLayout *) containerLayout isFillWidthAtIndex:(NSInteger) index{
+    
+    if(index < [_headerItemViewControllers count]){
+        
+        return YES;
+    }
+    else {
+        index -= [_headerItemViewControllers count];
+    }
+    
+    if(index < [self.dataSource count]){
+        return NO;
+    }
+    else{
+        index -= [self.dataSource count];
+    }
+    
+    if(index < [_footerItemViewControllers count]){
+        return YES;
+    }
+    
+    return NO;
+}
+
+
 -(void) cancel{
     [super cancel];
     [self stopLoading];

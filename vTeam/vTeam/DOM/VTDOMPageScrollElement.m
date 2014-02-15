@@ -12,6 +12,8 @@
 
 #import "VTDOMElement+Layout.h"
 #import "VTDOMElement+Style.h"
+#import "VTDOMDocument.h"
+#import "UIView+VTDOMElement.h"
 
 @interface VTDOMPageScrollItemView : VTDOMView
 
@@ -36,6 +38,7 @@
 
 
 @property(nonatomic,readonly) NSMutableArray * dequeueItemViews;
+@property(nonatomic,readonly) VTDOMElement * pageElement;
 
 @end
 
@@ -60,6 +63,19 @@
     [_dequeueItemViews release];
     
     [super dealloc];
+}
+
+-(VTDOMElement *) pageElement{
+    
+    NSString * pageId = [self attributeValueForKey:@"page-id"];
+    
+    if(pageId){
+        
+        return [self.document elementById:pageId];
+        
+    }
+    
+    return nil;
 }
 
 -(CGSize) layoutChildren:(UIEdgeInsets)padding{
@@ -120,6 +136,40 @@
 -(void) setDelegate:(id)delegate{
     [super setDelegate:delegate];
     [self reloadData];
+    
+    VTDOMElement * pageElement = [self pageElement];
+    
+    if(pageElement){
+        
+        UIScrollView * contentView = [self contentView];
+        
+        CGSize size = contentView.bounds.size;
+        CGSize contentSize = contentView.contentSize;
+        CGPoint contentOffset = contentView.contentOffset;
+        
+        if(contentSize.width < size.width){
+            contentSize.width = size.width;
+        }
+        
+        NSInteger pageCount = contentSize.width / size.width;
+        
+        NSInteger pageIndex = contentOffset.x / size.width;
+        
+        if(pageIndex >= pageCount){
+            pageIndex = pageCount - 1;
+        }
+        
+        if(pageIndex < 0){
+            pageIndex = 0;
+        }
+        
+        [pageElement setAttributeValue:[NSString stringWithFormat:@"%d",pageCount] forKey:@"pageCount"];
+        [pageElement setAttributeValue:[NSString stringWithFormat:@"%d",pageIndex] forKey:@"pageIndex"];
+        
+        if([pageElement isKindOfClass:[VTDOMViewElement class]]){
+            [[(VTDOMViewElement *) pageElement view] setElement:pageElement];
+        }
+    }
 }
 
 -(void) reloadData{
@@ -237,6 +287,7 @@
             [itemView removeFromSuperview];
             
         }
+        
     }
 }
 
@@ -255,10 +306,48 @@
         
         [self reloadData];
         
+        
     }
     
 }
 
+-(void) scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+    VTDOMElement * pageElement = [self pageElement];
+    
+    if(pageElement){
+        
+        UIScrollView * contentView = [self contentView];
+        
+        CGSize size = contentView.bounds.size;
+        CGSize contentSize = contentView.contentSize;
+        CGPoint contentOffset = contentView.contentOffset;
+        
+        if(contentSize.width < size.width){
+            contentSize.width = size.width;
+        }
+        
+        NSInteger pageCount = contentSize.width / size.width;
+        
+        NSInteger pageIndex = contentOffset.x / size.width;
+        
+        if(pageIndex >= pageCount){
+            pageIndex = pageCount - 1;
+        }
+        
+        if(pageIndex < 0){
+            pageIndex = 0;
+        }
+        
+        [pageElement setAttributeValue:[NSString stringWithFormat:@"%d",pageCount] forKey:@"pageCount"];
+        [pageElement setAttributeValue:[NSString stringWithFormat:@"%d",pageIndex] forKey:@"pageIndex"];
+        
+        if([pageElement isKindOfClass:[VTDOMViewElement class]]){
+            [[(VTDOMViewElement *) pageElement view] setElement:pageElement];
+        }
+    }
+    
+}
 
 
 @end

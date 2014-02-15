@@ -79,6 +79,8 @@
         contentSize.height += r.size.height + margin.top + margin.bottom;
     }
     
+    contentSize.height += padding.top + padding.bottom;
+    
     [self setContentSize:contentSize];
     
     if([self isViewLoaded]){
@@ -152,6 +154,8 @@
             domView = nil;
         }
         
+        UIEdgeInsets padding = self.padding;
+        
         CGSize size = contentView.bounds.size;
         CGSize contentSize = CGSizeMake(0, 0);
         
@@ -161,9 +165,9 @@
             
             UIEdgeInsets margin = [element margin];
             
-            r.origin.x = 0;
-            r.origin.y = contentSize.height + margin.top;
-            r.size.width = size.width;
+            r.origin.x = padding.left;
+            r.origin.y = padding.top + contentSize.height + margin.top;
+            r.size.width = size.width - padding.left - padding.right;
             
             contentSize.height += r.size.height + margin.top + margin.bottom;
             
@@ -238,6 +242,7 @@
             index ++;
         }
         
+    
         for (VTDOMVScrollItemView * itemView in [itemViews allValues]) {
             
             [itemView removeFromSuperview];

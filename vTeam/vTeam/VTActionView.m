@@ -59,13 +59,13 @@
             _maskLayer.backgroundColor = [_maskColor CGColor];
         }
         else{
-            _maskLayer.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.8].CGColor;
+            _maskLayer.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.2].CGColor;
         }
         _maskLayer.frame = self.layer.bounds;
-        self.layer.mask = _maskLayer;
+        [self.layer addSublayer:_maskLayer];
     }
     else{
-        self.layer.mask = nil;
+        [_maskLayer removeFromSuperlayer];
     }
 }
 

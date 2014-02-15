@@ -80,7 +80,7 @@
             UIColor * actionColor = [self colorValueForKey:@"action-color"];
             
             if(actionColor == nil){
-                actionColor = [UIColor colorWithWhite:0.0 alpha:0.3];
+                actionColor = [UIColor colorWithWhite:1.0 alpha:0.2];
             }
             
             _highlightedLayer.cornerRadius = [self floatValueForKey:@"corner-radius"];

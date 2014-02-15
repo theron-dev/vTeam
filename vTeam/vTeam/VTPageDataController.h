@@ -21,6 +21,8 @@
 @property(nonatomic,retain) NSBundle * itemViewBundle;
 @property(nonatomic,retain) IBOutlet VTDragLoadingView * leftLoadingView;
 @property(nonatomic,retain) IBOutlet VTDragLoadingView * rightLoadingView;
+@property(nonatomic,retain) IBOutlet UIPageControl * pageControl;
+@property(nonatomic,readonly) NSInteger pageIndex;
 
 -(void) startLoading;
 
