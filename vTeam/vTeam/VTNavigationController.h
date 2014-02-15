@@ -10,6 +10,6 @@
 
 #import <vTeam/IVTUIViewController.h>
 
-@interface VTNavigationController : UINavigationController<IVTUIViewController>
+@interface VTNavigationController : UINavigationController<IVTUIViewController,UIGestureRecognizerDelegate>
 
 @end

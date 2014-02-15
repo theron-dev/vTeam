@@ -64,6 +64,11 @@
             [self setEdgesForExtendedLayout:edge];
         }
     }
+    
+    if ([self respondsToSelector:@selector(interactivePopGestureRecognizer)]){
+        self.interactivePopGestureRecognizer.delegate = self;
+    }
+    
 #endif
     
     for(id controller in _controllers){
@@ -87,6 +92,7 @@
     }
     [super viewDidUnload];
 }
+
 
 - (void)didReceiveMemoryWarning
 {
