@@ -18,6 +18,7 @@
 @property(nonatomic,retain) IBOutlet UIView * footerView;
 @property(nonatomic,retain) IBOutlet UIView * backgroundView;
 @property(nonatomic,assign) NSInteger focusIndex;
+@property(nonatomic,assign) UIEdgeInsets visableEdgeInsets;
 
 -(BOOL) isFullVisableRect:(CGRect) rect;
 

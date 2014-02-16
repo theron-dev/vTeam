@@ -22,4 +22,6 @@
 
 -(UIFont *) fontValueForKey:(NSString *) key;
 
+-(UIEdgeInsets) edgeInsetsValueForKey:(NSString *) key;
+
 @end

@@ -40,9 +40,18 @@
     [self setImage:[element imageValueForKey:@"image-disabled" bundle:element.document.bundle] forState:UIControlStateDisabled];
     [self setImage:[element imageValueForKey:@"image-selected" bundle:element.document.bundle] forState:UIControlStateSelected];
     
+    [self setContentEdgeInsets:[element edgeInsetsValueForKey:@"content-edge-insets"]];
+    
+    [self setImageEdgeInsets:[element edgeInsetsValueForKey:@"image-edge-insets"]];
+    
+    [self setTitleEdgeInsets:[element edgeInsetsValueForKey:@"title-edge-insets"]];
+    
     [self.titleLabel setFont:[element fontValueForKey:@"font"]];
     
+    [self setSelected:[element booleanValueForKey:@"selected"]];
+    
     [self setEnabled:![element booleanValueForKey:@"disabled"]];
+    
     [self setAdjustsImageWhenDisabled:NO];
     
 }

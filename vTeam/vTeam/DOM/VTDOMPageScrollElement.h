@@ -6,12 +6,8 @@
 //  Copyright (c) 2014年 hailong.org. All rights reserved.
 //
 
-#import <vTeam/VTDOMViewElement.h>
+#import <vTeam/VTDOMContainerElement.h>
 
-@interface VTDOMPageScrollElement : VTDOMViewElement<UIScrollViewDelegate>
-
-@property(nonatomic,readonly) UIScrollView * contentView;
-
--(void) reloadData;
+@interface VTDOMPageScrollElement : VTDOMContainerElement
 
 @end

@@ -6,8 +6,8 @@
 //  Copyright (c) 2014年 hailong.org. All rights reserved.
 //
 
-#import <vTeam/VTDOMViewElement.h>
+#import <vTeam/VTDOMContainerElement.h>
 
-@interface VTDOMHScrollElement : VTDOMViewElement<UIScrollViewDelegate>
+@interface VTDOMHScrollElement : VTDOMContainerElement<UIScrollViewDelegate>
 
 @end

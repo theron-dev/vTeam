@@ -56,7 +56,11 @@
     
     CGContextSetTextMatrix(ctx , CGAffineTransformIdentity);
     
-    [_element render:_element.frame context:ctx];
+    CGRect r = _element.frame;
+    
+    r.origin = CGPointZero;
+    
+    [_element render:r context:ctx];
 }
 
 -(void) setElement:(VTDOMElement *)element{

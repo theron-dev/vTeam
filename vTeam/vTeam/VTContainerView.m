@@ -23,6 +23,7 @@
 @synthesize footerView = _footerView;
 @synthesize backgroundView = _backgroundView;
 @synthesize focusIndex = _focusIndex;
+@synthesize visableEdgeInsets = _visableEdgeInsets;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -323,6 +324,11 @@
 -(BOOL) isVisableRect:(CGRect) frame{
     CGRect rect = self.bounds;
     rect.origin = self.contentOffset;
+    rect.origin.x -= _visableEdgeInsets.left;
+    rect.origin.y -= _visableEdgeInsets.top;
+    rect.size.width += _visableEdgeInsets.left + _visableEdgeInsets.right;
+    rect.size.height += _visableEdgeInsets.top + _visableEdgeInsets.bottom;
+    
     CGRect rs = CGRectIntersection(rect, frame);
     return rs.size.width >0 && rs.size.height > 0;
 }
@@ -330,6 +336,11 @@
 -(BOOL) isFullVisableRect:(CGRect) frame{
     CGRect rect = self.bounds;
     rect.origin = self.contentOffset;
+    rect.origin.x -= _visableEdgeInsets.left;
+    rect.origin.y -= _visableEdgeInsets.top;
+    rect.size.width += _visableEdgeInsets.left + _visableEdgeInsets.right;
+    rect.size.height += _visableEdgeInsets.top + _visableEdgeInsets.bottom;
+    
     CGRect rs = CGRectIntersection(rect, frame);
     return CGSizeEqualToSize(frame.size, rs.size);
 }

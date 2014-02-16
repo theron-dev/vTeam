@@ -334,6 +334,8 @@
 		1193DB5817B0B35900F19592 /* VTBESessionObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1193DB5617B0B35900F19592 /* VTBESessionObject.m */; };
 		11968205187A68B5006509B0 /* VTDOMLinkElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 11968203187A68B5006509B0 /* VTDOMLinkElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11968206187A68B5006509B0 /* VTDOMLinkElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 11968204187A68B5006509B0 /* VTDOMLinkElement.m */; };
+		119EBDD218B05CDE00B745D7 /* VTDOMContainerElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 119EBDD018B05CDE00B745D7 /* VTDOMContainerElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		119EBDD318B05CDE00B745D7 /* VTDOMContainerElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 119EBDD118B05CDE00B745D7 /* VTDOMContainerElement.m */; };
 		11A0413417BB1C68001992BE /* VTDOMStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 11DE6CE717B8AE4400B04782 /* VTDOMStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11A0413517BB1C68001992BE /* VTDOMStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 11DE6CE817B8AE4400B04782 /* VTDOMStyle.m */; };
 		11A0413617BB1C68001992BE /* VTDOMElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 11DE6CE317B8ADDF00B04782 /* VTDOMElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -906,6 +908,8 @@
 		1193DB5617B0B35900F19592 /* VTBESessionObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTBESessionObject.m; sourceTree = "<group>"; };
 		11968203187A68B5006509B0 /* VTDOMLinkElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDOMLinkElement.h; sourceTree = "<group>"; };
 		11968204187A68B5006509B0 /* VTDOMLinkElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDOMLinkElement.m; sourceTree = "<group>"; };
+		119EBDD018B05CDE00B745D7 /* VTDOMContainerElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDOMContainerElement.h; sourceTree = "<group>"; };
+		119EBDD118B05CDE00B745D7 /* VTDOMContainerElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDOMContainerElement.m; sourceTree = "<group>"; };
 		11A0413D17BB25CD001992BE /* VTDOMStyleSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDOMStyleSheet.h; sourceTree = "<group>"; };
 		11A0413E17BB25CD001992BE /* VTDOMStyleSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDOMStyleSheet.m; sourceTree = "<group>"; };
 		11A0414117BB2B24001992BE /* hcss_scanf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hcss_scanf.h; sourceTree = "<group>"; };
@@ -1788,6 +1792,8 @@
 				11A041A217BCA8D2001992BE /* VTDOMViewElement.m */,
 				1174209717CAF348001EBEE7 /* VTDOMActionElement.h */,
 				1174209817CAF348001EBEE7 /* VTDOMActionElement.m */,
+				119EBDD018B05CDE00B745D7 /* VTDOMContainerElement.h */,
+				119EBDD118B05CDE00B745D7 /* VTDOMContainerElement.m */,
 				113F9E4C1874441800E6948C /* VTDOMPageScrollElement.h */,
 				113F9E4D1874441800E6948C /* VTDOMPageScrollElement.m */,
 				113F9E501874649900E6948C /* VTDOMHScrollElement.h */,
@@ -2049,6 +2055,7 @@
 				11E59F6C1728CCAC002DD63C /* VTStyleOutletContainer.h in Headers */,
 				11E59F701728CD6C002DD63C /* VTDataOutlet.h in Headers */,
 				11E59F741728CE81002DD63C /* VTDataOutletContainer.h in Headers */,
+				119EBDD218B05CDE00B745D7 /* VTDOMContainerElement.h in Headers */,
 				11E59F791728CFA8002DD63C /* VTViewController.h in Headers */,
 				1150F8661848626700176DDD /* UIButton+VTDOMElement.h in Headers */,
 				11E59F7D1728DBCD002DD63C /* NSURL+QueryValue.h in Headers */,
@@ -2473,6 +2480,7 @@
 				113140421749EC590081641F /* hactree.c in Sources */,
 				113140441749EC590081641F /* hbase64.c in Sources */,
 				113140461749EC590081641F /* hbtree.c in Sources */,
+				119EBDD318B05CDE00B745D7 /* VTDOMContainerElement.m in Sources */,
 				113140481749EC590081641F /* hbuffer.c in Sources */,
 				1131404A1749EC590081641F /* hbytes.c in Sources */,
 				1131404D1749EC590081641F /* hclass.c in Sources */,

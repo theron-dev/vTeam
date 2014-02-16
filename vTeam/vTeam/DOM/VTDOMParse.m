@@ -123,6 +123,9 @@ static hcss_scanf_t VTDOMParseCSSScanf = {
     else if([name isEqualToString:@"vscroll"]){
         elementClass = [VTDOMVScrollElement class];
     }
+    else if([name isEqualToString:@"container"]){
+        elementClass = [VTDOMContainerElement class];
+    }
     else if([name isEqualToString:@"a"]){
         elementClass = [VTDOMLinkElement class];
     }
