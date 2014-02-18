@@ -14,9 +14,5 @@
 
 @property(nonatomic,readonly) UIViewController * topViewController;
 
--(void) popViewController:(BOOL) animated;
-
--(void) pushViewController:(UIViewController *) viewController animated:(BOOL)animated;
-
 
 @end

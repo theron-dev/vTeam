@@ -11,8 +11,9 @@
 #import <QuartzCore/QuartzCore.h>
 
 #define ANIMATION_DURATION  0.3
-#define ANIMATION_SCALE     0.98
-#define ANIMATION_ALPHA     0.8
+#define ANIMATION_LEFT     100
+#define ANIMATION_ALPHA 0.9
+#define ANIMATION_SCALE 0.9
 
 typedef enum {
     VTHeapViewControllerPanDirectionNone,VTHeapViewControllerPanDirectionLeft,VTHeapViewControllerPanDirectionRight
@@ -122,49 +123,26 @@ typedef enum {
                 
                 if([_viewControllers count] >1){
                     
+                    CGFloat r = d / size.width;
+                    
                     UIViewController * viewController = [_viewControllers objectAtIndex:[_viewControllers count] -2];
                     
                     UIView * v = [viewController view];
                     
                     [v setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
-                    [v setFrame:CGRectMake(0, 0, size.width, size.height)];
+                    [v setFrame:CGRectMake((1.0 - r) * - ANIMATION_LEFT, 0, size.width, size.height)];
                     
                     if(v.superview != view){
-//                        [viewController viewWillAppear:NO];
                         [view insertSubview:v atIndex:0];
-//                        [viewController viewDidAppear:NO];
                     }
                     
-                    CGFloat r = d / size.width;
-                    
-                    CGFloat scale = ANIMATION_SCALE + (1.0 - ANIMATION_SCALE) * r;
-                    CGFloat alpha = ANIMATION_ALPHA + (1.0 - ANIMATION_ALPHA) * r;
-                    
-                    if(scale > 1.0){
-                        scale = 1.0;
-                    }
-                    
-                    if(alpha > 1.0){
-                        alpha = 1.0;
-                    }
-                    
-                    if(v.layer.mask == nil){
-                        CALayer * mask = [[CALayer alloc] init];
-                        mask.backgroundColor = [UIColor colorWithWhite:1.0 alpha:alpha].CGColor;
-                        mask.frame = v.layer.bounds;
-                        v.layer.mask = mask;
-                        [mask release];
-                    }
-                    else{
-                        v.layer.mask.backgroundColor = [UIColor colorWithWhite:1.0 alpha:alpha].CGColor;
-                    }
-                    
-                    v.layer.transform = CATransform3DMakeScale(scale, scale, scale);
-                    
+                    [v setUserInteractionEnabled:NO];
+
                     v = [self.topViewController view];
                     
-                    v.layer.mask = nil;
-                    v.layer.transform = CATransform3DIdentity;
+                    v.layer.shadowColor = [UIColor blackColor].CGColor;
+                    v.layer.shadowOpacity = (1.0 - r) * 0.3;
+                    v.layer.shadowRadius = d;
                     
                     [v setFrame:CGRectMake( d, 0, size.width, size.height)];
                     
@@ -175,8 +153,6 @@ typedef enum {
                     
                     UIView * v = [self.topViewController view];
                     
-                    v.layer.mask = nil;
-                    v.layer.transform = CATransform3DIdentity;
                     [v setFrame:CGRectMake( 0, 0, size.width, size.height)];
                 }
                 
@@ -198,23 +174,28 @@ typedef enum {
             
             CGFloat d = p.x - _panBeginLocation.x;
             
-            UIView * view = self.view;
-            CGSize size = view.bounds.size;
-            
             if(d >0 && _direction == VTHeapViewControllerPanDirectionRight){
                 
                 if([_viewControllers count] >1){
                     
                     UIViewController * viewController = [_viewControllers objectAtIndex:[_viewControllers count] -2];
-                    if([viewController isViewLoaded]){
-                        UIView * v = [viewController view];
-                        [v setFrame:CGRectMake(0, 0, size.width, size.height)];
-                    }
+                    
+                    [self visableViewController:viewController animated:YES];
+
+                    id topViewController = [self topViewController];
+                    
+                    UIView * v = [topViewController view];
+                    
+                    [v setUserInteractionEnabled:YES];
+                    
+                    [self removeViewController:topViewController animated:YES];
+                    
+                    [_viewControllers removeLastObject];
+                    
                 }
 
-                [[[self topViewController] view] setUserInteractionEnabled:YES];
+       
                 
-                [self popViewController:YES];
             }
             else if(d <0 && _direction == VTHeapViewControllerPanDirectionLeft){
                 
@@ -222,15 +203,14 @@ typedef enum {
                 if([_viewControllers count] >1){
                     
                     UIViewController * viewController = [_viewControllers objectAtIndex:[_viewControllers count] -2];
-                    if([viewController isViewLoaded]){
-                        UIView * v = [viewController view];
-//                        [viewController viewWillDisappear:NO];
-                        [v removeFromSuperview];
-//                        [viewController viewDidDisappear:NO];
-                    }
+                    
+                    [self hiddenViewController:viewController animated:YES];
+                    
                 }
                 
                 [[[self topViewController] view] setUserInteractionEnabled:YES];
+                
+                [self visableViewController:[self topViewController] animated:YES];
                 
             }
             else{
@@ -242,23 +222,9 @@ typedef enum {
                     [self hiddenViewController:viewController animated:YES];
                 }
                 
-                UIView * v = [self.topViewController view];
+                [[[self topViewController] view] setUserInteractionEnabled:YES];
                 
-                _animating = YES;
-                
-                [UIView animateWithDuration:ANIMATION_DURATION animations:^{
-                    
-                    v.layer.mask = nil;
-                    v.layer.transform = CATransform3DIdentity;
-                    [v setFrame:CGRectMake(0, 0, size.width, size.height)];
-                    
-                    
-                } completion:^(BOOL finished) {
-                    
-                    [v setUserInteractionEnabled:YES];
-                    _animating = NO;
-                    
-                }];
+                [self visableViewController:[self topViewController] animated:YES];
                
             }
             
@@ -325,260 +291,6 @@ typedef enum {
 -(UIViewController *) topViewController{
     return [_viewControllers lastObject];
 }
-
--(void) popViewControllerAnimationTopDidStopAction:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context{
-    UIViewController * viewController = (UIViewController *) context;
-    
-//    [viewController viewWillDisappear:YES];
-    
-    UIView * v = [viewController view];
-    
-    [v removeFromSuperview];
-    
-//    [viewController viewDidDisappear:YES];
- 
-    [_viewControllers removeLastObject];
-}
-
--(void) popViewControllerAnimationDidStopAction:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context{
-    
-    UIViewController * viewController = (UIViewController *) context;
-    
-    UIView * v = [viewController view];
-    
-    [v setTransform:CGAffineTransformIdentity];
-  
-    _animating = NO;
-}
-
--(void) popViewController:(BOOL) animated{
-    
-    if(_animating){
-        return;
-    }
-    
-    if(_panBeginTouch){
-        return;
-    }
-    
-    if([_viewControllers count] > 1){
-        
-        UIViewController * topViewController = [_viewControllers lastObject];
-        
-        if(animated && [self isViewLoaded]){
-         
-            _animating = YES;
-            
-            UIView * view = self.view;
-            CGSize size = view.bounds.size;
-            
-            UIView * v = [topViewController view];
-            [UIView beginAnimations:nil context:topViewController];
-            [UIView setAnimationDuration:ANIMATION_DURATION];
-            [UIView setAnimationDelegate:self];
-            [UIView setAnimationDidStopSelector:@selector(popViewControllerAnimationTopDidStopAction:finished:context:)];
-            
-            v.layer.mask = nil;
-            v.layer.transform = CATransform3DIdentity;
-            
-            [v setFrame:CGRectMake(size.width, 0, size.width, size.height)];
-            
-            [UIView commitAnimations];
-            
-            topViewController = [_viewControllers objectAtIndex:[_viewControllers count] -2];
-            
-            v = [topViewController view];
-            
-            if(v.superview != view){
-                
-//                [topViewController viewWillAppear:animated];
-                
-                [v setFrame:CGRectMake(0, 0, size.width, size.height)];
-                
-                if(v.layer.mask == nil){
-                    CALayer * mask = [[CALayer alloc] init];
-                    mask.backgroundColor = [UIColor colorWithWhite:1.0 alpha:ANIMATION_ALPHA].CGColor;
-                    mask.frame = v.layer.bounds;
-                    v.layer.mask = mask;
-                    [mask release];
-                }
-                else{
-                    v.layer.mask.backgroundColor = [UIColor colorWithWhite:1.0 alpha:ANIMATION_ALPHA].CGColor;
-                }
-                
-                v.layer.transform = CATransform3DMakeScale(ANIMATION_SCALE, ANIMATION_SCALE, ANIMATION_SCALE);
-                
-                [view insertSubview:v atIndex:0];
-                //[topViewController viewDidAppear:animated];
-            }
-            
-            [UIView beginAnimations:nil context:topViewController];
-            [UIView setAnimationDuration:ANIMATION_DURATION];
-            [UIView setAnimationDelegate:self];
-            [UIView setAnimationDidStopSelector:@selector(popViewControllerAnimationDidStopAction:finished:context:)];
-            
-            v.layer.mask = nil;
-            v.layer.transform = CATransform3DIdentity;
-            
-            [v setFrame:CGRectMake(0, 0, size.width, size.height)];
-            
-            [UIView commitAnimations];
-            
-        }
-        else{
-            if([topViewController isViewLoaded]){
-                UIView * v = [topViewController view];
-                if(v.superview){
-//                    [topViewController viewWillDisappear:animated];
-                    [v removeFromSuperview];
-//                    [topViewController viewDidDisappear:animated];
-                }
-            }
-            
-            [_viewControllers removeLastObject];
-            
-            topViewController = [_viewControllers lastObject];
-            
-            if([self isViewLoaded]){
-                UIView * topView = [topViewController view];
-                [self.view addSubview:topView];
-                CGSize size = self.view.bounds.size;
-                [topView setFrame:CGRectMake(0, 0, size.width, size.height)];
-                [topView setUserInteractionEnabled:YES];
-            }
-            
-        }
-    }
-}
-
--(void) pushViewControllerAnimationDidStopAction:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context{
-    
-    _animating = NO;
-}
-
--(void) pushViewControllerAnimationTopDidStopAction:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context{
-    
-    UIViewController * viewController = (UIViewController *) context;
-    
-    UIView * v = [viewController view];
-    
-    [v removeFromSuperview];
-    
-    v.layer.mask = nil;
-    v.layer.transform = CATransform3DIdentity;
-    
-//    [viewController viewDidDisappear:YES];
-   
-}
-
--(void) pushViewController:(UIViewController *) viewController animated:(BOOL)animated{
-    
-    if(_animating){
-        return;
-    }
-    
-    if(_panBeginTouch){
-        return;
-    }
-    
-    if(_viewControllers == nil){
-        _viewControllers = [[NSMutableArray alloc] initWithCapacity:4];
-    }
-    
-    if(animated && [self isViewLoaded] && [_viewControllers count] >0){
-        
-        _animating  = YES;
-        
-        UIView * view = self.view;
-        CGSize size = view.bounds.size;
-        
-        
-        UIViewController * topViewController = [_viewControllers lastObject];
-        
-        if(topViewController){
-            
-            UIView * v = [topViewController view];
-            
-//            [topViewController viewWillDisappear:animated];
-            
-            [UIView beginAnimations:nil context:topViewController];
-            [UIView setAnimationDuration:ANIMATION_DURATION];
-            [UIView setAnimationDelegate:self];
-            [UIView setAnimationDidStopSelector:@selector(pushViewControllerAnimationTopDidStopAction:finished:context:)];
-            
-            if(v.layer.mask == nil){
-                CALayer * mask = [[CALayer alloc] init];
-                mask.backgroundColor = [UIColor colorWithWhite:1.0 alpha:ANIMATION_ALPHA].CGColor;
-                mask.frame = v.layer.bounds;
-                v.layer.mask = mask;
-                [mask release];
-            }
-            else{
-                v.layer.mask.backgroundColor = [UIColor colorWithWhite:1.0 alpha:ANIMATION_ALPHA].CGColor;
-            }
-            
-            v.layer.transform = CATransform3DMakeScale(ANIMATION_SCALE, ANIMATION_SCALE, ANIMATION_SCALE);
-            
-            [UIView commitAnimations];
-        }
-        
-        
-        UIView * v = [viewController view];
-        
-//        [viewController viewWillAppear:animated];
-        
-        [v setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
-        
-        if(v.superview != view){
-            [v setFrame:CGRectMake(size.width, 0, size.width, size.height)];
-//            [viewController viewWillAppear:animated];
-            [view addSubview:v];
-//            [viewController viewDidAppear:animated];
-        }
-      
-        [UIView beginAnimations:nil context:viewController];
-        [UIView setAnimationDuration:ANIMATION_DURATION];
-        [UIView setAnimationDelegate:self];
-        [UIView setAnimationDidStopSelector:@selector(pushViewControllerAnimationDidStopAction:finished:context:)];
-        
-        [v setFrame:CGRectMake(0, 0, size.width, size.height)];
-        v.layer.mask = nil;
-        v.layer.transform = CATransform3DIdentity;
-        
-        [UIView commitAnimations];
-        
-        
-        [_viewControllers addObject:viewController];
-        
-    }
-    else{
-        
-        UIViewController * topViewController = [_viewControllers lastObject];
-        if([topViewController isViewLoaded]){
-            UIView * v = [topViewController view];
-            if(v.superview){
-//                [topViewController viewWillDisappear:animated];
-                [v removeFromSuperview];
-//                [topViewController viewDidDisappear:animated];
-            }
-        }
-        
-        [_viewControllers addObject:viewController];
-        
-        topViewController = viewController;
-        
-        if([self isViewLoaded]){
-            UIView * topView = [topViewController view];
-            [self.view addSubview:topView];
-            CGSize size = self.view.bounds.size;
-            [topView setFrame:CGRectMake(0, 0, size.width, size.height)];
-            [topView setUserInteractionEnabled:YES];
-        }
-    
-    }
-    
-}
-
 
 -(BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
     if(_panBeginTouch){
@@ -791,19 +503,21 @@ typedef enum {
         
         CGRect r = [v frame];
         
-//        [viewController viewWillDisappear:animated];
-        
         [UIView animateWithDuration:0.3 animations:^{
            
+            [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+            
             [v setFrame:CGRectMake(r.size.width, r.origin.y, r.size.width, r.size.height)];
+            [v.layer setShadowRadius:0.0];
+            [v.layer setShadowOpacity:0.0];
             
         } completion:^(BOOL finished) {
+            
+            [v setUserInteractionEnabled:YES];
             
             [v removeFromSuperview];
             
             [viewController release];
-            
-//            [viewController viewDidDisappear:animated];
             
         }];
         
@@ -812,9 +526,8 @@ typedef enum {
         
         UIView * v = [viewController view];
         
-//        [viewController viewWillDisappear:animated];
         [v removeFromSuperview];
-//        [viewController viewDidDisappear:animated];
+        
     }
 }
 
@@ -831,33 +544,21 @@ typedef enum {
         
         UIView * v = [viewController view];
         
-//        [viewController viewWillDisappear:animated];
+        CGRect r = [v frame];
         
         [UIView animateWithDuration:0.3 animations:^{
             
-            if(v.layer.mask == nil){
-                CALayer * mask = [[CALayer alloc] init];
-                mask.backgroundColor = [UIColor colorWithWhite:1.0 alpha:ANIMATION_ALPHA].CGColor;
-                mask.frame = v.layer.bounds;
-                v.layer.mask = mask;
-                [mask release];
-            }
-            else{
-                v.layer.mask.backgroundColor = [UIColor colorWithWhite:1.0 alpha:ANIMATION_ALPHA].CGColor;
-            }
+            [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
             
-            v.layer.transform = CATransform3DMakeScale(ANIMATION_SCALE, ANIMATION_SCALE, ANIMATION_SCALE);
+            [v setFrame:CGRectMake(- ANIMATION_LEFT, 0, r.size.width, r.size.height)];
             
         } completion:^(BOOL finished) {
             
             [v removeFromSuperview];
             
-            v.layer.mask = nil;
-            v.layer.transform = CATransform3DIdentity;
+            [v setUserInteractionEnabled:YES];
             
             [viewController release];
-            
-//            [viewController viewDidDisappear:animated];
             
         }];
         
@@ -866,9 +567,8 @@ typedef enum {
         
         UIView * v = [viewController view];
         
-//        [viewController viewWillDisappear:animated];
         [v removeFromSuperview];
-//        [viewController viewDidDisappear:animated];
+
     }
     
 }
@@ -886,29 +586,25 @@ typedef enum {
         CGSize size = view.bounds.size;
         
         UIView * v = [viewController view];
-        
-        [v setFrame:CGRectMake(0, 0, size.width, size.height)];
-        [v setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
-        
-//        [viewController viewWillAppear:animated];
-        
-        [view insertSubview:v atIndex:0];
-        
-        v.layer.mask = nil;
-        v.layer.transform = CATransform3DMakeScale(ANIMATION_SCALE, ANIMATION_SCALE, ANIMATION_SCALE);
+
+        if(v.superview != view){
+            [v setFrame:CGRectMake(- ANIMATION_LEFT, 0, size.width, size.height)];
+            [view insertSubview:v atIndex:0];
+        }
         
         _animating = YES;
         
+        
         [UIView animateWithDuration:0.3 animations:^{
         
-            v.layer.transform = CATransform3DIdentity;
+            [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+            
             [v setFrame:CGRectMake(0, 0, size.width, size.height)];
             
         } completion:^(BOOL finished) {
             
             _animating = NO;
-//            [viewController viewDidAppear:animated];
-            
+            [v setUserInteractionEnabled:YES];
         }];
         
     }
@@ -923,11 +619,10 @@ typedef enum {
         [v setFrame:CGRectMake(0, 0, size.width, size.height)];
         [v setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
         
-//        [viewController viewWillAppear:animated];
-        
-        [view addSubview:v];
-        
-//        [viewController viewDidAppear:animated];
+        if(v.superview != view){
+            [view insertSubview:v atIndex:0];
+        }
+
     }
     
 }
@@ -946,25 +641,26 @@ typedef enum {
         
         UIView * v = [viewController view];
     
-        [v setFrame:CGRectMake(size.width, 0, size.width, size.height)];
         [v setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
    
-//        [viewController viewWillAppear:animated];
-        
-        [view addSubview:v];
+        if(v.superview != view){
+            [v setFrame:CGRectMake(size.width, 0, size.width, size.height)];
+            [view addSubview:v];
+        }
         
         _animating = YES;
         
         [UIView animateWithDuration:0.3 animations:^{
+            
+            [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
             
             [v setFrame:CGRectMake(0, 0, size.width, size.height)];
             
         } completion:^(BOOL finished) {
             
             _animating = NO;
-            
-//            [viewController viewDidAppear:animated];
          
+            [v setUserInteractionEnabled:YES];
         }];
         
     }
@@ -979,11 +675,10 @@ typedef enum {
         [v setFrame:CGRectMake(0, 0, size.width, size.height)];
         [v setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
         
-//        [viewController viewWillAppear:animated];
-        
-        [view addSubview:v];
-        
-//        [viewController viewDidAppear:animated];
+        if(v.superview != view){
+            [view addSubview:v];
+        }
+ 
     }
     
 }
