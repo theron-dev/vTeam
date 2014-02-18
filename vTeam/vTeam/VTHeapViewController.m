@@ -129,10 +129,10 @@ typedef enum {
                     
                     UIView * v = [viewController view];
                     
-                    [v setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
-                    [v setFrame:CGRectMake((1.0 - r) * - ANIMATION_LEFT, 0, size.width, size.height)];
+                    [v setFrame:CGRectMake((1.0f - r) * - ANIMATION_LEFT, 0, size.width, size.height)];
                     
                     if(v.superview != view){
+                        [v setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
                         [view insertSubview:v atIndex:0];
                     }
                     
@@ -141,8 +141,8 @@ typedef enum {
                     v = [self.topViewController view];
                     
                     v.layer.shadowColor = [UIColor blackColor].CGColor;
-                    v.layer.shadowOpacity = (1.0 - r) * 0.3;
-                    v.layer.shadowRadius = d;
+                    v.layer.shadowOpacity = (1.0f - r) * 0.3;
+                    v.layer.shadowRadius = 5;
                     
                     [v setFrame:CGRectMake( d, 0, size.width, size.height)];
                     
@@ -253,27 +253,18 @@ typedef enum {
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
-//    [[self topViewController] viewWillAppear:animated];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    
-//    [[self topViewController] viewDidAppear:animated];
 }
 
 -(void) viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    
-//    [[self topViewController] viewWillDisappear:animated];
 }
 
 -(void) viewDidDisappear:(BOOL)animated{
-    
     [super viewDidDisappear:animated];
-    
-//    [[self topViewController] viewDidDisappear:animated];
 }
 
 -(UIImage *) titleImage{
