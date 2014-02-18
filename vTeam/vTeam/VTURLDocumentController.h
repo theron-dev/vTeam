@@ -32,6 +32,8 @@
 
 -(void) downloadImagesForView:(UIView *) view;
 
+-(void) reloadElement:(VTDOMElement *) element;
+
 @end
 
 @protocol VTURLDocumentControllerDelegate

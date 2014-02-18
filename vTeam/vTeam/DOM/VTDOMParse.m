@@ -27,6 +27,8 @@
 typedef struct _VTDOMParseScanf {
     hxml_scanf_t base;
     VTDOMParse * parse;
+    VTDOMElement * toElement;
+    NSInteger index;
 } VTDOMParseScanf;
 
 static hany VTDOMParse_scanf_element_new(struct _hxml_scanf_t * xml,hcchar * name,hcchar * ns, InvokeTickDeclare){
@@ -45,8 +47,14 @@ static void VTDOMParse_scanf_element_attr_set(struct _hxml_scanf_t * xml,hany el
 }
 
 static void VTDOMParse_scanf_element_child_add(struct _hxml_scanf_t * xml,hany element,hany child,InvokeTickDeclare){
+    VTDOMParseScanf * scan = (VTDOMParseScanf *) xml;
     VTDOMElement * el = (VTDOMElement *) element;
-    [el addElement:(VTDOMElement *) child];
+    if(el == scan->toElement){
+        [el insertElement:(VTDOMElement *) child atIndex:scan->index ++];
+    }
+    else{
+        [el addElement:(VTDOMElement *) child];
+    }
 }
 
 static hbool VTDOMParse_scanf_element_is_empty(struct _hxml_scanf_t * xml,hany element,InvokeTickDeclare){
@@ -136,7 +144,7 @@ static hcss_scanf_t VTDOMParseCSSScanf = {
     return [element autorelease];
 }
 
--(BOOL) parseHTML:(NSString *) html toElement:(VTDOMElement *) element{
+-(BOOL) parseHTML:(NSString *) html toElement:(VTDOMElement *) element atIndex:(NSInteger) index{
     VTDOMParseScanf scanf = {{
         VTDOMParse_scanf_element_new,
         VTDOMParse_scanf_element_attr_set,
@@ -145,9 +153,13 @@ static hcss_scanf_t VTDOMParseCSSScanf = {
         VTDOMParse_scanf_element_text_set,
         VTDOMParse_scanf_tag_has_children,
         VTDOMParse_scanf_element_release
-    },self};
+    },self, element, index};
     
     return hxml_scanf(&scanf.base, [html UTF8String], element, InvokeTickRoot) ? YES: NO;
+}
+
+-(BOOL) parseHTML:(NSString *) html toElement:(VTDOMElement *) element{
+    return [self parseHTML:html toElement:element atIndex:0];
 }
 
 -(BOOL) parseHTML:(NSString *) html toDocument:(VTDOMDocument *) document{

@@ -17,6 +17,8 @@
 
 -(VTDOMElement *) newElement:(NSString *) name ns:(NSString *) ns;
 
+-(BOOL) parseHTML:(NSString *) html toElement:(VTDOMElement *) element atIndex:(NSInteger) index;
+
 -(BOOL) parseHTML:(NSString *) html toElement:(VTDOMElement *) element;
 
 -(BOOL) parseHTML:(NSString *) html toDocument:(VTDOMDocument *) document;

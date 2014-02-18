@@ -18,6 +18,25 @@
 
 #import "UIView+Search.h"
 
+#import "VTDOMElement+Layout.h"
+
+@interface  VTURLDocumentControllerElementHttpTask : VTHttpTask
+
+@property(nonatomic,retain) VTDOMElement * element;
+
+@end
+
+@implementation VTURLDocumentControllerElementHttpTask
+
+@synthesize element = _element;
+
+-(void) dealloc{
+    [_element release];
+    [super dealloc];
+}
+
+@end
+
 @interface VTURLDocumentController()
 
 @property(nonatomic,retain) VTHttpTask * httpTask;
@@ -232,8 +251,75 @@
         
         [_httpTask setDelegate:nil];
         self.httpTask = nil;
+        
     }
-    
+    else if([httpTask isKindOfClass:[VTURLDocumentControllerElementHttpTask class]]){
+        
+        VTDOMElement * element = [httpTask element];
+        NSString * method = [element attributeValueForKey:@"method"];
+        
+        if([method isEqualToString:@"replace"]){
+            
+            VTDOMElement * parentElement = [element parentElement];
+            
+            NSArray * childs = [parentElement childs];
+            
+            NSInteger index = [childs indexOfObject:element];
+            
+            if(index != NSNotFound){
+                
+                NSString * name = [element attributeValueForKey:@"name"];
+                
+                if(name){
+                    
+                    for(NSInteger i = index+1; i < [childs count];){
+                        VTDOMElement * el = [childs objectAtIndex:i];
+                        if([name isEqualToString:[el attributeValueForKey:@"name"]]){
+                            [el removeFromParentElement];
+                        }
+                        else{
+                            i ++;
+                        }
+                    }
+                    
+                }
+                
+                VTDOMParse * parse = [[VTDOMParse alloc] init];
+                
+                [parse parseHTML:[httpTask responseBody] toElement:parentElement atIndex:index + 1];
+                
+                [self.document applyStyleSheet:parentElement];
+                
+                [[self.document rootElement] layout:_documentView.bounds.size];
+                
+                [[self.document rootElement] bindDelegate:_documentView];
+                
+                [_documentView setNeedsDisplay];
+            }
+            
+        }
+        else {
+            
+            for(VTDOMElement * el in [NSArray arrayWithArray:[element childs]]){
+                [el removeFromParentElement];
+            }
+            
+            VTDOMParse * parse = [[VTDOMParse alloc] init];
+            
+            [parse parseHTML:[httpTask responseBody] toElement:element];
+            
+            [self.document applyStyleSheet:element];
+            
+            [[self.document rootElement] layout:_documentView.bounds.size];
+            
+            [[self.document rootElement] bindDelegate:_documentView];
+            
+            [_documentView setNeedsDisplay];
+            
+        }
+        
+        
+    }
 }
 
 -(void) vtHttpTaskDidResponse:(id)httpTask{
@@ -301,5 +387,37 @@
         [self.delegate vtURLDocumentController:self doActionElement:element];
     }
 }
+
+-(void) reloadElement:(VTDOMElement *) element{
+    
+    NSString * url = [element attributeValueForKey:@"url"];
+    
+    if(url){
+        
+        VTURLDocumentControllerElementHttpTask * httpTask = [[VTURLDocumentControllerElementHttpTask alloc] initWithSource:self];
+        
+        [httpTask setDelegate:self];
+        [httpTask setElement:element];
+        [httpTask setResponseType:VTHttpTaskResponseTypeString];
+        [httpTask setAllowStatusCode302:YES];
+        
+        NSTimeInterval timeout = _timeoutInterval;
+        
+        if(timeout <= 0){
+            timeout = 300;
+        }
+        
+        NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url relativeToURL:_documentURL] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:timeout];
+        
+        [httpTask setRequest:request];
+        
+        [self.context handle:@protocol(IVTHttpResourceTask) task:httpTask priority:0];
+        
+        [httpTask release];
+        
+    }
+    
+}
+
 
 @end
