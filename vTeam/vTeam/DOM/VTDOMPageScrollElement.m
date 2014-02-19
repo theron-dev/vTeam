@@ -52,6 +52,14 @@
     return size;
 }
 
+-(void) setView:(UIView *)view{
+    
+    [super setView:view];
+    
+    [self.contentView setPagingEnabled:YES];
+
+}
+
 -(VTDOMElement *) pageElement{
     
     NSString * pageId = [self stringValueForKey:@"page-id"];
