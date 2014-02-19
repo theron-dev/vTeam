@@ -23,6 +23,7 @@
 #import "VTDOMHScrollElement.h"
 #import "VTDOMVScrollElement.h"
 #import "VTDOMLinkElement.h"
+#import "VTDOMStatusElement.h"
 
 typedef struct _VTDOMParseScanf {
     hxml_scanf_t base;
@@ -133,6 +134,9 @@ static hcss_scanf_t VTDOMParseCSSScanf = {
     }
     else if([name isEqualToString:@"container"]){
         elementClass = [VTDOMContainerElement class];
+    }
+    else if([name isEqualToString:@"status"]){
+        elementClass = [VTDOMStatusElement class];
     }
     else if([name isEqualToString:@"a"]){
         elementClass = [VTDOMLinkElement class];

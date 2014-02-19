@@ -208,6 +208,9 @@
                                     }
                                 }
                             }
+                            if([cfg booleanValueForKey:@"instance"]){
+                                [container instance];
+                            }
                         }
                         else{
                             NSLog(@"Service Class %@ not implement IVTService",className);

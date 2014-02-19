@@ -11,6 +11,7 @@
 #import "VTDOMView.h"
 #import "VTDOMElement+Style.h"
 #import "VTDOMElement+Layout.h"
+#import "VTDOMStatusElement.h"
 
 @interface VTDOMContainerItemView : VTDOMView
 
@@ -35,12 +36,14 @@
 @interface VTDOMContainerElement()
 
 @property(nonatomic,readonly) NSMutableArray * dequeueItemViews;
+@property(nonatomic,retain) VTDOMStatusElement * statusElement;
 
 @end
 
 @implementation VTDOMContainerElement
 
 @synthesize dequeueItemViews = _dequeueItemViews;
+@synthesize statusElement = _statusElement;
 
 -(NSMutableArray *) dequeueItemViews{
     if(_dequeueItemViews == nil){
@@ -58,6 +61,7 @@
     }
     
     [_dequeueItemViews release];
+    [_statusElement release];
     
     [super dealloc];
 }
@@ -118,6 +122,8 @@
     
     if(contentView){
         
+        CGPoint contentOffset = contentView.contentOffset;
+        
         NSMutableDictionary * itemViews = [NSMutableDictionary dictionaryWithCapacity:4];
         
         NSMutableArray * dequeueItemViews = [self dequeueItemViews];
@@ -140,11 +146,40 @@
             domView = nil;
         }
         
+        self.statusElement = nil;
+        
         for (VTDOMElement * element in [self childs]) {
             
             CGRect r = [self frameInElement:element];
 
             if([self isVisableRect:r]){
+                
+                if([element isKindOfClass:[VTDOMStatusElement class]]
+                   && ![[(VTDOMStatusElement *) element status] isEqualToString:@"loading"]){
+                    
+                    if(r.origin.y < 0 && contentOffset.y < 0){
+                        if(r.origin.y - contentOffset.y >= 0){
+                            [(VTDOMStatusElement *) element setStatus:@"topover"];
+                        }
+                        else{
+                            [(VTDOMStatusElement *) element setStatus:@"top"];
+                        }
+                        self.statusElement = (VTDOMStatusElement *) element;
+                    }
+                    else if(r.origin.x < 0 && contentOffset.x < 0){
+                        if(r.origin.x - contentOffset.x >= 0){
+                            [(VTDOMStatusElement *) element setStatus:@"leftover"];
+                        }
+                        else{
+                            [(VTDOMStatusElement *) element setStatus:@"left"];
+                        }
+                        self.statusElement = (VTDOMStatusElement *) element;
+                    }
+                    else{
+                        [(VTDOMStatusElement *) element setStatus:nil];
+                    }
+                    
+                }
                 
                 NSString * reuseIdentifier = [element attributeValueForKey:@"reuse"];
                 
@@ -164,7 +199,7 @@
                     itemView = [[[VTDOMContainerItemView alloc] initWithFrame:r] autorelease];
                     [itemView setBackgroundColor:[UIColor clearColor]];
                     [itemView setAllowAutoLayout:NO];
-                    [contentView addSubview:itemView];
+                    [contentView insertSubview:itemView atIndex:0];
                 }
                 
                 itemView.delegate = domView.delegate;
@@ -173,7 +208,7 @@
                 [itemView setFrame:r];
                 
                 if(itemView.superview == nil){
-                    [contentView addSubview:itemView];
+                    [contentView insertSubview:itemView atIndex:0];
                 }
                 
                 if(itemView.index == NSNotFound){
@@ -250,5 +285,19 @@
     }
     
 }
+
+-(void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    if(decelerate){
+        if(_statusElement){
+            
+            if([self.delegate respondsToSelector:@selector(vtDOMElementDoAction:)]){
+                [self.delegate vtDOMElementDoAction:_statusElement];
+            }
+            
+            self.statusElement = nil;
+        }
+    }
+}
+
 
 @end

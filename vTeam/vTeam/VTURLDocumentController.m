@@ -20,6 +20,10 @@
 
 #import "VTDOMElement+Layout.h"
 
+#import "VTDOMStatusElement.h"
+
+#import "VTDOMContainerElement.h"
+
 @interface  VTURLDocumentControllerElementHttpTask : VTHttpTask
 
 @property(nonatomic,retain) VTDOMElement * element;
@@ -40,6 +44,11 @@
 @interface VTURLDocumentController()
 
 @property(nonatomic,retain) VTHttpTask * httpTask;
+@property(nonatomic,retain) VTDOMStatusElement * statusElement;
+
+-(void) startLoading;
+
+-(void) stopLoading;
 
 @end
 
@@ -50,6 +59,7 @@
 @synthesize documentURL = _documentURL;
 @synthesize httpTask = _httpTask;
 @synthesize timeoutInterval = _timeoutInterval;
+@synthesize statusElement = _statusElement;
 
 -(void) dealloc{
     
@@ -61,6 +71,7 @@
     [_documentView release];
     [_document release];
     [_documentURL release];
+    [_statusElement release];
     [super dealloc];
 }
 
@@ -137,6 +148,9 @@
         
         [httpTask setRequest:request];
         
+        NSLog(@"%@",_documentURL);
+        
+        
         self.httpTask = httpTask;
         
         [self.context handle:@protocol(IVTHttpResourceTask) task:httpTask priority:0];
@@ -193,8 +207,10 @@
 
 -(void) didLoadedHTMLContent:(NSString *) htmlContent{
     
+    [self stopLoading];
+    
     [self loadHTMLContent:htmlContent];
-   
+ 
     if([self.delegate respondsToSelector:@selector(vtURLDocumentControllerDidLoaded:)]){
         [self.delegate vtURLDocumentControllerDidLoaded:self];
     }
@@ -212,6 +228,9 @@
         
     }
     else{
+        
+        [self stopLoading];
+        
         if([self.delegate respondsToSelector:@selector(vtURLDocumentController:didFailWithError:)]){
             [self.delegate vtURLDocumentController:self didFailWithError:error];
         }
@@ -383,6 +402,25 @@
 
 -(void) vtDOMView:(VTDOMView *) view doActionElement:(VTDOMElement *) element{
     
+    if([element isKindOfClass:[VTDOMStatusElement class]]){
+        
+        NSString * status = [(VTDOMStatusElement *) element status];
+        
+        if([status isEqualToString:@"topover"] || [status isEqualToString:@"leftover"]){
+            if(_statusElement == nil && ![self isLoading]){
+                
+                self.statusElement = (VTDOMStatusElement *) element;
+                
+                [_statusElement setStatus:@"loading"];
+                
+                [self performSelectorOnMainThread:@selector(startLoading) withObject:nil waitUntilDone:NO];
+                
+                [self reloadData];
+            }
+        }
+        
+    }
+    
     if([self.delegate respondsToSelector:@selector(vtURLDocumentController:doActionElement:)]){
         [self.delegate vtURLDocumentController:self doActionElement:element];
     }
@@ -417,6 +455,56 @@
         
     }
     
+}
+
+-(void) startLoading{
+    
+    if(_statusElement){
+        
+        VTDOMContainerElement * containerElement = (VTDOMContainerElement *) [_statusElement parentElement];
+        
+        while (containerElement && ![containerElement isKindOfClass:[VTDOMContainerElement class]]) {
+            containerElement = (VTDOMContainerElement *) [containerElement parentElement];
+        }
+        
+        if(containerElement){
+            
+            CGRect r = [_statusElement frame];
+            
+            UIScrollView * contentView = [containerElement contentView];
+            
+            [contentView setContentOffset:r.origin animated:YES];
+            
+        }
+        
+        [_statusElement setStatus:@"loading"];
+    }
+}
+
+-(void) stopLoading{
+    
+    if(_statusElement){
+        
+        VTDOMContainerElement * containerElement = (VTDOMContainerElement *) [_statusElement parentElement];
+        
+        while (containerElement && ![containerElement isKindOfClass:[VTDOMContainerElement class]]) {
+            containerElement = (VTDOMContainerElement *) [containerElement parentElement];
+        }
+        
+        if(containerElement){
+            
+            UIScrollView * contentView = [containerElement contentView];
+            
+            if(contentView.contentOffset.y < 0 || contentView.contentOffset.x < 0){
+                [contentView setContentOffset:CGPointZero animated:YES];
+            }
+            
+        }
+        
+        [_statusElement setStatus:nil];
+        
+        self.statusElement = nil;
+    }
 }
 
 

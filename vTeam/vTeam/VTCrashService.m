@@ -12,8 +12,54 @@
 
 #import "UIDevice+VTUUID.h"
 
+static VTCrashService * gVTCrashService = nil;
+
+static void VTCrashServiceUncaughtExceptionHandler(NSException *exception){
+    
+    VTCrashTask * task = [[VTCrashTask alloc] init];
+    [task setException:exception];
+    [gVTCrashService.context handle:@protocol(IVTCrashTask) task:task priority:0];
+    [task release];
+    
+}
+
+static void VTCrashServiceSignalHandler(int signal)
+{
+    
+    NSException * exception = [[NSException alloc] initWithName:@"VTCrashServiceSignal" reason:[NSString stringWithFormat:@"signal:%d, errno:%d",signal,errno] userInfo:nil];
+    [exception raise];
+    [exception release];
+}
+
 @implementation VTCrashService
 
+-(id) init{
+    
+    if((self = [super init])){
+        
+        NSSetUncaughtExceptionHandler(VTCrashServiceUncaughtExceptionHandler);
+        
+        signal(SIGABRT, VTCrashServiceSignalHandler);
+        signal(SIGILL, VTCrashServiceSignalHandler);
+        signal(SIGSEGV, VTCrashServiceSignalHandler);
+        signal(SIGFPE, VTCrashServiceSignalHandler);
+        signal(SIGBUS, VTCrashServiceSignalHandler);
+        signal(SIGPIPE, VTCrashServiceSignalHandler);
+        
+        gVTCrashService = self;
+    }
+    
+    return self;
+}
+
+-(void) dealloc{
+    
+    if(gVTCrashService == self){
+        gVTCrashService = nil;
+    }
+    
+    [super dealloc];
+}
 
 -(BOOL) handle:(Protocol *)taskType task:(id<IVTTask>)task priority:(NSInteger)priority{
     
