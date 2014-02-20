@@ -32,7 +32,7 @@
 
 -(void) downloadImagesForView:(UIView *) view;
 
--(void) reloadElement:(VTDOMElement *) element;
+-(void) reloadElement:(VTDOMElement *) element queryValues:(NSDictionary *) queryValues;
 
 @end
 

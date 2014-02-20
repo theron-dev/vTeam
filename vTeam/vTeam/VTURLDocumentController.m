@@ -24,6 +24,8 @@
 
 #import "VTDOMContainerElement.h"
 
+#import "NSURL+QueryValue.h"
+
 @interface  VTURLDocumentControllerElementHttpTask : VTHttpTask
 
 @property(nonatomic,retain) VTDOMElement * element;
@@ -156,6 +158,10 @@
         [self.context handle:@protocol(IVTHttpResourceTask) task:httpTask priority:0];
         
         [httpTask release];
+        
+        if([self.delegate respondsToSelector:@selector(vtURLDocumentControllerWillLoading:)]){
+            [self.delegate vtURLDocumentControllerWillLoading:self];
+        }
     }
 }
 
@@ -288,19 +294,15 @@
             if(index != NSNotFound){
                 
                 NSString * name = [element attributeValueForKey:@"name"];
-                
-                if(name){
-                    
-                    for(NSInteger i = index+1; i < [childs count];){
-                        VTDOMElement * el = [childs objectAtIndex:i];
-                        if([name isEqualToString:[el attributeValueForKey:@"name"]]){
-                            [el removeFromParentElement];
-                        }
-                        else{
-                            i ++;
-                        }
+
+                for(index ++; index < [childs count];){
+                    VTDOMElement * el = [childs objectAtIndex:index];
+                    if([name isEqualToString:[el attributeValueForKey:@"name"]]){
+                        [el removeFromParentElement];
                     }
-                    
+                    else{
+                        index ++;
+                    }
                 }
                 
                 VTDOMParse * parse = [[VTDOMParse alloc] init];
@@ -426,7 +428,7 @@
     }
 }
 
--(void) reloadElement:(VTDOMElement *) element{
+-(void) reloadElement:(VTDOMElement *) element queryValues:(NSDictionary *) queryValues{
     
     NSString * url = [element attributeValueForKey:@"url"];
     
@@ -445,13 +447,15 @@
             timeout = 300;
         }
         
-        NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url relativeToURL:_documentURL] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:timeout];
+        NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url relativeToURL:_documentURL queryValues:queryValues] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:timeout];
         
         [httpTask setRequest:request];
         
         [self.context handle:@protocol(IVTHttpResourceTask) task:httpTask priority:0];
         
         [httpTask release];
+        
+        NSLog(@"%@",request);
         
     }
     

@@ -27,6 +27,7 @@
 #import <vTeam/VTDOMVScrollElement.h>
 #import <vTeam/VTDOMLinkElement.h>
 #import <vTeam/VTDOMStatusElement.h>
+#import <vTeam/VTDOMActionElement.h>
 
 @interface VTDOM : NSObject
 
