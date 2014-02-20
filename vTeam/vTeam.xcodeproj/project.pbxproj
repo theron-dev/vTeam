@@ -76,6 +76,8 @@
 		1117024018308BE000CFD179 /* IGridView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117022E18308BE000CFD179 /* IGridView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1117024318308C8700CFD179 /* NSString+Grid.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117024118308C8700CFD179 /* NSString+Grid.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1117024418308C8700CFD179 /* NSString+Grid.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117024218308C8700CFD179 /* NSString+Grid.m */; };
+		1119900D18B645E400AB707F /* UIControl+VTDOMElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 1119900B18B645E400AB707F /* UIControl+VTDOMElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1119900E18B645E400AB707F /* UIControl+VTDOMElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1119900C18B645E400AB707F /* UIControl+VTDOMElement.m */; };
 		11216B4217587B99004C4B1C /* VTPopWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 11216B4017587B99004C4B1C /* VTPopWindow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11216B4317587B99004C4B1C /* VTPopWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 11216B4117587B99004C4B1C /* VTPopWindow.m */; };
 		11216B4D175895C3004C4B1C /* VTStyleController.h in Headers */ = {isa = PBXBuildFile; fileRef = 11216B4B175895C3004C4B1C /* VTStyleController.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -645,6 +647,8 @@
 		1117022E18308BE000CFD179 /* IGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGridView.h; sourceTree = "<group>"; };
 		1117024118308C8700CFD179 /* NSString+Grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Grid.h"; sourceTree = "<group>"; };
 		1117024218308C8700CFD179 /* NSString+Grid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Grid.m"; sourceTree = "<group>"; };
+		1119900B18B645E400AB707F /* UIControl+VTDOMElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+VTDOMElement.h"; sourceTree = "<group>"; };
+		1119900C18B645E400AB707F /* UIControl+VTDOMElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+VTDOMElement.m"; sourceTree = "<group>"; };
 		11216B4017587B99004C4B1C /* VTPopWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTPopWindow.h; sourceTree = "<group>"; };
 		11216B4117587B99004C4B1C /* VTPopWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTPopWindow.m; sourceTree = "<group>"; };
 		11216B4B175895C3004C4B1C /* VTStyleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTStyleController.h; sourceTree = "<group>"; };
@@ -1822,6 +1826,8 @@
 				11BE4F8518311E830013722E /* UIView+VTDOMElement.m */,
 				1150F8641848626700176DDD /* UIButton+VTDOMElement.h */,
 				1150F8651848626700176DDD /* UIButton+VTDOMElement.m */,
+				1119900B18B645E400AB707F /* UIControl+VTDOMElement.h */,
+				1119900C18B645E400AB707F /* UIControl+VTDOMElement.m */,
 				11A0417117BB6032001992BE /* VTDOM.h */,
 				11A0417217BB6032001992BE /* VTDOM.m */,
 				117F811C18B472CE0015DCB1 /* UIActivityIndicatorView+VTDOMElement.h */,
@@ -2294,6 +2300,7 @@
 				ACC8417917DB84BC004E3C38 /* VTAction.h in Headers */,
 				1117022F18308BE000CFD179 /* Grid.h in Headers */,
 				1117023118308BE000CFD179 /* GridApposeDataView.h in Headers */,
+				1119900D18B645E400AB707F /* UIControl+VTDOMElement.h in Headers */,
 				1117023318308BE000CFD179 /* GridApposeHeadView.h in Headers */,
 				1117023518308BE000CFD179 /* GridDataView.h in Headers */,
 				11F977651840E34100F697D7 /* NSString+Pinyin.h in Headers */,
@@ -2436,6 +2443,7 @@
 				114D7A4A172A130F0041468E /* VTJSON.m in Sources */,
 				114D7A4E172A20280041468E /* VTHttpFormBody.m in Sources */,
 				114D7A52172A29EB0041468E /* VTHttpService.m in Sources */,
+				1119900E18B645E400AB707F /* UIControl+VTDOMElement.m in Sources */,
 				114D7A56172A2A3F0041468E /* VTService.m in Sources */,
 				114D7A67172A32210041468E /* VTImageService.m in Sources */,
 				114D7A6B172A38DA0041468E /* VTImageView.m in Sources */,

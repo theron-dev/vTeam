@@ -38,6 +38,10 @@
     
     contentSize.height += padding.top + padding.bottom;
     
+    if(contentSize.height < size.height){
+        contentSize.height = size.height;
+    }
+    
     [self setContentSize:contentSize];
     
     if([self isViewLoaded]){

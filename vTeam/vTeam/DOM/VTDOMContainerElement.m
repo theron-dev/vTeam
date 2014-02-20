@@ -123,6 +123,9 @@
     if(contentView){
         
         CGPoint contentOffset = contentView.contentOffset;
+        CGSize size = contentView.bounds.size;
+        UIEdgeInsets contentInset = contentView.contentInset;
+        CGPoint bottomOffset = CGPointMake(contentOffset.x + size.width - contentInset.left - contentInset.right, contentOffset.y + size.height - contentInset.top - contentInset.bottom);
         
         NSMutableDictionary * itemViews = [NSMutableDictionary dictionaryWithCapacity:4];
         
@@ -157,7 +160,9 @@
                 if([element isKindOfClass:[VTDOMStatusElement class]]
                    && ![[(VTDOMStatusElement *) element status] isEqualToString:@"loading"]){
                     
-                    if(r.origin.y < 0 && contentOffset.y < 0){
+                    NSString * target = [element attributeValueForKey:@"target"];
+                    
+                    if(r.origin.y < 0 && contentOffset.y < 0 && [target isEqualToString:@"top"]){
                         if(r.origin.y - contentOffset.y >= 0){
                             [(VTDOMStatusElement *) element setStatus:@"topover"];
                         }
@@ -166,7 +171,25 @@
                         }
                         self.statusElement = (VTDOMStatusElement *) element;
                     }
-                    else if(r.origin.x < 0 && contentOffset.x < 0){
+                    else if(bottomOffset.y > r.origin.y && [target isEqualToString:@"bottom"]){
+                        if(bottomOffset.y >= r.origin.y + r.size.height){
+                            [(VTDOMStatusElement *) element setStatus:@"bottomover"];
+                        }
+                        else{
+                            [(VTDOMStatusElement *) element setStatus:@"bottom"];
+                        }
+                        self.statusElement = (VTDOMStatusElement *) element;
+                    }
+                    else if(bottomOffset.x > r.origin.x && [target isEqualToString:@"right"]){
+                        if(bottomOffset.x >= r.origin.x + r.size.width){
+                            [(VTDOMStatusElement *) element setStatus:@"rightover"];
+                        }
+                        else{
+                            [(VTDOMStatusElement *) element setStatus:@"right"];
+                        }
+                        self.statusElement = (VTDOMStatusElement *) element;
+                    }
+                    else if(r.origin.x < 0 && contentOffset.x < 0 && [target isEqualToString:@"left"]){
                         if(r.origin.x - contentOffset.x >= 0){
                             [(VTDOMStatusElement *) element setStatus:@"leftover"];
                         }
@@ -287,17 +310,27 @@
 }
 
 -(void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    if(decelerate){
-        if(_statusElement){
-            
-            if([self.delegate respondsToSelector:@selector(vtDOMElementDoAction:)]){
-                [self.delegate vtDOMElementDoAction:_statusElement];
-            }
-            
-            self.statusElement = nil;
+    if(_statusElement){
+        
+        if([self.delegate respondsToSelector:@selector(vtDOMElementDoAction:)]){
+            [self.delegate vtDOMElementDoAction:_statusElement];
         }
+        
+        self.statusElement = nil;
     }
 }
 
+-(void) scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
+    
+    if(_statusElement){
+        
+        if([self.delegate respondsToSelector:@selector(vtDOMElementDoAction:)]){
+            [self.delegate vtDOMElementDoAction:_statusElement];
+        }
+        
+        self.statusElement = nil;
+    }
+    
+}
 
 @end

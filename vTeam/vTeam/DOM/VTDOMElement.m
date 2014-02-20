@@ -123,7 +123,12 @@
     if(_childs == nil){
         _childs = [[NSMutableArray alloc] initWithCapacity:4];
     }
-    [_childs insertObject:element atIndex:index];
+    if(index < [_childs count]){
+        [_childs insertObject:element atIndex:index];
+    }
+    else{
+        [_childs addObject:element];
+    }
 }
 
 -(void) removeFromParentElement{

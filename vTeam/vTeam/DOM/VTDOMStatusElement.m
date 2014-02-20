@@ -10,9 +10,17 @@
 
 #import "VTDOMElement+Render.h"
 
+#import "VTDOMElement+Control.h"
+
 #import "VTDOMViewElement.h"
 
 #import "UIView+VTDOMElement.h"
+
+@interface VTDOMStatusElement(){
+    BOOL _insetTouch;
+}
+
+@end
 
 @implementation VTDOMStatusElement
 
@@ -60,5 +68,33 @@
 -(void) setStatus:(NSString *)status{
     [self setAttributeValue:status forKey:@"status"];
 }
+
+
+-(BOOL) touchesBegan:(CGPoint)location{
+    [super touchesBegan:location];
+    _insetTouch = YES;
+    return YES;
+}
+
+-(void) touchesCancelled:(CGPoint)location{
+    if([self isHighlighted]){
+        [self setHighlighted:NO];
+    }
+    _insetTouch = NO;
+}
+
+-(void) touchesEnded:(CGPoint)location{
+    
+    if(_insetTouch){
+        if([self.delegate respondsToSelector:@selector(vtDOMElementDoAction:)]){
+            [self.delegate vtDOMElementDoAction:self];
+        }
+    }
+    
+    _insetTouch = NO;
+    
+    [super touchesEnded:location];
+}
+
 
 @end

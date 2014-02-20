@@ -293,9 +293,9 @@
             
             if(index != NSNotFound){
                 
-                NSString * name = [element attributeValueForKey:@"name"];
-
-                for(index ++; index < [childs count];){
+                NSString * name = [element attributeValueForKey:@"group"];
+                
+                while(index < [childs count]){
                     VTDOMElement * el = [childs objectAtIndex:index];
                     if([name isEqualToString:[el attributeValueForKey:@"name"]]){
                         [el removeFromParentElement];
@@ -420,7 +420,21 @@
                 [self reloadData];
             }
         }
+        else if([status isEqualToString:@"right"] || [status isEqualToString:@"bottom"] || [status isEqualToString:@"bottomover"] || [status isEqualToString:@"rightover"]){
+            [self reloadElement:element queryValues:nil];
+            [(VTDOMStatusElement *) element setStatus:@"loading"];
+        }
         
+    }
+    else {
+        
+        NSString * actionName = [element attributeValueForKey:@"action-name"];
+        
+        if([actionName isEqualToString:@"reload-url"]){
+            
+            [self reloadElement:element queryValues:nil];
+            
+        }
     }
     
     if([self.delegate respondsToSelector:@selector(vtURLDocumentController:doActionElement:)]){
@@ -511,5 +525,10 @@
     }
 }
 
+-(IBAction) doRefreshAction:(id)sender{
+    if(![self isLoading]){
+        [self reloadData];
+    }
+}
 
 @end

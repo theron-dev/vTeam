@@ -34,6 +34,8 @@
 
 -(void) reloadElement:(VTDOMElement *) element queryValues:(NSDictionary *) queryValues;
 
+-(IBAction) doRefreshAction:(id)sender;
+
 @end
 
 @protocol VTURLDocumentControllerDelegate
