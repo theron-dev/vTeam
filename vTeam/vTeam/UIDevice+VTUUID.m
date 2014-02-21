@@ -24,32 +24,65 @@
 
 #import <SystemConfiguration/SystemConfiguration.h>
 
+
 @implementation UIDevice (VTUUID)
 
 SCNetworkConnectionFlags VTConnectionFlags = 0;
 SCNetworkReachabilityRef VTReachability = nil;
 
 -(NSString * ) vtUniqueIdentifier{
+
+    static NSString * uniqueIdentifier = nil;
     
-    if([self respondsToSelector:@selector(identifierForVendor)]){
-        return [[[self identifierForVendor] UUIDString] vtMD5String];
+    if(uniqueIdentifier == nil){
+        
+        NSBundle * bundle = [NSBundle mainBundle];
+        
+        NSMutableDictionary * query = [NSMutableDictionary dictionaryWithObjectsAndKeys:(NSString *)kSecClassGenericPassword,(NSString *)kSecClass
+                                , @"vtUniqueIdentifier",(NSString *) kSecAttrAccount
+                                , [bundle bundleIdentifier],(NSString *) kSecAttrService
+                                , @"vtUniqueIdentifier",(NSString *) kSecAttrLabel
+                                , [NSNumber numberWithBool:YES],(NSString *) kSecReturnData
+                                , nil];
+        
+        NSData * data = nil;
+        
+        OSStatus status = SecItemCopyMatching((CFDictionaryRef)query,(CFTypeRef *) & data);
+        
+        [data autorelease];
+        
+        if(status != noErr){
+            SecItemDelete((CFDictionaryRef) query);
+            data = nil;
+        }
+        
+        if(data){
+            uniqueIdentifier = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        }
+        else{
+            
+            if([self respondsToSelector:@selector(identifierForVendor)]){
+                uniqueIdentifier = [[[[self identifierForVendor] UUIDString] vtMD5String] retain];
+            }
+            
+            if(uniqueIdentifier == nil){
+                uuid_t uu = {0};
+                uuid_string_t suuid;
+                uuid_generate(uu);
+                uuid_unparse(uu, suuid);
+                uniqueIdentifier = [[[NSData dataWithBytes:suuid length:sizeof(suuid)] vtMD5String] retain];
+            }
+            
+            data = [uniqueIdentifier dataUsingEncoding:NSUTF8StringEncoding];
+            
+            [query removeObjectForKey:(NSString *)kSecReturnData];
+            [query setValue:data forKey:(NSString *)kSecValueData];
+            
+            SecItemAdd( (CFDictionaryRef) query, nil);
+        }
     }
     
-    NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
-    
-    id vtUniqueIdentifier = [userDefaults valueForKey:@"vtUniqueIdentifier"];
-    
-    if(vtUniqueIdentifier == nil){
-        uuid_t uu = {0};
-        uuid_string_t suuid;
-        uuid_generate(uu);
-        uuid_unparse(uu, suuid);
-        vtUniqueIdentifier = [[NSData dataWithBytes:suuid length:sizeof(suuid)] vtMD5String];
-        [userDefaults setValue:vtUniqueIdentifier forKey:@"vtUniqueIdentifier"];
-        [userDefaults synchronize];
-    }
-    
-    return vtUniqueIdentifier;
+    return uniqueIdentifier;
 }
 
 -(NSString *) MACAddress{
