@@ -28,4 +28,23 @@
     }
 }
 
+
+-(void) setDataOutlets:(NSArray *)dataOutlets{
+    if(_dataOutlets != dataOutlets){
+        
+        NSArray * v = [dataOutlets sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            NSInteger i = [obj1 tag] - [obj2 tag];
+            if(i < 0){
+                return NSOrderedAscending;
+            }
+            if(i > 0){
+                return NSOrderedDescending;
+            }
+            return NSOrderedSame;
+        }];
+        [_dataOutlets release];
+        _dataOutlets = [v retain];
+    }
+}
+
 @end

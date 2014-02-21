@@ -29,6 +29,7 @@ typedef  NSString * (^ VTDataOutletStringValue) (id data,NSString * keyPath);
 
 @interface VTDataOutlet : NSObject
 
+@property(nonatomic,assign) NSInteger tag;
 @property(nonatomic,retain) NSString * status;
 @property(nonatomic,retain) IBOutlet id view;
 @property(nonatomic,retain) IBOutletCollection(NSObject) NSArray * views;

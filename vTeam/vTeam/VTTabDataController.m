@@ -105,6 +105,7 @@
             }
             return NSOrderedSame;
         }];
+        [_controllers release];
         _controllers = [v retain];
     }
 }
@@ -121,6 +122,7 @@
             }
             return NSOrderedSame;
         }];
+        [_contentViews release];
         _contentViews = [v retain];
     }
 }
@@ -138,6 +140,7 @@
             }
             return NSOrderedSame;
         }];
+        [_tabButtons release];
         _tabButtons = [v retain];
     }
 }
