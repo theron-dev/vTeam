@@ -93,4 +93,53 @@
     }
 }
 
+-(void) setControllers:(NSArray *)controllers{
+    if(_controllers != controllers){
+        NSArray * v = [controllers sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            NSInteger i = [obj1 tag] - [obj2 tag];
+            if(i < 0){
+                return NSOrderedAscending;
+            }
+            if(i > 0){
+                return NSOrderedDescending;
+            }
+            return NSOrderedSame;
+        }];
+        _controllers = [v retain];
+    }
+}
+
+-(void) setContentViews:(NSArray *)contentViews{
+    if(_contentViews != contentViews){
+        NSArray * v = [contentViews sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            NSInteger i = [obj1 tag] - [obj2 tag];
+            if(i < 0){
+                return NSOrderedAscending;
+            }
+            if(i > 0){
+                return NSOrderedDescending;
+            }
+            return NSOrderedSame;
+        }];
+        _contentViews = [v retain];
+    }
+}
+
+-(void) setTabButtons:(NSArray *)tabButtons{
+    if(_tabButtons != tabButtons){
+        
+        NSArray * v = [tabButtons sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            NSInteger i = [obj1 tag] - [obj2 tag];
+            if(i < 0){
+                return NSOrderedAscending;
+            }
+            if(i > 0){
+                return NSOrderedDescending;
+            }
+            return NSOrderedSame;
+        }];
+        _tabButtons = [v retain];
+    }
+}
+
 @end

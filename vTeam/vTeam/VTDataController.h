@@ -15,6 +15,7 @@
 @interface VTDataController : NSObject<VTDataSourceDelegate,IVTController>
 
 @property(nonatomic,retain) IBOutlet VTDataSource * dataSource;
+@property(nonatomic,assign) NSInteger tag;
 
 -(void) refreshData;
 

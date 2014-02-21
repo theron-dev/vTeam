@@ -472,4 +472,38 @@
     return [self.dataSource dataObjectAtIndex:indexPath.row - [_headerCells count]];
 }
 
+-(void) setHeaderCells:(NSArray *)headerCells{
+    if(_headerCells != headerCells){
+        NSArray * v = [headerCells sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            NSInteger i = [obj1 tag] - [obj2 tag];
+            if(i < 0){
+                return NSOrderedAscending;
+            }
+            if(i > 0 ){
+                return NSOrderedDescending;
+            }
+            return NSOrderedSame;
+        }];
+        [_headerCells release];
+        _headerCells = [v retain];
+    }
+}
+
+-(void) setFooterCells:(NSArray *)footerCells{
+    if(_footerCells != footerCells){
+        NSArray * v = [footerCells sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            NSInteger i = [obj1 tag] - [obj2 tag];
+            if(i < 0){
+                return NSOrderedAscending;
+            }
+            if(i > 0 ){
+                return NSOrderedDescending;
+            }
+            return NSOrderedSame;
+        }];
+        [_footerCells release];
+        _footerCells = [v retain];
+    }
+}
+
 @end
