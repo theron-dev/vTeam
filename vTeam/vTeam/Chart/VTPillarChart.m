@@ -59,6 +59,10 @@
         minValue = 0.0;
     }
     
+    if(maxValue < 0.0){
+        maxValue = 0.0;
+    }
+    
     double dValue = maxValue - minValue;
     
     if(dValue != 0.0){
@@ -78,7 +82,7 @@
         for(id dataItem in dataItems){
             
             double v = [_valueReader doubleValue:dataItem];
-   
+            
             VTChartRectangle * rectangle = [[VTChartRectangle alloc] init];
             
             rectangle.borderWidth = _borderWidth;
