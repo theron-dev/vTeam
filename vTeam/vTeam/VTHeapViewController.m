@@ -78,7 +78,7 @@ typedef enum {
     _panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognizerAction:)];
     [_panGestureRecognizer setMinimumNumberOfTouches:1];
     [_panGestureRecognizer setMaximumNumberOfTouches:1];
-    [_panGestureRecognizer setCancelsTouchesInView:NO];
+    [_panGestureRecognizer setCancelsTouchesInView:YES];
     [self.view addGestureRecognizer:_panGestureRecognizer];
     
 }
@@ -118,7 +118,7 @@ typedef enum {
             
             UIView * view = self.view;
             CGSize size = view.bounds.size;
-            
+           
             if(d > 0){
                 
                 if([_viewControllers count] >1){
@@ -167,6 +167,7 @@ typedef enum {
         }
     }
     else if(state == UIGestureRecognizerStateEnded || state == UIGestureRecognizerStateFailed || state == UIGestureRecognizerStateCancelled){
+        
         if(_panBeginTouch){
             _panBeginTouch = NO;
             
