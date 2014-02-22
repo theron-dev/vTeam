@@ -78,7 +78,7 @@ typedef enum {
     _panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognizerAction:)];
     [_panGestureRecognizer setMinimumNumberOfTouches:1];
     [_panGestureRecognizer setMaximumNumberOfTouches:1];
-    [_panGestureRecognizer setCancelsTouchesInView:YES];
+    [_panGestureRecognizer setCancelsTouchesInView:[self.config booleanValueForKey:@"CancelsTouchesInView"]];
     [self.view addGestureRecognizer:_panGestureRecognizer];
     
 }
