@@ -506,4 +506,11 @@
     }
 }
 
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if([self.delegate respondsToSelector:@selector(vtTableDataController:didSelectRowAtIndexPath:)]){
+        [self.delegate vtTableDataController:self didSelectRowAtIndexPath:indexPath];
+    }
+}
+
 @end

@@ -41,5 +41,7 @@
 
 -(void) vtTableDataControllerScrollViewWillBeginDragging:(VTTableDataController *) dataController;
 
+-(void) vtTableDataController:(VTTableDataController *) dataController didSelectRowAtIndexPath:(NSIndexPath *) indexPath;
+
 @end
 
