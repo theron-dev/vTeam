@@ -453,7 +453,7 @@ typedef enum {
             [self addViewController:viewController animated:animated];
         }
     }
-    else {
+    else if(index < [_viewControllers count]){
         
         [self removeViewController:self.topViewController animated:animated];
         
