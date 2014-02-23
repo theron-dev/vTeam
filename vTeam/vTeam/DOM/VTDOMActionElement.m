@@ -60,15 +60,10 @@
     [_highlightedLayer removeFromSuperlayer];
 }
 
--(void) setHighlighted:(BOOL)highlighted{
-    [super setHighlighted:highlighted];
+-(void) refreshHighlightedLayer{
     
-    for(VTDOMElement * el in [self childs]){
-        [el setHighlighted:highlighted];
-    }
-    
-    if(highlighted){
- 
+    if([self isHighlighted] || [self isSelected]){
+        
         if([self.delegate respondsToSelector:@selector(vtDOMElement:addLayer:frame:)]){
             
             CGSize size = self.frame.size;
@@ -132,20 +127,37 @@
                 else{
                     _highlightedLayer.contentsGravity = kCAGravityResizeAspectFill;
                 }
-
+                
             }
             else{
                 _highlightedLayer.contents = nil;
             }
             
             [self.delegate vtDOMElement:self addLayer:_highlightedLayer frame:CGRectMake(0, 0, size.width, size.height)];
-
+            
         }
     }
     else{
         [_highlightedLayer removeFromSuperlayer];
-       
+        
     }
+    
+}
+
+-(void) setHighlighted:(BOOL)highlighted{
+    [super setHighlighted:highlighted];
+    
+    for(VTDOMElement * el in [self childs]){
+        [el setHighlighted:highlighted];
+    }
+    
+    [self refreshHighlightedLayer];
+}
+
+-(void) setSelected:(BOOL)selected{
+    [super setSelected:selected];
+    
+    [self refreshHighlightedLayer];
 }
 
 

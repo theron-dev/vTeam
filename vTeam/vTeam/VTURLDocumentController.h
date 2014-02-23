@@ -36,6 +36,8 @@
 
 -(IBAction) doRefreshAction:(id)sender;
 
+-(void) relayout;
+
 @end
 
 @protocol VTURLDocumentControllerDelegate

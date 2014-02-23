@@ -465,6 +465,8 @@
 		11D678ED17AA5097000E02FA /* VTBehaviorTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 11D678EB17AA5097000E02FA /* VTBehaviorTask.m */; };
 		11D678F017AA5243000E02FA /* VTBehaviorTransactionTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 11D678EE17AA5242000E02FA /* VTBehaviorTransactionTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11D678F117AA5243000E02FA /* VTBehaviorTransactionTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 11D678EF17AA5242000E02FA /* VTBehaviorTransactionTask.m */; };
+		11E0EFBB18B9B55B00B43022 /* VTDOMTableElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 11E0EFB918B9B55B00B43022 /* VTDOMTableElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11E0EFBC18B9B55B00B43022 /* VTDOMTableElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E0EFBA18B9B55B00B43022 /* VTDOMTableElement.m */; };
 		11E41C32182DD79800ED6D40 /* VTAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = 11E41C30182DD79800ED6D40 /* VTAlertView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11E41C33182DD79800ED6D40 /* VTAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E41C31182DD79800ED6D40 /* VTAlertView.m */; };
 		11E59F5F1728C197002DD63C /* IVTServiceContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 11E59F5E1728C03B002DD63C /* IVTServiceContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1048,6 +1050,8 @@
 		11DE6CE417B8ADDF00B04782 /* VTDOMElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDOMElement.m; sourceTree = "<group>"; };
 		11DE6CE717B8AE4400B04782 /* VTDOMStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDOMStyle.h; sourceTree = "<group>"; };
 		11DE6CE817B8AE4400B04782 /* VTDOMStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDOMStyle.m; sourceTree = "<group>"; };
+		11E0EFB918B9B55B00B43022 /* VTDOMTableElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDOMTableElement.h; sourceTree = "<group>"; };
+		11E0EFBA18B9B55B00B43022 /* VTDOMTableElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDOMTableElement.m; sourceTree = "<group>"; };
 		11E41C30182DD79800ED6D40 /* VTAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTAlertView.h; sourceTree = "<group>"; };
 		11E41C31182DD79800ED6D40 /* VTAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTAlertView.m; sourceTree = "<group>"; };
 		11E59F5E1728C03B002DD63C /* IVTServiceContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVTServiceContainer.h; sourceTree = "<group>"; };
@@ -1814,6 +1818,8 @@
 				113F9E5718746D6B00E6948C /* VTDOMVScrollElement.m */,
 				117F811818B462DB0015DCB1 /* VTDOMStatusElement.h */,
 				117F811918B462DB0015DCB1 /* VTDOMStatusElement.m */,
+				11E0EFB918B9B55B00B43022 /* VTDOMTableElement.h */,
+				11E0EFBA18B9B55B00B43022 /* VTDOMTableElement.m */,
 				11A0416917BB5C81001992BE /* VTDOMView.h */,
 				11A0416A17BB5C81001992BE /* VTDOMView.m */,
 				11A041B517BDC253001992BE /* VTDOMScrollView.h */,
@@ -2326,6 +2332,7 @@
 				1107F5A2187D4AAA0093AE80 /* VTChartDataReader.h in Headers */,
 				1107F5A7187D51400093AE80 /* VTPieChart.h in Headers */,
 				1107F5AB187D53CD0093AE80 /* VTChartArc.h in Headers */,
+				11E0EFBB18B9B55B00B43022 /* VTDOMTableElement.h in Headers */,
 				1107F5AF187D543E0093AE80 /* VTChartContainer.h in Headers */,
 				1107F5B2187D54850093AE80 /* IVTChartContainer.h in Headers */,
 				1107F5B5187D5AAD0093AE80 /* VTChartView.h in Headers */,
@@ -2506,6 +2513,7 @@
 				113140481749EC590081641F /* hbuffer.c in Sources */,
 				1131404A1749EC590081641F /* hbytes.c in Sources */,
 				1131404D1749EC590081641F /* hclass.c in Sources */,
+				11E0EFBC18B9B55B00B43022 /* VTDOMTableElement.m in Sources */,
 				1131404F1749EC590081641F /* hconfig.c in Sources */,
 				113140511749EC590081641F /* hdata.c in Sources */,
 				113140531749EC590081641F /* hdata_alloc.c in Sources */,

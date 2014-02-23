@@ -531,4 +531,11 @@
     }
 }
 
+-(void) relayout{
+    
+    [self.document.rootElement layout:_documentView.bounds.size];
+    
+    [_documentView setNeedsDisplay];
+}
+
 @end

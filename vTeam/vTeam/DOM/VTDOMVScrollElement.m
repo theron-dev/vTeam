@@ -28,8 +28,8 @@
         CGRect r = element.frame;
         UIEdgeInsets margin = [element margin];
         
-        r.origin = CGPointMake(padding.left, contentSize.height + margin.top + padding.top);
-        r.size.width = size.width - padding.left - padding.right;
+        r.origin = CGPointMake(padding.left + margin.left, contentSize.height + margin.top + padding.top);
+        r.size.width = size.width - padding.left - padding.right - margin.left - margin.right;
         
         [element setFrame:r];
         
