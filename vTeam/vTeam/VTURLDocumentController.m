@@ -48,6 +48,7 @@
 @property(nonatomic,retain) VTHttpTask * httpTask;
 @property(nonatomic,retain) VTDOMStatusElement * statusElement;
 
+
 -(void) startLoading;
 
 -(void) stopLoading;
@@ -62,6 +63,7 @@
 @synthesize httpTask = _httpTask;
 @synthesize timeoutInterval = _timeoutInterval;
 @synthesize statusElement = _statusElement;
+@synthesize documentUUID = _documentUUID;
 
 -(void) dealloc{
     
@@ -74,6 +76,7 @@
     [_document release];
     [_documentURL release];
     [_statusElement release];
+    [_documentUUID release];
     [super dealloc];
 }
 
@@ -187,6 +190,14 @@
 }
 
 -(void) loadHTMLContent:(NSString *) htmlContent{
+    
+    NSString * uuid = [htmlContent vtMD5String];
+    
+    if([_documentUUID isEqualToString:uuid]){
+        return;
+    }
+    
+    self.documentUUID = uuid;
     
     VTDOMParse * parse = [[VTDOMParse alloc] init];
     

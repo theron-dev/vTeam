@@ -25,6 +25,7 @@
 @property(nonatomic,assign) NSTimeInterval timeoutInterval;
 @property(nonatomic,readonly) NSString * documentFilePath;
 @property(nonatomic,assign,getter = isAllowPreloadCached) BOOL allowPreloadCached;
+@property(nonatomic,retain) NSString * documentUUID;
 
 -(void) reloadData;
 

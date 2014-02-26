@@ -10,4 +10,6 @@
 
 @interface VTDOMPageScrollElement : VTDOMContainerElement
 
+@property(nonatomic,readonly) NSInteger pageIndex;
+
 @end

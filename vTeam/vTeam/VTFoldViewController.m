@@ -240,6 +240,11 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
+    
+    if(_animating || [[[self topController] valueForKeyPath:@"config.fold.disabled"] boolValue]){
+        return NO;
+    }
+    
     CGPoint point = [touch locationInView:[[self centerViewController] view]];
     CGRect centerViewFrame = [[[self centerViewController] view] bounds];
     if (CGRectContainsPoint(centerViewFrame, point)) {

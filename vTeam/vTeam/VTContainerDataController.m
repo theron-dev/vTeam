@@ -222,7 +222,9 @@
 -(void) vtDataSourceDidLoaded:(VTDataSource *) dataSource{
     [super vtDataSourceDidLoaded:dataSource];
     [self setLastUpdateDate:[NSDate date]];
-    [_containerView reloadData];
+    if([dataSource isDataChanged]){
+        [_containerView reloadData];
+    }
     [self stopLoading];
 }
 

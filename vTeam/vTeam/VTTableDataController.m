@@ -196,7 +196,9 @@
 -(void) vtDataSourceDidLoaded:(VTDataSource *) dataSource{
     [super vtDataSourceDidLoaded:dataSource];
     [self setLastUpdateDate:[NSDate date]];
-    [_tableView reloadData];
+    if([dataSource isDataChanged]){
+        [_tableView reloadData];
+    }
     [self stopLoading];
 }
 

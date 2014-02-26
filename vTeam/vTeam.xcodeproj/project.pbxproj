@@ -78,6 +78,8 @@
 		1117024418308C8700CFD179 /* NSString+Grid.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117024218308C8700CFD179 /* NSString+Grid.m */; };
 		1119900D18B645E400AB707F /* UIControl+VTDOMElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 1119900B18B645E400AB707F /* UIControl+VTDOMElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1119900E18B645E400AB707F /* UIControl+VTDOMElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1119900C18B645E400AB707F /* UIControl+VTDOMElement.m */; };
+		11211CCE18BDB15E00053565 /* NSFileManager+VTMD5String.h in Headers */ = {isa = PBXBuildFile; fileRef = 11211CCC18BDB15E00053565 /* NSFileManager+VTMD5String.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11211CCF18BDB15E00053565 /* NSFileManager+VTMD5String.m in Sources */ = {isa = PBXBuildFile; fileRef = 11211CCD18BDB15E00053565 /* NSFileManager+VTMD5String.m */; };
 		11216B4217587B99004C4B1C /* VTPopWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 11216B4017587B99004C4B1C /* VTPopWindow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11216B4317587B99004C4B1C /* VTPopWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 11216B4117587B99004C4B1C /* VTPopWindow.m */; };
 		11216B4D175895C3004C4B1C /* VTStyleController.h in Headers */ = {isa = PBXBuildFile; fileRef = 11216B4B175895C3004C4B1C /* VTStyleController.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -651,6 +653,8 @@
 		1117024218308C8700CFD179 /* NSString+Grid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Grid.m"; sourceTree = "<group>"; };
 		1119900B18B645E400AB707F /* UIControl+VTDOMElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+VTDOMElement.h"; sourceTree = "<group>"; };
 		1119900C18B645E400AB707F /* UIControl+VTDOMElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+VTDOMElement.m"; sourceTree = "<group>"; };
+		11211CCC18BDB15E00053565 /* NSFileManager+VTMD5String.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+VTMD5String.h"; sourceTree = "<group>"; };
+		11211CCD18BDB15E00053565 /* NSFileManager+VTMD5String.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+VTMD5String.m"; sourceTree = "<group>"; };
 		11216B4017587B99004C4B1C /* VTPopWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTPopWindow.h; sourceTree = "<group>"; };
 		11216B4117587B99004C4B1C /* VTPopWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTPopWindow.m; sourceTree = "<group>"; };
 		11216B4B175895C3004C4B1C /* VTStyleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTStyleController.h; sourceTree = "<group>"; };
@@ -1251,6 +1255,8 @@
 				11F977641840E34100F697D7 /* NSString+Pinyin.m */,
 				110D4C5A18714F2900681A23 /* NSObject+VTValue.h */,
 				110D4C5B18714F2900681A23 /* NSObject+VTValue.m */,
+				11211CCC18BDB15E00053565 /* NSFileManager+VTMD5String.h */,
+				11211CCD18BDB15E00053565 /* NSFileManager+VTMD5String.m */,
 			);
 			name = NSCategory;
 			sourceTree = "<group>";
@@ -2093,6 +2099,7 @@
 				114D7A55172A2A3F0041468E /* VTService.h in Headers */,
 				114D7A66172A32210041468E /* VTImageService.h in Headers */,
 				114D7A6A172A38DA0041468E /* VTImageView.h in Headers */,
+				11211CCE18BDB15E00053565 /* NSFileManager+VTMD5String.h in Headers */,
 				114D7A6C172A38EF0041468E /* IVTImageTask.h in Headers */,
 				114D7A6F172A3A910041468E /* VTContentViewController.h in Headers */,
 				114D7A73172A3E8E0041468E /* VTFoldViewController.h in Headers */,
@@ -2520,6 +2527,7 @@
 				113140551749EC590081641F /* hdata_binary.c in Sources */,
 				113140571749EC590081641F /* hdata_json.c in Sources */,
 				113140591749EC590081641F /* hdata_set.c in Sources */,
+				11211CCF18BDB15E00053565 /* NSFileManager+VTMD5String.m in Sources */,
 				113351F018750A0E00F0E315 /* VTURLDocumentController.m in Sources */,
 				114D643417E1C62C0021CB8A /* VTMontagePlayer.m in Sources */,
 				1131405B1749EC590081641F /* hdata_storage.c in Sources */,

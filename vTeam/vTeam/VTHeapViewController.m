@@ -79,8 +79,23 @@ typedef enum {
     [_panGestureRecognizer setMinimumNumberOfTouches:1];
     [_panGestureRecognizer setMaximumNumberOfTouches:1];
     [_panGestureRecognizer setCancelsTouchesInView:[self.config booleanValueForKey:@"CancelsTouchesInView"]];
+    [_panGestureRecognizer setDelegate:self];
+    
     [self.view addGestureRecognizer:_panGestureRecognizer];
     
+}
+
+-(BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
+    
+    if(gestureRecognizer == _panGestureRecognizer){
+        
+        if(_animating || [[[self topController] valueForKeyPath:@"config.heap.disabled"] boolValue]){
+            return NO;
+        }
+        
+    }
+    
+    return YES;
 }
 
 -(void) panGestureRecognizerAction:(UIPanGestureRecognizer * ) gestureRecognizer{

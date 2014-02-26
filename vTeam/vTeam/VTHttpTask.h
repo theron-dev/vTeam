@@ -47,6 +47,7 @@ typedef enum {
 @property(retain) id userInfo;
 @property(assign,getter = isAllowWillRequest) BOOL allowWillRequest;        // 允许预先生成 request
 @property(assign,getter = isAllowStatusCode302) BOOL allowStatusCode302;    // 允许 HTTP 302 跳转
+@property(retain) NSString * responseUUID;
 
 -(NSURLRequest *) doWillRequeset;
 

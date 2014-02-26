@@ -208,6 +208,7 @@
     [respTask setResultsData:[httpTask responseBody]];
     [respTask setUrl:[[(VTHttpTask *)httpTask request] URL]];
     [respTask setStatusCode:[(NSHTTPURLResponse *)[httpTask response] statusCode]];
+    [respTask setResponseUUID:[httpTask responseUUID]];
     
     if(_responses == nil){
         _responses = [[NSMutableArray alloc] initWithCapacity:4];

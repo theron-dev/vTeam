@@ -245,10 +245,12 @@
     Protocol * taskType = NSProtocolFromString([userInfo valueForKey:@"taskType"]);
     id task = [userInfo valueForKey:@"task"];
     id body = [userInfo valueForKey:@"body"];
+    NSString * responseUUID = [userInfo valueForKey:@"responseUUID"];
+    
     if(task && taskType){
         NSError * error = [self errorByResponseBody:body task:task];
         if(error == nil){
-            [self vtDownlinkTask:task didResponse:body isCache:[task vtDownlinkPageTaskPageIndex] == 1 forTaskType:taskType];
+            [self vtDownlinkTask:task didResponse:body isCache:[task vtDownlinkPageTaskPageIndex] == 1 responseUUID:responseUUID forTaskType:taskType];
         }
         else{
             [self vtDownlinkTask:task didFitalError:error forTaskType:taskType];
@@ -282,7 +284,7 @@
             [NSDictionary dictionaryWithObjectsAndKeys:
              NSStringFromProtocol(taskType),@"taskType"
              ,task,@"task"
-             ,[httpTask responseBody],@"body", nil] afterDelay:0];
+             ,[httpTask responseBody],@"body",[httpTask responseUUID],@"responseUUID", nil] afterDelay:0];
     }
 }
 

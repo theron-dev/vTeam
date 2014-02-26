@@ -18,4 +18,6 @@
 
 -(CGRect) frameInElement:(VTDOMElement *) element;
 
+-(void) didVisableItemView:(UIView *) itemView element:(VTDOMElement *) element atIndex:(NSInteger) index;
+
 @end

@@ -358,6 +358,12 @@
         
         CALayer * superLayer = nil;
         
+        UIColor * actionColor = [self colorValueForKey:@"action-color"];
+        
+        if(actionColor == nil){
+            actionColor = [UIColor colorWithWhite:1.0f alpha:0.3f];
+        }
+        
         if([self.delegate isKindOfClass:[UIView class]]){
             superLayer = [(UIView *)self.delegate layer];
         }
@@ -373,7 +379,7 @@
                 
                 if(layer == nil){
                     layer = [[CALayer alloc] init];
-                    layer.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.3].CGColor;
+                    layer.backgroundColor = actionColor.CGColor;
                     layer.cornerRadius = 3;
                     layer.masksToBounds = YES;
                 }

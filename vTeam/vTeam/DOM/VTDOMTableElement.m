@@ -100,7 +100,7 @@
                           options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
     
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    
+    [self.tableView setAllowsSelection:[self booleanValueForKey:@"allowsSelection"]];
 }
 
 -(void) setDelegate:(id)delegate{
@@ -205,16 +205,11 @@
         
         cell = [[[VTDOMTableElementCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier] autorelease];
         
-        UIView * bgView = [[UIView alloc] initWithFrame:cell.bounds];
-        
-        [bgView setBackgroundColor:[UIColor blackColor]];
-        
-        [cell setBackgroundView:bgView];
-        
-        [bgView release];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
         
         VTDOMView * view = [[VTDOMView alloc] initWithFrame:cell.bounds];
         
+        [view setBackgroundColor:[UIColor clearColor]];
         [view setTag:100];
         
         [cell.contentView addSubview:view];

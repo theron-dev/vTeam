@@ -8,7 +8,7 @@
 
 #import <vTeam/vTeam.h>
 
-@interface VTHeapViewController : VTViewController
+@interface VTHeapViewController : VTViewController<UIGestureRecognizerDelegate>
 
 @property(nonatomic,assign,getter = isAnimating) BOOL animating;
 

@@ -110,6 +110,36 @@
     }
 }
 
+-(NSInteger) pageIndex{
+    
+    if([self isViewLoaded]){
+        UIScrollView * contentView = [self contentView];
+        
+        CGSize size = contentView.bounds.size;
+        CGSize contentSize = contentView.contentSize;
+        CGPoint contentOffset = contentView.contentOffset;
+        
+        if(contentSize.width < size.width){
+            contentSize.width = size.width;
+        }
+        
+        NSInteger pageCount = contentSize.width / size.width;
+        
+        NSInteger pageIndex = contentOffset.x / size.width;
+        
+        if(pageIndex >= pageCount){
+            pageIndex = pageCount - 1;
+        }
+        
+        if(pageIndex < 0){
+            pageIndex = 0;
+        }
+
+        return pageIndex;
+    }
+    return 0;
+}
+
 -(void) scrollViewDidScroll:(UIScrollView *)scrollView{
     
     VTDOMElement * pageElement = [self pageElement];

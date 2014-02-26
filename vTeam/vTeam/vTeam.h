@@ -116,3 +116,4 @@
 #import <vTeam/NSObject+VTValue.h>
 #import <vTeam/VTFlowContainerLayout.h>
 #import <vTeam/VTFallsContainerLayout.h>
+#import <vTeam/NSFileManager+VTMD5String.h>

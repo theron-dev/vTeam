@@ -13,6 +13,7 @@
 @protocol IVTDownlinkTask <IVTTask>
 
 @property(nonatomic,assign,getter = isSkipCached) BOOL skipCached;
+@property(nonatomic,assign,getter = isDataChanged) BOOL dataChanged;
 
 @optional
 

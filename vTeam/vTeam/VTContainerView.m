@@ -423,4 +423,11 @@
     return CGSizeMake(size.width - insets.left - insets.right, size.height - insets.top - insets.bottom);
 }
 
+-(NSArray *) visableItemViewControllers{
+    if(_itemViewControllers){
+        return [NSArray arrayWithArray:_itemViewControllers];
+    }
+    return nil;
+}
+
 @end

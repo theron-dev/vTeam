@@ -25,6 +25,14 @@
 @synthesize loaded = _loaded;
 @synthesize dataKey = _dataKey;
 @synthesize skipCached = _skipCached;
+@synthesize dataChanged = _dataChanged;
+
+-(id) init{
+    if((self = [super init])){
+        _dataChanged = YES;
+    }
+    return self;
+}
 
 -(void) dealloc{
     [self cancel];
@@ -93,26 +101,37 @@
 
 -(void) vtDownlinkTaskDidLoadedFromCache:(id) data timestamp:(NSDate *) timestamp forTaskType:(Protocol *) taskType{
 
-    [[self dataObjects] removeAllObjects];
-    
-    [self loadResultsData:data];
-    
-    if([_delegate respondsToSelector:@selector(vtDataSourceDidLoadedFromCache:timestamp:)]){
-        [_delegate vtDataSourceDidLoadedFromCache:self timestamp:timestamp];
+    if(_dataChanged){
+        
+        [[self dataObjects] removeAllObjects];
+        [self loadResultsData:data];
+        
+        if([_delegate respondsToSelector:@selector(vtDataSourceDidLoadedFromCache:timestamp:)]){
+            [_delegate vtDataSourceDidLoadedFromCache:self timestamp:timestamp];
+        }
+        
     }
+
+    self.dataChanged = NO;
 }
 
 -(void) vtDownlinkTaskDidLoaded:(id) data forTaskType:(Protocol *) taskType{
     _loading = NO;
-    [[self dataObjects] removeAllObjects];
     
-    [self loadResultsData:data];
+    if(self.dataChanged){
+        
+        [[self dataObjects] removeAllObjects];
+    
+        [self loadResultsData:data];
+        
+    }
     
     if([_delegate respondsToSelector:@selector(vtDataSourceDidLoaded:)]){
         [_delegate vtDataSourceDidLoaded:self];
     }
     _loaded = YES;
     _skipCached = NO;
+    self.dataChanged = NO;
 }
 
 -(void) vtDownlinkTaskDidFitalError:(NSError *) error forTaskType:(Protocol *) taskType{

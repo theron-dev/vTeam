@@ -14,11 +14,13 @@
 @synthesize error = _error;
 @synthesize url = _url;
 @synthesize statusCode = _statusCode;
+@synthesize responseUUID = _responseUUID;
 
 -(void) dealloc{
     [_resultsData release];
     [_error release];
     [_url release];
+    [_responseUUID release];
     [super dealloc];
 }
 

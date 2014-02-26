@@ -97,6 +97,8 @@
     
     VTDOMView * documentView = (VTDOMView *) [cell.contentView viewWithTag:100];
    
+    [documentView setUserInteractionEnabled:! [[document rootElement] booleanValueForKey:@"disabled"]];
+    
     if([document rootElement]){
         
         [self loadImagesForElement:[document rootElement]];
@@ -298,6 +300,21 @@
 
 -(void) vtDOMView:(VTDOMView *)view downloadImagesForView:(UIView *) forView{
     [self downloadImagesForView:forView];
+}
+
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    VTDOMElement * element = [[self documentByIndexPath:indexPath] rootElement];
+    if(element){
+        [element retain];
+        [element setAttributeValue:@"didSelect" forKey:@"event"];
+        
+        if([self.delegate respondsToSelector:@selector(vtDocumentDataController:element:doAction:)]){
+            [self.delegate vtDocumentDataController:self element:element doAction:nil];
+        }
+        
+        [element setAttributeValue:nil forKey:@"event"];
+        [element release];
+    }
 }
 
 @end

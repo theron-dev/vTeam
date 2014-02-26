@@ -23,6 +23,7 @@ static dispatch_queue_t gDownlinkServiceDispatchQueue = nil;
 @property(nonatomic,retain) NSString * service;
 @property(nonatomic,retain) NSString * key;
 @property(nonatomic,retain) NSString * jsonString;
+@property(nonatomic,retain) NSString * responseUUID;
 @property(nonatomic,assign) NSInteger timestamp;
 
 @end
@@ -33,11 +34,13 @@ static dispatch_queue_t gDownlinkServiceDispatchQueue = nil;
 @synthesize key = _key;
 @synthesize jsonString = _jsonString;
 @synthesize timestamp = _timestamp;
+@synthesize responseUUID = _responseUUID;
 
 -(void) dealloc{
     [_service release];
     [_key release];
     [_jsonString release];
+    [_responseUUID release];
     [super dealloc];
 }
 
@@ -132,10 +135,14 @@ static dispatch_queue_t gDownlinkServiceDispatchQueue = nil;
 
 }
 
--(void) vtDownlinkTask:(id<IVTDownlinkTask>) downlinkTask didResponse:(id) data isCache:(BOOL) isCache forTaskType:(Protocol *) taskType{
+-(void) vtDownlinkTask:(id<IVTDownlinkTask>)downlinkTask didResponse:(id)data isCache:(BOOL)isCache forTaskType:(Protocol *)taskType{
+    [self vtDownlinkTask:downlinkTask didResponse:data isCache:isCache responseUUID:nil forTaskType:taskType];
+}
+
+-(void) vtDownlinkTask:(id<IVTDownlinkTask>) downlinkTask didResponse:(id) data isCache:(BOOL) isCache responseUUID:(NSString *)responseUUID forTaskType:(Protocol *) taskType{
 
     NSString * dataKey = nil;
-    __block NSString * jsonString = nil;
+    __block BOOL dataChanged = YES;
     
     if(isCache){
         dataKey = [self dataKey:downlinkTask forTaskType:taskType];
@@ -144,7 +151,34 @@ static dispatch_queue_t gDownlinkServiceDispatchQueue = nil;
                 
                 NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
                 
-                jsonString = [[VTJSON encodeObject:data] retain];
+                NSString * jsonString = [VTJSON encodeObject:data];
+                
+                VTDownlinkServiceDBObject * dataObject = [self dataObjectForKey:dataKey];
+                
+                if(dataObject){
+                    
+                    dataChanged = ! [dataObject.responseUUID isEqualToString:responseUUID];
+                    
+                    dataObject.responseUUID = responseUUID;
+                    dataObject.jsonString = jsonString;
+                    dataObject.timestamp = time(NULL);
+                    
+                    [[VTDownlinkService dbContext] updateObject:dataObject];
+                    
+                }
+                else{
+                    
+                    dataObject = [[VTDownlinkServiceDBObject alloc] init];
+                    dataObject.responseUUID = responseUUID;
+                    dataObject.key = dataKey;
+                    dataObject.jsonString = jsonString;
+                    dataObject.timestamp = time(NULL);
+                    dataObject.service = NSStringFromClass([self class]);
+                    
+                    [[VTDownlinkService dbContext] insertObject:dataObject];
+                    
+                    [dataObject release];
+                }
                 
                 [pool release];
             });
@@ -157,43 +191,12 @@ static dispatch_queue_t gDownlinkServiceDispatchQueue = nil;
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 
+                [downlinkTask setDataChanged:dataChanged];
                 [downlinkTask vtDownlinkTaskDidLoaded:data forTaskType:taskType];
             
             });
         });
 
-    }
-    
-    if(isCache && dataKey){
-
-        dispatch_async([VTDownlinkService dispatchQueue], ^{
-            
-            NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-            
-            VTDownlinkServiceDBObject * dataObject = [self dataObjectForKey:dataKey];
-            
-            if(dataObject){
-                dataObject.jsonString = jsonString;
-                dataObject.timestamp = time(NULL);
-                [[VTDownlinkService dbContext] updateObject:dataObject];
-            }
-            else{
-                dataObject = [[VTDownlinkServiceDBObject alloc] init];
-                dataObject.key = dataKey;
-                dataObject.jsonString = jsonString;
-                dataObject.timestamp = time(NULL);
-                dataObject.service = NSStringFromClass([self class]);
-                [[VTDownlinkService dbContext] insertObject:dataObject];
-                [dataObject release];
-            }
-            
-            [jsonString release];
-            
-            [pool release];
-        });
-    }
-    else{
-        [jsonString release];
     }
 
 }

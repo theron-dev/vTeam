@@ -19,6 +19,7 @@
 @property(nonatomic,retain) IBOutlet UIView * backgroundView;
 @property(nonatomic,assign) NSInteger focusIndex;
 @property(nonatomic,assign) UIEdgeInsets visableEdgeInsets;
+@property(nonatomic,readonly,copy) NSArray * visableItemViewControllers;
 
 -(BOOL) isFullVisableRect:(CGRect) rect;
 

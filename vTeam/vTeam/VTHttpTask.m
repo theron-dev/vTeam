@@ -15,6 +15,9 @@
 #include "htime.h"
 #include "hfile.h"
 
+#import "NSData+VTMD5String.h"
+#import "NSFileManager+VTMD5String.h"
+
 @interface VTHttpTask()
 
 @property(assign) unsigned long long contentLength;
@@ -43,6 +46,7 @@
 @synthesize responseEncoding = _responseEncoding;
 @synthesize allowWillRequest = _allowWillRequest;
 @synthesize allowStatusCode302 = _allowStatusCode302;
+@synthesize responseUUID = _responseUUID;
 
 -(void) dealloc{
     [_userInfo release];
@@ -50,6 +54,7 @@
     [_responseBody release];
     [_response release];
     [_contentType release];
+    [_responseUUID release];
     [super dealloc];
 }
 
@@ -205,6 +210,9 @@
 
 -(void) doBackgroundLoaded{
     if(_responseType == VTHttpTaskResponseTypeString && _responseBody){
+        
+        self.responseUUID = [_responseBody vtMD5String];
+        
         if([[self.contentType lowercaseString] rangeOfString:@"charset=gbk"].location != NSNotFound || _responseEncoding == VTHttpTaskResponseEncodingGBK){
             self.responseBody = [[[NSString alloc] initWithData:_responseBody encoding:CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000)] autorelease];
         }
@@ -213,6 +221,9 @@
         }
     }
     else if(_responseType == VTHttpTaskResponseTypeJSON && _responseBody){
+        
+        self.responseUUID = [_responseBody vtMD5String];
+        
         NSString * s = nil;
         if([[self.contentType lowercaseString] rangeOfString:@"charset=gbk"].location != NSNotFound || _responseEncoding == VTHttpTaskResponseEncodingGBK){
             s = [[[NSString alloc] initWithData:_responseBody encoding:CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000)] autorelease];
@@ -220,6 +231,7 @@
         else{
             s = [[[NSString alloc] initWithData:_responseBody encoding:NSUTF8StringEncoding] autorelease];
         }
+        
         self.responseBody = s ? [VTJSON decodeText:s] : nil;
     }
     else if(_responseType == VTHttpTaskResponseTypeResource){
@@ -232,6 +244,9 @@
         else if(!self.allowCheckContentLength
            || _contentLength == 0 || _contentLength == _downloadLength){
             [[NSFileManager defaultManager] moveItemAtPath:t toPath:_responseBody error:nil];
+            
+            self.responseUUID = [[NSFileManager defaultManager] vtMD5StringAtPath:_responseBody];
+            
         }
         else{
             [[NSFileManager defaultManager] removeItemAtPath:t error:nil];

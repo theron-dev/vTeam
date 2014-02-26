@@ -252,6 +252,9 @@
                         [[domView delegate] vtDOMView:domView downloadImagesForView:itemView];
                     }
                     
+                    
+                    [self didVisableItemView:domView element:element atIndex:index];
+                    
                 }
                 
                 [itemViews removeObjectForKey:[NSNumber numberWithInt:index]];
@@ -330,6 +333,10 @@
         
         self.statusElement = nil;
     }
+    
+}
+
+-(void) didVisableItemView:(UIView *) itemView element:(VTDOMElement *) element atIndex:(NSInteger) index{
     
 }
 
