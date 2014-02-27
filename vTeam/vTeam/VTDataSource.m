@@ -46,7 +46,6 @@
 }
 
 -(void) refreshData{
-    _skipCached = YES;
     [self reloadData];
 }
 
