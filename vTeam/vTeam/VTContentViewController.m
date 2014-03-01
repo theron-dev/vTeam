@@ -131,11 +131,6 @@
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-}
-
--(void) viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    
     if(_contentViewController){
         
         UIView * contentView = [self contentView];
@@ -151,6 +146,13 @@
             [contentView addSubview:v];
         }
     }
+    
+}
+
+-(void) viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    
 
 }
 

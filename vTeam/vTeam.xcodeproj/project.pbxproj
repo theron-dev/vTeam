@@ -248,7 +248,7 @@
 		114D7A6C172A38EF0041468E /* IVTImageTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D7A63172A30F30041468E /* IVTImageTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		114D7A6F172A3A910041468E /* VTContentViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D7A6D172A3A900041468E /* VTContentViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		114D7A70172A3A910041468E /* VTContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 114D7A6E172A3A910041468E /* VTContentViewController.m */; };
-		114D7A73172A3E8E0041468E /* VTFoldViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D7A71172A3E8E0041468E /* VTFoldViewController.h */; };
+		114D7A73172A3E8E0041468E /* VTFoldViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D7A71172A3E8E0041468E /* VTFoldViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		114D7A75172A5B4B0041468E /* VTFoldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 114D7A72172A3E8E0041468E /* VTFoldViewController.m */; };
 		114D7AC3172A6D7A0041468E /* VTToolbar.h in Headers */ = {isa = PBXBuildFile; fileRef = 114D7AC1172A6D7A0041468E /* VTToolbar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		114D7AC4172A6D7A0041468E /* VTToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 114D7AC2172A6D7A0041468E /* VTToolbar.m */; };

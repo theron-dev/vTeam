@@ -63,6 +63,26 @@
     return pageIndex;
 }
 
+-(void) setPageIndex:(NSInteger)pageIndex animated:(BOOL) animated{
+    CGSize size = _containerView.bounds.size;
+    [_containerView setContentOffset:CGPointMake(pageIndex * size.width, 0) animated:animated];
+    if(!animated){
+        [_pageControl setCurrentPage:pageIndex];
+    }
+}
+
+-(NSInteger) pageCount{
+    
+    CGSize size = _containerView.bounds.size;
+    CGSize contentSize = _containerView.contentSize;
+
+    if(contentSize.width < size.width){
+        contentSize.width = size.width;
+    }
+    
+    return contentSize.width / size.width;
+}
+
 -(NSInteger) numberOfVTContainerLayout:(VTContainerLayout *) containerLayout{
     NSInteger pageCount = [self.dataSource count];
     [_pageControl setNumberOfPages:pageCount];

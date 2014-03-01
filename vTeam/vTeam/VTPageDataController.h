@@ -23,6 +23,9 @@
 @property(nonatomic,retain) IBOutlet VTDragLoadingView * rightLoadingView;
 @property(nonatomic,retain) IBOutlet UIPageControl * pageControl;
 @property(nonatomic,readonly) NSInteger pageIndex;
+@property(nonatomic,readonly) NSInteger pageCount;
+
+-(void) setPageIndex:(NSInteger)pageIndex animated:(BOOL) animated;
 
 -(void) startLoading;
 

@@ -8,7 +8,7 @@
 
 #import <vTeam/VTViewController.h>
 
-extern NSString * FoldViewControllerToCenterNotification;
+extern NSString * VTFoldViewControllerToCenterNotification;
 
 @interface VTFoldViewController : VTViewController<UIGestureRecognizerDelegate>
 

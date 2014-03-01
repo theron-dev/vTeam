@@ -733,11 +733,6 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 
-}
-
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-
     UIView * centerView = [[self centerViewController] view];
     
     if(centerView){
@@ -753,7 +748,12 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
             [centerView setUserInteractionEnabled:YES];
         }
     }
-    
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+
+
     _layoutSize = self.view.bounds.size;
     
 }
