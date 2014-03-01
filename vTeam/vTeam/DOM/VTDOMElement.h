@@ -51,6 +51,14 @@
 
 -(void) unbindDelegate:(id) delegate;
 
+-(void) elementWillAppera:(VTDOMElement *) element;
+
+-(void) elementDidAppera:(VTDOMElement *) element;
+
+-(void) elementWillDisappera:(VTDOMElement *) element;
+
+-(void) elementDidDisappera:(VTDOMElement *) element;
+
 @end
 
 @protocol VTDOMElementDelegate
@@ -64,6 +72,8 @@
 -(void) vtDOMElement:(VTDOMElement *) element addLayer:(CALayer *) layer frame:(CGRect) frame;
 
 -(void) vtDOMElement:(VTDOMElement *) element addView:(UIView *) view frame:(CGRect) frame;
+
+-(CGRect) vtDOMElement:(VTDOMElement *) element convertRect:(CGRect) rect;
 
 -(UIView *) vtDOMElementView:(VTDOMElement *) element viewClass:(Class)viewClass;
 

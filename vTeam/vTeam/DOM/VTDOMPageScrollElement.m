@@ -47,6 +47,7 @@
     
     if([self isViewLoaded]){
         [self.contentView setContentSize:contentSize];
+        [self reloadData];
     }
     
     return size;

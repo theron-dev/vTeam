@@ -44,9 +44,16 @@
     
     if([self isViewLoaded]){
         [self.contentView setContentSize:contentSize];
+        [self reloadData];
     }
     
     return size;
 }
+
+-(void) setDelegate:(id)delegate{
+    [super setDelegate:delegate];
+}
+
+
 
 @end

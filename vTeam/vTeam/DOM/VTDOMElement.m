@@ -109,15 +109,23 @@
 }
 
 -(void) addElement:(VTDOMElement *) element{
+    
+    [self elementWillAppera:element];
+    
     [element setParentElement:self];
     [element setDocument:_document];
     if(_childs == nil){
         _childs = [[NSMutableArray alloc] initWithCapacity:4];
     }
     [_childs addObject:element];
+    
+    [self elementDidAppera:element];
 }
 
 -(void) insertElement:(VTDOMElement *) element atIndex:(NSUInteger) index{
+    
+    [self elementWillAppera:element];
+    
     [element setParentElement:self];
     [element setDocument:_document];
     if(_childs == nil){
@@ -129,14 +137,46 @@
     else{
         [_childs addObject:element];
     }
+    
+    [self elementDidAppera:element];
+}
+
+-(void) elementWillAppera:(VTDOMElement *) element{
+    
+}
+
+-(void) elementDidAppera:(VTDOMElement *) element{
+    if(self.delegate){
+        [element setDelegate:self.delegate];
+    }
+    [self setNeedDisplay];
+}
+
+-(void) elementWillDisappera:(VTDOMElement *) element{
+    
+}
+
+-(void) elementDidDisappera:(VTDOMElement *) element{
+    [self setNeedDisplay];
 }
 
 -(void) removeFromParentElement{
     if(_parentElement){
+        
         VTDOMElement * parent = _parentElement;
+        
+        [self retain];
+        
+        [parent elementWillDisappera:self];
+        
         [self setParentElement:nil];
         [self setDocument:nil];
+        [self setDelegate:nil];
         [parent->_childs removeObject:self];
+        
+        [parent elementDidDisappera:self];
+        
+        [self release];
     }
 }
 

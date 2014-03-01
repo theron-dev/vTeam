@@ -343,9 +343,7 @@
             [self.document applyStyleSheet:element];
             
             [[self.document rootElement] layout:_documentView.bounds.size];
-            
-            [[self.document rootElement] bindDelegate:_documentView];
-            
+        
             [_documentView setNeedsDisplay];
             
         }

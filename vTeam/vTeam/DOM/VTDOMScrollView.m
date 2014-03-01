@@ -284,6 +284,10 @@
     [self addSubview:view];
 }
 
+-(CGRect) vtDOMElement:(VTDOMElement *) element convertRect:(CGRect) frame{
+    return element ? [element convertRect:frame superElement:_element] : frame;
+}
+
 -(void) touchesElement:(VTDOMElement *) element location:(CGPoint) location touchType:(int)touchType{
     
     CGRect r = [element frame];

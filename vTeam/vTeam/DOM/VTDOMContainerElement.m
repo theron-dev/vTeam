@@ -72,6 +72,7 @@
     
     if([self isViewLoaded]){
         [self.contentView setContentSize:contentSize];
+        [self reloadData];
     }
     
     return contentSize;
@@ -155,6 +156,8 @@
             
             CGRect r = [self frameInElement:element];
 
+            NSNumber * key = [NSNumber numberWithInt:index];
+            
             if([self isVisableRect:r]){
                 
                 if([element isKindOfClass:[VTDOMStatusElement class]]
@@ -206,7 +209,7 @@
                 
                 NSString * reuseIdentifier = [element attributeValueForKey:@"reuse"];
                 
-                VTDOMContainerItemView * itemView = [itemViews objectForKey:[NSNumber numberWithInt:index]];
+                VTDOMContainerItemView * itemView = [itemViews objectForKey:key];
                 
                 if(itemView == nil){
                     
@@ -262,13 +265,14 @@
             }
             else{
                 
-                VTDOMContainerItemView * itemView = [itemViews objectForKey:[NSNumber numberWithInt:index]];
+                VTDOMContainerItemView * itemView = [itemViews objectForKey:key];
                 
                 if(itemView){
                     [itemView setIndex:NSNotFound];
                     [itemView setElement:nil];
-                    [itemViews removeObjectForKey:[NSNumber numberWithInt:index]];
                     [dequeueItemViews addObject:itemView];
+                    [itemViews removeObjectForKey:key];
+                    [itemView removeFromSuperview];
                 }
             }
             
@@ -338,6 +342,11 @@
 
 -(void) didVisableItemView:(UIView *) itemView element:(VTDOMElement *) element atIndex:(NSInteger) index{
     
+}
+
+-(void) setFrame:(CGRect)frame{
+    [super setFrame:frame];
+    [self reloadData];
 }
 
 @end

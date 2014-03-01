@@ -51,11 +51,19 @@
             [delegate vtDOMElement:self.parentElement addView:self.view frame:self.frame];
         }
     }
-    else{
+    else if([self isViewLoaded]){
+        [self.view removeFromSuperview];
         self.view = nil;
     }
 }
 
+-(void) setFrame:(CGRect)frame{
+    [super setFrame:frame];
+    
+    if([self isViewLoaded] && [self.delegate respondsToSelector:@selector(vtDOMElement:convertRect:)]){
+        self.view.frame = [self.delegate vtDOMElement:self.parentElement convertRect:self.frame];
+    }
+}
 
 -(NSString *) actionName{
     return [self attributeValueForKey:@"action-name"];
@@ -93,6 +101,10 @@
 
 -(void) bindDelegate:(id)delegate{
     self.delegate = delegate;
+}
+
+-(void) elementDidAppera:(VTDOMElement *) element{
+    
 }
 
 -(void) draw:(CGRect) rect context:(CGContextRef) context{

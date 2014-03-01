@@ -244,6 +244,10 @@
     [_elementViewSet addObject:view];
 }
 
+-(CGRect) vtDOMElement:(VTDOMElement *) element convertRect:(CGRect) frame{
+    return element ? [element convertRect:frame superElement:_element] : frame;
+}
+
 -(UIView *) vtDOMElementView:(VTDOMElement *) element viewClass:(Class)viewClass{
     NSString * eid = [element attributeValueForKey:@"id"];
     
