@@ -10,7 +10,7 @@
 
 #import <vTeam/VTDOMElement+Render.h>
 
-@interface VTDOMView : UIControl<VTDOMElementDelegate>
+@interface VTDOMView : UIView<VTDOMElementDelegate>
 
 @property(nonatomic,assign) IBOutlet id delegate;
 @property(nonatomic,retain) VTDOMElement * element;

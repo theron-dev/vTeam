@@ -29,14 +29,17 @@
     
     for (VTDOMElement * element in [self childs]) {
 
+        UIEdgeInsets margin = [element margin];
+        
         [element setAttributeValue:@"100%" forKey:@"width"];
         [element setAttributeValue:@"100%" forKey:@"height"];
         
-        [element layout:size];
+        [element layout:CGSizeMake(size.width - margin.left - margin.right
+                                   , size.height - margin.top - margin.bottom)];
     
         CGRect r = [element frame];
         
-        r.origin = CGPointMake(contentSize.width, 0);
+        r.origin = CGPointMake(contentSize.width + margin.left, margin.top);
         
         [element setFrame:r];
         

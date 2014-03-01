@@ -23,10 +23,12 @@
     
     for (VTDOMElement * element in [self childs]) {
         
-        [element layout:size];
+        UIEdgeInsets margin = [element margin];
+        
+        [element layout:CGSizeMake(size.width - margin.left - margin.right
+                                   , size.height)];
         
         CGRect r = element.frame;
-        UIEdgeInsets margin = [element margin];
         
         r.origin = CGPointMake(padding.left + margin.left, contentSize.height + margin.top + padding.top);
         r.size.width = size.width - padding.left - padding.right - margin.left - margin.right;

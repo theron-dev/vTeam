@@ -125,6 +125,10 @@
 
 -(BOOL) touchesElement:(VTDOMElement *) element location:(CGPoint) location touchType:(int)touchType{
     
+    if([element isHidden]){
+        return NO;
+    }
+    
     CGRect r = [element frame];
     
     if(touchType == 0){

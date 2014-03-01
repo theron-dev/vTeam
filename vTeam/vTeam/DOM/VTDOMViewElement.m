@@ -57,13 +57,12 @@
     }
 }
 
--(void) setFrame:(CGRect)frame{
-    [super setFrame:frame];
-    
+-(void) elementDidFrameChanged:(VTDOMElement *) element{
     if([self isViewLoaded] && [self.delegate respondsToSelector:@selector(vtDOMElement:convertRect:)]){
         self.view.frame = [self.delegate vtDOMElement:self.parentElement convertRect:self.frame];
     }
 }
+
 
 -(NSString *) actionName{
     return [self attributeValueForKey:@"action-name"];

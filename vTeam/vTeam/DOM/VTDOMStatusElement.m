@@ -50,16 +50,11 @@
     
 }
 
--(void) addElement:(VTDOMElement *)element{
-    [super addElement:element];
+-(void) elementDidAppera:(VTDOMElement *)element{
+    [super elementDidAppera:element];
     [self refreshStatusForElement:element forStatus:[self attributeValueForKey:@"status"]];
 }
 
--(void) insertElement:(VTDOMElement *)element atIndex:(NSUInteger)index{
-    [super insertElement:element atIndex:index];
-    [self refreshStatusForElement:element forStatus:[self attributeValueForKey:@"status"]];
-    
-}
 
 -(NSString *) status{
     return [self attributeValueForKey:@"status"];

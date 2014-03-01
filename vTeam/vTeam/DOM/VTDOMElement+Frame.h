@@ -14,4 +14,6 @@
 
 - (CGRect)convertRect:(CGRect)rect superElement:(VTDOMElement *) element;
 
+- (void) elementDidFrameChanged:(VTDOMElement *) element;
+
 @end
