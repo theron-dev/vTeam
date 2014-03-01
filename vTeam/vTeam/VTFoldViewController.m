@@ -241,7 +241,11 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
     
-    if(_animating || [[[self topController] valueForKeyPath:@"config.fold.disabled"] boolValue]){
+    if(_animating ){
+        return NO;
+    }
+    
+    if(_tapGestureRecognizer != gestureRecognizer &&  [[[self topController] valueForKeyPath:@"config.fold.disabled"] boolValue]){
         return NO;
     }
     
