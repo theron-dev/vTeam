@@ -12,12 +12,9 @@
 
 #import "UIDevice+VTUUID.h"
 
-#import <execinfo.h>
-
 static VTCrashService * gVTCrashService = nil;
 
 static void VTCrashServiceUncaughtExceptionHandler(NSException *exception){
-    
     VTCrashTask * task = [[VTCrashTask alloc] init];
     [task setException:exception];
     [gVTCrashService.context handle:@protocol(IVTCrashTask) task:task priority:0];
@@ -95,24 +92,6 @@ static void VTCrashServiceSignalHandler(int signal)
             [data setValue:exception.reason forKey:@"reason"];
             [data setValue:exception.callStackSymbols forKey:@"callStackSymbols"];
             [data setValue:exception.callStackReturnAddresses forKey:@"callStackReturnAddresses"];
-            
-            void * array[30];
-            
-            int size = backtrace(array,30);
-            
-            NSMutableString * backtraceString = [NSMutableString stringWithCapacity:128];
-            
-            char ** symbols = backtrace_symbols(array,size);
-            
-            for(int i=0;i<size;i++){
-                [backtraceString appendFormat:@"%s\n",symbols[i]];
-            }
-            
-            if(symbols){
-                free(symbols);
-            }
-            
-            [data setValue:backtraceString forKey:@"backtrace"];
             
             [body addItemValue:[VTJSON encodeObject:data] forKey:@"exception"];
             

@@ -38,6 +38,7 @@
 -(void) loadMoreData{
     self.pageIndex ++;
     self.loading = YES;
+    self.dataChanged = YES;
     if([self.delegate respondsToSelector:@selector(vtDataSourceWillLoading:)]){
         [self.delegate vtDataSourceWillLoading:self];
     }
@@ -46,6 +47,7 @@
 
 -(void) reloadData{
     self.pageIndex = 1;
+    self.dataChanged = YES;
     _hasMoreData = YES;
     [super reloadData];
 }

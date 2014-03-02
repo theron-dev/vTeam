@@ -12,4 +12,12 @@
 
 @interface VTButton : UIButton<IVTAction>
 
+@property(nonatomic,retain) UIColor * backgroundColorHighlighted;
+@property(nonatomic,retain) UIColor * backgroundColorDisabled;
+@property(nonatomic,retain) UIColor * backgroundColorSelected;
+
+-(UIColor *) backgroundColorForState:(UIControlState) state;
+
+-(void) setBackgroundColor:(UIColor *) backgroundColor forState:(UIControlState)state;
+
 @end

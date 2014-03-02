@@ -60,16 +60,26 @@
     return src;
 }
 
+-(void) setAttributeValue:(NSString *)value forKey:(NSString *)key{
+    [super setAttributeValue:value forKey:key];
+    if([key isEqualToString:@"src"]){
+        _loaded = NO;
+        _loading = NO;
+        self.image = nil;
+    }
+}
+
 -(void) setSrc:(NSString *)src{
     [self setAttributeValue:src forKey:@"src"];
-    _loaded = NO;
-    _loading = NO;
-    self.image = nil;
 }
 
 -(NSString *) defaultSrc{
     
     NSString * src = [self attributeValueForKey:@"defaultSrc"];
+    
+    if(src == nil){
+        src = [self attributeValueForKey:@"default-src"];
+    }
     
     if(src && ![src hasPrefix:@"@"] && self.document.documentURL){
         return [[NSURL URLWithString:src relativeToURL:self.document.documentURL] absoluteString];

@@ -291,6 +291,8 @@
     }
     else if([httpTask isKindOfClass:[VTURLDocumentControllerElementHttpTask class]]){
         
+        self.documentUUID = nil;
+        
         VTDOMElement * element = [httpTask element];
         NSString * method = [element attributeValueForKey:@"method"];
         
