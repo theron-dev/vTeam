@@ -13,7 +13,7 @@
 @implementation NSData (VTMD5String)
 
 -(NSString *) vtMD5String{
-    unsigned char md[32];
+    unsigned char md[16];
     CC_MD5([self bytes], [self length], md);
     return [NSString stringWithFormat:
             @"%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X",
