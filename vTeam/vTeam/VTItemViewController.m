@@ -70,7 +70,6 @@
     [super dealloc];
 }
 
-
 -(IBAction) doAction :(id)sender{
     if([sender conformsToProtocol:@protocol(IVTAction)]){
         if([_delegate respondsToSelector:@selector(vtItemViewController:doAction:)]){

@@ -130,7 +130,7 @@
         
         VTItemViewController * itemViewController = [_headerItemViewControllers objectAtIndex:index];
         
-        if(itemViewController.restorationIdentifier == nil){
+        if([itemViewController reuseIdentifier] == nil){
             [itemViewController setReuseIdentifier:@"HeaderItemView"];
         }
         
