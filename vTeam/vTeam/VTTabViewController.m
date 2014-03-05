@@ -139,6 +139,7 @@
         [viewController setParentController:nil];
     }
     [_viewControllers release];
+    [_tabButtons release];
     [super dealloc];
 }
 
@@ -280,6 +281,24 @@
     }
     else{
         [self setSelectedIndex:[_tabButtons indexOfObject:sender]];
+    }
+}
+
+-(void) setTabButtons:(NSArray *)tabButtons{
+    if(_tabButtons != tabButtons){
+        [_tabButtons release];
+        _tabButtons = [[tabButtons sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            int tag = [(UIView *) obj1 tag] - [(UIView *) obj2 tag];
+            if(tag < 0){
+                return NSOrderedAscending;
+            }
+            
+            if(tag > 0){
+                return NSOrderedDescending;
+            }
+            
+            return NSOrderedSame;
+        }] retain];
     }
 }
 
