@@ -462,4 +462,14 @@
     
 }
 
+-(void) elementDidAppera:(VTDOMElement *)element{
+    [super elementDidAppera:element];
+    [self setRich:nil];
+}
+
+-(void) elementDidDisappera:(VTDOMElement *)element{
+    [super elementDidDisappera:element];
+    [self setRich:nil];
+}
+
 @end

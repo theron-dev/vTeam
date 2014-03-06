@@ -15,6 +15,6 @@
 
 @property(nonatomic,readonly) UIFont * font;
 @property(nonatomic,readonly) UIColor * textColor;
-@property(nonatomic,readonly) VTRich * rich;
+@property(nonatomic,retain) VTRich * rich;
 
 @end
