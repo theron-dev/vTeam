@@ -108,7 +108,7 @@
     
     NSMutableDictionary * itemViewControllers = [NSMutableDictionary dictionaryWithCapacity:4];
     for(VTItemViewController * itemViewController in _itemViewControllers){
-        NSNumber * key = [NSNumber numberWithInt:itemViewController.index];
+        NSNumber * key = [NSNumber numberWithLong:itemViewController.index];
         id t = [itemViewControllers objectForKey:key];
         if(t){
             [itemViewController setDataItem:nil];

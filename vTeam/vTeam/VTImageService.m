@@ -39,7 +39,7 @@
     
     NSData * bytes = [src dataUsingEncoding:NSUTF8StringEncoding];
     
-    md5_append(&md5, [bytes bytes], [bytes length]);
+    md5_append(&md5, [bytes bytes], (int) [bytes length]);
     
     md5_finish(&md5, digest);
     

@@ -8,6 +8,7 @@
 
 #import "VTDOMElement+Layout.h"
 #import "VTDOMElement+Style.h"
+#import "VTDOMBRElement.h"
 
 @implementation VTDOMElement (Layout)
 
@@ -83,7 +84,8 @@
             
             CGRect r = [element frame];
   
-            if(p.x + r.size.width + margin.left + margin.right <= frame.size.width - padding.right){
+            if(![element isKindOfClass:[VTDOMBRElement class]]
+                &&  ( p.x + r.size.width + margin.left + margin.right <= frame.size.width - padding.right)){
                 
                 r.origin = CGPointMake(p.x + margin.left, p.y + margin.top);
                 p.x += r.size.width + margin.left + margin.right;

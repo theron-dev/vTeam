@@ -14,7 +14,7 @@
 
 -(NSString *) vtMD5String{
     unsigned char md[16];
-    CC_MD5([self bytes], [self length], md);
+    CC_MD5([self bytes], (unsigned int) [self length], md);
     return [NSString stringWithFormat:
             @"%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X",
             md[0], md[1], md[2], md[3],

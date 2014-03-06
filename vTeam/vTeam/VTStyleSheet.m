@@ -81,12 +81,12 @@
 
 -(UIImage *) styleValueImage:(NSString *) image{
     NSRange r = [image rangeOfString:@" "];
-    CGFloat left = 0,top = 0;
+    double left = 0,top = 0;
     
     UIImage * img = nil;
     
     if(r.location != NSNotFound){
-        sscanf([[image substringFromIndex:r.location + 1] UTF8String], "%f %f",&left,&top);
+        sscanf([[image substringFromIndex:r.location + 1] UTF8String], "%lf %lf",&left,&top);
         image = [image substringToIndex:r.location];
     }
     

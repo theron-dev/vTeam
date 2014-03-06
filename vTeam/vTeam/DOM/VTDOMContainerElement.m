@@ -136,7 +136,7 @@
             
             if([itemView isKindOfClass:[VTDOMContainerItemView class]]){
                 
-                [itemViews setObject:itemView forKey:[NSNumber numberWithInt:itemView.index]];
+                [itemViews setObject:itemView forKey:[NSNumber numberWithLong:itemView.index]];
                 
             }
             
@@ -156,7 +156,7 @@
             
             CGRect r = [self frameInElement:element];
 
-            NSNumber * key = [NSNumber numberWithInt:index];
+            NSNumber * key = [NSNumber numberWithLong:index];
             
             if([self isVisableRect:r]){
                 
@@ -260,7 +260,7 @@
                     
                 }
                 
-                [itemViews removeObjectForKey:[NSNumber numberWithInt:index]];
+                [itemViews removeObjectForKey:[NSNumber numberWithLong:index]];
                 
             }
             else{

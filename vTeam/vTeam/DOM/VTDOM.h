@@ -29,6 +29,7 @@
 #import <vTeam/VTDOMStatusElement.h>
 #import <vTeam/VTDOMActionElement.h>
 #import <vTeam/VTDOMRichElement.h>
+#import <vTeam/VTDOMBRElement.h>
 
 @interface VTDOM : NSObject
 

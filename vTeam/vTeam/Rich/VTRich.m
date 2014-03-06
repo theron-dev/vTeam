@@ -8,6 +8,7 @@
 
 #import "VTRich.h"
 
+NSString * VTBackgroundColorAttributeName = @"VTBackgroundColorAttributeName";
 
 @implementation VTRichElement
 
@@ -269,7 +270,7 @@ static CTRunDelegateCallbacks VTRichDelegateCallbacks = {
         return;
     }
     
-    CTFrameDraw(frame, context);
+    //CTFrameDraw(frame, context);
     
     NSInteger elementIndex = 0;
     NSInteger lineIndex = 0;
@@ -278,6 +279,9 @@ static CTRunDelegateCallbacks VTRichDelegateCallbacks = {
     NSArray * elements = [self elements];
     id drawElement = nil;
     CGPoint lineOrigins[count];
+    CGColorRef clearColor = [UIColor clearColor].CGColor;
+    
+    CTFrameGetLineOrigins(frame, CFRangeMake(0, 0), lineOrigins);
     
     while(elementIndex < [elements count] && drawElement == nil){
         drawElement = [elements objectAtIndex:elementIndex ++];
@@ -286,60 +290,93 @@ static CTRunDelegateCallbacks VTRichDelegateCallbacks = {
         }
     }
     
-    CTFrameGetLineOrigins(frame, CFRangeMake(0, 0), lineOrigins);
-    
-    while(lineIndex < count && drawElement){
+    for(lineIndex = 0;lineIndex < count; lineIndex ++){
         
         CTLineRef line = CFArrayGetValueAtIndex(lines, lineIndex);
         CFArrayRef runs = CTLineGetGlyphRuns(line);
-
+        
+        CGContextSetTextPosition(context, lineOrigins[lineIndex].x, lineOrigins[lineIndex].y);
+        
         for(int i=0;i<CFArrayGetCount(runs);i++){
             
             CTRunRef run = CFArrayGetValueAtIndex(runs, i);
             
             CFRange r = CTRunGetStringRange(run);
             
-            NSRange rr = [drawElement range];
+            BOOL needRunDraw = YES;
             
-            if(r.location == rr.location && r.length == rr.length && r.length == 1){
-                
-                const CGPoint * p = CTRunGetPositionsPtr(run);
-                
-                CGSize s = CGSizeMake([drawElement width], [drawElement ascent] + [drawElement descent]);
+            const CGPoint * p = CTRunGetPositionsPtr(run);
+            
+            CGColorRef bgColor = (CGColorRef) CFDictionaryGetValue(CTRunGetAttributes(run), VTBackgroundColorAttributeName);
+            
+            if(bgColor){
                 
                 CGContextSaveGState(context);
                 
-                CGContextTranslateCTM(context, p->x, p->y + lineOrigins[lineIndex].y);
-                CGContextClipToRect(context, CGRectMake(0, 0, s.width, s.height));
+                CGFloat ascent=0,descent=0,leading=0;
                 
-                [drawElement drawRect:CGRectMake(0, 0, s.width, s.height) context:context];
+                double width = CTRunGetTypographicBounds(run, CFRangeMake(0, 0), & ascent, & descent, & leading);
+   
+                CGContextTranslateCTM(context, p->x, p->y + lineOrigins[lineIndex].y - descent);
+                
+                CGContextSetFillColorWithColor(context, bgColor);
+                
+                CGContextFillRect(context, CGRectMake(0, 0, width, ascent + descent));
                 
                 CGContextRestoreGState(context);
                 
-                
-                drawElement = nil;
-                while(elementIndex < [elements count] && drawElement == nil){
-                    drawElement = [elements objectAtIndex:elementIndex ++];
-                    if(![drawElement conformsToProtocol:@protocol(IVTRichDrawElement)]){
-                        drawElement = nil;
-                    }
-                }
             }
-            else if(r.location>= r.location + r.length){
-                drawElement = nil;
-                while(elementIndex < [elements count] && drawElement == nil){
-                    drawElement = [elements objectAtIndex:elementIndex ++];
-                    if(![drawElement conformsToProtocol:@protocol(IVTRichDrawElement)]){
-                        drawElement = nil;
+            else{
+                CGContextSetFillColorWithColor(context, clearColor);
+            }
+            
+            if(drawElement){
+            
+                NSRange rr = [drawElement range];
+                
+                if(r.location == rr.location && r.length == rr.length && r.length == 1){
+                    
+                    CGSize s = CGSizeMake( [drawElement width], [drawElement ascent] + [drawElement descent]);
+                    
+                    CGContextSaveGState(context);
+                    
+                    CGContextTranslateCTM(context, p->x, p->y + lineOrigins[lineIndex].y);
+                    CGContextClipToRect(context, CGRectMake(0, 0, s.width, s.height));
+            
+                    [drawElement drawRect:CGRectMake(0, 0, s.width, s.height) context:context];
+                    
+                    CGContextRestoreGState(context);
+                    
+                    needRunDraw = NO;
+                    
+                    drawElement = nil;
+                    while(elementIndex < [elements count] && drawElement == nil){
+                        drawElement = [elements objectAtIndex:elementIndex ++];
+                        if(![drawElement conformsToProtocol:@protocol(IVTRichDrawElement)]){
+                            drawElement = nil;
+                        }
                     }
                 }
+                else if(r.location>= r.location + r.length){
+                    drawElement = nil;
+                    while(elementIndex < [elements count] && drawElement == nil){
+                        drawElement = [elements objectAtIndex:elementIndex ++];
+                        if(![drawElement conformsToProtocol:@protocol(IVTRichDrawElement)]){
+                            drawElement = nil;
+                        }
+                    }
+                }
+            
+            }
+
+            if(needRunDraw){
+                CTRunDraw(run, context, CFRangeMake(0, 0));
             }
             
         }
-                                                                        
-        lineIndex ++;
-        
+
     }
+    
     
 }
 

@@ -15,10 +15,10 @@
 
 -(NSString *) vtBASE64String{
     InvokeTickBegin
-    huint32 size = [self length] * 4 / 3 + 1;
+    huint32 size = (huint32) [self length] * 4 / 3 + 1;
     hbuffer_t buf = buffer_alloc(MAX(size, 512), 1024);
     
-    hbase64_encode((hbyte *)[self bytes], [self length], buf);
+    hbase64_encode((hbyte *)[self bytes], (hint32)[self length], buf);
     
     NSString * rs = [NSString stringWithCString:buffer_to_str(buf) encoding:NSUTF8StringEncoding];
     

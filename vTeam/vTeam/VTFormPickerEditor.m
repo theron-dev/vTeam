@@ -93,7 +93,7 @@
         [_selectedIndexs addObject:[NSNumber numberWithInt:0]];
     }
     
-    [_selectedIndexs replaceObjectAtIndex:component withObject:[NSNumber numberWithInt:row]];
+    [_selectedIndexs replaceObjectAtIndex:component withObject:[NSNumber numberWithLong:row]];
 }
 
 -(VTFormPickerEditorItem *) itemAtIndex:(NSInteger) row component:(NSInteger) component{
@@ -158,7 +158,7 @@
     
     for (VTFormPickerEditorItem * item in items) {
         if([item value] == value){
-            [_selectedIndexs addObject:[NSNumber numberWithInt:row]];
+            [_selectedIndexs addObject:[NSNumber numberWithLong:row]];
             [_pickerView selectRow:row inComponent:0 animated:NO];
             return;
         }

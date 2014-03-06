@@ -87,7 +87,7 @@ vmVariant vmDOMElementClassGetPropertyCallback(vmRuntimeContext context,vmClass 
     if(element->uniqueKeys.length == name){
 
         rs.type = vmVariantTypeInt32;
-        rs.value.int32Value = [[element->element childs] count];
+        rs.value.int32Value = (hint32) [[element->element childs] count];
         
     }
     else if(element->uniqueKeys.parent == name){

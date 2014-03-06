@@ -71,7 +71,7 @@ typedef struct _VTFDBCursorInternal{
         if(bufferCount == 0){
             bufferCount = 200;
         }
-        FDBDataSetLength(&_cursor.base.data,bufferCount);
+        FDBDataSetLength(&_cursor.base.data,(huint32) bufferCount);
         _cursor.fdb = fdb;
         _cursor.vt = self;
     }
@@ -149,7 +149,7 @@ static hbool VTFDBCursorFilter (FDB * fdb,struct _FDBCursor * cursor,FDBDataItem
             if(_maxBufferCount == 0){
                 _maxBufferCount = 200;
             }
-            FDBDataSetLength(&_cursor.data,_maxBufferCount);
+            FDBDataSetLength(&_cursor.data,(huint32)_maxBufferCount);
         }
         
         return FDBCursorToRowid(_fdb,&_cursor,rowid);
@@ -195,7 +195,7 @@ static hbool VTFDBCursorFilter (FDB * fdb,struct _FDBCursor * cursor,FDBDataItem
 
 -(void *) blobValue:(long long) value length:(NSUInteger *) length{
     if(_fdb){
-        return FDBBlobRead(_fdb,value,length);
+        return FDBBlobRead(_fdb,value,(huint32 *) length);
     }
     return NULL;
 }

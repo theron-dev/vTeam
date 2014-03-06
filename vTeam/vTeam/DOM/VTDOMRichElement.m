@@ -29,7 +29,6 @@
     NSMutableArray * _highlightedLayers;
 }
 
-
 @property(nonatomic,retain) id focusElement;
 
 @end
@@ -86,6 +85,12 @@
     
     if(textColor){
         [attr setValue:(id) textColor.CGColor forKey:(id)kCTForegroundColorAttributeName];
+    }
+    
+    UIColor * bgColor = [element colorValueForKey:@"background-color"];
+    
+    if(bgColor){
+        [attr setValue:(id) bgColor.CGColor forKey:(id)VTBackgroundColorAttributeName];
     }
     
     if([name isEqualToString:@"br"]){

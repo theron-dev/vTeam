@@ -288,7 +288,7 @@
     if(_tabButtons != tabButtons){
         [_tabButtons release];
         _tabButtons = [[tabButtons sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-            int tag = [(UIView *) obj1 tag] - [(UIView *) obj2 tag];
+            NSInteger tag = [(UIView *) obj1 tag] - [(UIView *) obj2 tag];
             if(tag < 0){
                 return NSOrderedAscending;
             }

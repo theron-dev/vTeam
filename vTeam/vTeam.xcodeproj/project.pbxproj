@@ -200,6 +200,8 @@
 		114072A0176AFFBA00275493 /* hfdb_index.c in Sources */ = {isa = PBXBuildFile; fileRef = 1140729F176AFFBA00275493 /* hfdb_index.c */; };
 		1140741B176EAEC500275493 /* VTFDBIndex.h in Headers */ = {isa = PBXBuildFile; fileRef = 11407419176EAEC500275493 /* VTFDBIndex.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1140741C176EAEC500275493 /* VTFDBIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = 1140741A176EAEC500275493 /* VTFDBIndex.m */; };
+		1143852618C85AE10024925A /* VTDOMBRElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 1143852418C85AE00024925A /* VTDOMBRElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1143852718C85AE10024925A /* VTDOMBRElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1143852518C85AE10024925A /* VTDOMBRElement.m */; };
 		11442A87187122D40072D9CA /* VTCleanupTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 11442A85187122D40072D9CA /* VTCleanupTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11442A88187122D40072D9CA /* VTCleanupTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 11442A86187122D40072D9CA /* VTCleanupTask.m */; };
 		114772FC1727DE5200196FB2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 114772FA1727DE5200196FB2 /* InfoPlist.strings */; };
@@ -781,6 +783,8 @@
 		1140729F176AFFBA00275493 /* hfdb_index.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hfdb_index.c; sourceTree = "<group>"; };
 		11407419176EAEC500275493 /* VTFDBIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTFDBIndex.h; sourceTree = "<group>"; };
 		1140741A176EAEC500275493 /* VTFDBIndex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTFDBIndex.m; sourceTree = "<group>"; };
+		1143852418C85AE00024925A /* VTDOMBRElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDOMBRElement.h; sourceTree = "<group>"; };
+		1143852518C85AE10024925A /* VTDOMBRElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDOMBRElement.m; sourceTree = "<group>"; };
 		11442A85187122D40072D9CA /* VTCleanupTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTCleanupTask.h; sourceTree = "<group>"; };
 		11442A86187122D40072D9CA /* VTCleanupTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTCleanupTask.m; sourceTree = "<group>"; };
 		114772E21727DE0800196FB2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1826,6 +1830,8 @@
 				117F811918B462DB0015DCB1 /* VTDOMStatusElement.m */,
 				11E0EFB918B9B55B00B43022 /* VTDOMTableElement.h */,
 				11E0EFBA18B9B55B00B43022 /* VTDOMTableElement.m */,
+				1143852418C85AE00024925A /* VTDOMBRElement.h */,
+				1143852518C85AE10024925A /* VTDOMBRElement.m */,
 				11A0416917BB5C81001992BE /* VTDOMView.h */,
 				11A0416A17BB5C81001992BE /* VTDOMView.m */,
 				11A041B517BDC253001992BE /* VTDOMScrollView.h */,
@@ -2290,6 +2296,7 @@
 				11A0416317BB4D08001992BE /* VTDOMImageElement.h in Headers */,
 				11A0416717BB50AF001992BE /* VTDOMLabelElement.h in Headers */,
 				11A0416B17BB5C82001992BE /* VTDOMView.h in Headers */,
+				1143852618C85AE10024925A /* VTDOMBRElement.h in Headers */,
 				11A0416F17BB5E1C001992BE /* NSString+VTDOMSource.h in Headers */,
 				11A0417317BB6033001992BE /* VTDOM.h in Headers */,
 				11A0417717BB6290001992BE /* VTDOMRichElement.h in Headers */,
@@ -2491,6 +2498,7 @@
 				ACDE3A511733EC410046ED56 /* UIView+Image.m in Sources */,
 				ACDE3A5817349D380046ED56 /* VTPageContainerLayout.m in Sources */,
 				ACDE3A5C17349F940046ED56 /* VTPageDataController.m in Sources */,
+				1143852718C85AE10024925A /* VTDOMBRElement.m in Sources */,
 				ACDE3A661734BD0D0046ED56 /* UIView+Hidden.m in Sources */,
 				ACDE3A7F1735087D0046ED56 /* VTTableSection.m in Sources */,
 				ACDE3A83173508FC0046ED56 /* VTTableSource.m in Sources */,
@@ -2725,6 +2733,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -2754,6 +2763,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;

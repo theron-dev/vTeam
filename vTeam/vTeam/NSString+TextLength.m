@@ -13,7 +13,7 @@
 -(NSUInteger) textLength{
     
     int length = 0;
-    int stringLength = [self length];
+    NSUInteger stringLength = [self length];
     
     for (int i = 0; i < stringLength; i++) {
         unichar character = [self characterAtIndex:i];
@@ -32,7 +32,7 @@
 -(NSUInteger) textIndexOfLength:(NSUInteger) textLength{
     
     int length = 0;
-    int stringLength = [self length];
+    NSUInteger stringLength = [self length];
     
     for (int i = 0; i < stringLength; i++) {
         unichar character = [self characterAtIndex:i];

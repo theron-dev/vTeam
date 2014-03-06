@@ -44,7 +44,7 @@
     
     unichar uc;
     
-    int length = [self length];
+    NSUInteger length = [self length];
     int s = 0;
     
     for(int i=0;i<length;i++){

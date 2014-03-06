@@ -92,7 +92,7 @@ typedef struct _VTFDBIndexCursorInternal{
         if(bufferCount == 0){
             bufferCount = 2000;
         }
-        FDBIndexDataExpandSize(&_cursor.base.data, bufferCount);
+        FDBIndexDataExpandSize(&_cursor.base.data, (huint32) bufferCount);
         _cursor.dbIndex = dbIndex;
         _cursor.vt = self;
     }

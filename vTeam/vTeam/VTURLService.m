@@ -65,11 +65,11 @@
         
         NSInteger offset = ( [urlTask vtDownlinkPageTaskPageIndex] - 1) * [urlTask vtDownlinkPageTaskPageSize];
         
-        url = [url stringByReplacingOccurrencesOfString:@"{offset}" withString:[NSString stringWithFormat:@"%d",offset]];
+        url = [url stringByReplacingOccurrencesOfString:@"{offset}" withString:[NSString stringWithFormat:@"%d",(int) offset]];
         
-        url = [url stringByReplacingOccurrencesOfString:@"{pageIndex}" withString:[NSString stringWithFormat:@"%d",[urlTask vtDownlinkPageTaskPageIndex]]];
+        url = [url stringByReplacingOccurrencesOfString:@"{pageIndex}" withString:[NSString stringWithFormat:@"%d",(int)[urlTask vtDownlinkPageTaskPageIndex]]];
         
-        url = [url stringByReplacingOccurrencesOfString:@"{pageSize}" withString:[NSString stringWithFormat:@"%d",[urlTask vtDownlinkPageTaskPageSize]]];
+        url = [url stringByReplacingOccurrencesOfString:@"{pageSize}" withString:[NSString stringWithFormat:@"%d",(int)[urlTask vtDownlinkPageTaskPageSize]]];
         
         url = [url stringByDataOutlet:urlTask stringValue:^NSString *(id data, NSString *keyPath) {
             id v = [data dataForKeyPath:keyPath];
@@ -194,11 +194,11 @@
         
         NSInteger offset = ( [urlTask vtDownlinkPageTaskPageIndex] - 1) * [urlTask vtDownlinkPageTaskPageSize];
         
-        url = [url stringByReplacingOccurrencesOfString:@"{offset}" withString:[NSString stringWithFormat:@"%d",offset]];
+        url = [url stringByReplacingOccurrencesOfString:@"{offset}" withString:[NSString stringWithFormat:@"%d",(int)offset]];
         
-        url = [url stringByReplacingOccurrencesOfString:@"{pageIndex}" withString:[NSString stringWithFormat:@"%d",[urlTask vtDownlinkPageTaskPageIndex]]];
+        url = [url stringByReplacingOccurrencesOfString:@"{pageIndex}" withString:[NSString stringWithFormat:@"%d",(int)[urlTask vtDownlinkPageTaskPageIndex]]];
         
-        url = [url stringByReplacingOccurrencesOfString:@"{pageSize}" withString:[NSString stringWithFormat:@"%d",[urlTask vtDownlinkPageTaskPageSize]]];
+        url = [url stringByReplacingOccurrencesOfString:@"{pageSize}" withString:[NSString stringWithFormat:@"%d",(int)[urlTask vtDownlinkPageTaskPageSize]]];
         
         url = [url stringByDataOutlet:urlTask stringValue:^NSString *(id data, NSString *keyPath) {
             id v = [data dataForKeyPath:keyPath];

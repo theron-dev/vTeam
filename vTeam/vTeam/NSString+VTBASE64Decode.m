@@ -16,7 +16,7 @@
 -(NSData *) vtBASE64Decode{
     
     InvokeTickBegin
-    huint32 size = [self length] * 3 / 4 + 1;
+    huint32 size = (huint32) [self length] * 3 / 4 + 1;
     hbuffer_t buf = buffer_alloc(MAX(size, 512), 1024);
     
     hbase64_decode([self UTF8String], buf);

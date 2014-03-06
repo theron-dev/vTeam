@@ -103,7 +103,7 @@ static void VTSqliteStmtBindData(sqlite3_stmt * stmt,id data,sqlite3_destructor_
 
 -(int) columnIndexForName:(NSString *) name{
     id index = [[self indexOfNames] valueForKey:name];
-    return index == nil ? NSNotFound : [index intValue];
+    return index == nil ? -1 : [index intValue];
 }
 
 -(NSString *) columnNameAtIndex:(int) index{
@@ -221,21 +221,21 @@ static void VTSqliteStmtBindData(sqlite3_stmt * stmt,id data,sqlite3_destructor_
 
 -(id) objectAtIndex:(NSUInteger) index{
     
-    int columnType = sqlite3_column_type(_stmt, index);
+    int columnType = sqlite3_column_type(_stmt, (int)index);
     
     id returnValue = nil;
     
     if (columnType == SQLITE_INTEGER) {
-        returnValue = [NSNumber numberWithLongLong:[self longLongValueAtIndex:index]];
+        returnValue = [NSNumber numberWithLongLong:[self longLongValueAtIndex:(int)index]];
     }
     else if (columnType == SQLITE_FLOAT) {
-        returnValue = [NSNumber numberWithDouble:[self doubleValueAtIndex:index]];
+        returnValue = [NSNumber numberWithDouble:[self doubleValueAtIndex:(int)index]];
     }
     else if (columnType == SQLITE_BLOB) {
-        returnValue = [self dataValueAtIndex:index];
+        returnValue = [self dataValueAtIndex:(int)index];
     }
     else {
-        returnValue = [self stringValueAtIndex:index];
+        returnValue = [self stringValueAtIndex:(int)index];
     }
     
     return returnValue;
@@ -422,11 +422,11 @@ static void VTSqliteStmtBindData(sqlite3_stmt * stmt,id data,sqlite3_destructor_
 }
 
 -(int) count{
-    return [[self currentCursor] count];
+    return [(id<IVTSqliteCursor>)[self currentCursor] count];
 }
 
 -(int) columnCount{
-    return [[self currentCursor] count];
+    return [(id<IVTSqliteCursor>)[self currentCursor] count];
 }
 
 -(int) columnIndexForName:(NSString *) name{
@@ -622,7 +622,7 @@ static void VTSqliteStmtBindData(sqlite3_stmt * stmt,id data,sqlite3_destructor_
     
     char sbuf[102400];
     char * p;
-    int len;
+    ssize_t len;
     int lines = 0;
     
     NSMutableData * line = [NSMutableData dataWithCapacity:1024];
@@ -753,7 +753,7 @@ static void VTSqliteStmtBindData(sqlite3_stmt * stmt,id data,sqlite3_destructor_
             sqlite3_bind_null(stmt, i);
         }
         else if([v isKindOfClass:[NSData class]]){
-            sqlite3_bind_blob(stmt, i, [v bytes], [v length], type);
+            sqlite3_bind_blob(stmt, i, [v bytes], (int) [v length], type);
         }
         else if([v isKindOfClass:[NSDate class]]){
             sqlite3_bind_double(stmt, i, [v timeIntervalSince1970]);
@@ -790,7 +790,7 @@ static void VTSqliteStmtBindData(sqlite3_stmt * stmt,id data,sqlite3_destructor_
         }
         else {
             NSData * dataBytes = [[VTJSON encodeObject:v] dataUsingEncoding:NSUTF8StringEncoding];
-            sqlite3_bind_blob(stmt, i, [dataBytes bytes], [dataBytes length], type);
+            sqlite3_bind_blob(stmt, i, [dataBytes bytes],(int) [dataBytes length], type);
         }
         
     }

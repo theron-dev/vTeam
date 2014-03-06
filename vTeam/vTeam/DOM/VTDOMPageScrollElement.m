@@ -105,8 +105,8 @@
             pageIndex = 0;
         }
         
-        [pageElement setAttributeValue:[NSString stringWithFormat:@"%d",pageCount] forKey:@"pageCount"];
-        [pageElement setAttributeValue:[NSString stringWithFormat:@"%d",pageIndex] forKey:@"pageIndex"];
+        [pageElement setAttributeValue:[NSString stringWithFormat:@"%d",(int)pageCount] forKey:@"pageCount"];
+        [pageElement setAttributeValue:[NSString stringWithFormat:@"%d",(int)pageIndex] forKey:@"pageIndex"];
         
         if([pageElement isKindOfClass:[VTDOMViewElement class]]){
             [[(VTDOMViewElement *) pageElement view] setElement:pageElement];
@@ -172,8 +172,8 @@
             pageIndex = 0;
         }
         
-        [pageElement setAttributeValue:[NSString stringWithFormat:@"%d",pageCount] forKey:@"pageCount"];
-        [pageElement setAttributeValue:[NSString stringWithFormat:@"%d",pageIndex] forKey:@"pageIndex"];
+        [pageElement setAttributeValue:[NSString stringWithFormat:@"%d",(int)pageCount] forKey:@"pageCount"];
+        [pageElement setAttributeValue:[NSString stringWithFormat:@"%d",(int)pageIndex] forKey:@"pageIndex"];
         
         if([pageElement isKindOfClass:[VTDOMViewElement class]]){
             [[(VTDOMViewElement *) pageElement view] setElement:pageElement];

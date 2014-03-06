@@ -10,6 +10,8 @@
 
 #import <CoreText/CoreText.h>
 
+extern NSString * VTBackgroundColorAttributeName;
+
 @protocol IVTRichElement <NSObject>
 
 @property(nonatomic,assign) NSRange range;

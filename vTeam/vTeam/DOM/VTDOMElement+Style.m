@@ -39,10 +39,10 @@
 }
 
 -(UIEdgeInsets) edgeInsetsValueForKey:(NSString *) key{
-    CGFloat top = 0,left = 0,bottom = 0,right = 0;
+    double top = 0,left = 0,bottom = 0,right = 0;
     NSString * v = [self stringValueForKey:key];
     if(v){
-        sscanf([v UTF8String], "%f %f %f %f",& top,& left,& bottom,& right);
+        sscanf([v UTF8String], "%lf %lf %lf %lf",& top,& left,& bottom,& right);
     }
     return UIEdgeInsetsMake(top, left, bottom, right);
 }

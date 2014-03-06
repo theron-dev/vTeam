@@ -718,7 +718,7 @@
     p = rect.origin;
     p.x += p.x + rect.size.width;
     
-    for(int i=[_columns count] - 1;i >= right;i--){
+    for(NSInteger i=[_columns count] - 1;i >= right;i--){
         
         id<IGridColumn> column = [_columns objectAtIndex:i];
         
@@ -885,7 +885,7 @@
         
         CGFloat width = ([_columns count] - right + 1) * splitWidth;
         
-        for(int i=right;i<[_columns count];i++){
+        for(NSInteger i=right;i<[_columns count];i++){
             id<IGridColumn> column = [_columns objectAtIndex:i];
             width += [column width];
         }
@@ -921,7 +921,7 @@
             
             NSArray * cells = [row cells];
             
-            for(int i=right;i<[_columns count];i++){
+            for(NSInteger i=right;i<[_columns count];i++){
                 
                 id<IGridCell> cell = [cells objectAtIndex:i];
                 

@@ -43,7 +43,7 @@
 
 -(id) initWithData:(NSData *) data{
     if((self = [super init])){
-        _document = ReportDocumentCreateBytes([data bytes], [data length]);
+        _document = ReportDocumentCreateBytes([data bytes], (huint32)[data length]);
         if(_document == nil){
             [self release];
             return nil;

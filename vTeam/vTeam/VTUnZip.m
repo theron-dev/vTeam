@@ -96,7 +96,7 @@ NSString * kVTUnZipFileSize = @"kVTUnZipFileSize";
 }
 
 -(NSUInteger) read:(void *) buffer length:(NSUInteger) length{
-    return unzReadCurrentFile(_zFile, buffer, length);
+    return unzReadCurrentFile(_zFile, buffer, (unsigned) length);
 }
 
 -(void) unZipToDirectory:(NSString *) directory{
@@ -113,7 +113,7 @@ NSString * kVTUnZipFileSize = @"kVTUnZipFileSize";
             if([self openZipEntity]){
                 FILE * f = fopen([[directory stringByAppendingPathComponent:fileName] UTF8String], "w");
                 if(f){
-                    while((len = [self read:sbuf length:sizeof(sbuf)])){
+                    while((len = (int) [self read:sbuf length:sizeof(sbuf)]) >0){
                         fwrite(sbuf, 1, len, f);
                     }
                     fclose(f);

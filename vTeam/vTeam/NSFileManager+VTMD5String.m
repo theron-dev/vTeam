@@ -18,7 +18,7 @@
     if([self fileExistsAtPath:filePath]){
         
         char buffer[10240];
-        int length;
+        ssize_t length;
         unsigned char md[32];
         
         CC_MD5_CTX ctx;
@@ -33,7 +33,7 @@
                 
                 if(length > 0){
                     
-                    CC_MD5_Update(& ctx, buffer, length);
+                    CC_MD5_Update(& ctx, buffer, (unsigned int) length);
                     
                 }
                 

@@ -94,7 +94,7 @@
 -(void) nextAnimating{
     if(_imageSource ){
         
-        int count = CGImageSourceGetCount((CGImageSourceRef)_imageSource);
+        size_t count = CGImageSourceGetCount((CGImageSourceRef)_imageSource);
         
         _currentIndex ++;
         

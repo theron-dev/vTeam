@@ -112,7 +112,7 @@ static void VTCrashServiceSignalHandler(int signal)
                 NSLog(@"%@",error);
             }
             else if(response){
-                NSLog(@"%d",[response statusCode]);
+                NSLog(@"%d",(int) [response statusCode]);
                 NSLog(@"%@",[response allHeaderFields]);
             }
             
