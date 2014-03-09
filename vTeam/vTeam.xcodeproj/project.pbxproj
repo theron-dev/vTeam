@@ -35,6 +35,14 @@
 		1107F5C1187E81800093AE80 /* VTChartRectangle.h in Headers */ = {isa = PBXBuildFile; fileRef = 1107F5BF187E817E0093AE80 /* VTChartRectangle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1107F5C2187E81810093AE80 /* VTChartRectangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 1107F5C0187E817F0093AE80 /* VTChartRectangle.m */; };
 		110843C1186BD6DD00ECA4CB /* IVTAuthContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 110843C0186BD6DD00ECA4CB /* IVTAuthContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1109798F18CC293700243532 /* VTFeedbackTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 1109798D18CC293700243532 /* VTFeedbackTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1109799018CC293700243532 /* VTFeedbackTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 1109798E18CC293700243532 /* VTFeedbackTask.m */; };
+		1109799318CC298D00243532 /* VTFeedbackService.h in Headers */ = {isa = PBXBuildFile; fileRef = 1109799118CC298D00243532 /* VTFeedbackService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1109799418CC298D00243532 /* VTFeedbackService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1109799218CC298D00243532 /* VTFeedbackService.m */; };
+		1109799C18CC36A900243532 /* VTAppVersionTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 1109799A18CC36A900243532 /* VTAppVersionTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1109799D18CC36A900243532 /* VTAppVersionTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 1109799B18CC36A900243532 /* VTAppVersionTask.m */; };
+		110979A018CC36EF00243532 /* VTAppService.h in Headers */ = {isa = PBXBuildFile; fileRef = 1109799E18CC36EF00243532 /* VTAppService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		110979A118CC36EF00243532 /* VTAppService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1109799F18CC36EF00243532 /* VTAppService.m */; };
 		110D4C5C18714F2900681A23 /* NSObject+VTValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 110D4C5A18714F2900681A23 /* NSObject+VTValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		111638351762E1AD009979D3 /* hreport.c in Sources */ = {isa = PBXBuildFile; fileRef = 111638341762E1AD009979D3 /* hreport.c */; };
 		1116383F1762E99E009979D3 /* hreport.h in Headers */ = {isa = PBXBuildFile; fileRef = 111638331762DCBD009979D3 /* hreport.h */; settings = {ATTRIBUTES = (); }; };
@@ -607,6 +615,14 @@
 		1107F5BF187E817E0093AE80 /* VTChartRectangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTChartRectangle.h; sourceTree = "<group>"; };
 		1107F5C0187E817F0093AE80 /* VTChartRectangle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTChartRectangle.m; sourceTree = "<group>"; };
 		110843C0186BD6DD00ECA4CB /* IVTAuthContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVTAuthContext.h; sourceTree = "<group>"; };
+		1109798D18CC293700243532 /* VTFeedbackTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTFeedbackTask.h; sourceTree = "<group>"; };
+		1109798E18CC293700243532 /* VTFeedbackTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTFeedbackTask.m; sourceTree = "<group>"; };
+		1109799118CC298D00243532 /* VTFeedbackService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTFeedbackService.h; sourceTree = "<group>"; };
+		1109799218CC298D00243532 /* VTFeedbackService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTFeedbackService.m; sourceTree = "<group>"; };
+		1109799A18CC36A900243532 /* VTAppVersionTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTAppVersionTask.h; sourceTree = "<group>"; };
+		1109799B18CC36A900243532 /* VTAppVersionTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTAppVersionTask.m; sourceTree = "<group>"; };
+		1109799E18CC36EF00243532 /* VTAppService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTAppService.h; sourceTree = "<group>"; };
+		1109799F18CC36EF00243532 /* VTAppService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTAppService.m; sourceTree = "<group>"; };
 		110D4C5A18714F2900681A23 /* NSObject+VTValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+VTValue.h"; sourceTree = "<group>"; };
 		110D4C5B18714F2900681A23 /* NSObject+VTValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+VTValue.m"; sourceTree = "<group>"; };
 		1114FC9917B9DB5800B8C2CB /* VTDOMDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDOMDocument.h; sourceTree = "<group>"; };
@@ -1561,6 +1577,10 @@
 				11442A86187122D40072D9CA /* VTCleanupTask.m */,
 				113351FD18768C1700F0E315 /* VTAudioTask.h */,
 				113351FE18768C1700F0E315 /* VTAudioTask.m */,
+				1109798D18CC293700243532 /* VTFeedbackTask.h */,
+				1109798E18CC293700243532 /* VTFeedbackTask.m */,
+				1109799A18CC36A900243532 /* VTAppVersionTask.h */,
+				1109799B18CC36A900243532 /* VTAppVersionTask.m */,
 			);
 			name = Tasks;
 			sourceTree = "<group>";
@@ -1588,6 +1608,10 @@
 				11BE4FD818360CC80013722E /* VTCrashService.m */,
 				113351F918768BEC00F0E315 /* VTAudioService.h */,
 				113351FA18768BEC00F0E315 /* VTAudioService.m */,
+				1109799118CC298D00243532 /* VTFeedbackService.h */,
+				1109799218CC298D00243532 /* VTFeedbackService.m */,
+				1109799E18CC36EF00243532 /* VTAppService.h */,
+				1109799F18CC36EF00243532 /* VTAppService.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -2133,6 +2157,7 @@
 				11619CAA1732658C00BD3561 /* IVTAPITask.h in Headers */,
 				11619CAB1732658F00BD3561 /* IVTAPICancelTask.h in Headers */,
 				11619CAE173265B800BD3561 /* VTAPIRequestTask.h in Headers */,
+				1109799318CC298D00243532 /* VTFeedbackService.h in Headers */,
 				11619CB2173266D100BD3561 /* VTAPITask.h in Headers */,
 				11619CB61732674C00BD3561 /* VTAPIResponseTask.h in Headers */,
 				11619CBA173267D400BD3561 /* VTAPIService.h in Headers */,
@@ -2197,6 +2222,7 @@
 				113140661749EC590081641F /* hfile.h in Headers */,
 				113140681749EC590081641F /* hinifile.h in Headers */,
 				1131406A1749EC590081641F /* hjson.h in Headers */,
+				1109799C18CC36A900243532 /* VTAppVersionTask.h in Headers */,
 				1131406C1749EC590081641F /* hlibrary.h in Headers */,
 				1131406E1749EC590081641F /* hlist.h in Headers */,
 				113140701749EC590081641F /* hlog.h in Headers */,
@@ -2214,6 +2240,7 @@
 				113140891749EC590081641F /* hstr.h in Headers */,
 				1131408B1749EC590081641F /* hstruct_list.h in Headers */,
 				1131408D1749EC590081641F /* hthread.h in Headers */,
+				110979A018CC36EF00243532 /* VTAppService.h in Headers */,
 				11BE4FD918360CC80013722E /* VTCrashService.h in Headers */,
 				114D644417E2B1A80021CB8A /* VTMontageGroupElement.h in Headers */,
 				11968205187A68B5006509B0 /* VTDOMLinkElement.h in Headers */,
@@ -2280,6 +2307,7 @@
 				11D678E817AA4FF0000E02FA /* VTBehaviorObject.h in Headers */,
 				11D678EC17AA5097000E02FA /* VTBehaviorTask.h in Headers */,
 				11D678F017AA5243000E02FA /* VTBehaviorTransactionTask.h in Headers */,
+				1109798F18CC293700243532 /* VTFeedbackTask.h in Headers */,
 				1193DB5717B0B35900F19592 /* VTBESessionObject.h in Headers */,
 				11A0413417BB1C68001992BE /* VTDOMStyle.h in Headers */,
 				11A0413617BB1C68001992BE /* VTDOMElement.h in Headers */,
@@ -2490,6 +2518,7 @@
 				11619C9017325B5900BD3561 /* VTItemViewController.m in Sources */,
 				11619CAF173265B800BD3561 /* VTAPIRequestTask.m in Sources */,
 				116FD2291829EFC80001CB43 /* VTStatusGatherDataSource.m in Sources */,
+				1109799018CC293700243532 /* VTFeedbackTask.m in Sources */,
 				11619CB3173266D100BD3561 /* VTAPITask.m in Sources */,
 				11619CB71732674C00BD3561 /* VTAPIResponseTask.m in Sources */,
 				11619CBB173267D400BD3561 /* VTAPIService.m in Sources */,
@@ -2521,6 +2550,7 @@
 				AC325059173E83DF0094A7A6 /* VTFormButton.m in Sources */,
 				AC32505D173E87D10094A7A6 /* VTFormPickerEditor.m in Sources */,
 				AC325061173E884D0094A7A6 /* VTFormPickerEditorItem.m in Sources */,
+				1109799D18CC36A900243532 /* VTAppVersionTask.m in Sources */,
 				113140421749EC590081641F /* hactree.c in Sources */,
 				113140441749EC590081641F /* hbase64.c in Sources */,
 				113140461749EC590081641F /* hbtree.c in Sources */,
@@ -2554,6 +2584,7 @@
 				113140741749EC590081641F /* hmem.c in Sources */,
 				116FD2331829FD430001CB43 /* VTActionView.m in Sources */,
 				113140761749EC590081641F /* hmutex.c in Sources */,
+				110979A118CC36EF00243532 /* VTAppService.m in Sources */,
 				113140781749EC590081641F /* hnetbios.c in Sources */,
 				1131407A1749EC590081641F /* hprocess.c in Sources */,
 				113351FC18768BEC00F0E315 /* VTAudioService.m in Sources */,
@@ -2688,6 +2719,7 @@
 				1107F5A4187D4BDF0093AE80 /* NSObject+VTValue.m in Sources */,
 				1107F5A8187D51400093AE80 /* VTPieChart.m in Sources */,
 				1107F5AC187D53CD0093AE80 /* VTChartArc.m in Sources */,
+				1109799418CC298D00243532 /* VTFeedbackService.m in Sources */,
 				1107F5B0187D543E0093AE80 /* VTChartContainer.m in Sources */,
 				1107F5B6187D5AAD0093AE80 /* VTChartView.m in Sources */,
 				1107F5BA187E48120093AE80 /* VTChartTipLabel.m in Sources */,

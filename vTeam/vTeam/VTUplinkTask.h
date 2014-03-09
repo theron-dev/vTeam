@@ -6,8 +6,6 @@
 //  Copyright (c) 2013年 hailong.org. All rights reserved.
 //
 
-#import <vTeam/vTeam.h>
-
 #import <vTeam/IVTUplinkTask.h>
 #import <vTeam/VTTask.h>
 

@@ -118,4 +118,6 @@
 #import <vTeam/VTFallsContainerLayout.h>
 #import <vTeam/NSFileManager+VTMD5String.h>
 #import <vTeam/VTFoldViewController.h>
+#import <vTeam/VTFeedbackTask.h>
+#import <vTeam/VTAppVersionTask.h>
 
