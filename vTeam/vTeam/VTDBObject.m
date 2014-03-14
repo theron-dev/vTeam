@@ -20,4 +20,13 @@
     return nil;
 }
 
+-(oneway void) release{
+    [self willRelease:[self retainCount]];
+    [super release];
+}
+
+-(void) willRelease:(NSUInteger) retainCount{
+    
+}
+
 @end

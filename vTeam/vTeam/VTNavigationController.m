@@ -65,9 +65,14 @@
         }
     }
     
-    if ([self respondsToSelector:@selector(interactivePopGestureRecognizer)]){
-        self.interactivePopGestureRecognizer.delegate = self;
+    if([self isNavigationBarHidden]){
+    
+        if ([self respondsToSelector:@selector(interactivePopGestureRecognizer)]){
+            self.interactivePopGestureRecognizer.delegate = self;
+        }
+    
     }
+    
     
 #endif
     
@@ -270,6 +275,7 @@
                     if(viewController){
                         
                         [viewController setParentController:modalViewController];
+                        [viewController loadUrl:url basePath:@"/" animated:animated];
                         
                         [modalViewController presentModalViewController:viewController animated:animated];
                         
@@ -288,6 +294,7 @@
                 if(viewController){
                     
                     [viewController setParentController:self];
+                    [viewController loadUrl:url basePath:@"/" animated:animated];
                     
                     [self presentModalViewController:viewController animated:animated];
                     
@@ -311,19 +318,45 @@
 
 
 -(BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
-    return [[self topViewController] shouldAutorotateToInterfaceOrientation:toInterfaceOrientation];
+    
+    id topViewController = [self topViewController];
+    
+    if(topViewController){
+        return [topViewController shouldAutorotateToInterfaceOrientation:toInterfaceOrientation];
+    }
+    
+    
+    return [super shouldAutorotateToInterfaceOrientation:toInterfaceOrientation];
 }
 
 - (BOOL)shouldAutorotate{
-    return [[self topViewController] shouldAutorotate];
+    
+    id topViewController = [self topViewController];
+    
+    if(topViewController){
+        return [topViewController shouldAutorotate];
+    }
+    
+    return [super shouldAutorotate];
 }
 
 - (NSUInteger)supportedInterfaceOrientations{
-    return [[self topViewController] supportedInterfaceOrientations];
+    
+    id topViewController = [self topViewController];
+   
+    if(topViewController){
+        return [topViewController supportedInterfaceOrientations];
+    }
+    
+    return [super supportedInterfaceOrientations];
 }
 
 -(UIInterfaceOrientation) preferredInterfaceOrientationForPresentation{
-    return [[self topViewController] preferredInterfaceOrientationForPresentation];
+    id topViewController = [self topViewController];
+    if(topViewController){
+        return [topViewController preferredInterfaceOrientationForPresentation];
+    }
+    return [super preferredInterfaceOrientationForPresentation];
 }
 
 -(void) setConfig:(id)config{

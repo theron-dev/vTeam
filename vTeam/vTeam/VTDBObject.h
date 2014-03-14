@@ -22,4 +22,6 @@ typedef struct _VTDBObjectIndex{
 
 +(VTDBObjectIndex *) tableIndexs:(int *) length;
 
+-(void) willRelease:(NSUInteger) retainCount;
+
 @end

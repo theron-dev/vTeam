@@ -200,6 +200,7 @@
                     if(viewController){
                         
                         [viewController setParentController:modalViewController];
+                        [viewController loadUrl:url basePath:@"/" animated:YES];
                         
                         [modalViewController presentModalViewController:viewController animated:animated];
                         
@@ -218,6 +219,8 @@
                 if(viewController){
                     
                     [viewController setParentController:self];
+                    
+                    [viewController loadUrl:url basePath:@"/" animated:YES];
                     
                     [self presentModalViewController:viewController animated:animated];
                     
