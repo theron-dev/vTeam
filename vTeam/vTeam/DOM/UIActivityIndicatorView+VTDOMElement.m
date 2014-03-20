@@ -10,6 +10,10 @@
 
 @implementation UIActivityIndicatorView (VTDOMElement)
 
+-(id) initWithFrame:(CGRect)frame{
+    return [self initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+}
+
 -(void) setElement:(VTDOMElement *)element{
     [super setElement:element];
     if(![self isHidden]){

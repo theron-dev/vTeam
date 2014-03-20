@@ -477,4 +477,66 @@
     [self setRich:nil];
 }
 
+
+-(void) unbindDelegate:(id)delegate{
+    if(self.delegate == delegate){
+        self.delegate = nil;
+    }
+}
+
+-(void) bindDelegate:(id)delegate{
+    self.delegate = delegate;
+    for(VTDOMElement * el in [self childs]){
+        [el bindDelegate:self];
+    }
+}
+
+-(void) vtDOMElementDoAction:(VTDOMElement *) element{
+    id delegate = [self delegate];
+    if([delegate respondsToSelector:@selector(vtDOMElementDoAction:)]){
+        [delegate vtDOMElementDoAction:element];
+    }
+}
+
+-(void) vtDOMElementDoNeedDisplay:(VTDOMElement *) element{
+    
+    [self setRich:nil];
+    
+    id delegate = [self delegate];
+    if([delegate respondsToSelector:@selector(vtDOMElementDoNeedDisplay:)]){
+        [delegate vtDOMElementDoNeedDisplay:element];
+    }
+}
+
+-(void) vtDOMElement:(VTDOMElement *) element addLayer:(CALayer *) layer frame:(CGRect) frame{
+    
+    id delegate = [self delegate];
+    if([delegate respondsToSelector:@selector(vtDOMElement:addLayer:frame:)]){
+        [delegate vtDOMElement:element addLayer:layer frame:frame];
+    }
+}
+
+-(void) vtDOMElement:(VTDOMElement *) element addView:(UIView *) view frame:(CGRect) frame{
+    id delegate = [self delegate];
+    if([delegate respondsToSelector:@selector(vtDOMElement:addView:frame:)]){
+        [delegate vtDOMElement:element addView:view frame:frame];
+    }
+}
+
+-(CGRect) vtDOMElement:(VTDOMElement *) element convertRect:(CGRect) rect{
+    id delegate = [self delegate];
+    if([delegate respondsToSelector:@selector(vtDOMElement:convertRect:)]){
+        return [delegate vtDOMElement:element convertRect:rect];
+    }
+    return rect;
+}
+
+-(UIView *) vtDOMElementView:(VTDOMElement *) element viewClass:(Class)viewClass{
+    id delegate = [self delegate];
+    if([delegate respondsToSelector:@selector(vtDOMElementView:viewClass:)]){
+        return [delegate vtDOMElementView:element viewClass:viewClass];
+    }
+    return nil;
+}
+
 @end

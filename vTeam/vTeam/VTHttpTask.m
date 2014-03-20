@@ -10,13 +10,9 @@
 
 #import "VTJSON.h"
 
-#include "hconfig.h"
-#include "md5.h"
-#include "htime.h"
-#include "hfile.h"
-
 #import "NSData+VTMD5String.h"
 #import "NSFileManager+VTMD5String.h"
+#import "NSString+VTMD5String.h"
 
 @interface VTHttpTask()
 
@@ -118,12 +114,20 @@
 
             [req setAllHTTPHeaderFields:_request.allHTTPHeaderFields];
             
-            time_t t = file_last_modified_get([_responseBody UTF8String]);
-            char d[128] = "";
+            NSDictionary * attr = [fileManager attributesOfItemAtPath:_responseBody error:nil];
             
-            time_to_gmt_str(&t, d, sizeof(d));
+            NSDate * date = [attr fileModificationDate];
             
-            [req setValue:[NSString stringWithCString:d encoding:NSUTF8StringEncoding] forHTTPHeaderField:@"If-Modified-Since"];
+            NSDateFormatter *df = [[NSDateFormatter alloc] init];
+            
+            df.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
+            df.dateFormat = @"EEE',' dd MMM yyyy HH':'mm':'ss 'GMT'";
+            
+            NSString * modified = [df stringFromDate:date];
+            
+            [df release];
+            
+            [req setValue:modified forHTTPHeaderField:@"If-Modified-Since"];
             
             return req;
         }
@@ -235,21 +239,67 @@
         self.responseBody = s ? [VTJSON decodeText:s] : nil;
     }
     else if(_responseType == VTHttpTaskResponseTypeResource){
+        
         NSString * t = [_responseBody stringByAppendingPathExtension:@"tmp"];
+        
+        BOOL saveFile = NO;
+        BOOL removeFile = NO;
+        
         if(self.allowResume){
             if(_contentLength == _downloadLength){
-                [[NSFileManager defaultManager] moveItemAtPath:t toPath:_responseBody error:nil];
+
+                saveFile = YES;
+                
             }
         }
-        else if(!self.allowCheckContentLength
+        else if( !self.allowCheckContentLength
            || _contentLength == 0 || _contentLength == _downloadLength){
-            [[NSFileManager defaultManager] moveItemAtPath:t toPath:_responseBody error:nil];
             
-            self.responseUUID = [[NSFileManager defaultManager] vtMD5StringAtPath:_responseBody];
+            saveFile = YES;
+            
             
         }
         else{
-            [[NSFileManager defaultManager] removeItemAtPath:t error:nil];
+            removeFile = YES;
+        }
+        
+        NSFileManager * fileManager = [NSFileManager defaultManager];
+        
+        if(saveFile){
+            
+            [fileManager moveItemAtPath:t toPath:_responseBody error:nil];
+            self.responseUUID = [fileManager vtMD5StringAtPath:_responseBody];
+            
+            NSString * modified = [[self.response allHeaderFields] valueForKey:@"Last-Modified"];
+            
+            if(modified){
+                
+                NSDateFormatter *df = [[NSDateFormatter alloc] init];
+                
+                df.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
+                df.dateFormat = @"EEE',' dd MMM yyyy HH':'mm':'ss 'GMT'";
+                
+                NSDate * date = [df dateFromString:modified];
+                
+                [df release];
+                
+                NSDictionary * attr = [fileManager attributesOfItemAtPath:_responseBody error:nil];
+                
+                if(attr){
+                    
+                    NSMutableDictionary * mattr = [NSMutableDictionary dictionaryWithDictionary:attr];
+                    
+                    [mattr setValue:date forKeyPath:NSFileModificationDate];
+                    
+                    [fileManager setAttributes:mattr ofItemAtPath:_responseBody error:nil];
+                    
+                }
+                
+            }
+            
+        }
+        else if(removeFile){
+            [fileManager removeItemAtPath:t error:nil];
         }
     }
 }
@@ -282,26 +332,7 @@
 }
     
 +(NSString *) localResourcePathForURL:(NSURL *) url{
-    
-    md5_state_t md5;
-    md5_byte_t digest[16];
-    int i;
-    
-    md5_init(&md5);
-    
-    NSData * bytes = [[url absoluteString] dataUsingEncoding:NSUTF8StringEncoding];
-    
-    md5_append(&md5, [bytes bytes], (int) [bytes length]);
-    
-    md5_finish(&md5, digest);
-    
-    NSMutableString * md5String = [NSMutableString stringWithCapacity:32];
-    
-    for(i=0;i<16;i++){
-        [md5String appendFormat:@"%02x",digest[i]];
-    }
-    
-    return [NSTemporaryDirectory() stringByAppendingPathComponent:md5String];
+    return [NSTemporaryDirectory() stringByAppendingPathComponent:[[url absoluteString] vtMD5String]];
 }
 
 @end

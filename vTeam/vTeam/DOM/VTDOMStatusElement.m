@@ -32,11 +32,28 @@
 }
 
 -(void) refreshStatusForElement:(VTDOMElement *) element forStatus:(NSString *) status{
+    
     NSString * s = [element attributeValueForKey:@"status"];
-    [element setAttributeValue: s == status || [status isEqualToString:s] ? @"false":@"true" forKey:@"hidden"];
+    
+    if(status == nil || s == nil || s == status || [status isEqualToString:s]){
+        [element setAttributeValue:@"false" forKey:@"hidden"];
+    }
+    else {
+        
+        NSSet * ss = [NSSet setWithArray:[s componentsSeparatedByString:@","]];
+        
+        if([ss containsObject:status]){
+            [element setAttributeValue:@"false" forKey:@"hidden"];
+        }
+        else{
+            [element setAttributeValue:@"true" forKey:@"hidden"];
+        }
+    }
+
     if([element isKindOfClass:[VTDOMViewElement class]] && [(VTDOMViewElement *)element isViewLoaded]){
         [[(VTDOMViewElement *)element view] setElement:element];
     }
+    
     [element setNeedDisplay];
 }
 

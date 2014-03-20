@@ -11,7 +11,7 @@
 #import <vTeam/IVTAction.h>
 #import <vTeam/VTRich.h>
 
-@interface VTDOMRichElement : VTDOMElement<IVTAction>
+@interface VTDOMRichElement : VTDOMElement<IVTAction,VTDOMElementDelegate>
 
 @property(nonatomic,readonly) UIFont * font;
 @property(nonatomic,readonly) UIColor * textColor;

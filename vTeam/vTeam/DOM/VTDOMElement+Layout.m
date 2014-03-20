@@ -74,6 +74,14 @@
         CGPoint p = CGPointMake(padding.left, padding.top);
         CGFloat lineHeight = 0;
         CGFloat width = padding.left + padding.right;
+        CGFloat maxWidth = frame.size.width;
+        
+        if(maxWidth == MAXFLOAT){
+            NSString * max = [self attributeValueForKey:@"max-width"];
+            if(max){
+                maxWidth = [max floatValue];
+            }
+        }
         
         for(VTDOMElement * element in [self childs]){
             
@@ -85,7 +93,7 @@
             CGRect r = [element frame];
   
             if(![element isKindOfClass:[VTDOMBRElement class]]
-                &&  ( p.x + r.size.width + margin.left + margin.right <= frame.size.width - padding.right)){
+                &&  ( p.x + r.size.width + margin.left + margin.right <= maxWidth - padding.right)){
                 
                 r.origin = CGPointMake(p.x + margin.left, p.y + margin.top);
                 p.x += r.size.width + margin.left + margin.right;

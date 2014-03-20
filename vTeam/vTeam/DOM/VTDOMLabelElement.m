@@ -108,6 +108,7 @@
             CGFloat minFontSize = [self minFontSize];
             
             CGFloat width = r.size.width;
+            CGFloat height = r.size.height;
             
             if(width == MAXFLOAT){
                 NSString * max = [self stringValueForKey:@"max-width"];
@@ -116,14 +117,25 @@
                 }
             }
             
+            if(height == MAXFLOAT){
+                NSString * max = [self stringValueForKey:@"max-height"];
+                if(max){
+                    height = [max floatValue];
+                }
+            }
+            
             CGSize s = CGSizeZero;
             
             if(minFontSize ==0){
                 _actualFontSize = 0;
-                s = [text sizeWithFont:font constrainedToSize:CGSizeMake(width, MAXFLOAT) lineBreakMode:self.lineBreakMode];
+                s = [text sizeWithFont:font constrainedToSize:CGSizeMake(width, height) lineBreakMode:self.lineBreakMode];
             }
             else{
-                s = [text sizeWithFont:font minFontSize:minFontSize actualFontSize:&_actualFontSize forWidth:width lineBreakMode:self.lineBreakMode];
+                s = [text sizeWithFont:font minFontSize:minFontSize actualFontSize:&_actualFontSize forWidth:width lineBreakMode:NSLineBreakByClipping];
+                if(_actualFontSize != font.pointSize){
+                    font = [UIFont fontWithName:font.fontName size:_actualFontSize];
+                    s = [text sizeWithFont:font constrainedToSize:CGSizeMake(width, height) lineBreakMode:self.lineBreakMode];
+                }
             }
       
             if(r.size.width == MAXFLOAT){
