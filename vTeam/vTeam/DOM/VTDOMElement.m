@@ -8,6 +8,8 @@
 
 #import "VTDOMElement.h"
 
+#import "VTDOMDocument.h"
+
 @interface VTDOMElement(){
     NSMutableDictionary * _attributes;
     NSMutableArray * _childs;
@@ -94,6 +96,9 @@
         _attributes = [[NSMutableDictionary alloc] initWithCapacity:4];
     }
     [_attributes setValue:value forKey:key];
+    if(self.document && [key isEqualToString:@"class"]){
+        [self.document applyStyleSheet:self];
+    }
 }
 
 -(NSString *) attributeValueForKey:(NSString *)key{
