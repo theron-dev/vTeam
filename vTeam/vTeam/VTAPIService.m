@@ -194,7 +194,6 @@
 
 -(void) vtHttpTaskDidLoaded:(id) httpTask{
     
-    NSLog(@"%@",[httpTask request]);
     NSLog(@"%@",(NSHTTPURLResponse *)[httpTask response]);
     
     id task = [httpTask userInfo];
