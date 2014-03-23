@@ -169,7 +169,7 @@
         }
     }
     
-    id data = [self.dataSource dataObjectAtIndex:indexPath.row - [_headerCells count]];
+    id data = [self dataObjectByIndexPath:indexPath];
      
     if([cell isKindOfClass:[VTTableViewCell class]]){
         [(VTTableViewCell *) cell setContext:self.context];

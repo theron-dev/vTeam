@@ -24,4 +24,6 @@ typedef struct _VTDBObjectIndex{
 
 -(void) willRelease:(NSUInteger) retainCount;
 
+-(NSMutableDictionary *) toDictionary;
+
 @end

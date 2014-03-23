@@ -12,4 +12,8 @@
 
 -(NSString *) pinyinInitials;
 
+-(NSString *) pinyin;
+
+-(NSString *) pinyinInitialsChar;
+
 @end

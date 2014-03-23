@@ -8,6 +8,8 @@
 
 #import "VTDBObject.h"
 
+#include <objc/runtime.h>
+
 @implementation VTDBObject
 
 @synthesize rowid = _rowid;
@@ -27,6 +29,26 @@
 
 -(void) willRelease:(NSUInteger) retainCount{
     
+}
+
+-(NSMutableDictionary *) toDictionary{
+    
+    NSMutableDictionary * data = [NSMutableDictionary dictionaryWithCapacity:4];
+    
+    Class clazz = [[self class] tableClass];
+    
+    while(clazz && clazz != [NSObject class]){
+        unsigned int propCount = 0;
+        objc_property_t * prop =  class_copyPropertyList(clazz, &propCount);
+        for(int i=0;i<propCount;i++){
+            NSString * name = [NSString stringWithCString:property_getName(prop[i]) encoding:NSUTF8StringEncoding];
+            [data setValue:[self valueForKey:name] forKey:name];
+        }
+        free(prop);
+        clazz = class_getSuperclass(clazz);
+    }
+    
+    return data;
 }
 
 @end

@@ -15,31 +15,113 @@
 
 -(NSString *) pinyinInitials{
     
-    if([self length] ){
+    NSMutableString * ms = [NSMutableString stringWithCapacity:32];
+    
+    NSUInteger length = [self length];
+    
+    for(NSUInteger i = 0;i< length;i++){
         
-        unichar c = [self characterAtIndex:0];
+        unichar uc = [self characterAtIndex:i];
         
-        if( c >> 8 ){
+        if( uc >> 8){
             
-            hpinyin_t p = pinyin_find(c, InvokeTickRoot);
+            hpinyin_t p = pinyin_find(uc, InvokeTickRoot);
             
             if(p && pinyin_count(p, InvokeTickRoot) > 0){
                 
                 const char * cc = pinyin_get(p, 0, InvokeTickRoot);
                 
                 if(cc){
-                    c = * cc;
-                    return [NSString stringWithCharacters:&c length:1];
+                    [ms appendFormat:@"%c", * cc];
+                }
+                else{
+                    [ms appendString:@"*"];
                 }
                 
             }
+            else{
+                [ms appendString:@"*"];
+            }
         }
         else{
-            return [NSString stringWithCharacters:&c length:1];
+            [ms appendString:[NSString stringWithCharacters:& uc length:1]];
         }
+        
+    }
+    
+    return ms;
+    
+}
+
+-(NSString *) pinyinInitialsChar{
+   
+    if([self length]){
+        
+        unichar uc = [self characterAtIndex:0];
+        
+        if( uc >> 8){
+            
+            hpinyin_t p = pinyin_find(uc, InvokeTickRoot);
+            
+            if(p && pinyin_count(p, InvokeTickRoot) > 0){
+                
+                const char * cc = pinyin_get(p, 0, InvokeTickRoot);
+                
+                if(cc){
+                    return [NSString stringWithFormat:@"%c",*cc];
+                }
+
+                
+            }
+            
+        }
+        else{
+            return [NSString stringWithCharacters:& uc length:1];
+        }
+        
     }
     
     return nil;
+}
+
+-(NSString *) pinyin{
+    
+    NSMutableString * ms = [NSMutableString stringWithCapacity:32];
+    
+    NSUInteger length = [self length];
+    
+    for(NSUInteger i = 0;i< length;i++){
+        
+        unichar uc = [self characterAtIndex:i];
+        
+        if( uc >> 8){
+            
+            hpinyin_t p = pinyin_find(uc, InvokeTickRoot);
+            
+            if(p && pinyin_count(p, InvokeTickRoot) > 0){
+                
+                const char * cc = pinyin_get(p, 0, InvokeTickRoot);
+                
+                if(cc){
+                    [ms appendFormat:@"%s",cc];
+                }
+                else{
+                    [ms appendString:@"*"];
+                }
+
+            }
+            else{
+                [ms appendString:@"*"];
+            }
+        }
+        else{
+            [ms appendString:[NSString stringWithCharacters:& uc length:1]];
+        }
+        
+    }
+    
+    return ms;
+    
 }
 
 @end
