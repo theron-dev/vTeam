@@ -6,6 +6,6 @@
   git submodule update <br/>
 
 #Installing xcode project templates
-  unzip xcode.zip <br/>
-  cd xcode <br/>
-  cp -rf vTeam Templetes <br/>
+  open vTeam.dmg <br/>
+  copy vTeam to Templetes <br/>
+
