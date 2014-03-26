@@ -86,6 +86,8 @@
 		1117024418308C8700CFD179 /* NSString+Grid.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117024218308C8700CFD179 /* NSString+Grid.m */; };
 		1119900D18B645E400AB707F /* UIControl+VTDOMElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 1119900B18B645E400AB707F /* UIControl+VTDOMElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1119900E18B645E400AB707F /* UIControl+VTDOMElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1119900C18B645E400AB707F /* UIControl+VTDOMElement.m */; };
+		111DDF8B18E07434004C0E65 /* UIColor+UIImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 111DDF8918E07434004C0E65 /* UIColor+UIImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		111DDF8C18E07434004C0E65 /* UIColor+UIImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 111DDF8A18E07434004C0E65 /* UIColor+UIImage.m */; };
 		11211CCE18BDB15E00053565 /* NSFileManager+VTMD5String.h in Headers */ = {isa = PBXBuildFile; fileRef = 11211CCC18BDB15E00053565 /* NSFileManager+VTMD5String.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11211CCF18BDB15E00053565 /* NSFileManager+VTMD5String.m in Sources */ = {isa = PBXBuildFile; fileRef = 11211CCD18BDB15E00053565 /* NSFileManager+VTMD5String.m */; };
 		11216B4217587B99004C4B1C /* VTPopWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 11216B4017587B99004C4B1C /* VTPopWindow.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -671,6 +673,8 @@
 		1117024218308C8700CFD179 /* NSString+Grid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Grid.m"; sourceTree = "<group>"; };
 		1119900B18B645E400AB707F /* UIControl+VTDOMElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+VTDOMElement.h"; sourceTree = "<group>"; };
 		1119900C18B645E400AB707F /* UIControl+VTDOMElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+VTDOMElement.m"; sourceTree = "<group>"; };
+		111DDF8918E07434004C0E65 /* UIColor+UIImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+UIImage.h"; sourceTree = "<group>"; };
+		111DDF8A18E07434004C0E65 /* UIColor+UIImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+UIImage.m"; sourceTree = "<group>"; };
 		11211CCC18BDB15E00053565 /* NSFileManager+VTMD5String.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+VTMD5String.h"; sourceTree = "<group>"; };
 		11211CCD18BDB15E00053565 /* NSFileManager+VTMD5String.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+VTMD5String.m"; sourceTree = "<group>"; };
 		11216B4017587B99004C4B1C /* VTPopWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTPopWindow.h; sourceTree = "<group>"; };
@@ -1277,6 +1281,8 @@
 				110D4C5B18714F2900681A23 /* NSObject+VTValue.m */,
 				11211CCC18BDB15E00053565 /* NSFileManager+VTMD5String.h */,
 				11211CCD18BDB15E00053565 /* NSFileManager+VTMD5String.m */,
+				111DDF8918E07434004C0E65 /* UIColor+UIImage.h */,
+				111DDF8A18E07434004C0E65 /* UIColor+UIImage.m */,
 			);
 			name = NSCategory;
 			sourceTree = "<group>";
@@ -2162,6 +2168,7 @@
 				11619CB61732674C00BD3561 /* VTAPIResponseTask.h in Headers */,
 				11619CBA173267D400BD3561 /* VTAPIService.h in Headers */,
 				11619CC31733585200BD3561 /* VTDragLoadingView.h in Headers */,
+				111DDF8B18E07434004C0E65 /* UIColor+UIImage.h in Headers */,
 				11619CCB17339A3300BD3561 /* VTZoomView.h in Headers */,
 				11619CD81733B1C700BD3561 /* IVTAction.h in Headers */,
 				ACDE3A501733EC410046ED56 /* UIView+Image.h in Headers */,
@@ -2686,6 +2693,7 @@
 				11A0416017BB4694001992BE /* VTDOMElement+Style.m in Sources */,
 				11A0416417BB4D08001992BE /* VTDOMImageElement.m in Sources */,
 				11A0416817BB50AF001992BE /* VTDOMLabelElement.m in Sources */,
+				111DDF8C18E07434004C0E65 /* UIColor+UIImage.m in Sources */,
 				11A0416C17BB5C82001992BE /* VTDOMView.m in Sources */,
 				11A0417017BB5E1C001992BE /* NSString+VTDOMSource.m in Sources */,
 				11A0417417BB6033001992BE /* VTDOM.m in Sources */,

@@ -120,4 +120,4 @@
 #import <vTeam/VTFoldViewController.h>
 #import <vTeam/VTFeedbackTask.h>
 #import <vTeam/VTAppVersionTask.h>
-
+#import <vTeam/UIColor+UIImage.h>
