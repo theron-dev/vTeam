@@ -9,4 +9,11 @@
   open vTeam.dmg <br/>
   copy vTeam to Templetes <br/>
 
-<embed src="http://player.youku.com/player.php/sid/XNjkwMzE3MDQw/v.swf" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>
+#初级使用入门
+  http://v.youku.com/v_show/id_XNjkwMzE3MDQw.html <br/>
+
+#中级使用入门
+  http://v.youku.com/v_show/id_XNjkwMzIwMTIw.html <br/>
+
+#高级使用入门
+  http://v.youku.com/v_show/id_XNjkwMzIyODA0.html <br/>
