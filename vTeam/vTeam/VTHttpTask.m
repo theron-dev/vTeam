@@ -108,7 +108,7 @@
             
         }
         
-        if(isFileExist){
+        if(isFileExist && ! _forceUpdateResource){
             
             NSMutableURLRequest * req = [NSMutableURLRequest requestWithURL:_request.URL cachePolicy:_request.cachePolicy timeoutInterval:_request.timeoutInterval];
 
