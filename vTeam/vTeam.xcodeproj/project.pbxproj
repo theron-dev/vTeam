@@ -354,6 +354,8 @@
 		1193DB5817B0B35900F19592 /* VTBESessionObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1193DB5617B0B35900F19592 /* VTBESessionObject.m */; };
 		11968205187A68B5006509B0 /* VTDOMLinkElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 11968203187A68B5006509B0 /* VTDOMLinkElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11968206187A68B5006509B0 /* VTDOMLinkElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 11968204187A68B5006509B0 /* VTDOMLinkElement.m */; };
+		1197636E18E5231C009C3FF0 /* UILabel+VTDOMElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 1197636C18E5231C009C3FF0 /* UILabel+VTDOMElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1197636F18E5231C009C3FF0 /* UILabel+VTDOMElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1197636D18E5231C009C3FF0 /* UILabel+VTDOMElement.m */; };
 		119EBDD218B05CDE00B745D7 /* VTDOMContainerElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 119EBDD018B05CDE00B745D7 /* VTDOMContainerElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		119EBDD318B05CDE00B745D7 /* VTDOMContainerElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 119EBDD118B05CDE00B745D7 /* VTDOMContainerElement.m */; };
 		11A0413417BB1C68001992BE /* VTDOMStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 11DE6CE717B8AE4400B04782 /* VTDOMStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -950,6 +952,8 @@
 		1193DB5617B0B35900F19592 /* VTBESessionObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTBESessionObject.m; sourceTree = "<group>"; };
 		11968203187A68B5006509B0 /* VTDOMLinkElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDOMLinkElement.h; sourceTree = "<group>"; };
 		11968204187A68B5006509B0 /* VTDOMLinkElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDOMLinkElement.m; sourceTree = "<group>"; };
+		1197636C18E5231C009C3FF0 /* UILabel+VTDOMElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+VTDOMElement.h"; sourceTree = "<group>"; };
+		1197636D18E5231C009C3FF0 /* UILabel+VTDOMElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+VTDOMElement.m"; sourceTree = "<group>"; };
 		119EBDD018B05CDE00B745D7 /* VTDOMContainerElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDOMContainerElement.h; sourceTree = "<group>"; };
 		119EBDD118B05CDE00B745D7 /* VTDOMContainerElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDOMContainerElement.m; sourceTree = "<group>"; };
 		11A0413D17BB25CD001992BE /* VTDOMStyleSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDOMStyleSheet.h; sourceTree = "<group>"; };
@@ -1880,6 +1884,8 @@
 				11A0417217BB6032001992BE /* VTDOM.m */,
 				117F811C18B472CE0015DCB1 /* UIActivityIndicatorView+VTDOMElement.h */,
 				117F811D18B472CE0015DCB1 /* UIActivityIndicatorView+VTDOMElement.m */,
+				1197636C18E5231C009C3FF0 /* UILabel+VTDOMElement.h */,
+				1197636D18E5231C009C3FF0 /* UILabel+VTDOMElement.m */,
 			);
 			path = DOM;
 			sourceTree = "<group>";
@@ -2385,6 +2391,7 @@
 				1107F5AF187D543E0093AE80 /* VTChartContainer.h in Headers */,
 				1107F5B2187D54850093AE80 /* IVTChartContainer.h in Headers */,
 				1107F5B5187D5AAD0093AE80 /* VTChartView.h in Headers */,
+				1197636E18E5231C009C3FF0 /* UILabel+VTDOMElement.h in Headers */,
 				1107F5B9187E48120093AE80 /* VTChartTipLabel.h in Headers */,
 				1107F5BD187E6CCC0093AE80 /* VTPillarChart.h in Headers */,
 				1107F5C1187E81800093AE80 /* VTChartRectangle.h in Headers */,
@@ -2586,6 +2593,7 @@
 				113140691749EC590081641F /* hjson.c in Sources */,
 				1131406B1749EC590081641F /* hlibrary.c in Sources */,
 				1131406D1749EC590081641F /* hlist.c in Sources */,
+				1197636F18E5231C009C3FF0 /* UILabel+VTDOMElement.m in Sources */,
 				1131406F1749EC590081641F /* hlog.c in Sources */,
 				113140731749EC590081641F /* hmap2.c in Sources */,
 				113140741749EC590081641F /* hmem.c in Sources */,

@@ -37,6 +37,7 @@ typedef  NSString * (^ VTDataOutletStringValue) (id data,NSString * keyPath);
 @property(nonatomic,retain) NSString * keyPath;
 @property(nonatomic,retain) NSString * stringKeyPath;
 @property(nonatomic,retain) NSString * stringFormat;
+@property(nonatomic,retain) NSString * stringHtmlFormat;
 @property(nonatomic,retain) NSString * booleanKeyPath;
 @property(nonatomic,retain) NSString * valueKeyPath;
 @property(nonatomic,retain) NSString * enabledKeyPath;

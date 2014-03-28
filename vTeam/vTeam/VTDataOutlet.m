@@ -8,6 +8,8 @@
 
 #import <vTeam/VTDataOutlet.h>
 
+#import "NSString+VTDOMSource.h"
+
 @implementation NSObject(VTDataOutlet)
 
 -(id) dataForKey:(NSString *) key{
@@ -244,6 +246,7 @@
     [_enabledKeyPath release];
     [_disabledKeyPath release];
     [_valueKeyPath release];
+    [_stringHtmlFormat release];
     [_value release];
     [_views release];
     [super dealloc];
@@ -299,6 +302,9 @@
     }
     else if(_valueKeyPath){
         value = [data dataForKeyPath:_valueKeyPath];
+    }
+    else if(_stringHtmlFormat){
+        value = [_stringHtmlFormat htmlStringByDOMSource:data];
     }
     
     if([value isKindOfClass:[NSNull class]]){

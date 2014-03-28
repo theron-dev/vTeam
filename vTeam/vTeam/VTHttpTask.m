@@ -267,7 +267,9 @@
         
         if(saveFile){
             
+            [fileManager removeItemAtPath:_responseBody error:nil];
             [fileManager moveItemAtPath:t toPath:_responseBody error:nil];
+            
             self.responseUUID = [fileManager vtMD5StringAtPath:_responseBody];
             
             NSString * modified = [[self.response allHeaderFields] valueForKey:@"Last-Modified"];
