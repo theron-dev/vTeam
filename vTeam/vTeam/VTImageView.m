@@ -77,7 +77,7 @@
 }
 
 -(void) setSrc:(NSString *)src{
-    if(_src != src){
+    if(_src != src && ! [_src isEqualToString:src]){
         [src retain];
         [_src release];
         _src = src;

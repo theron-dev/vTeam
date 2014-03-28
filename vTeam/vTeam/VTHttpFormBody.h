@@ -25,6 +25,7 @@
 
 @property(nonatomic,retain) NSString * contentType;
 @property(nonatomic,retain) NSData * bytesData;
+@property(nonatomic,retain) NSString * filename;
 
 @end
 
@@ -42,6 +43,10 @@
 -(void) addItemBytes:(NSData *) bytesData contentType:(NSString *) contentType forKey:(NSString *) key;
 
 -(void) setItemBytes:(NSData *) bytesData contentType:(NSString *) contentType forKey:(NSString *) key;
+
+-(void) addItemBytes:(NSData *) bytesData contentType:(NSString *) contentType filename:(NSString *) filename forKey:(NSString *) key;
+
+-(void) setItemBytes:(NSData *) bytesData contentType:(NSString *) contentType filename:(NSString *) filename forKey:(NSString *) key;
 
 -(NSData *) bytesBody;
 

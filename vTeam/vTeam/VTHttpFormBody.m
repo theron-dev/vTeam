@@ -43,10 +43,13 @@
 @implementation VTHttpFormItemBytes
 
 @synthesize bytesData = _bytesData;
+@synthesize filename = _filename;
+@synthesize contentType = _contentType;
 
 -(void) dealloc{
     [_contentType release];
     [_bytesData release];
+    [_filename release];
     [super dealloc];
 }
 
@@ -135,6 +138,26 @@
     [item release];
 }
 
+-(void) addItemBytes:(NSData *) bytesData contentType:(NSString *) contentType filename:(NSString *) filename forKey:(NSString *) key{
+    VTHttpFormItemBytes * item = [[VTHttpFormItemBytes alloc] init];
+    item.key = key;
+    item.contentType = contentType;
+    item.bytesData = bytesData;
+    item.filename = filename;
+    [self addFormItem:item];
+    [item release];
+}
+
+-(void) setItemBytes:(NSData *) bytesData contentType:(NSString *) contentType filename:(NSString *) filename forKey:(NSString *) key{
+    VTHttpFormItemBytes * item = [[VTHttpFormItemBytes alloc] init];
+    item.key = key;
+    item.contentType = contentType;
+    item.bytesData = bytesData;
+    item.filename = filename;
+    [self setFormItem:item];
+    [item release];
+}
+
 -(NSString *) contentType{
     return _contentType;
 }
@@ -164,7 +187,12 @@
                 [md appendBytes:(void *)"Content-Disposition: form-data; name=\"" length:38];
                 [md appendData:[[item key] dataUsingEncoding:NSUTF8StringEncoding]];
                 [md appendBytes:(void *)"\"; filename=\"" length:13];
-                [md appendData:[[item key] dataUsingEncoding:NSUTF8StringEncoding]];
+                if([item filename]){
+                    [md appendData:[[item filename] dataUsingEncoding:NSUTF8StringEncoding]];
+                }
+                else{
+                    [md appendData:[[item key] dataUsingEncoding:NSUTF8StringEncoding]];
+                }
                 [md appendBytes:(void *)"\"\r\n" length:3];
                 
                 [md appendBytes:(void *)"Content-Type: " length:14];
