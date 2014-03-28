@@ -188,23 +188,23 @@
 }
 
 -(void) vtDataSourceDidLoadedFromCache:(VTDataSource *) dataSource timestamp:(NSDate *) timestamp{
-    [super vtDataSourceDidLoadedFromCache:dataSource timestamp:timestamp];
     [self setLastUpdateDate:timestamp];
     [_tableView reloadData];
+    [super vtDataSourceDidLoadedFromCache:dataSource timestamp:timestamp];
 }
 
 -(void) vtDataSourceDidLoaded:(VTDataSource *) dataSource{
-    [super vtDataSourceDidLoaded:dataSource];
     [self setLastUpdateDate:[NSDate date]];
     if([dataSource isDataChanged]){
         [_tableView reloadData];
     }
     [self stopLoading];
+    [super vtDataSourceDidLoaded:dataSource];
 }
 
 -(void) vtDataSourceDidContentChanged:(VTDataSource *)dataSource{
-    [super vtDataSourceDidContentChanged:dataSource];
     [_tableView reloadData];
+    [super vtDataSourceDidContentChanged:dataSource];
 }
 
 -(void) vtDataSource:(VTDataSource *)dataSource didFitalError:(NSError *)error{
