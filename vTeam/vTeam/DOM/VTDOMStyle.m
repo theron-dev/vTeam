@@ -71,17 +71,27 @@
         
         if(![value hasPrefix:@"http://"]){
             
-            NSArray * vs = [value componentsSeparatedByString:@" "];
-            NSString * path = nil;
             
-            if([vs count] >0){
-                path = [vs objectAtIndex:0];
+            NSString * path = nil;
+            NSArray * vs = nil;
+            
+            if([value hasPrefix:@"/"]){
+                path = value;
+            }
+            else{
+                vs = [value componentsSeparatedByString:@" "];
+                if([vs count] >0){
+                    path = [vs objectAtIndex:0];
+                }
             }
             
             UIImage * image = nil;
             
             if([path hasPrefix:@"@"]){
                 image = [UIImage imageNamed:[path substringFromIndex:1]];
+            }
+            else if([path hasPrefix:@"/"]){
+                image = [UIImage imageWithContentsOfFile:path];
             }
             else{
                 image = [UIImage imageNamed: bundle == nil ? path : [[bundle bundlePath] stringByAppendingPathComponent:path]];

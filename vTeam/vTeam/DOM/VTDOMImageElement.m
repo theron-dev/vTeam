@@ -244,12 +244,15 @@
             
             CGSize s = image.size;
             
-            if(r.size.width == MAXFLOAT){
+            if(r.size.width == MAXFLOAT && r.size.height == MAXFLOAT){
                 r.size.width = s.width;
-            }
-            
-            if(r.size.height == MAXFLOAT){
                 r.size.height = s.height;
+            }
+            else if(r.size.width == MAXFLOAT){
+                r.size.width = r.size.height * s.width / s.height;
+            }
+            else if(r.size.height == MAXFLOAT){
+                r.size.height = r.size.width * s.height / s.width;
             }
 
         }

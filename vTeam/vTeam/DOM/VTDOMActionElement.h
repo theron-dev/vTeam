@@ -12,4 +12,6 @@
 
 @interface VTDOMActionElement : VTDOMElement<IVTAction>
 
+@property(nonatomic,readonly,getter = isAllowLongTapAction) BOOL allowLongTapAction;
+
 @end

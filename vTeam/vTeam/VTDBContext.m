@@ -36,15 +36,15 @@ static NSString * VTDBContextPropertyDBType(objc_property_t prop){
     NSString * type = [NSString stringWithCString:property_getAttributes(prop) encoding:NSUTF8StringEncoding];
     
     if( [type hasPrefix:@"Ti"] || [type hasPrefix:@"Tl"] || [type hasPrefix:@"Tb"]){
-        return @"INT";
+        return @"INT DEFAULT 0";
     }
     
     if( [type hasPrefix:@"Tq"]  ){
-        return @"BIGINT";
+        return @"BIGINT DEFAULT 0";
     }
     
     if( [type hasPrefix:@"Tf"] || [type hasPrefix:@"Td"]   ){
-        return @"DOUBLE";
+        return @"DOUBLE DEFAULT 0.0";
     }
     
     if( [type hasPrefix:@"T@\"NSString\""] ){

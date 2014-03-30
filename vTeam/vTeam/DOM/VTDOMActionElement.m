@@ -29,9 +29,28 @@
     [super dealloc];
 }
 
+-(BOOL) isAllowLongTapAction{
+    return [self booleanValueForKey:@"long-tap"];
+}
+
+-(void) longAction{
+    
+    [self setAttributeValue:@"true" forKey:@"long-action"];
+    
+    if([self.delegate respondsToSelector:@selector(vtDOMElementDoAction:)]){
+        [self.delegate vtDOMElementDoAction:self];
+    }
+    
+}
+
 -(BOOL) touchesBegan:(CGPoint)location{
     [super touchesBegan:location];
     _insetTouch = YES;
+    
+    if([self isAllowLongTapAction]){
+        [self performSelector:@selector(longAction) withObject:nil afterDelay:0.8];
+    }
+    
     return YES;
 }
 
@@ -40,17 +59,22 @@
         [self setHighlighted:NO];
     }
     _insetTouch = NO;
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(longAction) object:nil];
+    [self setAttributeValue:nil forKey:@"long-action"];
 }
 
 -(void) touchesEnded:(CGPoint)location{
     
-    if(_insetTouch){
+    if(_insetTouch && ! [self booleanValueForKey:@"long-action"]){
         if([self.delegate respondsToSelector:@selector(vtDOMElementDoAction:)]){
             [self.delegate vtDOMElementDoAction:self];
         }
     }
     
-     _insetTouch = NO;
+    _insetTouch = NO;
+    
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(longAction) object:nil];
+    [self setAttributeValue:nil forKey:@"long-action"];
     
     [super touchesEnded:location];
 }
