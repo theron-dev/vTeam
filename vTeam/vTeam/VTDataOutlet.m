@@ -35,6 +35,9 @@
         else if([key hasPrefix:@"@joinString"]){
             return [(NSArray *)self componentsJoinedByString:@","];
         }
+        else if([key hasPrefix:@"@count"]){
+            return [NSNumber numberWithUnsignedInteger:[(NSArray *) self count]];
+        }
         else if([key hasPrefix:@"@"]){
             NSInteger index = [[key substringFromIndex:1] intValue];
             if(index >=0 && index < [(NSArray *)self count]){

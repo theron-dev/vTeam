@@ -38,8 +38,10 @@
 
 -(BOOL) hasWaitResultsData;
 
+-(void) setResultsData:(id) resultsData sender:(id) sender;
+
 -(void) setResultsData:(id) resultsData;
 
--(void) waitResultsData:(void (^)(id resultsData)) callback;
+-(void) waitResultsData:(void (^)(id resultsData,id sender)) callback;
 
 @end

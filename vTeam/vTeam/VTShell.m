@@ -103,7 +103,7 @@
 @property(nonatomic,retain) id rootViewController;
 @property(nonatomic,readonly) NSMutableArray * platformKeys;
 @property(nonatomic,readonly) NSMutableDictionary * storyboards;
-@property(nonatomic,copy) void (^ resultsCallback)(id resultsData);
+@property(nonatomic,copy) void (^ resultsCallback)(id resultsData,id sender);
 @property(nonatomic,readonly) NSMutableDictionary * authValues;
 
 @end
@@ -461,15 +461,19 @@
     [parse release];
 }
 
--(void) waitResultsData:(void (^)(id resultsData))callback{
+-(void) waitResultsData:(void (^)(id resultsData,id sender))callback{
     self.resultsCallback = callback;
 }
 
--(void) setResultsData:(id)resultsData{
+-(void) setResultsData:(id)resultsData sender:(id)sender{
     if(_resultsCallback){
-        _resultsCallback(resultsData);
+        _resultsCallback(resultsData,sender);
         self.resultsCallback = nil;
     }
+}
+
+-(void) setResultsData:(id)resultsData{
+    [self setResultsData:resultsData sender:nil];
 }
 
 -(BOOL) hasWaitResultsData{
