@@ -43,6 +43,7 @@
 @synthesize allowWillRequest = _allowWillRequest;
 @synthesize allowStatusCode302 = _allowStatusCode302;
 @synthesize responseUUID = _responseUUID;
+@synthesize reuseFilePath = _reuseFilePath;
 
 -(void) dealloc{
     [_userInfo release];
@@ -51,6 +52,7 @@
     [_response release];
     [_contentType release];
     [_responseUUID release];
+    [_reuseFilePath release];
     [super dealloc];
 }
 
@@ -80,7 +82,12 @@
             return nil;
         }
         
-        self.responseBody = [VTHttpTask localResourcePathForURL:url];
+        if(_reuseFilePath){
+            self.responseBody = _reuseFilePath;
+        }
+        else {
+            self.responseBody = [VTHttpTask localResourcePathForURL:url];
+        }
         
         BOOL isFileExist = [fileManager fileExistsAtPath:_responseBody];
         
@@ -235,8 +242,12 @@
         else{
             s = [[[NSString alloc] initWithData:_responseBody encoding:NSUTF8StringEncoding] autorelease];
         }
-        
+
         self.responseBody = s ? [VTJSON decodeText:s] : nil;
+        
+        if(![_responseBody isKindOfClass:[NSDictionary class]]){
+            NSLog(@"%@",s);
+        }
     }
     else if(_responseType == VTHttpTaskResponseTypeResource){
         

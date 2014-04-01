@@ -35,6 +35,14 @@
     [super dealloc];
 }
 
+-(void) setReuseFileURI:(NSString *)reuseFileURI{
+    [self setAttributeValue:reuseFileURI forKey:@"reuse-file-uri"];
+}
+
+-(NSString *) reuseFileURI{
+    return [self stringValueForKey:@"reuse-file-uri"];
+}
+
 -(UIImage *) image{
     if(_image == nil){
         self.image = [VTDOMStyle imageValue:[self src] bundle:self.document.bundle];

@@ -10,7 +10,7 @@
 
 #import "IVTImageTask.h"
 
-#include "md5.h"
+#import "NSString+VTMD5String.h"
 
 @interface VTImageService(){
     NSMutableDictionary * _imageCached;
@@ -30,26 +30,7 @@
 }
 
 +(NSString *) keySrc:(NSString *)src{
-    
-    md5_state_t md5;
-    md5_byte_t digest[16];
-    int i;
-    
-    md5_init(&md5);
-    
-    NSData * bytes = [src dataUsingEncoding:NSUTF8StringEncoding];
-    
-    md5_append(&md5, [bytes bytes], (int) [bytes length]);
-    
-    md5_finish(&md5, digest);
-    
-    NSMutableString * md5String = [NSMutableString stringWithCapacity:32];
-    
-    for(i=0;i<16;i++){
-        [md5String appendFormat:@"%02x",digest[i]];
-    }
-    
-    return md5String;
+    return [src vtMD5String];
 }
 
 -(NSString *) absoluteSrc:(NSString *)src{
@@ -134,12 +115,25 @@
                 [imageTask setImage:[UIImage imageNamed:[src substringFromIndex:1]] isLocal:YES];
             }
             else{
+                
                 NSString * key = [VTImageService keySrc:src];
+                
+                if([imageTask reuseFileURI]){
+                    key = [VTImageService keySrc:[imageTask reuseFileURI]];
+                }
+                
                 UIImage * image = [_imageCached objectForKey:key];
                 
                 if(image == nil){
                     
-                    NSString * localPath = [VTHttpTask localResourcePathForURL:[NSURL URLWithString:src]];
+                    NSString * localPath = nil;
+                    
+                    if([imageTask reuseFileURI]){
+                        localPath = [self.context filePathWithFileURI:[imageTask reuseFileURI]];
+                    }
+                    else {
+                        localPath = [VTHttpTask localResourcePathForURL:[NSURL URLWithString:src]];
+                    }
                     
                     image = [UIImage imageWithContentsOfFile:localPath];
                     
@@ -183,6 +177,11 @@
                             [httpTask setSource:imageTask];
                             [httpTask setDelegate:self];
                             [httpTask setAllowWillRequest:YES];
+                            
+                            if([imageTask reuseFileURI]){
+                                [httpTask setReuseFilePath:[self.context filePathWithFileURI:[imageTask reuseFileURI]]];
+                            }
+                            
                             [httpTask setUserInfo:[NSDictionary dictionaryWithObject:key forKey:@"key"]];
                             
                             if(_imageTasks == nil){
@@ -244,7 +243,13 @@
     NSString * src = [imageTask src];
     
     if([src hasPrefix:@"http://"]){
+        
         NSString * key = [VTImageService keySrc:src];
+        
+        if([imageTask reuseFileURI]){
+            key = [VTImageService keySrc:[imageTask reuseFileURI]];
+        }
+        
         NSMutableArray * imageTasks = [_imageTasks objectForKey:key];
         if(imageTasks){
             [imageTasks removeObject:imageTask];

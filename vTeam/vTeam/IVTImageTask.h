@@ -16,7 +16,8 @@
 @property(nonatomic,retain) NSString * defaultSrc;
 @property(nonatomic,retain) NSString * src;
 @property(nonatomic,assign,getter = isLoading) BOOL loading;
-    
+@property(nonatomic,retain) NSString * reuseFileURI;
+
 -(void) setImage:(UIImage *) image;
 
 -(void) setImage:(UIImage *) image isLocal:(BOOL) isLocal;

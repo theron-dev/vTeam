@@ -92,6 +92,7 @@ typedef enum {
 @property(assign) BOOL allowCheckContentLength;
 @property(assign) BOOL forceUpdateResource;
 @property(assign) BOOL allowResume;
+@property(retain) NSString * reuseFilePath;
 
 @end
 

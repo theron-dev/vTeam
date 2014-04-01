@@ -19,12 +19,14 @@
 @synthesize loaded = _loaded;
 @synthesize defaultSrc = _defaultSrc;
 @synthesize imageMode = _imageMode;
+@synthesize reuseFileURI = _reuseFileURI;
 
 -(void) dealloc{
     [_src release];
     [_defaultImage release];
     [_defaultSrc release];
     [_imageMode release];
+    [_reuseFileURI release];
     [super dealloc];
 }
 

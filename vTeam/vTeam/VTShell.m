@@ -595,4 +595,72 @@
     return [[self authValues] valueForKey:key];
 }
 
+-(NSBundle *) resourceBundle{
+    return [NSBundle mainBundle];
+}
+
+-(NSBundle *) temporaryBundle{
+    return [NSBundle bundleWithPath:NSTemporaryDirectory()];
+}
+
+-(NSBundle *) documentBundle{
+    return [NSBundle bundleWithPath:[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"]];
+}
+
+-(NSBundle *) applicationBundle{
+    return [NSBundle mainBundle];
+}
+
+-(NSString *) filePathWithFileURI:(NSString *) fileURI{
+    
+    NSString * filePath = nil;
+    
+    if([fileURI hasPrefix:@"res://"]){
+        filePath = [[[self resourceBundle] resourcePath] stringByAppendingPathComponent:[fileURI substringFromIndex:11]];
+    }
+    
+    if([fileURI hasPrefix:@"tmp://"]){
+        filePath = [[[self temporaryBundle] resourcePath] stringByAppendingPathComponent:[fileURI substringFromIndex:11]];
+    }
+    
+    if([fileURI hasPrefix:@"doc://"]){
+        filePath = [[[self documentBundle] resourcePath] stringByAppendingPathComponent:[fileURI substringFromIndex:11]];
+    }
+    
+    if([fileURI hasPrefix:@"app://"]){
+        filePath = [[[self applicationBundle] resourcePath] stringByAppendingPathComponent:[fileURI substringFromIndex:11]];
+    }
+    
+    return filePath;
+}
+
+-(NSString *) fileURIWithFilePath:(NSString *) filePath{
+    
+    NSString * path = [[self resourceBundle] resourcePath];
+    
+    if([filePath hasPrefix:path]){
+        return [@"res://" stringByAppendingString:[filePath substringFromIndex:[path length]]];
+    }
+    
+    path = [[self temporaryBundle] resourcePath];
+    
+    if([filePath hasPrefix:path]){
+        return [@"tmp://" stringByAppendingString:[filePath substringFromIndex:[path length]]];
+    }
+    
+    path = [[self documentBundle] resourcePath];
+    
+    if([filePath hasPrefix:path]){
+        return [@"doc://" stringByAppendingString:[filePath substringFromIndex:[path length]]];
+    }
+    
+    path = [[self applicationBundle] resourcePath];
+    
+    if([filePath hasPrefix:path]){
+        return [@"app://" stringByAppendingString:[filePath substringFromIndex:[path length]]];
+    }
+    
+    return filePath;
+}
+
 @end
