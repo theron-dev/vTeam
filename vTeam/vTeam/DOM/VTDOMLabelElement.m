@@ -211,6 +211,9 @@
 
         CGSize size = self.frame.size;
         
+        size.width += 0.999999;
+        size.height += 0.999999;
+        
         [text drawInRect:CGRectMake(padding.left, padding.top
                                     , size.width - padding.left - padding.right
                                     , size.height - padding.top - padding.bottom)
