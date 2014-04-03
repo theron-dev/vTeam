@@ -121,3 +121,7 @@
 #import <vTeam/VTFeedbackTask.h>
 #import <vTeam/VTAppVersionTask.h>
 #import <vTeam/UIColor+UIImage.h>
+#import <vTeam/VTGatherTask.h>
+#import <vTeam/VTGatherService.h>
+#import <vTeam/VTDBDataContext.h>
+#import <vTeam/VTDBDataObject.h>

@@ -197,6 +197,14 @@
 		113381F817D5901A005E4DCE /* NSString+TextLength.m in Sources */ = {isa = PBXBuildFile; fileRef = 113381F617D5901A005E4DCE /* NSString+TextLength.m */; };
 		1135CC03182B3EBC0074D26E /* VTWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1135CC01182B3EBC0074D26E /* VTWebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1135CC04182B3EBC0074D26E /* VTWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1135CC02182B3EBC0074D26E /* VTWebView.m */; };
+		113793F018ED174D007F3CE2 /* VTGatherService.h in Headers */ = {isa = PBXBuildFile; fileRef = 113793EE18ED174D007F3CE2 /* VTGatherService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		113793F118ED174D007F3CE2 /* VTGatherService.m in Sources */ = {isa = PBXBuildFile; fileRef = 113793EF18ED174D007F3CE2 /* VTGatherService.m */; };
+		113793F418ED19A9007F3CE2 /* VTGatherTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 113793F218ED19A9007F3CE2 /* VTGatherTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		113793F518ED19A9007F3CE2 /* VTGatherTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 113793F318ED19A9007F3CE2 /* VTGatherTask.m */; };
+		113793F818ED2C7D007F3CE2 /* VTDBDataContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 113793F618ED2C7D007F3CE2 /* VTDBDataContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		113793F918ED2C7D007F3CE2 /* VTDBDataContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 113793F718ED2C7D007F3CE2 /* VTDBDataContext.m */; };
+		113793FC18ED2CFE007F3CE2 /* VTDBDataObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 113793FA18ED2CFE007F3CE2 /* VTDBDataObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		113793FD18ED2CFE007F3CE2 /* VTDBDataObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 113793FB18ED2CFE007F3CE2 /* VTDBDataObject.m */; };
 		113B5BD9174F77C6003211AD /* UIView+VTDataOutlet.h in Headers */ = {isa = PBXBuildFile; fileRef = 113B5BD7174F77C6003211AD /* UIView+VTDataOutlet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		113B5BDA174F77C6003211AD /* UIView+VTDataOutlet.m in Sources */ = {isa = PBXBuildFile; fileRef = 113B5BD8174F77C6003211AD /* UIView+VTDataOutlet.m */; };
 		113F9E4E1874441800E6948C /* VTDOMPageScrollElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 113F9E4C1874441800E6948C /* VTDOMPageScrollElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -791,6 +799,14 @@
 		113381F617D5901A005E4DCE /* NSString+TextLength.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TextLength.m"; sourceTree = "<group>"; };
 		1135CC01182B3EBC0074D26E /* VTWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTWebView.h; sourceTree = "<group>"; };
 		1135CC02182B3EBC0074D26E /* VTWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTWebView.m; sourceTree = "<group>"; };
+		113793EE18ED174D007F3CE2 /* VTGatherService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTGatherService.h; sourceTree = "<group>"; };
+		113793EF18ED174D007F3CE2 /* VTGatherService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTGatherService.m; sourceTree = "<group>"; };
+		113793F218ED19A9007F3CE2 /* VTGatherTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTGatherTask.h; sourceTree = "<group>"; };
+		113793F318ED19A9007F3CE2 /* VTGatherTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTGatherTask.m; sourceTree = "<group>"; };
+		113793F618ED2C7D007F3CE2 /* VTDBDataContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDBDataContext.h; sourceTree = "<group>"; };
+		113793F718ED2C7D007F3CE2 /* VTDBDataContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDBDataContext.m; sourceTree = "<group>"; };
+		113793FA18ED2CFE007F3CE2 /* VTDBDataObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDBDataObject.h; sourceTree = "<group>"; };
+		113793FB18ED2CFE007F3CE2 /* VTDBDataObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDBDataObject.m; sourceTree = "<group>"; };
 		113B5BD7174F77C6003211AD /* UIView+VTDataOutlet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+VTDataOutlet.h"; sourceTree = "<group>"; };
 		113B5BD8174F77C6003211AD /* UIView+VTDataOutlet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+VTDataOutlet.m"; sourceTree = "<group>"; };
 		113F9E4C1874441800E6948C /* VTDOMPageScrollElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDOMPageScrollElement.h; sourceTree = "<group>"; };
@@ -1591,6 +1607,8 @@
 				1109798E18CC293700243532 /* VTFeedbackTask.m */,
 				1109799A18CC36A900243532 /* VTAppVersionTask.h */,
 				1109799B18CC36A900243532 /* VTAppVersionTask.m */,
+				113793F218ED19A9007F3CE2 /* VTGatherTask.h */,
+				113793F318ED19A9007F3CE2 /* VTGatherTask.m */,
 			);
 			name = Tasks;
 			sourceTree = "<group>";
@@ -1622,6 +1640,8 @@
 				1109799218CC298D00243532 /* VTFeedbackService.m */,
 				1109799E18CC36EF00243532 /* VTAppService.h */,
 				1109799F18CC36EF00243532 /* VTAppService.m */,
+				113793EE18ED174D007F3CE2 /* VTGatherService.h */,
+				113793EF18ED174D007F3CE2 /* VTGatherService.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -1696,6 +1716,10 @@
 				118AFC42175DA15100A6A2FF /* VTDBObject.m */,
 				118AFC45175DA1E800A6A2FF /* VTDBContext.h */,
 				118AFC46175DA1E800A6A2FF /* VTDBContext.m */,
+				113793FA18ED2CFE007F3CE2 /* VTDBDataObject.h */,
+				113793FB18ED2CFE007F3CE2 /* VTDBDataObject.m */,
+				113793F618ED2C7D007F3CE2 /* VTDBDataContext.h */,
+				113793F718ED2C7D007F3CE2 /* VTDBDataContext.m */,
 			);
 			name = DB;
 			sourceTree = "<group>";
@@ -2147,6 +2171,7 @@
 				114D7A73172A3E8E0041468E /* VTFoldViewController.h in Headers */,
 				114D7AC3172A6D7A0041468E /* VTToolbar.h in Headers */,
 				114D7ACB172A75A90041468E /* VTNavigationBar.h in Headers */,
+				113793F018ED174D007F3CE2 /* VTGatherService.h in Headers */,
 				114D7ADE172A88FD0041468E /* GIFView.h in Headers */,
 				114D7AE2172A89710041468E /* VTContainerView.h in Headers */,
 				116FD13D18288EE80001CB43 /* VTTabBarItem.h in Headers */,
@@ -2235,6 +2260,7 @@
 				113140661749EC590081641F /* hfile.h in Headers */,
 				113140681749EC590081641F /* hinifile.h in Headers */,
 				1131406A1749EC590081641F /* hjson.h in Headers */,
+				113793F418ED19A9007F3CE2 /* VTGatherTask.h in Headers */,
 				1109799C18CC36A900243532 /* VTAppVersionTask.h in Headers */,
 				1131406C1749EC590081641F /* hlibrary.h in Headers */,
 				1131406E1749EC590081641F /* hlist.h in Headers */,
@@ -2261,6 +2287,7 @@
 				113140911749EC590081641F /* htypes.h in Headers */,
 				113140931749EC590081641F /* huniquekey.h in Headers */,
 				113140951749EC590081641F /* hurl.h in Headers */,
+				113793FC18ED2CFE007F3CE2 /* VTDBDataObject.h in Headers */,
 				113140971749EC590081641F /* hwaiter.h in Headers */,
 				113140991749EC590081641F /* hxml_scanf.h in Headers */,
 				1131409B1749EC590081641F /* hxpath.h in Headers */,
@@ -2270,6 +2297,7 @@
 				11216B4217587B99004C4B1C /* VTPopWindow.h in Headers */,
 				11216B4D175895C3004C4B1C /* VTStyleController.h in Headers */,
 				118AFC2D175D9A9F00A6A2FF /* VTBarButtonItem.h in Headers */,
+				113793F818ED2C7D007F3CE2 /* VTDBDataContext.h in Headers */,
 				118AFC43175DA15100A6A2FF /* VTDBObject.h in Headers */,
 				118AFC47175DA1E800A6A2FF /* VTDBContext.h in Headers */,
 				114D643317E1C62C0021CB8A /* VTMontagePlayer.h in Headers */,
@@ -2514,6 +2542,7 @@
 				114D7A75172A5B4B0041468E /* VTFoldViewController.m in Sources */,
 				114D7AC4172A6D7A0041468E /* VTToolbar.m in Sources */,
 				114D7ACC172A75A90041468E /* VTNavigationBar.m in Sources */,
+				113793F118ED174D007F3CE2 /* VTGatherService.m in Sources */,
 				11F977661840E34100F697D7 /* NSString+Pinyin.m in Sources */,
 				114D7ADF172A88FD0041468E /* GIFView.m in Sources */,
 				114D7AE3172A89710041468E /* VTContainerView.m in Sources */,
@@ -2529,6 +2558,7 @@
 				11619C7817323BF500BD3561 /* VTContainerDataController.m in Sources */,
 				11619C7C17324C0A00BD3561 /* VTDownlinkService.m in Sources */,
 				11619C841732559900BD3561 /* VTUplinkService.m in Sources */,
+				113793F918ED2C7D007F3CE2 /* VTDBDataContext.m in Sources */,
 				11619C9017325B5900BD3561 /* VTItemViewController.m in Sources */,
 				11619CAF173265B800BD3561 /* VTAPIRequestTask.m in Sources */,
 				116FD2291829EFC80001CB43 /* VTStatusGatherDataSource.m in Sources */,
@@ -2555,6 +2585,7 @@
 				AC325015173E23980094A7A6 /* VTLayout.m in Sources */,
 				AC325019173E23A60094A7A6 /* VTLayoutData.m in Sources */,
 				AC325021173E257D0094A7A6 /* VTViewLayout.m in Sources */,
+				113793FD18ED2CFE007F3CE2 /* VTDBDataObject.m in Sources */,
 				AC325029173E2DF10094A7A6 /* VTFormController.m in Sources */,
 				AC32502E173E2EF60094A7A6 /* VTFormItem.m in Sources */,
 				AC325036173E36C50094A7A6 /* VTFormKeyboardEditor.m in Sources */,
@@ -2729,6 +2760,7 @@
 				1117023A18308BE000CFD179 /* GridScrollView.m in Sources */,
 				1117024418308C8700CFD179 /* NSString+Grid.m in Sources */,
 				11442A88187122D40072D9CA /* VTCleanupTask.m in Sources */,
+				113793F518ED19A9007F3CE2 /* VTGatherTask.m in Sources */,
 				1107F596187D44F60093AE80 /* VTChart.m in Sources */,
 				1107F59D187D464B0093AE80 /* VTChartComponent.m in Sources */,
 				1107F5A3187D4AAA0093AE80 /* VTChartDataReader.m in Sources */,

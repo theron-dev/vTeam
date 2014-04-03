@@ -22,15 +22,6 @@
     return nil;
 }
 
--(oneway void) release{
-    [self willRelease:[self retainCount]];
-    [super release];
-}
-
--(void) willRelease:(NSUInteger) retainCount{
-    
-}
-
 -(NSMutableDictionary *) toDictionary{
     
     NSMutableDictionary * data = [NSMutableDictionary dictionaryWithCapacity:4];
