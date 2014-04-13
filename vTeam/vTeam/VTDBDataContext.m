@@ -227,8 +227,7 @@ NSString * VTDBDataObjectSetKey = @"dataObjects";
             @synchronized(self) {
                 [[_updates lastObject] addObject:dbObject];
             }
-            
-            [self removeDataObject:(VTDBDataObject *) dbObject];
+        
         }
         
     }
@@ -247,6 +246,7 @@ NSString * VTDBDataObjectSetKey = @"dataObjects";
                 [[_updates lastObject] addObject:dbObject];
             }
             
+            [self removeDataObject:(VTDBDataObject *) dbObject];
         }
         
     }
