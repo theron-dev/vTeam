@@ -183,34 +183,13 @@
     
         if([alias length]){
 
-            if([url.host length]){
+            if([url.host length] == 0 || [url.host isEqualToString:self.scheme]){
+             
+                id modalViewController = self;
                 
-                if([url.host isEqualToString:self.scheme]){
-                    
-                    id modalViewController = self;
-                    
-                    while([modalViewController modalViewController]){
-                        modalViewController = [modalViewController modalViewController];
-                    }
-                    
-                    NSLog(@"%@",[url absoluteString]);
-                    
-                    id viewController = [self.context getViewController:url basePath:@"/"];
-                    
-                    if(viewController){
-                        
-                        [viewController setParentController:modalViewController];
-                        [viewController loadUrl:url basePath:@"/" animated:YES];
-                        
-                        [modalViewController presentModalViewController:viewController animated:animated];
-                        
-                        return YES;
-                    }
-                
+                while([modalViewController modalViewController]){
+                    modalViewController = [modalViewController modalViewController];
                 }
-                
-            }
-            else{
                 
                 NSLog(@"%@",[url absoluteString]);
                 
@@ -218,15 +197,16 @@
                 
                 if(viewController){
                     
-                    [viewController setParentController:self];
-                    
+                    [viewController setParentController:modalViewController];
                     [viewController loadUrl:url basePath:@"/" animated:YES];
                     
-                    [self presentModalViewController:viewController animated:animated];
+                    [modalViewController presentModalViewController:viewController animated:animated];
                     
                     return YES;
                 }
+                
             }
+            
         }
         else if([self.url.scheme isEqualToString:@"present"]){
             
