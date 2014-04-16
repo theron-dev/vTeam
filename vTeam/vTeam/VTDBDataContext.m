@@ -103,7 +103,7 @@ NSString * VTDBDataObjectSetKey = @"dataObjects";
         NSString * tableName = NSStringFromClass(tableClass);
         
         NSMutableDictionary * table = [_dataTables valueForKey:tableName];
-        
+
         dataObject =  [table valueForKey:key];
         
         if(dataObject == nil){
@@ -126,8 +126,10 @@ NSString * VTDBDataObjectSetKey = @"dataObjects";
                     table = [NSMutableDictionary dictionaryWithCapacity:4];
                     [_dataTables setValue:table forKey:tableName];
                 }
-                
+
                 [table setValue:dataObject forKey:key];
+                
+                [dataObject setDataContext:self];
             }
             
             [cursor close];
@@ -136,6 +138,78 @@ NSString * VTDBDataObjectSetKey = @"dataObjects";
     }
     
     return dataObject;
+}
+
+-(id) dataObjectForCacheKey:(NSString *) key tableClass:(Class) tableClass{
+    
+    VTDBDataObject * dataObject = nil;
+    
+    @synchronized(self) {
+        
+        NSString * tableName = NSStringFromClass(tableClass);
+        
+        NSMutableDictionary * table = [_dataTables valueForKey:tableName];
+        
+        dataObject =  [table valueForKey:key];
+    
+    }
+    
+    return dataObject;
+
+}
+
+-(void) setDataObject:(VTDBDataObject *) dataObject{
+    
+    @synchronized(self) {
+        
+        Class tableClass = [[dataObject class] tableClass];
+        
+        NSString * tableName = NSStringFromClass(tableClass);
+        
+        NSString * key = [dataObject dataKey];
+        
+        NSMutableDictionary * table = [_dataTables valueForKey:tableName];
+        
+        VTDBDataObject * object =  [table valueForKey:key];
+        
+        if(object != dataObject){
+            
+            if(_dataTables == nil){
+                _dataTables = [[NSMutableDictionary alloc] initWithCapacity:4];
+            }
+            
+            if(table == nil){
+                table = [NSMutableDictionary dictionaryWithCapacity:4];
+                [_dataTables setValue:table forKey:tableName];
+            }
+
+            [object setDataContext:nil];
+            
+            [table setValue:dataObject forKey:key];
+            
+            [dataObject setDataContext:self];
+        }
+        
+    }
+    
+    
+}
+
+-(BOOL) fillDataObject:(VTDBDataObject *) dataObject{
+    
+    Class tableClass = [[dataObject class] tableClass];
+    
+    NSString * query = [NSString stringWithFormat:@"SELECT * FROM [%@] WHERE [%@]=:key",NSStringFromClass(tableClass),[tableClass dataKey]];
+    
+    id<IVTSqliteCursor> cursor = [self.db query:query withData:dataObject];
+    
+    if([cursor next]){
+        [cursor toDataObject:dataObject];
+    }
+    
+    [cursor close];
+    
+    return NO;
 }
 
 -(NSSet *) dataObjects:(Class) tableClass{
@@ -208,6 +282,8 @@ NSString * VTDBDataObjectSetKey = @"dataObjects";
 
                 [table setValue:dbObject forKey:key];
                 
+                [(VTDBDataObject *) dbObject setDataContext:self];
+                
                 [[_updates lastObject] addObject:dbObject];
             }
             
@@ -219,7 +295,9 @@ NSString * VTDBDataObjectSetKey = @"dataObjects";
 }
 
 -(BOOL) updateObject:(VTDBObject *)dbObject{
+    
     BOOL rs = [super updateObject:dbObject];
+    
     if(rs){
         
         if([dbObject isKindOfClass:[VTDBDataObject class]]){

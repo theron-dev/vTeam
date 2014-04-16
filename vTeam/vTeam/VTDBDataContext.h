@@ -17,6 +17,12 @@ extern NSString * VTDBDataObjectSetKey;
 
 -(id) dataObjectForKey:(NSString *) key tableClass:(Class) tableClass;
 
+-(id) dataObjectForCacheKey:(NSString *) key tableClass:(Class) tableClass;
+
+-(void) setDataObject:(VTDBDataObject *) dataObject;
+
+-(BOOL) fillDataObject:(VTDBDataObject *) dataObject;
+
 -(NSSet *) dataObjects:(Class) tableClass;
 
 -(NSArray *) dataKeys:(Class) tableClass query:(NSString *) query data:(id) data;
