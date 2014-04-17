@@ -97,7 +97,7 @@
     NSMutableArray * _viewControllers;
     NSMutableArray * _serviceContainers;
     NSMutableDictionary * _focusValues;
-    
+    NSBundle * _bundle;
 }
 
 @property(nonatomic,retain) id rootViewController;
@@ -110,7 +110,6 @@
 
 @implementation VTShell
 
-@synthesize bundle = _bundle;
 @synthesize config = _config;
 @synthesize rootViewController = _rootViewController;
 @synthesize styleSheet = _styleSheet;
@@ -120,7 +119,6 @@
 @synthesize authValues = _authValues;
 
 -(void) dealloc{
-    [_bundle release];
     [_config release];
     [_rootViewController release];
     [_viewControllers release];
@@ -131,6 +129,7 @@
     [_storyboards release];
     [_platformKeys release];
     [_authValues release];
+    [_bundle release];
     self.resultsCallback = nil;
     [super dealloc];
 }
@@ -172,10 +171,15 @@
     return _platformKeys;
 }
 
--(id) initWithConfig:(id)config bundle:(NSBundle *) bundle{
+-(id) initWithConfig:(id)config bundle:(NSBundle *)bundle{
     if((self = [super init])){
+        
         _config = [config retain];
         _bundle = [bundle retain];
+        
+        if(_bundle == nil){
+            _bundle = [[NSBundle mainBundle] retain];
+        }
         
         NSArray * items = [config valueForKey:@"services"];
         
@@ -282,7 +286,7 @@
                 NSString * view = [platform valueForKey:@"view"];
                 
                 if([clazz isSubclassOfClass:[UIViewController class]]){
-                    viewController = [[[clazz alloc] initWithNibName:view bundle:_bundle] autorelease];
+                    viewController = [[[clazz alloc] initWithNibName:view bundle:[self resourceBundle]] autorelease];
                 }
                 else{
                     viewController = [[[clazz alloc] init] autorelease];
@@ -312,7 +316,7 @@
                 UIStoryboard * board = [self.storyboards valueForKey:name];
                 
                 if(board == nil){
-                    board = [UIStoryboard storyboardWithName:name bundle:self.bundle];
+                    board = [UIStoryboard storyboardWithName:name bundle:[self resourceBundle]];
                     [self.storyboards setValue:board forKey:name];
                 }
                 
@@ -596,7 +600,7 @@
 }
 
 -(NSBundle *) resourceBundle{
-    return [NSBundle mainBundle];
+    return _bundle;
 }
 
 -(NSBundle *) temporaryBundle{

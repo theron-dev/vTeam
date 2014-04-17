@@ -13,7 +13,6 @@
 
 @interface VTShell : NSObject<IVTUIContext>
 
-@property(nonatomic,readonly) NSBundle * bundle;
 @property(nonatomic,readonly) id config;
 
 -(id) initWithConfig:(id) config bundle:(NSBundle *) bundle;
