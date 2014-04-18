@@ -41,6 +41,7 @@
 @synthesize inherit = _inherit;
 
 -(void) dealloc{
+    [_instance setContext:nil];
     [_instance release];
     [_config release];
     [_taskTypes release];
@@ -119,6 +120,15 @@
 @synthesize authValues = _authValues;
 
 -(void) dealloc{
+    
+    for (VTServiceContainer * container in _serviceContainers) {
+        [container setContext:nil];
+    }
+    
+    for (id viewController in _viewControllers) {
+        [viewController setContext:nil];
+    }
+    
     [_config release];
     [_rootViewController release];
     [_viewControllers release];
