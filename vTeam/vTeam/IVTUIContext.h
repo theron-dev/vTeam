@@ -20,6 +20,8 @@
 #define VTUIPlatform_iPad           @"iPad"
 #define VTUIPlatform_iOS7           @"iOS7"
 
+typedef void ( ^ VTUIContextResultsCallback )(id resultsData,id sender);
+
 @protocol IVTUIContext <IVTServiceContext>
 
 @property(nonatomic,readonly) VTStyleSheet * styleSheet;
@@ -42,6 +44,8 @@
 
 -(void) setResultsData:(id) resultsData;
 
--(void) waitResultsData:(void (^)(id resultsData,id sender)) callback;
+-(void) waitResultsData:(VTUIContextResultsCallback) callback;
+
+-(VTUIContextResultsCallback) resultsCallback;
 
 @end

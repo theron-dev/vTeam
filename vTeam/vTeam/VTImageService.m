@@ -76,6 +76,9 @@
             if([defaultSrc hasPrefix:@"@"]){
                 [imageTask setDefaultImage:[UIImage imageNamed:[defaultSrc substringFromIndex:1]]];
             }
+            else if([defaultSrc hasPrefix:@"/"]){
+                [imageTask setDefaultImage:[UIImage imageWithContentsOfFile:defaultSrc]];
+            }
             else{
                 
                 NSString * key = [VTImageService keySrc:defaultSrc];
@@ -113,6 +116,10 @@
             if([src hasPrefix:@"@"]){
                 [imageTask setLoading:NO];
                 [imageTask setImage:[UIImage imageNamed:[src substringFromIndex:1]] isLocal:YES];
+            }
+            else if([src hasPrefix:@"/"]){
+                [imageTask setLoading:NO];
+                [imageTask setImage:[UIImage imageWithContentsOfFile:src] isLocal:YES];
             }
             else{
                 

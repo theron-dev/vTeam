@@ -104,7 +104,7 @@
 @property(nonatomic,retain) id rootViewController;
 @property(nonatomic,readonly) NSMutableArray * platformKeys;
 @property(nonatomic,readonly) NSMutableDictionary * storyboards;
-@property(nonatomic,copy) void (^ resultsCallback)(id resultsData,id sender);
+@property(nonatomic,copy) VTUIContextResultsCallback resultsCallback;
 @property(nonatomic,readonly) NSMutableDictionary * authValues;
 
 @end
@@ -675,6 +675,10 @@
     }
     
     return filePath;
+}
+
+-(VTUIContextResultsCallback) resultsCallback{
+    return _resultsCallback;
 }
 
 @end
