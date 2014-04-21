@@ -12,4 +12,6 @@
 
 @interface VTController : NSObject<IVTController>
 
+@property(nonatomic,assign) NSInteger tag;
+
 @end

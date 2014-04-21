@@ -38,6 +38,7 @@
 
 
 @property(nonatomic,readonly) NSMutableArray * dynamicDatas;
+@property(nonatomic,retain) VTDOMStatusElement * statusElement;
 
 @end
 
@@ -57,6 +58,8 @@
     if([_documentView respondsToSelector:@selector(setDelegate:)]){
         [(id)_documentView setDelegate:nil];
     }
+    
+    [_statusElement release];
 
     [_html release];
     
@@ -156,7 +159,7 @@
     NSBundle * bundle = self.bundle;
     
     if(bundle == nil){
-        bundle = [NSBundle mainBundle];
+        bundle = [self.context resourceBundle];
     }
     
     NSString * htmlContent = [NSString stringWithContentsOfFile:[[bundle bundlePath] stringByAppendingPathComponent:self.html] encoding:NSUTF8StringEncoding error:nil];
@@ -315,6 +318,24 @@
 
 -(void) vtDOMView:(VTDOMView *) view doActionElement:(VTDOMElement *) element{
     
+    if([element isKindOfClass:[VTDOMStatusElement class]]){
+        
+        NSString * status = [(VTDOMStatusElement *) element status];
+        
+        if([status isEqualToString:@"topover"] || [status isEqualToString:@"leftover"]){
+            if(_statusElement == nil && ![self isLoading]){
+                
+                self.statusElement = (VTDOMStatusElement *) element;
+                
+                [_statusElement setStatus:@"loading"];
+                
+                [self performSelectorOnMainThread:@selector(startLoading) withObject:nil waitUntilDone:NO];
+                
+            }
+        }
+
+    }
+    
     [self onActionElement:element];
     
     if([self.delegate respondsToSelector:@selector(vtDocumentController:doActionElement:)]){
@@ -373,6 +394,60 @@
 
 -(void) vtDOMView:(VTDOMView *)view downloadImagesForView:(UIView *) forView{
     [self downloadImagesForView:forView];
+}
+
+-(void) startLoading{
+    
+    if(_statusElement){
+        
+        VTDOMContainerElement * containerElement = (VTDOMContainerElement *) [_statusElement parentElement];
+        
+        while (containerElement && ![containerElement isKindOfClass:[VTDOMContainerElement class]]) {
+            containerElement = (VTDOMContainerElement *) [containerElement parentElement];
+        }
+        
+        if(containerElement){
+            
+            CGRect r = [_statusElement frame];
+            
+            UIScrollView * contentView = [containerElement contentView];
+            
+            [contentView setContentOffset:r.origin animated:YES];
+            
+        }
+        
+        [_statusElement setStatus:@"loading"];
+        
+        self.loading = YES;
+    }
+}
+
+-(void) stopLoading{
+    
+    if(_statusElement){
+        
+        VTDOMContainerElement * containerElement = (VTDOMContainerElement *) [_statusElement parentElement];
+        
+        while (containerElement && ![containerElement isKindOfClass:[VTDOMContainerElement class]]) {
+            containerElement = (VTDOMContainerElement *) [containerElement parentElement];
+        }
+        
+        if(containerElement){
+            
+            UIScrollView * contentView = [containerElement contentView];
+            
+            if(contentView.contentOffset.y < 0 || contentView.contentOffset.x < 0){
+                [contentView setContentOffset:CGPointZero animated:YES];
+            }
+            
+        }
+        
+        [_statusElement setStatus:nil];
+        
+        self.statusElement = nil;
+        
+        self.loading = NO;
+    }
 }
 
 @end

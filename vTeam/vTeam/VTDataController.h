@@ -10,12 +10,11 @@
 
 #import <vTeam/IVTUIContext.h>
 #import <vTeam/VTDataSource.h>
-#import <vTeam/IVTController.h>
+#import <vTeam/VTController.h>
 
-@interface VTDataController : NSObject<VTDataSourceDelegate,IVTController>
+@interface VTDataController : VTController<VTDataSourceDelegate,IVTController>
 
 @property(nonatomic,retain) IBOutlet VTDataSource * dataSource;
-@property(nonatomic,assign) NSInteger tag;
 
 -(void) refreshData;
 

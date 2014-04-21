@@ -21,6 +21,7 @@
 @property(nonatomic,assign,getter = isAllowAutoWidth) BOOL allowAutoWidth;
 @property(nonatomic,readonly) CGSize contentSize;
 @property(nonatomic,readonly,getter = isDocumentLoaded) BOOL documentLoaded;
+@property(nonatomic,assign,getter = isLoading) BOOL loading;
 
 -(void) documentWillLoad;
 
@@ -51,6 +52,10 @@
 -(void) onActionElement:(VTDOMElement *) element;
 
 -(void) documentLayout;
+
+-(void) startLoading;
+
+-(void) stopLoading;
 
 @end
 

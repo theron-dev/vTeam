@@ -14,8 +14,6 @@
 @implementation VTDataController
 
 @synthesize dataSource = _dataSource;
-@synthesize context = _context;
-@synthesize delegate = _delegate;
 
 -(void) dealloc{
     [self.context cancelHandleForSource:self];
@@ -38,49 +36,61 @@
 }
 
 -(void) setContext:(id<IVTUIContext>)context{
-    if(_context != context){
-        [_context cancelHandleForSource:self];
-    }
-    _context = context;
+    [super setContext:context];
     [_dataSource setContext:context];
 }
 
 -(void) vtDataSourceWillLoading:(VTDataSource *) dataSource{
     if(dataSource == _dataSource){
-        if([_delegate respondsToSelector:@selector(vtDataControllerWillLoading:)]){
-            [_delegate vtDataControllerWillLoading:self];
+        id delegate = self.delegate;
+        if([delegate respondsToSelector:@selector(vtDataControllerWillLoading:)]){
+            [delegate vtDataControllerWillLoading:self];
         }
     }
 }
 
 -(void) vtDataSourceDidLoadedFromCache:(VTDataSource *) dataSource timestamp:(NSDate *) timestamp{
+   
     if(dataSource == _dataSource){
-        if([_delegate respondsToSelector:@selector(vtDataControllerDidLoadedFromCache:timestamp:)]){
-            [_delegate vtDataControllerDidLoadedFromCache:self timestamp:timestamp];
+        
+        id delegate = self.delegate;
+        
+        if([delegate respondsToSelector:@selector(vtDataControllerDidLoadedFromCache:timestamp:)]){
+            [delegate vtDataControllerDidLoadedFromCache:self timestamp:timestamp];
         }
     }
+    
 }
 
 -(void) vtDataSourceDidLoaded:(VTDataSource *) dataSource{
     if(dataSource == _dataSource){
-        if([_delegate respondsToSelector:@selector(vtDataControllerDidLoaded:)]){
-            [_delegate vtDataControllerDidLoaded:self];
+        
+        id delegate = self.delegate;
+        
+        if([delegate respondsToSelector:@selector(vtDataControllerDidLoaded:)]){
+            [delegate vtDataControllerDidLoaded:self];
         }
     }
 }
 
 -(void) vtDataSource:(VTDataSource *) dataSource didFitalError:(NSError *) error{
     if(dataSource == _dataSource){
-        if([_delegate respondsToSelector:@selector(vtDataController:didFitalError:)]){
-            [_delegate vtDataController:self didFitalError:error];
+        
+        id delegate = self.delegate;
+        
+        if([delegate respondsToSelector:@selector(vtDataController:didFitalError:)]){
+            [delegate vtDataController:self didFitalError:error];
         }
     }
 }
 
 -(void) vtDataSourceDidContentChanged:(VTDataSource *) dataSource{
     if(dataSource == _dataSource){
-        if([_delegate respondsToSelector:@selector(vtDataControllerDidContentChanged:)]){
-            [_delegate vtDataControllerDidContentChanged:self];
+        
+        id delegate = self.delegate;
+        
+        if([delegate respondsToSelector:@selector(vtDataControllerDidContentChanged:)]){
+            [delegate vtDataControllerDidContentChanged:self];
         }
     }
 }
