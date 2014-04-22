@@ -154,12 +154,18 @@
     if(identifier == nil){
         identifier = @"Cell";
     }
+
+    NSBundle * bundle = [self itemViewBundle];
+    
+    if(bundle == nil){
+        bundle = [self.context resourceBundle];
+    }
     
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
     if(cell == nil){
         
-        cell = (UITableViewCell *) [VTTableViewCell tableViewCellWithNibName:self.itemViewNib bundle:self.itemViewBundle];
+        cell = (UITableViewCell *) [VTTableViewCell tableViewCellWithNibName:self.itemViewNib bundle:bundle];
         
         [cell setValue:identifier forKey:@"reuseIdentifier"];
         
