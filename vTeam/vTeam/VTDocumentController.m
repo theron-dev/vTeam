@@ -267,7 +267,14 @@
     
     if(_document == nil){
         
+        NSBundle * bundle = self.bundle;
+        
+        if(bundle == nil){
+            bundle = [self.context resourceBundle];
+        }
+        
         _document = [[VTDOMDocument alloc] init];
+        _document.bundle = bundle;
         
         VTDOMParse * parse = [[VTDOMParse alloc] init];
         

@@ -94,7 +94,27 @@
                 image = [UIImage imageWithContentsOfFile:path];
             }
             else{
-                image = [UIImage imageNamed: bundle == nil ? path : [[bundle bundlePath] stringByAppendingPathComponent:path]];
+                
+                if(bundle == nil){
+                    image = [UIImage imageNamed:path];
+                }
+                else if([[bundle bundlePath] hasPrefix:[[NSBundle mainBundle] resourcePath]]){
+                
+                    NSString * p = [[bundle bundlePath] substringFromIndex:[[[NSBundle mainBundle] resourcePath] length]];
+                    
+                    if([p hasPrefix:@"/"]){
+                        p = [p substringFromIndex:1];
+                    }
+                    
+                    p = [p stringByAppendingPathComponent:path];
+
+                    image = [UIImage imageNamed:p];
+                    
+                }
+                else {
+                    image = [UIImage imageWithContentsOfFile:[[bundle bundlePath] stringByAppendingPathComponent:path]];
+                }
+                
             }
             
             if(image){
