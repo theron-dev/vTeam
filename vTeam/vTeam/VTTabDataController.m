@@ -56,6 +56,14 @@
 -(void) setSelectedIndex:(NSUInteger)selectedIndex{
     if(_selectedIndex != selectedIndex){
         
+        id delegate = [self delegate];
+        
+        if([delegate respondsToSelector:@selector(vtTabDataController:willSelectedChanged:)]){
+            if(![delegate vtTabDataController:self willSelectedChanged:selectedIndex]){
+                return;
+            }
+        }
+        
         NSUInteger index = 0;
         
         for (UIButton * button in _tabButtons) {
@@ -72,8 +80,8 @@
         
         _selectedIndex = selectedIndex;
         
-        if([self.delegate respondsToSelector:@selector(vtTabDataController:didSelectedChanged:)]){
-            [self.delegate vtTabDataController:self didSelectedChanged:_selectedIndex];
+        if([delegate respondsToSelector:@selector(vtTabDataController:didSelectedChanged:)]){
+            [delegate vtTabDataController:self didSelectedChanged:_selectedIndex];
         }
     }
 }

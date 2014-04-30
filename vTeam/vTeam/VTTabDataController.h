@@ -31,6 +31,8 @@
 
 @optional
 
+-(BOOL) vtTabDataController:(VTTabDataController *) dataController willSelectedChanged:(NSUInteger) selectedIndex;
+
 -(void) vtTabDataController:(VTTabDataController *) dataController didSelectedChanged:(NSUInteger) selectedIndex;
 
 @end

@@ -55,6 +55,15 @@
 -(void) setSelectedIndex:(NSUInteger)selectedIndex animated:(BOOL) animated withoutOffset:(BOOL)withoutOffset{
     if(_selectedIndex != selectedIndex){
         
+        id delegate = [self delegate];
+        
+        if([delegate respondsToSelector:@selector(vtTabDataController:willSelectedChanged:)]){
+            if(![delegate vtTabDataController:self willSelectedChanged:selectedIndex]){
+                return;
+            }
+        }
+        
+        
         NSUInteger index = 0;
         
         for (UIButton * button in self.tabButtons) {
@@ -79,8 +88,8 @@
             [_pageContentView setContentOffset:CGPointMake(_selectedIndex * _pageContentView.bounds.size.width,0) animated:animated];
         }
         
-        if([self.delegate respondsToSelector:@selector(vtTabDataController:didSelectedChanged:)]){
-            [self.delegate vtTabDataController:self didSelectedChanged:_selectedIndex];
+        if([delegate respondsToSelector:@selector(vtTabDataController:didSelectedChanged:)]){
+            [delegate vtTabDataController:self didSelectedChanged:_selectedIndex];
         }
     }
     else{
