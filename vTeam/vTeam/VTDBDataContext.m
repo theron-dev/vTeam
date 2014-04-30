@@ -203,13 +203,16 @@ NSString * VTDBDataObjectSetKey = @"dataObjects";
     
     id<IVTSqliteCursor> cursor = [self.db query:query withData:dataObject];
     
+    BOOL rs = NO;
+    
     if([cursor next]){
         [cursor toDataObject:dataObject];
+        rs = YES;
     }
     
     [cursor close];
     
-    return NO;
+    return rs;
 }
 
 -(NSSet *) dataObjects:(Class) tableClass{
