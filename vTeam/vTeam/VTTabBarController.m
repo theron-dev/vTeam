@@ -199,24 +199,32 @@
     
     if([url.scheme isEqualToString:scheme]){
         
-        NSString * path = [url firstPathComponent:@"/"];
+        NSString * path = [url firstPathComponent:[self.basePath stringByAppendingPathComponent:self.alias]];
         
-        id viewController = nil;
+        NSInteger selectedIndex = 0;
         
-        for(viewController in self.viewControllers){
-            if([[viewController alias] isEqualToString:path]){
-                break;
+        NSArray * items = [self.config valueForKeyPath:@"items"];
+        
+        if([items isKindOfClass:[NSArray class]]){
+            for (id item in items) {
+                if([[item valueForKey:@"alias"] isEqualToString:path]){
+                    break;
+                }
+                selectedIndex ++;
             }
         }
         
-        if(viewController){
-            if(self.selectedViewController != viewController){
-                [self setSelectedViewController:viewController];
+        if(self.selectedIndex != selectedIndex){
+            [self setSelectedIndex:selectedIndex];
+            
+            NSArray * barItems = [self.tabBar items];
+            
+            if(selectedIndex < [barItems count]){
+                [self.tabBar setSelectedItem:[barItems objectAtIndex:selectedIndex]];
             }
+            
         }
-        
-        [(id)self.selectedViewController loadUrl:url basePath:@"/" animated:animated];
-
+    
         return YES;
     }
     else if([[url scheme] isEqualToString:@"present"]){
