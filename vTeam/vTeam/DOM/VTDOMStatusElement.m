@@ -50,9 +50,7 @@
         }
     }
 
-    if(s == nil){
-        [element setAttributeValue:status forKey:@"status"];
-    }
+    [element setAttributeValue:status forKey:@"tostatus"];
     
     if([element isKindOfClass:[VTDOMViewElement class]] && [(VTDOMViewElement *)element isViewLoaded]){
         [[(VTDOMViewElement *)element view] setElement:element];
