@@ -25,9 +25,6 @@
             }
         }
     }
-    else{
-        [self reloadData];
-    }
 }
 
 @end
