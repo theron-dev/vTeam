@@ -100,23 +100,27 @@
     NSInteger visableFocusIndex = NSNotFound;
     NSInteger fullVisableFocusIndex = NSNotFound;
     
-    NSMutableArray * itemViews = [NSMutableArray arrayWithCapacity:4];
-    
     if(_queueItemViewControllers == nil){
         _queueItemViewControllers = [[NSMutableArray alloc] initWithCapacity:4];
     }
     
     NSMutableDictionary * itemViewControllers = [NSMutableDictionary dictionaryWithCapacity:4];
+    
     for(VTItemViewController * itemViewController in _itemViewControllers){
+        
         NSNumber * key = [NSNumber numberWithLong:itemViewController.index];
+        
         id t = [itemViewControllers objectForKey:key];
+       
         if(t){
             [itemViewController setDataItem:nil];
             [itemViewController setIndex:NSNotFound];
             [self addQueueItemViewController:t];
             [self removeItemViewController:t];
         }
+        
         [itemViewControllers setObject:itemViewController forKey:key];
+        
     }
     
     CGSize size = self.bounds.size;
@@ -127,15 +131,15 @@
    
     NSInteger index = 0;
     
-    if(_backgroundView){
+    if(_backgroundView && _backgroundView.superview == nil){
         
         [_backgroundView setFrame:CGRectMake(contentOffset.x, contentOffset.y, size.width, size.height)];
         [_backgroundView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
         
-        [itemViews addObject:_backgroundView];
+        [self addSubview:_backgroundView];
     }
     
-    if(_headerView){
+    if(_headerView && _headerView.superview == nil){
         
         CGRect r = _headerView.frame;
         r.origin = CGPointZero;
@@ -145,7 +149,7 @@
         [_headerView setFrame:r];
         [_headerView setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth];
         
-        [itemViews addObject:_headerView];
+        [self addSubview:_headerView];
 
     }
     
@@ -200,9 +204,8 @@
             
             if(itemView.superview == nil){
                 [self addItemViewController:itemViewController];
+                [self addSubview:itemView];
             }
-            
-            [itemViews addObject:itemView];
             
             [self removeQueueItemViewController:itemViewController];
             [itemViewControllers removeObjectForKey:nKey];
@@ -221,7 +224,7 @@
         index ++;
     }
     
-    if(_footerView){
+    if(_footerView && _footerView.superview == nil){
         CGRect r = _footerView.frame;
         r.origin = CGPointZero;
         r.origin.y = contentSize.height + top;
@@ -231,7 +234,7 @@
         [_footerView setFrame:r];
         [_footerView setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth];
         
-        [itemViews addObject:_footerView];
+        [self addSubview:_footerView];
        
     }
     
@@ -240,20 +243,6 @@
         [itemViewController setIndex:NSNotFound];
         [self addQueueItemViewController:itemViewController];
         [self removeItemViewController:itemViewController];
-    }
-    
-    UIView * itemView;
-    
-    while((itemView = [itemViews lastObject])){
-       
-        if(itemView.superview == nil){
-            [self insertSubview:itemView atIndex:0];
-        }
-        else{
-            [self sendSubviewToBack:itemView];
-        }
-        
-        [itemViews removeLastObject];
     }
     
     contentSize.height += top +bottom;

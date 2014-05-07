@@ -45,7 +45,12 @@
 
 
 -(void) reloadData{
-    self.pageIndex = 1;
+    
+    if(self.pageIndex !=1){
+        self.pageIndex = 1;
+        self.dataChanged = YES;
+    }
+    
     _hasMoreData = YES;
     [super reloadData];
 }
@@ -69,11 +74,10 @@
         }
         
         [self loadResultsData:data];
-        
+
         _hasMoreData = [[self dataObjects] count] - count >0;
-        
     }
-    
+
     if([self.delegate respondsToSelector:@selector(vtDataSourceDidLoaded:)]){
         [self.delegate vtDataSourceDidLoaded:self];
     }

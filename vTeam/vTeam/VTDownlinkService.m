@@ -191,7 +191,10 @@ static dispatch_queue_t gDownlinkServiceDispatchQueue = nil;
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 
-                [downlinkTask setDataChanged:dataChanged];
+                if( ! [downlinkTask isDataChanged]){
+                    [downlinkTask setDataChanged:dataChanged];
+                }
+                
                 [downlinkTask vtDownlinkTaskDidLoaded:data forTaskType:taskType];
             
             });
