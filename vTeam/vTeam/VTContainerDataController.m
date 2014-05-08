@@ -401,7 +401,7 @@
 }
 
 -(void) scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
-    [self downloadImagesForView:scrollView];
+
 }
 
 -(void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
@@ -410,12 +410,12 @@
        && scrollView.contentOffset.y - scrollView.contentSize.height + scrollView.frame.size.height > - _bottomLoadingView.frame.size.height){
         [(id)self.dataSource performSelectorOnMainThread:@selector(loadMoreData) withObject:nil waitUntilDone:NO];
     }
-    [self downloadImagesForView:scrollView];
+
 }
 
 -(void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     if(!decelerate){
-        [self downloadImagesForView:scrollView];
+
         if(![_topLoadingView isAnimating] && ![_bottomLoadingView isAnimating] && _bottomLoadingView.superview
            && [self.dataSource respondsToSelector:@selector(hasMoreData)] && [(id)self.dataSource hasMoreData]
            && scrollView.contentOffset.y - scrollView.contentSize.height + scrollView.frame.size.height > -_bottomLoadingView.frame.size.height){
@@ -444,7 +444,7 @@
 }
 
 -(void) vtContainerViewDidLayout:(VTContainerView *) containerView{
-    [self downloadImagesForView:containerView];
+
 }
 
 -(CGSize) vtContainerLayout:(VTContainerLayout *)containerLayout itemSizeAtIndex:(NSInteger)index{

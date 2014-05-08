@@ -1,3 +1,17 @@
 //
 // Prefix header for all source files of the 'vTeam' target in the 'vTeam' project
 //
+
+
+#ifdef __OBJC__
+
+#import <UIKit/UIKit.h>
+
+#ifndef DEBUG
+
+#define NSLog(...) {}
+
+#endif
+
+#endif
+

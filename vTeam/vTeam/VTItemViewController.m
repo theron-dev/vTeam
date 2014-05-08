@@ -85,6 +85,13 @@
         [self view];
         [_dataOutletContainer applyDataOutlet:self];
         [self loadImagesForView:self.view];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [self downloadImagesForView:self.view];
+            
+        });
+        
         [_layoutContainer layout];
         [_dataSource cancel];
         [_dataSource reloadData];

@@ -88,16 +88,17 @@
         [_dataOutletContainer applyDataOutlet:self];
         [self cancelDownloadImagesForView:self];
         [self loadImagesForView:self];
-        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(downloadImagesForView:) object:nil];
-        [self performSelector:@selector(downloadImagesForView:) withObject:self afterDelay:0.0];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self downloadImagesForView:self];
+        });
+        
         [_layoutContainer layout];
         [_dataSource cancel];
         [_dataSource reloadData];
     }
     else{
         [_dataOutletContainer applyDataOutlet:self];
-        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(downloadImagesForView:) object:nil];
-        [self performSelector:@selector(downloadImagesForView:) withObject:self afterDelay:0.0];
         [_layoutContainer layout];
     }
 }

@@ -103,10 +103,11 @@
         
         [self loadImagesForElement:[document rootElement]];
         
-        [NSObject cancelPreviousPerformRequestsWithTarget:self
-                                                 selector:@selector(downloadImagesForElement:) object:[document rootElement]];
-        
-        [self performSelector:@selector(downloadImagesForElement:) withObject:[document rootElement] afterDelay:0.0];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [self downloadImagesForElement:[document rootElement]];
+            
+        });
         
     }
     
@@ -118,10 +119,12 @@
         
     }
     
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(downloadImagesForView:) object:nil];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [self downloadImagesForView:cell];
+        
+    });
     
-    [self performSelector:@selector(downloadImagesForView:) withObject:tableView afterDelay:0.0];
- 
     return cell;
 }
 
