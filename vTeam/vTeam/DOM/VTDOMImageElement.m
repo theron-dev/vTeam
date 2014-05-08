@@ -126,6 +126,12 @@
                 if(r.size.width / r.size.height != imageSize.width / imageSize.height){
                     r.size.width = imageSize.width / imageSize.height * r.size.height;
                     
+                    NSString * maxWidth = [self attributeValueForKey:@"max-width"];
+                    
+                    if(maxWidth && r.size.width > [maxWidth doubleValue]){
+                        r.size.width = [maxWidth doubleValue];
+                    }
+                    
                     [self setFrame:r];
                 }
                 
@@ -144,6 +150,12 @@
                 if(r.size.width / r.size.height != imageSize.width / imageSize.height){
                     
                     r.size.height = imageSize.height / imageSize.width * r.size.width;
+                    
+                    NSString * maxHeight = [self attributeValueForKey:@"max-height"];
+                    
+                    if(maxHeight && r.size.height > [maxHeight doubleValue]){
+                        r.size.height = [maxHeight doubleValue];
+                    }
                     
                     [self setFrame:r];
                 }
