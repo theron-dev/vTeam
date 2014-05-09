@@ -550,7 +550,11 @@
     [_documentView setNeedsDisplay];
 }
 
--(void) didLoaded{
+-(void) documentWillLoad{
+    
+}
+
+-(void) documentDidLoad{
     
 }
 
