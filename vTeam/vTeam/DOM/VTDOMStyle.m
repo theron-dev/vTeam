@@ -69,7 +69,7 @@
     
     if(value){
         
-        if(![value hasPrefix:@"http://"]){
+        if(![value hasPrefix:@"http://"] && ![value hasPrefix:@"https://"]){
             
             
             NSString * path = nil;

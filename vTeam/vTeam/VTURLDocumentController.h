@@ -39,6 +39,10 @@
 
 -(void) relayout;
 
+-(void) documentWillLoad;
+
+-(void) documentDidLoad;
+
 @end
 
 @protocol VTURLDocumentControllerDelegate

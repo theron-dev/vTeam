@@ -214,7 +214,7 @@
                 [md appendData:[[item key] dataUsingEncoding:NSUTF8StringEncoding]];
                 [md appendBytes:(void *)"\"\r\n\r\n" length:5];
                 
-                [md appendData:[[item value] dataUsingEncoding:NSUTF8StringEncoding]];
+                [md appendData:[[(VTHttpFormItemValue *) item value] dataUsingEncoding:NSUTF8StringEncoding]];
                 
                 [md appendBytes:(void *)"\r\n" length:2];
             }
@@ -233,7 +233,7 @@
                 [md appendBytes:(void *)"&" length:1];
                 [md appendData:[[item key] dataUsingEncoding:NSUTF8StringEncoding]];
                 [md appendBytes:(void *)"=" length:1];
-                [md appendData:[[NSURL encodeQueryValue:[item value]] dataUsingEncoding:NSUTF8StringEncoding]];
+                [md appendData:[[NSURL encodeQueryValue:[(VTHttpFormItemValue *) item value]] dataUsingEncoding:NSUTF8StringEncoding]];
             }
         }
 

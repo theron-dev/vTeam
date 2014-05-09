@@ -162,9 +162,6 @@
         
         [httpTask release];
         
-        if([self.delegate respondsToSelector:@selector(vtURLDocumentControllerWillLoading:)]){
-            [self.delegate vtURLDocumentControllerWillLoading:self];
-        }
     }
 }
 
@@ -190,6 +187,8 @@
 }
 
 -(void) loadHTMLContent:(NSString *) htmlContent{
+    
+    [self documentWillLoad];
     
     NSString * uuid = [htmlContent vtMD5String];
     
@@ -219,6 +218,8 @@
     [self downloadImagesForElement:_document.rootElement];
     [self downloadImagesForView:_documentView];
     
+    
+    [self documentDidLoad];
     
 }
 
@@ -502,7 +503,7 @@
             
             UIScrollView * contentView = [containerElement contentView];
             
-            [contentView setContentOffset:r.origin animated:YES];
+            [contentView setContentOffset:CGPointMake(0, r.origin.y) animated:YES];
             
         }
         
@@ -547,6 +548,10 @@
     [self.document.rootElement layout:_documentView.bounds.size];
     
     [_documentView setNeedsDisplay];
+}
+
+-(void) didLoaded{
+    
 }
 
 @end

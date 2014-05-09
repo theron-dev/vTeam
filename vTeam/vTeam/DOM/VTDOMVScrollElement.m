@@ -25,7 +25,7 @@
         
         UIEdgeInsets margin = [element margin];
         
-        [element layout:CGSizeMake(size.width - margin.left - margin.right
+        [element layout:CGSizeMake(size.width - margin.left - margin.right - padding.left - padding.right
                                    , size.height)];
         
         CGRect r = element.frame;

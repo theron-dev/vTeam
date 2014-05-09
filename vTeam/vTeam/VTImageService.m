@@ -157,7 +157,7 @@
                     [imageTask setLoading:NO];
                     [imageTask setImage:image isLocal:YES];
                 }
-                else if([src hasPrefix:@"http://"]){
+                else if([src hasPrefix:@"http://"] || [src hasPrefix:@"https://"]){
                     
                     if(taskType != @protocol(IVTLocalImageTask)){
                         
