@@ -194,7 +194,7 @@
 
 -(void) vtHttpTaskDidLoaded:(id) httpTask{
     
-    NSLog(@"%@",(NSHTTPURLResponse *)[httpTask response]);
+    NSLog(@"%@",[(NSHTTPURLResponse *)[httpTask response] allHeaderFields]);
     
     id task = [httpTask userInfo];
     [_httpTasks removeObject:httpTask];
