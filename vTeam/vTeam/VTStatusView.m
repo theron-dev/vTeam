@@ -9,6 +9,8 @@
 #import "VTStatusView.h"
 #import "VTAnimationView.h"
 
+#import "UIView+Hidden.h"
+
 @implementation VTStatusViewItem
 
 @synthesize status = _status;
@@ -51,11 +53,12 @@
 }
 */
 
--(void) changedStatus {
+-(void) changedStatus:(BOOL) animated {
+    
     for(VTStatusViewItem * item in _statusItems){
         if([_status isEqualToString:[item status]]){
             for(UIView * v in [item views]){
-                [v setHidden:NO];
+                [v setHidden:NO animated:animated];
                 if([v isKindOfClass:[UIActivityIndicatorView class]]){
                     [(UIActivityIndicatorView *)v startAnimating];
                 }
@@ -72,7 +75,7 @@
                 if([v isKindOfClass:[VTAnimationView class]]){
                     [(VTAnimationView *) v stopAnimating];
                 }
-                [v setHidden:YES];
+                [v setHidden:YES animated:animated];
             }
         }
     }
@@ -81,18 +84,11 @@
 -(void) awakeFromNib{
     [super awakeFromNib];
     
-    [self changedStatus];
+    [self changedStatus:NO];
 }
 
 -(void) setStatus:(NSString *)status{
-    if(_status != status){
-        
-        [status retain];
-        [_status release];
-        _status = status;
-        
-        [self changedStatus];
-    }
+    [self setStatus:status animated:NO];
 }
 
 -(void) setStatusItems:(NSArray *)statusItems{
@@ -100,8 +96,19 @@
         [statusItems retain];
         [_statusItems release];
         _statusItems = statusItems;
-        
-        [self changedStatus];
+        [self changedStatus:NO];
     }
 }
+
+-(void) setStatus:(NSString *)status animated:(BOOL) animated{
+    if(_status != status){
+        
+        [status retain];
+        [_status release];
+        _status = status;
+        
+        [self changedStatus:animated];
+    }
+}
+
 @end

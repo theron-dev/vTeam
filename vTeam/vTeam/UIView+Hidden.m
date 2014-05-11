@@ -23,6 +23,7 @@
 }
 
 -(void) setHidden:(BOOL)hidden animated:(BOOL) animated{
+    
     if(animated){
         
         [self setHidden:NO];

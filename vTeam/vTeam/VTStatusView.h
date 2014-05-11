@@ -20,4 +20,6 @@
 @property(nonatomic,retain) NSString * status;
 @property(nonatomic,retain) IBOutletCollection(VTStatusViewItem) NSArray * statusItems;
 
+-(void) setStatus:(NSString *)status animated:(BOOL) animated;
+
 @end
