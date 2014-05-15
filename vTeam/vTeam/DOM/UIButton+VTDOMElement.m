@@ -28,27 +28,102 @@
     
     [self setTitleEdgeInsets:[element edgeInsetsValueForKey:@"title-edge-insets"]];
 
-    [self setTitle:[element attributeValueForKey:@"title"] forState:UIControlStateNormal];
-    [self setTitle:[element attributeValueForKey:@"title-highlighted"] forState:UIControlStateHighlighted];
-    [self setTitle:[element attributeValueForKey:@"title-disabled"] forState:UIControlStateDisabled];
-    [self setTitle:[element attributeValueForKey:@"title-selected"] forState:UIControlStateSelected];
+    NSString * title = [element attributeValueForKey:@"title"];
+   
+    if(title){
+        [self setTitle:title forState:UIControlStateNormal];
+    }
     
-    [self setTitleColor:[element colorValueForKey:@"color"] forState:UIControlStateNormal];
-    [self setTitleColor:[element colorValueForKey:@"color-highlighted"] forState:UIControlStateHighlighted];
-    [self setTitleColor:[element colorValueForKey:@"color-disabled"] forState:UIControlStateDisabled];
-    [self setTitleColor:[element colorValueForKey:@"color-selected"] forState:UIControlStateSelected];
+    title = [element attributeValueForKey:@"title-highlighted"];
     
-    [self setBackgroundImage:[element imageValueForKey:@"background-image" bundle:element.document.bundle] forState:UIControlStateNormal];
-    [self setBackgroundImage:[element imageValueForKey:@"background-image-highlighted" bundle:element.document.bundle] forState:UIControlStateHighlighted];
-    [self setBackgroundImage:[element imageValueForKey:@"background-image-disabled" bundle:element.document.bundle] forState:UIControlStateDisabled];
-    [self setBackgroundImage:[element imageValueForKey:@"background-image-selected" bundle:element.document.bundle] forState:UIControlStateSelected];
-    
-    [self setImage:[element imageValueForKey:@"image" bundle:element.document.bundle] forState:UIControlStateNormal];
-    [self setImage:[element imageValueForKey:@"image-highlighted" bundle:element.document.bundle] forState:UIControlStateHighlighted];
-    [self setImage:[element imageValueForKey:@"image-disabled" bundle:element.document.bundle] forState:UIControlStateDisabled];
-    [self setImage:[element imageValueForKey:@"image-selected" bundle:element.document.bundle] forState:UIControlStateSelected];
-    
+    if(title){
+        [self setTitle:title forState:UIControlStateHighlighted];
+    }
 
+    title = [element attributeValueForKey:@"title-disabled"];
+    
+    if(title){
+        [self setTitle:title forState:UIControlStateDisabled];
+    }
+    
+    title = [element attributeValueForKey:@"title-selected"];
+    
+    if(title){
+        [self setTitle:title forState:UIControlStateSelected];
+    }
+    
+    UIColor * color =[element colorValueForKey:@"color"];
+    
+    if(color){
+        [self setTitleColor:color forState:UIControlStateNormal];
+    }
+    
+    color =[element colorValueForKey:@"color-highlighted"];
+    
+    if(color){
+        [self setTitleColor:color forState:UIControlStateHighlighted];
+    }
+    
+    color =[element colorValueForKey:@"color-disabled"];
+    
+    if(color){
+        [self setTitleColor:color forState:UIControlStateDisabled];
+    }
+    
+    color =[element colorValueForKey:@"color-selected"];
+    
+    if(color){
+        [self setTitleColor:color forState:UIControlStateSelected];
+    }
+  
+    UIImage * image = [element imageValueForKey:@"background-image" bundle:element.document.bundle];
+    
+    if(image){
+        [self setBackgroundImage:image forState:UIControlStateNormal];
+    }
+    
+    image = [element imageValueForKey:@"background-image-highlighted" bundle:element.document.bundle];
+    
+    if(image){
+        [self setBackgroundImage:image forState:UIControlStateHighlighted];
+    }
+    
+    image = [element imageValueForKey:@"background-image-disabled" bundle:element.document.bundle];
+    
+    if(image){
+        [self setBackgroundImage:image forState:UIControlStateDisabled];
+    }
+    
+    image = [element imageValueForKey:@"background-image-selected" bundle:element.document.bundle];
+    
+    if(image){
+        [self setBackgroundImage:image forState:UIControlStateSelected];
+    }
+    
+    image = [element imageValueForKey:@"image" bundle:element.document.bundle];
+    
+    if(image){
+        [self setImage:image forState:UIControlStateNormal];
+    }
+    
+    image = [element imageValueForKey:@"image-highlighted" bundle:element.document.bundle];
+    
+    if(image){
+        [self setImage:image forState:UIControlStateHighlighted];
+    }
+    
+    image = [element imageValueForKey:@"image-disabled" bundle:element.document.bundle];
+    
+    if(image){
+        [self setImage:image forState:UIControlStateDisabled];
+    }
+    
+    image = [element imageValueForKey:@"image-selected" bundle:element.document.bundle];
+    
+    if(image){
+        [self setImage:image forState:UIControlStateSelected];
+    }
+    
     [self setSelected:[element booleanValueForKey:@"selected"]];
     
     [self setEnabled:![element booleanValueForKey:@"disabled"]];
