@@ -46,6 +46,8 @@
 
 -(void) documentDidLoad;
 
+-(void) cancel;
+
 @end
 
 @protocol VTURLDocumentControllerDelegate

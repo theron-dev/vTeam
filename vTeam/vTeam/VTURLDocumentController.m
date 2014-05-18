@@ -80,6 +80,16 @@
     [super dealloc];
 }
 
+-(void) cancel{
+    
+    if(_httpTask){
+        [self.context cancelHandle:@protocol(IVTHttpResourceTask) task:_httpTask];
+        self.httpTask = nil;
+    }
+    
+    [self.context cancelHandleForSource:self];
+}
+
 -(void) reloadData{
     
     if(_httpTask){
