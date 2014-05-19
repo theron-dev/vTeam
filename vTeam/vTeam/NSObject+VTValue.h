@@ -97,4 +97,6 @@
 
 -(NSDictionary *) dictionaryValue;
 
+-(id) objectValueAtIndex:(NSUInteger) index;
+
 @end

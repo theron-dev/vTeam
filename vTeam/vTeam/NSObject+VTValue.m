@@ -299,4 +299,11 @@
     return nil;
 }
 
+-(id) objectValueAtIndex:(NSUInteger) index{
+    if([self isKindOfClass:[NSArray class]] && index < [(NSArray *)self count]){
+        return [(NSArray *) self objectAtIndex:index];
+    }
+    return nil;
+}
+
 @end
