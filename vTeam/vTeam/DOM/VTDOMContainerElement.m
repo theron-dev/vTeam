@@ -201,7 +201,7 @@
                         }
                         self.statusElement = (VTDOMStatusElement *) element;
                     }
-                    else{
+                    else if(target){
                         [(VTDOMStatusElement *) element setStatus:nil];
                     }
                     
