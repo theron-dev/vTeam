@@ -40,8 +40,8 @@
     
     contentSize.height += padding.top + padding.bottom;
     
-    if(contentSize.height < size.height){
-        contentSize.height = size.height;
+    if(contentSize.height < size.height + 1){
+        contentSize.height = size.height + 1;
     }
     
     [self setContentSize:contentSize];
