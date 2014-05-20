@@ -27,6 +27,7 @@
     [_bundle release];
     [_dataItem release];
     [_html release];
+    [_selectedBackgroundColor release];
     [_documentURL release];
     [super dealloc];
 }
@@ -75,6 +76,13 @@
     if(cell == nil){
         
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier] autorelease];
+        
+        if(_selectedBackgroundColor){
+            UIView * v = [[UIView alloc] initWithFrame:cell.bounds];
+            v.backgroundColor = _selectedBackgroundColor;
+            [cell setSelectedBackgroundView:v];
+            [v release];
+        }
         
         [cell setBackgroundColor:[UIColor clearColor]];
         [cell.contentView setBackgroundColor:[UIColor clearColor]];

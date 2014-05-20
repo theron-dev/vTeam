@@ -108,7 +108,17 @@
        || key == nil){
         return defalutValue;
     }
-    
+    else if([key hasPrefix:@"@"] && [self isKindOfClass:[NSArray class]]){
+        if([key isEqualToString:@"@first"]){
+            return [self objectValueAtIndex:0];
+        }
+        else if([key isEqualToString:@"@last"]){
+            return [(NSArray *) self lastObject];
+        }
+        else {
+            return [self objectValueAtIndex:[[key substringFromIndex:1] intValue]];
+        }
+    }
     @try {
         return [self valueForKey:key];
     }

@@ -16,6 +16,7 @@
 @property(nonatomic,retain) NSString * html;
 @property(nonatomic,retain) NSURL * documentURL;
 @property(nonatomic,retain) id dataItem;
+@property(nonatomic,retain) UIColor * selectedBackgroundColor;
 
 -(VTDOMDocument *) documentByIndexPath:(NSIndexPath *) indexPath;
 
