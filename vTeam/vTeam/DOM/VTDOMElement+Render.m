@@ -144,12 +144,16 @@
     
 }
 
+-(UIColor *) backgroundColor{
+    return [self colorValueForKey:@"background-color"];
+}
+
 -(void) draw:(CGRect) rect context:(CGContextRef) context{
     
     CGSize size = self.frame.size;
     CGRect r = CGRectMake(0, 0, size.width, size.height);
     
-    UIColor * backgroundColor = [self colorValueForKey:@"background-color"];
+    UIColor * backgroundColor = [self backgroundColor];
     
     if(backgroundColor){
         

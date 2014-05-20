@@ -44,6 +44,11 @@
 }
 
 -(BOOL) touchesBegan:(CGPoint)location{
+    
+    if([self booleanValueForKey:@"disabled"]){
+        return NO;
+    }
+    
     [super touchesBegan:location];
     _insetTouch = YES;
     

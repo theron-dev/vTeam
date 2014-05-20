@@ -12,6 +12,8 @@
 
 #import "VTDOMElement+Control.h"
 
+#import "VTDOMElement+Style.h"
+
 #import "VTDOMViewElement.h"
 
 #import "UIView+VTDOMElement.h"
@@ -81,6 +83,22 @@
 
 -(void) setStatus:(NSString *)status{
     [self setAttributeValue:status forKey:@"status"];
+}
+
+-(UIColor *) backgroundColor{
+    
+    NSString * key = [self status];
+    
+    if([key length]){
+        UIColor * color = [self colorValueForKey:[@"background-color-" stringByAppendingString:key]];
+        if(color == nil){
+            [self colorValueForKey:@"background-color"];
+        }
+        return color;
+    }
+    
+    return [self colorValueForKey:@"background-color"];
+   
 }
 
 

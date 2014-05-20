@@ -190,9 +190,9 @@
     
     CGPoint location = [[touches anyObject] locationInView:self];
     
-    [self touchesElement:_element location:location touchType:0];
-    
-    [super touchesBegan:touches withEvent:event];
+    if(! [self touchesElement:_element location:location touchType:0]){
+        [super touchesBegan:touches withEvent:event];
+    }
 }
 
 -(void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
