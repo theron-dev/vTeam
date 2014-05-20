@@ -46,7 +46,7 @@
 
 @end
 
-@protocol VTDocumentDataControllerDelegate <VTDataControllerDelegate>
+@protocol VTDocumentDataControllerDelegate <VTTableDataControllerDelegate>
 
 @optional
 

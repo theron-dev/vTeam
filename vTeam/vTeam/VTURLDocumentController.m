@@ -77,6 +77,7 @@
     [_documentURL release];
     [_statusElement release];
     [_documentUUID release];
+    [_errorDocument release];
     [super dealloc];
 }
 
@@ -258,6 +259,19 @@
     else{
         
         [self stopLoading];
+        
+        if(_errorDocument){
+            NSString * html = [[[self.context resourceBundle] bundlePath] stringByAppendingPathComponent:_errorDocument];
+            
+            NSString * htmlContent = [NSString stringWithContentsOfFile:html encoding:NSUTF8StringEncoding error:nil];
+            
+            if(htmlContent){
+                
+                [self loadHTMLContent:htmlContent];
+                
+            }
+            
+        }
         
         if([self.delegate respondsToSelector:@selector(vtURLDocumentController:didFailWithError:)]){
             [self.delegate vtURLDocumentController:self didFailWithError:error];
@@ -469,7 +483,10 @@
         
         NSString * actionName = [element attributeValueForKey:@"action-name"];
         
-        if([actionName isEqualToString:@"reload-url"]){
+        if([actionName isEqualToString:@"reloadData"]){
+            [self reloadData];
+        }
+        else if([actionName isEqualToString:@"reload-url"]){
             
             [self reloadElement:element queryValues:nil];
             

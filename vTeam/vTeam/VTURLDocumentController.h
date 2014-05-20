@@ -29,6 +29,7 @@
 @property(nonatomic,readonly) NSString * documentFilePath;
 @property(nonatomic,assign,getter = isAllowPreloadCached) BOOL allowPreloadCached;
 @property(nonatomic,retain) NSString * documentUUID;
+@property(nonatomic,retain) NSString * errorDocument;
 
 -(void) reloadData;
 

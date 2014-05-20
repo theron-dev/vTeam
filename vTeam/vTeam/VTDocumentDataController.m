@@ -326,6 +326,7 @@
         [element setAttributeValue:nil forKey:@"event"];
         [element release];
     }
+    [super tableView:tableView didSelectRowAtIndexPath:indexPath];
 }
 
 @end
