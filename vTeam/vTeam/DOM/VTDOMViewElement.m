@@ -10,6 +10,7 @@
 
 #import "VTDOMElement+Style.h"
 #import "VTDOMElement+Frame.h"
+#import "VTDOMElement+Render.h"
 
 @implementation VTDOMViewElement
 
@@ -108,6 +109,16 @@
 
 -(void) draw:(CGRect) rect context:(CGContextRef) context{
     
+}
+
+-(void) setAttributeValue:(NSString *)value forKey:(NSString *)key{
+    [super setAttributeValue:value forKey:key];
+    
+    if([key isEqualToString:@"hidden"] || [key isEqualToString:@"visable"]){
+        if([self isViewLoaded]){
+            [[self view] setHidden:[self isHidden]];
+        }
+    }
 }
 
 @end
