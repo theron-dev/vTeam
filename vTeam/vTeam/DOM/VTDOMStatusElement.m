@@ -18,6 +18,33 @@
 
 #import "UIView+VTDOMElement.h"
 
+@interface VTDOMElement(VTDOMStatusElement)
+
+
+@property(nonatomic,readonly) NSSet * statusSet;
+
+
+@end
+
+@implementation VTDOMElement(VTDOMStatusElement)
+
+-(NSSet *) statusSet{
+    
+    NSSet * statusSet = [self valueForKey:@"statusSet"];
+    
+    if(statusSet == nil){
+        
+        NSArray * ss = [[self attributeValueForKey:@"status"] componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"|,; "]];
+        
+        statusSet = ss ? [NSSet setWithArray:ss] : [NSSet set];
+    
+    }
+    
+    return statusSet;
+}
+
+@end
+
 @interface VTDOMStatusElement(){
     BOOL _insetTouch;
 }
@@ -35,21 +62,13 @@
 
 -(void) refreshStatusForElement:(VTDOMElement *) element forStatus:(NSString *) status{
     
-    NSString * s = [element attributeValueForKey:@"status"];
-    
-    if(status == nil || s == nil || s == status || [status isEqualToString:s]){
+    NSSet * s = [element statusSet];
+
+    if(status == nil || [s count] == 0 || [s containsObject:status]){
         [element setAttributeValue:@"false" forKey:@"hidden"];
     }
     else {
-        
-        NSSet * ss = [NSSet setWithArray:[s componentsSeparatedByString:@","]];
-        
-        if([ss containsObject:status]){
-            [element setAttributeValue:@"false" forKey:@"hidden"];
-        }
-        else{
-            [element setAttributeValue:@"true" forKey:@"hidden"];
-        }
+        [element setAttributeValue:@"true" forKey:@"hidden"];
     }
 
     [element setAttributeValue:status forKey:@"tostatus"];
