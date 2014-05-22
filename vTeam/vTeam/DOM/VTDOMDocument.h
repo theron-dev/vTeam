@@ -11,6 +11,8 @@
 #import <vTeam/VTDOMElement.h>
 #import <vTeam/VTDOMStyleSheet.h>
 
+#define VTDOMDocumentVersion    @"1.0.0"
+
 @interface VTDOMDocument : NSObject
 
 @property(nonatomic,retain) NSBundle * bundle;

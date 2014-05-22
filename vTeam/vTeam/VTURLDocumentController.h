@@ -17,8 +17,6 @@
 #define VTURLDocumentControllerErrorCodeNotFoundFileURL         0x30
 #define VTURLDocumentControllerErrorCodeNotSupperDocumentVersion         0x40
 
-#define VTDOMDocumentVersion    @"1.0.0"
-
 @interface VTURLDocumentController : VTController<IVTHttpTaskDelegate,VTDOMViewDelegate>
 
 @property(nonatomic,retain) IBOutlet VTDOMView * documentView;
