@@ -139,7 +139,7 @@
             }
       
             if(r.size.width == MAXFLOAT){
-                r.size.width = s.width + padding.left + padding.right;
+                r.size.width = (int) (s.width + 0.99999f) + padding.left + padding.right;
                 NSString * min = [self stringValueForKey:@"min-width"];
                 if(min){
                     if(r.size.width < [min floatValue]){
@@ -149,7 +149,7 @@
             }
             
             if(r.size.height == MAXFLOAT){
-                r.size.height = s.height + padding.top + padding.bottom;
+                r.size.height = (int) (s.height + 0.99999f) + padding.top + padding.bottom;
                 NSString * min = [self stringValueForKey:@"min-height"];
                 if(min){
                     if(r.size.height < [min floatValue]){
@@ -210,9 +210,6 @@
         UIGraphicsPushContext(context);
 
         CGSize size = self.frame.size;
-        
-        size.width += 0.999999;
-        size.height += 0.999999;
         
         [text drawInRect:CGRectMake(padding.left, padding.top
                                     , size.width - padding.left - padding.right
