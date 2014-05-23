@@ -2,10 +2,23 @@
 
 rm -rf build
 
-xcodebuild
-xcodebuild -sdk iphonesimulator7.1
-cp -a build/Release-iphoneos build/Release
-lipo -create build/Release-iphoneos/vTeam.framework/vTeam build/Release-iphonesimulator/vTeam.framework/vTeam -output build/Release/vTeam.framework/vTeam
+
+if [ $1 ]
+then
+
+target=$1
+
+else
+
+target=Release
+
+fi
+
+
+xcodebuild -configuration $target
+xcodebuild -sdk iphonesimulator7.1 -configuration $target
+cp -a build/$target-iphoneos build/$target
+lipo -create build/$target-iphoneos/vTeam.framework/vTeam build/$target-iphonesimulator/vTeam.framework/vTeam -output build/$target/vTeam.framework/vTeam
 
 
 
