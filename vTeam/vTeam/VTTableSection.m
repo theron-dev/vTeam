@@ -24,4 +24,22 @@
     [super dealloc];
 }
 
+-(void) setCells:(NSArray *)cells{
+    NSArray * c = [cells sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        NSInteger tag1 = [(UIView *) obj1 tag];
+        NSInteger tag2 = [(UIView *) obj2 tag];
+        NSInteger r = tag1 - tag2;
+        
+        if(r < 0){
+            return NSOrderedAscending;
+        }
+        if(r > 0){
+            return NSOrderedDescending;
+        }
+        return NSOrderedSame;
+    }];
+    [_cells release];
+    _cells = [c retain];
+}
+
 @end

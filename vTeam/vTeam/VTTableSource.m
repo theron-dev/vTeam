@@ -59,4 +59,14 @@
     return 0;
 }
 
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    id delegate = [self delegate];
+    
+    if([delegate respondsToSelector:@selector(vtTableSource:tableView:didSelectRowAtIndexPath:)]){
+        [delegate vtTableSource:self tableView:tableView didSelectRowAtIndexPath:indexPath];
+    }
+    
+}
+
 @end

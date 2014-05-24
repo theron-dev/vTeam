@@ -9,9 +9,18 @@
 #import <UIKit/UIKit.h>
 
 #import <vTeam/VTTableSection.h>
+#import <vTeam/VTController.h>
 
-@interface VTTableSource : NSObject<UITableViewDataSource,UITableViewDelegate>
+@interface VTTableSource : VTController<UITableViewDataSource,UITableViewDelegate>
 
 @property(nonatomic,retain) IBOutletCollection(VTTableSection) NSArray * sections;
+
+@end
+
+@protocol VTTableSourceDelegate
+
+@optional
+
+-(void) vtTableSource:(VTTableSource *) tableSource tableView:(UITableView *) tableView didSelectRowAtIndexPath:(NSIndexPath *) indexPath;
 
 @end
