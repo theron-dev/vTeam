@@ -366,11 +366,7 @@
                     
                     [self.document applyStyleSheet:parentElement];
                     
-                    [[self.document rootElement] layout:_documentView.bounds.size];
-                    
-                    [[self.document rootElement] bindDelegate:_documentView];
-                    
-                    [_documentView setNeedsDisplay];
+                    [self documentLayout];
                 }
                 
             }
@@ -386,9 +382,7 @@
                 
                 [self.document applyStyleSheet:element];
                 
-                [[self.document rootElement] layout:_documentView.bounds.size];
-            
-                [_documentView setNeedsDisplay];
+                [self documentLayout];
                 
             }
         }
@@ -474,7 +468,15 @@
             }
         }
         else if([status isEqualToString:@"right"] || [status isEqualToString:@"bottom"] || [status isEqualToString:@"bottomover"] || [status isEqualToString:@"rightover"]){
-            [self reloadElement:element queryValues:nil];
+            
+            NSMutableDictionary * queryValues = [NSMutableDictionary dictionary];
+            
+            if([self.delegate respondsToSelector:@selector(vtURLDocumentController:willReloadElement:queryValues:)]){
+                [self.delegate vtURLDocumentController:self willReloadElement:element queryValues:queryValues];
+            }
+            
+            [self reloadElement:element queryValues:queryValues];
+            
             [(VTDOMStatusElement *) element setStatus:@"loading"];
         }
         
@@ -525,7 +527,7 @@
         
         [httpTask release];
         
-        NSLog(@"%@",request);
+        NSLog(@"%@",[[request URL] absoluteString]);
         
     }
     
@@ -599,6 +601,32 @@
 }
 
 -(void) documentDidLoad{
+    
+}
+
+-(void) documentWillLayout{
+    
+}
+
+-(void) documentDidLayout{
+    
+}
+
+-(void) documentLayout{
+    
+    CGSize size = [_documentView bounds].size;
+    
+    [self documentWillLayout];
+    
+    [[_document rootElement] layout:size];
+    
+    [self documentDidLayout];
+    
+    [self downloadImagesForElement:_document.rootElement];
+    
+    [_documentView setElement:_document.rootElement];
+    
+    [self downloadImagesForView:_documentView];
     
 }
 
