@@ -20,4 +20,8 @@
 
 -(void) didVisableItemView:(UIView *) itemView element:(VTDOMElement *) element atIndex:(NSInteger) index;
 
+-(void) didContainerDidAppera;
+
+-(void) didContainerDidDispaaer;
+
 @end

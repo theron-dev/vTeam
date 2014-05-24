@@ -33,6 +33,33 @@
 
 @end
 
+@interface VTDOMContainerScrollView : UIScrollView{
+}
+
+@end
+
+@protocol VTDOMContainerScrollViewDelegate <UIScrollViewDelegate>
+
+@optional
+
+-(void) scrollView:(UIScrollView *) scrollView willMoveToWindow:(UIWindow *) window;
+
+@end
+
+@implementation VTDOMContainerScrollView
+
+
+-(void) willMoveToWindow:(UIWindow *)newWindow{
+    [super willMoveToWindow:newWindow];
+    
+    if([self.delegate respondsToSelector:@selector(scrollView:willMoveToWindow:)]){
+        [(id)self.delegate scrollView:self willMoveToWindow:newWindow];
+    }
+    
+}
+@end
+
+
 @interface VTDOMContainerElement()
 
 @property(nonatomic,readonly) NSMutableArray * dequeueItemViews;
@@ -90,7 +117,7 @@
     NSString * view = [self stringValueForKey:@"viewClass"];
     Class clazz = NSClassFromString(view);
     if(clazz == nil || ![clazz isSubclassOfClass:[UIScrollView class]]){
-        clazz = [UIScrollView class];
+        clazz = [VTDOMContainerScrollView class];
     }
     return clazz;
 }
@@ -350,6 +377,25 @@
 -(void) setFrame:(CGRect)frame{
     [super setFrame:frame];
     [self reloadData];
+}
+
+-(void) scrollView:(UIScrollView *) scrollView willMoveToWindow:(UIWindow *) window{
+    if([self isViewLoaded]){
+        if(window){
+            [self didContainerDidAppera];
+        }
+        else {
+            [self didContainerDidDispaaer];
+        }
+    }
+}
+
+-(void) didContainerDidAppera{
+    
+}
+
+-(void) didContainerDidDispaaer{
+    
 }
 
 @end

@@ -144,6 +144,25 @@
     return 0;
 }
 
+-(NSInteger) pageSize{
+    
+    if([self isViewLoaded]){
+        
+        UIScrollView * contentView = [self contentView];
+        
+        CGSize size = contentView.bounds.size;
+        CGSize contentSize = contentView.contentSize;
+        
+        if(contentSize.width < size.width){
+            contentSize.width = size.width;
+        }
+        
+        return contentSize.width / size.width;
+    }
+    return 0;
+    
+}
+
 -(void) scrollViewDidScroll:(UIScrollView *)scrollView{
     
     VTDOMElement * pageElement = [self pageElement];
@@ -179,6 +198,72 @@
             [[(VTDOMViewElement *) pageElement view] setElement:pageElement];
         }
     }
+    
+}
+
+-(void) doLoops {
+    
+    UIScrollView * contentView = [self contentView];
+    
+    CGSize size = contentView.bounds.size;
+    CGSize contentSize = contentView.contentSize;
+    CGPoint contentOffset = contentView.contentOffset;
+    
+    if(contentSize.width < size.width){
+        contentSize.width = size.width;
+    }
+    
+    NSInteger pageCount = contentSize.width / size.width;
+    
+    NSInteger pageIndex = contentOffset.x / size.width;
+    
+    if(pageIndex >= pageCount){
+        pageIndex = pageCount - 1;
+    }
+    
+    if(pageIndex + 1 >= pageCount){
+        pageIndex = 0;
+    }
+    else {
+        pageIndex ++;
+    }
+    
+    if(pageIndex < 0){
+        pageIndex = 0;
+    }
+    
+    [contentView setContentOffset:CGPointMake(pageIndex * size.width, 0) animated:YES];
+    
+    NSString * v = [self attributeValueForKey:@"loops"];
+    NSTimeInterval interval = [v doubleValue];
+    
+    if(interval > 0){
+        
+        [self performSelector:@selector(doLoops) withObject:nil afterDelay:interval];
+        
+    }
+    
+}
+
+-(void) didContainerDidAppera{
+    
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(doLoops) object:nil];
+    
+    NSString * v = [self attributeValueForKey:@"loops"];
+    NSTimeInterval interval = [v doubleValue];
+    
+    if(interval > 0){
+        
+        [self performSelector:@selector(doLoops) withObject:nil afterDelay:interval];
+        
+    }
+    
+}
+
+-(void) didContainerDidDispaaer{
+    
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(doLoops) object:nil];
+    
     
 }
 
