@@ -27,4 +27,17 @@
     [self setHidden:[element isHidden]];
 }
 
+-(void) element:(VTDOMElement *) element attributeChangedValue:(NSString *) value forKey:(NSString *) key{
+    
+    
+    if([key isEqualToString:@"hidden"] || [key isEqualToString:@"visable"]){
+        [self setHidden:[element isHidden]];
+    }
+    
+}
+
+-(void) element:(VTDOMElement *) element valueChangedValue:(id) value forKey:(NSString *)key{
+    
+}
+
 @end

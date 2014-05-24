@@ -166,6 +166,9 @@
                     NSString * target = [element attributeValueForKey:@"target"];
                     
                     if(r.origin.y < 0 && contentOffset.y < 0 && [target isEqualToString:@"top"]){
+                        
+                        [element setValue:[NSNumber numberWithFloat:r.origin.y - contentOffset.y] forKey:@"offsetY"];
+                        
                         if(r.origin.y - contentOffset.y >= 0){
                             [(VTDOMStatusElement *) element setStatus:@"topover"];
                         }

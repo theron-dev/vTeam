@@ -14,4 +14,8 @@
 
 -(void) setElement:(VTDOMElement *) element;
 
+-(void) element:(VTDOMElement *) element attributeChangedValue:(NSString *) value forKey:(NSString *) key;
+
+-(void) element:(VTDOMElement *) element valueChangedValue:(id)value forKey:(NSString *)key;
+
 @end

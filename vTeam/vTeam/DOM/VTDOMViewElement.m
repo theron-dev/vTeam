@@ -12,6 +12,8 @@
 #import "VTDOMElement+Frame.h"
 #import "VTDOMElement+Render.h"
 
+#import "UIView+VTDOMElement.h"
+
 @implementation VTDOMViewElement
 
 @synthesize view = _view;
@@ -114,10 +116,17 @@
 -(void) setAttributeValue:(NSString *)value forKey:(NSString *)key{
     [super setAttributeValue:value forKey:key];
     
-    if([key isEqualToString:@"hidden"] || [key isEqualToString:@"visable"]){
-        if([self isViewLoaded]){
-            [[self view] setHidden:[self isHidden]];
-        }
+    if([self isViewLoaded]){
+        [self.view element:self attributeChangedValue:value forKey:key];
+    }
+    
+}
+
+-(void) setValue:(id)value forKey:(NSString *)key{
+    [super setValue:value forKey:key];
+    
+    if([self isViewLoaded]){
+        [self.view element:self valueChangedValue:value forKey:key];
     }
 }
 
