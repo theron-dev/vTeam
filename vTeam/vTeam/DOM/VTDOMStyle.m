@@ -62,7 +62,7 @@
 }
 
 +(BOOL) booleanValue:(NSString *) value{
-    return value && ([value boolValue] || [value isEqualToString:@"true"]);
+    return value && ! [@"0" isEqualToString:value] && ![@"false" isEqualToString:value] && ![@"" isEqualToString:value];
 }
 
 +(UIImage *) imageValue:(NSString *) value bundle:(NSBundle *) bundle{
