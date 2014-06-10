@@ -100,9 +100,16 @@
         
         NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url queryValues:[urlTask queryValues]] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:120];
         
+        id header = [self.config dictionaryValueForKey:@"headers"];
+        
+        for (NSString * key in header) {
+            [request setValue:[header stringValueForKey:key] forHTTPHeaderField:key];
+        }
+        
         [httpTask setRequest:request];
         
-        NSLog(@"%@",httpTask.request);
+        NSLog(@"%@",request);
+        NSLog(@"%@",[request allHTTPHeaderFields]);
         
         VTURLServiceItem * item = [[[VTURLServiceItem alloc] init] autorelease];
         
