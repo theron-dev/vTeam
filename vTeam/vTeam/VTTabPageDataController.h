@@ -15,4 +15,6 @@
 @property(nonatomic,assign) CGFloat leftSpaceWidth;
 @property(nonatomic,assign) CGFloat rightSpaceWidth;
 
+-(void) scrollToTabButton:(NSUInteger) index;
+
 @end
