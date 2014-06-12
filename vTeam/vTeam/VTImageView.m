@@ -10,6 +10,10 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+#import "UIView+VTDOMElement.h"
+
+#import "VTDOMElement+Style.h"
+
 @implementation VTImageView
 
 @synthesize src = _src;
@@ -62,6 +66,47 @@
     else{
         self.loaded = YES;
         [super setImage:image];
+    }
+    if((_fitHeight || _fitWidth) && self.image){
+        CGSize imageSize = [self.image size];
+        CGRect r = [self frame];
+        
+        if(_fitWidth){
+            
+            if(r.size.width && r.size.height && imageSize.width && imageSize.height){
+                
+                if(r.size.width / r.size.height != imageSize.width / imageSize.height){
+                    r.size.width = imageSize.width / imageSize.height * r.size.height;
+                    
+                    if(_maxWidth && r.size.width > _maxWidth){
+                        r.size.width = _maxWidth;
+                    }
+                    
+                    [self setFrame:r];
+                }
+                
+            }
+            
+        }
+        
+        if(_fitHeight){
+            
+            if(r.size.width && r.size.height && imageSize.width && imageSize.height){
+                
+                if(r.size.width / r.size.height != imageSize.width / imageSize.height){
+                    
+                    r.size.height = imageSize.height / imageSize.width * r.size.width;
+                    
+                    if(_maxHeight && r.size.height > _maxHeight){
+                        r.size.height = _maxHeight;
+                    }
+                    
+                    [self setFrame:r];
+                }
+                
+            }
+            
+        }
     }
 }
 
@@ -269,5 +314,18 @@
         self.layer.contentsRect = CGRectMake(0, 0, 1.0, 1.0);
     }
 }
+
+-(void) setElement:(VTDOMElement *)element{
+    [super setElement:element];
+    
+    self.maxWidth = [element floatValueForKey:@"max-width"];
+    self.maxHeight = [element floatValueForKey:@"max-height"];
+    self.fitWidth = [element booleanValueForKey:@"fit-width"];
+    self.fitHeight = [element booleanValueForKey:@"fit-height"];
+    self.defaultSrc = [element attributeValueForKey:@"default-src"];
+    self.src = [element attributeValueForKey:@"src"];
+    
+}
+
 
 @end

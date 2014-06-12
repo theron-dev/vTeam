@@ -424,7 +424,8 @@
 -(void) scrollViewDidScroll:(UIScrollView *)scrollView{
     if(![_topLoadingView isAnimating] && ![_bottomLoadingView isAnimating] && _bottomLoadingView.superview
        && [self.dataSource respondsToSelector:@selector(hasMoreData)] && [(id)self.dataSource hasMoreData]
-       && scrollView.contentOffset.y - scrollView.contentSize.height + scrollView.frame.size.height > - _bottomLoadingView.frame.size.height
+       && scrollView.contentOffset.y + scrollView.frame.size.height
+        > scrollView.contentSize.height + _bottomLoadingView.frame.size.height
        && ![self.dataSource isLoading]){
         [(id)self.dataSource performSelectorOnMainThread:@selector(loadMoreData) withObject:nil waitUntilDone:NO];
     }
@@ -442,7 +443,8 @@
             }
             else if(_bottomLoadingView.superview
                     && [self.dataSource respondsToSelector:@selector(hasMoreData)] && [(id)self.dataSource hasMoreData]
-                    && scrollView.contentOffset.y - scrollView.contentSize.height + scrollView.frame.size.height > -_bottomLoadingView.frame.size.height
+                    && scrollView.contentOffset.y + scrollView.frame.size.height
+                        > scrollView.contentSize.height + _bottomLoadingView.frame.size.height
                     && ![self.dataSource isLoading]){
                 [self.dataSource performSelectorOnMainThread:@selector(loadMoreData) withObject:nil waitUntilDone:NO];
             }
