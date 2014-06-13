@@ -16,7 +16,10 @@
         return value;
     }
     else if([value respondsToSelector:@selector(stringValue)]){
-        return [value stringValue];
+        value = [value stringValue];
+        if(value){
+            return value;
+        }
     }
     else if(value){
         return [NSString stringWithFormat:@"%@",value];
@@ -155,7 +158,10 @@
         return value;
     }
     else if([value respondsToSelector:@selector(stringValue)]){
-        return [value stringValue];
+        value = [value stringValue];
+        if(value){
+            return value;
+        }
     }
     else if(value){
         return [NSString stringWithFormat:@"%@",value];
