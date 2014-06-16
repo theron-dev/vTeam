@@ -438,7 +438,7 @@
 -(void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     if(decelerate){
         if(![_topLoadingView isAnimating]){
-            if(- scrollView.contentOffset.y >= _topLoadingView.frame.size.height){
+            if( - (scrollView.contentInset.top + scrollView.contentOffset.y) >= _topLoadingView.frame.size.height){
                 _allowRefresh = YES;
             }
             else if(_bottomLoadingView.superview
