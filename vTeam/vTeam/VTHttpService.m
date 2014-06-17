@@ -462,7 +462,10 @@ static void VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction(void * task){
     if([task conformsToProtocol:@protocol(IVTHttpTask)]){
         
         if(_operationQueue == nil){
+            
             _operationQueue = [[NSOperationQueue alloc] init];
+            
+            [_operationQueue setName:NSStringFromClass([self class])];
             
             int maxThreadCount = [[self.config valueForKey:@"maxThreadCount"] intValue];
             
