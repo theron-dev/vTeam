@@ -12,6 +12,46 @@
 
 -(NSString *) stringValueForKey:(NSString *) key{
     NSString * v = [self attributeValueForKey:key];
+    
+    if(v == nil){
+        
+        NSString * style = [self attributeValueForKey:@"style"];
+        
+        if([style length]){
+            
+            NSMutableDictionary * styleMap = [self valueForKey:@"styleMap"];
+            
+            if(styleMap == nil){
+            
+                styleMap = [NSMutableDictionary dictionaryWithCapacity:4];
+                
+                NSArray * items = [style componentsSeparatedByString:@";"];
+            
+                for (NSString * item in items) {
+                    
+                    NSArray * ss = [item componentsSeparatedByString:@":"];
+                    
+                    if([ss count] > 1){
+                        
+                        NSString * key = [[ss objectAtIndex:0] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                        
+                        NSString * value = [[ss objectAtIndex:1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                        
+                        [styleMap setValue:value forKey:key];
+                        
+                    }
+                    
+                }
+                
+                [self setValue:styleMap forKey:@"styleMap"];
+                
+            }
+            
+            v = [styleMap valueForKey:key];
+            
+        }
+    }
+    
     if(v == nil){
         v = [self.style stringValueForKey:key];
     }

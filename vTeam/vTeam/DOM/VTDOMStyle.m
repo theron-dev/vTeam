@@ -143,10 +143,16 @@
     if([value isEqualToString:@"clear"]){
         return [UIColor clearColor];
     }
-    if(value){
+    if([value hasPrefix:@"#"] && [value length] >= 7){
         int r=0,g=0,b=0;
         float a = 1.0;
         sscanf([value UTF8String], "#%02x%02x%02x %f",&r,&g,&b,&a);
+        return [UIColor colorWithRed:(float)r / 255.0 green:(float)g / 255.0 blue:(float)b / 255.0 alpha:a];
+    }
+    else if([value hasPrefix:@"#"] && [value length] == 4){
+        int r=0,g=0,b=0;
+        float a = 1.0;
+        sscanf([value UTF8String], "#%1x%1x%1x",&r,&g,&b);
         return [UIColor colorWithRed:(float)r / 255.0 green:(float)g / 255.0 blue:(float)b / 255.0 alpha:a];
     }
     return nil;
