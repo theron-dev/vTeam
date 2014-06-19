@@ -153,7 +153,7 @@
         int r=0,g=0,b=0;
         float a = 1.0;
         sscanf([value UTF8String], "#%1x%1x%1x",&r,&g,&b);
-        return [UIColor colorWithRed:(float)r / 255.0 green:(float)g / 255.0 blue:(float)b / 255.0 alpha:a];
+        return [UIColor colorWithRed:(float)(r * 16 + r) / 255.0 green:(float)(g * 16 + g) / 255.0 blue:(float)(b * 16 + b) / 255.0 alpha:a];
     }
     return nil;
 }
