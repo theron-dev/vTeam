@@ -135,6 +135,7 @@
 -(void) setElement:(VTDOMElement *)element{
     [super setElement:element];
     
+    self.clipsToBounds = YES;
     self.contentMode = UIViewContentModeScaleAspectFill;
     self.maxWidth = [element floatValueForKey:@"max-width"];
     self.maxHeight = [element floatValueForKey:@"max-height"];
