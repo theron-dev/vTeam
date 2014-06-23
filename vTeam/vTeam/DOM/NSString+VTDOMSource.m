@@ -19,7 +19,7 @@
     v = [v stringByReplacingOccurrencesOfString:@"\n" withString:@"\\n"];
     v = [v stringByReplacingOccurrencesOfString:@"\r" withString:@""];
     v = [v stringByReplacingOccurrencesOfString:@"\t" withString:@"\\t"];
-    v = [v stringByReplacingOccurrencesOfString:@"\"" withString:@"&qout;"];
+    v = [v stringByReplacingOccurrencesOfString:@"\"" withString:@"&quot;"];
     return v;
 }
 
@@ -31,7 +31,7 @@
     v = [v stringByReplacingOccurrencesOfString:@"&amp;" withString:@"&"];
     v = [v stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
     v = [v stringByReplacingOccurrencesOfString:@"\\t" withString:@"\t"];
-    v = [v stringByReplacingOccurrencesOfString:@"&qout;" withString:@"\""];
+    v = [v stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\""];
     return v;
 }
 
