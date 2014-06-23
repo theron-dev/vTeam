@@ -50,8 +50,7 @@
         self.pageIndex = 1;
         self.dataChanged = YES;
     }
-    
-    _hasMoreData = YES;
+
     [super reloadData];
 }
 
@@ -62,20 +61,15 @@
 
 -(void) vtDownlinkTaskDidLoaded:(id) data forTaskType:(Protocol *) taskType{
     
-    NSInteger count = [[self dataObjects] count];
-    
     self.loading = NO;
     
     if(self.dataChanged){
         
         if(_pageIndex == 1){
             [[self dataObjects] removeAllObjects];
-            count = 0;
         }
         
         [self loadResultsData:data];
-
-        _hasMoreData = [[self dataObjects] count] - count >0;
     }
 
     if([self.delegate respondsToSelector:@selector(vtDataSourceDidLoaded:)]){
