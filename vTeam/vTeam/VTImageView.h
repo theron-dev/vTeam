@@ -13,8 +13,6 @@
 @interface VTImageView : UIImageView<IVTLocalImageTask>
 
 @property(nonatomic,retain) UIImage * defaultImage;
-@property(nonatomic,retain) NSString * imageMode;
-
 @property(nonatomic,assign,getter = isFitWidth) BOOL fitWidth;
 @property(nonatomic,assign,getter = isFitHeight) BOOL fitHeight;
 @property(nonatomic,assign) CGFloat maxWidth;
