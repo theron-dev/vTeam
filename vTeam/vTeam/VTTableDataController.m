@@ -315,7 +315,7 @@
         if(_notFoundDataView && _notFoundDataView.superview == nil){
             _notFoundDataView.frame = _tableView.bounds;
             [_notFoundDataView setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
-            [_tableView addSubview:_notFoundDataView];
+            [_tableView insertSubview:_notFoundDataView atIndex:0];
         }
     }
     else{
