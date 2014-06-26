@@ -58,6 +58,15 @@
     return _hasMoreData;
 }
 
+-(void) loadResultsData:(id)resultsData{
+    
+    NSUInteger c = [self count];
+    
+    [super loadResultsData:resultsData];
+    
+    self.hasMoreData = [self count] != c;
+    
+}
 
 -(void) vtDownlinkTaskDidLoaded:(id) data forTaskType:(Protocol *) taskType{
     
