@@ -315,7 +315,25 @@
         if(_notFoundDataView && _notFoundDataView.superview == nil){
             _notFoundDataView.frame = _tableView.bounds;
             [_notFoundDataView setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
-            [_tableView insertSubview:_notFoundDataView atIndex:0];
+            
+            UIView * v = nil;
+            Class clazz = NSClassFromString(@"UITableViewWrapperView");
+            
+            if(clazz){
+                for (UIView * sv in [_tableView subviews]) {
+                    if([sv class] == clazz){
+                        v = sv;
+                        break;
+                    }
+                }
+            }
+            
+            if(v){
+                [_tableView insertSubview:_notFoundDataView aboveSubview:v];
+            }
+            else {
+                [_tableView insertSubview:_notFoundDataView atIndex:0];
+            }
         }
     }
     else{
