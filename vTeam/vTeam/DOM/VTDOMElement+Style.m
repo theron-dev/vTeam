@@ -87,4 +87,42 @@
     return UIEdgeInsetsMake(top, left, bottom, right);
 }
 
+-(float) floatValueForKey:(NSString *) key of:(CGFloat) baseValue defaultValue:(CGFloat) defaultValue{
+    
+    NSString * v = [self stringValueForKey:key];
+    
+    if(v == nil){
+        return defaultValue;
+    }
+    
+    if([v isEqualToString:@"auto"]){
+        return MAXFLOAT;
+    }
+    
+    if([v hasSuffix:@"%"]){
+        return [v floatValue] * baseValue / 100.0;
+    }
+    else {
+        NSRange r = [v rangeOfString:@"%+"];
+        
+        if(r.location != NSNotFound){
+            
+            return [[v substringToIndex:r.location] floatValue] * baseValue / 100.0 + [[v substringFromIndex:r.location + r.length] floatValue];
+            
+        }
+        else{
+            
+            r = [v rangeOfString:@"%-"];
+            
+            if(r.location != NSNotFound){
+                return [[v substringToIndex:r.location] floatValue] * baseValue / 100.0 -[[v substringFromIndex:r.location + r.length] floatValue];
+            }
+            else{
+                return [v floatValue];
+            }
+        }
+    }
+
+}
+
 @end

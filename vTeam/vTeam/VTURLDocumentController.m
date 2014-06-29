@@ -26,6 +26,7 @@
 
 #import "NSURL+QueryValue.h"
 
+
 @interface  VTURLDocumentControllerElementHttpTask : VTHttpTask
 
 @property(nonatomic,retain) VTDOMElement * element;
@@ -234,15 +235,28 @@
     
 }
 
--(void) didLoadedHTMLContent:(NSString *) htmlContent{
-    
-    [self stopLoading];
+-(void) delayDidLoadedHTMLContent:(NSString *) htmlContent {
     
     [self loadHTMLContent:htmlContent];
- 
+    
     if([self.delegate respondsToSelector:@selector(vtURLDocumentControllerDidLoaded:)]){
         [self.delegate vtURLDocumentControllerDidLoaded:self];
     }
+}
+
+-(void) didLoadedHTMLContent:(NSString *) htmlContent{
+    
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    
+    [self stopLoading];
+    
+    if(self.document){
+        [self performSelector:@selector(delayDidLoadedHTMLContent:) withObject:htmlContent afterDelay:0.3];
+    }
+    else {
+        [self delayDidLoadedHTMLContent:htmlContent];
+    }
+    
 }
 
 -(void) didFailError:(NSError *) error{
@@ -294,99 +308,101 @@
     
     if(_httpTask == httpTask){
         
-        NSString * documentVersion =  [[[(VTHttpTask *)httpTask response] allHeaderFields] valueForKey:@"VTDOMDocumentVersion"];
-        
-        if([documentVersion isEqualToString:VTDOMDocumentVersion]){
-        
-            NSString * filePath = [self documentFilePath];
+        if ([httpTask isKindOfClass:[VTURLDocumentControllerElementHttpTask class]]){
             
-            NSFileManager * fileManager = [NSFileManager defaultManager];
+            NSString * documentVersion =  [[[(VTHttpTask *)httpTask response] allHeaderFields] valueForKey:@"VTDOMDocumentVersion"];
             
-            NSString * dir = [filePath stringByDeletingLastPathComponent];
-            
-            if(![fileManager fileExistsAtPath:dir]){
-                [fileManager createDirectoryAtPath:dir withIntermediateDirectories:YES attributes:nil error:nil];
-            }
-            
-            [fileManager removeItemAtPath:filePath error:nil];
-            
-            [fileManager moveItemAtPath:[httpTask responseBody] toPath:filePath error:nil];
-            
-            [self didLoadedHTMLContent:[NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil]];
-            
-        }
-        else {
-            
-            NSLog(@"%@",[[(VTHttpTask *)httpTask response] allHeaderFields] );
-            
-            [self didFailError:[NSError errorWithDomain:NSStringFromClass([self class]) code:VTURLDocumentControllerErrorCodeNotSupperDocumentVersion userInfo:[[(VTHttpTask *)httpTask response] allHeaderFields]]];
-            
-        }
-        
-        [_httpTask setDelegate:nil];
-        self.httpTask = nil;
-        
-    }
-    else if([httpTask isKindOfClass:[VTURLDocumentControllerElementHttpTask class]]){
-        
-        NSString * documentVersion =  [[[(VTHttpTask *)httpTask response] allHeaderFields] valueForKey:@"VTDOMDocumentVersion"];
-        
-        if([documentVersion isEqualToString:VTDOMDocumentVersion]){
-            
-            self.documentUUID = nil;
-            
-            VTDOMElement * element = [httpTask element];
-            NSString * method = [element attributeValueForKey:@"method"];
-            
-            if([method isEqualToString:@"replace"]){
+            if([documentVersion isEqualToString:VTDOMDocumentVersion]){
                 
-                VTDOMElement * parentElement = [element parentElement];
+                self.documentUUID = nil;
                 
-                NSArray * childs = [parentElement childs];
+                VTDOMElement * element = [httpTask element];
+                NSString * method = [element attributeValueForKey:@"method"];
                 
-                NSInteger index = [childs indexOfObject:element];
-                
-                if(index != NSNotFound){
+                if([method isEqualToString:@"replace"]){
                     
-                    NSString * name = [element attributeValueForKey:@"group"];
+                    VTDOMElement * parentElement = [element parentElement];
                     
-                    while(index < [childs count]){
-                        VTDOMElement * el = [childs objectAtIndex:index];
-                        if([name isEqualToString:[el attributeValueForKey:@"name"]]){
-                            [el removeFromParentElement];
+                    NSArray * childs = [parentElement childs];
+                    
+                    NSInteger index = [childs indexOfObject:element];
+                    
+                    if(index != NSNotFound){
+                        
+                        NSString * name = [element attributeValueForKey:@"group"];
+                        
+                        while(index < [childs count]){
+                            VTDOMElement * el = [childs objectAtIndex:index];
+                            if([name isEqualToString:[el attributeValueForKey:@"name"]]){
+                                [el removeFromParentElement];
+                            }
+                            else{
+                                index ++;
+                            }
                         }
-                        else{
-                            index ++;
-                        }
+                        
+                        VTDOMParse * parse = [[VTDOMParse alloc] init];
+                        
+                        [parse parseHTML:[httpTask responseBody] toElement:parentElement atIndex:index + 1];
+                        
+                        [self.document applyStyleSheet:parentElement];
+                        
+                        [self documentLayout];
+                    }
+                    
+                }
+                else {
+                    
+                    for(VTDOMElement * el in [NSArray arrayWithArray:[element childs]]){
+                        [el removeFromParentElement];
                     }
                     
                     VTDOMParse * parse = [[VTDOMParse alloc] init];
                     
-                    [parse parseHTML:[httpTask responseBody] toElement:parentElement atIndex:index + 1];
+                    [parse parseHTML:[httpTask responseBody] toElement:element];
                     
-                    [self.document applyStyleSheet:parentElement];
+                    [self.document applyStyleSheet:element];
                     
                     [self documentLayout];
+                    
                 }
+            }
+            
+        }
+        else {
+            NSString * documentVersion =  [[[(VTHttpTask *)httpTask response] allHeaderFields] valueForKey:@"VTDOMDocumentVersion"];
+            
+            if([documentVersion isEqualToString:VTDOMDocumentVersion]){
+            
+                NSString * filePath = [self documentFilePath];
+                
+                NSFileManager * fileManager = [NSFileManager defaultManager];
+                
+                NSString * dir = [filePath stringByDeletingLastPathComponent];
+                
+                if(![fileManager fileExistsAtPath:dir]){
+                    [fileManager createDirectoryAtPath:dir withIntermediateDirectories:YES attributes:nil error:nil];
+                }
+                
+                [fileManager removeItemAtPath:filePath error:nil];
+                
+                [fileManager moveItemAtPath:[httpTask responseBody] toPath:filePath error:nil];
+                
+                [self didLoadedHTMLContent:[NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil]];
                 
             }
             else {
                 
-                for(VTDOMElement * el in [NSArray arrayWithArray:[element childs]]){
-                    [el removeFromParentElement];
-                }
+                NSLog(@"%@",[[(VTHttpTask *)httpTask response] allHeaderFields] );
                 
-                VTDOMParse * parse = [[VTDOMParse alloc] init];
-                
-                [parse parseHTML:[httpTask responseBody] toElement:element];
-                
-                [self.document applyStyleSheet:element];
-                
-                [self documentLayout];
+                [self didFailError:[NSError errorWithDomain:NSStringFromClass([self class]) code:VTURLDocumentControllerErrorCodeNotSupperDocumentVersion userInfo:[[(VTHttpTask *)httpTask response] allHeaderFields]]];
                 
             }
         }
         
+        [_httpTask setDelegate:nil];
+        self.httpTask = nil;
+    
     }
 }
 
@@ -462,22 +478,26 @@
                 
                 [_statusElement setStatus:@"loading"];
                 
-                [self performSelectorOnMainThread:@selector(startLoading) withObject:nil waitUntilDone:NO];
+                dispatch_async(dispatch_get_current_queue(), ^{
+                    [self startLoading];
+                });
                 
                 [self reloadData];
             }
         }
         else if([status isEqualToString:@"right"] || [status isEqualToString:@"bottom"] || [status isEqualToString:@"bottomover"] || [status isEqualToString:@"rightover"]){
             
-            NSMutableDictionary * queryValues = [NSMutableDictionary dictionary];
-            
-            if([self.delegate respondsToSelector:@selector(vtURLDocumentController:willReloadElement:queryValues:)]){
-                [self.delegate vtURLDocumentController:self willReloadElement:element queryValues:queryValues];
+            if(! [self isLoading]){
+                NSMutableDictionary * queryValues = [NSMutableDictionary dictionary];
+                
+                if([self.delegate respondsToSelector:@selector(vtURLDocumentController:willReloadElement:queryValues:)]){
+                    [self.delegate vtURLDocumentController:self willReloadElement:element queryValues:queryValues];
+                }
+                
+                [self reloadElement:element queryValues:queryValues];
+                
+                [(VTDOMStatusElement *) element setStatus:@"loading"];
             }
-            
-            [self reloadElement:element queryValues:queryValues];
-            
-            [(VTDOMStatusElement *) element setStatus:@"loading"];
         }
         
     }
@@ -523,6 +543,8 @@
         
         [httpTask setRequest:request];
         
+        self.httpTask = httpTask;
+        
         [self.context handle:@protocol(IVTHttpResourceTask) task:httpTask priority:0];
         
         [httpTask release];
@@ -559,6 +581,7 @@
 
 -(void) stopLoading{
     
+
     if(_statusElement){
         
         VTDOMContainerElement * containerElement = (VTDOMContainerElement *) [_statusElement parentElement];

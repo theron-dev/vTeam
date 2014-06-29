@@ -24,4 +24,6 @@
 
 -(UIEdgeInsets) edgeInsetsValueForKey:(NSString *) key;
 
+-(float) floatValueForKey:(NSString *) key of:(CGFloat) baseValue defaultValue:(CGFloat) defaultValue;
+
 @end

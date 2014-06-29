@@ -130,33 +130,33 @@
             
             CGRect r = [element frame];
             
-            NSString * left = [element stringValueForKey:@"left"];
-            NSString * right = [element stringValueForKey:@"right"];
-            NSString * top = [element stringValueForKey:@"top"];
-            NSString * bottom = [element stringValueForKey:@"bottom"];
+            float left = [element floatValueForKey:@"left" of:insetSize.width defaultValue:0];
+            float right = [element floatValueForKey:@"right" of:insetSize.width defaultValue:0];
+            float top = [element floatValueForKey:@"top" of:insetSize.height defaultValue:0];
+            float bottom = [element floatValueForKey:@"bottom" of:insetSize.height defaultValue:0];
             
-            if([left isEqualToString:@"auto"]){
-                if([right isEqualToString:@"auto"]){
+            if(left == MAXFLOAT){
+                if(right == MAXFLOAT){
                     r.origin.x = (frame.size.width - r.size.width) / 2.0;
                 }
-                else{
-                    r.origin.x = (frame.size.width - r.size.width - padding.right - [right floatValue]);
+                else {
+                    r.origin.x = (frame.size.width - r.size.width - padding.right - right);
                 }
             }
-            else{
-                r.origin.x = padding.left + [left floatValue];
+            else {
+                r.origin.x = left + padding.left;
             }
             
-            if([top isEqualToString:@"auto"]){
-                if([bottom isEqualToString:@"auto"]){
+            if(top == MAXFLOAT){
+                if(bottom == MAXFLOAT){
                     r.origin.y = (frame.size.height - r.size.height) / 2.0;
                 }
-                else{
-                    r.origin.y = frame.size.height - r.size.height - padding.bottom - [bottom floatValue];
+                else {
+                    r.origin.y = (frame.size.height - r.size.height - padding.bottom - bottom);
                 }
             }
-            else{
-                r.origin.y = padding.top + [top floatValue];
+            else {
+                r.origin.y = top + padding.top;
             }
             
             [element setFrame:r];
@@ -182,66 +182,8 @@
     
     CGRect frame = CGRectZero;
     
-    NSString * width = [self stringValueForKey:@"width"];
-    NSString * height = [self stringValueForKey:@"height"];
-    
-    if([width isEqualToString:@"auto"]){
-        frame.size.width = MAXFLOAT;
-    }
-    else if([width hasSuffix:@"%"]){
-        frame.size.width = [width floatValue] * size.width / 100.0;
-    }
-    else if(width){
-        
-        NSRange r = [width rangeOfString:@"%+"];
-        
-        if(r.location != NSNotFound){
-            
-            frame.size.width = [[width substringToIndex:r.location] floatValue] * size.width / 100.0 + [[width substringFromIndex:r.location + r.length] floatValue];
-            
-        }
-        else{
-            
-            r = [width rangeOfString:@"%-"];
-            
-            if(r.location != NSNotFound){
-                frame.size.width = [[width substringToIndex:r.location] floatValue] * size.width / 100.0 -[[width substringFromIndex:r.location + r.length] floatValue];
-            }
-            else{
-               frame.size.width = [width floatValue]; 
-            }
-        }
-        
-        
-    }
-    
-    if([height isEqualToString:@"auto"]){
-        frame.size.height = MAXFLOAT;
-    }
-    else if([height hasSuffix:@"%"]){
-        frame.size.height = [height floatValue] * size.height / 100.0;
-    }
-    else if(height){
-        
-        NSRange r = [height rangeOfString:@"%+"];
-        
-        if(r.location != NSNotFound){
-            
-            frame.size.height = [[height substringToIndex:r.location] floatValue] * size.height / 100.0 + [[height substringFromIndex:r.location + r.length] floatValue];
-            
-        }
-        else{
-            
-            r = [height rangeOfString:@"%-"];
-            
-            if(r.location != NSNotFound){
-                frame.size.height = [[height substringToIndex:r.location] floatValue] * size.height / 100.0 -[[height substringFromIndex:r.location + r.length] floatValue];
-            }
-            else{
-                frame.size.height = [height floatValue];
-            }
-        }
-    }
+    frame.size.width = [self floatValueForKey:@"width" of:size.width defaultValue:0];
+    frame.size.height = [self floatValueForKey:@"height" of:size.height defaultValue:0];
     
     [self setFrame:frame];
     
@@ -251,25 +193,25 @@
         
         if(frame.size.width == MAXFLOAT){
             frame.size.width = contentSize.width;
-            NSString * max = [self stringValueForKey:@"max-width"];
-            NSString * min = [self stringValueForKey:@"min-width"];
-            if(max && frame.size.width > [max floatValue]){
-                frame.size.width = [max floatValue];
+            float v = [self floatValueForKey:@"max-width" of:size.width defaultValue:frame.size.width];
+            if(frame.size.width > v){
+                frame.size.width = v;
             }
-            if(min && frame.size.width < [min floatValue]){
-                frame.size.width = [min floatValue];
+            v = [self floatValueForKey:@"min-width" of:size.width defaultValue:frame.size.width];
+            if(frame.size.width < v){
+                frame.size.width = v;
             }
         }
         
         if(frame.size.height == MAXFLOAT){
             frame.size.height = contentSize.height;
-            NSString * max = [self stringValueForKey:@"max-height"];
-            NSString * min = [self stringValueForKey:@"min-height"];
-            if(max && frame.size.height > [max floatValue]){
-                frame.size.height = [max floatValue];
+            float v = [self floatValueForKey:@"max-height" of:size.height defaultValue:frame.size.height];
+            if(frame.size.height > v){
+                frame.size.height = v;
             }
-            if(min && frame.size.height < [min floatValue]){
-                frame.size.height = [min floatValue];
+            v = [self floatValueForKey:@"min-height" of:size.height defaultValue:frame.size.height];
+            if(frame.size.height < v){
+                frame.size.height = v;
             }
         }
         
@@ -286,5 +228,6 @@
 -(CGSize) layout{
     return [self layoutChildren:self.padding];
 }
+
 
 @end

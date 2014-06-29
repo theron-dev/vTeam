@@ -83,7 +83,7 @@
 -(void) dealloc{
     
     if([self isViewLoaded]){
-        [[self contentView] setDelegate:nil];
+        [self.contentView setDelegate:nil];
         [self.contentView removeObserver:self forKeyPath:@"contentOffset"];
     }
     
@@ -349,11 +349,16 @@
 -(void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     if(_statusElement){
         
-        if([self.delegate respondsToSelector:@selector(vtDOMElementDoAction:)]){
-            [self.delegate vtDOMElementDoAction:_statusElement];
-        }
+        VTDOMElement * element = [_statusElement retain];
         
         self.statusElement = nil;
+        
+        if([self.delegate respondsToSelector:@selector(vtDOMElementDoAction:)]){
+            [self.delegate vtDOMElementDoAction:element];
+        }
+        
+        [element release];
+        
     }
 }
 
@@ -361,11 +366,15 @@
     
     if(_statusElement){
         
-        if([self.delegate respondsToSelector:@selector(vtDOMElementDoAction:)]){
-            [self.delegate vtDOMElementDoAction:_statusElement];
-        }
+        VTDOMElement * element = [_statusElement retain];
         
         self.statusElement = nil;
+        
+        if([self.delegate respondsToSelector:@selector(vtDOMElementDoAction:)]){
+            [self.delegate vtDOMElementDoAction:element];
+        }
+        
+        [element release];
     }
     
 }
