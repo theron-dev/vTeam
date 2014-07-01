@@ -17,6 +17,7 @@
 -(BOOL) parseXML:(NSString *) xmlContent url:(NSURL *) url toElement:(VTElement *) element atIndex:(NSUInteger) index{
     
     
+    NSXMLParser
     xmlDocPtr doc;
     
     doc = xmlReadDoc((const xmlChar *)[xmlContent UTF8String], [[url absoluteString] UTF8String]
