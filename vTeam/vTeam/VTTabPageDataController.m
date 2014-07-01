@@ -49,7 +49,8 @@
     CGRect rr = [tabButton frame];
     r.origin.x = rr.origin.x + (rr.size.width - r.size.width) / 2.0;
     [_tabBackgroundView setFrame:r];
-    [self scrollToTabBackgroundVisable:YES];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    [self performSelector:@selector(scrollToTabBackgroundVisable:) withObject:@true afterDelay:0.0];
 }
 
 -(void) setSelectedIndex:(NSUInteger)selectedIndex animated:(BOOL) animated withoutOffset:(BOOL)withoutOffset{
