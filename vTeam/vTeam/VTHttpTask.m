@@ -236,7 +236,8 @@
         self.responseUUID = [_responseBody vtMD5String];
         
         NSString * s = nil;
-        if([[self.contentType lowercaseString] rangeOfString:@"charset=gbk"].location != NSNotFound || _responseEncoding == VTHttpTaskResponseEncodingGBK){
+        if([[self.contentType lowercaseString] rangeOfString:@"charset=gbk"].location != NSNotFound
+           || _responseEncoding == VTHttpTaskResponseEncodingGBK){
             s = [[[NSString alloc] initWithData:_responseBody encoding:CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000)] autorelease];
         }
         else{
