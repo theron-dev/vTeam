@@ -15,7 +15,7 @@
 #define ANIMATION_ALPHA 0.9
 #define ANIMATION_SCALE 0.9
 
-typedef enum {
+typedef enum _VTHeapViewControllerPanDirection{
     VTHeapViewControllerPanDirectionNone,VTHeapViewControllerPanDirectionLeft,VTHeapViewControllerPanDirectionRight
 }VTHeapViewControllerPanDirection;
 

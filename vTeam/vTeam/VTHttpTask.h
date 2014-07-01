@@ -8,11 +8,11 @@
 
 #import <vTeam/VTTask.h>
 
-typedef enum {
+typedef enum _VTHttpTaskResponseType{
     VTHttpTaskResponseTypeNone,VTHttpTaskResponseTypeString,VTHttpTaskResponseTypeJSON,VTHttpTaskResponseTypeResource
 } VTHttpTaskResponseType;
 
-typedef enum {
+typedef enum _VTHttpTaskResponseEncoding{
     VTHttpTaskResponseEncodingNone,VTHttpTaskResponseEncodingGBK
 } VTHttpTaskResponseEncoding;
 

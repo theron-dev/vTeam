@@ -1,0 +1,4 @@
+Documentation set was installed to Xcode!
+
+Path: /Users/hailongz/Library/Developer/Shared/Documentation/DocSets/org.hailong.vTeam.docset
+Time: 2014-07-01 03:54:02 +0000

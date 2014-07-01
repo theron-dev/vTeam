@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef enum {
+typedef enum _VTDragLoadingViewDirect{
     VTDragLoadingViewDirectDown,VTDragLoadingViewDirectUp,VTDragLoadingViewDirectLeft,VTDragLoadingViewDirectRight
 } VTDragLoadingViewDirect;
 

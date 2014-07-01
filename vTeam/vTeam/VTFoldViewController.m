@@ -17,7 +17,7 @@
 #define ANIMATION_SCALE     1.0
 #define ANIMATION_ALPHA     0.8
 
-typedef enum{
+typedef enum _VTFoldViewDirection{
     VTFoldViewDirectionNone,VTFoldViewDirectionLeft,VTFoldViewDirectionRight
 }VTFoldViewDirection;
 

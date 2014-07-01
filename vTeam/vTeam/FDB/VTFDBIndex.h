@@ -14,11 +14,11 @@
 struct _FDBIndex;
 struct _FDBIndexDB;
 
-typedef enum {
+typedef enum _VTFDBIndexQueryMode {
     VTFDBIndexQueryModeAsc = -1,VTFDBIndexQueryModeDesc = 1
 } VTFDBIndexQueryMode;
 
-typedef enum {
+typedef enum _VTFDBIndexQueryStringMatch {
     VTFDBIndexQueryStringMatchEqual,VTFDBIndexQueryStringMatchPrefix
 } VTFDBIndexQueryStringMatch;
 

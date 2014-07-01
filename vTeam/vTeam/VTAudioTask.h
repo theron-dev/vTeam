@@ -8,7 +8,7 @@
 
 #import <vTeam/VTTask.h>
 
-typedef enum {
+typedef enum _VTAudioTaskStatus{
     VTAudioTaskStatusNone,VTAudioTaskStatusLoaded,VTAudioTaskStatusLoading,VTAudioTaskStatusPlaying
 } VTAudioTaskStatus;
 
