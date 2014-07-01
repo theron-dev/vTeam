@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>B0B052E3-9236-4584-BF0B-A4F602D00463</string>
+	<key>IDESourceControlProjectName</key>
+	<string>vElement</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>D8D73D6B-AAF2-4C14-B2B6-FCAF9E6C79ED</key>
+		<string>https://github.com/hailongz/vTeam.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>v2/vElement/vElement.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>D8D73D6B-AAF2-4C14-B2B6-FCAF9E6C79ED</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/hailongz/vTeam.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>D8D73D6B-AAF2-4C14-B2B6-FCAF9E6C79ED</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D8D73D6B-AAF2-4C14-B2B6-FCAF9E6C79ED</string>
+			<key>IDESourceControlWCCName</key>
+			<string>vTeam</string>
+		</dict>
+	</array>
+</dict>
+</plist>
