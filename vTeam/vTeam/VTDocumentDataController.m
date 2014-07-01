@@ -136,36 +136,6 @@
     return cell;
 }
 
-
--(void) downloadImagesForView:(UIView *) view{
-    NSArray * imageViews = [view searchViewForProtocol:@protocol(IVTImageTask)];
-    for(id imageView in imageViews){
-        if(![imageView isLoading] && ![imageView isLoaded]){
-            [imageView setSource:self];
-            [self.context handle:@protocol(IVTImageTask) task:imageView priority:0];
-        }
-    }
-}
-
--(void) loadImagesForView:(UIView *) view{
-    NSArray * imageViews = [view searchViewForProtocol:@protocol(IVTImageTask)];
-    for(id imageView in imageViews){
-        if([imageView isLoading]){
-            [self.context cancelHandle:@protocol(IVTImageTask) task:imageView];
-        }
-        [self.context handle:@protocol(IVTLocalImageTask) task:imageView priority:0];
-    }
-}
-
--(void) cancelDownloadImagesForView:(UIView *) view{
-    NSArray * imageViews = [view searchViewForProtocol:@protocol(IVTImageTask)];
-    for(id imageView in imageViews){
-        if([imageView isLoading]){
-            [self.context cancelHandle:@protocol(IVTImageTask) task:imageView];
-        }
-    }
-}
-
 -(void) loadImagesForElement:(VTDOMElement *) element{
     
     if([element isKindOfClass:[VTDOMImageElement class]]){
@@ -173,6 +143,9 @@
         VTDOMImageElement * imgElement = (VTDOMImageElement *) element;
         
         if(![imgElement isLoading] && ![imgElement isLoaded]){
+
+            [imgElement setLocalAsyncLoad:YES];
+            
             [self.context handle:@protocol(IVTLocalImageTask) task:imgElement priority:0.0];
         }
     }
@@ -190,6 +163,7 @@
         
         if(![imgElement isLoading] && ![imgElement isLoaded]){
             [imgElement setSource:self];
+            [imgElement setLocalAsyncLoad:YES];
             [self.context handle:@protocol(IVTImageTask) task:imgElement priority:0];
         }
         

@@ -17,6 +17,7 @@
 @property(nonatomic,retain) NSString * src;
 @property(nonatomic,assign,getter = isLoading) BOOL loading;
 @property(nonatomic,retain) NSString * reuseFileURI;
+@property(nonatomic,assign,getter = isLocalAsyncLoad) BOOL localAsyncLoad;
 
 -(void) setImage:(UIImage *) image;
 
@@ -27,6 +28,7 @@
 @end
 
 @protocol IVTLocalImageTask <IVTImageTask>
+
 
 
 @end

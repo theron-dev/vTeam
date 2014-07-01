@@ -64,6 +64,8 @@
     return src;
 }
 
+typedef void (^ VTImageServiceBlock)(UIImage * image);
+
 -(BOOL) handle:(Protocol *)taskType task:(id<IVTTask>)task priority:(NSInteger)priority{
     
     if([task conformsToProtocol:@protocol(IVTImageTask)]){
@@ -129,6 +131,88 @@
                     key = [VTImageService keySrc:[imageTask reuseFileURI]];
                 }
                 
+               
+                VTImageServiceBlock fn = ^(UIImage * image) {
+                    
+                    if(image){
+                        [imageTask setLoading:NO];
+                        [imageTask setImage:image isLocal:YES];
+                    }
+                    else if([src hasPrefix:@"http://"] || [src hasPrefix:@"https://"]){
+                        
+                        if(taskType != @protocol(IVTLocalImageTask)){
+                            
+                            NSMutableArray * imageTasks = [_imageTasks objectForKey:key];
+                            
+                            if(imageTasks){
+                                [imageTasks addObject:imageTask];
+                                [imageTask setLoading:YES];
+                            }
+                            else{
+                                
+                                VTHttpTask * httpTask = [[VTHttpTask alloc] init];
+                                
+                                NSURL * URL = [NSURL URLWithString:src];
+                                
+                                NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:URL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:[[self.config valueForKey:@"timeout"] doubleValue]];
+                                
+                                [request setValue:[NSString stringWithFormat:@"%@://%@%@",URL.scheme,URL.host,URL.path] forHTTPHeaderField:@"Referer"];
+                                
+                                [httpTask setRequest:request];
+                                
+                                [httpTask setResponseType:VTHttpTaskResponseTypeResource];
+                                [httpTask setAllowCheckContentLength:YES];
+                                [httpTask setSource:imageTask];
+                                [httpTask setDelegate:self];
+                                [httpTask setAllowWillRequest:YES];
+                                
+                                if([imageTask reuseFileURI]){
+                                    [httpTask setReuseFilePath:[self.context filePathWithFileURI:[imageTask reuseFileURI]]];
+                                }
+                                
+                                [httpTask setUserInfo:[NSDictionary dictionaryWithObject:key forKey:@"key"]];
+                                
+                                if(_imageTasks == nil){
+                                    _imageTasks = [[NSMutableDictionary alloc] init];
+                                }
+                                
+                                [_imageTasks setValue:[NSMutableArray arrayWithObject:imageTask] forKey:key];
+                                
+                                [imageTask setLoading:YES];
+                                
+                                if(_httpTasks == nil){
+                                    _httpTasks = [[NSMutableDictionary alloc] init];
+                                }
+                                
+                                [_httpTasks setObject:httpTask forKey:key];
+                                
+                                [self.context handle:@protocol(IVTHttpResourceTask) task:httpTask priority:0];
+                                
+                                [httpTask release];
+                            }
+                        }
+                        
+                    }
+                    else{
+                        
+                        image = [UIImage imageNamed:src];
+                        
+                        if(image){
+                            if(_imageCached == nil){
+                                _imageCached = [[NSMutableDictionary alloc] init];
+                            }
+                            [_imageCached setObject:image forKey:key];
+                            [imageTask setLoading:NO];
+                            [imageTask setImage:image isLocal:YES];
+                        }
+                        else{
+                            [imageTask setLoading:NO];
+                            [imageTask setImage:nil isLocal:YES];
+                        }
+                        
+                    }
+                };
+                
                 UIImage * image = [_imageCached objectForKey:key];
                 
                 if(image == nil){
@@ -142,94 +226,44 @@
                         localPath = [VTHttpTask localResourcePathForURL:[NSURL URLWithString:src]];
                     }
                     
-                    image = [UIImage imageWithContentsOfFile:localPath];
-                    
-                    if(image){
-                        if(_imageCached == nil){
-                            _imageCached = [[NSMutableDictionary alloc] init];
-                        }
+                    if([imageTask isLocalAsyncLoad]){
                         
-                        [_imageCached setObject:image forKey:key];
+                        dispatch_async(dispatch_get_current_queue(), ^{
+                           
+                            UIImage * image = [UIImage imageWithContentsOfFile:localPath];
+                            
+                            if(image){
+                                if(_imageCached == nil){
+                                    _imageCached = [[NSMutableDictionary alloc] init];
+                                }
+                                
+                                [_imageCached setObject:image forKey:key];
+                            }
+                            
+                            fn(image);
+                        });
+                        
                     }
+                    else {
+                        
+                        UIImage * image = [UIImage imageWithContentsOfFile:localPath];
+                        
+                        if(image){
+                            if(_imageCached == nil){
+                                _imageCached = [[NSMutableDictionary alloc] init];
+                            }
+                            
+                            [_imageCached setObject:image forKey:key];
+                        }
+
+                        fn(image);
+                    }
+                    
+                }
+                else {
+                    fn(image);
                 }
                 
-                if(image){
-                    [imageTask setLoading:NO];
-                    [imageTask setImage:image isLocal:YES];
-                }
-                else if([src hasPrefix:@"http://"] || [src hasPrefix:@"https://"]){
-                    
-                    if(taskType != @protocol(IVTLocalImageTask)){
-                        
-                        NSMutableArray * imageTasks = [_imageTasks objectForKey:key];
-                        
-                        if(imageTasks){
-                            [imageTasks addObject:imageTask];
-                            [imageTask setLoading:YES];
-                        }
-                        else{
-        
-                            VTHttpTask * httpTask = [[VTHttpTask alloc] init];
-                            
-                            NSURL * URL = [NSURL URLWithString:src];
-                            
-                            NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:URL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:[[self.config valueForKey:@"timeout"] doubleValue]];
-                            
-                            [request setValue:[NSString stringWithFormat:@"%@://%@%@",URL.scheme,URL.host,URL.path] forHTTPHeaderField:@"Referer"];
-                            
-                            [httpTask setRequest:request];
-                            
-                            [httpTask setResponseType:VTHttpTaskResponseTypeResource];
-                            [httpTask setAllowCheckContentLength:YES];
-                            [httpTask setSource:imageTask];
-                            [httpTask setDelegate:self];
-                            [httpTask setAllowWillRequest:YES];
-                            
-                            if([imageTask reuseFileURI]){
-                                [httpTask setReuseFilePath:[self.context filePathWithFileURI:[imageTask reuseFileURI]]];
-                            }
-                            
-                            [httpTask setUserInfo:[NSDictionary dictionaryWithObject:key forKey:@"key"]];
-                            
-                            if(_imageTasks == nil){
-                                _imageTasks = [[NSMutableDictionary alloc] init];
-                            }
-                            
-                            [_imageTasks setValue:[NSMutableArray arrayWithObject:imageTask] forKey:key];
-                            
-                            [imageTask setLoading:YES];
-                            
-                            if(_httpTasks == nil){
-                                _httpTasks = [[NSMutableDictionary alloc] init];
-                            }
-                            
-                            [_httpTasks setObject:httpTask forKey:key];
-                            
-                            [self.context handle:@protocol(IVTHttpResourceTask) task:httpTask priority:0];
-                            
-                            [httpTask release];
-                        }
-                    }
-  
-                }
-                else{
-                    
-                    image = [UIImage imageNamed:src];
-                    
-                    if(image){
-                        if(_imageCached == nil){
-                            _imageCached = [[NSMutableDictionary alloc] init];
-                        }
-                        [_imageCached setObject:image forKey:key];
-                        [imageTask setLoading:NO];
-                        [imageTask setImage:image isLocal:YES];
-                    }
-                    else{
-                        [imageTask setLoading:NO];
-                        [imageTask setImage:nil isLocal:YES];
-                    }
-                    
-                }
             }
         }
         else{

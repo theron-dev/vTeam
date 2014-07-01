@@ -100,6 +100,7 @@
     for(id imageView in imageViews){
         if(![imageView isLoading] && ![imageView isLoaded]){
             [imageView setSource:self];
+            [imageView setLocalAsyncLoad:YES];
             [self.context handle:@protocol(IVTImageTask) task:imageView priority:0];
         }
     }
@@ -112,6 +113,7 @@
             [self.context cancelHandle:@protocol(IVTImageTask) task:imageView];
         }
         if(![imageView isLoaded]){
+            [imageView setLocalAsyncLoad:YES];
             [self.context handle:@protocol(IVTLocalImageTask) task:imageView priority:0];
         }
     }

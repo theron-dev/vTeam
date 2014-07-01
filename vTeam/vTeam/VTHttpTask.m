@@ -245,9 +245,9 @@
 
         self.responseBody = s ? [VTJSON decodeText:s] : nil;
         
-        if(![_responseBody isKindOfClass:[NSDictionary class]]){
+        //if(![_responseBody isKindOfClass:[NSDictionary class]]){
             NSLog(@"%@",s);
-        }
+        //}
     }
     else if(_responseType == VTHttpTaskResponseTypeResource){
         

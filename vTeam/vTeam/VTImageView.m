@@ -23,6 +23,7 @@
 @synthesize loaded = _loaded;
 @synthesize defaultSrc = _defaultSrc;
 @synthesize reuseFileURI = _reuseFileURI;
+@synthesize localAsyncLoad = _localAsyncLoad;
 
 -(void) dealloc{
     [_src release];

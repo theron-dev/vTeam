@@ -37,13 +37,6 @@
 -(void) layoutDocumentByIndexPath:(NSIndexPath *) indexPath;
 
 
--(void) downloadImagesForView:(UIView *) view;
-
--(void) loadImagesForView:(UIView *) view;
-
--(void) cancelDownloadImagesForView:(UIView *) view;
-
-
 @end
 
 @protocol VTDocumentDataControllerDelegate <VTTableDataControllerDelegate>

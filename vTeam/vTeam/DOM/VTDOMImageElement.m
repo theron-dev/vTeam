@@ -28,6 +28,7 @@
 @synthesize loading = _loading;
 @synthesize defaultImage = _defaultImage;
 @synthesize loaded = _loaded;
+@synthesize localAsyncLoad = _localAsyncLoad;
 
 -(void) dealloc{
     [_defaultImage release];
