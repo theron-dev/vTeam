@@ -13,7 +13,19 @@
 
 @interface VTDocumentView : UIView<IVTViewEntity>
 
+@property(nonatomic,weak) id delegate;
 @property(nonatomic,retain) VTElement * element;
 @property(nonatomic,assign,getter = isAllowAutoLayout) BOOL allowAutoLayout;
 
 @end
+
+@protocol VTDocumentViewDelegate <NSObject>
+
+@optional
+
+-(void) documentView:(VTDocumentView *) documentView onActionViewEntity:(id<IVTViewEntity>) viewEntity element:(VTElement *) element;
+
+-(void) documentView:(VTDocumentView *) documentView onVisableViewEntity:(id<IVTViewEntity>) viewEntity element:(VTElement *) element;
+
+@end
+

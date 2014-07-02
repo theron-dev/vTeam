@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1178637F1963BF5D00959677 /* VTBRElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 1178637D1963BF5D00959677 /* VTBRElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		117863801963BF5D00959677 /* VTBRElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1178637E1963BF5D00959677 /* VTBRElement.m */; };
+		117863831963C18B00959677 /* VTCanvasElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 117863811963C18B00959677 /* VTCanvasElement.h */; };
+		117863841963C18B00959677 /* VTCanvasElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 117863821963C18B00959677 /* VTCanvasElement.m */; };
 		11A2F48B1962B12800FE7892 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 11A2F4891962B12800FE7892 /* InfoPlist.strings */; };
 		11A2F5F01962B49A00FE7892 /* vDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = 11A2F5EE1962B49A00FE7892 /* vDocument.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11A2F5F11962B49A00FE7892 /* vDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A2F5EF1962B49A00FE7892 /* vDocument.m */; };
@@ -19,9 +23,21 @@
 		11A2F6051962C61A00FE7892 /* IVTViewEntity.h in Headers */ = {isa = PBXBuildFile; fileRef = 11A2F6041962C61A00FE7892 /* IVTViewEntity.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11A2F6081962C94600FE7892 /* VTDocumentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 11A2F6061962C94600FE7892 /* VTDocumentView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11A2F6091962C94600FE7892 /* VTDocumentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A2F6071962C94600FE7892 /* VTDocumentView.m */; };
+		11A2F60B1963A5DD00FE7892 /* IVTLayoutElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 11A2F60A1963A4E000FE7892 /* IVTLayoutElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11A2F60E1963A75000FE7892 /* VTElement+Value.h in Headers */ = {isa = PBXBuildFile; fileRef = 11A2F60C1963A75000FE7892 /* VTElement+Value.h */; };
+		11A2F60F1963A75000FE7892 /* VTElement+Value.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A2F60D1963A75000FE7892 /* VTElement+Value.m */; };
+		11A2F6121963A80800FE7892 /* VTElementStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 11A2F6101963A80800FE7892 /* VTElementStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11A2F6131963A80800FE7892 /* VTElementStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A2F6111963A80800FE7892 /* VTElementStyle.m */; };
+		11A2F6151963AA1900FE7892 /* IVTCanvasElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 11A2F6141963AA1900FE7892 /* IVTCanvasElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11A2F6181963ABB700FE7892 /* VTLayoutElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 11A2F6161963ABB700FE7892 /* VTLayoutElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11A2F6191963ABB700FE7892 /* VTLayoutElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A2F6171963ABB700FE7892 /* VTLayoutElement.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1178637D1963BF5D00959677 /* VTBRElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTBRElement.h; sourceTree = "<group>"; };
+		1178637E1963BF5D00959677 /* VTBRElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTBRElement.m; sourceTree = "<group>"; };
+		117863811963C18B00959677 /* VTCanvasElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTCanvasElement.h; sourceTree = "<group>"; };
+		117863821963C18B00959677 /* VTCanvasElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTCanvasElement.m; sourceTree = "<group>"; };
 		11A2F4591962B10C00FE7892 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		11A2F4671962B10C00FE7892 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		11A2F46A1962B10C00FE7892 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -41,6 +57,14 @@
 		11A2F6041962C61A00FE7892 /* IVTViewEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVTViewEntity.h; sourceTree = "<group>"; };
 		11A2F6061962C94600FE7892 /* VTDocumentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDocumentView.h; sourceTree = "<group>"; };
 		11A2F6071962C94600FE7892 /* VTDocumentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDocumentView.m; sourceTree = "<group>"; };
+		11A2F60A1963A4E000FE7892 /* IVTLayoutElement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVTLayoutElement.h; sourceTree = "<group>"; };
+		11A2F60C1963A75000FE7892 /* VTElement+Value.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "VTElement+Value.h"; sourceTree = "<group>"; };
+		11A2F60D1963A75000FE7892 /* VTElement+Value.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "VTElement+Value.m"; sourceTree = "<group>"; };
+		11A2F6101963A80800FE7892 /* VTElementStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTElementStyle.h; sourceTree = "<group>"; };
+		11A2F6111963A80800FE7892 /* VTElementStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTElementStyle.m; sourceTree = "<group>"; };
+		11A2F6141963AA1900FE7892 /* IVTCanvasElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVTCanvasElement.h; sourceTree = "<group>"; };
+		11A2F6161963ABB700FE7892 /* VTLayoutElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTLayoutElement.h; sourceTree = "<group>"; };
+		11A2F6171963ABB700FE7892 /* VTLayoutElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTLayoutElement.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +121,18 @@
 				11A2F6041962C61A00FE7892 /* IVTViewEntity.h */,
 				11A2F6061962C94600FE7892 /* VTDocumentView.h */,
 				11A2F6071962C94600FE7892 /* VTDocumentView.m */,
+				11A2F60C1963A75000FE7892 /* VTElement+Value.h */,
+				11A2F60D1963A75000FE7892 /* VTElement+Value.m */,
+				11A2F6101963A80800FE7892 /* VTElementStyle.h */,
+				11A2F6111963A80800FE7892 /* VTElementStyle.m */,
+				11A2F60A1963A4E000FE7892 /* IVTLayoutElement.h */,
+				11A2F6141963AA1900FE7892 /* IVTCanvasElement.h */,
+				11A2F6161963ABB700FE7892 /* VTLayoutElement.h */,
+				11A2F6171963ABB700FE7892 /* VTLayoutElement.m */,
+				1178637D1963BF5D00959677 /* VTBRElement.h */,
+				1178637E1963BF5D00959677 /* VTBRElement.m */,
+				117863811963C18B00959677 /* VTCanvasElement.h */,
+				117863821963C18B00959677 /* VTCanvasElement.m */,
 			);
 			path = vDocument;
 			sourceTree = "<group>";
@@ -121,9 +157,16 @@
 				11A2F6081962C94600FE7892 /* VTDocumentView.h in Headers */,
 				11A2F6021962C10900FE7892 /* VTElementXMLParser.h in Headers */,
 				11A2F5F01962B49A00FE7892 /* vDocument.h in Headers */,
+				11A2F6151963AA1900FE7892 /* IVTCanvasElement.h in Headers */,
+				11A2F60E1963A75000FE7892 /* VTElement+Value.h in Headers */,
+				11A2F60B1963A5DD00FE7892 /* IVTLayoutElement.h in Headers */,
+				11A2F6121963A80800FE7892 /* VTElementStyle.h in Headers */,
+				11A2F6181963ABB700FE7892 /* VTLayoutElement.h in Headers */,
 				11A2F6051962C61A00FE7892 /* IVTViewEntity.h in Headers */,
 				11A2F5F41962B4B100FE7892 /* VTElement.h in Headers */,
 				11A2F5FA1962B80900FE7892 /* VTDocument.h in Headers */,
+				117863831963C18B00959677 /* VTCanvasElement.h in Headers */,
+				1178637F1963BF5D00959677 /* VTBRElement.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,7 +238,12 @@
 				11A2F6091962C94600FE7892 /* VTDocumentView.m in Sources */,
 				11A2F6031962C10900FE7892 /* VTElementXMLParser.m in Sources */,
 				11A2F5FB1962B80900FE7892 /* VTDocument.m in Sources */,
+				11A2F6131963A80800FE7892 /* VTElementStyle.m in Sources */,
+				11A2F60F1963A75000FE7892 /* VTElement+Value.m in Sources */,
+				11A2F6191963ABB700FE7892 /* VTLayoutElement.m in Sources */,
 				11A2F5F11962B49A00FE7892 /* vDocument.m in Sources */,
+				117863841963C18B00959677 /* VTCanvasElement.m in Sources */,
+				117863801963BF5D00959677 /* VTBRElement.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
