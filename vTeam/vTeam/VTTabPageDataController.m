@@ -155,7 +155,7 @@
 
 -(void) scrollView:(UIScrollView *) scrollView didContentOffsetChanged:(CGPoint) contentOffset{
     
-    if(scrollView == _pageContentView){
+    if(scrollView == _pageContentView && scrollView.window){
         CGFloat index = contentOffset.x / scrollView.bounds.size.width;
         NSInteger count = scrollView.contentSize.width / scrollView.bounds.size.width;
         
