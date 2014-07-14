@@ -56,7 +56,7 @@ SCNetworkReachabilityRef VTReachability = nil;
             data = nil;
         }
         
-        if(data){
+        if([data length] == 32){
             uniqueIdentifier = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         }
         else{
