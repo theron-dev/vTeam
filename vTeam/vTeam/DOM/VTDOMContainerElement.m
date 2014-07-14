@@ -134,6 +134,7 @@
     [self.contentView setContentSize:self.contentSize];
     [self.contentView setShowsHorizontalScrollIndicator:NO];
     [self.contentView setDelegate:self];
+    [self.contentView setScrollsToTop:[self booleanValueForKey:@"scrollsToTop"]];
     [self.contentView addObserver:self forKeyPath:@"contentOffset"
                           options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
     
