@@ -224,15 +224,15 @@
     
     [_document setStyleSheet:[self.context domStyleSheet]];
     
+    [self documentDidLoad];
+    
     [_documentView setAllowAutoLayout:YES];
     [_documentView setElement:_document.rootElement];
     
     [self downloadImagesForElement:_document.rootElement];
     [self downloadImagesForView:_documentView];
     
-    
-    [self documentDidLoad];
-    
+    [self documentDidVisable];
 }
 
 -(void) delayDidLoadedHTMLContent:(NSString *) htmlContent {
@@ -457,6 +457,14 @@
     }
 }
 
+
+-(UIView *) vtDOMView:(VTDOMView *)view elementView:(VTDOMElement *)element viewClass:(Class) viewClass{
+    if([self.delegate respondsToSelector:@selector(vtURLDocumentController:elementView:viewClass:)]){
+        return [self.delegate vtURLDocumentController:self elementView:element viewClass:viewClass];
+    }
+    return nil;
+}
+
 -(void) vtDOMView:(VTDOMView *)view downloadImagesForElement:(VTDOMElement *)element{
     [self downloadImagesForElement:element];
 }
@@ -624,6 +632,13 @@
 }
 
 -(void) documentDidLoad{
+    
+    if([self.delegate respondsToSelector:@selector(vtURLDocumentControllerDidDocumentLoaded:)]){
+        [self.delegate vtURLDocumentControllerDidDocumentLoaded:self];
+    }
+}
+
+-(void) documentDidVisable{
     
 }
 

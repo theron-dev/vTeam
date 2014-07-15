@@ -245,7 +245,8 @@
                 if(itemView == nil){
                     
                     for(itemView in dequeueItemViews){
-                        if(reuseIdentifier == nil || [reuseIdentifier isEqualToString:itemView.reuseIdentifier]){
+                        if(reuseIdentifier == itemView.reuseIdentifier
+                           || [reuseIdentifier isEqualToString:itemView.reuseIdentifier]){
                             break;
                         }
                     }
@@ -300,7 +301,6 @@
                 
                 if(itemView){
                     [itemView setIndex:NSNotFound];
-                    [itemView setElement:nil];
                     [dequeueItemViews addObject:itemView];
                     [itemViews removeObjectForKey:key];
                     [itemView removeFromSuperview];

@@ -28,4 +28,6 @@
 
 -(void) vtDOMView:(VTDOMView *)view downloadImagesForView:(UIView *) forView;
 
+-(UIView *) vtDOMView:(VTDOMView *)view elementView:(VTDOMElement *)element viewClass:(Class) viewClass;
+
 @end

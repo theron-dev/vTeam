@@ -53,6 +53,8 @@
 
 -(void) documentDidLayout;
 
+-(void) documentDidVisable;
+
 @end
 
 @protocol VTURLDocumentControllerDelegate
@@ -68,5 +70,9 @@
 -(void) vtURLDocumentController:(VTURLDocumentController *) controller didFailWithError:(NSError *) error;
 
 -(void) vtURLDocumentController:(VTURLDocumentController *) controller willReloadElement:(VTDOMElement *)element queryValues:(NSMutableDictionary *) queryValues;
+
+-(void) vtURLDocumentControllerDidDocumentLoaded:(VTURLDocumentController *) controller;
+
+-(UIView *) vtURLDocumentController:(VTURLDocumentController *) controller elementView:(VTDOMElement *)element viewClass:(Class) viewClass;
 
 @end

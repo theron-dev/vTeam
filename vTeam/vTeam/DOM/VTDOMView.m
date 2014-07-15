@@ -253,6 +253,15 @@
 }
 
 -(UIView *) vtDOMElementView:(VTDOMElement *) element viewClass:(Class)viewClass{
+    
+    UIView * v = nil;
+    
+    if([self.delegate respondsToSelector:@selector(vtDOMView:elementView:viewClass:)]){
+        if((v = [self.delegate vtDOMView:self elementView:element viewClass:viewClass])){
+            return v;
+        }
+    }
+    
     NSString * eid = [element attributeValueForKey:@"id"];
     
     if(eid == nil){
@@ -269,7 +278,7 @@
     }
     
     if(eid){
-        UIView * v = [_elementViews objectForKey:eid];
+        v = [_elementViews objectForKey:eid];
         if(v == nil){
             v = [[[viewClass alloc] initWithFrame:element.frame] autorelease];
             if(_elementViews == nil){
