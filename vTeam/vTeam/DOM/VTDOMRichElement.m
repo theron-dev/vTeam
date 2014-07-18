@@ -269,15 +269,38 @@
 }
 
 -(UIFont *) font{
+   
     UIFont * font = [self fontValueForKey:@"font"];
     
     if(font == nil){
+        
         CGFloat fontSize = [self floatValueForKey:@"font-size"];
+        
         if(fontSize == 0){
             fontSize = 14;
         }
-        font = [UIFont systemFontOfSize:14];
+
+        
+        
+        NSString * v = [self stringValueForKey:@"font-weight"];
+        
+        if([v isEqualToString:@"bold"]){
+            font = [UIFont boldSystemFontOfSize:fontSize];
+        }
+        else{
+            
+            v = [self stringValueForKey:@"font-style"];
+            
+            if([v isEqualToString:@"italic"]){
+                font = [UIFont italicSystemFontOfSize:fontSize];
+            }
+            else {
+                font = [UIFont systemFontOfSize:fontSize];
+            }
+        }
     }
+    
+ 
     
     return font;
 }
