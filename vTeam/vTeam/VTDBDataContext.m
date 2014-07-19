@@ -323,11 +323,16 @@ NSString * VTDBDataObjectSetKey = @"dataObjects";
         
         if([dbObject isKindOfClass:[VTDBDataObject class]]){
             
+            [self removeDataObject:(VTDBDataObject *) dbObject];
+            
+            
             @synchronized(self) {
+                
+                dbObject.rowid = 0;
+                
                 [[_updates lastObject] addObject:dbObject];
             }
-            
-            [self removeDataObject:(VTDBDataObject *) dbObject];
+
         }
         
     }

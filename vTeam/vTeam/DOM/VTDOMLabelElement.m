@@ -21,18 +21,8 @@
 
 @implementation VTDOMLabelElement
 
--(UIFont *) font{
-    UIFont * font = [self fontValueForKey:@"font"];
-    
-    if(font == nil){
-        CGFloat fontSize = [self floatValueForKey:@"font-size"];
-        if(fontSize == 0){
-            fontSize = 14;
-        }
-        font = [UIFont systemFontOfSize:14];
-    }
-    
-    return font;
+-(UIFont *) font{    
+    return [self elementFont:[UIFont systemFontOfSize:14]];
 }
 
 -(CGFloat) minFontSize{

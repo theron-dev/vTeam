@@ -76,4 +76,23 @@
     self.layer.borderColor = [borderColor CGColor];
 }
 
+-(NSString *) fontName{
+    if([self respondsToSelector:@selector(font)]){
+        return [[(UILabel *)self font] fontName];
+    }
+    return nil;
+}
+
+-(void) setFontName:(NSString *)fontName{
+    if([self respondsToSelector:@selector(font)]){
+        UIFont * f = [(UILabel *)self font];
+        if(f && fontName){
+            f = [UIFont fontWithName:fontName size:f.pointSize];
+        }
+        if([self respondsToSelector:@selector(setFont:)]){
+            [(UILabel *)self setFont:f];
+        }
+    }
+}
+
 @end

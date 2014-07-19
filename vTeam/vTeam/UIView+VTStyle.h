@@ -18,5 +18,6 @@
 @property(nonatomic,retain) UIImage * backgroundImage;
 @property(nonatomic,retain) UIColor * borderColor;
 @property(nonatomic,assign) float borderWidth;
+@property(nonatomic,retain) NSString * fontName;
 
 @end

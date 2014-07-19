@@ -26,4 +26,6 @@
 
 -(float) floatValueForKey:(NSString *) key of:(CGFloat) baseValue defaultValue:(CGFloat) defaultValue;
 
+-(UIFont *) elementFont:(UIFont *) defaultFont;
+
 @end

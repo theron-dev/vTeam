@@ -118,6 +118,9 @@
         else if([key isEqualToString:@"@last"]){
             return [(NSArray *) self lastObject];
         }
+        else if([key isEqualToString:@"@joinString"]){
+            return [(NSArray *) self componentsJoinedByString:@","];
+        }
         else {
             return [self objectValueAtIndex:[[key substringFromIndex:1] intValue]];
         }

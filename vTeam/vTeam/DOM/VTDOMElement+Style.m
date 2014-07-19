@@ -125,4 +125,43 @@
 
 }
 
+-(UIFont *) elementFont:(UIFont *) defaultFont{
+    
+    UIFont * font = [self fontValueForKey:@"font"];
+    
+    if(font == nil){
+        
+        NSString * v = [self stringValueForKey:@"font-size"];
+        
+        if(v == nil){
+            return defaultFont;
+        }
+        
+        CGFloat fontSize = [v floatValue];
+        
+        if(fontSize == 0){
+            fontSize = 14;
+        }
+        
+        NSString * fontName = [self stringValueForKey:@"font-name"];
+        NSString * weight = [self stringValueForKey:@"font-weight"];
+        NSString * style = [self stringValueForKey:@"font-style"];
+        
+        if([fontName length]){
+            font = [UIFont fontWithName:fontName size:fontSize];
+        }
+        else if([weight isEqualToString:@"bold"]){
+            font = [UIFont boldSystemFontOfSize:fontSize];
+        }
+        else if([style isEqualToString:@"italic"]){
+            font = [UIFont italicSystemFontOfSize:fontSize];
+        }
+        else {
+            font = [UIFont systemFontOfSize:fontSize];
+        }
+    }
+    
+    return font;
+}
+
 @end
