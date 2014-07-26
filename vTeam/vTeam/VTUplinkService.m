@@ -10,6 +10,9 @@
 
 #import <vTeam/VTAPITask.h>
 
+#import "VTAPIResponseTask.h"
+
+#import <objc/runtime.h>
 
 @implementation VTUplinkService
 
@@ -39,6 +42,42 @@
     [t release];
     
     return YES;
+}
+
+
+-(BOOL) handle:(Protocol *)taskType task:(id<IVTTask>)task priority:(NSInteger)priority{
+    
+    if(taskType == @protocol(IVTAPIResponseTask)){
+        
+        id<IVTAPIResponseTask> respTask = (id<IVTAPIResponseTask>) task;
+        
+        NSString * name = NSStringFromProtocol([respTask taskType]);
+        
+        SEL sel = NSSelectorFromString([NSString stringWithFormat:@"handle%@:task:response:",name]);
+        
+        IMP impl = class_getMethodImplementation([self class], sel);
+        
+        if(impl){
+            
+            return (* ((BOOL (*) (id sender,SEL name,Protocol * taskType,id task,id response)) impl) ) (self,sel,[respTask taskType],[respTask task],respTask);
+        }
+        
+    }
+    else {
+        
+        NSString * name = NSStringFromProtocol(taskType);
+        
+        SEL sel = NSSelectorFromString([NSString stringWithFormat:@"handle%@:task:priority:",name]);
+      
+        IMP impl = class_getMethodImplementation([self class], sel);
+        
+        if(impl){
+            return (* ((BOOL (*) (id sender,SEL name,Protocol * taskType,id task,NSInteger priority)) impl) ) (self,sel,taskType,task,priority);
+        }
+
+    }
+    
+    return NO;
 }
 
 
