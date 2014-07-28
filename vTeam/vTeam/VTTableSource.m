@@ -69,4 +69,23 @@
     
 }
 
+-(void) setSections:(NSArray *)sections{
+    
+    NSArray * c = [sections sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        NSInteger tag1 = [(VTTableSection *) obj1 tag];
+        NSInteger tag2 = [(VTTableSection *) obj2 tag];
+        NSInteger r = tag1 - tag2;
+        
+        if(r < 0){
+            return NSOrderedAscending;
+        }
+        if(r > 0){
+            return NSOrderedDescending;
+        }
+        return NSOrderedSame;
+    }];
+    [_sections release];
+    _sections = [c retain];
+}
+
 @end

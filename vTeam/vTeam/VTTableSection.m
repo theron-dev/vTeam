@@ -15,6 +15,7 @@
 @synthesize view = _view;
 @synthesize cells = _cells;
 @synthesize footerView = _footerView;
+@synthesize tag = _tag;
 
 -(void) dealloc{
     [_title release];

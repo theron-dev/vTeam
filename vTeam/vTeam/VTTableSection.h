@@ -15,5 +15,6 @@
 @property(nonatomic,retain) IBOutlet UIView * view;
 @property(nonatomic,retain) IBOutlet UIView * footerView;
 @property(nonatomic,retain) IBOutletCollection(UITableViewCell) NSArray * cells;
+@property(nonatomic,assign) NSInteger tag;
 
 @end
