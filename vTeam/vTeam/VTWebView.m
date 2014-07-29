@@ -20,7 +20,7 @@
         {
             if ([inScrollView isKindOfClass:[UIImageView class]])
             {
-                inScrollView.hidden = YES;
+                [inScrollView removeFromSuperview];
             }
         }
         
@@ -28,7 +28,7 @@
         {
             if ([inScrollView isKindOfClass:[UIImageView class]])
             {
-                inScrollView.hidden = YES;
+                [inScrollView removeFromSuperview];
             }
         }
 
@@ -50,7 +50,7 @@
         {
             if ([inScrollView isKindOfClass:[UIImageView class]])
             {
-                inScrollView.hidden = YES;
+                [inScrollView removeFromSuperview];
             }
         }
         
@@ -58,7 +58,7 @@
         {
             if ([inScrollView isKindOfClass:[UIImageView class]])
             {
-                inScrollView.hidden = YES;
+                [inScrollView removeFromSuperview];
             }
         }
         

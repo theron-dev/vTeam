@@ -56,22 +56,24 @@
 -(void) setAttributeValue:(NSString *)value forKey:(NSString *)key{
     [super setAttributeValue:value forKey:key];
     if([key isEqualToString:@"status"]){
+        [self setValue:nil forKey:@"statusSet"];
         [self refreshStatus];
     }
 }
 
--(void) refreshStatusForElement:(VTDOMElement *) element forStatus:(NSString *) status{
+-(void) refreshStatusForElement:(VTDOMElement *) element{
     
+    NSSet * status = [self statusSet];
     NSSet * s = [element statusSet];
 
-    if(status == nil || [s count] == 0 || [s containsObject:status]){
+    if([s count] == 0 || [s intersectsSet:status]){
         [element setAttributeValue:@"false" forKey:@"hidden"];
     }
     else {
         [element setAttributeValue:@"true" forKey:@"hidden"];
     }
 
-    [element setAttributeValue:status forKey:@"tostatus"];
+    [element setValue:status forKey:@"tostatus"];
     
     if([element isKindOfClass:[VTDOMViewElement class]] && [(VTDOMViewElement *)element isViewLoaded]){
         [[(VTDOMViewElement *)element view] setElement:element];
@@ -82,17 +84,16 @@
 
 -(void) refreshStatus{
     
-    NSString * status = [self attributeValueForKey:@"status"];
-    
+
     for(VTDOMElement * el in [self childs]){
-        [self refreshStatusForElement:el forStatus:status];
+        [self refreshStatusForElement:el];
     }
     
 }
 
 -(void) elementDidAppera:(VTDOMElement *)element{
     [super elementDidAppera:element];
-    [self refreshStatusForElement:element forStatus:[self attributeValueForKey:@"status"]];
+    [self refreshStatusForElement:element];
 }
 
 
@@ -118,6 +119,23 @@
     
     return [self colorValueForKey:@"background-color"];
    
+}
+
+-(void) setHighlighted:(BOOL)highlighted{
+    [super setHighlighted:highlighted];
+    
+    if(highlighted){
+        NSMutableSet * statusSet = [NSMutableSet setWithSet:[self statusSet]];
+        [statusSet addObject:@"highlighted"];
+        [self setValue:statusSet forKey:@"statusSet"];
+        [self refreshStatus];
+    }
+    else {
+        NSMutableSet * statusSet = [NSMutableSet setWithSet:[self statusSet]];
+        [statusSet removeObject:@"highlighted"];
+        [self setValue:statusSet forKey:@"statusSet"];
+        [self refreshStatus];
+    }
 }
 
 
