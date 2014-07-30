@@ -605,6 +605,11 @@
     
 }
 
+
+-(NSArray *) authKeys{
+    return [[self authValues] allKeys];
+}
+
 -(id) authValueForKey:(NSString *) key{
     return [[self authValues] valueForKey:key];
 }
