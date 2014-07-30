@@ -739,7 +739,7 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
 
     UIView * centerView = [[self centerViewController] view];
     
-    if(centerView){
+    if(centerView && self.view.window){
         
         if(centerView.superview == nil){
             [centerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
@@ -759,6 +759,22 @@ NSString * VTFoldViewControllerToCenterNotification = @"VTFoldViewControllerToCe
 
 
     _layoutSize = self.view.bounds.size;
+    
+    UIView * centerView = [[self centerViewController] view];
+    
+    if(centerView && self.view.window){
+        
+        if(centerView.superview == nil){
+            [centerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+            [self.view addSubview:centerView];
+            [self.view bringSubviewToFront:centerView];
+            
+            CGSize size = self.view.bounds.size;
+            
+            [centerView setFrame:CGRectMake(0, 0, size.width, size.height)];
+            [centerView setUserInteractionEnabled:YES];
+        }
+    }
     
 }
 
