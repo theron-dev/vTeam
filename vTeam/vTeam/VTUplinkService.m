@@ -55,9 +55,11 @@
         
         SEL sel = NSSelectorFromString([NSString stringWithFormat:@"handle%@:task:response:",name]);
         
-        IMP impl = class_getMethodImplementation([self class], sel);
+        Method method = class_getInstanceMethod([self class], sel);
         
-        if(impl){
+        if(method){
+            
+            IMP impl = method_getImplementation(method);
             
             return (* ((BOOL (*) (id sender,SEL name,Protocol * taskType,id task,id response)) impl) ) (self,sel,[respTask taskType],[respTask task],respTask);
         }
@@ -69,9 +71,12 @@
         
         SEL sel = NSSelectorFromString([NSString stringWithFormat:@"handle%@:task:priority:",name]);
       
-        IMP impl = class_getMethodImplementation([self class], sel);
+        Method method = class_getInstanceMethod([self class], sel);
         
-        if(impl){
+        if(method){
+            
+            IMP impl = method_getImplementation(method);
+            
             return (* ((BOOL (*) (id sender,SEL name,Protocol * taskType,id task,NSInteger priority)) impl) ) (self,sel,taskType,task,priority);
         }
 
