@@ -178,6 +178,7 @@
             bgLayer.contentsScale = [backgroundImage scale];
             bgLayer.contentsRect = CGRectMake(0, 0, 1.0, 1.0);
             bgLayer.contentsCenter  = CGRectMake(left, top, 1.0 / imageSize.width, 1.0 / imageSize.height);
+            bgLayer.contentsGravity = kCAGravityResize;
             
             [bgLayer renderInContext:context];
         }
