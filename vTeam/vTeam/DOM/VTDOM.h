@@ -32,6 +32,8 @@
 #import <vTeam/VTDOMBRElement.h>
 #import <vTeam/UILabel+VTDOMElement.h>
 #import <vTeam/UIControl+VTDOMElement.h>
+#import <vTeam/VTDOMWebViewElement.h>
+#import <vTeam/VTDOMWebContainerElement.h>
 
 @interface VTDOM : NSObject
 

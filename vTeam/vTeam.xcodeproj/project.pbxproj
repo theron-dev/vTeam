@@ -422,6 +422,10 @@
 		11BC146F1804F6C60065A9EE /* UIImage+GaussianBlur.m in Sources */ = {isa = PBXBuildFile; fileRef = 11BC146D1804F6C60065A9EE /* UIImage+GaussianBlur.m */; };
 		11BC147B1804FE770065A9EE /* VTController.h in Headers */ = {isa = PBXBuildFile; fileRef = 11BC14791804FE770065A9EE /* VTController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11BC147C1804FE770065A9EE /* VTController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11BC147A1804FE770065A9EE /* VTController.m */; };
+		11BC6F4A198B29E00026C81C /* VTDOMWebViewElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 11BC6F48198B29E00026C81C /* VTDOMWebViewElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11BC6F4B198B29E00026C81C /* VTDOMWebViewElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 11BC6F49198B29E00026C81C /* VTDOMWebViewElement.m */; };
+		11BC6F54198B39C40026C81C /* VTDOMWebContainerElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 11BC6F52198B39C40026C81C /* VTDOMWebContainerElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11BC6F55198B39C40026C81C /* VTDOMWebContainerElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 11BC6F53198B39C40026C81C /* VTDOMWebContainerElement.m */; };
 		11BE4F8618311E830013722E /* UIView+VTDOMElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 11BE4F8418311E830013722E /* UIView+VTDOMElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11BE4F8718311E830013722E /* UIView+VTDOMElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 11BE4F8518311E830013722E /* UIView+VTDOMElement.m */; };
 		11BE4FD518360C790013722E /* VTCrashTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 11BE4FD318360C790013722E /* VTCrashTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1020,6 +1024,10 @@
 		11BC146D1804F6C60065A9EE /* UIImage+GaussianBlur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GaussianBlur.m"; sourceTree = "<group>"; };
 		11BC14791804FE770065A9EE /* VTController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTController.h; sourceTree = "<group>"; };
 		11BC147A1804FE770065A9EE /* VTController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTController.m; sourceTree = "<group>"; };
+		11BC6F48198B29E00026C81C /* VTDOMWebViewElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDOMWebViewElement.h; sourceTree = "<group>"; };
+		11BC6F49198B29E00026C81C /* VTDOMWebViewElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDOMWebViewElement.m; sourceTree = "<group>"; };
+		11BC6F52198B39C40026C81C /* VTDOMWebContainerElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDOMWebContainerElement.h; sourceTree = "<group>"; };
+		11BC6F53198B39C40026C81C /* VTDOMWebContainerElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDOMWebContainerElement.m; sourceTree = "<group>"; };
 		11BE4F8418311E830013722E /* UIView+VTDOMElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+VTDOMElement.h"; sourceTree = "<group>"; };
 		11BE4F8518311E830013722E /* UIView+VTDOMElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+VTDOMElement.m"; sourceTree = "<group>"; };
 		11BE4FD318360C790013722E /* VTCrashTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTCrashTask.h; sourceTree = "<group>"; };
@@ -1904,6 +1912,10 @@
 				1150F8651848626700176DDD /* UIButton+VTDOMElement.m */,
 				1119900B18B645E400AB707F /* UIControl+VTDOMElement.h */,
 				1119900C18B645E400AB707F /* UIControl+VTDOMElement.m */,
+				11BC6F48198B29E00026C81C /* VTDOMWebViewElement.h */,
+				11BC6F49198B29E00026C81C /* VTDOMWebViewElement.m */,
+				11BC6F52198B39C40026C81C /* VTDOMWebContainerElement.h */,
+				11BC6F53198B39C40026C81C /* VTDOMWebContainerElement.m */,
 				11A0417117BB6032001992BE /* VTDOM.h */,
 				11A0417217BB6032001992BE /* VTDOM.m */,
 				117F811C18B472CE0015DCB1 /* UIActivityIndicatorView+VTDOMElement.h */,
@@ -2210,6 +2222,7 @@
 				ACDE3A7E1735087D0046ED56 /* VTTableSection.h in Headers */,
 				ACDE3A82173508FC0046ED56 /* VTTableSource.h in Headers */,
 				ACDE3A8617350AE50046ED56 /* VTButton.h in Headers */,
+				11BC6F4A198B29E00026C81C /* VTDOMWebViewElement.h in Headers */,
 				ACDE3AB1173647950046ED56 /* VTAppStatusView.h in Headers */,
 				AC324F6C173DD8FA0094A7A6 /* UIView+VTStyle.h in Headers */,
 				AC324F87173DE23B0094A7A6 /* UIButton+VTStyle.h in Headers */,
@@ -2411,6 +2424,7 @@
 				1107F595187D44F60093AE80 /* VTChart.h in Headers */,
 				1107F597187D44FC0093AE80 /* IVTChartView.h in Headers */,
 				1107F599187D45E70093AE80 /* IVTChartAnimation.h in Headers */,
+				11BC6F54198B39C40026C81C /* VTDOMWebContainerElement.h in Headers */,
 				1107F59C187D464B0093AE80 /* VTChartComponent.h in Headers */,
 				1107F5A2187D4AAA0093AE80 /* VTChartDataReader.h in Headers */,
 				1107F5A7187D51400093AE80 /* VTPieChart.h in Headers */,
@@ -2579,6 +2593,7 @@
 				114D642C17E1BBC20021CB8A /* VTMontageScenes.m in Sources */,
 				ACDE3AB2173647950046ED56 /* VTAppStatusView.m in Sources */,
 				113F9E5918746D6B00E6948C /* VTDOMVScrollElement.m in Sources */,
+				11BC6F55198B39C40026C81C /* VTDOMWebContainerElement.m in Sources */,
 				AC324F6D173DD8FA0094A7A6 /* UIView+VTStyle.m in Sources */,
 				AC324F88173DE23B0094A7A6 /* UIButton+VTStyle.m in Sources */,
 				AC325011173E1AE30094A7A6 /* VTHeapViewController.m in Sources */,
@@ -2689,6 +2704,7 @@
 				AC875C50177568F4009999A2 /* VTTableViewCell.m in Sources */,
 				AC875C60177589FF009999A2 /* VTURLDataSource.m in Sources */,
 				11BC146F1804F6C60065A9EE /* UIImage+GaussianBlur.m in Sources */,
+				11BC6F4B198B29E00026C81C /* VTDOMWebViewElement.m in Sources */,
 				AC875C6517758AB9009999A2 /* VTURLService.m in Sources */,
 				117F811B18B462DB0015DCB1 /* VTDOMStatusElement.m in Sources */,
 				114D643D17E1D0AB0021CB8A /* VTMontageViewElement.m in Sources */,
