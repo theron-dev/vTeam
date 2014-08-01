@@ -20,4 +20,6 @@
 
 -(id) authValueForKey:(NSString *) key;
 
+-(NSArray *) authKeys;
+
 @end
