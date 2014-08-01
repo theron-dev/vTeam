@@ -127,14 +127,19 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-    self.webViewLoaded = YES;
+    
     
     CGSize contentSize = [self contentSize];
     
     [self.contentView setContentInset:UIEdgeInsetsMake(0, 0, contentSize.height, 0)];
-    [self.contentView setContentOffset:CGPointZero];
+    
+    if(! self.webViewLoaded){
+        [self.contentView setContentOffset:CGPointZero];
+    }
     
     [self reloadData];
+    
+    self.webViewLoaded = YES;
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{

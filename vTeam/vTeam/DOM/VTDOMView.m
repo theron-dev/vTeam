@@ -11,10 +11,180 @@
 #import "VTDOMElement+Control.h"
 #import <QuartzCore/QuartzCore.h>
 
+@interface VTDOMViewContainer : NSObject{
+    NSMutableDictionary * _viewSetByReuse;
+    NSMutableSet * _viewSet;
+}
+
+-(UIView *) elementView:(VTDOMElement *) element forClass:(Class) viewClass;
+
+-(void) addElementView:(VTDOMElement *) element view:(UIView *) view;
+
+-(void) removeElementView:(UIView *) view;
+
+-(void) addContainer:(VTDOMViewContainer *) container;
+
+-(void) removeFromSuperView;
+
+-(void) removeAllElementViews;
+
+@end
+
+@implementation VTDOMViewContainer
+
+
+-(void) dealloc{
+    
+    for(UIView * v in [_viewSetByReuse allValues]){
+        if([v respondsToSelector:@selector(setElement:)]){
+            [v performSelector:@selector(setElement:) withObject:nil];
+        }
+    }
+    
+    for(UIView * v in _viewSet){
+        if([v respondsToSelector:@selector(setElement:)]){
+            [v performSelector:@selector(setElement:) withObject:nil];
+        }
+    }
+    
+    [_viewSetByReuse release];
+    [_viewSet release];
+    
+    [super dealloc];
+}
+
+-(UIView *) elementView:(VTDOMElement *) element forClass:(Class) viewClass{
+    
+    NSString * reuse = [element attributeValueForKey:@"reuse"];
+    
+    NSSet * viewSet = nil;
+    
+    if([reuse length]){
+        viewSet = [_viewSetByReuse valueForKey:reuse];
+    }
+    else {
+        viewSet = _viewSet;
+    }
+    
+    for (UIView * v in _viewSet) {
+        if([v class] == viewClass){
+            return v;
+        }
+    }
+
+    return nil;
+}
+
+-(void) addElementView:(VTDOMElement *) element view:(UIView *) view{
+    
+    NSString * reuse = [element attributeValueForKey:@"reuse"];
+    
+    if([reuse length]){
+        
+        if(_viewSetByReuse == nil){
+            _viewSetByReuse = [[NSMutableDictionary alloc] initWithCapacity:4];
+        }
+        
+        NSMutableSet * viewSet = [_viewSetByReuse valueForKey:reuse];
+        
+        if(viewSet == nil){
+            viewSet = [NSMutableSet setWithCapacity:4];
+            [_viewSetByReuse setValue:viewSet forKey:reuse];
+        }
+        
+        [viewSet addObject:view];
+        
+    }
+    else {
+        if(_viewSet == nil){
+            _viewSet = [[NSMutableSet alloc] initWithCapacity:4];
+        }
+        [_viewSet addObject:view];
+    }
+    
+}
+
+-(void) removeElementView:(UIView *) view{
+
+    for (NSString * key in [_viewSetByReuse allKeys]) {
+        
+        NSMutableSet * viewSet = [_viewSetByReuse valueForKey:key];
+        
+        [viewSet removeObject:view];
+        
+        if([viewSet count] == 0){
+            [_viewSetByReuse removeObjectForKey:key];
+        }
+        
+    }
+    
+    [_viewSet removeObject:view];
+    
+}
+
+-(void) addContainer:(VTDOMViewContainer *) container{
+    
+    for (NSString * key in container->_viewSetByReuse) {
+        
+        NSMutableSet * viewSet = [container->_viewSetByReuse valueForKey:key];
+        
+        NSMutableSet * tViewSet = [_viewSetByReuse valueForKey:key];
+        
+        if(tViewSet == nil){
+           
+            if(_viewSetByReuse == nil){
+                _viewSetByReuse = [[NSMutableDictionary alloc] initWithCapacity:4];
+            }
+            
+            [_viewSetByReuse setValue:[NSMutableSet setWithSet:viewSet] forKey:key];
+        }
+        else {
+            [tViewSet addObjectsFromArray:[viewSet allObjects]];
+        }
+        
+    }
+    
+    if(container->_viewSet){
+        
+        if(_viewSet == nil){
+            _viewSet = [[NSMutableSet alloc] initWithCapacity:4];
+        }
+        
+        [_viewSet addObjectsFromArray:[container->_viewSet allObjects]];
+        
+    }
+    
+}
+
+-(void) removeFromSuperView{
+    
+    for (NSString * key in [_viewSetByReuse allKeys]) {
+        
+        NSMutableSet * viewSet = [_viewSetByReuse valueForKey:key];
+        
+        for (UIView *v in viewSet) {
+            [v removeFromSuperview];
+        }
+
+    }
+    
+    for (UIView *v in _viewSet) {
+        [v removeFromSuperview];
+    }
+    
+}
+
+-(void) removeAllElementViews{
+    [_viewSetByReuse removeAllObjects];
+    [_viewSet removeAllObjects];
+}
+
+@end
+
 
 @interface VTDOMView(){
-    NSMutableDictionary * _elementViews;
-    NSMutableSet * _elementViewSet;
+    VTDOMViewContainer * _viewContainer;
+    VTDOMViewContainer * _visableViewContainer;
 }
 
 @end
@@ -26,15 +196,9 @@
 @synthesize delegate = _delegate;
 
 -(void) dealloc{
-    for(UIView * v in [NSArray arrayWithArray: [_elementViews allValues]]){
-        if([v respondsToSelector:@selector(setElement:)]){
-            [v performSelector:@selector(setElement:) withObject:nil];
-        }
-    }
+    [_viewContainer release];
     [_element unbindDelegate:self];
     [_element release];
-    [_elementViews release];
-    [_elementViewSet release];
     [super dealloc];
 }
 
@@ -66,8 +230,13 @@
 -(void) setElement:(VTDOMElement *)element{
     if(_element != element){
         
-        if(_elementViewSet == nil){
-            _elementViewSet = [[NSMutableSet alloc] initWithCapacity:4];
+        if(_viewContainer == nil){
+            _viewContainer = [[VTDOMViewContainer alloc] init];
+        }
+        
+        if(_visableViewContainer){
+            [_viewContainer addContainer:_visableViewContainer];
+            [_visableViewContainer removeAllElementViews];
         }
         
         [_element unbindDelegate:self];
@@ -81,14 +250,8 @@
         
         [_element bindDelegate:self];
         
-        for (id key in [_elementViews allKeys]) {
-            UIView * v = [_elementViews objectForKey:key];
-            if(![_elementViewSet containsObject:v]){
-                [v removeFromSuperview];
-                [_elementViews removeObjectForKey:key];
-            }
-        }
-        [_elementViewSet removeAllObjects];
+        [_viewContainer removeFromSuperView];
+
     }
     [self setNeedsDisplay];
 }
@@ -245,7 +408,12 @@
     
     [self addSubview:view];
     
-    [_elementViewSet addObject:view];
+    if(_visableViewContainer == nil){
+        _visableViewContainer = [[VTDOMViewContainer alloc] init];
+    }
+    
+    [_visableViewContainer addElementView:element view:view];
+
 }
 
 -(CGRect) vtDOMElement:(VTDOMElement *) element convertRect:(CGRect) frame{
@@ -262,36 +430,18 @@
         }
     }
     
-    NSString * eid = [element attributeValueForKey:@"id"];
+    v = [_viewContainer elementView:element forClass:viewClass];
     
-    if(eid == nil){
-        eid = [element attributeValueForKey:@"uuid"];
+    if(v == nil){
+        v = [[[viewClass alloc] initWithFrame:element.frame] autorelease];
     }
-    
-    if(eid == nil){
-        uuid_t uuid;
-        uuid_generate_random(uuid);
-        eid = [NSString stringWithFormat:@"%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x"
-               ,uuid[0],uuid[1],uuid[2],uuid[3],uuid[4],uuid[5],uuid[6],uuid[7]
-               ,uuid[8],uuid[9],uuid[10],uuid[11],uuid[12],uuid[13],uuid[14],uuid[15]];
-        [element setAttributeValue:eid forKey:@"uuid"];
+    else {
+        v.frame = element.frame;
+        [[v retain] autorelease];
+        [_viewContainer removeElementView:v];
     }
-    
-    if(eid){
-        v = [_elementViews objectForKey:eid];
-        if(v == nil){
-            v = [[[viewClass alloc] initWithFrame:element.frame] autorelease];
-            if(_elementViews == nil){
-                _elementViews = [[NSMutableDictionary alloc] initWithCapacity:4];
-            }
-            [_elementViews setObject:v forKey:eid];
-        }
-        else{
-            v.frame = element.frame;
-        }
-        return v;
-    }
-    return nil;
+   
+    return v;
 }
 
 
