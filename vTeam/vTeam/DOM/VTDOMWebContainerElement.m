@@ -16,6 +16,7 @@
 @interface VTDOMWebContainerElement()
 
 @property(nonatomic,readonly) UIWebView * webView;
+@property(nonatomic,assign,getter = isWebViewLoaded) BOOL webViewLoaded;
 
 @end
 
@@ -45,15 +46,103 @@
     return r;
 }
 
+-(void) dealloc{
+    [self.webView setDelegate:nil];
+    [super dealloc];
+}
+
 -(void) setView:(UIView *)view{
+    
+    [self.webView setDelegate:nil];
+    
+    self.webViewLoaded = NO;
+    
     [super setView:view];
+
+    
+    [self.webView setDelegate:self];
     
     if(view){
-        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[self stringValueForKey:@"url"] relativeToURL:[self.document documentURL]]]];
+        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[self stringValueForKey:@"src"] relativeToURL:[self.document documentURL]]]];
     }
     else {
         [self.webView loadHTMLString:@"" baseURL:[self.document documentURL]];
     }
+    
+    
+}
+
+-(CGSize) layoutChildren:(UIEdgeInsets)padding{
+    
+    CGSize size = self.frame.size;
+    
+    CGSize contentSize = CGSizeMake(size.width, 0);
+    
+    for (VTDOMElement * element in [self childs]) {
+        
+        UIEdgeInsets margin = [element margin];
+        
+        [element layout:CGSizeMake(size.width - margin.left - margin.right - padding.left - padding.right
+                                   , size.height)];
+        
+        CGRect r = element.frame;
+        
+        r.origin = CGPointMake(padding.left + margin.left, contentSize.height + margin.top + padding.top);
+        r.size.width = size.width - padding.left - padding.right - margin.left - margin.right;
+        
+        [element setFrame:r];
+        
+        contentSize.height += r.size.height + margin.top + margin.bottom;
+    }
+    
+    contentSize.height += padding.top + padding.bottom;
+    
+    [self setContentSize:contentSize];
+    
+    if([self isViewLoaded] && self.webViewLoaded){
+        [self reloadData];
+    }
+    
+    return size;
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
+    
+    if(navigationType == UIWebViewNavigationTypeLinkClicked){
+        
+        [self setAttributeValue:[[request URL] absoluteString] forKey:@"link"];
+        
+        if([self.delegate respondsToSelector:@selector(vtDOMElementDoAction:)]){
+            [self.delegate vtDOMElementDoAction:self];
+        }
+
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (void)webViewDidStartLoad:(UIWebView *)webView{
+    
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+    self.webViewLoaded = YES;
+    
+    CGSize contentSize = [self contentSize];
+    
+    [self.contentView setContentInset:UIEdgeInsetsMake(0, 0, contentSize.height, 0)];
+    [self.contentView setContentOffset:CGPointZero];
+    
+    [self reloadData];
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
+    
+}
+
+-(void) didViewLoaded{
+    
 }
 
 @end

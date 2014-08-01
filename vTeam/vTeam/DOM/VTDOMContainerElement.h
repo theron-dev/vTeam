@@ -24,4 +24,6 @@
 
 -(void) didContainerDidDispaaer;
 
+-(void) didViewLoaded;
+
 @end
