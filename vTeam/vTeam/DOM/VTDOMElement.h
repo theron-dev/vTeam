@@ -59,6 +59,8 @@
 
 -(void) elementDidDisappera:(VTDOMElement *) element;
 
+-(NSArray *) elementsByClass:(Class) elementClass inherit:(BOOL) inherit;
+
 @end
 
 @protocol VTDOMElementDelegate

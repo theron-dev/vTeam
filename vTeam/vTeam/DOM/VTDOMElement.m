@@ -251,4 +251,30 @@
     }
 }
 
+-(void) elementsByClass:(Class) elementClass inherit:(BOOL) inherit toArray:(NSMutableArray *) toArray{
+    
+    if((inherit && [self isKindOfClass:elementClass]) || (! inherit && elementClass == [self class])){
+        
+        [toArray addObject:self];
+        
+    }
+    else {
+        
+        for (VTDOMElement * element in [self childs]) {
+            [element elementsByClass:elementClass inherit:inherit toArray:toArray];
+        }
+        
+    }
+    
+}
+
+-(NSArray *) elementsByClass:(Class) elementClass inherit:(BOOL) inherit{
+    
+    NSMutableArray * array = [NSMutableArray arrayWithCapacity:4];
+    
+    [self elementsByClass:elementClass inherit:inherit toArray:array];
+    
+    return array;
+}
+
 @end

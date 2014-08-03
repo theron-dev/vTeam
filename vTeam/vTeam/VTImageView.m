@@ -55,18 +55,10 @@
     [self setImage:image isLocal:NO];
 }
 
--(void) setImage:(UIImage *) image isLocal:(BOOL) isLocal{
-    if(image == nil){
-        if(!isLocal){
-            self.loaded = YES;
-        }
-        [super setImage:_defaultImage];
-    }
-    else{
-        self.loaded = YES;
-        [super setImage:image];
-    }
+-(void) fitImageSize{
+    
     if((_fitHeight || _fitWidth) && self.image){
+        
         CGSize imageSize = [self.image size];
         CGRect r = [self frame];
         
@@ -85,7 +77,7 @@
                         r.size.width = _minWidth;
                     }
                     
-                    [self setFrame:r];
+                    [super setFrame:r];
                 }
                 
             }
@@ -108,13 +100,33 @@
                         r.size.height = _minHeight;
                     }
                     
-                    [self setFrame:r];
+                    [super setFrame:r];
                 }
                 
             }
             
         }
     }
+}
+
+-(void) setImage:(UIImage *) image isLocal:(BOOL) isLocal{
+    if(image == nil){
+        if(!isLocal){
+            self.loaded = YES;
+        }
+        [super setImage:_defaultImage];
+    }
+    else{
+        self.loaded = YES;
+        [super setImage:image];
+    }
+    
+    [self fitImageSize];
+}
+
+-(void) setFrame:(CGRect)frame{
+    [super setFrame:frame];
+    [self fitImageSize];
 }
 
 -(void) setDefaultImage:(UIImage *)defaultImage{

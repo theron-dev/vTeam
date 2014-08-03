@@ -96,8 +96,6 @@
         
         if([self.delegate respondsToSelector:@selector(vtDOMElement:addLayer:frame:)]){
             
-            CGSize size = self.frame.size;
-            
             if(_highlightedLayer == nil){
                 _highlightedLayer = [[CALayer alloc] init];
             }
