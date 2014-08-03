@@ -81,6 +81,10 @@
                         r.size.width = _maxWidth;
                     }
                     
+                    if(_minWidth && r.size.width < _minWidth){
+                        r.size.width = _minWidth;
+                    }
+                    
                     [self setFrame:r];
                 }
                 
@@ -98,6 +102,10 @@
                     
                     if(_maxHeight && r.size.height > _maxHeight){
                         r.size.height = _maxHeight;
+                    }
+                    
+                    if(_minHeight && r.size.height < _minHeight){
+                        r.size.height = _minHeight;
                     }
                     
                     [self setFrame:r];
@@ -140,6 +148,8 @@
     self.contentMode = UIViewContentModeScaleAspectFill;
     self.maxWidth = [element floatValueForKey:@"max-width"];
     self.maxHeight = [element floatValueForKey:@"max-height"];
+    self.minWidth = [element floatValueForKey:@"min-width"];
+    self.minHeight = [element floatValueForKey:@"min-height"];
     self.fitWidth = [element booleanValueForKey:@"fit-width"];
     self.fitHeight = [element booleanValueForKey:@"fit-height"];
     self.defaultSrc = [element attributeValueForKey:@"default-src"];

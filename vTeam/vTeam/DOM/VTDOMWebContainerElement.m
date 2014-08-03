@@ -59,7 +59,7 @@
     
     [super setView:view];
 
-    
+    [self.webView setScalesPageToFit:YES];
     [self.webView setDelegate:self];
     
     if(view){

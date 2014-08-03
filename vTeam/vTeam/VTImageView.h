@@ -17,5 +17,7 @@
 @property(nonatomic,assign,getter = isFitHeight) BOOL fitHeight;
 @property(nonatomic,assign) CGFloat maxWidth;
 @property(nonatomic,assign) CGFloat maxHeight;
+@property(nonatomic,assign) CGFloat minWidth;
+@property(nonatomic,assign) CGFloat minHeight;
 
 @end

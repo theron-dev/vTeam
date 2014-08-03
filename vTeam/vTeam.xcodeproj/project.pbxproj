@@ -329,6 +329,8 @@
 		11619CCC17339A3300BD3561 /* VTZoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11619CCA17339A3000BD3561 /* VTZoomView.m */; };
 		11619CD81733B1C700BD3561 /* IVTAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 11619CD71733B1A400BD3561 /* IVTAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1161A1BD188673E900336782 /* IGridValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 1161A1BC188673E900336782 /* IGridValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1169597E198E43D000BA1AC3 /* VTDOMActionViewElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 1169597C198E43D000BA1AC3 /* VTDOMActionViewElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1169597F198E43D000BA1AC3 /* VTDOMActionViewElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1169597D198E43D000BA1AC3 /* VTDOMActionViewElement.m */; };
 		116CDE771786924D00BCD47D /* VTTabBarController.h in Headers */ = {isa = PBXBuildFile; fileRef = 116CDE751786924D00BCD47D /* VTTabBarController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		116CDE781786924D00BCD47D /* VTTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116CDE761786924D00BCD47D /* VTTabBarController.m */; };
 		116CDE7B1786A0BD00BCD47D /* VTTabBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 116CDE791786A0BC00BCD47D /* VTTabBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -940,6 +942,8 @@
 		11619CCA17339A3000BD3561 /* VTZoomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTZoomView.m; sourceTree = "<group>"; };
 		11619CD71733B1A400BD3561 /* IVTAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVTAction.h; sourceTree = "<group>"; };
 		1161A1BC188673E900336782 /* IGridValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGridValue.h; sourceTree = "<group>"; };
+		1169597C198E43D000BA1AC3 /* VTDOMActionViewElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDOMActionViewElement.h; sourceTree = "<group>"; };
+		1169597D198E43D000BA1AC3 /* VTDOMActionViewElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDOMActionViewElement.m; sourceTree = "<group>"; };
 		116CDE751786924D00BCD47D /* VTTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTTabBarController.h; sourceTree = "<group>"; };
 		116CDE761786924D00BCD47D /* VTTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTTabBarController.m; sourceTree = "<group>"; };
 		116CDE791786A0BC00BCD47D /* VTTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTTabBar.h; sourceTree = "<group>"; };
@@ -1916,6 +1920,8 @@
 				11BC6F49198B29E00026C81C /* VTDOMWebViewElement.m */,
 				11BC6F52198B39C40026C81C /* VTDOMWebContainerElement.h */,
 				11BC6F53198B39C40026C81C /* VTDOMWebContainerElement.m */,
+				1169597C198E43D000BA1AC3 /* VTDOMActionViewElement.h */,
+				1169597D198E43D000BA1AC3 /* VTDOMActionViewElement.m */,
 				11A0417117BB6032001992BE /* VTDOM.h */,
 				11A0417217BB6032001992BE /* VTDOM.m */,
 				117F811C18B472CE0015DCB1 /* UIActivityIndicatorView+VTDOMElement.h */,
@@ -2153,6 +2159,7 @@
 				1147734F1727E7C800196FB2 /* IVTUIViewController.h in Headers */,
 				114773501727E7C800196FB2 /* IVTUIContext.h in Headers */,
 				114773051727DFE000196FB2 /* vTeam.h in Headers */,
+				1169597E198E43D000BA1AC3 /* VTDOMActionViewElement.h in Headers */,
 				1147730C1727E29600196FB2 /* VTShell.h in Headers */,
 				11E59F5F1728C197002DD63C /* IVTServiceContainer.h in Headers */,
 				11E59F641728C785002DD63C /* VTStyleSheet.h in Headers */,
@@ -2676,6 +2683,7 @@
 				118AFC2E175D9A9F00A6A2FF /* VTBarButtonItem.m in Sources */,
 				118AFC44175DA15100A6A2FF /* VTDBObject.m in Sources */,
 				118AFC48175DA1E800A6A2FF /* VTDBContext.m in Sources */,
+				1169597F198E43D000BA1AC3 /* VTDOMActionViewElement.m in Sources */,
 				11EE82981760966800219D52 /* ioapi.c in Sources */,
 				11EE829A1760966800219D52 /* mztools.c in Sources */,
 				11EE829C1760966800219D52 /* unzip.c in Sources */,
