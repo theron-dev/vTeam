@@ -64,6 +64,9 @@
 
 @property(nonatomic,readonly) NSMutableArray * dequeueItemViews;
 @property(nonatomic,retain) VTDOMStatusElement * statusElement;
+@property(nonatomic,assign) CGSize layoutContentSize;
+@property(nonatomic,assign) CGPoint layoutContentOffset;
+@property(nonatomic,assign) CGSize layoutSize;
 
 @end
 
@@ -124,6 +127,10 @@
 
 -(void) setView:(UIView *)view{
     
+    self.layoutContentOffset = CGPointZero;
+    self.layoutContentSize = CGSizeZero;
+    self.layoutSize = CGSizeZero;
+    
     [self.contentView setDelegate:nil];
     [self.contentView removeObserver:self forKeyPath:@"contentOffset"];
     
@@ -134,10 +141,11 @@
     [self.contentView setShowsHorizontalScrollIndicator:NO];
     [self.contentView setDelegate:self];
     [self.contentView setScrollsToTop:[self booleanValueForKey:@"scrollsToTop"]];
-    [self.contentView addObserver:self forKeyPath:@"contentOffset"
-                          options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
     
     [self didViewLoaded];
+    
+    [self.contentView addObserver:self forKeyPath:@"contentOffset"
+                          options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
 }
 
 -(void) didViewLoaded{
@@ -157,13 +165,27 @@
         
         CGPoint contentOffset = contentView.contentOffset;
         CGSize size = contentView.bounds.size;
+        CGSize contentSize = contentView.contentSize;
+        
+        if(CGPointEqualToPoint(contentOffset, self.layoutContentOffset)
+           && CGSizeEqualToSize(contentSize, self.layoutContentSize)
+           && CGSizeEqualToSize(size, self.layoutSize)){
+            
+            return;
+        }
+        
+        self.layoutContentOffset = contentOffset;
+        self.layoutContentSize = contentSize;
+        self.layoutSize = size;
+        
+        
         UIEdgeInsets contentInset = contentView.contentInset;
         CGPoint bottomOffset = CGPointMake(contentOffset.x + size.width - contentInset.left - contentInset.right, contentOffset.y + size.height - contentInset.top - contentInset.bottom);
         
         NSMutableDictionary * itemViews = [NSMutableDictionary dictionaryWithCapacity:4];
         
         NSMutableArray * dequeueItemViews = [self dequeueItemViews];
-        
+   
         for (VTDOMContainerItemView * itemView in [contentView subviews]) {
             
             if([itemView isKindOfClass:[VTDOMContainerItemView class]]){

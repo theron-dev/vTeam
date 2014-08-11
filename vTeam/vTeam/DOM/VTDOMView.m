@@ -39,12 +39,14 @@
         if([v respondsToSelector:@selector(setElement:)]){
             [v performSelector:@selector(setElement:) withObject:nil];
         }
+        [v removeFromSuperview];
     }
     
     for(UIView * v in _viewSet){
         if([v respondsToSelector:@selector(setElement:)]){
             [v performSelector:@selector(setElement:) withObject:nil];
         }
+        [v removeFromSuperview];
     }
     
     [_viewSetByReuse release];
@@ -62,7 +64,8 @@
     if([reuse length]){
         viewSet = [_viewSetByReuse valueForKey:reuse];
     }
-    else {
+    
+    if(viewSet == nil){
         viewSet = _viewSet;
     }
     
@@ -187,6 +190,8 @@
     VTDOMViewContainer * _visableViewContainer;
 }
 
+@property(nonatomic,assign) CGSize layoutSize;
+
 @end
 
 @implementation VTDOMView
@@ -230,6 +235,8 @@
 -(void) setElement:(VTDOMElement *)element{
     if(_element != element){
         
+        _layoutSize = CGSizeZero;
+        
         if(_viewContainer == nil){
             _viewContainer = [[VTDOMViewContainer alloc] init];
         }
@@ -245,7 +252,8 @@
         [_element release];
         _element = element;
         if(_allowAutoLayout){
-            [_element layout:self.bounds.size];
+            _layoutSize = self.bounds.size;
+            [_element layout:_layoutSize];
         }
         
         [_element bindDelegate:self];
@@ -258,18 +266,51 @@
 
 -(void) setBounds:(CGRect)bounds{
     [super setBounds:bounds];
-    if(_allowAutoLayout){
-        [_element layout:self.bounds.size];
+    if(_allowAutoLayout && !CGSizeEqualToSize(_layoutSize, self.bounds.size)){
+        
+        _layoutSize = self.bounds.size;
+        
+        [_element layout:_layoutSize];
+        
+        if(_viewContainer == nil){
+            _viewContainer = [[VTDOMViewContainer alloc] init];
+        }
+        
+        if(_visableViewContainer){
+            [_viewContainer addContainer:_visableViewContainer];
+            [_visableViewContainer removeAllElementViews];
+        }
+        
         [_element bindDelegate:self];
+        
+        [_viewContainer removeFromSuperView];
+
         [self setNeedsDisplay];
     }
 }
 
 -(void) setFrame:(CGRect)frame{
     [super setFrame:frame];
-    if(_allowAutoLayout){
-        [_element layout:self.bounds.size];
+    
+    if(_allowAutoLayout && !CGSizeEqualToSize(_layoutSize, self.bounds.size) ){
+        
+        _layoutSize = self.bounds.size;
+        
+        [_element layout:_layoutSize];
+        
+        if(_viewContainer == nil){
+            _viewContainer = [[VTDOMViewContainer alloc] init];
+        }
+        
+        if(_visableViewContainer){
+            [_viewContainer addContainer:_visableViewContainer];
+            [_visableViewContainer removeAllElementViews];
+        }
+        
         [_element bindDelegate:self];
+        
+        [_viewContainer removeFromSuperView];
+
         [self setNeedsDisplay];
     }
 }
