@@ -352,6 +352,8 @@
 		117F811E18B472CE0015DCB1 /* UIActivityIndicatorView+VTDOMElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 117F811C18B472CE0015DCB1 /* UIActivityIndicatorView+VTDOMElement.h */; };
 		117F811F18B472CE0015DCB1 /* UIActivityIndicatorView+VTDOMElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 117F811D18B472CE0015DCB1 /* UIActivityIndicatorView+VTDOMElement.m */; };
 		1181E720187F9712004C4425 /* hvermin_debug.c in Sources */ = {isa = PBXBuildFile; fileRef = 11C877FD187EA5AB00E787C4 /* hvermin_debug.c */; };
+		118A032B199B60A00009AF3A /* VTDOMTipElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 118A0329199B60A00009AF3A /* VTDOMTipElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		118A032C199B60A00009AF3A /* VTDOMTipElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 118A032A199B60A00009AF3A /* VTDOMTipElement.m */; };
 		118AFC2D175D9A9F00A6A2FF /* VTBarButtonItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 118AFC2B175D9A9F00A6A2FF /* VTBarButtonItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		118AFC2E175D9A9F00A6A2FF /* VTBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 118AFC2C175D9A9F00A6A2FF /* VTBarButtonItem.m */; };
 		118AFC43175DA15100A6A2FF /* VTDBObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 118AFC41175DA15100A6A2FF /* VTDBObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -964,6 +966,8 @@
 		117F811918B462DB0015DCB1 /* VTDOMStatusElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDOMStatusElement.m; sourceTree = "<group>"; };
 		117F811C18B472CE0015DCB1 /* UIActivityIndicatorView+VTDOMElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActivityIndicatorView+VTDOMElement.h"; sourceTree = "<group>"; };
 		117F811D18B472CE0015DCB1 /* UIActivityIndicatorView+VTDOMElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActivityIndicatorView+VTDOMElement.m"; sourceTree = "<group>"; };
+		118A0329199B60A00009AF3A /* VTDOMTipElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDOMTipElement.h; sourceTree = "<group>"; };
+		118A032A199B60A00009AF3A /* VTDOMTipElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDOMTipElement.m; sourceTree = "<group>"; };
 		118AFC2B175D9A9F00A6A2FF /* VTBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTBarButtonItem.h; sourceTree = "<group>"; };
 		118AFC2C175D9A9F00A6A2FF /* VTBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTBarButtonItem.m; sourceTree = "<group>"; };
 		118AFC41175DA15100A6A2FF /* VTDBObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDBObject.h; sourceTree = "<group>"; };
@@ -1922,6 +1926,8 @@
 				11BC6F53198B39C40026C81C /* VTDOMWebContainerElement.m */,
 				1169597C198E43D000BA1AC3 /* VTDOMActionViewElement.h */,
 				1169597D198E43D000BA1AC3 /* VTDOMActionViewElement.m */,
+				118A0329199B60A00009AF3A /* VTDOMTipElement.h */,
+				118A032A199B60A00009AF3A /* VTDOMTipElement.m */,
 				11A0417117BB6032001992BE /* VTDOM.h */,
 				11A0417217BB6032001992BE /* VTDOM.m */,
 				117F811C18B472CE0015DCB1 /* UIActivityIndicatorView+VTDOMElement.h */,
@@ -2360,6 +2366,7 @@
 				11A2D10C179690C600082380 /* VTRich.h in Headers */,
 				11A2D1141796A69E00082380 /* VTRichView.h in Headers */,
 				11A2D1181796AC2500082380 /* VTRichImageElement.h in Headers */,
+				118A032B199B60A00009AF3A /* VTDOMTipElement.h in Headers */,
 				1174768617992E4B00FA7DF0 /* VTMonitorService.h in Headers */,
 				1135CC03182B3EBC0074D26E /* VTWebView.h in Headers */,
 				11C29F56179F795E00E48A36 /* VTFlowViewLayout.h in Headers */,
@@ -2779,6 +2786,7 @@
 				1117023018308BE000CFD179 /* Grid.m in Sources */,
 				1117023218308BE000CFD179 /* GridApposeDataView.m in Sources */,
 				1117023418308BE000CFD179 /* GridApposeHeadView.m in Sources */,
+				118A032C199B60A00009AF3A /* VTDOMTipElement.m in Sources */,
 				1117023618308BE000CFD179 /* GridDataView.m in Sources */,
 				1117023818308BE000CFD179 /* GridHeadView.m in Sources */,
 				1117023A18308BE000CFD179 /* GridScrollView.m in Sources */,

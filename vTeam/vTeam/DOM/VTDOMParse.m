@@ -29,6 +29,7 @@
 #import "VTDOMWebViewElement.h"
 #import "VTDOMWebContainerElement.h"
 #import "VTDOMActionViewElement.h"
+#import "VTDOMTipElement.h"
 
 typedef struct _VTDOMParseScanf {
     hxml_scanf_t base;
@@ -160,6 +161,9 @@ static hcss_scanf_t VTDOMParseCSSScanf = {
     }
     else if([name isEqualToString:@"webcontainer"]){
         elementClass = [VTDOMWebContainerElement class];
+    }
+    else if([name isEqualToString:@"tip"]){
+        elementClass = [VTDOMTipElement class];
     }
     
     VTDOMElement * element = [[elementClass alloc] init];

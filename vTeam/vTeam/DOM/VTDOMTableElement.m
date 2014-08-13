@@ -94,6 +94,8 @@
     [self.tableView setContentInset:[self edgeInsetsValueForKey:@"content-inset"]];
     [self.tableView setScrollIndicatorInsets:[self edgeInsetsValueForKey:@"scroll-inset"]];
     [self.tableView setShowsHorizontalScrollIndicator:NO];
+    [self.tableView setDelaysContentTouches:YES];
+    [self.tableView setCanCancelContentTouches:YES];
     [self.tableView setDelegate:self];
     [self.tableView setDataSource:self];
     [self.tableView addObserver:self forKeyPath:@"contentOffset"
@@ -137,6 +139,10 @@
     }
     
     [self setContentSize:contentSize];
+    
+    if([self isViewLoaded]){
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+    }
     
     return size;
 }
@@ -205,9 +211,15 @@
         
         cell = [[[VTDOMTableElementCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier] autorelease];
         
-        [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
+        UIView * bgView = [[UIView alloc] initWithFrame:cell.contentView.bounds];
         
-        VTDOMView * view = [[VTDOMView alloc] initWithFrame:cell.bounds];
+        [bgView setBackgroundColor:[UIColor colorWithWhite:0.92 alpha:1.0]];
+        
+        [cell setSelectedBackgroundView:bgView];
+        
+        [bgView release];
+        
+        VTDOMView * view = [[VTDOMView alloc] initWithFrame:cell.contentView.bounds];
         
         [view setBackgroundColor:[UIColor clearColor]];
         [view setTag:100];
@@ -237,7 +249,15 @@
     [cell setElement:element];
     
     if(view.element != element){
+        
+        UIColor * bgColor = [element colorValueForKey:@"action-color"];
     
+        if(bgColor == nil){
+            bgColor = [UIColor colorWithWhite:0.92 alpha:1.0];
+        }
+        
+        [cell.selectedBackgroundView setBackgroundColor:bgColor];
+        
         [view setUserInteractionEnabled:! [element booleanValueForKey:@"disabled"]];
         
         [view setElement:element];
@@ -284,6 +304,9 @@
     
     [element setAttributeValue:nil forKey:@"event"];
     [element release];
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
 }
 
 -(void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{

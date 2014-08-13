@@ -517,7 +517,15 @@
         NSString * actionName = [element attributeValueForKey:@"action-name"];
         
         if([actionName isEqualToString:@"reloadData"]){
+            
+            NSString * url = [element attributeValueForKey:@"url"];
+            
+            if(url){
+                self.documentURL = [NSURL URLWithString:url relativeToURL:self.documentURL];
+            }
+            
             [self reloadData];
+            
         }
         else if([actionName isEqualToString:@"reload-url"]){
             
