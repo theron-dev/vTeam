@@ -317,6 +317,7 @@
                 self.documentUUID = nil;
                 
                 VTDOMElement * element = [httpTask element];
+                
                 NSString * method = [element attributeValueForKey:@"method"];
                 
                 if([method isEqualToString:@"replace"]){
@@ -331,19 +332,21 @@
                         
                         NSString * name = [element attributeValueForKey:@"group"];
                         
-                        while(index < [childs count]){
+                        NSInteger i = index;
+                        
+                        while(i < [childs count]){
                             VTDOMElement * el = [childs objectAtIndex:index];
                             if([name isEqualToString:[el attributeValueForKey:@"name"]]){
                                 [el removeFromParentElement];
                             }
                             else{
-                                index ++;
+                                i ++;
                             }
                         }
                         
                         VTDOMParse * parse = [[VTDOMParse alloc] init];
                         
-                        [parse parseHTML:[httpTask responseBody] toElement:parentElement atIndex:index + 1];
+                        [parse parseHTML:[httpTask responseBody] toElement:parentElement atIndex:index];
                         
                         [self.document applyStyleSheet:parentElement];
                         

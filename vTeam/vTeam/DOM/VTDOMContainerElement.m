@@ -67,6 +67,7 @@
 @property(nonatomic,assign) CGSize layoutContentSize;
 @property(nonatomic,assign) CGPoint layoutContentOffset;
 @property(nonatomic,assign) CGSize layoutSize;
+@property(nonatomic,assign) UIEdgeInsets layoutContentInset;
 
 @end
 
@@ -166,10 +167,12 @@
         CGPoint contentOffset = contentView.contentOffset;
         CGSize size = contentView.bounds.size;
         CGSize contentSize = contentView.contentSize;
+        UIEdgeInsets contentInset = contentView.contentInset;
         
         if(CGPointEqualToPoint(contentOffset, self.layoutContentOffset)
            && CGSizeEqualToSize(contentSize, self.layoutContentSize)
-           && CGSizeEqualToSize(size, self.layoutSize)){
+           && CGSizeEqualToSize(size, self.layoutSize)
+           && UIEdgeInsetsEqualToEdgeInsets(contentInset, self.layoutContentInset)){
             
             return;
         }
@@ -177,10 +180,10 @@
         self.layoutContentOffset = contentOffset;
         self.layoutContentSize = contentSize;
         self.layoutSize = size;
+        self.layoutContentInset = contentInset;
         
-        
-        UIEdgeInsets contentInset = contentView.contentInset;
-        CGPoint bottomOffset = CGPointMake(contentOffset.x + size.width - contentInset.left - contentInset.right, contentOffset.y + size.height - contentInset.top - contentInset.bottom);
+       
+        CGPoint bottomOffset = CGPointMake(contentOffset.x + size.width, contentOffset.y + size.height );
         
         NSMutableDictionary * itemViews = [NSMutableDictionary dictionaryWithCapacity:4];
         

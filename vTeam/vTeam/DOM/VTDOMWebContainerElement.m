@@ -100,6 +100,7 @@
     [self setContentSize:contentSize];
     
     if([self isViewLoaded] && self.webViewLoaded){
+        [self.contentView setContentInset:UIEdgeInsetsMake(0, 0, contentSize.height, 0)];
         [self reloadData];
     }
     
