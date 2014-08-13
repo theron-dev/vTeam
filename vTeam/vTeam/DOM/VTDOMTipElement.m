@@ -26,6 +26,9 @@
     
     if(delegate && [self isViewLoaded]){
     
+        [self.view setHidden:NO];
+        [self.view setAlpha:1.0];
+        
         [UIView beginAnimations:nil context:nil];
         
         [UIView setAnimationDuration:[self floatValueForKey:@"duration"]];

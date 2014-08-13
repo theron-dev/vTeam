@@ -165,7 +165,7 @@
         
         [httpTask setRequest:request];
         
-        NSLog(@"%@",_documentURL);
+        NSLog(@"%@",[_documentURL absoluteString]);
         
         
         self.httpTask = httpTask;
@@ -335,7 +335,7 @@
                         NSInteger i = index;
                         
                         while(i < [childs count]){
-                            VTDOMElement * el = [childs objectAtIndex:index];
+                            VTDOMElement * el = [childs objectAtIndex:i];
                             if([name isEqualToString:[el attributeValueForKey:@"name"]]){
                                 [el removeFromParentElement];
                             }
@@ -493,6 +493,19 @@
                     [self startLoading];
                 });
                 
+                NSString * url = [element attributeValueForKey:@"url"];
+                
+                if(url){
+                    
+                    NSMutableDictionary * queryValues = [NSMutableDictionary dictionary];
+                    
+                    if([self.delegate respondsToSelector:@selector(vtURLDocumentController:willReloadElement:queryValues:)]){
+                        [self.delegate vtURLDocumentController:self willReloadElement:element queryValues:queryValues];
+                    }
+                    
+                    self.documentURL = [NSURL URLWithString:url relativeToURL:self.documentURL queryValues:queryValues];
+                }
+                
                 [self reloadData];
             }
         }
@@ -521,7 +534,14 @@
             NSString * url = [element attributeValueForKey:@"url"];
             
             if(url){
-                self.documentURL = [NSURL URLWithString:url relativeToURL:self.documentURL];
+               
+                NSMutableDictionary * queryValues = [NSMutableDictionary dictionary];
+                
+                if([self.delegate respondsToSelector:@selector(vtURLDocumentController:willReloadElement:queryValues:)]){
+                    [self.delegate vtURLDocumentController:self willReloadElement:element queryValues:queryValues];
+                }
+                
+                self.documentURL = [NSURL URLWithString:url relativeToURL:self.documentURL queryValues:queryValues];
             }
             
             [self reloadData];

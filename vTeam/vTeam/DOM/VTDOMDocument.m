@@ -104,6 +104,32 @@
     }
 }
 
+-(void) elementDidAppera:(VTDOMElement *) element{
+    
+    NSString * eid = [element attributeValueForKey:@"id"];
+    
+    if(eid){
+        if([_elementsById valueForKey:eid] == nil){
+            if(_elementsById == nil){
+                _elementsById = [[NSMutableDictionary alloc] initWithCapacity:4];
+            }
+            [_elementsById setObject:element forKey:eid];
+        }
+    }
+}
+
+-(void) elementWillDisappera:(VTDOMElement *) element{
+    
+    NSString * eid = [element attributeValueForKey:@"id"];
+    
+    if(eid){
+        if([_elementsById valueForKey:eid] == element){
+            [_elementsById removeObjectForKey:eid];
+        }
+    }
+    
+}
+
 -(void) setRootElement:(VTDOMElement *)rootElement{
     if(_rootElement != rootElement){
         [rootElement retain];
@@ -112,13 +138,6 @@
         [_rootElement setParentElement:nil];
         [_rootElement setDocument:self];
         [self applyStyleSheet:_rootElement];
-        if(_elementsById == nil){
-            _elementsById = [[NSMutableDictionary alloc] initWithCapacity:4];
-        }
-        else{
-            [_elementsById removeAllObjects];
-        }
-        [self scanfElements:_rootElement];
     }
 }
 

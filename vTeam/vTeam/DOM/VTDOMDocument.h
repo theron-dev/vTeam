@@ -29,4 +29,8 @@
 
 -(void) applyStyleSheet;
 
+-(void) elementDidAppera:(VTDOMElement *) element;
+
+-(void) elementWillDisappera:(VTDOMElement *) element;
+
 @end

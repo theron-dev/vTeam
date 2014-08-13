@@ -194,9 +194,15 @@
 }
 
 -(void) setDocument:(VTDOMDocument *)document{
-    _document = document;
-    for(VTDOMElement * element in _childs){
-        [element setDocument:document];
+    if(_document != document){
+        
+        [_document elementWillDisappera:self];
+        _document = document;
+        [_document elementDidAppera:self];
+        
+        for(VTDOMElement * element in _childs){
+            [element setDocument:document];
+        }
     }
 }
 

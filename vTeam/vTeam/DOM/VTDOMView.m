@@ -35,11 +35,14 @@
 
 -(void) dealloc{
     
-    for(UIView * v in [_viewSetByReuse allValues]){
-        if([v respondsToSelector:@selector(setElement:)]){
-            [v performSelector:@selector(setElement:) withObject:nil];
+    for(NSSet * vs in [_viewSetByReuse allValues]){
+        
+        for(UIView * v in vs){
+            if([v respondsToSelector:@selector(setElement:)]){
+                [v performSelector:@selector(setElement:) withObject:nil];
+            }
+            [v removeFromSuperview];
         }
-        [v removeFromSuperview];
     }
     
     for(UIView * v in _viewSet){
@@ -69,7 +72,7 @@
         viewSet = _viewSet;
     }
     
-    for (UIView * v in _viewSet) {
+    for (UIView * v in viewSet) {
         if([v class] == viewClass){
             return v;
         }
@@ -449,12 +452,6 @@
     
     [self addSubview:view];
     
-    if(_visableViewContainer == nil){
-        _visableViewContainer = [[VTDOMViewContainer alloc] init];
-    }
-    
-    [_visableViewContainer addElementView:element view:view];
-
 }
 
 -(CGRect) vtDOMElement:(VTDOMElement *) element convertRect:(CGRect) frame{
@@ -482,6 +479,12 @@
         [_viewContainer removeElementView:v];
     }
    
+    if(_visableViewContainer == nil){
+        _visableViewContainer = [[VTDOMViewContainer alloc] init];
+    }
+    
+    [_visableViewContainer addElementView:element view:v];
+    
     return v;
 }
 
