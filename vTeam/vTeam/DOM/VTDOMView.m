@@ -237,32 +237,37 @@
 
 -(void) setElement:(VTDOMElement *)element{
     
-    _layoutSize = CGSizeZero;
-    
-    if(_viewContainer == nil){
-        _viewContainer = [[VTDOMViewContainer alloc] init];
+    if(_element != element){
+        
+        _layoutSize = CGSizeZero;
+        
+        if(_viewContainer == nil){
+            _viewContainer = [[VTDOMViewContainer alloc] init];
+        }
+        
+        if(_visableViewContainer){
+            [_viewContainer addContainer:_visableViewContainer];
+            [_visableViewContainer removeAllElementViews];
+        }
+        
+        [_element unbindDelegate:self];
+        
+        [element retain];
+        [_element release];
+        _element = element;
+        if(_allowAutoLayout){
+            _layoutSize = self.bounds.size;
+            [_element layout:_layoutSize];
+        }
+        
+        [_element bindDelegate:self];
+        
+        [_viewContainer removeFromSuperView];
+        
+        [self setNeedsDisplay];
     }
     
-    if(_visableViewContainer){
-        [_viewContainer addContainer:_visableViewContainer];
-        [_visableViewContainer removeAllElementViews];
-    }
     
-    [_element unbindDelegate:self];
-    
-    [element retain];
-    [_element release];
-    _element = element;
-    if(_allowAutoLayout){
-        _layoutSize = self.bounds.size;
-        [_element layout:_layoutSize];
-    }
-    
-    [_element bindDelegate:self];
-    
-    [_viewContainer removeFromSuperView];
-    
-    [self setNeedsDisplay];
 }
 
 -(void) setBounds:(CGRect)bounds{

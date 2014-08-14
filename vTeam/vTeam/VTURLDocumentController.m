@@ -31,6 +31,7 @@
 
 @interface  VTURLDocumentControllerElementHttpTask : VTHttpTask
 
+@property(nonatomic,retain) VTDOMDocument * document;
 @property(nonatomic,retain) VTDOMElement * element;
 @property(nonatomic,retain) VTDOMElement * topElement;
 
@@ -39,9 +40,13 @@
 @implementation VTURLDocumentControllerElementHttpTask
 
 @synthesize element = _element;
+@synthesize topElement = _topElement;
+@synthesize document = _document;
 
 -(void) dealloc{
     [_element release];
+    [_document release];
+    [_topElement release];
     [super dealloc];
 }
 
@@ -102,6 +107,10 @@
 }
 
 -(void) reloadData{
+    [self reloadData:nil];
+}
+
+-(void) reloadData:(VTDOMElement *) element{
     
     [self.context cancelHandleForSource:self];
     
@@ -156,6 +165,8 @@
         VTURLDocumentControllerElementHttpTask * httpTask
             = [[VTURLDocumentControllerElementHttpTask alloc] init];
         
+        [httpTask setElement:element];
+        [httpTask setDocument:self.document];
         [httpTask setTopElement:[self topElement:nil]];
         [httpTask setSource:self];
         [httpTask setDelegate:self];
@@ -329,8 +340,7 @@
     
     VTDOMElement * topElement = [httpTask topElement];
 
-    
-    if(topElement == [self topElement:nil] && [httpTask element] == nil){
+    if(topElement == [self topElement:nil] && [httpTask document] == self.document){
         
         [topElement setAttributeValue:@"" forKey:@"loading"];
         
@@ -551,7 +561,7 @@
                         self.documentURL = [NSURL URLWithString:url relativeToURL:self.documentURL queryValues:queryValues];
                     }
                     
-                    [self reloadData];
+                    [self reloadData:element];
                 }
             }
         }
@@ -729,8 +739,13 @@
     
     [self documentWillLayout];
     
-    [_documentView setElement:_document.rootElement];
-    
+    if(_documentView.element == _document.rootElement){
+        [_document.rootElement layout];
+    }
+    else {
+        [_documentView setElement:_document.rootElement];
+    }
+
     [self downloadImagesForElement:_document.rootElement];
    
     [self downloadImagesForView:_documentView];
