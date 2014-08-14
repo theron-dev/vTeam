@@ -14,6 +14,7 @@
 #import "VTDOMElement+Style.h"
 #import "VTDOMDocument.h"
 #import "UIView+VTDOMElement.h"
+#import "VTDOMStatusElement.h"
 
 @interface VTDOMPageScrollElement()
 
@@ -191,6 +192,41 @@
             pageIndex = 0;
         }
         
+        NSInteger index = 0;
+        CGRect r = CGRectZero;
+        
+        for (VTDOMElement * child in [pageElement childs]) {
+            
+            VTDOMElement * el = child;
+            
+            if(! [el isKindOfClass:[VTDOMStatusElement class]]){
+                for (VTDOMElement * e in [el childs]) {
+                    if([e isKindOfClass:[VTDOMStatusElement class]]){
+                        el = e;
+                        break;
+                    }
+                }
+            }
+            
+            if(index == pageIndex){
+                [el setAttributeValue:@"selected" forKey:@"status"];
+                r = [child frame];
+            }
+            else {
+                [el setAttributeValue:@"" forKey:@"status"];
+            }
+            
+            index ++;
+        }
+        
+        if([pageElement isKindOfClass:[VTDOMContainerElement class]]){
+            
+            UIScrollView * scrView = [(VTDOMContainerElement *) pageElement contentView];
+            
+            [scrView scrollRectToVisible:r animated:YES];
+            
+        }
+        
         [pageElement setAttributeValue:[NSString stringWithFormat:@"%d",(int)pageCount] forKey:@"pageCount"];
         [pageElement setAttributeValue:[NSString stringWithFormat:@"%d",(int)pageIndex] forKey:@"pageIndex"];
         
@@ -267,5 +303,29 @@
     
 }
 
+-(void) setPageIndex:(NSInteger)pageIndex animated:(BOOL) animated{
+    
+    UIScrollView * contentView = [self contentView];
+    
+    CGSize size = contentView.bounds.size;
+    CGSize contentSize = contentView.contentSize;
+    
+    if(contentSize.width < size.width){
+        contentSize.width = size.width;
+    }
+    
+    NSInteger pageCount = contentSize.width / size.width;
+   
+    if(pageIndex >= pageCount){
+        pageIndex = pageCount - 1;
+    }
+    
+    if(pageIndex < 0){
+        pageIndex = 0;
+    }
+    
+    [contentView setContentOffset:CGPointMake(pageIndex * size.width, 0) animated:animated];
+    
+}
 
 @end

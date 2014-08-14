@@ -30,4 +30,6 @@
 
 -(UIView *) vtDOMView:(VTDOMView *)view elementView:(VTDOMElement *)element viewClass:(Class) viewClass;
 
+-(void) vtDOMView:(VTDOMView *)view loadContentForElement:(VTDOMElement *) element;
+
 @end

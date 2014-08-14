@@ -30,6 +30,11 @@
     
     CGRect rs = rect;
     
+    if(element.parentElement && element.parentElement == el){
+        rs.origin = CGPointZero;
+        return rs;
+    }
+    
     while(el && el != element){
         
         CGRect r = el.frame;

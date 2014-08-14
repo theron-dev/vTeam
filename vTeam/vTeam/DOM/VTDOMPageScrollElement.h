@@ -13,4 +13,6 @@
 @property(nonatomic,readonly) NSInteger pageIndex;
 @property(nonatomic,readonly) NSInteger pageSize;
 
+-(void) setPageIndex:(NSInteger)pageIndex animated:(BOOL) animated;
+
 @end

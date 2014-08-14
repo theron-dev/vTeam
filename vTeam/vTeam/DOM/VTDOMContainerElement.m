@@ -411,6 +411,28 @@
 
 -(void) didVisableItemView:(UIView *) itemView element:(VTDOMElement *) element atIndex:(NSInteger) index{
     
+    if([element attributeValueForKey:@"url"] && [element booleanValueForKey:@"loadContent"]){
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            VTDOMView * domView = self.delegate;
+            
+            if(![domView isKindOfClass:[VTDOMView class]]){
+                domView = nil;
+            }
+            
+            id delegate = [domView delegate];
+            
+            if([delegate respondsToSelector:@selector(vtDOMView:loadContentForElement:)]){
+                
+                
+                    [delegate vtDOMView:domView loadContentForElement:element];
+                
+                
+            }
+            
+        });
+    }
+    
 }
 
 -(void) setFrame:(CGRect)frame{
@@ -435,6 +457,16 @@
 
 -(void) didContainerDidDispaaer{
     
+}
+
+-(void) elementDidAppera:(VTDOMElement *)element{
+    [super elementDidAppera:element];
+    self.layoutSize = CGSizeZero;
+}
+
+-(void) elementDidDisappera:(VTDOMElement *)element{
+    [super elementDidDisappera:element];
+    self.layoutSize = CGSizeZero;
 }
 
 @end

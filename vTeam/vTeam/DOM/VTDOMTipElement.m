@@ -26,19 +26,28 @@
     
     if(delegate && [self isViewLoaded]){
     
-        [self.view setHidden:NO];
-        [self.view setAlpha:1.0];
+        if([self booleanValueForKey:@"tiped"]){
+            [self.view setHidden:YES];
+        }
+        else {
         
-        [UIView beginAnimations:nil context:nil];
-        
-        [UIView setAnimationDuration:[self floatValueForKey:@"duration"]];
-        [UIView setAnimationDelay:[self floatValueForKey:@"delay"]];
-        [UIView setAnimationDelegate:self];
-        [UIView setAnimationDidStopSelector:@selector(endAnimated)];
-        
-        [self.view setAlpha:0.0];
+            [self.view setHidden:NO];
+            [self.view setAlpha:1.0];
             
-        [UIView commitAnimations];
+            [UIView beginAnimations:nil context:nil];
+            
+            [UIView setAnimationDuration:[self floatValueForKey:@"duration"]];
+            [UIView setAnimationDelay:[self floatValueForKey:@"delay"]];
+            [UIView setAnimationDelegate:self];
+            [UIView setAnimationDidStopSelector:@selector(endAnimated)];
+            
+            [self.view setAlpha:0.0];
+                
+            [UIView commitAnimations];
+            
+            [self setAttributeValue:@"true" forKey:@"tiped"];
+            
+        }
     }
     else if([self isViewLoaded]){
         [self.view.layer removeAllAnimations];
