@@ -8,6 +8,9 @@
 
 #import "UIActivityIndicatorView+VTDOMElement.h"
 
+
+#import <vTeam/VTDOMElement+Render.h>
+
 @implementation UIActivityIndicatorView (VTDOMElement)
 
 -(id) initWithFrame:(CGRect)frame{
@@ -16,7 +19,12 @@
 
 -(void) setElement:(VTDOMElement *)element{
     [super setElement:element];
-    if(![self isHidden]){
+    if([element isHidden]){
+        [self stopAnimating];
+        [self setHidden:YES];
+    }
+    else{
+        [self setHidden:NO];
         [self startAnimating];
     }
 }
