@@ -251,6 +251,7 @@
         
         CTFontRef font = CTFontCreateWithName((CFStringRef)_rich.font.fontName, _rich.font.pointSize + _rich.incFontSize, nil);
         [attr setValue:(id)font forKey:(id)kCTFontAttributeName];
+        
         CFRelease(font);
         
         [attr setValue:(id)_rich.textColor.CGColor forKey:(id)kCTForegroundColorAttributeName];

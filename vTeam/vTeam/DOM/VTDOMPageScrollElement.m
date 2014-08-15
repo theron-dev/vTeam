@@ -65,6 +65,24 @@
 
 }
 
+-(BOOL) isVisableRect:(CGRect) frame{
+    UIScrollView * contentView = [self contentView];
+    CGRect rect = contentView.bounds;
+    rect.origin = contentView.contentOffset;
+    
+    int preloadPages = [[self stringValueForKey:@"preload-pages"] intValue];
+    
+    rect.origin.x -= rect.size.width * preloadPages;
+    rect.size.width += rect.size.width * preloadPages;
+    
+    if(rect.origin.x <0){
+        rect.origin.x = 0;
+    }
+    
+    CGRect rs = CGRectIntersection(rect, frame);
+    return rs.size.width >0 && rs.size.height > 0;
+}
+
 -(VTDOMElement *) pageElement{
     
     NSString * pageId = [self stringValueForKey:@"page-id"];
