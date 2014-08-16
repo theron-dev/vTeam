@@ -10,7 +10,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-#define SCALE_LEVEL     0.02
+#define SCALE_LEVEL     0.004
 #define ALPHA_LEVEL     0.05
 
 
