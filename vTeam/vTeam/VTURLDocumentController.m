@@ -148,7 +148,7 @@
     }
     else{
         
-        if(_allowPreloadCached){
+        if(_allowPreloadCached && self.document == nil){
             
             NSString * filePath = [self documentFilePath];
             
@@ -679,6 +679,8 @@
     
     [self startLoading:element rect:[element frame]];
 
+    [element setAttributeValue:@"loading" forKey:@"status"];
+    
 }
 
 -(void) stopLoading:(VTDOMElement *) element{
@@ -764,6 +766,15 @@
     
     [self reloadElement:element queryValues:queryValues];
     
+}
+
+-(void) setDocumentURL:(NSURL *)documentURL{
+    if(_documentURL != documentURL){
+        [documentURL retain];
+        [_documentURL release];
+        _documentURL = documentURL;
+        self.documentUUID = nil;
+    }
 }
 
 @end

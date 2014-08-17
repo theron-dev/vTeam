@@ -55,6 +55,10 @@
 
 -(void) documentDidVisable;
 
+-(void) startLoading:(VTDOMElement *) element;
+
+-(void) stopLoading:(VTDOMElement *) element;
+
 @end
 
 @protocol VTURLDocumentControllerDelegate
