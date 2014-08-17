@@ -42,7 +42,7 @@
 
 @end
 
-
+// VTFoldViewController 手势会影响编辑功能， 设置 config.fold.disabled = YES
 @interface VTDOMTableElement()
 
 
@@ -93,9 +93,6 @@
     
     [self.tableView setContentInset:[self edgeInsetsValueForKey:@"content-inset"]];
     [self.tableView setScrollIndicatorInsets:[self edgeInsetsValueForKey:@"scroll-inset"]];
-    [self.tableView setShowsHorizontalScrollIndicator:NO];
-    [self.tableView setDelaysContentTouches:YES];
-    [self.tableView setCanCancelContentTouches:YES];
     [self.tableView setDelegate:self];
     [self.tableView setDataSource:self];
     [self.tableView addObserver:self forKeyPath:@"contentOffset"
@@ -103,6 +100,7 @@
     
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.tableView setAllowsSelection:[self booleanValueForKey:@"allowsSelection"]];
+ 
 }
 
 -(void) setDelegate:(id)delegate{
@@ -182,6 +180,7 @@
     return NO;
 }
 
+
 -(UITableViewCellEditingStyle) tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     VTDOMElement * element = [self elementByIndexPath:indexPath];
@@ -247,6 +246,7 @@
     [view setFrame:CGRectMake(padding.left + margin.left, margin.top, r.size.width, r.size.height)];
     
     [cell setElement:element];
+
     
     if(view.element != element){
         

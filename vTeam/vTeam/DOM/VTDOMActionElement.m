@@ -50,6 +50,7 @@
     }
     
     [super touchesBegan:location];
+    
     _insetTouch = YES;
     
     if([self isAllowLongTapAction]){
