@@ -343,7 +343,7 @@
     
     if(touchType == 0){
         
-        if( touchType || (location.x >=0 && location.y >=0 && location.x < r.size.width
+        if((location.x >=0 && location.y >=0 && location.x < r.size.width
                           && location.y < r.size.height)){
             
             NSInteger index = [[element childs] count] -1;
