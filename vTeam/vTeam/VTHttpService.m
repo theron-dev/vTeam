@@ -252,7 +252,7 @@ static void VTHttpTaskOperatorDeallocTaskReleaseDispatchFunction(void * task){
     
     while(![self isCancelled] && !_finished){
         NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-        [runloop runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.8]];
+        [runloop runUntilDate:[NSDate dateWithTimeIntervalSinceNow:10.0]];
         [pool release];
     }
     
