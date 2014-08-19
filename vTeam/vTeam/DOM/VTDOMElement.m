@@ -95,6 +95,7 @@
     if(_attributes == nil){
         _attributes = [[NSMutableDictionary alloc] initWithCapacity:4];
     }
+    key = [key lowercaseString];
     [_attributes setValue:value forKey:key];
     if(self.document && [key isEqualToString:@"class"]){
         [self.document applyStyleSheet:self];
@@ -102,11 +103,11 @@
 }
 
 -(NSString *) attributeValueForKey:(NSString *)key{
-    return [_attributes valueForKey:key];
+    return [_attributes valueForKey:[key lowercaseString]];
 }
 
 -(void) removeAttributeForKey:(NSString *) key{
-    [_attributes removeObjectForKey:key];
+    [_attributes removeObjectForKey:[key lowercaseString]];
 }
 
 -(void) removeAllAttributes{

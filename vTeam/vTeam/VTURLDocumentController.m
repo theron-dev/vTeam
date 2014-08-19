@@ -274,7 +274,7 @@
     [self stopLoading:element];
 
     if(self.document){
-        [self performSelector:@selector(delayDidLoadedHTMLContent:) withObject:content afterDelay:0.3];
+        [self performSelector:@selector(delayDidLoadedContent:) withObject:content afterDelay:0.3];
     }
     else {
         [self delayDidLoadedContent:content];

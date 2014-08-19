@@ -31,6 +31,7 @@
 #import "VTDOMActionViewElement.h"
 #import "VTDOMTipElement.h"
 
+#import <libxml/HTMLparser.h>
 
 @interface VTDOMParseXMLParser : NSObject<NSXMLParserDelegate>
 
@@ -39,6 +40,13 @@
 @property(nonatomic,retain) VTDOMElement * rootElement;
 @property(nonatomic,assign) NSInteger index;
 @property(nonatomic,retain) NSMutableString * text;
+
+@end
+
+@interface VTDOMParseHTMLParser : VTDOMParseXMLParser
+
+@property(nonatomic,assign) BOOL hasHtml;
+@property(nonatomic,assign) BOOL hasBody;
 
 @end
 
@@ -183,18 +191,151 @@ static hcss_scanf_t VTDOMParseCSSScanf = {
     return [element autorelease];
 }
 
--(BOOL) parseHTML:(NSString *) html toElement:(VTDOMElement *) element atIndex:(NSInteger) index{
-    VTDOMParseScanf scanf = {{
-        VTDOMParse_scanf_element_new,
-        VTDOMParse_scanf_element_attr_set,
-        VTDOMParse_scanf_element_child_add,
-        VTDOMParse_scanf_element_is_empty,
-        VTDOMParse_scanf_element_text_set,
-        VTDOMParse_scanf_tag_has_children,
-        VTDOMParse_scanf_element_release
-    },self, element, index};
+static void VTDOMParseStartElementSAXFunc(void *ctx,
+                                           const xmlChar *name,
+                                           const xmlChar **atts){
     
-    return hxml_scanf(&scanf.base, [html UTF8String], element, InvokeTickRoot) ? YES: NO;
+    VTDOMParseHTMLParser * parser = (VTDOMParseHTMLParser *) ctx;
+    
+    if(! parser.hasHtml && strcasecmp((char *)name, "html") == 0){
+        parser.hasHtml = YES;
+        return;
+    }
+    
+    if(! parser.hasBody && strcasecmp((char *)name, "body") == 0){
+        parser.hasBody = YES;
+        return;
+    }
+    
+    if(parser.hasBody && parser.hasHtml){
+    
+        if([parser.text length]){
+            NSRange r = {0,[parser.text length]};
+            [parser.text deleteCharactersInRange:r];
+        }
+        
+        VTDOMElement * element = [parser.domParse newElement:[NSString stringWithCString:(char *)name encoding:NSUTF8StringEncoding] ns:nil];
+        
+        const xmlChar ** p = atts;
+        
+        NSString * key = nil;
+        NSString * value = nil;
+        
+        while (p && *p) {
+            
+            if(key == nil){
+                key = [NSString stringWithCString: (char *) * p encoding:NSUTF8StringEncoding];
+            }
+            else {
+                
+                value = [NSString stringWithCString: (char *) * p encoding:NSUTF8StringEncoding];
+                
+                [element setAttributeValue:value forKey:key];
+                
+                key = value = nil;
+            }
+            
+            p ++;
+        }
+        
+        if(parser.element == [parser rootElement]){
+            [parser.element insertElement:element atIndex:parser.index ++];
+        }
+        else {
+            [parser.element addElement:element];
+        }
+        
+        parser.element = element;
+
+    }
+}
+
+static void VTDOMParseCharactersSAXFunc (void *ctx,
+                                        const xmlChar *ch,
+                                         int len){
+    
+    VTDOMParseHTMLParser * parser = (VTDOMParseHTMLParser *) ctx;
+    
+    if(parser.hasBody && parser.hasHtml){
+        
+        if(parser.text == nil){
+            parser.text = [[NSMutableString alloc] initWithCapacity:64];
+        }
+        
+        NSString * text = [[NSString alloc] initWithBytes:ch length:len encoding:NSUTF8StringEncoding];
+        
+        [parser.text appendString:text];
+        
+        [text release];
+    }
+    
+}
+
+static void VTDOMParseEndElementSAXFunc (void *ctx,
+                                          const xmlChar *name){
+    
+    VTDOMParseHTMLParser * parser = (VTDOMParseHTMLParser *) ctx;
+    
+    if(parser.hasHtml && strcasecmp((char *)name, "html") == 0){
+        parser.hasHtml = YES;
+        return;
+    }
+    
+    if(parser.hasBody && strcasecmp((char *)name, "body") == 0){
+        parser.hasBody = YES;
+        return;
+    }
+    
+    if(parser.hasBody && parser.hasHtml){
+        
+        if([parser.text length]){
+            [parser.element setText:[parser.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
+            NSRange r = {0,[parser.text length]};
+            [parser.text deleteCharactersInRange:r];
+        }
+        
+        parser.element = [parser.element parentElement];
+        
+    }
+}
+
+-(BOOL) parseHTML:(NSString *) html toElement:(VTDOMElement *) element atIndex:(NSInteger) index{
+//    VTDOMParseScanf scanf = {{
+//        VTDOMParse_scanf_element_new,
+//        VTDOMParse_scanf_element_attr_set,
+//        VTDOMParse_scanf_element_child_add,
+//        VTDOMParse_scanf_element_is_empty,
+//        VTDOMParse_scanf_element_text_set,
+//        VTDOMParse_scanf_tag_has_children,
+//        VTDOMParse_scanf_element_release
+//    },self, element, index};
+//   
+//    return hxml_scanf(&scanf.base, [html UTF8String], element, InvokeTickRoot) ? YES: NO;
+
+    htmlSAXHandler h ;
+    
+    memset(& h, 0, sizeof(h));
+  
+    h.characters = VTDOMParseCharactersSAXFunc;
+    h.startElement = VTDOMParseStartElementSAXFunc;
+    h.endElement = VTDOMParseEndElementSAXFunc;
+    
+    VTDOMParseHTMLParser * ctx = [[VTDOMParseHTMLParser alloc] init];
+    
+    [ctx setDomParse:self];
+    [ctx setElement:element];
+    [ctx setRootElement:element];
+    [ctx setIndex:index];
+  
+    htmlDocPtr doc = htmlSAXParseDoc((xmlChar *) [html UTF8String], "utf-8", & h, ctx);
+    
+    [ctx release];
+    
+    if(doc){
+        xmlFreeDoc(doc);
+    }
+    
+    return YES;
 }
 
 -(BOOL) parseHTML:(NSString *) html toElement:(VTDOMElement *) element{
@@ -225,6 +366,7 @@ static hcss_scanf_t VTDOMParseCSSScanf = {
     VTDOMParseXMLParser * delegate = [[VTDOMParseXMLParser alloc] init];
     
     delegate.rootElement = element;
+    delegate.element = element;
     delegate.index = index;
     delegate.domParse = self;
     
@@ -293,8 +435,8 @@ static hcss_scanf_t VTDOMParseCSSScanf = {
     
     [element setAttributes:attributeDict];
     
-    if(_element == nil){
-        [_rootElement insertElement:element atIndex:_index ++];
+    if(_element == _rootElement){
+        [_element insertElement:element atIndex:_index ++];
     }
     else {
         [_element addElement:element];
@@ -312,12 +454,7 @@ static hcss_scanf_t VTDOMParseCSSScanf = {
         [_text deleteCharactersInRange:r];
     }
     
-    if([_element parentElement] == _rootElement){
-        self.element = nil;
-    }
-    else{
-        self.element = [_element parentElement];
-    }
+    self.element = [_element parentElement];
     
 }
 
@@ -340,5 +477,12 @@ static hcss_scanf_t VTDOMParseCSSScanf = {
     
     [text release];
 }
+
+@end
+
+@implementation VTDOMParseHTMLParser
+
+@synthesize hasBody = _hasBody;
+@synthesize hasHtml = _hasHtml;
 
 @end
