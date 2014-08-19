@@ -25,4 +25,10 @@
 
 -(BOOL) parseCSS:(NSString *) css toStyleSheet:(VTDOMStyleSheet *) styleSheet;
 
+-(BOOL) parseXML:(NSString *) xml toElement:(VTDOMElement *) element atIndex:(NSInteger) index;
+
+-(BOOL) parseXML:(NSString *) xml toElement:(VTDOMElement *) element;
+
+-(BOOL) parseXML:(NSString *) xml toDocument:(VTDOMDocument *) document;
+
 @end

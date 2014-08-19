@@ -197,7 +197,7 @@
     }
     else{
         
-        if([name isEqualToString:@"p"]){
+        if([name isEqualToString:@"p"] || [name isEqualToString:@"div"]){
             if(![rich isNewLine]){
                 [rich appendText:@"\n" attributes:attr];
             }
@@ -211,7 +211,7 @@
             [self elementToRichElement:el rich:rich attributes:attr];
         }
         
-        if([name isEqualToString:@"p"]){
+        if([name isEqualToString:@"p"] || [name isEqualToString:@"div"]){
             if(![rich isNewLine]){
                 [rich appendText:@"\n" attributes:attr];
             }

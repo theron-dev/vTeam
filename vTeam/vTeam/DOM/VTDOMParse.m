@@ -31,6 +31,17 @@
 #import "VTDOMActionViewElement.h"
 #import "VTDOMTipElement.h"
 
+
+@interface VTDOMParseXMLParser : NSObject<NSXMLParserDelegate>
+
+@property(nonatomic,assign) VTDOMParse * domParse;
+@property(nonatomic,retain) VTDOMElement * element;
+@property(nonatomic,retain) VTDOMElement * rootElement;
+@property(nonatomic,assign) NSInteger index;
+@property(nonatomic,retain) NSMutableString * text;
+
+@end
+
 typedef struct _VTDOMParseScanf {
     hxml_scanf_t base;
     VTDOMParse * parse;
@@ -113,6 +124,11 @@ static hcss_scanf_t VTDOMParseCSSScanf = {
 
 -(VTDOMElement *) newElement:(NSString *) name ns:(NSString *) ns{
     Class elementClass = [VTDOMElement class];
+   
+    if([name rangeOfString:@"px"].location != NSNotFound){
+    
+        NSLog(@"");
+    }
     
     if([name isEqualToString:@"img"]){
         elementClass = [VTDOMImageElement class];
@@ -209,8 +225,125 @@ static hcss_scanf_t VTDOMParseCSSScanf = {
     return NO;
 }
 
+-(BOOL) parseXML:(NSString *) xml toElement:(VTDOMElement *) element atIndex:(NSInteger) index{
+    
+    VTDOMParseXMLParser * delegate = [[VTDOMParseXMLParser alloc] init];
+    
+    delegate.rootElement = element;
+    delegate.index = index;
+    delegate.domParse = self;
+    
+    NSXMLParser * parser = [[NSXMLParser alloc] initWithData:[xml dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    [parser setDelegate:delegate];
+    
+    BOOL rs = [parser parse];
+    
+    [parser release];
+    
+    return rs;
+}
+
+-(BOOL) parseXML:(NSString *) xml toElement:(VTDOMElement *) element{
+    return [self parseXML:xml toElement:element atIndex:0];
+}
+
+-(BOOL) parseXML:(NSString *) xml toDocument:(VTDOMDocument *) document{
+    
+    VTDOMElement * rootElement = [[[VTDOMElement alloc] init] autorelease];
+    rootElement.name = @"__ROOT__";
+    if([self parseXML:xml toElement:rootElement]){
+        if([rootElement.childs count] == 1){
+            rootElement = [[rootElement childs] objectAtIndex:0];
+            [rootElement retain];
+            [rootElement removeFromParentElement];
+            [document setRootElement:rootElement];
+            [rootElement release];
+        }
+        else{
+            [document setRootElement:rootElement];
+        }
+        return YES;
+    }
+    return NO;
+}
+
 -(BOOL) parseCSS:(NSString *) css toStyleSheet:(VTDOMStyleSheet *) styleSheet{
     return hcss_scanf(&VTDOMParseCSSScanf, [css UTF8String], styleSheet, InvokeTickRoot) ? YES: NO;
+}
+
+@end
+
+@implementation VTDOMParseXMLParser
+
+@synthesize element =_element;
+@synthesize index = _index;
+@synthesize domParse = _domParse;
+@synthesize rootElement = _rootElement;
+@synthesize text = _text;
+
+-(void) dealloc{
+    
+    [_element release];
+    [_rootElement release];
+    [_text release];
+    
+    [super dealloc];
+}
+
+- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI
+    qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict{
+
+    VTDOMElement * element = [_domParse newElement:elementName ns:namespaceURI];
+    
+    [element setAttributes:attributeDict];
+    
+    if(_element == nil){
+        [_rootElement insertElement:element atIndex:_index ++];
+    }
+    else {
+        [_element addElement:element];
+    }
+    
+    self.element = element;
+    
+}
+
+- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName{
+
+    if([_text length]){
+        [_element setText:[NSString stringWithString:_text]];
+        NSRange r = {0,[_text length]};
+        [_text deleteCharactersInRange:r];
+    }
+    
+    if([_element parentElement] == _rootElement){
+        self.element = nil;
+    }
+    else{
+        self.element = [_element parentElement];
+    }
+    
+}
+
+- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string{
+    if(_text == nil){
+        _text = [[NSMutableString alloc] initWithCapacity:64];
+    }
+    [_text appendString:string];
+}
+
+- (void)parser:(NSXMLParser *)parser foundCDATA:(NSData *)CDATABlock{
+    
+    NSString * text = [[NSString alloc] initWithData:CDATABlock encoding:NSUTF8StringEncoding];
+    
+    if(_text == nil){
+        _text = [[NSMutableString alloc] initWithCapacity:64];
+    }
+    
+    [_text appendString:text];
+    
+    [text release];
 }
 
 @end

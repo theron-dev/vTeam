@@ -283,4 +283,14 @@
     return array;
 }
 
+-(void) setAttributes:(NSDictionary *)attributes{
+    if(_attributes == nil){
+        _attributes = [[NSMutableDictionary alloc] initWithDictionary:attributes];
+    }
+    else{
+        [_attributes removeAllObjects];
+        [_attributes addEntriesFromDictionary:attributes];
+    }
+}
+
 @end

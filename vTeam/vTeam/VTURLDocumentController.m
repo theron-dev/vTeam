@@ -139,7 +139,7 @@
         NSString * htmlContent = [NSString stringWithContentsOfURL:_documentURL encoding:NSUTF8StringEncoding error:nil];
         
         if(htmlContent){
-            [self didLoadedHTMLContent:htmlContent element:nil];
+            [self didLoadedContent:htmlContent element:nil];
         }
         else{
             [self didFailError:[NSError errorWithDomain:NSStringFromClass([self class]) code:VTURLDocumentControllerErrorCodeNotFoundFileURL userInfo:[NSDictionary dictionaryWithObject:@"not found file" forKey:NSLocalizedDescriptionKey]] element:nil];
@@ -156,7 +156,7 @@
             
             if([fileManager fileExistsAtPath:filePath]){
                 
-                [self loadHTMLContent:[NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil]];
+                [self loadContent:[NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil]];
       
             }
             
@@ -215,11 +215,11 @@
     return filePath;
 }
 
--(void) loadHTMLContent:(NSString *) htmlContent{
+-(void) loadContent:(NSString *) content{
     
     [self documentWillLoad];
     
-    NSString * uuid = [htmlContent vtMD5String];
+    NSString * uuid = [content vtMD5String];
     
     if([_documentUUID isEqualToString:uuid]){
         return;
@@ -237,7 +237,12 @@
     
     [_document setDocumentURL:_documentURL];
     
-    [parse parseHTML:htmlContent toDocument:_document];
+    if([content hasPrefix:@"<?xml"]){
+        [parse parseXML:content toDocument:_document];
+    }
+    else {
+        [parse parseHTML:content toDocument:_document];
+    }
     
     [_document setStyleSheet:[self.context domStyleSheet]];
     
@@ -250,28 +255,29 @@
     [self downloadImagesForView:_documentView];
     
     [self documentDidVisable];
+    
 }
 
--(void) delayDidLoadedHTMLContent:(NSString *) htmlContent {
+-(void) delayDidLoadedContent:(NSString *) content {
     
-    [self loadHTMLContent:htmlContent];
+    [self loadContent:content ];
     
     if([self.delegate respondsToSelector:@selector(vtURLDocumentControllerDidLoaded:)]){
         [self.delegate vtURLDocumentControllerDidLoaded:self];
     }
 }
 
--(void) didLoadedHTMLContent:(NSString *) htmlContent element:(VTDOMElement *) element{
+-(void) didLoadedContent:(NSString *) content element:(VTDOMElement *) element{
     
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     
     [self stopLoading:element];
-    
+
     if(self.document){
-        [self performSelector:@selector(delayDidLoadedHTMLContent:) withObject:htmlContent afterDelay:0.3];
+        [self performSelector:@selector(delayDidLoadedHTMLContent:) withObject:content afterDelay:0.3];
     }
     else {
-        [self delayDidLoadedHTMLContent:htmlContent];
+        [self delayDidLoadedContent:content];
     }
     
 }
@@ -284,7 +290,9 @@
     
     if([fileManager fileExistsAtPath:filePath]){
         
-        [self didLoadedHTMLContent:[NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil] element:element];
+        if(self.document == nil){
+            [self didLoadedContent:[NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil] element:element];
+        }
         
     }
     else{
@@ -292,13 +300,14 @@
         [self stopLoading:element];
         
         if(_errorDocument){
+           
             NSString * html = [[[self.context resourceBundle] bundlePath] stringByAppendingPathComponent:_errorDocument];
             
             NSString * htmlContent = [NSString stringWithContentsOfFile:html encoding:NSUTF8StringEncoding error:nil];
             
             if(htmlContent){
                 
-                [self loadHTMLContent:htmlContent];
+                [self loadContent:htmlContent];
                 
             }
             
@@ -365,7 +374,7 @@
             
             [fileManager moveItemAtPath:[httpTask responseBody] toPath:filePath error:nil];
             
-            [self didLoadedHTMLContent:[NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil] element:[httpTask element]];
+            [self didLoadedContent:[NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil] element:[httpTask element]];
             
         }
         else {
