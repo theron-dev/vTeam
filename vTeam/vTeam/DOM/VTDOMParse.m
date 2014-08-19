@@ -124,11 +124,6 @@ static hcss_scanf_t VTDOMParseCSSScanf = {
 
 -(VTDOMElement *) newElement:(NSString *) name ns:(NSString *) ns{
     Class elementClass = [VTDOMElement class];
-   
-    if([name rangeOfString:@"px"].location != NSNotFound){
-    
-        NSLog(@"");
-    }
     
     if([name isEqualToString:@"img"]){
         elementClass = [VTDOMImageElement class];
