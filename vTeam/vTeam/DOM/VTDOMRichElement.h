@@ -17,4 +17,6 @@
 @property(nonatomic,readonly) UIColor * textColor;
 @property(nonatomic,retain) VTRich * rich;
 
+-(BOOL) willAppendText:(NSString *)text attributes:(NSDictionary *)attributes rich:(VTRich *) rich;
+
 @end

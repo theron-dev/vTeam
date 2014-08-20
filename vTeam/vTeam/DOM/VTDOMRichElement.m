@@ -204,7 +204,11 @@
         }
         
         if([text length]){
-            [rich appendText:text attributes:attr];
+            
+            if(! [self willAppendText:text attributes:attr rich:rich]){
+                [rich appendText:text attributes:attr];
+            }
+            
         }
 
         for(VTDOMElement * el in [element childs]){
@@ -521,6 +525,10 @@
         return [delegate vtDOMElementView:element viewClass:viewClass];
     }
     return nil;
+}
+
+-(BOOL) willAppendText:(NSString *)text attributes:(NSDictionary *)attributes rich:(VTRich *) rich{
+    return NO;
 }
 
 @end
