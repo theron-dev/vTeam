@@ -10,41 +10,29 @@
 	<string>vTeam</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>5368ECB3-AC1F-42F8-9711-9F603B6E9CCC</key>
+		<key>C7E9E03769B7E7F1FD67C7B0DE244E0BE6846FB9</key>
 		<string>https://github.com/hailongz/vTeam.git</string>
-		<key>82E8B2D7-E2AD-43FE-8C57-2ECD01CE358B</key>
-		<string>https://github.com/hailongz/c.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>vTeam/vTeam.xcodeproj/project.xcworkspace</string>
+	<string>vTeam/vTeam.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>5368ECB3-AC1F-42F8-9711-9F603B6E9CCC</key>
+		<key>C7E9E03769B7E7F1FD67C7B0DE244E0BE6846FB9</key>
 		<string>../../..</string>
-		<key>82E8B2D7-E2AD-43FE-8C57-2ECD01CE358B</key>
-		<string>../../../c</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/hailongz/vTeam.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>5368ECB3-AC1F-42F8-9711-9F603B6E9CCC</string>
+	<string>C7E9E03769B7E7F1FD67C7B0DE244E0BE6846FB9</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>82E8B2D7-E2AD-43FE-8C57-2ECD01CE358B</string>
-			<key>IDESourceControlWCCName</key>
-			<string>c</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>5368ECB3-AC1F-42F8-9711-9F603B6E9CCC</string>
+			<string>C7E9E03769B7E7F1FD67C7B0DE244E0BE6846FB9</string>
 			<key>IDESourceControlWCCName</key>
 			<string>vTeam</string>
 		</dict>
